@@ -1,3 +1,3 @@
 import { createAction, props } from '@ngrx/store';
 
-export const testAction = createAction('[app] Test Action', props<{ test: boolean }>());
+export const toggleMenu = createAction('[app] Toggle Menu', props<{ open?: boolean }>());

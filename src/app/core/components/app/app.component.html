@@ -1,4 +1,32 @@
-<!-- NG-ZORRO -->
-<a href="https://github.com/NG-ZORRO/ng-zorro-antd" target="_blank" style="display: flex;align-items: center;justify-content: center;height: 100%;width: 100%;">
-  <img height="300" src="https://img.alicdn.com/tfs/TB1X.qJJgHqK1RjSZFgXXa7JXXa-89-131.svg">
-</a>
+<nz-layout class="page-layout">
+  <nz-sider
+    nzCollapsible
+    nzBreakpoint="lg"
+    [nzCollapsedWidth]="0"
+    [nzWidth]="350"
+    [nzTrigger]="null"
+    [nzCollapsed]="(isMenuOpen | async) == false"
+    (nzCollapsedChange)="toggleMenu($event)"
+    class="menu-layout"
+  >
+    <div class="logo">Logo here</div>
+    <ul nz-menu nzTheme="dark" nzMode="inline">
+      <li nz-menu-item (click)="toggleMenu(false)">Close Menu</li>
+      <li nz-menu-item>Hello</li>
+      <li nz-menu-item>World</li>
+    </ul>
+  </nz-sider>
+
+  <nz-layout>
+    <nz-header class="header-layout">
+      <i class="menu-open-trigger" nz-icon [nzType]="(isMenuOpen | async) ? 'menu-unfold' : 'menu-fold'" (click)="toggleMenu(true)"></i>
+      <ul nz-menu nz-Theme="dark" nzMode="horizontal" class="header-menu">
+        <li nz-menu-item>Hello</li>
+        <li nz-menu-item>World</li>
+      </ul>
+    </nz-header>
+    <nz-content>
+      <router-outlet></router-outlet>
+    </nz-content>
+  </nz-layout>
+</nz-layout>
