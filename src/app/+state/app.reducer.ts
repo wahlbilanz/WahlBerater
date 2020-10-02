@@ -10,6 +10,7 @@ export interface AppPartialState {
 
 export const initialState: State = {
   menuOpen: false,
+  activeBreakpoints: { xs: false, sm: false, md: false, lg: false, xl: false, xxl: false },
 };
 
 export const appReducer = createReducer(
@@ -17,5 +18,9 @@ export const appReducer = createReducer(
   on(AppActions.toggleMenu, (state: State, { open }) => ({
     ...state,
     menuOpen: open != null ? open : !state.menuOpen,
+  })),
+  on(AppActions.updateActiveBreakpoints, (state: State, { activeBreakpoints }) => ({
+    ...state,
+    activeBreakpoints,
   })),
 );

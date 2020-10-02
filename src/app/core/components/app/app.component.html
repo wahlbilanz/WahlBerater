@@ -3,11 +3,12 @@
     nzCollapsible
     nzBreakpoint="lg"
     [nzCollapsedWidth]="0"
-    [nzWidth]="350"
+    [nzWidth]="450"
     [nzTrigger]="null"
     [nzCollapsed]="(isMenuOpen | async) == false"
     (nzCollapsedChange)="toggleMenu($event)"
     class="menu-layout"
+    [class.fixed]="fixMenu | async"
   >
     <div class="logo">Logo here</div>
     <button (click)="toggleMenu(false)">Close Menu</button>
@@ -27,13 +28,15 @@
   <nz-layout>
     <nz-header class="header-layout">
       <i class="menu-open-trigger" nz-icon [nzType]="(isMenuOpen | async) ? 'menu-unfold' : 'menu-fold'" (click)="toggleMenu(true)"></i>
-      <ul nz-menu nz-Theme="dark" nzMode="horizontal" class="header-menu">
+      <ul nz-menu nzTheme="dark" nzMode="horizontal" class="header-menu">
         <li nz-menu-item>Hello</li>
         <li nz-menu-item>World</li>
       </ul>
     </nz-header>
     <nz-content>
-      <router-outlet></router-outlet>
+      <main>
+        <router-outlet></router-outlet>
+      </main>
     </nz-content>
   </nz-layout>
 </nz-layout>
