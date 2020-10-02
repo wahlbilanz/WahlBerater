@@ -22,6 +22,7 @@
     "@angular/platform-browser-dynamic": "~10.1.4",
     "@angular/router": "~10.1.4",
     "@ngrx/effects": "^10.0.0",
+    "@ngrx/router-store": "^10.0.0",
     "@ngrx/store": "^10.0.0",
     "@ngrx/store-devtools": "^10.0.0",
     "ng-zorro-antd": "^10.0.0",

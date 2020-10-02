@@ -10,10 +10,17 @@
     class="menu-layout"
   >
     <div class="logo">Logo here</div>
+    <button (click)="toggleMenu(false)">Close Menu</button>
     <ul nz-menu nzTheme="dark" nzMode="inline">
-      <li nz-menu-item (click)="toggleMenu(false)">Close Menu</li>
-      <li nz-menu-item>Hello</li>
-      <li nz-menu-item>World</li>
+      <li nz-menu-item nzMatchRouter [nzMatchRouterExact]="true">
+        <a routerLink="/">Start</a>
+      </li>
+      <li nz-menu-item nzMatchRouter>
+        <a routerLink="/docs/about">About</a>
+      </li>
+      <li nz-menu-item nzMatchRouter>
+        <a routerLink="/docs/privacy">Privacy</a>
+      </li>
     </ul>
   </nz-sider>
 
