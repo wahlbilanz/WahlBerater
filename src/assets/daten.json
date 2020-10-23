@@ -1,0 +1,166 @@
+{
+  "thesen": {
+    "soziales": {
+      "titel": "Soziales",
+      "color": "#ffaa00",
+      "thesen": {
+        "asozial": {
+          "these": "du bist asozial",
+          "background": "amerikanische wissenschaftler haben herausgefunden, dass mancheiner asozial ist.",
+          "provenance": [
+            {
+              "title": "assi",
+              "background": "ey alter, bistn assi, wa?"
+            },
+            {
+              "title": "asi ja",
+              "background": "wattn assi ey"
+            }
+          ]
+        },
+        "gendern": {
+          "these": "alles sollte gegendert werden",
+          "background": "manchmal wird gegendert, finden einige bisschen komisch lesbar",
+          "provenance": [
+            {
+              "title": "gendern",
+              "background": "some gender background"
+            },
+            {
+              "title": "gendern2",
+              "background": "genderbackground zwo"
+            }
+          ]
+        }
+      }
+    },
+    "energie": {
+      "titel": "Energie",
+      "color": "#00aaff",
+      "thesen": {
+        "not": {
+          "these": "energie ist noetig",
+          "background": "amerikanische wissenschaftler haben herausgefunden, energie wichtig ist. und vielleicht sollten wir **markdown** [supporten](https://walberater.de)?",
+          "provenance": [
+            {
+              "title": "blah",
+              "background": "blah blah"
+            },
+            {
+              "title": "mehr blah blah",
+              "background": "blah blah blah blah blah blah blah blah blah blah blah blah"
+            }
+          ]
+        },
+        "gruen": {
+          "these": "energie sollte gruen sein",
+          "background": "amerikanische wissenschaftler haben herausgefunden, dass gruene energie huebscher ist als orangene",
+          "provenance": [
+            {
+              "title": "energiefarbe",
+              "background": "gruen"
+            },
+            {
+              "title": "energetische farbe",
+              "background": "orange"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "kandidaten": {
+    "sophiemuster": {
+      "name": "Sophie Muster",
+      "bild": "https://walberater.de/walberater.png",
+      "oneliner": "Ich stehe fuer alle sophien dieser welt!",
+      "beschreibung": "ich bin links oder mitte oder rechts, weiss ich selbst nicht genau. aber eine partei ist die beste, das ist mal klar! also waehlt mich!!",
+      "free": "geboren in einer stadt. oder dorf. und dann gross geworden. ich mag essen und trinken, aber keine steine. meine hobbies sind schoen.",
+      "liste": "sophien",
+      "positionen": {
+        "asozial": {
+          "vote": -2,
+          "reason": "die erste frage ist -2 dann steigen wir auf bis +2"
+        },
+        "gendern": {
+          "vote": -1,
+          "reason": "die erste frage ist -2 dann steigen wir auf bis +2, hier also -1"
+        },
+        "not": {
+          "vote": 1,
+          "reason": "die erste frage ist -2 dann steigen wir auf bis +2, hier also +1"
+        },
+        "gruen": {
+          "vote": 2,
+          "reason": "die erste frage ist -2 dann steigen wir auf bis +2, hier also +2"
+        }
+      }
+    },
+    "martinmuster": {
+      "name": "Martin Muster",
+      "bild": "https://walberater.de/walberater.png",
+      "oneliner": "Ich stehe fuer einen martin! aber welchen!?",
+      "beschreibung": "ich bin auch links oder mitte oder rechts. und ich kann [links](https://walberater.de) und **fett** :)",
+      "free": "geboren und dann gross geworden. groesser als die meisten sophien, wuerde ich mal behaupten! keine hobbies. arbeit ist was zaehlt, verdammt nochmal! ;-)",
+      "liste": "martins",
+      "positionen": {
+        "asozial": {
+          "vote": 2,
+          "reason": "die erste frage ist 2 dann fallen wir auf -2"
+        },
+        "gendern": {
+          "vote": 1,
+          "reason": "die erste frage ist 2 dann fallen wir auf -2. hier also 1"
+        },
+        "not": {
+          "vote": -1,
+          "reason": "die erste frage ist 2 dann fallen wir auf -2. hier also -1"
+        },
+        "gruen": {
+          "vote": -2,
+          "reason": "die erste frage ist 2 dann fallen wir auf -2. hier also -2"
+        }
+      }
+    },
+    "martinmuster2": {
+      "name": "Martin Muster 2",
+      "bild": "https://walberater.de/walberater.png",
+      "oneliner": "Ich stehe fuer einen anderen martin! aber welchen!?",
+      "beschreibung": "ich bin auch links oder mitte oder rechts. und ich kann [links](https://walberater.de) und **fett** :) 2!",
+      "free": "geboren und dann gross geworden. groesser als die meisten sophien, wuerde ich mal behaupten! keine hobbies. arbeit ist was zaehlt, verdammt nochmal! ;-) 2!",
+      "liste": "martins",
+      "positionen": {
+        "asozial": {
+          "vote": 1,
+          "reason": "alle fragen 1"
+        },
+        "gendern": {
+          "vote": 1,
+          "reason": "alle fragen 1"
+        },
+        "not": {
+          "vote": 1,
+          "reason": "alle fragen 1"
+        },
+        "gruen": {
+          "vote": 1,
+          "reason": "alle fragen 1"
+        }
+      }
+    }
+  },
+  "listen": {
+    "sophien": {
+      "name": "Alle Sophien!",
+      "farbe": "#00ff00",
+      "link": "https://sophien.irgendwas",
+      "beschreibung": "wir sind sophien."
+    },
+    "martins": {
+      "name": "Alle Martins!",
+      "farbe": "#0000ff",
+      "link": "https://martins.irgendwas",
+      "beschreibung": "wir sind martins."
+    }
+  }
+}
