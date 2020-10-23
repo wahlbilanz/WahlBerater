@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "wallokal": {
+    "walberater": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/wallokal",
+            "outputPath": "dist/walberater",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -72,18 +72,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "wallokal:build"
+            "browserTarget": "walberater:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "wallokal:build:production"
+              "browserTarget": "walberater:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "wallokal:build"
+            "browserTarget": "walberater:build"
           }
         },
         "test": {
@@ -121,16 +121,19 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "wallokal:serve"
+            "devServerTarget": "walberater:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "wallokal:serve:production"
+              "devServerTarget": "walberater:serve:production"
             }
           }
         }
       }
     }
   },
-  "defaultProject": "wallokal"
+  "defaultProject": "walberater",
+  "cli": {
+    "analytics": false
+  }
 }
