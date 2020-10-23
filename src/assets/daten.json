@@ -1,19 +1,19 @@
 {
-  "thesen": {
+  "kategorien": {
     "soziales": {
       "titel": "Soziales",
-      "color": "#ffaa00",
+      "color": "rgb(255, 216, 139)",
       "thesen": {
         "asozial": {
           "these": "du bist asozial",
           "background": "amerikanische wissenschaftler haben herausgefunden, dass mancheiner asozial ist.",
           "provenance": [
             {
-              "title": "assi",
+              "these": "assi",
               "background": "ey alter, bistn assi, wa?"
             },
             {
-              "title": "asi ja",
+              "these": "asi ja",
               "background": "wattn assi ey"
             }
           ]
@@ -23,11 +23,11 @@
           "background": "manchmal wird gegendert, finden einige bisschen komisch lesbar",
           "provenance": [
             {
-              "title": "gendern",
+              "these": "gendern",
               "background": "some gender background"
             },
             {
-              "title": "gendern2",
+              "these": "gendern2",
               "background": "genderbackground zwo"
             }
           ]
@@ -36,18 +36,18 @@
     },
     "energie": {
       "titel": "Energie",
-      "color": "#00aaff",
+      "color": "rgb(180, 230, 255)",
       "thesen": {
         "not": {
           "these": "energie ist noetig",
           "background": "amerikanische wissenschaftler haben herausgefunden, energie wichtig ist. und vielleicht sollten wir **markdown** [supporten](https://walberater.de)?",
           "provenance": [
             {
-              "title": "blah",
+              "these": "blah",
               "background": "blah blah"
             },
             {
-              "title": "mehr blah blah",
+              "these": "mehr blah blah",
               "background": "blah blah blah blah blah blah blah blah blah blah blah blah"
             }
           ]
@@ -57,11 +57,11 @@
           "background": "amerikanische wissenschaftler haben herausgefunden, dass gruene energie huebscher ist als orangene",
           "provenance": [
             {
-              "title": "energiefarbe",
+              "these": "energiefarbe",
               "background": "gruen"
             },
             {
-              "title": "energetische farbe",
+              "these": "energetische farbe",
               "background": "orange"
             }
           ]

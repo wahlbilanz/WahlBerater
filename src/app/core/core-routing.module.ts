@@ -5,7 +5,7 @@ import { WelcomePageComponent } from './pages/welcome-page/welcome-page.componen
 const routes: Routes = [
   { path: '', pathMatch: 'full', component: WelcomePageComponent },
   { path: 'docs', loadChildren: () => import('../modules/documentation/documentation.module').then((m) => m.DocumentationModule) },
-  { path: '**', redirectTo: '' },
+  //{ path: '**', redirectTo: '' },
 ];
 
 @NgModule({

@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {DatenServiceService} from '../../services/daten-service.service';
+import {Observable} from 'rxjs';
+import {Daten} from '../../../definitions/models/daten.model';
 
 @Component({
   selector: 'app-welcome-page',
@@ -7,9 +10,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class WelcomePageComponent implements OnInit {
 
-  constructor() { }
+  daten: Daten;
+
+  constructor(readonly ds: DatenServiceService) { }
 
   ngOnInit(): void {
+    this.ds.getData ().subscribe(daten => {this.daten = daten;console.log (this.daten)});
   }
 
 }
