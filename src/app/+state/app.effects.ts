@@ -6,7 +6,7 @@ import { Store } from '@ngrx/store';
 import { routerNavigatedAction } from '@ngrx/router-store';
 import { mergeMap, map, catchError } from 'rxjs/operators';
 import * as AppActions from './app.actions';
-import { DatenServiceService } from '../core/services/daten-service.service';
+import { DataService } from '../core/services/data.service';
 import { asyncScheduler, scheduled } from 'rxjs';
 
 @Injectable()
@@ -33,5 +33,5 @@ export class AppEffects {
     { useEffectsErrorHandler: true },
   );
 
-  constructor(private actions: Actions, private store: Store<State>, private dataService: DatenServiceService) {}
+  constructor(private actions: Actions, private store: Store<State>, private dataService: DataService) {}
 }
