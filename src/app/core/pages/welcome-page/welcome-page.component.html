@@ -1,50 +1,58 @@
 <h1>Tach.</h1>
 
 <h2>Thesen</h2>
-<ul *ngIf="daten?.kategorien">
-  <li *ngFor="let kategorie of daten.kategorien | keyvalue" class="kategorie" style="background-color:{{kategorie.value.color}}">
-    Kategorie <strong>{{kategorie.value.titel}}</strong> hat folgende thesen:
-    <ul>
-      <li *ngFor="let these of kategorie.value.thesen | keyvalue">
-        Background: <em>{{these.value.background}}</em><br>
-        These: <strong>{{these.value.these}}</strong><br>
-        <small>entstanden aus:</small>
-        <ul>
-          <li *ngFor="let orgthese of these.value.provenance">
-            <em>{{orgthese.background}}</em> -- <strong>{{orgthese.these}}</strong>
-          </li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-</ul>
+<ng-container *ngIf="data | async as daten">
+  <ul *ngIf="daten?.kategorien">
+    <li *ngFor="let kategorie of daten.kategorien | keyvalue" class="kategorie" style="background-color:{{ kategorie.value.color }}">
+      Kategorie <strong>{{ kategorie.value.titel }}</strong> hat folgende thesen:
+      <ul>
+        <li *ngFor="let these of kategorie.value.thesen | keyvalue">
+          Background: <em>{{ these.value.background }}</em
+          ><br />
+          These: <strong>{{ these.value.these }}</strong
+          ><br />
+          <small>entstanden aus:</small>
+          <ul>
+            <li *ngFor="let orgthese of these.value.provenance">
+              <em>{{ orgthese.background }}</em> -- <strong>{{ orgthese.these }}</strong>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
 
-<h2>Listen</h2>
-<ul *ngIf="daten?.listen">
-  <li *ngFor="let liste of daten.listen | keyvalue" class="liste" style="background-color:{{liste.value.color}}">
-    <a href="{{liste.value.link}}"><strong>{{liste.value.name}}:</strong></a> {{liste.value.beschreibung}}
-  </li>
-</ul>
+  <h2>Listen</h2>
+  <ul *ngIf="daten?.listen">
+    <li *ngFor="let liste of daten.listen | keyvalue" class="liste" style="background-color:{{ liste.value.color }}">
+      <a href="{{ liste.value.link }}"
+        ><strong>{{ liste.value.name }}:</strong></a
+      >
+      {{ liste.value.beschreibung }}
+    </li>
+  </ul>
 
-<h2>Kandidaten</h2>
-<ul *ngIf="daten?.kandidaten">
-  <li *ngFor="let kandidat of daten.kandidaten | keyvalue">
-    <strong>{{kandidat.value.name}}</strong>
-    von der Liste
-    <em>{{daten.listen[kandidat.value.liste].name}}</em>
-    <ul>
-      <li><strong>bild:</strong> {{kandidat.value.bild}}</li>
-      <li><strong>oneliner:</strong> {{kandidat.value.oneliner}}</li>
-      <li><strong>beschreibung:</strong> {{kandidat.value.beschreibung}}</li>
-      <li><strong>freitext:</strong> {{kandidat.value.free}}</li>
-      <li><strong>positionen:</strong>
-        <ul>
-          <li *ngFor="let position of kandidat.value.positionen | keyvalue">
-            <strong>These:</strong> {{position.key}} -- position: <strong>{{position.value.vote}}</strong> weil <em>{{position.value.reason}}</em>
-          </li>
-        </ul>
-
-      </li>
-    </ul>
-  </li>
-</ul>
+  <h2>Kandidaten</h2>
+  <ul *ngIf="daten?.kandidaten">
+    <li *ngFor="let kandidat of daten.kandidaten | keyvalue">
+      <strong>{{ kandidat.value.name }}</strong>
+      von der Liste
+      <em>{{ daten.listen[kandidat.value.liste].name }}</em>
+      <ul>
+        <li><strong>bild:</strong> {{ kandidat.value.bild }}</li>
+        <li><strong>oneliner:</strong> {{ kandidat.value.oneliner }}</li>
+        <li><strong>beschreibung:</strong> {{ kandidat.value.beschreibung }}</li>
+        <li><strong>freitext:</strong> {{ kandidat.value.free }}</li>
+        <li>
+          <strong>positionen:</strong>
+          <ul>
+            <li *ngFor="let position of kandidat.value.positionen | keyvalue">
+              <strong>These:</strong> {{ position.key }} -- position: <strong>{{ position.value.vote }}</strong> weil
+              <em>{{ position.value.reason }}</em>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</ng-container>

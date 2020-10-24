@@ -11,6 +11,9 @@ export interface AppPartialState {
 export const initialState: State = {
   menuOpen: false,
   activeBreakpoints: { xs: false, sm: false, md: false, lg: false, xl: false, xxl: false },
+  data: null,
+  dataLoaded: false,
+  usedCachedData: false,
 };
 
 export const appReducer = createReducer(
@@ -22,5 +25,18 @@ export const appReducer = createReducer(
   on(AppActions.updateActiveBreakpoints, (state: State, { activeBreakpoints }) => ({
     ...state,
     activeBreakpoints,
+  })),
+
+  on(AppActions.loadDataSuccess, (state: State, { data, wasCached }) => ({
+    ...state,
+    data,
+    dataLoaded: true,
+    usedCachedData: wasCached,
+  })),
+  on(AppActions.loadDataError, (state: State) => ({
+    ...state,
+    data: null,
+    dataLoaded: false,
+    usedCachedData: false,
   })),
 );

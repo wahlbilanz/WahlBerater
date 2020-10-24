@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { NzBreakpointService, siderResponsiveMap } from 'ng-zorro-antd/core/services';
 import { map } from 'rxjs/operators';
@@ -11,7 +11,7 @@ import * as AppSelectors from '../../../+state/app.selectors';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   public isMenuOpen = this.store.pipe(select(AppSelectors.isMenuOpen));
   public fixMenu = this.store.pipe(
     select(AppSelectors.isBreakpointActive, { breakpoint: 'lg' }),
@@ -22,6 +22,11 @@ export class AppComponent {
     this.breakpointService.subscribe(siderResponsiveMap, true).subscribe((activeBreakpoints) => {
       this.store.dispatch(AppActions.updateActiveBreakpoints({ activeBreakpoints }));
     });
+  }
+
+  ngOnInit() {
+    // first things first! Let's load some data.
+    this.store.dispatch(AppActions.loadData());
   }
 
   public toggleMenu(event) {

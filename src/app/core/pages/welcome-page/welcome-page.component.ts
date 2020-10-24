@@ -1,21 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import {DatenServiceService} from '../../services/daten-service.service';
-import {Observable} from 'rxjs';
-import {Daten} from '../../../definitions/models/daten.model';
+import { select, Store } from '@ngrx/store';
+import { AppPartialState } from '../../../+state/app.reducer';
+import * as AppSelectors from '../../../+state/app.selectors';
 
 @Component({
   selector: 'app-welcome-page',
   templateUrl: './welcome-page.component.html',
-  styleUrls: ['./welcome-page.component.scss']
+  styleUrls: ['./welcome-page.component.scss'],
 })
 export class WelcomePageComponent implements OnInit {
+  data = this.store.pipe(select(AppSelectors.getData));
 
-  daten: Daten;
+  constructor(private store: Store<AppPartialState>) {}
 
-  constructor(readonly ds: DatenServiceService) { }
-
-  ngOnInit(): void {
-    this.ds.getData ().subscribe(daten => {this.daten = daten;console.log (this.daten)});
-  }
-
+  ngOnInit(): void {}
 }
