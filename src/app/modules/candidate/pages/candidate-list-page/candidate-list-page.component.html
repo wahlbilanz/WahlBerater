@@ -1,1 +1,45 @@
-<p>candidate-list-page works!</p>
+<h1>Kandidaten für die Studierendenschaft an der FernUniversität in Hagen</h1>
+
+
+
+<ng-container *ngIf="data | async as d">
+<div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }" nzJustify="center" class="mt">
+  <div nz-col [nzSpan]="12" *ngFor="let candidate of d.candidates | keyvalue" class="mt">
+    <nz-card nzHoverable [nzCover]="coverKandidat" [routerLink]="['/candidates/' + candidate.key]">
+      <nz-card-meta nzTitle="{{candidate.value.name}}" nzDescription="Liste: {{candidate.value.party}}"></nz-card-meta>
+      <p class="mt">
+        {{candidate.value.oneliner}}
+      </p>
+    </nz-card>
+  </div>
+</div>
+
+<ng-template #coverKandidat>
+  <div nz-row style="font-size: 10em;" nzJustify="center" class="mt">
+    <i nz-icon nzType="user" nzTheme="outline"></i>
+  </div>
+</ng-template>
+
+<!--  <ul>-->
+<!--    <li *ngFor="let kandidat of daten.kandidaten | keyvalue">-->
+<!--      <strong>{{ kandidat.value.name }}</strong>-->
+<!--      von der Liste-->
+<!--      <em>{{ data.listen[kandidat.value.liste].name }}</em>-->
+<!--      <ul>-->
+<!--        <li><strong>bild:</strong> {{ kandidat.value.bild }}</li>-->
+<!--        <li><strong>oneliner:</strong> {{ kandidat.value.oneliner }}</li>-->
+<!--        <li><strong>beschreibung:</strong> {{ kandidat.value.beschreibung }}</li>-->
+<!--        <li><strong>freitext:</strong> {{ kandidat.value.free }}</li>-->
+<!--        <li>-->
+<!--          <strong>positionen:</strong>-->
+<!--          <ul>-->
+<!--            <li *ngFor="let position of kandidat.value.positionen | keyvalue">-->
+<!--              <strong>These:</strong> {{ position.key }} &#45;&#45; position: <strong>{{ position.value.vote }}</strong> weil-->
+<!--              <em>{{ position.value.reason }}</em>-->
+<!--            </li>-->
+<!--          </ul>-->
+<!--        </li>-->
+<!--      </ul>-->
+<!--    </li>-->
+<!--  </ul>-->
+</ng-container>

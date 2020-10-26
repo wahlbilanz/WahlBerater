@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 import { BreakpointBooleanMap } from 'ng-zorro-antd/core/services';
-import { Daten } from '../definitions/models/daten.model';
+import { Data } from '../definitions/models/data.model';
 
 export const toggleMenu = createAction('[app] Toggle Menu', props<{ open?: boolean }>());
 export const updateActiveBreakpoints = createAction(
@@ -9,5 +9,5 @@ export const updateActiveBreakpoints = createAction(
 );
 
 export const loadData = createAction('[app] Load Data JSON');
-export const loadDataSuccess = createAction('[app] Load Data JSON Success', props<{ data: Daten; wasCached: boolean }>());
+export const loadDataSuccess = createAction('[app] Load Data JSON Success', props<{ data: Data; wasCached: boolean }>());
 export const loadDataError = createAction('[app] Load Data JSON Error', props<{ error: Error }>());

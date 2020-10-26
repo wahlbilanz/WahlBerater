@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
-import { Daten } from '../../definitions/models/daten.model';
+import { Data } from '../../definitions/models/data.model';
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +13,7 @@ export class DataService {
 
   constructor(private http: HttpClient) {}
 
-  getData(): Observable<Daten> {
-    return this.http.get(this.url).pipe(map((data: any) => data as Daten));
+  getData(): Observable<Data> {
+    return this.http.get(this.url).pipe(map((data: any) => data as Data));
   }
 }

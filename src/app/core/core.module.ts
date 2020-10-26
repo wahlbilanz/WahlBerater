@@ -19,6 +19,9 @@ import { environment } from '../../environments/environment';
 import { AppComponent } from './components/app/app.component';
 import { CoreRoutingModule } from './core-routing.module';
 import { WelcomePageComponent } from './pages/welcome-page/welcome-page.component';
+import { NzGridModule } from 'ng-zorro-antd/grid';
+import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzDividerModule } from 'ng-zorro-antd/divider';
 
 registerLocaleData(en);
 
@@ -50,6 +53,9 @@ registerLocaleData(en);
     NzIconModule,
     NzLayoutModule,
     NzMenuModule,
+    NzGridModule,
+    NzCardModule,
+    NzDividerModule,
   ],
 })
 export class CoreModule {}
