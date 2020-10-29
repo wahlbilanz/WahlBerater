@@ -1,0 +1,9 @@
+kind: pipeline
+name: build
+
+steps:
+- name: fail
+  image: alpine
+  commands:
+  - echo "test"
+  - exit 1
