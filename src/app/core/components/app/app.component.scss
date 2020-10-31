@@ -1,5 +1,7 @@
 @import '../../../../assets/styles/variables';
 
+$nav-height: 46px;
+
 :host {
   display: grid;
   width: 100vw;
@@ -13,13 +15,44 @@
 
 header {
   grid-area: nav;
+  display: flex;
   width: 100vw;
   margin: 0;
   background-color: $wb-color-primary-600;
+
+  .menu-toggle {
+    display: block;
+    margin-left: auto;
+    padding: $wb-space-small $wb-space-medium;
+
+    font-size: 14px;
+
+    color: $wb-color-primary-200;
+    &:hover {
+      color: $wb-color-primary-900;
+    }
+  }
 }
 
 main {
   margin: 0;
   padding-top: $wb-space-small;
   grid-area: main;
+  overflow: auto;
+}
+
+nav {
+  position: absolute;
+  z-index: 9001; // over 9000!!
+  right: $wb-space-medium;
+  top: $nav-height + $wb-space-small;
+
+  max-width: calc(100vw - #{$wb-space-medium});
+  min-width: 480px;
+  height: 270px;
+
+  padding: $wb-space-medium;
+  box-shadow: 0 1px 2px -2px rgba(0, 0, 0, 0.21), 0 3px 6px 0 rgba(0, 0, 0, 0.17), 0 5px 12px 4px rgba(0, 0, 0, 0.14);
+
+  background-color: $wb-color-neutral-100;
 }
