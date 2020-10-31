@@ -1,34 +1,25 @@
-.page-layout {
-  min-height: 100vh;
-}
+@import '../../../../assets/styles/variables';
 
-.menu-layout {
-  overflow: auto;
+:host {
+  display: grid;
+  width: 100vw;
   height: 100vh;
-  left: 0;
-  z-index: 900;
+  margin: 0;
 
-  &.fixed {
-    position: fixed;
-  }
-
-  .logo {
-    height: 72px;
-    margin: 15px;
-    background-color: red;
-  }
+  grid-template:
+    'nav nav' 46px
+    'main main' auto;
 }
 
-.menu-open-trigger {
-  float: left;
-  font-size: 18px;
-  line-height: 64px;
-  padding: 0 24px;
-  cursor: pointer;
-  color: white;
+header {
+  grid-area: nav;
+  width: 100vw;
+  margin: 0;
+  background-color: $wb-color-primary-600;
 }
 
 main {
-  width: 100%;
-  height: 100%;
+  margin: 0;
+  padding-top: $wb-space-small;
+  grid-area: main;
 }

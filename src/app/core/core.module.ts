@@ -51,7 +51,6 @@ registerLocaleData(en);
     EffectsModule.forRoot([AppEffects]),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     NzIconModule,
-    NzLayoutModule,
     NzMenuModule,
     NzGridModule,
     NzCardModule,
