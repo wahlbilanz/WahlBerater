@@ -13,10 +13,10 @@ import * as AppSelectors from '../../../+state/app.selectors';
 })
 export class AppComponent implements OnInit {
   public isMenuOpen = this.store.pipe(select(AppSelectors.isMenuOpen));
-  public fixMenu = this.store.pipe(
-    select(AppSelectors.isBreakpointActive, { breakpoint: 'lg' }),
-    map((active) => !active),
-  );
+  // public fixMenu = this.store.pipe(
+  //   select(AppSelectors.isBreakpointActive, { breakpoint: 'lg' }),
+  //   map((active) => !active),
+  // );
 
   constructor(private store: Store<AppPartialState>, private breakpointService: NzBreakpointService) {
     this.breakpointService.subscribe(siderResponsiveMap, true).subscribe((activeBreakpoints) => {
@@ -27,9 +27,5 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     // first things first! Let's load some data.
     this.store.dispatch(AppActions.loadData());
-  }
-
-  public toggleMenu(event) {
-    this.store.dispatch(AppActions.toggleMenu({ open: event }));
   }
 }
