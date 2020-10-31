@@ -93,22 +93,22 @@ body {
 @border-radius-sm: @border-radius-base;
 
 // vertical paddings
-@padding-lg: 24px; // containers
-@padding-md: 16px; // small containers and buttons
-@padding-sm: 12px; // Form controls and items
-@padding-xs: 8px; // small items
-@padding-xss: 4px; // more small
+@padding-lg: @wb-space-large; // containers
+@padding-md: @wb-space-medium; // small containers and buttons
+@padding-sm: @wb-space-small; // Form controls and items
+@padding-xs: @wb-space-x-small; // small items
+@padding-xss: @wb-space-xx-small; // more small
 
 // vertical padding for all form controls
 @control-padding-horizontal: @padding-sm;
 @control-padding-horizontal-sm: @padding-xs;
 
 // vertical margins
-@margin-lg: 24px; // containers
-@margin-md: 16px; // small containers and buttons
-@margin-sm: 12px; // Form controls and items
-@margin-xs: 8px; // small items
-@margin-xss: 4px; // more small
+@margin-lg: @wb-space-large; // containers
+@margin-md: @wb-space-medium; // small containers and buttons
+@margin-sm: @wb-space-small; // Form controls and items
+@margin-xs: @wb-space-x-small; // small items
+@margin-xss: @wb-space-xx-small; // more small
 
 // height rules
 @height-base: 32px;
@@ -287,27 +287,27 @@ body {
 
 // Media queries breakpoints
 // Extra small screen / phone
-@screen-xs: 480px;
+@screen-xs: @wb-breakpoint-x-small;
 @screen-xs-min: @screen-xs;
 
 // Small screen / tablet
-@screen-sm: 576px;
+@screen-sm: @wb-breakpoint-small;
 @screen-sm-min: @screen-sm;
 
 // Medium screen / desktop
-@screen-md: 768px;
+@screen-md: @wb-breakpoint-medium;
 @screen-md-min: @screen-md;
 
 // Large screen / wide desktop
-@screen-lg: 992px;
+@screen-lg: @wb-breakpoint-large;
 @screen-lg-min: @screen-lg;
 
 // Extra large screen / full hd
-@screen-xl: 1200px;
+@screen-xl: @wb-breakpoint-x-large;
 @screen-xl-min: @screen-xl;
 
 // Extra extra large screen / large desktop
-@screen-xxl: 1600px;
+@screen-xxl: @wb-breakpoint-xx-large;
 @screen-xxl-min: @screen-xxl;
 
 // provide a maximum
