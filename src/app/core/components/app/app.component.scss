@@ -11,7 +11,7 @@ $nav-height: 46px;
   grid-template:
     'nav nav nav' 46px
     'space-left main space-right' auto
-    / minmax(auto, 33vw) minmax(33vw, auto) minmax(auto, 33vw);
+    / minmax($wb-space-medium, 33vw) minmax($wb-breakpoint-medium, 98vw) minmax($wb-space-medium, 33vw);
 
   // no side-spacing on smaller devices
   @media screen and (max-width: $wb-breakpoint-medium) {
