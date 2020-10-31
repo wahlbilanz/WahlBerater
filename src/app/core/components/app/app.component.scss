@@ -9,8 +9,21 @@ $nav-height: 46px;
   margin: 0;
 
   grid-template:
-    'nav nav' 46px
-    'main main' auto;
+    'nav nav nav' 46px
+    'space-left main space-right' auto
+    / minmax(auto, 33vw) minmax(33vw, auto) minmax(auto, 33vw);
+
+  // no side-spacing on smaller devices
+  @media screen and (max-width: $wb-breakpoint-medium) {
+    grid-template:
+      'nav' 46px
+      'main' auto;
+
+    main {
+      padding-left: $wb-space-small;
+      padding-right: $wb-space-small;
+    }
+  }
 }
 
 header {
@@ -47,9 +60,10 @@ nav {
   right: $wb-space-medium;
   top: $nav-height + $wb-space-small;
 
-  max-width: calc(100vw - #{$wb-space-medium});
-  min-width: 480px;
+  width: 480px;
   height: 270px;
+  max-width: calc(100vw - #{2 * $wb-space-medium});
+  max-height: calc(100vh - #{$nav-height + (2 * $wb-space-medium)});
 
   padding: $wb-space-medium;
   box-shadow: 0 1px 2px -2px rgba(0, 0, 0, 0.21), 0 3px 6px 0 rgba(0, 0, 0, 0.17), 0 5px 12px 4px rgba(0, 0, 0, 0.14);
