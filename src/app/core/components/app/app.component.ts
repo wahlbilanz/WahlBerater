@@ -47,4 +47,9 @@ export class AppComponent implements OnInit {
 
     this.store.dispatch(AppActions.toggleMenu({}));
   }
+
+  /** Hides menu, when main container received click */
+  mainClicked(event: MouseEvent) {
+    this.store.dispatch(AppActions.toggleMenu({ open: false }));
+  }
 }
