@@ -61,3 +61,37 @@ $wb-logo-font-color: $wb-color-neutral-700;
 $wb-headline-font-family: 'Raleway', sans, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 $wb-body-font-family: 'Montserrat', 'Helvetica Neue', 'Arial', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
   'Noto Color Emoji';
+
+// Spacing
+$wb-space-x-large: 36px;
+$wb-space-large: 24px;
+$wb-space-medium: 16px;
+$wb-space-small: 12px;
+$wb-space-x-small: 8px;
+$wb-space-xx-small: 4px;
+
+// Breakpoints
+
+$wb-breakpoint-x-small: 480px; // Extra small screen / phone
+$wb-breakpoint-small: 576px; // Small screen / tablet
+$wb-breakpoint-medium: 768px; // Medium screen / desktop
+$wb-breakpoint-large: 992px; // Large screen / wide desktop
+$wb-breakpoint-x-large: 1200px; // Extra large screen / full hd
+$wb-breakpoint-xx-large: 1600px; // Extra extra large screen / large desktop
+
+$wb-breakpoint-x-small-min: $wb-breakpoint-x-small;
+$wb-breakpoint-x-small-max: $wb-breakpoint-small - 1px;
+
+$wb-breakpoint-small-min: $wb-breakpoint-small;
+$wb-breakpoint-small-max: $wb-breakpoint-medium - 1px;
+
+$wb-breakpoint-medium-min: $wb-breakpoint-medium;
+$wb-breakpoint-medium-max: $wb-breakpoint-large - 1px;
+
+$wb-breakpoint-large-min: $wb-breakpoint-large;
+$wb-breakpoint-large-max: $wb-breakpoint-x-large - 1px;
+
+$wb-breakpoint-x-large-min: $wb-breakpoint-x-large;
+$wb-breakpoint-x-large-max: $wb-breakpoint-xx-large - 1px;
+
+$wb-breakpoint-xx-large-min: $wb-breakpoint-xx-large;
