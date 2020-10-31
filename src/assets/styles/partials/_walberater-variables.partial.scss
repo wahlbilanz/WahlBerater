@@ -54,7 +54,7 @@ $wb-color-accent-pink-200: hsl(336, 100%, 77%);
 $wb-color-accent-pink-100: hsl(338, 100%, 86%);
 $wb-color-accent-pink-0: hsl(341, 100%, 95%);
 
-$wb-logo-font-family: 'Audiowide';
+$wb-logo-font-family: 'Audiowide', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 $wb-logo-wal-color: $wb-color-primary-600;
 $wb-logo-font-color: $wb-color-neutral-700;
 
@@ -95,3 +95,103 @@ $wb-breakpoint-x-large-min: $wb-breakpoint-x-large;
 $wb-breakpoint-x-large-max: $wb-breakpoint-xx-large - 1px;
 
 $wb-breakpoint-xx-large-min: $wb-breakpoint-xx-large;
+
+// Typography
+$wb-type-hero: (
+  'font-family': $wb-logo-font-family,
+  'font-weight': 500,
+  'font-size': 76px,
+  'line-height': 84px,
+  'letter-spacing': -4.6px,
+  'color': $wb-color-neutral-700,
+);
+
+$wb-type-h1: (
+  'font-family': $wb-headline-font-family,
+  'font-weight': 500,
+  'font-size': 38px,
+  'line-height': 46px,
+  'letter-spacing': -0.5px,
+  'color': $wb-color-neutral-900,
+);
+
+$wb-type-h2: (
+  'font-family': $wb-headline-font-family,
+  'font-weight': 500,
+  'font-size': 28px,
+  'line-height': 36px,
+  'letter-spacing': -0.5px,
+  'color': $wb-color-neutral-900,
+);
+
+$wb-type-h3: (
+  'font-family': $wb-headline-font-family,
+  'font-weight': 500,
+  'font-size': 22px,
+  'line-height': 34px,
+  'letter-spacing': -0.4px,
+  'color': $wb-color-neutral-800,
+);
+
+$wb-type-h4: (
+  'font-family': $wb-headline-font-family,
+  'font-weight': 400,
+  'font-size': 22px,
+  'line-height': 32px,
+  'letter-spacing': -0.4px,
+  'color': $wb-color-neutral-700,
+);
+
+$wb-type-h5: (
+  'font-family': $wb-headline-font-family,
+  'font-weight': 400,
+  'font-size': 18px,
+  'line-height': 28px,
+  'letter-spacing': -0.4px,
+  'color': $wb-color-neutral-700,
+);
+
+$wb-type-paragraph: (
+  'font-family': $wb-body-font-family,
+  'font-weight': 500,
+  'font-size': 16px,
+  'line-height': 24px,
+  'letter-spacing': 0px,
+  'color': $wb-color-neutral-900,
+);
+
+$wb-type-paragraph-small: (
+  'font-family': $wb-body-font-family,
+  'font-weight': 500,
+  'font-size': 14px,
+  'line-height': 22px,
+  'letter-spacing': 0px,
+  'color': $wb-color-neutral-800,
+);
+
+$wb-type-strong: (
+  'font-family': $wb-body-font-family,
+  'font-weight': 700,
+  'font-size': 16px,
+  'line-height': 24px,
+  'letter-spacing': 0px,
+  'color': $wb-color-neutral-900,
+);
+
+$wb-type-strong-small: (
+  'font-family': $wb-body-font-family,
+  'font-weight': 500,
+  'font-size': 14px,
+  'line-height': 22px,
+  'letter-spacing': 0px,
+  'color': $wb-color-neutral-800,
+);
+
+@mixin use-typography($type) {
+  font-family: map-get($type, 'font-family');
+  font-weight: map-get($type, 'font-weight');
+  font-size: map-get($type, 'font-size');
+  line-height: map-get($type, 'line-height');
+  letter-spacing: map-get($type, 'letter-spacing');
+  color: map-get($type, 'color');
+}
