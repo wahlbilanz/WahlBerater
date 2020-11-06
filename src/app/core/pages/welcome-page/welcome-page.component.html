@@ -1,57 +1,64 @@
-
+<h1>Willkommen zum WahlBerater!</h1>
+<p>Der WahlBerater ist dein Berater für die Wahlen des Studierendenparlaments 2021 an der FernUniversität in Hagen.</p>
 
 <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }" nzJustify="center">
   <div nz-col [nzSpan]="16">
     <h1>Der WalBerater ist dein Wahlberater für die Wahlen des Studierendenparlaments 2021 an der FernUniversität in Hagen.</h1>
+    <h2>Der WalBerater ist dein Wahlberater für die Wahlen des Studierendenparlaments 2021 an der FernUniversität in Hagen.</h2>
+    <h3>Der WalBerater ist dein Wahlberater für die Wahlen des Studierendenparlaments 2021 an der FernUniversität in Hagen.</h3>
+    <h4>Der WalBerater ist dein Wahlberater für die Wahlen des Studierendenparlaments 2021 an der FernUniversität in Hagen.</h4>
+    <h5>Der WalBerater ist dein Wahlberater für die Wahlen des Studierendenparlaments 2021 an der FernUniversität in Hagen.</h5>
   </div>
 </div>
-
 
 <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }" nzJustify="center" class="mt">
   <div nz-col [nzSpan]="8">
     <nz-card nzHoverable [nzCover]="coverQuiz" [routerLink]="['/quiz']">
-      <nz-card-meta nzTitle="Starte das Quiz" nzDescription="Das Quiz hilft dir deine Position mit den Positionen der Kandidaten zu vergleichen."></nz-card-meta>
+      <nz-card-meta
+        nzTitle="Starte das Quiz"
+        nzDescription="Das Quiz hilft dir deine Position mit den Positionen der Kandidaten zu vergleichen."
+      ></nz-card-meta>
     </nz-card>
   </div>
   <div nz-col [nzSpan]="8">
     <nz-card nzHoverable [nzCover]="coverCandidates" [routerLink]="['/candidates']">
-      <nz-card-meta nzTitle="Die Kandidaten" nzDescription="Erkunde die Kandidaten für das Studierendenparlaments individuell und manuell."></nz-card-meta>
+      <nz-card-meta
+        nzTitle="Die Kandidaten"
+        nzDescription="Erkunde die Kandidaten für das Studierendenparlaments individuell und manuell."
+      ></nz-card-meta>
     </nz-card>
   </div>
 </div>
 
-
 <ng-template #coverQuiz>
-  <div nz-row style="font-size: 10em;" nzJustify="center" class="mt">
+  <div nz-row style="font-size: 10em" nzJustify="center" class="mt">
     <i nz-icon nzType="bar-chart" nzTheme="outline"></i>
   </div>
 </ng-template>
 <ng-template #coverCandidates>
-  <div nz-row style="font-size: 10em;" nzJustify="center" class="mt">
+  <div nz-row style="font-size: 10em" nzJustify="center" class="mt">
     <i nz-icon nzType="team" nzTheme="outline"></i>
   </div>
 </ng-template>
-
 
 <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }" nzJustify="center" class="mt">
   <div nz-col [nzSpan]="16">
     <nz-card title="Impressum &amp; Datenschutz">
       <p>
-        Bevor du deine persönlichen Einstellungen einer Webseite preisgibst solltest du unbedingt <strong>immer die Datenschutzerklaerung lesen und verstehen!</strong>
-        Nimm dir daher kurz Zeit und schaue in <a [routerLink]="['/docs/privacy']">unsere Datenschutzerklärung.</a>
+        Bevor du deine persönlichen Einstellungen einer Webseite preisgibst solltest du unbedingt
+        <strong>immer die Datenschutzerklaerung lesen und verstehen!</strong> Nimm dir daher kurz Zeit und schaue in
+        <a [routerLink]="['/docs/privacy']">unsere Datenschutzerklärung.</a>
       </p>
       <p>
-        Der WalBerater wird von zweimal Martin und einmal Sophie entwickelt. Im <a [routerLink]="['/docs/about']">Impressum</a> erfährst du mehr über uns!
+        Der WalBerater wird von zweimal Martin und einmal Sophie entwickelt. Im <a [routerLink]="['/docs/about']">Impressum</a> erfährst du
+        mehr über uns!
       </p>
     </nz-card>
   </div>
 </div>
 
-
-
 <ng-container *ngIf="data | async as d">
-        <nz-divider nzText="Debug"></nz-divider>
-
+  <nz-divider nzText="Debug"></nz-divider>
 
   <h2>Thesen</h2>
   <ul *ngIf="d?.categories">
