@@ -1,5 +1,6 @@
 @import 'variables';
-/* You can add global styles to this file, and also import other style files */
+@import 'partials/fonts.partial';
+@import 'partials/typography.partial';
 
 .my {
   margin-top: $component-margin;
@@ -8,4 +9,3 @@
 .mt {
   margin-top: $component-margin;
 }
-
