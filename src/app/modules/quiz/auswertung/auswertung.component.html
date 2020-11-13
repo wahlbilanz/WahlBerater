@@ -1,5 +1,8 @@
+
+
 <ng-container *ngIf="votes | async as v">
   <ng-container *ngIf="data | async as d">
+    <app-auswertung-barchart [votes]="v" [candidates]="d.candidates"></app-auswertung-barchart>
 
     <h2>Detailierte Auswertung der Kandidaten</h2>
     <ng-container *ngFor="let category of d.categories  | keyvalue">
@@ -40,10 +43,7 @@
 
 
 
-    <div *ngFor="let claim of v  | keyvalue">
-      {{d.claims[claim.value.id].title}}
-      {{claim.value.decision}}
-    </div>
+
   </ng-container>
 </ng-container>
 

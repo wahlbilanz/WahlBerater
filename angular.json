@@ -105,7 +105,7 @@
               "src/assets/themes/ng-zorro.theme.less",
               "src/assets/styles/index.scss"
             ],
-            "scripts": []
+            "scripts": [  "node_modules/apexcharts/dist/apexcharts.min.js"]
           }
         },
         "lint": {

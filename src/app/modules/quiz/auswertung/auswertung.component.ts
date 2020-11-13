@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ViewChild, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { AppPartialState } from '../../../+state/app.reducer';
 import * as AppSelectors from '../../../+state/app.selectors';
-import {runInThisContext} from 'vm';
+
 
 @Component({
   selector: 'app-auswertung',
@@ -13,13 +13,14 @@ export class AuswertungComponent implements OnInit {
   votes = this.store.pipe(select(AppSelectors.getVotes));
   data = this.store.pipe(select(AppSelectors.getData));
 
+
   constructor(private store: Store<AppPartialState>) { }
 
   ngOnInit(): void {
 
   }
-  candidateDecisionToWord (decision: number): string {
-    return this.decisionToWord (decision,Math.abs(decision) > 1);
+  candidateDecisionToWord(decision: number): string {
+    return this.decisionToWord (decision, Math.abs(decision) > 1);
   }
 
   decisionToWord(decision: number, fav: boolean): string {
