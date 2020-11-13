@@ -1,11 +1,14 @@
 import {Component, Input, ViewChild, OnInit} from '@angular/core';
+import {select, Store} from '@ngrx/store';
+import {AppPartialState} from '../../../+state/app.reducer';
+import * as AppSelectors from '../../../+state/app.selectors';
 
 import {
   ApexAxisChartSeries,
   ApexTitleSubtitle,
   ApexChart,
   ApexXAxis,
-  ChartComponent
+  ChartComponent, ApexPlotOptions, ApexDataLabels
 } from 'ng-apexcharts';
 import {CandidateMap} from '../../../definitions/models/candidate.model';
 
@@ -13,8 +16,9 @@ import {CandidateMap} from '../../../definitions/models/candidate.model';
 export type ChartOptions = {
   series: ApexAxisChartSeries;
   chart: ApexChart;
-  title: ApexTitleSubtitle;
   xaxis: ApexXAxis;
+  plotOptions: ApexPlotOptions;
+  dataLabels: ApexDataLabels;
 };
 
 
@@ -25,15 +29,39 @@ export type ChartOptions = {
 })
 export class AuswertungBarchartComponent implements OnInit {
 
-  @Input() votes: {};
-  @Input() candidates: CandidateMap;
+  votes = this.store.pipe(select(AppSelectors.getVotes));
+  data = this.store.pipe(select(AppSelectors.getData));
 
-  @ViewChild('chart') chart: ChartComponent;
-  public chartOptions: any;
+  decisions = {};
+  candidates = {};
+
+  @ViewChild('chartObj', {static: false}) chart: ChartComponent;
+
+  public chartOptions: Partial<ChartOptions>;
 
 
-  constructor() {
+  constructor(private store: Store<AppPartialState>) {
 
+    this.chartOptions = {
+      series: [{
+        data: []
+      }],
+      chart: {
+        type: 'bar',
+        height: 350
+      },
+      plotOptions: {
+        bar: {
+          horizontal: true,
+        }
+      },
+      dataLabels: {
+        enabled: false
+      },
+      xaxis: {
+        categories: [],
+      }
+    };
   }
 
   private calcScore(candidate: number, user: number, fav: boolean): number {
@@ -74,67 +102,42 @@ export class AuswertungBarchartComponent implements OnInit {
     return 0;
   }
 
-  ngOnInit(): void {
-    const scoreArray = [];
-    // console.log (this.votes);
-    for (const c in this.candidates) {
-      if (this.candidates.hasOwnProperty(c)) {
-        let score = 0;
-        for (const v in this.candidates[c].positions) {
-          if (this.candidates[c].positions.hasOwnProperty(v)) {
-            // console.log (v);
-            // console.log (this.candidates[c].positions[v]);
-            // console.log (this.votes[v]);
-            if (this.votes[v]) {
-              score += this.calcScore (this.candidates[c].positions[v].vote, this.votes[v].decision, this.votes[v].fav)
+  recalc(): void {
+    if (this.candidates && this.decisions) {
+      const scoreArray = [];
+      for (const c in this.candidates) {
+        if (this.candidates.hasOwnProperty(c)) {
+          let score = 0;
+          for (const v in this.candidates[c].positions) {
+            if (this.candidates[c].positions.hasOwnProperty(v)) {
+              if (this.decisions[v]) {
+                score += this.calcScore(this.candidates[c].positions[v].vote, this.decisions[v].decision, this.decisions[v].fav);
+              }
             }
           }
-
+          scoreArray.push({
+            candidate: c,
+            score
+          });
         }
-        scoreArray.push ({
-          candidate: c,
-          score
-        });
+      }
+      this.chartOptions.series[0].data = scoreArray.map(s => s.score);
+      this.chartOptions.xaxis.categories = scoreArray.map(s => s.candidate);
+      if (this.chart) {
+        this.chart.updateSeries([{data: this.chartOptions.series[0].data}]);
       }
     }
-this.chartOptions = {
-          series: [{
-          data: scoreArray.map(s => s.score)
-        }],
-          chart: {
-          type: 'bar',
-          height: 350
-        },
-        plotOptions: {
-          bar: {
-            horizontal: true,
-          }
-        },
-        dataLabels: {
-          enabled: false
-        },
-        xaxis: {
-          categories: scoreArray.map(s => s.candidate),
-        }
-        };
-    /*this.chartOptions = {
-      series: [
-        {
-          name: 'Series 1',
-          data: [80, 50, 30, 40, 100, 20]
-        }
-      ],
-      chart: {
-        height: 350,
-        type: 'radar'
-      },
-      title: {
-        text: 'Basic Radar Chart'
-      },
-      xaxis: {
-        categories: ['January', 'February', 'March', 'April', 'May', 'June']
-      }
-    };*/
+  }
+
+  ngOnInit(): void {
+    this.data.subscribe(d => {
+      this.candidates = d.candidates;
+      this.recalc();
+    });
+    this.votes.subscribe(v => {
+      this.decisions = v;
+      this.recalc();
+    });
   }
 
 }

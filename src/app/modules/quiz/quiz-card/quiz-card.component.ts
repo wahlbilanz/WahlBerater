@@ -6,7 +6,7 @@ import {ActivatedRoute} from '@angular/router';
 import {Claim} from '../../../definitions/models/claim.model';
 import {Category} from '../../../definitions/models/category.model';
 import {vote} from '../../../+state/app.actions';
-import { map } from 'rxjs/operators';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-quiz-card',
@@ -29,12 +29,12 @@ export class QuizCardComponent implements OnInit, OnChanges {
   ngOnChanges(): void {
     this.fav = false;
     this.decision = 0;
-    this.votes.subscribe(v => {
+    this.votes.pipe(first()).subscribe(v => {
       if (this.claimId in v) {
         this.fav = v[this.claimId].fav;
         this.decision = v[this.claimId].decision;
       }
-    }).unsubscribe();
+    });
   }
 
   ngOnInit(): void {

@@ -7,6 +7,9 @@
     <li nz-menu-item nzMatchRouter>
       <a routerLink="/quiz">Quiz</a>
     </li>
+    <li nz-menu-item nzMatchRouter>
+      <a routerLink="/quiz/auswertung">Auswertung</a>
+    </li>
   </ul>
 
   <a class="menu-toggle" [title]="(isMenuOpen | async) === true ? 'Menü schließen' : 'Menü öffnen'" (click)="toggleMenu($event)">

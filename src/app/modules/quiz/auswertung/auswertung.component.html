@@ -2,7 +2,7 @@
 
 <ng-container *ngIf="votes | async as v">
   <ng-container *ngIf="data | async as d">
-    <app-auswertung-barchart [votes]="v" [candidates]="d.candidates"></app-auswertung-barchart>
+    <app-auswertung-barchart></app-auswertung-barchart>
 
     <h2>Detailierte Auswertung der Kandidaten</h2>
     <ng-container *ngFor="let category of d.categories  | keyvalue">
@@ -29,19 +29,12 @@
         </nz-collapse-panel>
       </nz-collapse>
 
-<!--        <nz-list nzBordered nzSize="small">-->
-<!--        <nz-list-item *ngFor="let candidate of d.candidates | keyvalue">-->
-<!--          -->
-<!--          {{candidate.value.name}} {{candidateDecisionToWord (candidate.value.positions[claimid].vote)}}-->
-<!--        </nz-list-item>-->
-<!--    </nz-list>-->
-
       </nz-collapse-panel>
     </nz-collapse>
   </div>
     </ng-container>
 
-
+<a (click)="sampleVotes ()"><i nz-icon nzType="fork" nzTheme="outline"></i> Sample Votes</a>
 
 
   </ng-container>
@@ -64,3 +57,4 @@
       <i nz-icon nzType="heart" nzTheme="fill" (click)="$event.stopPropagation()" class="heart-red"></i>
       <i nz-icon nzType="like" (click)="$event.stopPropagation()"></i>
     </ng-template>
+

@@ -2,6 +2,8 @@ import { Component, ViewChild, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { AppPartialState } from '../../../+state/app.reducer';
 import * as AppSelectors from '../../../+state/app.selectors';
+import { first } from 'rxjs/operators';
+import {vote} from '../../../+state/app.actions';
 
 
 @Component({
@@ -39,6 +41,16 @@ export class AuswertungComponent implements OnInit {
         return 'ja';
     }
     return 'übersprungen';
+  }
+
+  sampleVotes(): void {
+    this.data.pipe(first()).subscribe(d => {
+      for (const claim in d.claims) {
+        if (d.claims.hasOwnProperty(claim)) {
+          this.store.dispatch(vote ({claimId: claim, decision: Math.floor(Math.random() * 3) -1, fav: Math.random() < .3}));
+        }
+      }
+    });
   }
 
 }
