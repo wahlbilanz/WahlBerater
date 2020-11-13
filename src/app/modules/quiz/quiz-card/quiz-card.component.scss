@@ -5,7 +5,7 @@
   /*width: 100%;
   padding: 15px;
   margin: 6rem auto 0 auto;*/
-  border: 2px solid;
+  border: 4px solid;
   border-radius: 7px;
 
 
@@ -37,6 +37,12 @@
   color: $wb-color-primary-600;
   background-color: white;
 
+    &.votesmaller {
+      font-size: 2rem;
+      width: 4rem;
+      height: 4rem;
+    }
+
     &.selected {
       color: white;
       background-color: $wb-color-primary-600;
@@ -44,13 +50,13 @@
     }
 
     &.votefav {
-      border-color: #FF2F00;
-      color: #FF2F00;
+      border-color: $favcolor;
+      color: $favcolor;
     }
 
     &.votefav.selected {
       color: white;
-      background-color: #FF2F00;
+      background-color: $favcolor;
 
     }
 
@@ -63,7 +69,11 @@
     //min-height: 44px;
   }
   .cardnavbtn {
-  color: $wb-color-primary-600;
+
+    color: $wb-color-primary-600;
+      font-size: 1.5rem;
+      width: 3rem;
+      height: 3rem;
 
   }
 }

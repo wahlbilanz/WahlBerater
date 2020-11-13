@@ -1,6 +1,6 @@
 
 <ng-container *ngIf="votes | async as v">
-  <div id="quizcard" class="container my-5 p-5">
+  <div id="quizcard" class="container my-5 p-5" style="border-color:{{category.color}}">
     <h2 id="card-category">
       {{category.title}}
     </h2>
@@ -14,32 +14,33 @@
     </h1>
 
     <div id="decision" class="row align-items-center">
-      <div class="col-sm-4 text-center">
+      <div class="col-5 text-center">
         <a *ngIf="decision === 1" class="votebtn selected" (click)="yes()"><i nz-icon nzType="like" nzTheme="fill"></i></a>
         <a *ngIf="decision !== 1" class="votebtn" (click)="yes()"><i nz-icon nzType="like" nzTheme="outline"></i></a>
       </div>
-      <div class="col-sm-4 text-center">
+      <div class="col-2 text-center">
 
-        <a *ngIf="fav"  class="votebtn votefav selected" (click)="toggleFav()"><i nz-icon nzType="heart" nzTheme="fill"></i></a>
-        <a *ngIf="!fav" class="votebtn votefav" (click)="toggleFav()"><i nz-icon nzType="heart" nzTheme="outline"></i></a>
+        <a *ngIf="fav"  class="votebtn votesmaller votefav selected" (click)="toggleFav()"><i nz-icon nzType="heart" nzTheme="fill"></i></a>
+        <a *ngIf="!fav" class="votebtn votesmaller votefav" (click)="toggleFav()"><i nz-icon nzType="heart" nzTheme="outline"></i></a>
 
         <br>
 
-        <a class="votebtn"><i nz-icon nzType="forward" nzTheme="outline"></i></a>
+        <a class="votebtn votesmaller"><i nz-icon nzType="forward" nzTheme="outline"></i></a>
 
       </div>
-      <div class="col-sm-4 text-center">
+      <div class="col-5 text-center">
         <a *ngIf="decision === -1" class="votebtn selected" (click)="no()"><i nz-icon nzType="dislike" nzTheme="fill"></i></a>
         <a *ngIf="decision !== -1" class="votebtn" (click)="no()"><i nz-icon nzType="dislike" nzTheme="outline"></i></a>
       </div>
     </div>
 
     <div id="cardnav" class="row justify-content-between">
-      <div class="col-sm-4 text-center">
+      <div class="col-4 text-center">
         <a class="cardnavbtn" *ngIf="prev" [routerLink]="prev"><i nz-icon nzType="left" nzTheme="outline"></i></a>
       </div>
-      <div class="col-sm-4 text-center">
+      <div class="col-4 text-center">
         <a class="cardnavbtn" *ngIf="next" [routerLink]="next"><i nz-icon nzType="right" nzTheme="outline"></i></a>
+        <a class="cardnavbtn" *ngIf="!next" [routerLink]="'/quiz/auswertung'"><i nz-icon nzType="bar-chart" nzTheme="outline"></i></a>
       </div>
     </div>
 

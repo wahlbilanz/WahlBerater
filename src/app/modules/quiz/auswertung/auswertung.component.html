@@ -1,0 +1,66 @@
+<ng-container *ngIf="votes | async as v">
+  <ng-container *ngIf="data | async as d">
+
+    <h2>Detailierte Auswertung der Kandidaten</h2>
+    <ng-container *ngFor="let category of d.categories  | keyvalue">
+  <div *ngIf="category.key != 'howto'" class="category" style="border-color:{{category.value.color}}">
+    <h3>{{category.value.title}}</h3>
+    <nz-collapse>
+      <nz-collapse-panel *ngFor="let claimid of category.value.claims" class="claim" [nzHeader]="d.claims[claimid].claim"
+        [nzExtra]="v[claimid] ? (v[claimid].decision > 0 ? (v[claimid].fav ? yesyes : yes) : (v[claimid].fav ? nono : no)) : skip"
+      >
+        Hintergrund: {{d.claims[claimid].background}}<br>
+        These: {{d.claims[claimid].claim}}<br>
+        <span *ngIf="v[claimid]">
+        Deine Antwort: {{decisionToWord (v[claimid].decision, v[claimid].fav)}}<br>
+      </span>
+        Die Kandidaten denken dazu:
+        <nz-collapse>
+          <nz-collapse-panel *ngFor="let candidate of d.candidates | keyvalue" [nzHeader]="candidate.value.name"
+        [nzExtra]="candidate.value.positions[claimid].vote == 0 ? skip : candidate.value.positions[claimid].vote > 0 ? (candidate.value.positions[claimid].vote == 2 ? yesyes : yes) : (candidate.value.positions[claimid].vote == -2 ? nono : no)"
+        >
+            {{candidateDecisionToWord (candidate.value.positions[claimid].vote)}}, denn:
+            <blockquote>
+              {{candidate.value.positions[claimid].reason}}
+            </blockquote>
+        </nz-collapse-panel>
+      </nz-collapse>
+
+<!--        <nz-list nzBordered nzSize="small">-->
+<!--        <nz-list-item *ngFor="let candidate of d.candidates | keyvalue">-->
+<!--          -->
+<!--          {{candidate.value.name}} {{candidateDecisionToWord (candidate.value.positions[claimid].vote)}}-->
+<!--        </nz-list-item>-->
+<!--    </nz-list>-->
+
+      </nz-collapse-panel>
+    </nz-collapse>
+  </div>
+    </ng-container>
+
+
+
+    <div *ngFor="let claim of v  | keyvalue">
+      {{d.claims[claim.value.id].title}}
+      {{claim.value.decision}}
+    </div>
+  </ng-container>
+</ng-container>
+
+    <ng-template #skip>
+      <i nz-icon nzType="loading" nzTheme="outline"></i>
+    </ng-template>
+    <ng-template #nono>
+      <i nz-icon nzType="heart" nzTheme="fill" (click)="$event.stopPropagation()" class="heart-red"></i>
+      <i nz-icon nzType="dislike" (click)="$event.stopPropagation()"></i>
+    </ng-template>
+    <ng-template #no>
+      <i nz-icon nzType="dislike" (click)="$event.stopPropagation()"></i>
+    </ng-template>
+    <ng-template #yes>
+      <i nz-icon nzType="like" (click)="$event.stopPropagation()"></i>
+    </ng-template>
+    <ng-template #yesyes>
+      <i nz-icon nzType="heart" nzTheme="fill" (click)="$event.stopPropagation()" class="heart-red"></i>
+      <i nz-icon nzType="like" (click)="$event.stopPropagation()"></i>
+    </ng-template>

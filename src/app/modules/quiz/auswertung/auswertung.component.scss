@@ -1,0 +1,11 @@
+@import '../../../../assets/styles/variables';
+
+.category {
+  border: 2px solid;
+  border-radius: 7px;
+  margin: 20px 0;;
+  padding: 1rem;
+}
+.heart-red {
+  color: $favcolor;
+}
