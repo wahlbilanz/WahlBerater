@@ -7,4 +7,5 @@ export interface State {
   data?: Data;
   dataLoaded: boolean;
   usedCachedData: boolean;
+  votes: {};
 }

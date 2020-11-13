@@ -1,5 +1,5 @@
 {
-  "name": "walberater",
+  "name": "wahlberater",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -25,6 +25,7 @@
     "@ngrx/router-store": "^10.0.0",
     "@ngrx/store": "^10.0.0",
     "@ngrx/store-devtools": "^10.0.0",
+    "bootstrap": "^4.5.3",
     "ng-zorro-antd": "^10.0.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",

@@ -1,5 +1,11 @@
 {
   "claims": {
+    "howto": {
+      "claim": "Thesen sollten relevant und kontrovers sein.",
+      "background": "Hintergrundinformationen, um die These einordnen zu können.",
+      "provenance": [
+      ]
+    },
     "asozial": {
       "claim": "du bist asozial",
       "background": "amerikanische wissenschaftler haben herausgefunden, dass mancheiner asozial ist.",
@@ -30,7 +36,7 @@
     },
   "not": {
     "claim": "energie ist noetig",
-    "background": "amerikanische wissenschaftler haben herausgefunden, energie wichtig ist. und vielleicht sollten wir **markdown** [supporten](https://walberater.de)?",
+    "background": "amerikanische wissenschaftler haben herausgefunden, energie wichtig ist. und vielleicht sollten wir **markdown** [supporten](https://wahlberater.de)?",
     "provenance": [
       {
         "claim": "blah",
@@ -58,6 +64,11 @@
   }
 },
   "categories": {
+    "howto": {
+      "title": "Einführung",
+      "color": "rgb(33,33,33)",
+      "claims": ["howto"]
+    },
     "soziales": {
       "title": "Soziales",
       "color": "rgb(255, 216, 139)",
@@ -72,13 +83,13 @@
   "candidates": {
     "sophiemuster": {
       "name": "Sophie Muster",
-      "pic": "https://walberater.de/walberater.png",
+      "pic": "https://wahlberater.de/wahlberater.png",
       "oneliner": "Ich stehe fuer alle sophien dieser welt!",
       "description": "ich bin links oder mitte oder rechts, weiss ich selbst nicht genau. aber eine partei ist die beste, das ist mal klar! also waehlt mich!!",
       "prose": "geboren in einer stadt. oder dorf. und dann gross geworden. ich mag essen und trinken, aber keine steine. meine hobbies sind schoen.",
       "party": "sophien",
       "links": {
-        "twitter": "https://twitter.com/walberater",
+        "twitter": "https://twitter.com/wahlberater",
         "blog": "https://some.blog.sophie"
       },
       "positions": {
@@ -102,13 +113,13 @@
     },
     "martinmuster": {
       "name": "Martin Muster",
-      "pic": "https://walberater.de/walberater.png",
+      "pic": "https://wahlberater.de/wahlberater.png",
       "oneliner": "Ich stehe fuer einen martin! aber welchen!?",
-      "description": "ich bin auch links oder mitte oder rechts. und ich kann [links](https://walberater.de) und **fett** :)",
+      "description": "ich bin auch links oder mitte oder rechts. und ich kann [links](https://wahlberater.de) und **fett** :)",
       "prose": "geboren und dann gross geworden. groesser als die meisten sophien, wuerde ich mal behaupten! keine hobbies. arbeit ist was zaehlt, verdammt nochmal! ;-)",
       "party": "martins",
       "links": {
-        "twitter": "https://twitter.com/walberater",
+        "twitter": "https://twitter.com/wahlberater",
         "blog": "https://some.blog.martin"
       },
       "positions": {
@@ -132,13 +143,13 @@
     },
     "martinmuster2": {
       "name": "Martin Muster 2",
-      "pic": "https://walberater.de/walberater.png",
+      "pic": "https://wahlberater.de/wahlberater.png",
       "oneliner": "Ich stehe fuer einen anderen martin! aber welchen!?",
-      "descriptions": "ich bin auch links oder mitte oder rechts. und ich kann [links](https://walberater.de) und **fett** :) 2!",
+      "descriptions": "ich bin auch links oder mitte oder rechts. und ich kann [links](https://wahlberater.de) und **fett** :) 2!",
       "prose": "geboren und dann gross geworden. groesser als die meisten sophien, wuerde ich mal behaupten! keine hobbies. arbeit ist was zaehlt, verdammt nochmal! ;-) 2!",
       "party": "martins",
       "links": {
-        "twitter": "https://twitter.com/walberater",
+        "twitter": "https://twitter.com/wahlberater",
         "blog": "https://some.blog.martin2"
       },
       "positions": {

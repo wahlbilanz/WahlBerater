@@ -1,0 +1,4 @@
+
+<ng-container *ngIf="category && data | async as d">
+    <app-quiz-card [category]="d.categories[category]" [claim]="d.claims[claimId]" [claimId]="claimId" [next]="getNext(d)" [prev]="getPrev(d)"></app-quiz-card>
+</ng-container>

@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "walberater": {
+    "wahlberater": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/walberater",
+            "outputPath": "dist/wahlberater",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -35,9 +35,12 @@
             ],
             "styles": [
               "src/assets/themes/ng-zorro.theme.less",
-              "src/assets/styles/index.scss"
+              "src/assets/styles/index.scss",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/bootstrap/dist/js/bootstrap.min.js"]
           },
           "configurations": {
             "production": {
@@ -73,18 +76,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "walberater:build"
+            "browserTarget": "wahlberater:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "walberater:build:production"
+              "browserTarget": "wahlberater:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "walberater:build"
+            "browserTarget": "wahlberater:build"
           }
         },
         "test": {
@@ -122,18 +125,18 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "walberater:serve"
+            "devServerTarget": "wahlberater:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "walberater:serve:production"
+              "devServerTarget": "wahlberater:serve:production"
             }
           }
         }
       }
     }
   },
-  "defaultProject": "walberater",
+  "defaultProject": "wahlberater",
   "cli": {
     "analytics": false
   }

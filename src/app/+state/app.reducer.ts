@@ -14,6 +14,7 @@ export const initialState: State = {
   data: null,
   dataLoaded: false,
   usedCachedData: false,
+  votes: {}
 };
 
 export const appReducer = createReducer(
@@ -38,5 +39,16 @@ export const appReducer = createReducer(
     data: null,
     dataLoaded: false,
     usedCachedData: false,
+  })),
+
+  on(AppActions.vote, (state: State, { claimId, decision, fav }) => ({
+    ...state,
+    votes: {
+      ...state.votes,
+      [claimId]: {
+        decision,
+        fav
+      }
+    },
   })),
 );

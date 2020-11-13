@@ -1,0 +1,69 @@
+@import '../../../../assets/styles/variables';
+
+#quizcard {
+  max-width: 600px;
+  /*width: 100%;
+  padding: 15px;
+  margin: 6rem auto 0 auto;*/
+  border: 2px solid;
+  border-radius: 7px;
+
+
+
+#card-category {
+  margin-top: -2.5em;
+  background: white;
+  padding: 0 .5em;
+  width: max-content;
+  margin-left: auto;
+}
+
+#claim-background {
+
+}
+#claim {
+
+}
+
+
+  .votebtn {
+    font-size: 3rem;
+  width: 6rem;
+  height: 6rem;
+  border-radius: 50%;
+    margin: 0 auto;
+    display: block;
+  border: 2px solid $wb-color-primary-600;
+  color: $wb-color-primary-600;
+  background-color: white;
+
+    &.selected {
+      color: white;
+      background-color: $wb-color-primary-600;
+
+    }
+
+    &.votefav {
+      border-color: #FF2F00;
+      color: #FF2F00;
+    }
+
+    &.votefav.selected {
+      color: white;
+      background-color: #FF2F00;
+
+    }
+
+    //i {
+    //width: 100%;
+    //height: 100%;
+    //}
+    //padding: 0.25em 0.75em;
+    //min-width: 10ch;
+    //min-height: 44px;
+  }
+  .cardnavbtn {
+  color: $wb-color-primary-600;
+
+  }
+}
