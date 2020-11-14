@@ -84,7 +84,8 @@
     },
     "typedef": [
       true,
-      "call-signature"
+      "property-declaration",
+      "parameter"
     ],
     "typedef-whitespace": {
       "options": [
