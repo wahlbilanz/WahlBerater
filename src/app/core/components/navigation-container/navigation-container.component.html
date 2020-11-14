@@ -1,40 +1,38 @@
-<div class="tile-menu">
-  <a
-    class="nav-block home-link"
-    routerLink="/"
-    routerLinkActive="active"
-    [routerLinkActiveOptions]="{ exact: true }"
-    title="Zurück zur Startseite"
-  >
-    <i nz-icon nzType="home" nzTheme="outline" class="nav-icon"></i>
-    Start
-  </a>
+<a
+  class="nav-block home-link"
+  routerLink="/"
+  routerLinkActive="active"
+  [routerLinkActiveOptions]="{ exact: true }"
+  title="Zurück zur Startseite"
+>
+  <i nz-icon nzType="home" nzTheme="outline" class="nav-icon"></i>
+  Start
+</a>
 
-  <a class="nav-block results-link" routerLink="/quiz/results" routerLinkActive="active" title="Zur Quiz Auswertung">
-    <i nz-icon nzType="bar-chart" nzTheme="outline" class="nav-icon"></i>
-    Quiz Auswertung
-  </a>
+<a class="nav-block results-link" routerLink="/quiz/results" routerLinkActive="active" title="Zur Quiz Auswertung">
+  <i nz-icon nzType="bar-chart" nzTheme="outline" class="nav-icon"></i>
+  Auswertung
+</a>
 
-  <a class="nav-block quiz-link" routerLink="/quiz" routerLinkActive="active" title="Started das Quiz" *ngIf="false">
-    <i nz-icon nzType="question" nzTheme="outline" class="nav-icon"></i>
-    Quiz starten
-  </a>
+<a class="nav-block quiz-link" routerLink="/quiz" routerLinkActive="active" title="Started das Quiz" *ngIf="false">
+  <i nz-icon nzType="question" nzTheme="outline" class="nav-icon"></i>
+  Quiz starten
+</a>
 
-  <a class="nav-block candidates-link" routerLink="/candidates" routerLinkActive="active" title="Zur Liste aller Kandidierenden">
-    <i nz-icon nzType="user" nzTheme="outline" class="nav-icon"></i>
-    Kandidierenden&shy;liste
-  </a>
+<a class="nav-block candidates-link" routerLink="/candidates" routerLinkActive="active" title="Zur Liste aller Kandidierenden">
+  <i nz-icon nzType="user" nzTheme="outline" class="nav-icon"></i>
+  Kandi&shy;dierenden&shy;liste
+</a>
 
-  <a
-    class="nav-block claims-link"
-    routerLink="/claim"
-    routerLinkActive="active"
-    title="Zur Liste aller Thesen die die Kandidierenden beantwortet haben"
-  >
-    <i nz-icon nzType="unordered-list" nzTheme="outline" class="nav-icon"></i>
-    Thesenliste
-  </a>
-</div>
+<a
+  class="nav-block claims-link"
+  routerLink="/claim"
+  routerLinkActive="active"
+  title="Zur Liste aller Thesen die die Kandidierenden beantwortet haben"
+>
+  <i nz-icon nzType="unordered-list" nzTheme="outline" class="nav-icon"></i>
+  Thesenliste
+</a>
 
 <ul class="boring-menu">
   <li><a href="https://www.wahlberater.de" target="_blank">WahlBerater Projekt</a></li>

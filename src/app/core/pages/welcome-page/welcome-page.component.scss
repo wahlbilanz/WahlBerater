@@ -63,7 +63,7 @@ section.welcome-page-nav {
     @include use-typography($wb-type-strong);
     color: $wb-color-neutral-600;
     background-color: $wb-color-neutral-0;
-    box-shadow: 0 1px 2px -2px rgba(0, 0, 0, 0.08), 0 1.5px 3px 0 rgba(0, 0, 0, 0.05), 0 2.5px 6px 2px rgba(0, 0, 0, 0.06);
+    box-shadow: $wb-shadow-normal;
 
     transition: color 0.3s, background-color 0.3s, box-shadow 0.3s;
 
@@ -100,7 +100,7 @@ section.welcome-page-nav {
   a.nav-block:hover {
     color: $wb-color-secondary-400;
     text-decoration: none;
-    box-shadow: 0 1px 2px -2px rgba(0, 0, 0, 0.21), 0 3px 6px 0 rgba(0, 0, 0, 0.17), 0 5px 12px 4px rgba(0, 0, 0, 0.14);
+    box-shadow: $wb-shadow-hover;
 
     .small {
       color: $wb-color-neutral-700;
