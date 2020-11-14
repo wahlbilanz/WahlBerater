@@ -9,12 +9,24 @@
   Start
 </a>
 
-<a class="nav-block results-link" routerLink="/quiz/results" routerLinkActive="active" title="Zur Quiz Auswertung">
+<a
+  class="nav-block results-link"
+  routerLink="/quiz/results"
+  routerLinkActive="active"
+  title="Zur Quiz Auswertung"
+  *ngIf="(quizState | async) === QuizStateEnum.CONCLUDED"
+>
   <i nz-icon nzType="bar-chart" nzTheme="outline" class="nav-icon"></i>
   Auswertung
 </a>
 
-<a class="nav-block quiz-link" routerLink="/quiz" routerLinkActive="active" title="Started das Quiz" *ngIf="false">
+<a
+  class="nav-block quiz-link"
+  routerLink="/quiz"
+  routerLinkActive="active"
+  title="Started das Quiz"
+  *ngIf="(quizState | async) !== QuizStateEnum.CONCLUDED"
+>
   <i nz-icon nzType="question" nzTheme="outline" class="nav-icon"></i>
   Quiz
 </a>

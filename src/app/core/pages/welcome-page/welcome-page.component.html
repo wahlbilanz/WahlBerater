@@ -1,7 +1,12 @@
 <h1>Willkommen zum WahlBerater!</h1>
 
 <section class="welcome-page-nav">
-  <a class="nav-block results-link" routerLink="/quiz/results" title="Zur Quiz Auswertung">
+  <a
+    class="nav-block results-link"
+    routerLink="/quiz/results"
+    title="Zur Quiz Auswertung"
+    *ngIf="(quizState | async) !== QuizStateEnum.NOT_STARTED"
+  >
     <i nz-icon nzType="bar-chart" nzTheme="outline" class="nav-icon"></i>
     Zur Quiz Auswertung
     <p class="small">Sieh dir deine Ergebnisse von dem letztem Quiz an!</p>
