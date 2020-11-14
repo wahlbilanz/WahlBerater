@@ -14,6 +14,7 @@ export const initialState: State = {
   data: null,
   dataLoaded: false,
   usedCachedData: false,
+  allowLocalDataStorage: null,
 };
 
 export const appReducer = createReducer(
@@ -38,5 +39,14 @@ export const appReducer = createReducer(
     data: null,
     dataLoaded: false,
     usedCachedData: false,
+  })),
+
+  on(AppActions.changeDataStorePreference, (state, { allow }) => ({
+    ...state,
+    allowLocalDataStorage: allow,
+  })),
+  on(AppActions.restoreDataStorePreference, (state, { allow }) => ({
+    ...state,
+    allowLocalDataStorage: allow,
   })),
 );

@@ -13,15 +13,17 @@
   <a class="nav-block candidates-link" routerLink="/candidates" title="Zur Liste aller Kandidierenden">
     <i nz-icon nzType="user" nzTheme="outline" class="nav-icon"></i>
     <!-- damn it. it's too long -->
-    Kandidierenden&shy;liste
+    Kandidierende
   </a>
   <a class="nav-block claims-link" routerLink="/claim" title="Zur Liste aller Thesen die die Kandidierenden beantwortet haben">
     <i nz-icon nzType="unordered-list" nzTheme="outline" class="nav-icon"></i>
-    Thesenliste
+    Thesen
   </a>
 
   <div class="nav-block privacy-block">
-    <label nz-checkbox [ngModel]="true">Speichere die Quizergebnisse auf meinem Gerät</label>
+    <label nz-checkbox [ngModel]="localStorageAllowed | async" (ngModelChange)="updateLocalStorageOptIn($event)"
+      >Speichere die Quizergebnisse auf meinem Gerät</label
+    >
     <p class="small">
       Bevor du deine persönlichen Einstellungen einer Webseite preisgibst solltest du unbedingt
       <i>immer die Datenschutzerklärung lesen und verstehen!</i> Nimm dir daher kurz Zeit und schaue in

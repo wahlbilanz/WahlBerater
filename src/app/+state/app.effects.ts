@@ -8,6 +8,7 @@ import { mergeMap, map, catchError } from 'rxjs/operators';
 import * as AppActions from './app.actions';
 import { DataService } from '../core/services/data.service';
 import { asyncScheduler, scheduled } from 'rxjs';
+import { DataPersistanceService } from '../core/services/data-persistance.service';
 
 @Injectable()
 export class AppEffects {
@@ -24,7 +25,7 @@ export class AppEffects {
         ofType(AppActions.loadData),
         mergeMap(() =>
           this.dataService.getData().pipe(
-            // TODO detect if offline and the try to deliver cached Variant?
+            // TODO detect if offline and then try to deliver cached Variant?
             map((data) => AppActions.loadDataSuccess({ data, wasCached: false })),
             catchError((error) => scheduled([AppActions.loadDataError({ error })], asyncScheduler)),
           ),
@@ -33,5 +34,23 @@ export class AppEffects {
     { useEffectsErrorHandler: true },
   );
 
-  constructor(private actions: Actions, private store: Store<State>, private dataService: DataService) {}
+  persistLocalStorageOptIn = createEffect(
+    () =>
+      this.actions.pipe(
+        ofType(AppActions.changeDataStorePreference),
+        map(({ allow }) => this.dataPersistanceService.updateUserOptIn(allow)),
+      ),
+    { dispatch: false },
+  );
+
+  restoreLocalStorageOptIn = createEffect(() =>
+    scheduled([AppActions.restoreDataStorePreference({ allow: this.dataPersistanceService.getUserOptInStatus() })], asyncScheduler),
+  );
+
+  constructor(
+    private actions: Actions,
+    private store: Store<State>,
+    private dataService: DataService,
+    private dataPersistanceService: DataPersistanceService,
+  ) {}
 }
