@@ -1,27 +1,27 @@
 <h1>Willkommen zum WahlBerater!</h1>
 
 <section class="welcome-page-nav">
-  <a class="nav-block wide" routerLink="/quiz/results">
+  <a class="nav-block results-link" routerLink="/quiz/results">
     <i nz-icon nzType="bar-chart" nzTheme="outline"  class="nav-icon"></i>
     Zur Quiz Auswertung
     <p class="small">
       Sieh dir deine Ergebnisse von dem letztem Quiz an!
     </p>
   </a>
-  <a class="nav-block large" routerLink="/quiz">
+  <a class="nav-block quiz-link" routerLink="/quiz">
     <i nz-icon nzType="question" nzTheme="outline" class="nav-icon"></i>
     Quiz starten
   </a>
-  <a class="nav-block large" routerLink="/candidates">
+  <a class="nav-block candidates-link" routerLink="/candidates">
     <i nz-icon nzType="user" nzTheme="outline" class="nav-icon"></i>
     Kandidatenliste
   </a>
-  <a class="nav-block large" routerLink="/claim">
+  <a class="nav-block claims-link" routerLink="/claim">
     <i nz-icon nzType="unordered-list" nzTheme="outline" class="nav-icon"></i>
     Thesenliste
   </a>
 
-  <div class="nav-block wide">
+  <div class="nav-block privacy-block">
     <label nz-checkbox [ngModel]="true">Speichere die Quizergebnisse auf meinem Gerät</label>
     <p class="small">
       Bevor du deine persönlichen Einstellungen einer Webseite preisgibst solltest du unbedingt
@@ -30,7 +30,7 @@
     </p>
   </div>
 
-  <div class="nav-block wide">
+  <div class="nav-block about-block">
     <h2>Was ist ein Wahl Berater?</h2>
     <p>
       Der WahlBerater ist dein Berater für die Wahlen des Studierendenparlaments 2021 an der FernUniversität in Hagen.

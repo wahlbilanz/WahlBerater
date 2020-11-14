@@ -166,7 +166,7 @@ $wb-type-paragraph-small: (
   'font-size': 14px,
   'line-height': 22px,
   'letter-spacing': 0px,
-  'color': $wb-color-neutral-700,
+  'color': $wb-color-neutral-600,
 );
 
 $wb-type-strong: (
@@ -184,7 +184,7 @@ $wb-type-strong-small: (
   'font-size': 14px,
   'line-height': 22px,
   'letter-spacing': 0px,
-  'color': $wb-color-neutral-700,
+  'color': $wb-color-neutral-600,
 );
 
 @mixin use-typography($type) {
