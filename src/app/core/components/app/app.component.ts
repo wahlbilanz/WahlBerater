@@ -37,6 +37,7 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     // first things first! Let's load some data.
     this.store.dispatch(AppActions.loadData());
+    setTimeout(() => this.store.dispatch(AppActions.toggleMenu({ open: true })), 300);
   }
 
   toggleMenu(event: MouseEvent) {

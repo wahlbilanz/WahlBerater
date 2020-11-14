@@ -72,8 +72,7 @@ nav {
   right: $wb-space-medium;
   top: $nav-height + $wb-space-small;
 
-  width: 480px;
-  height: 270px;
+  width: 720px;
   max-width: calc(100vw - #{2 * $wb-space-medium});
   max-height: calc(100vh - #{$nav-height + (2 * $wb-space-medium)});
 

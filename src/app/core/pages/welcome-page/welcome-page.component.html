@@ -1,12 +1,10 @@
 <h1>Willkommen zum WahlBerater!</h1>
 
 <section class="welcome-page-nav">
-  <a class="nav-block results-link" routerLink="/quiz/results">
-    <i nz-icon nzType="bar-chart" nzTheme="outline"  class="nav-icon"></i>
+  <a class="nav-block results-link" routerLink="/quiz/results" title="Zur Quiz Auswertung">
+    <i nz-icon nzType="bar-chart" nzTheme="outline" class="nav-icon"></i>
     Zur Quiz Auswertung
-    <p class="small">
-      Sieh dir deine Ergebnisse von dem letztem Quiz an!
-    </p>
+    <p class="small">Sieh dir deine Ergebnisse von dem letztem Quiz an!</p>
   </a>
   <a class="nav-block quiz-link" routerLink="/quiz" title="Started das Quiz">
     <i nz-icon nzType="question" nzTheme="outline" class="nav-icon"></i>
@@ -26,19 +24,17 @@
     <label nz-checkbox [ngModel]="true">Speichere die Quizergebnisse auf meinem Gerät</label>
     <p class="small">
       Bevor du deine persönlichen Einstellungen einer Webseite preisgibst solltest du unbedingt
-        <i>immer die Datenschutzerklärung lesen und verstehen!</i> Nimm dir daher kurz Zeit und schaue in
-        <a routerLink="/docs/privacy">unsere Datenschutzerklärung.</a>
+      <i>immer die Datenschutzerklärung lesen und verstehen!</i> Nimm dir daher kurz Zeit und schaue in
+      <a routerLink="/docs/privacy">unsere Datenschutzerklärung.</a>
     </p>
   </div>
 
   <div class="nav-block about-block">
     <h2>Was ist ein Wahl Berater?</h2>
+    <p>Der WahlBerater ist dein Berater für die Wahlen des Studierendenparlaments 2021 an der FernUniversität in Hagen.</p>
     <p>
-      Der WahlBerater ist dein Berater für die Wahlen des Studierendenparlaments 2021 an der FernUniversität in Hagen.
-    </p>
-    <p>
-      Es ist ein offenes Projekt...
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et pharetra magna.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et pharetra magna.
+      Es ist ein offenes Projekt... Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et pharetra magna.Lorem ipsum dolor sit
+      amet, consectetur adipiscing elit. Mauris et pharetra magna.
     </p>
     <p>
       <a routerLink="/docs/about">Hier mehr lesen!</a>

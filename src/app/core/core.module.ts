@@ -20,11 +20,12 @@ import { environment } from '../../environments/environment';
 import { AppComponent } from './components/app/app.component';
 import { CoreRoutingModule } from './core-routing.module';
 import { WelcomePageComponent } from './pages/welcome-page/welcome-page.component';
+import { NavigationContainerComponent } from './components/navigation-container/navigation-container.component';
 
 registerLocaleData(en);
 
 @NgModule({
-  declarations: [AppComponent, WelcomePageComponent],
+  declarations: [AppComponent, WelcomePageComponent, NavigationContainerComponent],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent],
   imports: [

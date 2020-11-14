@@ -18,7 +18,7 @@
 </header>
 
 <nav *ngIf="(isMenuOpen | async) === true" @menuAnimation aria-modal="true">
-  Hello World!
+  <app-navigation-container></app-navigation-container>
 </nav>
 
 <main (click)="mainClicked($event)">
