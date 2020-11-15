@@ -11,6 +11,7 @@ import {
   ChartComponent, ApexPlotOptions, ApexDataLabels
 } from 'ng-apexcharts';
 import {CandidateMap} from '../../../definitions/models/candidate.model';
+import {claimScore} from '../../../definitions/functions/score.function';
 
 
 export type ChartOptions = {
@@ -64,43 +65,6 @@ export class AuswertungBarchartComponent implements OnInit {
     };
   }
 
-  private calcScore(candidate: number, user: number, fav: boolean): number {
-    if (candidate === 0 || user === 0 || (candidate > 0 && user < 0) || (candidate < 0 && user > 0)) {
-      return 1;
-    }
-
-    if (candidate === 2) {
-      if (user === 1 && fav) {
-        return 2;
-      }
-      if (user === 1) {
-        return 1;
-      }
-    }
-
-    if (candidate === 1) {
-      if (user === 1 || user === 0) {
-        return 1;
-      }
-    }
-
-    if (candidate === -1) {
-      if (user === -1 || user === 0) {
-        return 1;
-      }
-    }
-
-    if (candidate === -2) {
-      if (user === -1 && fav) {
-        return 2;
-      }
-      if (user === -1) {
-        return 1;
-      }
-    }
-
-    return 0;
-  }
 
   recalc(): void {
     if (this.candidates && this.decisions) {
@@ -111,7 +75,7 @@ export class AuswertungBarchartComponent implements OnInit {
           for (const v in this.candidates[c].positions) {
             if (this.candidates[c].positions.hasOwnProperty(v)) {
               if (this.decisions[v]) {
-                score += this.calcScore(this.candidates[c].positions[v].vote, this.decisions[v].decision, this.decisions[v].fav);
+                score += claimScore(this.candidates[c].positions[v].vote, this.decisions[v].decision, this.decisions[v].fav);
               }
             }
           }

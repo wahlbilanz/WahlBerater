@@ -7,7 +7,7 @@ import { QuizComponent } from './quiz/quiz.component';
 import { AuswertungComponent } from './auswertung/auswertung.component';
 import { NzCollapseModule } from 'ng-zorro-antd/collapse';
 import { NzListModule } from 'ng-zorro-antd/list';
-import { NgApexchartsModule } from "ng-apexcharts";
+import { NgApexchartsModule } from 'ng-apexcharts';
 import { AuswertungBarchartComponent } from './auswertung-barchart/auswertung-barchart.component';
 
 @NgModule({

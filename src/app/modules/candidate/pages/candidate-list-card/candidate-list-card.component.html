@@ -1,0 +1,31 @@
+
+<div class="card">
+
+  <div id="chart">
+    <apx-chart
+      [series]="chartOptions.series"
+      [chart]="chartOptions.chart"
+      [xaxis]="chartOptions.xaxis"
+    ></apx-chart>
+  </div>
+  <div class="card-body">
+    <div class="row align-items-start">
+      <div class="col-2">
+        <div nz-row style="font-size: 2em;" nzJustify="center" class="card-img-left" alt="Card image cap">
+          <i nz-icon nzType="user" nzTheme="outline"></i>
+        </div>
+      </div>
+      <div class="col-10">
+<!--        <h5 class="card-title">test</h5>-->
+        <h5 class="card-title">{{data.candidates[candidate].name}}</h5>
+        <p class="card-text">{{data.candidates[candidate].oneliner}}</p>
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+      </div>
+    </div>
+
+
+<!--    <h5 class="card-title">{{candidate.name}}</h5>-->
+<!--    <p class="card-text">{{candidate.oneliner}}</p>-->
+<!--    <a href="#" class="btn btn-primary">Go somewhere</a>-->
+  </div>
+</div>

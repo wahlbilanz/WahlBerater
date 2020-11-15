@@ -3,22 +3,26 @@
 
 
 <ng-container *ngIf="data | async as d">
-<div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }" nzJustify="center" class="mt">
-  <div nz-col [nzSpan]="12" *ngFor="let candidate of d.candidates | keyvalue" class="mt">
-    <nz-card nzHoverable [nzCover]="coverKandidat" [routerLink]="['/candidates/' + candidate.key]">
-      <nz-card-meta nzTitle="{{candidate.value.name}}" nzDescription="Liste: {{candidate.value.party}}"></nz-card-meta>
-      <p class="mt">
-        {{candidate.value.oneliner}}
-      </p>
-    </nz-card>
+<ng-container *ngIf="votes | async as v">
+  <div class="row">
+    <div class="col-sm-6 col-md-4 col-lg-3" *ngFor="let candidate of d.candidates | keyvalue" class="mt">
+<!--<div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }" nzJustify="center" class="mt">-->
+<!--  <div nz-col [nzSpan]="12" *ngFor="let candidate of d.candidates | keyvalue" class="mt">{{candidate.key}}-->
+    <app-candidate-list-card [data]="d" [decisions]="v" [candidate]="candidate.key"></app-candidate-list-card>
+<!--    <nz-card nzHoverable [nzCover]="coverKandidat" [routerLink]="['/candidates/' + candidate.key]">-->
+<!--      <nz-card-meta nzTitle="{{candidate.value.name}}" nzDescription="Liste: {{candidate.value.party}}"></nz-card-meta>-->
+<!--      <p class="mt">-->
+<!--        {{candidate.value.oneliner}}-->
+<!--      </p>-->
+<!--    </nz-card>-->
   </div>
 </div>
 
-<ng-template #coverKandidat>
-  <div nz-row style="font-size: 10em;" nzJustify="center" class="mt">
-    <i nz-icon nzType="user" nzTheme="outline"></i>
-  </div>
-</ng-template>
+<!--<ng-template #coverKandidat>-->
+<!--  <div nz-row style="font-size: 10em;" nzJustify="center" class="mt">-->
+<!--    <i nz-icon nzType="user" nzTheme="outline"></i>-->
+<!--  </div>-->
+<!--</ng-template>-->
 
 <!--  <ul>-->
 <!--    <li *ngFor="let kandidat of daten.kandidaten | keyvalue">-->
@@ -42,4 +46,5 @@
 <!--      </ul>-->
 <!--    </li>-->
 <!--  </ul>-->
+</ng-container>
 </ng-container>

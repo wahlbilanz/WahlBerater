@@ -10,6 +10,7 @@ import * as AppSelectors from '../../../../+state/app.selectors';
 })
 export class CandidateListPageComponent implements OnInit {
   data = this.store.pipe(select(AppSelectors.getData));
+  votes = this.store.pipe(select(AppSelectors.getVotes));
 
   constructor(private store: Store<AppPartialState>) { }
 

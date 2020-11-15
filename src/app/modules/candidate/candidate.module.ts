@@ -7,14 +7,16 @@ import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { NzDescriptionsModule } from 'ng-zorro-antd/descriptions';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzCollapseModule } from 'ng-zorro-antd/collapse';
+import { NgApexchartsModule } from 'ng-apexcharts';
 
 import { CandidateRoutingModule } from './candidate-routing.module';
 import { CandidateListPageComponent } from './pages/candidate-list-page/candidate-list-page.component';
 import { CandidateProfilePageComponent } from './pages/candidate-profile-page/candidate-profile-page.component';
+import { CandidateListCardComponent } from './pages/candidate-list-card/candidate-list-card.component';
 
 
 @NgModule({
-  declarations: [CandidateListPageComponent, CandidateProfilePageComponent],
+  declarations: [CandidateListPageComponent, CandidateProfilePageComponent, CandidateListCardComponent],
   imports: [
     CommonModule,
     CandidateRoutingModule,
@@ -24,6 +26,7 @@ import { CandidateProfilePageComponent } from './pages/candidate-profile-page/ca
     NzDescriptionsModule,
     NzDividerModule,
     NzCollapseModule,
+    NgApexchartsModule,
   ]
 })
 export class CandidateModule { }
