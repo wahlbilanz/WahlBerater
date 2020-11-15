@@ -17,15 +17,18 @@
         <span *ngIf="v[claimid]">
         Deine Antwort: {{decisionToWord (v[claimid].decision, v[claimid].fav)}}<br>
       </span>
-        Die Kandidaten denken dazu:
+        <h4>Was denken die Kandidaten?</h4>
         <nz-collapse>
           <nz-collapse-panel *ngFor="let candidate of d.candidates | keyvalue" [nzHeader]="candidate.value.name"
-        [nzExtra]="candidate.value.positions[claimid].vote == 0 ? skip : candidate.value.positions[claimid].vote > 0 ? (candidate.value.positions[claimid].vote == 2 ? yesyes : yes) : (candidate.value.positions[claimid].vote == -2 ? nono : no)"
+        [nzExtra]="(!candidate.value.positions[claimid] || candidate.value.positions[claimid].vote == 0) ? skip : candidate.value.positions[claimid].vote > 0 ? (candidate.value.positions[claimid].vote == 2 ? yesyes : yes) : (candidate.value.positions[claimid].vote == -2 ? nono : no)"
+                             class="{{v[claimid] && candidate.value.positions[claimid] && ((v[claimid].decision > 0 && candidate.value.positions[claimid].vote > 0) || (v[claimid].decision < 0 && candidate.value.positions[claimid].vote < 0)) ? 'same_direction' : ''}}"
         >
+  <ng-container *ngIf="candidate.value.positions[claimid]">
             {{candidateDecisionToWord (candidate.value.positions[claimid].vote)}}, denn:
             <blockquote>
               {{candidate.value.positions[claimid].reason}}
             </blockquote>
+  </ng-container>
         </nz-collapse-panel>
       </nz-collapse>
 
@@ -41,20 +44,20 @@
 </ng-container>
 
     <ng-template #skip>
-      <i nz-icon nzType="loading" nzTheme="outline"></i>
+      <i nz-icon nzType="loading" nzTheme="outline" class="vote-icon"></i>
     </ng-template>
     <ng-template #nono>
-      <i nz-icon nzType="heart" nzTheme="fill" (click)="$event.stopPropagation()" class="heart-red"></i>
-      <i nz-icon nzType="dislike" (click)="$event.stopPropagation()"></i>
+<!--      <i nz-icon nzType="heart" nzTheme="fill" (click)="$event.stopPropagation()" class="heart-red"></i>-->
+      <i nz-icon nzType="dislike" nzTheme="fill" (click)="$event.stopPropagation()" class="vote-icon"></i>
     </ng-template>
     <ng-template #no>
-      <i nz-icon nzType="dislike" (click)="$event.stopPropagation()"></i>
+      <i nz-icon nzType="dislike" nzTheme="outline" (click)="$event.stopPropagation()" class="vote-icon"></i>
     </ng-template>
     <ng-template #yes>
-      <i nz-icon nzType="like" (click)="$event.stopPropagation()"></i>
+      <i nz-icon nzType="like" nzTheme="outline" (click)="$event.stopPropagation()" class="vote-icon"></i>
     </ng-template>
     <ng-template #yesyes>
-      <i nz-icon nzType="heart" nzTheme="fill" (click)="$event.stopPropagation()" class="heart-red"></i>
-      <i nz-icon nzType="like" (click)="$event.stopPropagation()"></i>
+<!--      <i nz-icon nzType="heart" nzTheme="fill" (click)="$event.stopPropagation()" class="heart-red"></i>-->
+      <i nz-icon nzType="like" nzTheme="fill" (click)="$event.stopPropagation()" class="vote-icon"></i>
     </ng-template>
 
