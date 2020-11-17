@@ -7,9 +7,10 @@
 
   gap: $wb-space-small;
   grid-template:
-    'home       quiz    logo' 1fr
-    'candidates claims  boring' 1fr
-    / 1fr 1fr minmax(185px, auto);
+    'home       quiz  ' 1fr
+    'candidates claims' 1fr
+    'boring     boring' auto
+    / 1fr 1fr;
 
   @media screen and (max-width: $wb-breakpoint-small) {
     grid-template:
@@ -22,7 +23,6 @@
 
 .nav-block {
   padding: $wb-space-small $wb-space-medium;
-  // border: 1px solid transparent;
   text-align: center;
 
   display: flex;
@@ -40,21 +40,18 @@
 
   &:hover {
     color: $wb-color-secondary-400;
-    // border-color: $wb-color-secondary-400;
     text-decoration: none;
     box-shadow: $wb-shadow-hover;
   }
   &.active,
   &:active {
-    // border-color: $wb-color-secondary-600;
     background-color: $wb-color-secondary-900;
-    color: $wb-color-primary-100;
+    color: $wb-color-secondary-100;
   }
   &.active:hover,
   &:active:hover {
     color: $wb-color-secondary-700;
     background-color: $wb-color-secondary-0;
-    // border-color: $wb-color-secondary-400;
   }
 
   .nav-icon {
@@ -81,14 +78,43 @@
 
 .boring-menu {
   grid-area: boring;
-  align-self: end;
-  justify-self: center;
+  // align-self: end;
+  // justify-self: center;
 
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
   margin: 0;
-  padding-left: $wb-space-medium;
+  padding: 0;
+
+  li {
+    list-style: none;
+
+    &:not(:first-child) {
+      margin-left: $wb-space-medium;
+    }
+
+    a {
+      @include use-typography($wb-type-strong-small);
+      color: $wb-color-neutral-600;
+    }
+    a:active,
+    a.active {
+      color: $wb-color-secondary-700;
+      &:hover {
+        color: $wb-color-neutral-700;
+      }
+    }
+    a:hover {
+      color: $wb-color-secondary-600;
+    }
+  }
 
   @media screen and (max-width: $wb-breakpoint-small) {
-    align-self: start;
-    justify-self: start;
+    flex-flow: column nowrap;
+    justify-content: start;
+    li:not(:first-child) {
+      margin-left: 0;
+    }
   }
 }

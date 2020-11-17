@@ -56,8 +56,7 @@ header {
     &:hover {
       color: $wb-color-primary-900;
     }
-    &:active,
-    &:focus {
+    &:active {
       color: $wb-color-primary-200;
     }
   }
