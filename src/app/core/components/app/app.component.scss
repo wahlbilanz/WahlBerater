@@ -4,8 +4,7 @@ $nav-height: 46px;
 
 :host {
   display: grid;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
   margin: 0;
 
   grid-template:
@@ -29,7 +28,10 @@ $nav-height: 46px;
 header {
   grid-area: nav;
   display: flex;
-  width: 100vw;
+  position: fixed;
+  z-index: 90999;
+  width: 100%;
+
   margin: 0;
   background-color: $wb-color-primary-600;
 
