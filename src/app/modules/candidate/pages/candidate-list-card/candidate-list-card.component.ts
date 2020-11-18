@@ -61,7 +61,7 @@ export class CandidateListCardComponent implements OnInit {
     console.log (this.decisions);
 
     for (const category in this.data.categories) {
-      if (this.data.categories.hasOwnProperty(category)) {
+      if (this.data.categories.hasOwnProperty(category) && category !== 'howto') {
         let score = 0;
         for (const claim of this.data.categories[category].claims) {
           console.log (claim, this.decisions[claim], this.data.candidates[this.candidate]);
