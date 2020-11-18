@@ -1,5 +1,5 @@
 import { createSelector, createFeatureSelector } from '@ngrx/store';
-import { State } from './app.models';
+import { QuizState, State } from './app.models';
 import { STATE_FEATURE_KEY, AppPartialState } from './app.reducer';
 
 const getAppState = createFeatureSelector<AppPartialState, State>(STATE_FEATURE_KEY);
@@ -9,3 +9,6 @@ export const isBreakpointActive = createSelector(getAppState, (state: State, pro
 
 export const getData = createSelector(getAppState, (state: State) => (state.dataLoaded ? state.data : state.data));
 export const isDataLoaded = createSelector(getAppState, (state: State) => state.dataLoaded);
+
+export const isLocalDataStorageAllowed = createSelector(getAppState, (state: State) => state.allowLocalDataStorage);
+export const getQuizState = createSelector(getAppState, (state: State) => QuizState.STARTED);

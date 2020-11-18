@@ -1,0 +1,38 @@
+@import '../variables';
+
+h1.hero {
+  @include use-typography($wb-type-hero);
+}
+h1 {
+  @include use-typography($wb-type-h1);
+}
+h2 {
+  @include use-typography($wb-type-h2);
+}
+h3 {
+  @include use-typography($wb-type-h3);
+}
+h4 {
+  @include use-typography($wb-type-h4);
+}
+h5 {
+  @include use-typography($wb-type-h5);
+}
+p {
+  @include use-typography($wb-type-paragraph);
+}
+p.small,
+p small {
+  @include use-typography($wb-type-paragraph-small);
+}
+p.strong,
+p strong {
+  @include use-typography($wb-type-strong);
+}
+p.small.strong,
+p small strong,
+p strong small,
+p strong.small,
+p small.strong {
+  @include use-typography($wb-type-strong-small);
+}

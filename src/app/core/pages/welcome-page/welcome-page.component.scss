@@ -3,5 +3,107 @@
   margin: 10px;
 }
 .gutter-row {
-  background-color: #f00;;
+  background-color: #f00;
+}
+
+// --------------------------------------------------
+@import '../../../../assets/styles/variables';
+
+$nav-row-size: 2 * $wb-space-medium + map-get($wb-type-paragraph, 'line-height');
+
+section.welcome-page-nav {
+  display: grid;
+  gap: $wb-space-medium;
+  grid-template-columns: repeat(6, 1fr);
+  grid-auto-flow: row;
+  // grid-auto-rows: $nav-row-size;
+
+  width: 100%;
+  padding: 0 $wb-space-medium;
+  margin: 0;
+
+  // less horizontal gap on smaller devices
+  @media screen and (max-width: $wb-breakpoint-medium) {
+    gap: $wb-space-medium $wb-space-small;
+    padding: 0;
+  }
+
+  @mixin wide-block() {
+    grid-area: span 1 / span 6;
+    text-align: left;
+
+    .nav-icon {
+      display: inline-block;
+      font-size: 1.5em;
+      vertical-align: bottom;
+      margin: 0;
+      margin-right: $wb-space-medium;
+    }
+  }
+
+  @mixin large-block() {
+    grid-area: span 2 / span 2;
+    .nav-icon {
+      display: block;
+      font-size: $nav-row-size;
+      margin: 0;
+      margin-bottom: $wb-space-small;
+    }
+
+    @media screen and (max-width: $wb-breakpoint-small) {
+      grid-area: span 2 / span 3;
+    }
+  }
+
+  .nav-block {
+    display: block;
+    padding: $wb-space-medium $wb-space-large;
+    text-align: center;
+
+    @include use-typography($wb-type-strong);
+    color: $wb-color-neutral-600;
+    background-color: $wb-color-neutral-0;
+    box-shadow: $wb-shadow-normal;
+
+    transition: color 0.3s, background-color 0.3s, box-shadow 0.3s;
+
+    p,
+    .small {
+      transition: color 0.3s;
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+    .small {
+      @include use-typography($wb-type-paragraph-small);
+    }
+
+    &.results-link,
+    &.privacy-block,
+    &.about-block {
+      @include wide-block();
+    }
+    &.quiz-link,
+    &.candidates-link,
+    &.claims-link {
+      @include large-block();
+      .small {
+        display: none;
+      }
+    }
+    @media screen and (max-width: $wb-breakpoint-small) {
+      &.claims-link {
+        @include wide-block();
+      }
+    }
+  }
+  a.nav-block:hover {
+    color: $wb-color-secondary-400;
+    text-decoration: none;
+    box-shadow: $wb-shadow-hover;
+
+    .small {
+      color: $wb-color-secondary-400;
+    }
+  }
 }

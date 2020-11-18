@@ -1,7 +1,7 @@
+import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { NzBreakpointService, siderResponsiveMap } from 'ng-zorro-antd/core/services';
-import { map } from 'rxjs/operators';
 import * as AppActions from '../../../+state/app.actions';
 import { AppPartialState } from '../../../+state/app.reducer';
 import * as AppSelectors from '../../../+state/app.selectors';
@@ -10,13 +10,23 @@ import * as AppSelectors from '../../../+state/app.selectors';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
+  animations: [
+    trigger('menuAnimation', [
+      transition(':enter', [
+        style({ opacity: 0, transform: 'translateY(-20px)' }),
+        animate('100ms ease-in', style({ opacity: 0.5, transform: 'translateY(0px)' })),
+        animate('100ms ease-out', style({ opacity: 1, transform: 'translateY(0px)' })),
+      ]),
+      transition(':leave', [
+        style({ opacity: 1, transform: 'translateY(0px)' }),
+        animate('100ms ease-in', style({ opacity: 0.5, transform: 'translateY(0px)' })),
+        animate('100ms ease-out', style({ opacity: 0, transform: 'translateY(-20px)' })),
+      ]),
+    ]),
+  ],
 })
 export class AppComponent implements OnInit {
   public isMenuOpen = this.store.pipe(select(AppSelectors.isMenuOpen));
-  public fixMenu = this.store.pipe(
-    select(AppSelectors.isBreakpointActive, { breakpoint: 'lg' }),
-    map((active) => !active),
-  );
 
   constructor(private store: Store<AppPartialState>, private breakpointService: NzBreakpointService) {
     this.breakpointService.subscribe(siderResponsiveMap, true).subscribe((activeBreakpoints) => {
@@ -29,7 +39,17 @@ export class AppComponent implements OnInit {
     this.store.dispatch(AppActions.loadData());
   }
 
-  public toggleMenu(event) {
-    this.store.dispatch(AppActions.toggleMenu({ open: event }));
+  toggleMenu(event: MouseEvent) {
+    if (event) {
+      event.preventDefault();
+      event.stopImmediatePropagation();
+    }
+
+    this.store.dispatch(AppActions.toggleMenu({}));
+  }
+
+  /** Hides menu, when main container received click */
+  mainClicked(event: MouseEvent) {
+    this.store.dispatch(AppActions.toggleMenu({ open: false }));
   }
 }

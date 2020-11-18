@@ -1,4 +1,6 @@
-@import "~ng-zorro-antd/ng-zorro-antd.less";
+@import '~ng-zorro-antd/ng-zorro-antd.less';
+@import './walberater.variables.less';
+
 @theme: default;
 
 // The prefix to use on all css classes from ant.
@@ -8,45 +10,63 @@
 @html-selector: html;
 
 // -------- Colors -----------
-@primary-color: @blue-6;
-@info-color: @primary-color;
+@primary-color: @wb-color-primary-600;
+@info-color: @wb-color-secondary-600; // @primary-color;
 @success-color: @green-6;
 @processing-color: @blue-6;
 @error-color: @red-5;
 @highlight-color: @red-5;
 @warning-color: @gold-6;
+
 @normal-color: #d9d9d9;
 @white: #fff;
 @black: #000;
 
+// // Color used by default to control hover and active backgrounds and for
+// // alert info backgrounds.
+// @primary-1: color(~`colorPalette('@{primary-color}', 1) `); // replace tint(@primary-color, 90%)
+// @primary-2: color(~`colorPalette('@{primary-color}', 2) `); // replace tint(@primary-color, 80%)
+// @primary-3: color(~`colorPalette('@{primary-color}', 3) `); // unused
+// @primary-4: color(~`colorPalette('@{primary-color}', 4) `); // unused
+// @primary-5: color(
+//   ~`colorPalette('@{primary-color}', 5) `
+// ); // color used to control the text color in many active and hover states, replace tint(@primary-color, 20%)
+// @primary-6: @primary-color; // color used to control the text color of active buttons, don't use, use @primary-color
+// @primary-7: color(~`colorPalette('@{primary-color}', 7) `); // replace shade(@primary-color, 5%)
+// @primary-8: color(~`colorPalette('@{primary-color}', 8) `); // unused
+// @primary-9: color(~`colorPalette('@{primary-color}', 9) `); // unused
+// @primary-10: color(~`colorPalette('@{primary-color}', 10) `); // unused
+
 // Color used by default to control hover and active backgrounds and for
 // alert info backgrounds.
-@primary-1: color(~`colorPalette('@{primary-color}', 1) `); // replace tint(@primary-color, 90%)
-@primary-2: color(~`colorPalette('@{primary-color}', 2) `); // replace tint(@primary-color, 80%)
-@primary-3: color(~`colorPalette('@{primary-color}', 3) `); // unused
-@primary-4: color(~`colorPalette('@{primary-color}', 4) `); // unused
-@primary-5: color(
-  ~`colorPalette('@{primary-color}', 5) `
-); // color used to control the text color in many active and hover states, replace tint(@primary-color, 20%)
-@primary-6: @primary-color; // color used to control the text color of active buttons, don't use, use @primary-color
-@primary-7: color(~`colorPalette('@{primary-color}', 7) `); // replace shade(@primary-color, 5%)
-@primary-8: color(~`colorPalette('@{primary-color}', 8) `); // unused
-@primary-9: color(~`colorPalette('@{primary-color}', 9) `); // unused
-@primary-10: color(~`colorPalette('@{primary-color}', 10) `); // unused
+@primary-1: @wb-color-primary-100;
+@primary-2: @wb-color-primary-200;
+@primary-3: @wb-color-primary-300;
+@primary-4: @wb-color-primary-400;
+@primary-5: @wb-color-primary-500; // color used to control the text color in many active and hover states, replace tint(@primary-color, 20%)
+@primary-6: @wb-color-primary-600; // color used to control the text color of active buttons, don't use, use @primary-color
+@primary-7: @wb-color-primary-700;
+@primary-8: @wb-color-primary-800;
+@primary-9: @wb-color-primary-900;
+@primary-10: @wb-color-primary-900;
+
+// html,
+// body {
+//   color: @wb-color-primary-600 !important;
+// }
 
 // Base Scaffolding Variables
 // ---
 
 // Background color for `<body>`
-@body-background: #fff;
+@body-background: @wb-color-neutral-200; // #fff;
 // Base background color for most components
-@component-background: #fff;
+@component-background: @wb-color-neutral-0; // #fff;
 // Popover background color
 @popover-background: @component-background;
 @popover-customize-border-color: @border-color-split;
-@font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
-'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
-'Noto Color Emoji';
+
+@font-family: @wb-body-font-family;
 @code-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
 @text-color: fade(@black, 85%);
 @text-color-secondary: fade(@black, 45%);
@@ -73,22 +93,22 @@
 @border-radius-sm: @border-radius-base;
 
 // vertical paddings
-@padding-lg: 24px; // containers
-@padding-md: 16px; // small containers and buttons
-@padding-sm: 12px; // Form controls and items
-@padding-xs: 8px; // small items
-@padding-xss: 4px; // more small
+@padding-lg: @wb-space-large; // containers
+@padding-md: @wb-space-medium; // small containers and buttons
+@padding-sm: @wb-space-small; // Form controls and items
+@padding-xs: @wb-space-x-small; // small items
+@padding-xss: @wb-space-xx-small; // more small
 
 // vertical padding for all form controls
 @control-padding-horizontal: @padding-sm;
 @control-padding-horizontal-sm: @padding-xs;
 
 // vertical margins
-@margin-lg: 24px; // containers
-@margin-md: 16px; // small containers and buttons
-@margin-sm: 12px; // Form controls and items
-@margin-xs: 8px; // small items
-@margin-xss: 4px; // more small
+@margin-lg: @wb-space-large; // containers
+@margin-md: @wb-space-medium; // small containers and buttons
+@margin-sm: @wb-space-small; // Form controls and items
+@margin-xs: @wb-space-x-small; // small items
+@margin-xss: @wb-space-xx-small; // more small
 
 // height rules
 @height-base: 32px;
@@ -98,15 +118,15 @@
 // The background colors for active and hover states for things like
 // list items or table cells.
 @item-active-bg: @primary-1;
-@item-hover-bg: #f5f5f5;
+@item-hover-bg: @wb-color-neutral-100;
 
 // ICONFONT
 @iconfont-css-prefix: anticon;
 
 // LINK
 @link-color: @primary-color;
-@link-hover-color: color(~`colorPalette('@{link-color}', 5) `);
-@link-active-color: color(~`colorPalette('@{link-color}', 7) `);
+@link-hover-color: @wb-color-secondary-500; // color(~`colorPalette('@{link-color}', 5) `);
+@link-active-color: @wb-color-secondary-700; // color(~`colorPalette('@{link-color}', 7) `);
 @link-decoration: none;
 @link-hover-decoration: none;
 @link-focus-decoration: none;
@@ -153,16 +173,11 @@
 @shadow-color: rgba(0, 0, 0, 0.15);
 @shadow-color-inverse: @component-background;
 @box-shadow-base: @shadow-2;
-@shadow-1-up: 0 -6px 16px -8px rgba(0, 0, 0, 0.08), 0 -9px 28px 0 rgba(0, 0, 0, 0.05),
-  0 -12px 48px 16px rgba(0, 0, 0, 0.03);
-@shadow-1-down: 0 6px 16px -8px rgba(0, 0, 0, 0.08), 0 9px 28px 0 rgba(0, 0, 0, 0.05),
-0 12px 48px 16px rgba(0, 0, 0, 0.03);
-@shadow-1-left: -6px 0 16px -8px rgba(0, 0, 0, 0.08), -9px 0 28px 0 rgba(0, 0, 0, 0.05),
--12px 0 48px 16px rgba(0, 0, 0, 0.03);
-@shadow-1-right: 6px 0 16px -8px rgba(0, 0, 0, 0.08), 9px 0 28px 0 rgba(0, 0, 0, 0.05),
-12px 0 48px 16px rgba(0, 0, 0, 0.03);
-@shadow-2: 0 3px 6px -4px rgba(0, 0, 0, 0.12), 0 6px 16px 0 rgba(0, 0, 0, 0.08),
-0 9px 28px 8px rgba(0, 0, 0, 0.05);
+@shadow-1-up: 0 -6px 16px -8px rgba(0, 0, 0, 0.08), 0 -9px 28px 0 rgba(0, 0, 0, 0.05), 0 -12px 48px 16px rgba(0, 0, 0, 0.03);
+@shadow-1-down: 0 6px 16px -8px rgba(0, 0, 0, 0.08), 0 9px 28px 0 rgba(0, 0, 0, 0.05), 0 12px 48px 16px rgba(0, 0, 0, 0.03);
+@shadow-1-left: -6px 0 16px -8px rgba(0, 0, 0, 0.08), -9px 0 28px 0 rgba(0, 0, 0, 0.05), -12px 0 48px 16px rgba(0, 0, 0, 0.03);
+@shadow-1-right: 6px 0 16px -8px rgba(0, 0, 0, 0.08), 9px 0 28px 0 rgba(0, 0, 0, 0.05), 12px 0 48px 16px rgba(0, 0, 0, 0.03);
+@shadow-2: 0 3px 6px -4px rgba(0, 0, 0, 0.12), 0 6px 16px 0 rgba(0, 0, 0, 0.08), 0 9px 28px 8px rgba(0, 0, 0, 0.05);
 
 // Buttons
 @btn-font-weight: 400;
@@ -272,27 +287,27 @@
 
 // Media queries breakpoints
 // Extra small screen / phone
-@screen-xs: 480px;
+@screen-xs: @wb-breakpoint-x-small;
 @screen-xs-min: @screen-xs;
 
 // Small screen / tablet
-@screen-sm: 576px;
+@screen-sm: @wb-breakpoint-small;
 @screen-sm-min: @screen-sm;
 
 // Medium screen / desktop
-@screen-md: 768px;
+@screen-md: @wb-breakpoint-medium;
 @screen-md-min: @screen-md;
 
 // Large screen / wide desktop
-@screen-lg: 992px;
+@screen-lg: @wb-breakpoint-large;
 @screen-lg-min: @screen-lg;
 
 // Extra large screen / full hd
-@screen-xl: 1200px;
+@screen-xl: @wb-breakpoint-x-large;
 @screen-xl-min: @screen-xl;
 
 // Extra extra large screen / large desktop
-@screen-xxl: 1600px;
+@screen-xxl: @wb-breakpoint-xx-large;
 @screen-xxl-min: @screen-xxl;
 
 // provide a maximum
@@ -382,16 +397,11 @@
 @input-padding-horizontal-sm: @control-padding-horizontal-sm - 1px;
 @input-padding-horizontal-lg: @input-padding-horizontal;
 @input-padding-vertical-base: max(
-  round((@input-height-base - @font-size-base * @line-height-base) / 2 * 10) / 10 -
-  @border-width-base,
+  round((@input-height-base - @font-size-base * @line-height-base) / 2 * 10) / 10 - @border-width-base,
   3px
 );
-@input-padding-vertical-sm: max(
-  round((@input-height-sm - @font-size-base * @line-height-base) / 2 * 10) / 10 - @border-width-base,
-  0
-);
-@input-padding-vertical-lg: ceil((@input-height-lg - @font-size-lg * @line-height-base) / 2 * 10) /
-  10 - @border-width-base;
+@input-padding-vertical-sm: max(round((@input-height-sm - @font-size-base * @line-height-base) / 2 * 10) / 10 - @border-width-base, 0);
+@input-padding-vertical-lg: ceil((@input-height-lg - @font-size-lg * @line-height-base) / 2 * 10) / 10 - @border-width-base;
 @input-placeholder-color: hsv(0, 0, 75%);
 @input-color: @text-color;
 @input-icon-color: @input-color;
@@ -686,8 +696,7 @@
 @card-actions-li-margin: 12px 0;
 @card-skeleton-bg: #cfd8dc;
 @card-background: @component-background;
-@card-shadow: 0 1px 2px -2px rgba(0, 0, 0, 0.16), 0 3px 6px 0 rgba(0, 0, 0, 0.12),
-0 5px 12px 4px rgba(0, 0, 0, 0.09);
+@card-shadow: 0 1px 2px -2px rgba(0, 0, 0, 0.16), 0 3px 6px 0 rgba(0, 0, 0, 0.12), 0 5px 12px 4px rgba(0, 0, 0, 0.09);
 @card-radius: @border-radius-base;
 @card-head-tabs-margin-bottom: -17px;
 @card-head-extra-color: @text-color;
@@ -712,8 +721,7 @@
 @tabs-card-head-background: @background-color-light;
 @tabs-card-height: 40px;
 @tabs-card-active-color: @primary-color;
-@tabs-card-horizontal-padding: (@tabs-card-height - floor(@font-size-base * @line-height-base)) / 2 -
-  @border-width-base @padding-md;
+@tabs-card-horizontal-padding: (@tabs-card-height - floor(@font-size-base * @line-height-base)) / 2 - @border-width-base @padding-md;
 @tabs-card-horizontal-padding-sm: 6px @padding-md;
 @tabs-card-horizontal-padding-lg: 7px @padding-md 6px;
 @tabs-title-font-size: @font-size-base;
@@ -899,9 +907,8 @@
 @alert-no-icon-padding-vertical: @padding-xs;
 @alert-with-description-no-icon-padding-vertical: @padding-md - 1px;
 @alert-with-description-padding-vertical: @padding-md - 1px;
-@alert-with-description-padding: @alert-with-description-padding-vertical 15px
-@alert-with-description-no-icon-padding-vertical @alert-with-description-icon-size * 2 +
-  @alert-with-description-padding-vertical;
+@alert-with-description-padding: @alert-with-description-padding-vertical 15px @alert-with-description-no-icon-padding-vertical
+  @alert-with-description-icon-size * 2 + @alert-with-description-padding-vertical;
 @alert-icon-top: 8px + @font-size-base * @line-height-base / 2 - @font-size-base / 2;
 @alert-with-description-icon-size: 24px;
 @alert-with-description-icon-top: @alert-with-description-padding-vertical;
@@ -1001,4 +1008,3 @@
 @image-preview-operation-size: 18px;
 @image-preview-operation-color: @text-color-dark;
 @image-preview-operation-disabled-color: fade(@image-preview-operation-color, 45%);
-
