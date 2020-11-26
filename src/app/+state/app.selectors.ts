@@ -1,5 +1,5 @@
 import { createSelector, createFeatureSelector } from '@ngrx/store';
-import { State } from './app.models';
+import { QuizState, State } from './app.models';
 import { STATE_FEATURE_KEY, AppPartialState } from './app.reducer';
 
 const getAppState = createFeatureSelector<AppPartialState, State>(STATE_FEATURE_KEY);
@@ -12,3 +12,5 @@ export const isDataLoaded = createSelector(getAppState, (state: State) => state.
 
 export const getVotes =  createSelector(getAppState, (state: State) => state.votes);
 
+export const isLocalDataStorageAllowed = createSelector(getAppState, (state: State) => state.allowLocalDataStorage);
+export const getQuizState = createSelector(getAppState, (state: State) => QuizState.STARTED);

@@ -15,6 +15,7 @@ export const initialState: State = {
   dataLoaded: false,
   usedCachedData: false,
   votes: {}
+  allowLocalDataStorage: null,
 };
 
 export const appReducer = createReducer(
@@ -40,7 +41,6 @@ export const appReducer = createReducer(
     dataLoaded: false,
     usedCachedData: false,
   })),
-
   on(AppActions.vote, (state: State, { claimId, decision, fav }) => ({
     ...state,
     votes: {
@@ -48,6 +48,16 @@ export const appReducer = createReducer(
       [claimId]: {
         decision,
         fav
+      }
+    },
+  })),
+  on(AppActions.changeDataStorePreference, (state, { allow }) => ({
+    ...state,
+    allowLocalDataStorage: allow,
+  })),
+  on(AppActions.restoreDataStorePreference, (state, { allow }) => ({
+    ...state,
+    allowLocalDataStorage: allow,
       }
     },
   })),

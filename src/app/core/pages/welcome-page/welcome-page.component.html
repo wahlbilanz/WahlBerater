@@ -1,57 +1,111 @@
+<h1>Willkommen zum WahlBerater!</h1>
 
+<section class="welcome-page-nav">
+  <a
+    class="nav-block results-link"
+    routerLink="/quiz/results"
+    title="Zur Quiz Auswertung"
+    *ngIf="(quizState | async) !== QuizStateEnum.NOT_STARTED"
+  >
+    <i nz-icon nzType="bar-chart" nzTheme="outline" class="nav-icon"></i>
+    Zur Quiz Auswertung
+    <p class="small">Sieh dir deine Ergebnisse von dem letztem Quiz an!</p>
+  </a>
+  <a class="nav-block quiz-link" routerLink="/quiz" title="Started das Quiz">
+    <i nz-icon nzType="question" nzTheme="outline" class="nav-icon"></i>
+    Quiz starten
+  </a>
+  <a class="nav-block candidates-link" routerLink="/candidates" title="Zur Liste aller Kandidierenden">
+    <i nz-icon nzType="user" nzTheme="outline" class="nav-icon"></i>
+    <!-- damn it. it's too long -->
+    Kandi&shy;dierende
+  </a>
+  <a class="nav-block claims-link" routerLink="/claim" title="Zur Liste aller Thesen die die Kandidierenden beantwortet haben">
+    <i nz-icon nzType="unordered-list" nzTheme="outline" class="nav-icon"></i>
+    Thesen
+  </a>
 
-<div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }" nzJustify="center">
+  <div class="nav-block privacy-block">
+    <label nz-checkbox [ngModel]="localStorageAllowed | async" (ngModelChange)="updateLocalStorageOptIn($event)"
+      >Speichere die Quizergebnisse auf meinem Gerät</label
+    >
+    <p class="small">
+      Bevor du deine persönlichen Einstellungen einer Webseite preisgibst solltest du unbedingt
+      <i>immer die Datenschutzerklärung lesen und verstehen!</i> Nimm dir daher kurz Zeit und schaue in
+      <a routerLink="/docs/privacy">unsere Datenschutzerklärung.</a>
+    </p>
+  </div>
+
+  <div class="nav-block about-block">
+    <h2>Was ist ein Wahl Berater?</h2>
+    <p>Der WahlBerater ist dein Berater für die Wahlen des Studierendenparlaments 2021 an der FernUniversität in Hagen.</p>
+    <p>
+      Es ist ein offenes Projekt... Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et pharetra magna.Lorem ipsum dolor sit
+      amet, consectetur adipiscing elit. Mauris et pharetra magna.
+    </p>
+    <p>
+      <a routerLink="/docs/about">Hier mehr lesen!</a>
+    </p>
+  </div>
+</section>
+
+<!-- <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }" nzJustify="center">
   <div nz-col [nzSpan]="16">
     <h1>Der WahlBerater ist dein Wahlberater für die Wahlen des Studierendenparlaments 2021 an der FernUniversität in Hagen.</h1>
+    <h2>Der WalBerater ist dein Wahlberater für die Wahlen des Studierendenparlaments 2021 an der FernUniversität in Hagen.</h2>
+    <h3>Der WalBerater ist dein Wahlberater für die Wahlen des Studierendenparlaments 2021 an der FernUniversität in Hagen.</h3>
+    <h4>Der WalBerater ist dein Wahlberater für die Wahlen des Studierendenparlaments 2021 an der FernUniversität in Hagen.</h4>
+    <h5>Der WalBerater ist dein Wahlberater für die Wahlen des Studierendenparlaments 2021 an der FernUniversität in Hagen.</h5>
   </div>
 </div>
-
 
 <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }" nzJustify="center" class="mt">
   <div nz-col [nzSpan]="8">
     <nz-card nzHoverable [nzCover]="coverQuiz" [routerLink]="['/quiz']">
-      <nz-card-meta nzTitle="Starte das Quiz" nzDescription="Das Quiz hilft dir deine Position mit den Positionen der Kandidaten zu vergleichen."></nz-card-meta>
+      <nz-card-meta
+        nzTitle="Starte das Quiz"
+        nzDescription="Das Quiz hilft dir deine Position mit den Positionen der Kandidaten zu vergleichen."
+      ></nz-card-meta>
     </nz-card>
   </div>
   <div nz-col [nzSpan]="8">
     <nz-card nzHoverable [nzCover]="coverCandidates" [routerLink]="['/candidates']">
-      <nz-card-meta nzTitle="Die Kandidaten" nzDescription="Erkunde die Kandidaten für das Studierendenparlaments individuell und manuell."></nz-card-meta>
+      <nz-card-meta
+        nzTitle="Die Kandidaten"
+        nzDescription="Erkunde die Kandidaten für das Studierendenparlaments individuell und manuell."
+      ></nz-card-meta>
     </nz-card>
   </div>
 </div>
 
-
 <ng-template #coverQuiz>
-  <div nz-row style="font-size: 10em;" nzJustify="center" class="mt">
+  <div nz-row style="font-size: 10em" nzJustify="center" class="mt">
     <i nz-icon nzType="bar-chart" nzTheme="outline"></i>
   </div>
 </ng-template>
 <ng-template #coverCandidates>
-  <div nz-row style="font-size: 10em;" nzJustify="center" class="mt">
+  <div nz-row style="font-size: 10em" nzJustify="center" class="mt">
     <i nz-icon nzType="team" nzTheme="outline"></i>
   </div>
 </ng-template>
-
 
 <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }" nzJustify="center" class="mt">
   <div nz-col [nzSpan]="16">
     <nz-card title="Impressum &amp; Datenschutz">
       <p>
-        Bevor du deine persönlichen Einstellungen einer Webseite preisgibst solltest du unbedingt <strong>immer die Datenschutzerklaerung lesen und verstehen!</strong>
-        Nimm dir daher kurz Zeit und schaue in <a [routerLink]="['/docs/privacy']">unsere Datenschutzerklärung.</a>
+        Bevor du deine persönlichen Einstellungen einer Webseite preisgibst solltest du unbedingt
+        <strong>immer die Datenschutzerklaerung lesen und verstehen!</strong> Nimm dir daher kurz Zeit und schaue in
+        <a [routerLink]="['/docs/privacy']">unsere Datenschutzerklärung.</a>
       </p>
       <p>
         Der WahlBerater wird von zweimal Martin und einmal Sophie entwickelt. Im <a [routerLink]="['/docs/about']">Impressum</a> erfährst du mehr über uns!
       </p>
     </nz-card>
   </div>
-</div>
-
-
+</div> -->
 
 <ng-container *ngIf="data | async as d">
-        <nz-divider nzText="Debug"></nz-divider>
-
+  <nz-divider nzText="Debug"></nz-divider>
 
   <h2>Thesen</h2>
   <ul *ngIf="d?.categories">

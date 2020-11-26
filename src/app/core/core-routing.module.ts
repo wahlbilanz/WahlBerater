@@ -6,9 +6,9 @@ const routes: Routes = [
   { path: '', pathMatch: 'full', component: WelcomePageComponent },
   { path: 'docs', loadChildren: () => import('../modules/documentation/documentation.module').then((m) => m.DocumentationModule) },
   { path: 'quiz', loadChildren: () => import('../modules/quiz/quiz.module').then((m) => m.QuizModule) },
-  { path: 'thesis', loadChildren: () => import('../modules/claim/claim.module').then((m) => m.ClaimModule) },
+  { path: 'claim', loadChildren: () => import('../modules/claim/claim.module').then((m) => m.ClaimModule) },
   { path: 'candidates', loadChildren: () => import('../modules/candidate/candidate.module').then((m) => m.CandidateModule) },
-  //{ path: '**', redirectTo: '' },
+  // { path: '**', redirectTo: '' },
 ];
 
 @NgModule({
