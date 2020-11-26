@@ -45,8 +45,8 @@ export class CandidateListCardComponent implements OnInit {
         }
       ],
       chart: {
-        height: 350,
-        width: 350,
+        /*height: 350,
+        width: 350,*/
         type: 'radar'
       },
       xaxis: {

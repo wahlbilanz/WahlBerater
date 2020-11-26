@@ -4,8 +4,8 @@
 
 <ng-container *ngIf="data | async as d">
 <ng-container *ngIf="votes | async as v">
-  <div class="row">
-    <div class="col-sm-6 col-md-4 col-lg-3" *ngFor="let candidate of d.candidates | keyvalue" class="mt">
+  <div id="candidate-list">
+    <div class="candidate-preview" *ngFor="let candidate of d.candidates | keyvalue">
 <!--<div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }" nzJustify="center" class="mt">-->
 <!--  <div nz-col [nzSpan]="12" *ngFor="let candidate of d.candidates | keyvalue" class="mt">{{candidate.key}}-->
     <app-candidate-list-card [data]="d" [decisions]="v" [candidate]="candidate.key"></app-candidate-list-card>
@@ -16,6 +16,7 @@
 <!--      </p>-->
 <!--    </nz-card>-->
   </div>
+<!--    <div class="flex-break"></div>-->
 </div>
 
 <!--<ng-template #coverKandidat>-->
