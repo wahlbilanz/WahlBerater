@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { AppPartialState } from '../../../../+state/app.reducer';
 import * as AppSelectors from '../../../../+state/app.selectors';
+import {first} from 'rxjs/operators';
+import {vote} from '../../../../+state/app.actions';
 
 @Component({
   selector: 'app-candidate-list-page',
@@ -15,6 +17,6 @@ export class CandidateListPageComponent implements OnInit {
   constructor(private store: Store<AppPartialState>) { }
 
   ngOnInit(): void {
-  }
 
+  }
 }

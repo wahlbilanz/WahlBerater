@@ -12,7 +12,7 @@
 
       <nz-divider nzText="Die Positionen von {{d.candidates[candidateId].name}}"></nz-divider>
 
- <nz-collapse style="width: 300px;">
+ <nz-collapse>
       <nz-collapse-panel
         *ngFor="let position of d.candidates[candidateId].positions | keyvalue"
         [nzHeader]="d.claims[position.key].claim"
@@ -23,7 +23,7 @@
         </p>
 
         <p>
-          {{d.candidates[candidateId].name}} denkt {{position.value.vote}}, denn:
+          {{d.candidates[candidateId].name}} denkt {{position.value.vote | candidateDecisionToWord}}, denn:
         </p>
 
         <blockquote>

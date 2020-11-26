@@ -21,6 +21,7 @@ h5 {
 p {
   @include use-typography($wb-type-paragraph);
 }
+blockquote,
 p.small,
 p small {
   @include use-typography($wb-type-paragraph-small);

@@ -13,6 +13,7 @@ import { CandidateRoutingModule } from './candidate-routing.module';
 import { CandidateListPageComponent } from './pages/candidate-list-page/candidate-list-page.component';
 import { CandidateProfilePageComponent } from './pages/candidate-profile-page/candidate-profile-page.component';
 import { CandidateListCardComponent } from './pages/candidate-list-card/candidate-list-card.component';
+import {PipesModule} from '../pipes/pipes.module';
 
 
 @NgModule({
@@ -27,6 +28,7 @@ import { CandidateListCardComponent } from './pages/candidate-list-card/candidat
     NzDividerModule,
     NzCollapseModule,
     NgApexchartsModule,
+    PipesModule
   ]
 })
 export class CandidateModule { }

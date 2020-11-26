@@ -1,7 +1,7 @@
 @import '../../../../assets/styles/variables';
 
 #quizcard {
-  max-width: 600px;
+  max-width: 500px;
   /*width: 100%;
   padding: 15px;
   margin: 6rem auto 0 auto;*/
@@ -57,7 +57,7 @@
     }
 
     .votebtn {
-      font-size: 3rem;
+      font-size: 3.5rem;
       width: 6rem;
       height: 6rem;
       border-radius: 50%;
@@ -68,7 +68,7 @@
       background-color: white;
 
       &.votesmaller {
-        font-size: 2rem;
+        font-size: 2.5rem;
         width: 4rem;
         height: 4rem;
       }
@@ -103,23 +103,20 @@
     justify-content: space-between;
     display: flex;
     flex-wrap: wrap;
-    margin-right: -15px;
-    margin-left: -15px;
+    margin: $wb-space-x-large (-$wb-space-medium) 0 (-$wb-space-medium);
 
     div {
       position: relative;
       width: 100%;
       padding-right: 15px;
       padding-left: 15px;
-      flex: 0 0 33.333333%;
-      max-width: 33.333333%;
+      flex: 0 0 30%;
+      max-width: 30%;
       text-align: center;
       .cardnavbtn {
 
-        color: $wb-color-primary-600;
+        color: $wb-color-neutral-700;
         font-size: 1.5rem;
-        width: 3rem;
-        height: 3rem;
 
       }
     }

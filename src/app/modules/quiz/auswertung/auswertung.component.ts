@@ -1,10 +1,10 @@
-import { Component, ViewChild, OnInit } from '@angular/core';
+import {Component, ViewChild, OnInit, Pipe, PipeTransform} from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { AppPartialState } from '../../../+state/app.reducer';
 import * as AppSelectors from '../../../+state/app.selectors';
 import { first } from 'rxjs/operators';
 import {vote} from '../../../+state/app.actions';
-
+// import {DecisionToWord, CandidateDecisionToWord} from '../../../definitions/functions/decision-mapping.function';
 
 @Component({
   selector: 'app-auswertung',
@@ -21,27 +21,7 @@ export class AuswertungComponent implements OnInit {
   ngOnInit(): void {
 
   }
-  candidateDecisionToWord(decision: number): string {
-    return this.decisionToWord (decision, Math.abs(decision) > 1);
-  }
 
-  decisionToWord(decision: number, fav: boolean): string {
-    switch (decision) {
-      case -2:
-      case -1:
-        if (fav) {
-          return 'auf keinen fall';
-        }
-        return 'nein';
-      case 1:
-      case 2:
-        if (fav) {
-          return 'auf jeden fall';
-        }
-        return 'ja';
-    }
-    return 'übersprungen';
-  }
 
   sampleVotes(): void {
     this.data.pipe(first()).subscribe(d => {

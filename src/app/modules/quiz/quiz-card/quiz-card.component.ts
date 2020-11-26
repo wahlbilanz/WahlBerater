@@ -67,6 +67,8 @@ export class QuizCardComponent implements OnInit, OnChanges {
 
 
   private updateVote(goahead: boolean): void {
+    console.log ('dispatching:');
+    console.log ({claimId: this.claimId, decision: this.decision, fav: this.fav});
     this.store.dispatch(vote ({claimId: this.claimId, decision: this.decision, fav: this.fav}));
     if (goahead) {
       setTimeout(() => {

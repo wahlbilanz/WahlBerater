@@ -11,3 +11,10 @@ body{
 .mt {
   margin-top: $component-margin;
 }
+
+blockquote {
+  margin: $wb-space-small 0 $wb-space-small $wb-space-large;
+  padding-left: $wb-space-small;
+  border-left: 3px solid #ccc;
+  color: #555;
+}

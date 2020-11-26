@@ -87,7 +87,8 @@ export class AuswertungBarchartComponent implements OnInit {
       }
       this.chartOptions.series[0].data = scoreArray.map(s => s.score);
       this.chartOptions.xaxis.categories = scoreArray.map(s => s.candidate);
-      if (this.chart) {
+      if (this.chart && this.chartOptions.series && this.chartOptions.series[0].data && scoreArray.length === Object.keys(this.candidates).length) {
+        console.log (this.chartOptions.series[0].data);
         this.chart.updateSeries([{data: this.chartOptions.series[0].data}]);
       }
     }

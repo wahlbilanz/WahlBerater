@@ -9,6 +9,7 @@ import {
   ApexTitleSubtitle,
   ApexChart,
   ApexXAxis,
+  ApexYAxis,
   ChartComponent
 } from 'ng-apexcharts';
 
@@ -17,6 +18,7 @@ export type ChartOptions = {
   chart: ApexChart;
   title: ApexTitleSubtitle;
   xaxis: ApexXAxis;
+  yaxis: ApexYAxis;
 };
 
 @Component({
@@ -51,6 +53,11 @@ export class CandidateListCardComponent implements OnInit {
       },
       xaxis: {
         categories: []
+      },
+      yaxis: {
+        min: 0,
+        max: 0,
+        tickAmount: 0
       }
     };
   }
@@ -59,23 +66,31 @@ export class CandidateListCardComponent implements OnInit {
     console.log (this.data);
     console.log (this.candidate);
     console.log (this.decisions);
-
+    let maxY = 0;
     for (const category in this.data.categories) {
       if (this.data.categories.hasOwnProperty(category) && category !== 'howto') {
         let score = 0;
+        if (maxY < this.data.categories[category].claims.length) {
+          maxY = this.data.categories[category].claims.length;
+        }
         for (const claim of this.data.categories[category].claims) {
-          console.log (claim, this.decisions[claim], this.data.candidates[this.candidate]);
+          // console.log (claim, this.decisions[claim], this.data.candidates[this.candidate]);
           if (this.decisions[claim] && this.data.candidates[this.candidate] && this.data.candidates[this.candidate].positions[claim]) {
-            console.log (claim, this.data.candidates[this.candidate].positions[claim].vote, this.decisions[claim].decision);
+            // console.log (claim, this.data.candidates[this.candidate].positions[claim].vote, this.decisions[claim].decision);
             score += claimScore(this.data.candidates[this.candidate].positions[claim].vote, this.decisions[claim].decision, this.decisions[claim].fav);
           }
         }
         this.radarData.push({category, score});
-        console.log ({category, score});
+        // console.log ({category, score});
       }
     }
+    console.log (this.candidate);
+    console.log (this.radarData);
+    console.log (maxY);
     this.chartOptions.series[0].data = this.radarData.map(s => s.score);
     this.chartOptions.xaxis.categories = this.radarData.map(s => s.category);
+    this.chartOptions.yaxis.max = maxY * 2;
+    this.chartOptions.yaxis.tickAmount = maxY * 2;
     if (this.chart) {
       this.chart.updateSeries([{data: this.chartOptions.series[0].data}]);
     }

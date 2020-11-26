@@ -3,6 +3,7 @@ import { select, Store } from '@ngrx/store';
 import { AppPartialState } from '../../../../+state/app.reducer';
 import * as AppSelectors from '../../../../+state/app.selectors';
 import {ActivatedRoute} from '@angular/router';
+// import {decisionToWord, candidateDecisionToWord} from '../../../../definitions/functions/decision-mapping.function';
 
 @Component({
   selector: 'app-candidate-profile-page',

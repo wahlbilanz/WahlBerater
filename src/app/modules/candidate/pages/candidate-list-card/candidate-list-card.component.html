@@ -6,6 +6,7 @@
       [series]="chartOptions.series"
       [chart]="chartOptions.chart"
       [xaxis]="chartOptions.xaxis"
+      [yaxis]="chartOptions.yaxis"
     ></apx-chart>
   </div>
   <div class="card-body">
@@ -17,7 +18,7 @@
       <div class="candidate-content">
         <h5 class="card-title">{{data.candidates[candidate].name}}</h5>
         <p class="card-text">{{data.candidates[candidate].oneliner}}</p>
-        <a [routerLink]="'/candidates/' + candidate" class="btn btn-primary">Go somewhere</a>
+        <a [routerLink]="'/candidates/' + candidate" class="btn btn-primary">Profil öffnen</a>
       </div>
 
 

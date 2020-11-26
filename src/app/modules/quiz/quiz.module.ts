@@ -9,6 +9,8 @@ import { NzCollapseModule } from 'ng-zorro-antd/collapse';
 import { NzListModule } from 'ng-zorro-antd/list';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { AuswertungBarchartComponent } from './auswertung-barchart/auswertung-barchart.component';
+// import {DecisionToWord, CandidateDecisionToWord} from '../../definitions/functions/decision-mapping.function';
+import {PipesModule} from '../pipes/pipes.module';
 
 @NgModule({
   declarations: [QuizCardComponent, QuizComponent, AuswertungComponent, AuswertungBarchartComponent],
@@ -18,7 +20,8 @@ import { AuswertungBarchartComponent } from './auswertung-barchart/auswertung-ba
     NzIconModule,
     NzCollapseModule,
     NzListModule,
-    NgApexchartsModule
+    NgApexchartsModule,
+    PipesModule,
   ]
 })
 export class QuizModule { }

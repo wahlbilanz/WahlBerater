@@ -10,12 +10,12 @@
     <h3>{{category.value.title}}</h3>
     <nz-collapse>
       <nz-collapse-panel *ngFor="let claimid of category.value.claims" class="claim" [nzHeader]="d.claims[claimid].claim"
-        [nzExtra]="v[claimid] ? (v[claimid].decision > 0 ? (v[claimid].fav ? yesyes : yes) : (v[claimid].fav ? nono : no)) : skip"
+        [nzExtra]="v[claimid] ? (v[claimid].decision > 0 ? (v[claimid].fav ? yesyes : yes) : (v[claimid].decision < 0 ? (v[claimid].fav ? nono : no) : skip)) : skip"
       >
         Hintergrund: {{d.claims[claimid].background}}<br>
         These: {{d.claims[claimid].claim}}<br>
         <span *ngIf="v[claimid]">
-          Deine Antwort: {{decisionToWord (v[claimid].decision, v[claimid].fav)}}<br>
+          Deine Antwort: {{v[claimid].decision | decisionToWord:v[claimid].fav}}<br>
         </span>
         <a [routerLink]="'/quiz/' + category.key + '/' + claimid">Zurück zur These</a>
         <h4>Was denken die Kandidaten?</h4>
@@ -25,7 +25,7 @@
                              class="{{v[claimid] && candidate.value.positions[claimid] && ((v[claimid].decision > 0 && candidate.value.positions[claimid].vote > 0) || (v[claimid].decision < 0 && candidate.value.positions[claimid].vote < 0)) ? 'same_direction' : ''}}"
         >
   <ng-container *ngIf="candidate.value.positions[claimid]">
-            {{candidateDecisionToWord (candidate.value.positions[claimid].vote)}}, denn:
+            {{candidate.value.positions[claimid].vote | candidateDecisionToWord}}, denn:
             <blockquote>
               {{candidate.value.positions[claimid].reason}}
             </blockquote>
