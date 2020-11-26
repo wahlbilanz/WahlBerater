@@ -1,7 +1,9 @@
 @import 'variables';
 @import 'partials/fonts.partial';
 @import 'partials/typography.partial';
-
+body{
+  background-color: #fff;
+}
 .my {
   margin-top: $component-margin;
   margin-bottom: $component-margin;

@@ -2,7 +2,7 @@ import {Component, Input, OnChanges, OnInit} from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { AppPartialState } from '../../../+state/app.reducer';
 import * as AppSelectors from '../../../+state/app.selectors';
-import {ActivatedRoute} from '@angular/router';
+import {Router} from '@angular/router';
 import {Claim} from '../../../definitions/models/claim.model';
 import {Category} from '../../../definitions/models/category.model';
 import {vote} from '../../../+state/app.actions';
@@ -24,7 +24,7 @@ export class QuizCardComponent implements OnInit, OnChanges {
   fav: boolean;
   decision: number;
 
-  constructor(private store: Store<AppPartialState>) { }
+  constructor(private store: Store<AppPartialState>, private router: Router) { }
 
   ngOnChanges(): void {
     this.fav = false;
@@ -44,7 +44,7 @@ export class QuizCardComponent implements OnInit, OnChanges {
 
   toggleFav(): void {
     this.fav = !this.fav;
-    this.updateVote();
+    this.updateVote(false);
   }
 
   no(): void {
@@ -53,7 +53,7 @@ export class QuizCardComponent implements OnInit, OnChanges {
     } else {
       this.decision = -1;
     }
-    this.updateVote();
+    this.updateVote(true);
   }
 
   yes(): void {
@@ -62,11 +62,20 @@ export class QuizCardComponent implements OnInit, OnChanges {
     } else {
       this.decision = 1;
     }
-    this.updateVote();
+    this.updateVote(true);
   }
 
 
-  private updateVote(): void {
+  private updateVote(goahead: boolean): void {
     this.store.dispatch(vote ({claimId: this.claimId, decision: this.decision, fav: this.fav}));
+    if (goahead) {
+      setTimeout(() => {
+        if (this.next) {
+          this.router.navigate([this.next]);
+        } else {
+          this.router.navigate(['/quiz/auswertung']);
+        }
+      }, 300);
+    }
   }
 }

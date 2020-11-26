@@ -15,8 +15,9 @@
         Hintergrund: {{d.claims[claimid].background}}<br>
         These: {{d.claims[claimid].claim}}<br>
         <span *ngIf="v[claimid]">
-        Deine Antwort: {{decisionToWord (v[claimid].decision, v[claimid].fav)}}<br>
-      </span>
+          Deine Antwort: {{decisionToWord (v[claimid].decision, v[claimid].fav)}}<br>
+        </span>
+        <a [routerLink]="'/quiz/' + category.key + '/' + claimid">Zurück zur These</a>
         <h4>Was denken die Kandidaten?</h4>
         <nz-collapse>
           <nz-collapse-panel *ngFor="let candidate of d.candidates | keyvalue" [nzHeader]="candidate.value.name"

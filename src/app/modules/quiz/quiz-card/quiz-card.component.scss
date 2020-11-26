@@ -8,10 +8,12 @@
   border: 4px solid;
   border-radius: 7px;
 
+  padding: $wb-space-x-large;
+  margin: $wb-space-x-large auto;
 
 
 #card-category {
-  margin-top: -2.5em;
+  margin-top: -2em;
   background: white;
   padding: 0 .5em;
   width: max-content;
@@ -19,61 +21,107 @@
 }
 
 #claim-background {
+  margin-top: $wb-space-x-large;
+  padding: $wb-space-small;
 
 }
 #claim {
-
+  margin-bottom: $wb-space-x-large;
+  padding: $wb-space-small;
 }
 
+  #decision {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+    align-items: center;
 
-  .votebtn {
-    font-size: 3rem;
-  width: 6rem;
-  height: 6rem;
-  border-radius: 50%;
-    margin: 0 auto;
-    display: block;
-  border: 2px solid $wb-color-primary-600;
-  color: $wb-color-primary-600;
-  background-color: white;
-
-    &.votesmaller {
-      font-size: 2rem;
-      width: 4rem;
-      height: 4rem;
+    #decision-left,
+    #decision-right,
+    #decision-center {
+      position: relative;
+      width: 100%;
+      padding-right: 15px;
+      padding-left: 15px;
+      text-align: center
+    }
+    #decision-left,
+    #decision-right {
+      flex: 0 0 40%;
+      max-width: 40%;
+    }
+    #decision-center {
+      flex: 0 0 20%;
+      max-width: 20%;
     }
 
-    &.selected {
-      color: white;
-      background-color: $wb-color-primary-600;
+    .votebtn {
+      font-size: 3rem;
+      width: 6rem;
+      height: 6rem;
+      border-radius: 50%;
+      margin: 0 auto;
+      display: block;
+      border: 2px solid $wb-color-primary-600;
+      color: $wb-color-primary-600;
+      background-color: white;
 
+      &.votesmaller {
+        font-size: 2rem;
+        width: 4rem;
+        height: 4rem;
+      }
+
+      &.selected {
+        color: white;
+        background-color: $wb-color-primary-600;
+
+      }
+
+      &.votefav {
+        border-color: $favcolor;
+        color: $favcolor;
+      }
+
+      &.votefav.selected {
+        color: white;
+        background-color: $favcolor;
+
+      }
+
+      //i {
+      //width: 100%;
+      //height: 100%;
+      //}
+      //padding: 0.25em 0.75em;
+      //min-width: 10ch;
+      //min-height: 44px;
     }
-
-    &.votefav {
-      border-color: $favcolor;
-      color: $favcolor;
-    }
-
-    &.votefav.selected {
-      color: white;
-      background-color: $favcolor;
-
-    }
-
-    //i {
-    //width: 100%;
-    //height: 100%;
-    //}
-    //padding: 0.25em 0.75em;
-    //min-width: 10ch;
-    //min-height: 44px;
   }
-  .cardnavbtn {
+  #cardnav {
+    justify-content: space-between;
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
 
-    color: $wb-color-primary-600;
-      font-size: 1.5rem;
-      width: 3rem;
-      height: 3rem;
+    div {
+      position: relative;
+      width: 100%;
+      padding-right: 15px;
+      padding-left: 15px;
+      flex: 0 0 33.333333%;
+      max-width: 33.333333%;
+      text-align: center;
+      .cardnavbtn {
 
+        color: $wb-color-primary-600;
+        font-size: 1.5rem;
+        width: 3rem;
+        height: 3rem;
+
+      }
+    }
   }
 }

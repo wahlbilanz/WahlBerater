@@ -35,12 +35,10 @@
             ],
             "styles": [
               "src/assets/themes/ng-zorro.theme.less",
-              "src/assets/styles/index.scss",
-              "node_modules/bootstrap/dist/css/bootstrap.min.css"
+              "src/assets/styles/index.scss"
             ],
             "scripts": [
-              "node_modules/jquery/dist/jquery.min.js",
-              "node_modules/bootstrap/dist/js/bootstrap.min.js"]
+            ]
           },
           "configurations": {
             "production": {
