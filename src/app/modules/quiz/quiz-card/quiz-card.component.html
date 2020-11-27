@@ -5,9 +5,7 @@
       {{category.title}}
     </h2>
 
-    <div id="claim-background" class="">
-      {{claim.background}}
-    </div>
+    <div id="claim-background" [innerHTML]="claim.background | markdown" class=""></div>
 
     <h1 id="claim" class="">
       {{claim.claim}}

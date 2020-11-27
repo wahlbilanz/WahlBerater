@@ -5,7 +5,7 @@ import {decisionToWord} from '../../definitions/functions/decision-mapping.funct
   name: 'decisionToWord',
   pure: true
 })
-export class DecisionToWord implements PipeTransform {
+export class DecisionToWordPipe implements PipeTransform {
 
   transform(decision: number, fav?: boolean): string {
     return decisionToWord (decision, fav);
@@ -16,7 +16,7 @@ export class DecisionToWord implements PipeTransform {
   name: 'candidateDecisionToWord',
   pure: true
 })
-export class CandidateDecisionToWord implements PipeTransform {
+export class CandidateDecisionToWordPipe implements PipeTransform {
 
   transform(decision: number): string {
     return decisionToWord (decision, Math.abs(decision) > 1);

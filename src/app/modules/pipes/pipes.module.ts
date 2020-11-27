@@ -1,14 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import {DecisionToWord, CandidateDecisionToWord} from './decision-mapping';
+import {DecisionToWordPipe, CandidateDecisionToWordPipe} from './decision-mapping.pipe';
+import { MarkdownPipe } from './markdown.pipe';
 
 
 @NgModule({
-  declarations: [DecisionToWord, CandidateDecisionToWord],
+  declarations: [DecisionToWordPipe, CandidateDecisionToWordPipe, MarkdownPipe],
   imports: [
     CommonModule
   ],
-  exports:      [ DecisionToWord, CandidateDecisionToWord ],
+  exports:      [ DecisionToWordPipe, CandidateDecisionToWordPipe, MarkdownPipe ],
 })
 export class PipesModule { }

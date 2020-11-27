@@ -1,4 +1,4 @@
-@import '../../../../assets/styles/variables';
+@import '../../../../assets/styles/index';
 
 .category {
   border: 2px solid;
@@ -9,10 +9,21 @@
 .heart-red {
   color: $favcolor;
 }
-.same_direction .vote-icon {
-  color: $favcolor;
+.same_direction {
+    @include use-typography($wb-type-strong);
+    color: $favcolor;
+
+
+    .vote-icon {
+      //color: $favcolor;
+    }
+  .ant-collapse-content-box {
+    color: #00ff00;
+    background-color: #ff0000;
+  }
 }
 
 .visualisations {
   margin: $wb-space-x-large 0;
 }
+

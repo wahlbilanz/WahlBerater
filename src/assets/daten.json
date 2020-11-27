@@ -2,13 +2,13 @@
   "claims": {
     "howto": {
       "claim": "Thesen sollten relevant und kontrovers sein.",
-      "background": "Hintergrundinformationen, um die These einordnen zu können.",
+      "background": "Hintergrundinformationen, um die These einordnen zu können. Bisschen Erklärung wie das Quiz funktioniert.",
       "provenance": [
       ]
     },
     "asozial": {
-      "claim": "du bist asozial",
-      "background": "amerikanische wissenschaftler haben herausgefunden, dass mancheiner asozial ist.",
+      "claim": "Es sollte mehr asoziale geben.",
+      "background": "Amerikanische Wissenschaftler haben herausgefunden, dass manche asozial sind.",
       "provenance": [
         {
           "claim": "assi",
@@ -21,8 +21,8 @@
       ]
     },
     "gendern": {
-      "claim": "alles sollte gegendert werden",
-      "background": "manchmal wird gegendert, finden einige bisschen komisch lesbar",
+      "claim": "Es sollte immer und überall gegendert werden",
+      "background": "Manchmal wird gegendert, finden einige bisschen komisch lesbar.",
       "provenance": [
         {
           "claim": "gendern",
@@ -35,8 +35,8 @@
       ]
     },
   "not": {
-    "claim": "energie ist noetig",
-    "background": "amerikanische wissenschaftler haben herausgefunden, energie wichtig ist. und vielleicht sollten wir **markdown** [supporten](https://wahlberater.de)?",
+    "claim": "Energie ist nötig.",
+    "background": "Amerikanische Wissenschaftler haben herausgefunden, dass Energie wichtig ist. Und vielleicht sollten wir **markdown** [supporten](https://wahlberater.de)?",
     "provenance": [
       {
         "claim": "blah",
@@ -49,8 +49,8 @@
     ]
   },
   "gruen": {
-    "claim": "energie sollte gruen sein",
-    "background": "amerikanische wissenschaftler haben herausgefunden, dass gruene energie huebscher ist als orangene",
+    "claim": "Energie sollte grün sein",
+    "background": "Amerikanische Wissenschaftler haben herausgefunden, dass grüne energie hübscher ist als orangene",
     "provenance": [
       {
         "claim": "energiefarbe",

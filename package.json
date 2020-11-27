@@ -26,6 +26,8 @@
     "@ngrx/store": "^10.0.0",
     "@ngrx/store-devtools": "^10.0.0",
     "apexcharts": "^3.22.2",
+    "dompurify": "^2.2.2",
+    "marked": "^1.2.5",
     "ng-apexcharts": "^1.5.6",
     "ng-zorro-antd": "^10.0.0",
     "rxjs": "~6.6.0",
