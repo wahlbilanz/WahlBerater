@@ -2,7 +2,14 @@
 
 <ng-container *ngIf="votes | async as v">
   <ng-container *ngIf="data | async as d">
-    <app-auswertung-barchart></app-auswertung-barchart>
+    <nz-tabset>
+      <nz-tab nzTitle="Bar 1">
+        <app-auswertung-barchart></app-auswertung-barchart>
+      </nz-tab>
+      <nz-tab nzTitle="Bar 2">
+        <app-auswertung-barchart-table></app-auswertung-barchart-table>
+      </nz-tab>
+    </nz-tabset>
 
     <h2>Detailierte Auswertung der Kandidaten</h2>
     <ng-container *ngFor="let category of d.categories  | keyvalue">
