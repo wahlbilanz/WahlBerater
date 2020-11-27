@@ -9,6 +9,9 @@
       <nz-tab nzTitle="Bar 2">
         <app-auswertung-barchart-table></app-auswertung-barchart-table>
       </nz-tab>
+      <nz-tab nzTitle="HeatMap">
+        <app-auswertung-heatmap></app-auswertung-heatmap>
+      </nz-tab>
     </nz-tabset>
 
     <h2>Detailierte Auswertung der Kandidaten</h2>
@@ -32,7 +35,7 @@
                              class="{{v[claimid] && candidate.value.positions[claimid] && ((v[claimid].decision > 0 && candidate.value.positions[claimid].vote > 0) || (v[claimid].decision < 0 && candidate.value.positions[claimid].vote < 0)) ? 'same_direction' : ''}}"
         >
   <ng-container *ngIf="candidate.value.positions[claimid]">
-            {{candidate.value.positions[claimid].vote | candidateDecisionToWord}}, denn:
+    <a [routerLink]="'/candidates/' + candidate.key">{{candidate.value.name}}</a> denkt {{candidate.value.positions[claimid].vote | candidateDecisionToWord}}, denn:
             <blockquote>
               {{candidate.value.positions[claimid].reason}}
             </blockquote>

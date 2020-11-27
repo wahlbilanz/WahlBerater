@@ -7,11 +7,11 @@ import {CategoryMap} from '../../../definitions/models/category.model';
 import {CandidateMap} from '../../../definitions/models/candidate.model';
 
 @Component({
-  selector: 'app-auswertung-barchart-table',
-  templateUrl: './auswertung-barchart-table.component.html',
-  styleUrls: ['./auswertung-barchart-table.component.scss']
+  selector: 'app-auswertung-heatmap',
+  templateUrl: './auswertung-heatmap.component.html',
+  styleUrls: ['./auswertung-heatmap.component.scss']
 })
-export class AuswertungBarchartTableComponent implements OnInit {
+export class AuswertungHeatmapComponent implements OnInit {
 
   votes = this.store.pipe(select(AppSelectors.getVotes));
   data = this.store.pipe(select(AppSelectors.getData));
@@ -25,18 +25,6 @@ export class AuswertungBarchartTableComponent implements OnInit {
 
   constructor(private store: Store<AppPartialState>) { }
 
-  getCategory(claim: string): string {
-    for (const category in this.categories) {
-      if (this.categories.hasOwnProperty(category) && this.categories[category].claims.includes (claim)) {
-        return category;
-      }
-    }
-    return 'unknown';
-  }
-
-  maxValueArray(): number[] {
-    return [...Array(this.maxValue).keys()];
-  }
 
   recalc(): void {
     this.table = [];
@@ -48,27 +36,26 @@ export class AuswertungBarchartTableComponent implements OnInit {
       for (const c in this.candidates) {
         if (this.candidates.hasOwnProperty(c)) {
           console.log (c);
-          const candidate = {name: this.candidates[c].name, id: c,scores: {}, score: 0};
+          const candidate = {name: this.candidates[c].name, id: c, scores: {}, score: 0};
           let scoresum = 0;
-            // let score = 0;
+          // let score = 0;
           for (const v in this.candidates[c].positions) {
             if (this.candidates[c].positions.hasOwnProperty(v)) {
               if (this.decisions[v]) {
                 console.log (c, v);
-                const cat = this.getCategory(v);
-                if (!candidate.scores[cat]) {
-                  candidate.scores[cat] = {title: this.categories[cat].title, color: this.categories[cat].color, score: 0};
-                }
                 const s = claimScore(this.candidates[c].positions[v].vote, this.decisions[v].decision, this.decisions[v].fav);
-                candidate.scores[cat].score += s;
+                if (!candidate.scores[s]) {
+                  candidate.scores[s] = 0;
+                }
+                candidate.scores[s]++;
                 scoresum += s;
+                if (this.maxValue < candidate.scores[s]) {
+                  this.maxValue = candidate.scores[s];
+                }
               }
             }
           }
           candidate.score = scoresum;
-          if (this.maxValue < scoresum) {
-            this.maxValue = scoresum;
-          }
           this.table.push(candidate);
         }
       }
@@ -88,4 +75,5 @@ export class AuswertungBarchartTableComponent implements OnInit {
       this.recalc();
     });
   }
+
 }
