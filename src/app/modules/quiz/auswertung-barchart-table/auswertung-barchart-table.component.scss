@@ -1,0 +1,54 @@
+@import '../../../../assets/styles/index';
+table {
+  margin: $wb-space-x-large 0;
+  padding-right: $wb-space-small;
+  width: 100%;
+  overflow: visible;
+  tr.spacer {
+    height: $wb-space-xx-small;
+  }
+  th {
+    white-space: nowrap;
+    width: 1%;
+    padding-right: $wb-space-x-small;
+  }
+  td {
+    //border: 1px solid;
+    text-align: center;
+    &.missed {
+      border: none;
+    }
+    /*&.hit:first-of-type {
+      border-top-left-radius: $wb-space-xx-small;
+      border-bottom-left-radius: $wb-space-xx-small;
+    }
+    &.hit:last-of-type {
+      border-top-right-radius: $wb-space-small;
+      border-bottom-right-radius: $wb-space-small;
+    }*/
+  }
+  tr#axis {
+    border-top: 1px solid #888;
+    td {
+      border: none;
+      text-align: right;
+      @include use-typography($wb-type-paragraph-small);
+      color: #888;
+      span.axis-label {
+        margin-right: -$wb-space-small;
+        width: 2*$wb-space-small;
+        display: block;
+        float: right;
+        text-align: center;
+      }
+      &:last-child span.axis-label {
+        margin-right: 0;
+        text-align: right;
+      }
+    }
+    /*td:nth-child(even) {
+      background-color: #888;
+      color: #fff;
+    }*/
+  }
+}
