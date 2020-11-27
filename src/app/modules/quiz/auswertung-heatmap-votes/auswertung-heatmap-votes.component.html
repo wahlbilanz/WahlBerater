@@ -1,0 +1,42 @@
+
+<div id="heatmapvotechart">
+  <table>
+    <tr>
+      <th></th>
+      <td>
+        <i nz-icon nzType="dislike" nzTheme="fill"></i>
+      </td>
+      <td>
+        <i nz-icon nzType="dislike" nzTheme="outline"></i>
+      </td>
+      <td>
+        <i nz-icon nzType="like" nzTheme="outline"></i>
+      </td>
+      <td>
+        <i nz-icon nzType="like" nzTheme="fill"></i>
+      </td>
+    </tr>
+    <ng-container *ngFor="let candidate of table">
+      <tr>
+        <th>
+          <a [routerLink]="'/candidates/' + candidate.id">{{candidate.name}}</a>
+        </th>
+        <td>
+          <span *ngIf="candidate.scores.nono" style="background-color:hsl(0,{{100*candidate.scores.nono/maxValue}}%,50%)" class="heatmapscore">{{candidate.scores.nono}}</span>
+        </td>
+        <td>
+          <span *ngIf="candidate.scores.no" style="background-color:hsl(0,{{100*candidate.scores.no/maxValue}}%,50%)" class="heatmapscore">{{candidate.scores.no}}</span>
+        </td>
+        <td>
+          <span *ngIf="candidate.scores.yes" style="background-color:hsl(0,{{100*candidate.scores.yes/maxValue}}%,50%)" class="heatmapscore">{{candidate.scores.yes}}</span>
+        </td>
+        <td>
+          <span *ngIf="candidate.scores.yesyes" style="background-color:hsl(0,{{100*candidate.scores.yesyes/maxValue}}%,50%)" class="heatmapscore">{{candidate.scores.yesyes}}</span>
+        </td>
+      </tr>
+      <tr class="spacer"></tr>
+    </ng-container>
+    <tr class="spacer"></tr>
+  </table>
+  <strong>also show misses?</strong>
+</div>

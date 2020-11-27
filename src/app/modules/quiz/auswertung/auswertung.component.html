@@ -2,15 +2,18 @@
 
 <ng-container *ngIf="votes | async as v">
   <ng-container *ngIf="data | async as d">
-    <nz-tabset>
+    <nz-tabset class="visualisations">
       <nz-tab nzTitle="Bar 1">
         <app-auswertung-barchart></app-auswertung-barchart>
       </nz-tab>
       <nz-tab nzTitle="Bar 2">
         <app-auswertung-barchart-table></app-auswertung-barchart-table>
       </nz-tab>
-      <nz-tab nzTitle="HeatMap">
+      <nz-tab nzTitle="HeatMap 1">
         <app-auswertung-heatmap></app-auswertung-heatmap>
+      </nz-tab>
+      <nz-tab nzTitle="HeatMap 2">
+        <app-auswertung-heatmap-votes></app-auswertung-heatmap-votes>
       </nz-tab>
     </nz-tabset>
 

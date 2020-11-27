@@ -19,17 +19,18 @@
             <a [routerLink]="'/candidates/' + candidate.id">{{candidate.name}}</a>
           </th>
           <td>
-            <span *ngIf="candidate.scores[0]" style="background-color:hsl(0,{{100*candidate.scores[0]/maxValue}}%,50%)" class="heatmapscore">{{candidate.scores[0]}}</span>
+            <span *ngIf="candidate.scores[0]" style="background-color:hsl(0,{{100*candidate.scores[0]/maxValue[0]}}%,50%)" class="heatmapscore">{{candidate.scores[0]}}</span>
           </td>
           <td>
-            <span *ngIf="candidate.scores[1]" style="background-color:hsl(0,{{100*candidate.scores[1]/maxValue}}%,50%)" class="heatmapscore">{{candidate.scores[1]}}</span>
+            <span *ngIf="candidate.scores[1]" style="background-color:hsl(0,{{100*candidate.scores[1]/maxValue[1]}}%,50%)" class="heatmapscore">{{candidate.scores[1]}}</span>
           </td>
           <td>
-            <span *ngIf="candidate.scores[2]" style="background-color:hsl(0,{{100*candidate.scores[2]/maxValue}}%,50%)" class="heatmapscore">{{candidate.scores[2]}}</span>
+            <span *ngIf="candidate.scores[2]" style="background-color:hsl(0,{{100*candidate.scores[2]/maxValue[2]}}%,50%)" class="heatmapscore">{{candidate.scores[2]}}</span>
           </td>
         </tr>
         <tr class="spacer"></tr>
       </ng-container>
       <tr class="spacer"></tr>
   </table>
+  <strong>normalisiert ueber columns</strong>
 </div>

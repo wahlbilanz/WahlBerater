@@ -1,0 +1,28 @@
+@import '../../../../assets/styles/index';
+table {
+  margin: $wb-space-x-large 0;
+
+  tr.spacer {
+    height: $wb-space-xx-small;
+  }
+
+  th {
+    white-space: nowrap;
+    padding-right: $wb-space-x-small;
+  }
+
+  td {
+    text-align: center;
+    width: 3rem;
+    height: 3rem;
+    .heatmapscore {
+      color: #fff;
+      width: 100%;
+      height: 100%;
+      line-height: 3rem;
+      display: block;
+      vertical-align: middle;
+    }
+
+  }
+}

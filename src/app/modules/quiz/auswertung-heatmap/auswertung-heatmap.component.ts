@@ -21,14 +21,14 @@ export class AuswertungHeatmapComponent implements OnInit {
   categories: CategoryMap;
 
   table = [];
-  maxValue = 0;
+  maxValue = [0, 0, 0];
 
   constructor(private store: Store<AppPartialState>) { }
 
 
   recalc(): void {
     this.table = [];
-    this.maxValue = 0;
+    this.maxValue = [0, 0, 0];
     if (this.candidates && this.decisions) {
 
       // const scoreArray = [];
@@ -49,8 +49,8 @@ export class AuswertungHeatmapComponent implements OnInit {
                 }
                 candidate.scores[s]++;
                 scoresum += s;
-                if (this.maxValue < candidate.scores[s]) {
-                  this.maxValue = candidate.scores[s];
+                if (this.maxValue[s] < candidate.scores[s]) {
+                  this.maxValue[s] = candidate.scores[s];
                 }
               }
             }

@@ -14,9 +14,10 @@ import { AuswertungBarchartTableComponent } from './auswertung-barchart-table/au
 // import {DecisionToWord, CandidateDecisionToWord} from '../../definitions/functions/decision-mapping.function';
 import {PipesModule} from '../pipes/pipes.module';
 import { AuswertungHeatmapComponent } from './auswertung-heatmap/auswertung-heatmap.component';
+import { AuswertungHeatmapVotesComponent } from './auswertung-heatmap-votes/auswertung-heatmap-votes.component';
 
 @NgModule({
-  declarations: [QuizCardComponent, QuizComponent, AuswertungComponent, AuswertungBarchartComponent, AuswertungBarchartTableComponent, AuswertungBarchartTableComponent, AuswertungHeatmapComponent],
+  declarations: [QuizCardComponent, QuizComponent, AuswertungComponent, AuswertungBarchartComponent, AuswertungBarchartTableComponent, AuswertungBarchartTableComponent, AuswertungHeatmapComponent, AuswertungHeatmapVotesComponent],
   imports: [
     CommonModule,
     QuizRoutingModule,
