@@ -1,0 +1,14 @@
+
+parties:
+  - id: party-turquoise
+    name: Türkise Partei
+    color: 'rgb(0, 234, 222)'
+    link: https://example.org/party01
+    description: |
+      Eine Partei. Eine Farbe
+  - id: party-orange
+    name: Orange Partei
+    color: 'rgb(234, 140, 0)'
+    link: https://example.org/party02
+    description: |
+      Orange, wie eine Kartoffel

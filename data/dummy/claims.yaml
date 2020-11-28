@@ -1,0 +1,48 @@
+
+claims:
+
+  - id: social01
+    title: Du bist asozial
+    category: social-stuff
+    description: |
+      Amerikanische Wissenschaftler haben herausgefunden, dass mancheiner asozial ist.
+    provenance:
+      - claim: assi
+        description: mensch = assi
+      - claim: asi, jah!
+        description: Wattn Assi, ey!
+
+  - id: social02
+    title: Alles sollte gegendert werden
+    category: social-stuff
+    description: |
+      Manchmal wird gegendert, finden einige bisschen komisch lesbar.
+    provenance:
+      - claim: Gendern
+        description: Mehr gendern!
+      - claim: Gendern2
+        description: Noch mehr gendern!
+
+  - id: energy01
+    title: Energie sollte grün sein
+    category: energy
+    description: |
+      Ungarische Wissenschaftler haben herausgefunden, das grüne Energie besser _riecht_.
+    provenance:
+      - claim: Mehr grüne Energie
+        description: null
+
+  - id: energy02
+    title: Die Umwelt sollte mehr Energiesteuern zahlen
+    category: energy
+    description: |
+      Mehr Steuern sind mehr besser!
+    provenance:
+      - claim: Umweltsteuern
+        description: Umweltsteuern sollten ein Thema sein
+      - claim: Steuern für Umwelt
+        description: null
+
+  - id: misc01
+    title: Sonstige Fragen sind auch wichtig
+    category: misc

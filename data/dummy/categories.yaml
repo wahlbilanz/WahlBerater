@@ -1,0 +1,11 @@
+
+categories:
+  - id: social-stuff
+    title: Soziales
+    color: 'rgb(255, 216, 139)'
+  - id: energy
+    title: Energie und Umwelt
+    color: 'rgb(180, 230, 255)'
+  - id: misc
+    title: Sonstiges
+    color: 'rgb(180, 180, 180)'
