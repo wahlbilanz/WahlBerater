@@ -1,10 +1,15 @@
-
 export interface ClaimMap {
-    [claim: string]: Claim;
+  [claim: string]: Claim;
+}
+
+export interface ClaimProvenanceEntry {
+  claim: string;
+  description?: string;
 }
 
 export interface Claim {
-  claim: string;
-  background: string;
-  provenance: [Claim];
+  title: string;
+  category: string;
+  description: string;
+  provenance: ClaimProvenanceEntry[];
 }

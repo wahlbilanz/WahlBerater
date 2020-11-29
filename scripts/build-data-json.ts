@@ -81,14 +81,6 @@ debug.enable('*');
 const log = debug('data-builder');
 const warning = debug('data-builder-validation');
 
-// // TODO check basic data validity and types?
-// // TODO check ID duplications
-// // TODO impl function to anomyize IDs based on seed/salt and the orignal ID
-// // TODO cross check IDs (if it really exists)
-// // TODO check if all candidates have positions for all claims
-// // TODO extract, shrink, and optimize pictures
-// // TODO export 2 json
-
 function readYaml(path: string): InputDocument[] {
   log('Read yaml file %s', path);
   const content = readFileSync(path);

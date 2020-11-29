@@ -1,20 +1,28 @@
 import { PositionsMap } from './position.model';
 
 export interface CandidateMap {
-    [candidate: string]: Candidate;
+  [candidate: string]: Candidate;
 }
 
-interface Link {
-    [url: string]: string;
+interface LinkMap {
+  [url: string]: string;
+  twitter?: string;
+  blog?: string;
+  facebook?: string;
+  instagram?: string;
 }
 
-export interface Candidate {
+export interface CandidatePersonalInfo {
   name: string;
-  pic: string;
-  oneliner: string;
+  picture: string;
+  shortDescription: string;
   description: string;
-  prose: string;
+  links: LinkMap;
+}
+
+export interface CandidatePoliticalInfo {
   party: string;
   positions: PositionsMap;
-  links: Link;
 }
+
+export interface Candidate extends CandidatePersonalInfo, CandidatePoliticalInfo {}

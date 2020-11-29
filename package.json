@@ -3,15 +3,16 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
+    "start": "npm run build-dummy-data && ng serve",
+    "build": "find ./src/assets/data -type f -not -name '.gitkeep' -delete && ng build",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "postinstall": "ngcc",
     "ngcc": "ngcc",
     "ts-node": "ts-node",
-    "build-data-json": "ts-node --project tsconfig.scripts.json ./scripts/build-data-json.ts --"
+    "build-data-json": "ts-node --project tsconfig.scripts.json ./scripts/build-data-json.ts --",
+    "build-dummy-data": "find ./src/assets/data -type f -not -name '.gitkeep' -delete && npm run build-data-json -- --input ./data/dummy --output ./src/assets/data --anonymize-ids"
   },
   "private": true,
   "dependencies": {
