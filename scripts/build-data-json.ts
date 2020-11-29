@@ -5,6 +5,9 @@ import { join as joinPath, extname } from 'path';
 import * as yargs from 'yargs';
 import { v5 as uuidv5 } from 'uuid';
 import * as sharp from 'sharp';
+import { ClaimRoutingModule } from '../src/app/modules/claim/claim-routing.module';
+import * as Color from 'color';
+import { URL } from 'url';
 
 interface ClaimProvenance {
   claim: string;
@@ -51,6 +54,7 @@ interface Party {
   id: string;
   name: string;
   color: string;
+  link?: string;
   description?: string;
 }
 
@@ -75,8 +79,9 @@ const IMAGE_QUALITY = 80;
 
 debug.enable('*');
 const log = debug('data-builder');
+const warning = debug('data-builder-validation');
 
-// TODO check basic data validity and types?
+// // TODO check basic data validity and types?
 // // TODO check ID duplications
 // // TODO impl function to anomyize IDs based on seed/salt and the orignal ID
 // // TODO cross check IDs (if it really exists)
@@ -147,6 +152,238 @@ function unifyDocs(docs: InputDocument[], merge: boolean = false): DataDocument 
     candidates,
     categories,
     parties,
+  };
+}
+
+function cleanString(str: string): string {
+  return !!str ? str.trim() : null;
+}
+
+function cleanId(id: string): string {
+  return !!id ? id.trim().toLowerCase() : null;
+}
+
+function cleanColor(color: string): string {
+  color = cleanString(color);
+  if (!color) {
+    return color;
+  }
+  try {
+    return Color(color).hex();
+  } catch (e) {
+    warning("Color '%s' is malformed and cannot be parse", color);
+    return null;
+  }
+}
+
+function cleanUrl(link: string): string {
+  link = cleanString(link);
+  if (!link) {
+    return null;
+  }
+
+  try {
+    const url = new URL(link);
+    if (!url.protocol.startsWith('https')) {
+      warning("URL '%s' is a no HTTPS link", link);
+    }
+    return url.toString();
+  } catch (e) {
+    warning("URL '%s' is invalid or malformed.", link);
+    return null;
+  }
+}
+
+function cleanVote(vote: string | number): -2 | -1 | 0 | 1 | 2 {
+  if (typeof vote === 'string') {
+    try {
+      vote = Number(vote);
+    } catch (e) {
+      throw Error(`Cannot cast vote '${vote}' as a number`);
+    }
+  }
+
+  vote = Math.round(vote);
+  if (vote < -2 || vote > 2) {
+    throw Error(`Vote '${vote}' is out of bounds`);
+  }
+  return vote as -2 | -1 | 0 | 1 | 2;
+}
+
+function cleanClaim(claim: Claim): Claim {
+  claim = {
+    id: cleanId(claim.id),
+    title: cleanString(claim.title),
+    category: cleanId(claim.category),
+    description: cleanString(claim.description),
+    provenance:
+      !claim.provenance || claim.provenance.length === 0
+        ? []
+        : claim.provenance.map((prov) => ({ claim: cleanString(prov.claim), description: cleanString(prov.description) })),
+  };
+
+  if (!claim.id) {
+    throw Error('Claim is missing an ID');
+  }
+  if (!claim.title) {
+    throw Error(`Claim ${claim.id} has no title`);
+  }
+  if (!claim.category) {
+    throw Error(`Claim ${claim.id} has no category`);
+  }
+  if (!claim.description) {
+    warning('Claim %s has no description', claim.id);
+  }
+  if (!claim.provenance || claim.provenance.length === 0) {
+    warning('Claim %s has no provenance', claim.id);
+  } else if (claim.provenance.filter((prov) => !prov.claim).length > 0) {
+    throw Error(`Claim ${claim.id} has incomplete provenance information.`);
+  }
+
+  return claim;
+}
+
+function cleanCategory(category: Category): Category {
+  category = {
+    id: cleanId(category.id),
+    title: cleanString(category.title),
+    color: cleanColor(category.color),
+  };
+
+  if (!category.id) {
+    throw Error(`Category is missing an ID`);
+  }
+  if (!category.title) {
+    throw Error(`Category ${category.id} has no title`);
+  }
+  if (!category.color) {
+    warning('Category %s has no color', category.id);
+  }
+
+  return category;
+}
+
+function cleanCandidate(candidate: Candidate): Candidate {
+  candidate = {
+    id: cleanId(candidate.id),
+    publishPersonalInfo: candidate.publishPersonalInfo === true,
+    name: cleanString(candidate.name),
+    party: cleanId(candidate.party),
+    picture: cleanString(candidate.picture),
+    links: !candidate.links
+      ? {}
+      : {
+          blog: cleanUrl(candidate.links.blog) || undefined,
+          twitter: cleanUrl(candidate.links.twitter) || undefined,
+          facebook: cleanUrl(candidate.links.facebook) || undefined,
+          instagram: cleanUrl(candidate.links.instagram) || undefined,
+        },
+    shortDescription: cleanString(candidate.shortDescription),
+    description: cleanString(candidate.description),
+    positions:
+      !candidate.positions || Object.getOwnPropertyNames(candidate.positions).length === 0
+        ? {}
+        : Object.getOwnPropertyNames(candidate.positions)
+            .map((claim) => cleanId(claim))
+            .filter((claim) => !!claim)
+            .map((claim) => [claim, candidate.positions[claim]])
+            .map(([claim, pos]: [string, CandidatePosition]) => [
+              claim,
+              {
+                vote: cleanVote(pos.vote),
+                reason: cleanString(pos.reason),
+              } as CandidatePosition,
+            ])
+            .reduce((obj, [claim, pos]: [string, CandidatePosition]) => ({ ...obj, [claim]: pos }), {}),
+  };
+
+  if (!candidate.id) {
+    throw Error(`Candidate is missing an ID`);
+  }
+  if (!candidate.party) {
+    throw Error(`Candidate ${candidate.id} has no party`);
+  }
+  if (!candidate.positions || Object.getOwnPropertyNames(candidate.positions).length === 0) {
+    throw Error(`Candidate ${candidate.id} has no position votes`);
+  }
+  for (const claim of Object.getOwnPropertyNames(candidate.positions)) {
+    if (!candidate.positions[claim].reason) {
+      warning('Candidate %s has no reason for vote of claim %s', candidate.id, claim);
+    }
+  }
+
+  if (candidate.publishPersonalInfo === true) {
+    // some checks only make sense, when the candidate agreed to publish personal info
+    if (!candidate.name) {
+      throw Error(`Candidate ${candidate.id} has no name`);
+    }
+    if (!candidate.picture) {
+      warning('Candidate %s has no picture', candidate.id);
+    }
+    if (!candidate.links || Object.getOwnPropertyNames(candidate.links).length === 0) {
+      warning('Candidate %s has no links', candidate.id);
+    }
+    if (!candidate.shortDescription) {
+      warning('Candidate %s has no short description', candidate.id);
+    }
+    if (!candidate.description) {
+      warning('Candidate %s has no description', candidate.id);
+    }
+  }
+
+  return candidate;
+}
+
+function cleanParty(party: Party): Party {
+  party = {
+    id: cleanId(party.id),
+    name: cleanString(party.name),
+    color: cleanColor(party.color),
+    link: cleanUrl(party.link),
+    description: cleanString(party.description),
+  };
+
+  if (!party.id) {
+    throw Error(`Party is missing an ID`);
+  }
+  if (!party.name) {
+    throw Error(`Party ${party.id} has no name`);
+  }
+  if (!party.color) {
+    warning('Party %s has no color', party.id);
+  }
+  if (!party.link) {
+    warning('Party %s has no link', party.id);
+  }
+  if (!party.description) {
+    warning('Party %s has no description', party.description);
+  }
+
+  return party;
+}
+
+function cleanData(data: DataDocument): DataDocument {
+  return {
+    candidates: new Map<string, Candidate>(
+      Array.from(data.candidates.values())
+        .map((entry) => cleanCandidate(entry))
+        .map((entry) => [entry.id, entry]),
+    ),
+    categories: new Map<string, Category>(
+      Array.from(data.categories.values())
+        .map((entry) => cleanCategory(entry))
+        .map((entry) => [entry.id, entry]),
+    ),
+    claims: new Map<string, Claim>(
+      Array.from(data.claims.values())
+        .map((entry) => cleanClaim(entry))
+        .map((entry) => [entry.id, entry]),
+    ),
+    parties: new Map<string, Party>(
+      Array.from(data.parties.values())
+        .map((entry) => cleanParty(entry))
+        .map((entry) => [entry.id, entry]),
+    ),
   };
 }
 
@@ -341,7 +578,6 @@ async function main() {
     .alias('help', 'h')
     .parse(process.argv.slice(3));
 
-  // TODO check if all inputs are there
   if (!argv.input || !argv.output) {
     log('Input and output options must be set. Run --help for more information.');
     return;
@@ -349,11 +585,18 @@ async function main() {
 
   const docs = readAllYamlFiles(argv.input);
   let data = unifyDocs(docs, argv.merge);
-  let isValid = validateIdRefs(data);
+  data = cleanData(data);
+  if (!validateIdRefs(data)) {
+    log('ID reference check failed.');
+    process.exit(1);
+  }
 
   if (argv['anonymize-ids'] === true) {
     data = shuffleIds(data, argv.seed);
-    isValid = validateIdRefs(data);
+    if (!validateIdRefs(data)) {
+      log('ID reference check failed.');
+      process.exit(1);
+    }
   }
 
   mkdirSync(argv.output, { recursive: true });
@@ -366,8 +609,6 @@ async function main() {
     joinPath(argv.output, 'personal.json'),
     JSON.stringify(generatePersonalJson(data), undefined, argv.minify === true ? 0 : 2),
   );
-
-  // console.log(data);
 }
 
 main();
