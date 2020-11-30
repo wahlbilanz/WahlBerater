@@ -56,23 +56,44 @@ export class AuswertungHeatmapVotesComponent implements OnInit {
 
                 switch (this.candidates[c].positions[v].vote) {
                   case 2:
-                    if (this.decisions[v].decision === 1 && this.decisions[v].fav) {
-                      candidate.scores.yesyes++;
+                    if (this.decisions[v].decision === 1) {
+                      if (this.decisions[v].fav) {
+                        candidate.scores.yesyes++;
+                      } else {
+                        candidate.scores.yes += .5;
+                        candidate.scores.yesyes += .5;
+                      }
                     }
                     break;
                   case 1:
-                    if (this.decisions[v].decision === 1 && !this.decisions[v].fav) {
-                      candidate.scores.yes++;
+                    if (this.decisions[v].decision === 1) {
+                      if (!this.decisions[v].fav) {
+                        candidate.scores.yes++;
+                      } else {
+                        candidate.scores.yes += .5;
+                        candidate.scores.yesyes += .5;
+                      }
                     }
                     break;
                   case -1:
-                    if (this.decisions[v].decision === -1 && !this.decisions[v].fav) {
-                      candidate.scores.no++;
+                    if (this.decisions[v].decision === -1) {
+                      if (!this.decisions[v].fav) {
+                        candidate.scores.no++;
+                      } else {
+                        candidate.scores.no += .5;
+                        candidate.scores.nono += .5;
+                      }
                     }
                     break;
                   case -2:
-                    if (this.decisions[v].decision === -1 && this.decisions[v].fav) {
-                      candidate.scores.nono++;
+                    if (this.decisions[v].decision === -1) {
+                      if (this.decisions[v].fav) {
+                        candidate.scores.nono++;
+                      } else {
+                        candidate.scores.no += .5;
+                        candidate.scores.nono += .5;
+
+                      }
                     }
                     break;
                 }
