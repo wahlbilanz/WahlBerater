@@ -22,11 +22,11 @@ trigger:
     - develop
 
 steps:
-- name: lint
-  image: node:lts-slim
-  commands:
-    - npm ci --cache .npm-cache --prefer-offline
-    - npm run lint
+#- name: lint
+#  image: node:lts-slim
+#  commands:
+#    - npm ci --cache .npm-cache --prefer-offline
+#    - npm run lint
 - name: build
   image: plugins/docker
   pull: if-not-exists
@@ -36,6 +36,8 @@ steps:
   #  - npm run build --prod
   settings:
     pull: false
+    pull_image: false
+    #cache_from: node:14
     username:
       from_secret: docker_username
     password:
