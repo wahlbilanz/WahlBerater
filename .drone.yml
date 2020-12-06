@@ -1,10 +1,29 @@
 kind: pipeline
-name: build
+name: lint
 type: docker
 
 steps:
-- name: fail
-  image: alpine
+- name: lint
+  image: node:lts-slim
   commands:
-  - echo "test"
-  - exit 1
+    - npm ci --cache .npm-cache --prefer-offline
+    - npm run lint
+
+---
+
+kind: pipeline
+name: build
+type: docker
+
+# only build on master and develop
+trigger:
+  branch:
+    - master
+    - develop
+
+steps:
+- name: build
+  image: node:lts-slim
+  commands:
+    - npm ci --cache .npm-cache --prefer-offline
+    - npm run build --prod
