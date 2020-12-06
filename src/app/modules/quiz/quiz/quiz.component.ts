@@ -3,13 +3,13 @@ import { select, Store } from '@ngrx/store';
 import { map } from 'rxjs/operators';
 import { AppPartialState } from '../../../+state/app.reducer';
 import * as AppSelectors from '../../../+state/app.selectors';
-import {ActivatedRoute} from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Data } from '../../../definitions/models/data.model';
 
 @Component({
   selector: 'app-quiz',
   templateUrl: './quiz.component.html',
-  styleUrls: ['./quiz.component.scss']
+  styleUrls: ['./quiz.component.scss'],
 })
 export class QuizComponent implements OnInit {
   data = this.store.pipe(select(AppSelectors.getData));
@@ -22,12 +22,10 @@ export class QuizComponent implements OnInit {
   // prev: string;
   // next: string;
 
-
-  constructor(private store: Store<AppPartialState>,
-              private route: ActivatedRoute) { }
+  constructor(private store: Store<AppPartialState>, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(pm => {
+    this.route.paramMap.subscribe((pm) => {
       this.claimId = pm.get('claim');
       this.category = pm.get('category');
     });
@@ -65,5 +63,4 @@ export class QuizComponent implements OnInit {
       }
     }
   }
-
 }

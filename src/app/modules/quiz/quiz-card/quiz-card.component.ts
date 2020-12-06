@@ -1,17 +1,17 @@
-import {Component, Input, OnChanges, OnInit} from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { AppPartialState } from '../../../+state/app.reducer';
 import * as AppSelectors from '../../../+state/app.selectors';
-import {Router} from '@angular/router';
-import {Claim} from '../../../definitions/models/claim.model';
-import {Category} from '../../../definitions/models/category.model';
-import {vote} from '../../../+state/app.actions';
+import { Router } from '@angular/router';
+import { Claim } from '../../../definitions/models/claim.model';
+import { Category } from '../../../definitions/models/category.model';
+import { vote } from '../../../+state/app.actions';
 import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-quiz-card',
   templateUrl: './quiz-card.component.html',
-  styleUrls: ['./quiz-card.component.scss']
+  styleUrls: ['./quiz-card.component.scss'],
 })
 export class QuizCardComponent implements OnInit, OnChanges {
   votes = this.store.pipe(select(AppSelectors.getVotes));
@@ -24,12 +24,12 @@ export class QuizCardComponent implements OnInit, OnChanges {
   fav: boolean;
   decision: number;
 
-  constructor(private store: Store<AppPartialState>, private router: Router) { }
+  constructor(private store: Store<AppPartialState>, private router: Router) {}
 
   ngOnChanges(): void {
     this.fav = false;
     this.decision = 0;
-    this.votes.pipe(first()).subscribe(v => {
+    this.votes.pipe(first()).subscribe((v) => {
       if (this.claimId in v) {
         this.fav = v[this.claimId].fav;
         this.decision = v[this.claimId].decision;
@@ -39,7 +39,9 @@ export class QuizCardComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     // Todo: remove debug
-    this.store.pipe(select(AppSelectors.getVotes)).subscribe(x => { console.log(x); });
+    this.store.pipe(select(AppSelectors.getVotes)).subscribe((x) => {
+      console.log(x);
+    });
   }
 
   toggleFav(): void {
@@ -65,11 +67,10 @@ export class QuizCardComponent implements OnInit, OnChanges {
     this.updateVote(true);
   }
 
-
   private updateVote(goahead: boolean): void {
-    console.log ('dispatching:');
-    console.log ({claimId: this.claimId, decision: this.decision, fav: this.fav});
-    this.store.dispatch(vote ({claimId: this.claimId, decision: this.decision, fav: this.fav}));
+    console.log('dispatching:');
+    console.log({ claimId: this.claimId, decision: this.decision, fav: this.fav });
+    this.store.dispatch(vote({ claimId: this.claimId, decision: this.decision, fav: this.fav }));
     if (goahead) {
       setTimeout(() => {
         if (this.next) {

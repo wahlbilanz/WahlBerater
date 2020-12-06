@@ -1,36 +1,50 @@
-
 <div id="heatmapchart">
   <table>
+    <tr>
+      <th></th>
+      <td>
+        <i nz-icon nzType="dislike" nzTheme="outline"></i>
+      </td>
+      <td>
+        <i nz-icon nzType="heart" nzTheme="outline"></i>
+      </td>
+      <td>
+        <i nz-icon nzType="fire" nzTheme="outline"></i>
+      </td>
+    </tr>
+    <ng-container *ngFor="let candidate of table">
       <tr>
-        <th></th>
+        <th>
+          <a [routerLink]="'/candidates/' + candidate.id">{{ candidate.name }}</a>
+        </th>
         <td>
-          <i nz-icon nzType="dislike" nzTheme="outline"></i>
+          <span
+            *ngIf="candidate.scores[0]"
+            style="background-color:hsl(0,{{ (100 * candidate.scores[0]) / maxValue[0] }}%,50%)"
+            class="heatmapscore"
+            >{{ candidate.scores[0] }}</span
+          >
         </td>
         <td>
-          <i nz-icon nzType="heart" nzTheme="outline"></i>
+          <span
+            *ngIf="candidate.scores[1]"
+            style="background-color:hsl(0,{{ (100 * candidate.scores[1]) / maxValue[1] }}%,50%)"
+            class="heatmapscore"
+            >{{ candidate.scores[1] }}</span
+          >
         </td>
         <td>
-          <i nz-icon nzType="fire" nzTheme="outline"></i>
+          <span
+            *ngIf="candidate.scores[2]"
+            style="background-color:hsl(0,{{ (100 * candidate.scores[2]) / maxValue[2] }}%,50%)"
+            class="heatmapscore"
+            >{{ candidate.scores[2] }}</span
+          >
         </td>
       </tr>
-      <ng-container *ngFor="let candidate of table">
-        <tr>
-          <th>
-            <a [routerLink]="'/candidates/' + candidate.id">{{candidate.name}}</a>
-          </th>
-          <td>
-            <span *ngIf="candidate.scores[0]" style="background-color:hsl(0,{{100*candidate.scores[0]/maxValue[0]}}%,50%)" class="heatmapscore">{{candidate.scores[0]}}</span>
-          </td>
-          <td>
-            <span *ngIf="candidate.scores[1]" style="background-color:hsl(0,{{100*candidate.scores[1]/maxValue[1]}}%,50%)" class="heatmapscore">{{candidate.scores[1]}}</span>
-          </td>
-          <td>
-            <span *ngIf="candidate.scores[2]" style="background-color:hsl(0,{{100*candidate.scores[2]/maxValue[2]}}%,50%)" class="heatmapscore">{{candidate.scores[2]}}</span>
-          </td>
-        </tr>
-        <tr class="spacer"></tr>
-      </ng-container>
       <tr class="spacer"></tr>
+    </ng-container>
+    <tr class="spacer"></tr>
   </table>
   <strong>normalisiert ueber columns</strong>
 </div>

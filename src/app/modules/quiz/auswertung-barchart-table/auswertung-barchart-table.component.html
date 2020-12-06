@@ -1,30 +1,44 @@
-
 <div id="mybarchartchart">
   <table>
-      <ng-container *ngFor="let candidate of table">
-        <tr>
-          <th><a [routerLink]="'/candidates/' + candidate.id">{{candidate.name}}</a></th>
-          <ng-container *ngFor="let category of candidate.scores | keyvalue">
-            <td *ngIf="category.value.score > 0" [colSpan]="category.value.score"
-                style="width:{{100*category.value.score/maxValue}}%;background-color:{{category.value.color}}" class="hit">
-              <span title="{{category.value.score}} Übereinstimmung{{ category.value.score == 1 ? '' : 'en' }} in der Kategorie {{category.value.title}}">{{category.value.score}}</span>
-            </td>
-          </ng-container>
-          <td *ngIf="candidate.score < maxValue" [colSpan]="maxValue - candidate.score"
-              style="width:{{100*(maxValue - candidate.score)/maxValue}}%" class="missed">
-    <!--        {{maxValue - candidate.score}}-->
-          </td>
-        </tr>
-        <tr class="spacer"></tr>
-      </ng-container>
-      <tr class="spacer"></tr>
-      <tr id="axis">
-        <th></th>
-        <ng-container *ngFor="let value of maxValueArray()">
-          <td style="width:{{100/maxValue}}%">
-            <span class="axis-label">{{value + 1}}</span>
+    <ng-container *ngFor="let candidate of table">
+      <tr>
+        <th>
+          <a [routerLink]="'/candidates/' + candidate.id">{{ candidate.name }}</a>
+        </th>
+        <ng-container *ngFor="let category of candidate.scores | keyvalue">
+          <td
+            *ngIf="category.value.score > 0"
+            [colSpan]="category.value.score"
+            style="width:{{ (100 * category.value.score) / maxValue }}%;background-color:{{ category.value.color }}"
+            class="hit"
+          >
+            <span
+              title="{{ category.value.score }} Übereinstimmung{{ category.value.score == 1 ? '' : 'en' }} in der Kategorie {{
+                category.value.title
+              }}"
+              >{{ category.value.score }}</span
+            >
           </td>
         </ng-container>
+        <td
+          *ngIf="candidate.score < maxValue"
+          [colSpan]="maxValue - candidate.score"
+          style="width:{{ (100 * (maxValue - candidate.score)) / maxValue }}%"
+          class="missed"
+        >
+          <!--        {{maxValue - candidate.score}}-->
+        </td>
       </tr>
+      <tr class="spacer"></tr>
+    </ng-container>
+    <tr class="spacer"></tr>
+    <tr id="axis">
+      <th></th>
+      <ng-container *ngFor="let value of maxValueArray()">
+        <td style="width:{{ 100 / maxValue }}%">
+          <span class="axis-label">{{ value + 1 }}</span>
+        </td>
+      </ng-container>
+    </tr>
   </table>
 </div>

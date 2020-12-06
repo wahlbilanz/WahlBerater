@@ -1,50 +1,77 @@
-
 <ng-container *ngIf="votes | async as v">
-  <div id="quizcard" class="" style="border-color:{{category.color}}">
+  <div id="quizcard" class="" style="border-color:{{ category.color }}">
     <h2 id="card-category">
-      {{category.title}}
+      {{ category.title }}
     </h2>
 
     <div id="claim-background" [innerHTML]="claim.background | markdown" class=""></div>
 
     <h1 id="claim" class="">
-      {{claim.claim}}
+      {{ claim.claim }}
     </h1>
 
     <div id="decision" class="">
       <div id="decision-left" class="">
-        <a *ngIf="decision === 1" class="votebtn selected" (click)="yes()" title="Du stimmst dafür. Drücke nochmal um deine Entscheidung zurück zu ziehen."><i nz-icon nzType="like" nzTheme="fill"></i></a>
+        <a
+          *ngIf="decision === 1"
+          class="votebtn selected"
+          (click)="yes()"
+          title="Du stimmst dafür. Drücke nochmal um deine Entscheidung zurück zu ziehen."
+          ><i nz-icon nzType="like" nzTheme="fill"></i
+        ></a>
         <a *ngIf="decision !== 1" class="votebtn" (click)="yes()" title="Dafür stimmen."><i nz-icon nzType="like" nzTheme="outline"></i></a>
       </div>
-      <div id="decision-center"  class="">
+      <div id="decision-center" class="">
+        <a
+          *ngIf="fav"
+          class="votebtn votesmaller votefav selected"
+          (click)="toggleFav()"
+          title="Du bewertest diese These als sehr wichtig. Drücke nochmal um die Gewichtung aufzuheben."
+          ><i nz-icon nzType="heart" nzTheme="fill"></i
+        ></a>
+        <a *ngIf="!fav" class="votebtn votesmaller votefav" (click)="toggleFav()" title="Diese These als sehr wichtig bewerten."
+          ><i nz-icon nzType="heart" nzTheme="outline"></i
+        ></a>
 
-        <a *ngIf="fav"  class="votebtn votesmaller votefav selected" (click)="toggleFav()" title="Du bewertest diese These als sehr wichtig. Drücke nochmal um die Gewichtung aufzuheben."><i nz-icon nzType="heart" nzTheme="fill"></i></a>
-        <a *ngIf="!fav" class="votebtn votesmaller votefav" (click)="toggleFav()" title="Diese These als sehr wichtig bewerten."><i nz-icon nzType="heart" nzTheme="outline"></i></a>
+        <br />
 
-        <br>
-
-        <a class="votebtn votesmaller" *ngIf="next"  [routerLink]="next" title="Überspringen und weiter zur nächten These."><i nz-icon nzType="forward" nzTheme="outline"></i></a>
-        <a class="votebtn votesmaller" *ngIf="!next" [routerLink]="'/quiz/auswertung'" title="Weiter zur Auswertung."><i nz-icon nzType="bar-chart" nzTheme="outline"></i></a>
-
+        <a class="votebtn votesmaller" *ngIf="next" [routerLink]="next" title="Überspringen und weiter zur nächten These."
+          ><i nz-icon nzType="forward" nzTheme="outline"></i
+        ></a>
+        <a class="votebtn votesmaller" *ngIf="!next" [routerLink]="'/quiz/auswertung'" title="Weiter zur Auswertung."
+          ><i nz-icon nzType="bar-chart" nzTheme="outline"></i
+        ></a>
       </div>
       <div id="decision-right" class="">
-        <a *ngIf="decision === -1" class="votebtn selected" (click)="no()" title="Du stimmst dagegen. Drücke nochmal um deine Entscheidung zurück zu ziehen."><i nz-icon nzType="dislike" nzTheme="fill"></i></a>
-        <a *ngIf="decision !== -1" class="votebtn" (click)="no()" title="Dagegen stimmen."><i nz-icon nzType="dislike" nzTheme="outline"></i></a>
+        <a
+          *ngIf="decision === -1"
+          class="votebtn selected"
+          (click)="no()"
+          title="Du stimmst dagegen. Drücke nochmal um deine Entscheidung zurück zu ziehen."
+          ><i nz-icon nzType="dislike" nzTheme="fill"></i
+        ></a>
+        <a *ngIf="decision !== -1" class="votebtn" (click)="no()" title="Dagegen stimmen."
+          ><i nz-icon nzType="dislike" nzTheme="outline"></i
+        ></a>
       </div>
     </div>
 
     <div id="cardnav" class="">
       <div class="">
-        <a class="cardnavbtn" *ngIf="prev" [routerLink]="prev" title="Zurück zur vorherigen These."><i nz-icon nzType="left" nzTheme="outline"></i></a>
+        <a class="cardnavbtn" *ngIf="prev" [routerLink]="prev" title="Zurück zur vorherigen These."
+          ><i nz-icon nzType="left" nzTheme="outline"></i
+        ></a>
       </div>
       <div class="">
-        <a class="cardnavbtn" [routerLink]="'/quiz/auswertung'" title="Direkt zur Auswertung."><i nz-icon nzType="bar-chart" nzTheme="outline"></i></a>
+        <a class="cardnavbtn" [routerLink]="'/quiz/auswertung'" title="Direkt zur Auswertung."
+          ><i nz-icon nzType="bar-chart" nzTheme="outline"></i
+        ></a>
       </div>
       <div class="">
-        <a class="cardnavbtn" *ngIf="next" [routerLink]="next" title="Weiter zur nächten These."><i nz-icon nzType="right" nzTheme="outline"></i></a>
+        <a class="cardnavbtn" *ngIf="next" [routerLink]="next" title="Weiter zur nächten These."
+          ><i nz-icon nzType="right" nzTheme="outline"></i
+        ></a>
       </div>
     </div>
-
-
   </div>
 </ng-container>

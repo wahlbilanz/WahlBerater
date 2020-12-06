@@ -11,24 +11,22 @@
   padding: $wb-space-x-large;
   margin: $wb-space-x-large auto;
 
+  #card-category {
+    margin-top: -2em;
+    background: white;
+    padding: 0 0.5em;
+    width: max-content;
+    margin-left: auto;
+  }
 
-#card-category {
-  margin-top: -2em;
-  background: white;
-  padding: 0 .5em;
-  width: max-content;
-  margin-left: auto;
-}
-
-#claim-background {
-  margin-top: $wb-space-x-large;
-  padding: $wb-space-small;
-
-}
-#claim {
-  margin-bottom: $wb-space-x-large;
-  padding: $wb-space-small;
-}
+  #claim-background {
+    margin-top: $wb-space-x-large;
+    padding: $wb-space-small;
+  }
+  #claim {
+    margin-bottom: $wb-space-x-large;
+    padding: $wb-space-small;
+  }
 
   #decision {
     display: flex;
@@ -44,7 +42,7 @@
       width: 100%;
       padding-right: 15px;
       padding-left: 15px;
-      text-align: center
+      text-align: center;
     }
     #decision-left,
     #decision-right {
@@ -76,7 +74,6 @@
       &.selected {
         color: white;
         background-color: $wb-color-primary-600;
-
       }
 
       &.votefav {
@@ -87,7 +84,6 @@
       &.votefav.selected {
         color: white;
         background-color: $favcolor;
-
       }
 
       //i {
@@ -114,10 +110,8 @@
       max-width: 30%;
       text-align: center;
       .cardnavbtn {
-
         color: $wb-color-neutral-700;
         font-size: 1.5rem;
-
       }
     }
   }

@@ -10,7 +10,7 @@ export const isBreakpointActive = createSelector(getAppState, (state: State, pro
 export const getData = createSelector(getAppState, (state: State) => (state.dataLoaded ? state.data : state.data));
 export const isDataLoaded = createSelector(getAppState, (state: State) => state.dataLoaded);
 
-export const getVotes =  createSelector(getAppState, (state: State) => state.votes);
+export const getVotes = createSelector(getAppState, (state: State) => state.votes);
 
 export const isLocalDataStorageAllowed = createSelector(getAppState, (state: State) => state.allowLocalDataStorage);
 export const getQuizState = createSelector(getAppState, (state: State) => QuizState.STARTED);

@@ -47,8 +47,8 @@ export const appReducer = createReducer(
       ...state.votes,
       [claimId]: {
         decision,
-        fav
-      }
+        fav,
+      },
     },
   })),
   on(AppActions.changeDataStorePreference, (state, { allow }) => ({

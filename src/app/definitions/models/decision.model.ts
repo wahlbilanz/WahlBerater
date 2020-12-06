@@ -6,5 +6,4 @@ export class Decision {
     this.decision = decision;
     this.fav = fav;
   }
-
 }

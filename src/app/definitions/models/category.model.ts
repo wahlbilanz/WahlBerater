@@ -1,7 +1,7 @@
-import {ClaimMap} from './claim.model';
+import { ClaimMap } from './claim.model';
 
 export interface CategoryMap {
-    [category: string]: Category;
+  [category: string]: Category;
 }
 
 export interface Category {

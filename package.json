@@ -9,7 +9,9 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "postinstall": "ngcc",
-    "ngcc": "ngcc"
+    "ngcc": "ngcc",
+    "prettier": "prettier --write \"**/*.{js,json,css,scss,less,md,ts,html,component.html}\"",
+    "format:check": "prettier --list-different \"src/{app,environments,assets}/**/*{.ts,.js,.json,.css,.scss}\""
   },
   "private": true,
   "dependencies": {

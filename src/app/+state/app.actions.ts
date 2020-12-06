@@ -15,4 +15,4 @@ export const loadDataError = createAction('[app] Load Data JSON Error', props<{ 
 export const vote = createAction('[app] Vote', props<{ claimId: string; decision: number; fav: boolean }>());
 
 export const changeDataStorePreference = createAction('[app] User changed data store preference', props<{ allow: boolean }>());
-export const restoreDataStorePreference = createAction("[app] Restored user's data store preference", props<{ allow: boolean }>());
+export const restoreDataStorePreference = createAction('[app] Restored user\'s data store preference', props<{ allow: boolean }>());

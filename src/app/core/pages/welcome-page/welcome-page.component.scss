@@ -20,7 +20,7 @@ section.welcome-page-nav {
 
   width: 100%;
   padding: 0 $wb-space-medium;
-  margin: 0;
+  margin: 20px 0;
 
   // less horizontal gap on smaller devices
   @media screen and (max-width: $wb-breakpoint-medium) {

@@ -8,9 +8,8 @@ describe('AuswertungBarchartTableComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AuswertungBarchartTableComponent ]
-    })
-    .compileComponents();
+      declarations: [AuswertungBarchartTableComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

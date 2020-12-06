@@ -1,24 +1,22 @@
-import {Pipe, PipeTransform} from '@angular/core';
-import {decisionToWord} from '../../definitions/functions/decision-mapping.function';
+import { Pipe, PipeTransform } from '@angular/core';
+import { decisionToWord } from '../../definitions/functions/decision-mapping.function';
 
 @Pipe({
   name: 'decisionToWord',
-  pure: true
+  pure: true,
 })
 export class DecisionToWordPipe implements PipeTransform {
-
   transform(decision: number, fav?: boolean): string {
-    return decisionToWord (decision, fav);
+    return decisionToWord(decision, fav);
   }
 }
 
 @Pipe({
   name: 'candidateDecisionToWord',
-  pure: true
+  pure: true,
 })
 export class CandidateDecisionToWordPipe implements PipeTransform {
-
   transform(decision: number): string {
-    return decisionToWord (decision, Math.abs(decision) > 1);
+    return decisionToWord(decision, Math.abs(decision) > 1);
   }
 }

@@ -1,5 +1,3 @@
-
-
 export function decisionToWord(decision: number, fav?: boolean): string {
   switch (decision) {
     case -2:
@@ -16,5 +14,4 @@ export function decisionToWord(decision: number, fav?: boolean): string {
       return 'ja';
   }
   return 'übersprungen';
-
 }

@@ -12,21 +12,21 @@ import { NgApexchartsModule } from 'ng-apexcharts';
 import { AuswertungBarchartComponent } from './auswertung-barchart/auswertung-barchart.component';
 import { AuswertungBarchartTableComponent } from './auswertung-barchart-table/auswertung-barchart-table.component';
 // import {DecisionToWord, CandidateDecisionToWord} from '../../definitions/functions/decision-mapping.function';
-import {PipesModule} from '../pipes/pipes.module';
+import { PipesModule } from '../pipes/pipes.module';
 import { AuswertungHeatmapComponent } from './auswertung-heatmap/auswertung-heatmap.component';
 import { AuswertungHeatmapVotesComponent } from './auswertung-heatmap-votes/auswertung-heatmap-votes.component';
 
 @NgModule({
-  declarations: [QuizCardComponent, QuizComponent, AuswertungComponent, AuswertungBarchartComponent, AuswertungBarchartTableComponent, AuswertungBarchartTableComponent, AuswertungHeatmapComponent, AuswertungHeatmapVotesComponent],
-  imports: [
-    CommonModule,
-    QuizRoutingModule,
-    NzIconModule,
-    NzCollapseModule,
-    NzListModule,
-    NgApexchartsModule,
-    PipesModule,
-    NzTabsModule,
-  ]
+  declarations: [
+    QuizCardComponent,
+    QuizComponent,
+    AuswertungComponent,
+    AuswertungBarchartComponent,
+    AuswertungBarchartTableComponent,
+    AuswertungBarchartTableComponent,
+    AuswertungHeatmapComponent,
+    AuswertungHeatmapVotesComponent,
+  ],
+  imports: [CommonModule, QuizRoutingModule, NzIconModule, NzCollapseModule, NzListModule, NgApexchartsModule, PipesModule, NzTabsModule],
 })
-export class QuizModule { }
+export class QuizModule {}

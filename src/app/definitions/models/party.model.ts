@@ -1,5 +1,5 @@
 export interface PartyMap {
-    [party: string]: Party;
+  [party: string]: Party;
 }
 
 export interface Party {

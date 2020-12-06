@@ -8,9 +8,8 @@ describe('ThesisListPageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ClaimListPageComponent ]
-    })
-    .compileComponents();
+      declarations: [ClaimListPageComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

@@ -1,7 +1,7 @@
-import {CategoryMap} from './category.model';
-import {CandidateMap} from './candidate.model';
-import {PartyMap} from './party.model';
-import {ClaimMap} from './claim.model';
+import { CategoryMap } from './category.model';
+import { CandidateMap } from './candidate.model';
+import { PartyMap } from './party.model';
+import { ClaimMap } from './claim.model';
 
 export interface Data {
   claims: ClaimMap;
@@ -9,4 +9,3 @@ export interface Data {
   candidates: CandidateMap;
   parties: PartyMap;
 }
-

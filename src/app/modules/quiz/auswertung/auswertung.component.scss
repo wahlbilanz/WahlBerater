@@ -3,20 +3,19 @@
 .category {
   border: 2px solid;
   border-radius: 7px;
-  margin: 20px 0;;
+  margin: 20px 0;
   padding: 1rem;
 }
 .heart-red {
   color: $favcolor;
 }
 .same_direction {
-    @include use-typography($wb-type-strong);
-    color: $favcolor;
+  @include use-typography($wb-type-strong);
+  color: $favcolor;
 
-
-    .vote-icon {
-      //color: $favcolor;
-    }
+  .vote-icon {
+    //color: $favcolor;
+  }
   .ant-collapse-content-box {
     color: #00ff00;
     background-color: #ff0000;
@@ -26,4 +25,3 @@
 .visualisations {
   margin: $wb-space-x-large 0;
 }
-

@@ -1,6 +1,5 @@
-
 export interface ClaimMap {
-    [claim: string]: Claim;
+  [claim: string]: Claim;
 }
 
 export interface Claim {

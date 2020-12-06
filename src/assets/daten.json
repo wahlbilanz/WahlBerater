@@ -3,8 +3,7 @@
     "howto": {
       "claim": "Thesen sollten relevant und kontrovers sein.",
       "background": "Hintergrundinformationen, um die These einordnen zu können. Bisschen Erklärung wie das Quiz funktioniert.",
-      "provenance": [
-      ]
+      "provenance": []
     },
     "asozial": {
       "claim": "Es sollte mehr asoziale geben.",
@@ -34,41 +33,40 @@
         }
       ]
     },
-  "not": {
-    "claim": "Energie ist nötig.",
-    "background": "Amerikanische Wissenschaftler haben herausgefunden, dass Energie wichtig ist. Und vielleicht sollten wir **markdown** [supporten](https://wahlberater.de)?",
-    "provenance": [
-      {
-        "claim": "blah",
-        "background": "blah blah"
-      },
-      {
-        "claim": "mehr blah blah",
-        "background": "blah blah blah blah blah blah blah blah blah blah blah blah"
-      }
-    ]
+    "not": {
+      "claim": "Energie ist nötig.",
+      "background": "Amerikanische Wissenschaftler haben herausgefunden, dass Energie wichtig ist. Und vielleicht sollten wir **markdown** [supporten](https://wahlberater.de)?",
+      "provenance": [
+        {
+          "claim": "blah",
+          "background": "blah blah"
+        },
+        {
+          "claim": "mehr blah blah",
+          "background": "blah blah blah blah blah blah blah blah blah blah blah blah"
+        }
+      ]
+    },
+    "gruen": {
+      "claim": "Energie sollte grün sein",
+      "background": "Amerikanische Wissenschaftler haben herausgefunden, dass grüne energie hübscher ist als orangene",
+      "provenance": [
+        {
+          "claim": "energiefarbe",
+          "background": "gruen"
+        },
+        {
+          "claim": "energetische farbe",
+          "background": "orange"
+        }
+      ]
+    },
+    "blah": {
+      "claim": "blah blah",
+      "background": "blah blahblah blahblah blahblah blah",
+      "provenance": []
+    }
   },
-  "gruen": {
-    "claim": "Energie sollte grün sein",
-    "background": "Amerikanische Wissenschaftler haben herausgefunden, dass grüne energie hübscher ist als orangene",
-    "provenance": [
-      {
-        "claim": "energiefarbe",
-        "background": "gruen"
-      },
-      {
-        "claim": "energetische farbe",
-        "background": "orange"
-      }
-    ]
-  },
-  "blah": {
-    "claim": "blah blah",
-    "background": "blah blahblah blahblah blahblah blah",
-    "provenance": [
-    ]
-  }
-},
   "categories": {
     "howto": {
       "title": "Einführung",

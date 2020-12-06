@@ -1,5 +1,5 @@
 export interface PositionsMap {
-    [claim: string]: Position;
+  [claim: string]: Position;
 }
 
 export interface Position {

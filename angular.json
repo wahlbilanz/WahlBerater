@@ -33,12 +33,8 @@
                 "output": "/assets/"
               }
             ],
-            "styles": [
-              "src/assets/themes/ng-zorro.theme.less",
-              "src/assets/styles/index.scss"
-            ],
-            "scripts": [
-            ]
+            "styles": ["src/assets/themes/ng-zorro.theme.less", "src/assets/styles/index.scss"],
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -95,28 +91,16 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
-            "assets": [
-              "src/assets/static/favicon.ico",
-              "src/assets/static"
-            ],
-            "styles": [
-              "src/assets/themes/ng-zorro.theme.less",
-              "src/assets/styles/index.scss"
-            ],
-            "scripts": [  "node_modules/apexcharts/dist/apexcharts.min.js"]
+            "assets": ["src/assets/static/favicon.ico", "src/assets/static"],
+            "styles": ["src/assets/themes/ng-zorro.theme.less", "src/assets/styles/index.scss"],
+            "scripts": ["node_modules/apexcharts/dist/apexcharts.min.js"]
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": [
-              "tsconfig.app.json",
-              "tsconfig.spec.json",
-              "e2e/tsconfig.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "tsConfig": ["tsconfig.app.json", "tsconfig.spec.json", "e2e/tsconfig.json"],
+            "exclude": ["**/node_modules/**"]
           }
         },
         "e2e": {

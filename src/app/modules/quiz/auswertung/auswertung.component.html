@@ -16,46 +16,73 @@
     </nz-tabset>
 
     <h2>Detailierte Auswertung der Kandidaten</h2>
-    <ng-container *ngFor="let category of d.categories  | keyvalue">
-      <div *ngIf="category.key != 'howto'" class="category" style="border-color:{{category.value.color}}">
-        <h3>{{category.value.title}}</h3>
+    <ng-container *ngFor="let category of d.categories | keyvalue">
+      <div *ngIf="category.key != 'howto'" class="category" style="border-color:{{ category.value.color }}">
+        <h3>{{ category.value.title }}</h3>
         <nz-collapse>
-          <nz-collapse-panel *ngFor="let claimid of category.value.claims" class="claim"
-                             [nzHeader]="d.claims[claimid].claim"
-                             [nzExtra]="v[claimid] ? (v[claimid].decision > 0 ? (v[claimid].fav ? yesyes : yes) : (v[claimid].decision < 0 ? (v[claimid].fav ? nono : no) : skip)) : skip"
+          <nz-collapse-panel
+            *ngFor="let claimid of category.value.claims"
+            class="claim"
+            [nzHeader]="d.claims[claimid].claim"
+            [nzExtra]="
+              v[claimid]
+                ? v[claimid].decision > 0
+                  ? v[claimid].fav
+                    ? yesyes
+                    : yes
+                  : v[claimid].decision < 0
+                  ? v[claimid].fav
+                    ? nono
+                    : no
+                  : skip
+                : skip
+            "
           >
-
             <div class="background" [innerHTML]="d.claims[claimid].background | markdown"></div>
-            <span *ngIf="v[claimid]">
-              Deine Antwort: {{v[claimid].decision | decisionToWord:v[claimid].fav}}
-            </span>
+            <span *ngIf="v[claimid]"> Deine Antwort: {{ v[claimid].decision | decisionToWord: v[claimid].fav }} </span>
             <a [routerLink]="'/quiz/' + category.key + '/' + claimid">Zurück zur These, um Entscheidung zu ändern.</a>
 
             <h4>Was denken die Kandidaten?</h4>
             <nz-collapse>
-              <nz-collapse-panel *ngFor="let candidate of d.candidates | keyvalue" [nzHeader]="candidate.value.name"
-                                 [nzExtra]="(!candidate.value.positions[claimid] || candidate.value.positions[claimid].vote == 0) ? skip : candidate.value.positions[claimid].vote > 0 ? (candidate.value.positions[claimid].vote == 2 ? yesyes : yes) : (candidate.value.positions[claimid].vote == -2 ? nono : no)"
-                                 class="{{v[claimid] && candidate.value.positions[claimid] && ((v[claimid].decision > 0 && candidate.value.positions[claimid].vote > 0) || (v[claimid].decision < 0 && candidate.value.positions[claimid].vote < 0)) ? 'same_direction' : ''}}"
+              <nz-collapse-panel
+                *ngFor="let candidate of d.candidates | keyvalue"
+                [nzHeader]="candidate.value.name"
+                [nzExtra]="
+                  !candidate.value.positions[claimid] || candidate.value.positions[claimid].vote == 0
+                    ? skip
+                    : candidate.value.positions[claimid].vote > 0
+                    ? candidate.value.positions[claimid].vote == 2
+                      ? yesyes
+                      : yes
+                    : candidate.value.positions[claimid].vote == -2
+                    ? nono
+                    : no
+                "
+                class="{{
+                  v[claimid] &&
+                  candidate.value.positions[claimid] &&
+                  ((v[claimid].decision > 0 && candidate.value.positions[claimid].vote > 0) ||
+                    (v[claimid].decision < 0 && candidate.value.positions[claimid].vote < 0))
+                    ? 'same_direction'
+                    : ''
+                }}"
               >
                 <ng-container *ngIf="candidate.value.positions[claimid]">
-                  <a [routerLink]="'/candidates/' + candidate.key">{{candidate.value.name}}</a>
-                  denkt {{candidate.value.positions[claimid].vote | candidateDecisionToWord}}, denn:
+                  <a [routerLink]="'/candidates/' + candidate.key">{{ candidate.value.name }}</a>
+                  denkt {{ candidate.value.positions[claimid].vote | candidateDecisionToWord }}, denn:
                   <blockquote [innerHTML]="candidate.value.positions[claimid].reason | markdown"></blockquote>
                 </ng-container>
                 <ng-container *ngIf="!candidate.value.positions[claimid]">
-                  <a [routerLink]="'/candidates/' + candidate.key">{{candidate.value.name}}</a> hat diese Frage nicht
-                  beantwortet.
+                  <a [routerLink]="'/candidates/' + candidate.key">{{ candidate.value.name }}</a> hat diese Frage nicht beantwortet.
                 </ng-container>
               </nz-collapse-panel>
             </nz-collapse>
-
           </nz-collapse-panel>
         </nz-collapse>
       </div>
     </ng-container>
 
-    <a (click)="sampleVotes ()"><i nz-icon nzType="fork" nzTheme="outline"></i> Sample Votes</a>
-
+    <a (click)="sampleVotes()"><i nz-icon nzType="fork" nzTheme="outline"></i> Sample Votes</a>
   </ng-container>
 </ng-container>
 
@@ -76,4 +103,3 @@
   <!--      <i nz-icon nzType="heart" nzTheme="fill" (click)="$event.stopPropagation()" class="heart-red"></i>-->
   <i nz-icon nzType="like" nzTheme="fill" (click)="$event.stopPropagation()" class="vote-icon"></i>
 </ng-template>
-

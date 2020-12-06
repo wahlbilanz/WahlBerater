@@ -1,11 +1,11 @@
 import { PositionsMap } from './position.model';
 
 export interface CandidateMap {
-    [candidate: string]: Candidate;
+  [candidate: string]: Candidate;
 }
 
 interface Link {
-    [url: string]: string;
+  [url: string]: string;
 }
 
 export interface Candidate {
