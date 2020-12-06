@@ -23,7 +23,17 @@ trigger:
 
 steps:
 - name: build
-  image: node:lts-slim
-  commands:
-    - npm ci --cache .npm-cache --prefer-offline
-    - npm run build --prod
+  image: plugins/docker
+  pull: if-not-exists
+  #image: node:lts-slim
+  #commands:
+  #  - npm ci --cache .npm-cache --prefer-offline
+  #  - npm run build --prod
+  settings:
+    pull: false
+    username:
+      from_secret: docker_username
+    password:
+      from_secret: docker_password
+    repo: docker-registry.codeahoi.de/wahlhelfer/wahlberater
+    registry: docker-registry.codeahoi.de
