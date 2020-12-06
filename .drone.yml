@@ -1,15 +1,15 @@
-kind: pipeline
-name: lint
-type: docker
-
-steps:
-- name: lint
-  image: node:lts-slim
-  commands:
-    - npm ci --cache .npm-cache --prefer-offline
-    - npm run lint
-
----
+#kind: pipeline
+#name: lint
+#type: docker
+#
+#steps:
+#- name: lint
+#  image: node:lts-slim
+#  commands:
+#    - npm ci --cache .npm-cache --prefer-offline
+#    - npm run lint
+#
+#---
 
 kind: pipeline
 name: build
@@ -22,6 +22,11 @@ trigger:
     - develop
 
 steps:
+- name: lint
+  image: node:lts-slim
+  commands:
+    - npm ci --cache .npm-cache --prefer-offline
+    - npm run lint
 - name: build
   image: plugins/docker
   pull: if-not-exists
