@@ -4,7 +4,7 @@
 FROM node:14 as donator
 COPY . /data
 WORKDIR /data
-RUN npm ci
+RUN npm ci --cache .npm-cache --prefer-offline
 RUN npm run build --prod
 
 # deploy to an nginx
