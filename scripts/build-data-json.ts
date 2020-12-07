@@ -22,7 +22,14 @@ interface Claim {
   provenance?: ClaimProvenance[];
 }
 
-interface CandidatePosition {
+interface EntityLinks {
+  twitter?: string;
+  blog?: string;
+  facebook?: string;
+  instagram?: string;
+}
+
+interface VotePosition {
   vote: -2 | -1 | 0 | 1 | 2;
   reason?: string;
 }
@@ -33,15 +40,10 @@ interface Candidate {
   name: string;
   party: string;
   picture: string;
-  links?: {
-    twitter?: string;
-    blog?: string;
-    facebook?: string;
-    instagram?: string;
-  };
+  links?: EntityLinks;
   shortDescription: string;
   description: string;
-  positions: { [claimId: string]: CandidatePosition };
+  positions?: { [claimId: string]: VotePosition };
 }
 
 interface Category {
@@ -54,8 +56,11 @@ interface Party {
   id: string;
   name: string;
   color: string;
-  link?: string;
+  picture: string;
+  links?: EntityLinks;
+  shortDescription: string;
   description?: string;
+  positions?: { [claimId: string]: VotePosition };
 }
 
 interface InputDocument {
@@ -70,6 +75,11 @@ interface DataDocument {
   candidates?: Map<string, Candidate>;
   categories?: Map<string, Category>;
   parties?: Map<string, Party>;
+}
+
+interface PositionedEntities {
+  partyHasPositions: boolean;
+  candidateHasPositions: boolean;
 }
 
 const UUID_NAMESPACE = 'b1c7c198-31bd-11eb-adc1-0242ac120002';
@@ -255,7 +265,7 @@ function cleanCategory(category: Category): Category {
   return category;
 }
 
-function cleanCandidate(candidate: Candidate): Candidate {
+function cleanCandidate(candidate: Candidate, hasPositions: boolean): Candidate {
   candidate = {
     id: cleanId(candidate.id),
     publishPersonalInfo: candidate.publishPersonalInfo === true,
@@ -273,20 +283,20 @@ function cleanCandidate(candidate: Candidate): Candidate {
     shortDescription: cleanString(candidate.shortDescription),
     description: cleanString(candidate.description),
     positions:
-      !candidate.positions || Object.getOwnPropertyNames(candidate.positions).length === 0
+      !hasPositions || !candidate.positions || Object.getOwnPropertyNames(candidate.positions).length === 0
         ? {}
         : Object.getOwnPropertyNames(candidate.positions)
             .map((claim) => cleanId(claim))
             .filter((claim) => !!claim)
             .map((claim) => [claim, candidate.positions[claim]])
-            .map(([claim, pos]: [string, CandidatePosition]) => [
+            .map(([claim, pos]: [string, VotePosition]) => [
               claim,
               {
                 vote: cleanVote(pos.vote),
                 reason: cleanString(pos.reason),
-              } as CandidatePosition,
+              } as VotePosition,
             ])
-            .reduce((obj, [claim, pos]: [string, CandidatePosition]) => ({ ...obj, [claim]: pos }), {}),
+            .reduce((obj, [claim, pos]: [string, VotePosition]) => ({ ...obj, [claim]: pos }), {}),
   };
 
   if (!candidate.id) {
@@ -295,12 +305,14 @@ function cleanCandidate(candidate: Candidate): Candidate {
   if (!candidate.party) {
     throw Error(`Candidate ${candidate.id} has no party`);
   }
-  if (!candidate.positions || Object.getOwnPropertyNames(candidate.positions).length === 0) {
-    throw Error(`Candidate ${candidate.id} has no position votes`);
-  }
-  for (const claim of Object.getOwnPropertyNames(candidate.positions)) {
-    if (!candidate.positions[claim].reason) {
-      warning('Candidate %s has no reason for vote of claim %s', candidate.id, claim);
+  if (hasPositions) {
+    if (!candidate.positions || Object.getOwnPropertyNames(candidate.positions).length === 0) {
+      throw Error(`Candidate ${candidate.id} has no position votes`);
+    }
+    for (const claim of Object.getOwnPropertyNames(candidate.positions)) {
+      if (!candidate.positions[claim].reason) {
+        warning('Candidate %s has no reason for vote of claim %s', candidate.id, claim);
+      }
     }
   }
 
@@ -326,13 +338,37 @@ function cleanCandidate(candidate: Candidate): Candidate {
   return candidate;
 }
 
-function cleanParty(party: Party): Party {
+function cleanParty(party: Party, hasPositions: boolean): Party {
   party = {
     id: cleanId(party.id),
     name: cleanString(party.name),
     color: cleanColor(party.color),
-    link: cleanUrl(party.link),
+    picture: cleanString(party.picture),
+    links: !party.links
+      ? {}
+      : {
+          blog: cleanUrl(party.links.blog) || undefined,
+          twitter: cleanUrl(party.links.twitter) || undefined,
+          facebook: cleanUrl(party.links.facebook) || undefined,
+          instagram: cleanUrl(party.links.instagram) || undefined,
+        },
+    shortDescription: cleanString(party.shortDescription),
     description: cleanString(party.description),
+    positions:
+      !hasPositions || !party.positions || Object.getOwnPropertyNames(party.positions).length === 0
+        ? {}
+        : Object.getOwnPropertyNames(party.positions)
+            .map((claim) => cleanId(claim))
+            .filter((claim) => !!claim)
+            .map((claim) => [claim, party.positions[claim]])
+            .map(([claim, pos]: [string, VotePosition]) => [
+              claim,
+              {
+                vote: cleanVote(pos.vote),
+                reason: cleanString(pos.reason),
+              } as VotePosition,
+            ])
+            .reduce((obj, [claim, pos]: [string, VotePosition]) => ({ ...obj, [claim]: pos }), {}),
   };
 
   if (!party.id) {
@@ -344,21 +380,38 @@ function cleanParty(party: Party): Party {
   if (!party.color) {
     warning('Party %s has no color', party.id);
   }
-  if (!party.link) {
-    warning('Party %s has no link', party.id);
+  if (!party.picture) {
+    warning('Party %s has no picture', party.id);
+  }
+  if (!party.links || Object.getOwnPropertyNames(party.links).length === 0) {
+    warning('Party %s has no links', party.id);
+  }
+  if (!party.shortDescription) {
+    warning('Party %s has no short description', party.description);
   }
   if (!party.description) {
     warning('Party %s has no description', party.description);
   }
 
+  if (hasPositions) {
+    if (!party.positions || Object.getOwnPropertyNames(party.positions).length === 0) {
+      throw Error(`Party ${party.id} has no position votes`);
+    }
+    for (const claim of Object.getOwnPropertyNames(party.positions)) {
+      if (!party.positions[claim].reason) {
+        warning('Party %s has no reason for vote of claim %s', party.id, claim);
+      }
+    }
+  }
+
   return party;
 }
 
-function cleanData(data: DataDocument): DataDocument {
+function cleanData(data: DataDocument, positionedEntities: PositionedEntities): DataDocument {
   return {
     candidates: new Map<string, Candidate>(
       Array.from(data.candidates.values())
-        .map((entry) => cleanCandidate(entry))
+        .map((entry) => cleanCandidate(entry, positionedEntities.candidateHasPositions))
         .map((entry) => [entry.id, entry]),
     ),
     categories: new Map<string, Category>(
@@ -373,13 +426,29 @@ function cleanData(data: DataDocument): DataDocument {
     ),
     parties: new Map<string, Party>(
       Array.from(data.parties.values())
-        .map((entry) => cleanParty(entry))
+        .map((entry) => cleanParty(entry, positionedEntities.partyHasPositions))
         .map((entry) => [entry.id, entry]),
     ),
   };
 }
 
-function validateIdRefs(data: DataDocument): boolean {
+function validateClaimPositions(data: DataDocument, positions: { [claimId: string]: VotePosition }, entity: string): boolean {
+  let valid = true;
+  const answeredClaims = Object.getOwnPropertyNames(positions);
+  const unknownClaims = answeredClaims.filter((value) => !data.claims.has(value));
+  const unansweredClaims = Array.from(data.claims.keys()).filter((value) => !answeredClaims.includes(value));
+  if (unknownClaims.length > 0) {
+    valid = false;
+    log('%s references unknown claims %s', entity, unknownClaims.join(', '));
+  }
+  if (unansweredClaims.length > 0) {
+    valid = false;
+    log('%s has not answered following claims %s', entity, unansweredClaims.join(', '));
+  }
+  return valid;
+}
+
+function validateIdRefs(data: DataDocument, positionedEntities: PositionedEntities): boolean {
   log('Validate ID references');
   let valid = true;
 
@@ -398,16 +467,19 @@ function validateIdRefs(data: DataDocument): boolean {
       log('Missing party %s for candidate %s', candidate.party, candidate.id);
     }
 
-    const answeredClaims = Object.getOwnPropertyNames(candidate.positions);
-    const unknownClaims = answeredClaims.filter((value) => !data.claims.has(value));
-    const unansweredClaims = Array.from(data.claims.keys()).filter((value) => !answeredClaims.includes(value));
-    if (unknownClaims.length > 0) {
-      valid = false;
-      log('Candidate %s references unknown claims %s', candidate.id, unknownClaims.join(', '));
+    if (positionedEntities.candidateHasPositions) {
+      if (!validateClaimPositions(data, candidate.positions, `Candidate ${candidate.id}`)) {
+        valid = false;
+      }
     }
-    if (unansweredClaims.length > 0) {
-      valid = false;
-      log('Candidate %s has not answered following claims %s', candidate.id, unansweredClaims.join(', '));
+  }
+
+  // check party positions
+  if (positionedEntities.partyHasPositions) {
+    for (const party of data.parties.values()) {
+      if (!validateClaimPositions(data, party.positions, `Party ${party.id}`)) {
+        valid = false;
+      }
     }
   }
 
@@ -415,7 +487,7 @@ function validateIdRefs(data: DataDocument): boolean {
   return valid;
 }
 
-function shuffleIds(input: DataDocument, seed: string = ''): DataDocument {
+function shuffleIds(input: DataDocument, seed: string = '', positionedEntities: PositionedEntities): DataDocument {
   log('Shuffle IDs');
 
   seed = seed || '';
@@ -443,15 +515,25 @@ function shuffleIds(input: DataDocument, seed: string = ''): DataDocument {
   for (const entry of input.candidates.values()) {
     entry.id = idTable.get(`candidate:${entry.id}`);
     entry.party = idTable.get(`party:${entry.party}`);
-    const positions = {};
-    for (const claim of Object.getOwnPropertyNames(entry.positions)) {
-      positions[idTable.get(`claim:${claim}`)] = entry.positions[claim];
+
+    if (positionedEntities.candidateHasPositions) {
+      const positions = {};
+      for (const claim of Object.getOwnPropertyNames(entry.positions)) {
+        positions[idTable.get(`claim:${claim}`)] = entry.positions[claim];
+      }
+      entry.positions = positions;
     }
-    entry.positions = positions;
     candidates.set(entry.id, entry);
   }
   for (const entry of input.parties.values()) {
     entry.id = idTable.get(`party:${entry.id}`);
+    if (positionedEntities.partyHasPositions) {
+      const positions = {};
+      for (const claim of Object.getOwnPropertyNames(entry.positions)) {
+        positions[idTable.get(`claim:${claim}`)] = entry.positions[claim];
+      }
+      entry.positions = positions;
+    }
     parties.set(entry.id, entry);
   }
 
@@ -463,45 +545,69 @@ function shuffleIds(input: DataDocument, seed: string = ''): DataDocument {
   };
 }
 
-async function processPictures(data: DataDocument, input: string, output: string): Promise<DataDocument> {
+async function processPicture(inputPath: string, inputFile: string, outputPath: string, id: string): Promise<string> {
+  try {
+    const fileName = `${id}.jpg`;
+    log('Transform picture: %s', inputFile);
+    await sharp(joinPath(inputPath, inputFile))
+      .flatten({ background: IMAGE_BACKGROUND })
+      .resize({ ...IMAGE_DIMENSIONS, fit: 'cover', position: sharp.strategy.entropy, withoutEnlargement: true })
+      .jpeg({ quality: IMAGE_QUALITY, progressive: true })
+      .toFile(joinPath(outputPath, fileName));
+    return fileName;
+  } catch (e) {
+    log('Error while processing picture of %s', id);
+    throw e;
+  }
+}
+
+async function processCandidatePictures(data: DataDocument, input: string, output: string): Promise<DataDocument> {
   for (const candidate of data.candidates.values()) {
     if (candidate.publishPersonalInfo !== true) {
       log('Skip image processing for %s', candidate.id);
       continue;
     }
     if (!candidate.picture) {
-      log('Candidate %s has no picture.');
+      log('Candidate %s has no picture.', candidate.id);
       candidate.picture = null;
       continue;
     }
 
-    try {
-      const fileName = `${candidate.id}.jpg`;
-      log('Transform picture for %s: %s', candidate.id, candidate.picture);
-      await sharp(joinPath(input, candidate.picture))
-        .flatten({ background: IMAGE_BACKGROUND })
-        .resize({ ...IMAGE_DIMENSIONS, fit: 'cover', position: sharp.strategy.entropy, withoutEnlargement: true })
-        .jpeg({ quality: IMAGE_QUALITY, progressive: true })
-        .toFile(joinPath(output, fileName));
-      candidate.picture = fileName;
-    } catch (e) {
-      log('Error while processing picture of %s', candidate.id);
-      throw e;
-    }
+    candidate.picture = await processPicture(input, candidate.picture, output, candidate.id);
   }
 
   return data;
 }
 
-function generatePoliticalJson(data: DataDocument): { [key: string]: any } {
+async function processPartyPictures(data: DataDocument, input: string, output: string): Promise<DataDocument> {
+  for (const party of data.parties.values()) {
+    if (!party.picture) {
+      log('Party %s has no picture.', party.id);
+      party.picture = null;
+      continue;
+    }
+
+    party.picture = await processPicture(input, party.picture, output, party.id);
+  }
+
+  return data;
+}
+
+function generatePoliticalJson(data: DataDocument, positionedEntities: PositionedEntities): { [key: string]: any } {
   return {
     categories: Array.from(data.categories.values()).reduce((obj, entry) => ({ ...obj, [entry.id]: { ...entry, id: undefined } }), {}),
-    parties: Array.from(data.parties.values()).reduce((obj, entry) => ({ ...obj, [entry.id]: { ...entry, id: undefined } }), {}),
+    parties: Array.from(data.parties.values()).reduce(
+      (obj, entry) => ({
+        ...obj,
+        [entry.id]: { ...entry, id: undefined, positions: positionedEntities.partyHasPositions ? entry.positions : undefined },
+      }),
+      {},
+    ),
     claims: Array.from(data.claims.values()).reduce((obj, entry) => ({ ...obj, [entry.id]: { ...entry, id: undefined } }), {}),
     candidates: Array.from(data.candidates.values()).reduce(
       (obj, entry) => ({
         ...obj,
-        [entry.id]: { party: entry.party, positions: entry.positions },
+        [entry.id]: { party: entry.party, positions: positionedEntities.candidateHasPositions ? entry.positions : undefined },
       }),
       {},
     ),
@@ -566,6 +672,13 @@ async function main() {
       description: 'Random seed for UUID generation',
       type: 'string',
     })
+    .option('positioned-entities', {
+      alias: 'p',
+      description: 'Which entities can provide positions',
+      type: 'string',
+      choices: ['parties', 'candidates', 'both'],
+      default: 'parties',
+    })
     .help()
     .alias('help', 'h')
     .parse(process.argv.slice(3));
@@ -574,28 +687,37 @@ async function main() {
     log('Input and output options must be set. Run --help for more information.');
     return;
   }
+  if (!argv['positioned-entities'] || ['parties', 'candidates', 'both'].includes(argv['positioned-entities']) === false) {
+    log('"positioned-entities" must be one of parties, candidates, both.');
+    return;
+  }
+  const positionedEntities: PositionedEntities = {
+    partyHasPositions: argv['positioned-entities'] === 'parties' || argv['positioned-entities'] === 'both',
+    candidateHasPositions: argv['positioned-entities'] === 'candidates' || argv['positioned-entities'] === 'both',
+  };
 
   const docs = readAllYamlFiles(argv.input);
   let data = unifyDocs(docs, argv.merge);
-  data = cleanData(data);
-  if (!validateIdRefs(data)) {
+  data = cleanData(data, positionedEntities);
+  if (!validateIdRefs(data, positionedEntities)) {
     log('ID reference check failed.');
     process.exit(1);
   }
 
   if (argv['anonymize-ids'] === true) {
-    data = shuffleIds(data, argv.seed);
-    if (!validateIdRefs(data)) {
+    data = shuffleIds(data, argv.seed, positionedEntities);
+    if (!validateIdRefs(data, positionedEntities)) {
       log('ID reference check failed.');
       process.exit(1);
     }
   }
 
   mkdirSync(argv.output, { recursive: true });
-  data = await processPictures(data, argv.input, argv.output);
+  data = await processCandidatePictures(data, argv.input, argv.output);
+  data = await processPartyPictures(data, argv.input, argv.output);
   writeFileSync(
     joinPath(argv.output, 'political.json'),
-    JSON.stringify(generatePoliticalJson(data), undefined, argv.minify === true ? 0 : 2),
+    JSON.stringify(generatePoliticalJson(data, positionedEntities), undefined, argv.minify === true ? 0 : 2),
   );
   writeFileSync(
     joinPath(argv.output, 'personal.json'),
