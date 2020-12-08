@@ -15,4 +15,10 @@ export const isDataLoaded = createSelector(getAppState, (state: State) => state.
 export const getVotes = createSelector(getAppState, (state: State) => state.votes);
 
 export const isLocalDataStorageAllowed = createSelector(getAppState, (state: State) => state.allowLocalDataStorage);
-export const getQuizState = createSelector(getAppState, (state: State) => QuizState.STARTED);
+export const getQuizState = createSelector(getAppState, (state: State) => QuizState.STARTED); // TODO
+
+export const getParties = createSelector(getAppState, (state: State) => (state.politicalDataLoaded ? state.politicalData.parties : null));
+export const getPartyIds = createSelector(getAppState, (state: State) =>
+  state.politicalDataLoaded ? Object.getOwnPropertyNames(state.politicalData.parties) : null,
+);
+export const getPartyById = createSelector(getParties, (parties, props: { id: number }) => parties[props.id]);

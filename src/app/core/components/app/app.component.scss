@@ -5,6 +5,7 @@ $nav-height: 46px;
 :host {
   display: grid;
   width: 100%;
+  min-height: 100vh;
   margin: 0;
 
   grid-template:

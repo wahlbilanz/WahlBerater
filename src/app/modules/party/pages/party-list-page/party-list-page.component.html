@@ -1,1 +1,5 @@
-<p>party-list-page works!</p>
+<h1>Wahllisten</h1>
+
+<section class="party-list">
+  <app-party-card [partyId]="id" *ngFor="let id of partyIds | async"></app-party-card>
+</section>

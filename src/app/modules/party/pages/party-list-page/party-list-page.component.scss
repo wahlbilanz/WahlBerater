@@ -1,0 +1,13 @@
+@import '../../../../../assets/styles/variables';
+
+:host {
+  display: block;
+}
+
+.party-list {
+  display: grid;
+  gap: $wb-space-medium;
+  grid-template-columns: repeat(2, 1fr);
+
+  padding: 0 $wb-space-medium;
+}
