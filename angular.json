@@ -27,6 +27,7 @@
               "src/assets/static/favicon.ico",
               "src/assets/daten.json",
               "src/assets/static",
+              "src/assets/data",
               {
                 "glob": "**/*",
                 "input": "./node_modules/@ant-design/icons-angular/src/inline-svg/",
@@ -37,8 +38,7 @@
               "src/assets/themes/ng-zorro.theme.less",
               "src/assets/styles/index.scss"
             ],
-            "scripts": [
-            ]
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -103,7 +103,9 @@
               "src/assets/themes/ng-zorro.theme.less",
               "src/assets/styles/index.scss"
             ],
-            "scripts": [  "node_modules/apexcharts/dist/apexcharts.min.js"]
+            "scripts": [
+              "node_modules/apexcharts/dist/apexcharts.min.js"
+            ]
           }
         },
         "lint": {

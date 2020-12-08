@@ -14,10 +14,10 @@ export class DataService {
   constructor(private http: HttpClient) {}
 
   getPoliticalData(): Observable<Data> {
-    return this.http.get(new URL('political.json', this.baseUrl).toString()).pipe(map((data: any) => data as Data));
+    return this.http.get(`${this.baseUrl}/political.json`).pipe(map((data: any) => data as Data));
   }
 
   getPersonalData(): Observable<any> {
-    return this.http.get(new URL('personal.json', this.baseUrl).toString()).pipe(map((data: any) => data as Data));
+    return this.http.get(`${this.baseUrl}/personal.json`).pipe(map((data: any) => data as Data));
   }
 }
