@@ -1,6 +1,4 @@
-
 <div class="card">
-
   <div class="chart">
     <apx-chart
       [series]="chartOptions.series"
@@ -10,20 +8,19 @@
     ></apx-chart>
   </div>
   <div class="card-body">
-      <div class="candidate-avatar">
-        <div nz-row style="font-size: 2em;" nzJustify="center" class="card-img-left" alt="Card image cap">
-          <i nz-icon nzType="user" nzTheme="outline"></i>
-        </div>
+    <div class="candidate-avatar">
+      <div nz-row style="font-size: 2em" nzJustify="center" class="card-img-left" alt="Card image cap">
+        <i nz-icon nzType="user" nzTheme="outline"></i>
       </div>
-      <div class="candidate-content">
-        <h5 class="card-title">{{data.candidates[candidate].name}}</h5>
-        <p class="card-text">{{data.candidates[candidate].oneliner}}</p>
-        <a [routerLink]="'/candidates/' + candidate" class="btn btn-primary">Profil öffnen</a>
-      </div>
+    </div>
+    <div class="candidate-content">
+      <h5 class="card-title">{{ data.candidates[candidate].name }}</h5>
+      <!-- <p class="card-text">{{ data.candidates[candidate].oneliner }}</p> -->
+      <a [routerLink]="'/candidates/' + candidate" class="btn btn-primary">Profil öffnen</a>
+    </div>
 
-
-<!--    <h5 class="card-title">{{candidate.name}}</h5>-->
-<!--    <p class="card-text">{{candidate.oneliner}}</p>-->
-<!--    <a href="#" class="btn btn-primary">Go somewhere</a>-->
+    <!--    <h5 class="card-title">{{candidate.name}}</h5>-->
+    <!--    <p class="card-text">{{candidate.oneliner}}</p>-->
+    <!--    <a href="#" class="btn btn-primary">Go somewhere</a>-->
   </div>
 </div>
