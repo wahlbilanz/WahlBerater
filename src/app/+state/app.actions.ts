@@ -9,8 +9,10 @@ export const updateActiveBreakpoints = createAction(
 );
 
 export const loadData = createAction('[app] Load Data JSON');
-export const loadDataSuccess = createAction('[app] Load Data JSON Success', props<{ data: Data; wasCached: boolean }>());
-export const loadDataError = createAction('[app] Load Data JSON Error', props<{ error: Error }>());
+export const loadPoliticalDataSuccess = createAction('[app] Load Political Data JSON Success', props<{ data: Data; wasCached: boolean }>());
+export const loadPoliticalDataError = createAction('[app] Load Political Data JSON Error', props<{ error: Error }>());
+export const loadPersonalDataSuccess = createAction('[app] Load Personal Data JSON Success', props<{ data: Data; wasCached: boolean }>());
+export const loadPersonalDataError = createAction('[app] Load Personal Data JSON Error', props<{ error: Error }>());
 
 export const vote = createAction('[app] Vote', props<{ claimId: string; decision: number; fav: boolean }>());
 

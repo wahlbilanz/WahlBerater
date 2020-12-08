@@ -4,7 +4,7 @@ import { NavigationStart } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { routerNavigatedAction, routerRequestAction } from '@ngrx/router-store';
 import { Store } from '@ngrx/store';
-import { asyncScheduler, scheduled } from 'rxjs';
+import { asyncScheduler, merge, scheduled } from 'rxjs';
 import { catchError, map, mergeMap, tap } from 'rxjs/operators';
 import { DataPersistanceService } from '../core/services/data-persistance.service';
 import { DataService } from '../core/services/data.service';
@@ -52,10 +52,17 @@ export class AppEffects {
       this.actions.pipe(
         ofType(AppActions.loadData),
         mergeMap(() =>
-          this.dataService.getData().pipe(
-            // TODO detect if offline and then try to deliver cached Variant?
-            map((data) => AppActions.loadDataSuccess({ data, wasCached: false })),
-            catchError((error) => scheduled([AppActions.loadDataError({ error })], asyncScheduler)),
+          merge(
+            this.dataService.getPoliticalData().pipe(
+              // TODO detect if offline and then try to deliver cached Variant?
+              map((data) => AppActions.loadPoliticalDataSuccess({ data, wasCached: false })),
+              catchError((error) => scheduled([AppActions.loadPoliticalDataError({ error })], asyncScheduler)),
+            ),
+            this.dataService.getPersonalData().pipe(
+              // TODO detect if offline and then try to deliver cached Variant?
+              map((data) => AppActions.loadPersonalDataSuccess({ data, wasCached: false })),
+              catchError((error) => scheduled([AppActions.loadPersonalDataError({ error })], asyncScheduler)),
+            ),
           ),
         ),
       ),
