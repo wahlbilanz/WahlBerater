@@ -7,5 +7,4 @@ export interface CategoryMap {
 export interface Category {
   title: string;
   color: string;
-  claims: [string];
 }

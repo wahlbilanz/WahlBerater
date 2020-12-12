@@ -11,8 +11,10 @@ export interface AppPartialState {
 export const initialState: State = {
   menuOpen: false,
   activeBreakpoints: { xs: false, sm: false, md: false, lg: false, xl: false, xxl: false },
-  data: null,
-  dataLoaded: false,
+  politicalData: null,
+  personalData: null,
+  politicalDataLoaded: false,
+  personalDataLoaded: false,
   usedCachedData: false,
   votes: {},
   allowLocalDataStorage: null,
@@ -29,16 +31,16 @@ export const appReducer = createReducer(
     activeBreakpoints,
   })),
 
-  on(AppActions.loadDataSuccess, (state: State, { data, wasCached }) => ({
+  on(AppActions.loadPoliticalDataSuccess, (state: State, { data, wasCached }) => ({
     ...state,
-    data,
-    dataLoaded: true,
+    politicalData: data,
+    politicalDataLoaded: true,
     usedCachedData: wasCached,
   })),
-  on(AppActions.loadDataError, (state: State) => ({
+  on(AppActions.loadPoliticalDataError, (state: State) => ({
     ...state,
-    data: null,
-    dataLoaded: false,
+    politicalData: null,
+    politicalDataLoaded: false,
     usedCachedData: false,
   })),
   on(AppActions.vote, (state: State, { claimId, decision, fav }) => ({

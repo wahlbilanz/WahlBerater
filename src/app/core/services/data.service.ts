@@ -9,11 +9,15 @@ import { Data } from '../../definitions/models/data.model';
   providedIn: 'root',
 })
 export class DataService {
-  private readonly url = environment.dataUrl;
+  private readonly baseUrl = environment.dataUrl;
 
   constructor(private http: HttpClient) {}
 
-  getData(): Observable<Data> {
-    return this.http.get(this.url).pipe(map((data: any) => data as Data));
+  getPoliticalData(): Observable<Data> {
+    return this.http.get(`${this.baseUrl}/political.json`).pipe(map((data: any) => data as Data));
+  }
+
+  getPersonalData(): Observable<any> {
+    return this.http.get(`${this.baseUrl}/personal.json`).pipe(map((data: any) => data as Data));
   }
 }

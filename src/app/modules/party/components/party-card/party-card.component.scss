@@ -1,0 +1,84 @@
+@import '../../../../../assets/styles/variables';
+
+:host {
+  display: block;
+}
+
+.party-card {
+  display: grid;
+  gap: $wb-space-x-small;
+  grid-template:
+    'picture name name'
+    'picture desc desc'
+    'picture candidates candidates'
+    'picture social link';
+
+  min-height: 150px;
+  padding-right: $wb-space-small;
+
+  border-left: $wb-space-xx-small solid transparent;
+  box-shadow: $wb-shadow-normal;
+  transition: color 0.3s, background-color 0.3s, box-shadow 0.3s, border-color 0.3s;
+
+  &:hover {
+    box-shadow: $wb-shadow-hover;
+  }
+}
+
+.party-picture {
+  height: 100%;
+  grid-area: picture;
+}
+.party-name {
+  grid-area: name;
+  margin-top: $wb-space-small;
+  margin-bottom: 0;
+}
+.party-description {
+  grid-area: desc;
+  margin: 0;
+}
+
+.party-candidates {
+  grid-area: candidates;
+  display: flex;
+
+  .test {
+    content: ' ';
+    width: 24px;
+    height: 24px;
+
+    background-color: gray;
+    border: 2px solid black;
+    border-radius: 50%;
+
+    &:not(:first-child) {
+      margin-left: -8px;
+    }
+  }
+}
+.party-social {
+  grid-area: social;
+  display: flex;
+
+  a,
+  a:active,
+  a:link {
+    @include use-typography($wb-type-paragraph);
+    color: $wb-color-neutral-500;
+    &:not(:first-child) {
+      margin-left: $wb-space-xx-small;
+    }
+  }
+  a:hover {
+    color: $wb-color-secondary-600;
+  }
+}
+.party-link {
+  grid-area: link;
+  text-align: right;
+}
+.party-social,
+.party-link {
+  margin-bottom: $wb-space-small;
+}

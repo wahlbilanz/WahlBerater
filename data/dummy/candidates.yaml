@@ -1,0 +1,175 @@
+
+candidates:
+  - id: cd01
+    publishPersonalInfo: true
+    name: Hans Franz
+    party: party-turquoise
+    picture: pics/cd01.png
+    links:
+      twitter: https://twitter.com/walberater
+      blog: https://some.blog.martin2
+      facebook: https://facebook.com/bla
+    shortDescription: Ich bin der Hans. Der Franz Hans.
+    description: |
+      Cupidatat irure elit exercitation ad cupidatat aliquip. Adipisicing irure pariatur labore amet mollit ut minim pariatur. Non in aute commodo quis laborum ex. Do qui fugiat cupidatat reprehenderit do sint laboris adipisicing in.
+      Aute eiusmod commodo sit excepteur laborum voluptate qui et irure incididunt voluptate irure reprehenderit consectetur. Magna pariatur Lorem irure adipisicing deserunt ut aliquip do velit cillum. Ad sit reprehenderit consectetur labore sit culpa nostrud enim duis magna commodo mollit nulla. Reprehenderit dolor duis consectetur anim enim cupidatat duis.
+
+      Laborum ex pariatur laboris eiusmod ipsum velit excepteur laborum deserunt. Velit eiusmod amet ad duis in sunt non sint fugiat veniam excepteur. Nulla excepteur non et cillum quis nisi ex minim est in mollit nisi.
+
+      Lorem minim nulla minim Lorem consectetur do voluptate veniam ea. Adipisicing sint esse officia aute nisi duis officia voluptate exercitation velit minim anim. Esse ex in veniam laborum. Et sint aliqua duis eiusmod incididunt.
+    positions:
+      social01:
+        vote: -2
+        reason: '-2 Dolore reprehenderit et magna velit Lorem adipisicing aliquip nostrud duis laborum.'
+      social02:
+        vote: -1
+        reason: '-1 Nostrud ad excepteur sint magna ullamco dolore esse dolor laborum fugiat nulla sit quis.'
+      energy01:
+        vote: 1
+        reason: '1 Dolor ullamco et commodo ut laborum adipisicing.'
+      energy02:
+        vote: 2
+        reason: '2 Nisi non consequat aliquip aliquip elit esse et ipsum et.'
+      misc01:
+        vote: 0
+        reason: '0 Sit ea quis ad velit tempor sunt ullamco esse voluptate excepteur.'
+
+  - id: cd02
+    publishPersonalInfo: true
+    name: Anette Anagram
+    party: party-turquoise
+    picture: pics/cd02.png
+    links:
+      twitter: https://twitter.com/walberater
+      blog: https://some.blog.martin2
+      facebook: https://facebook.com/bla
+    shortDescription: Anette Anagram Margana Ettena
+    description: |
+      Reprehenderit esse laboris culpa consectetur pariatur sint ut cillum eiusmod deserunt exercitation ut tempor ut. Occaecat officia ad sint quis ipsum in id. Eiusmod minim pariatur magna laboris cillum. Reprehenderit labore laboris ex nisi qui eu tempor id aliquip.
+
+      Reprehenderit ut in mollit voluptate aute aute consequat ea nulla aliquip. Nisi adipisicing ex ad deserunt aliquip deserunt quis. Quis cupidatat dolore est reprehenderit eiusmod velit. Est Lorem consectetur qui in labore ad mollit minim exercitation id non ut.
+
+      Voluptate tempor aliqua magna cupidatat non pariatur nulla proident adipisicing occaecat proident. Incididunt mollit Lorem labore consequat veniam proident. Commodo quis anim ullamco nisi dolore et do eiusmod aliqua et adipisicing quis. Exercitation qui cupidatat esse nulla anim adipisicing.
+
+      Eiusmod ex tempor est irure irure non irure tempor. Incididunt culpa ullamco exercitation sunt duis mollit irure ad cillum. Pariatur ut magna cillum deserunt irure duis quis et ullamco et.
+    positions:
+      social01:
+        vote: 0
+        reason: '0 Dolore reprehenderit et magna velit Lorem adipisicing aliquip nostrud duis laborum.'
+      social02:
+        vote: -2
+        reason: '-2 Nostrud ad excepteur sint magna ullamco dolore esse dolor laborum fugiat nulla sit quis.'
+      energy01:
+        vote: -1
+        reason: '-1 Dolor ullamco et commodo ut laborum adipisicing.'
+      energy02:
+        vote: 1
+        reason: '1 Nisi non consequat aliquip aliquip elit esse et ipsum et.'
+      misc01:
+        vote: 2
+        reason: '2 Sit ea quis ad velit tempor sunt ullamco esse voluptate excepteur.'
+
+  - id: cd03
+    publishPersonalInfo: true
+    name: Maxi Muster
+    party: party-turquoise
+    picture: pics/cd03.png
+    links:
+      twitter: https://twitter.com/walberater
+      blog: https://some.blog.martin2
+      facebook: https://facebook.com/bla
+    shortDescription: Anette Anagram Margana Ettena
+    description: |
+      Ipsum sint velit laboris reprehenderit laborum qui elit labore sunt. Excepteur est esse ut excepteur non proident exercitation do sint eu elit officia. Cillum laborum pariatur in aute nostrud adipisicing duis ullamco laborum esse irure nulla ut deserunt.
+
+      Nisi sint pariatur sit voluptate deserunt. Nulla pariatur occaecat consequat ex proident officia. Exercitation ex voluptate enim sint sunt commodo qui. Incididunt sit et aliqua voluptate aute in mollit aliqua. Pariatur duis quis minim cupidatat nulla duis cillum cillum non. Dolor pariatur adipisicing dolore cillum esse ipsum commodo minim nostrud eiusmod qui.
+
+      Consectetur occaecat deserunt minim eu mollit aute eiusmod esse anim laboris id. Irure veniam dolor fugiat magna et aliquip dolore. Sit cillum sunt irure proident. Enim elit anim ex velit proident sit ex aute officia deserunt do sit culpa. In est duis voluptate commodo officia aliqua amet laborum labore ipsum. Ullamco nulla anim irure ad ut. Tempor cupidatat ut laboris qui ut labore dolore.
+    positions:
+      social01:
+        vote: 2
+        reason: '2 Dolore reprehenderit et magna velit Lorem adipisicing aliquip nostrud duis laborum.'
+      social02:
+        vote: 0
+        reason: '0 Nostrud ad excepteur sint magna ullamco dolore esse dolor laborum fugiat nulla sit quis.'
+      energy01:
+        vote: -2
+        reason: '-2 Dolor ullamco et commodo ut laborum adipisicing.'
+      energy02:
+        vote: -1
+        reason: '-1 Nisi non consequat aliquip aliquip elit esse et ipsum et.'
+      misc01:
+        vote: 1
+        reason: '1 Sit ea quis ad velit tempor sunt ullamco esse voluptate excepteur.'
+---
+
+candidates:
+  - id: cd04
+    publishPersonalInfo: true
+    name: Maxi Muster
+    party: party-orange
+    picture: pics/cd04.png
+    links:
+      twitter: https://twitter.com/walberater
+      blog: https://some.blog.martin2
+      facebook: https://facebook.com/bla
+    shortDescription: Anette Anagram Margana Ettena
+    description: |
+      Consectetur voluptate adipisicing velit magna adipisicing fugiat laborum. Nulla ad reprehenderit laborum excepteur minim sit labore commodo ad. Consequat irure exercitation excepteur sunt deserunt exercitation minim laboris sit dolore Lorem sint consectetur ad. Aliquip laborum irure quis sint irure nisi cillum ex veniam. Aliqua ea eiusmod mollit anim aute nostrud irure ex adipisicing est aliqua. Culpa labore dolor duis nulla.
+
+      Consectetur est eu dolor ea ex laboris ea minim ullamco tempor aute laborum tempor. Esse ex enim ad pariatur amet irure cillum dolore ipsum qui enim ea voluptate. Ullamco exercitation tempor do cillum velit adipisicing culpa id occaecat exercitation aliquip est. Ipsum deserunt ex dolore eu sunt magna ea qui in qui esse nostrud quis eiusmod.
+
+      Lorem sint veniam sit laborum ea ut. Ullamco officia elit sunt ex dolor labore. Sint minim quis dolor in magna. Aliqua laboris pariatur qui dolor. Excepteur amet laboris commodo ea cupidatat officia incididunt cillum. Aute officia laboris cillum occaecat ea adipisicing consequat. Reprehenderit magna incididunt nulla occaecat esse voluptate sit anim.
+
+      Sunt amet sunt ipsum minim minim occaecat nulla nisi sit eiusmod nostrud elit commodo et. Commodo aute amet consequat dolor esse deserunt cupidatat. Nulla aute voluptate duis magna minim velit ut. Duis proident occaecat laborum anim aliqua ipsum. Veniam dolore proident dolor laboris consectetur ullamco cillum.
+
+      Nostrud exercitation est culpa aliquip do ea velit fugiat. Ex duis mollit occaecat sunt nisi. Nostrud irure et ex Lorem aliqua amet velit nisi magna id voluptate. Sunt laboris anim eu sunt aute sunt officia ipsum est. Proident Lorem cupidatat culpa consectetur eu nulla ullamco ad id anim esse quis. Aliqua qui est commodo labore. Pariatur aliqua reprehenderit ad sunt voluptate elit duis.
+    positions:
+      social01:
+        vote: 1
+        reason: '1 Dolore reprehenderit et magna velit Lorem adipisicing aliquip nostrud duis laborum.'
+      social02:
+        vote: 2
+        reason: '2 Nostrud ad excepteur sint magna ullamco dolore esse dolor laborum fugiat nulla sit quis.'
+      energy01:
+        vote: 0
+        reason: '0 Dolor ullamco et commodo ut laborum adipisicing.'
+      energy02:
+        vote: -2
+        reason: '-2 Nisi non consequat aliquip aliquip elit esse et ipsum et.'
+      misc01:
+        vote: -1
+        reason: '-1 Sit ea quis ad velit tempor sunt ullamco esse voluptate excepteur.'
+
+  - id: cd05
+    publishPersonalInfo: false
+    name: Lisa Lustig
+    party: party-orange
+    picture: pics/cd05.png
+    links:
+      twitter: https://twitter.com/walberater
+      blog: https://some.blog.martin2
+      facebook: https://facebook.com/bla
+    shortDescription: Anette Anagram Margana Ettena
+    description: |
+      Ipsum sint velit laboris reprehenderit laborum qui elit labore sunt. Excepteur est esse ut excepteur non proident exercitation do sint eu elit officia. Cillum laborum pariatur in aute nostrud adipisicing duis ullamco laborum esse irure nulla ut deserunt.
+
+      Nisi sint pariatur sit voluptate deserunt. Nulla pariatur occaecat consequat ex proident officia. Exercitation ex voluptate enim sint sunt commodo qui. Incididunt sit et aliqua voluptate aute in mollit aliqua. Pariatur duis quis minim cupidatat nulla duis cillum cillum non. Dolor pariatur adipisicing dolore cillum esse ipsum commodo minim nostrud eiusmod qui.
+
+      Consectetur occaecat deserunt minim eu mollit aute eiusmod esse anim laboris id. Irure veniam dolor fugiat magna et aliquip dolore. Sit cillum sunt irure proident. Enim elit anim ex velit proident sit ex aute officia deserunt do sit culpa. In est duis voluptate commodo officia aliqua amet laborum labore ipsum. Ullamco nulla anim irure ad ut. Tempor cupidatat ut laboris qui ut labore dolore.
+    positions:
+      social01:
+        vote: -1
+        reason: '-1 Dolore reprehenderit et magna velit Lorem adipisicing aliquip nostrud duis laborum.'
+      social02:
+        vote: 1
+        reason: '1 Nostrud ad excepteur sint magna ullamco dolore esse dolor laborum fugiat nulla sit quis.'
+      energy01:
+        vote: 2
+        reason: '2 Dolor ullamco et commodo ut laborum adipisicing.'
+      energy02:
+        vote: 0
+        reason: '0 Nisi non consequat aliquip aliquip elit esse et ipsum et.'
+      misc01:
+        vote: -2
+        reason: '-2 Sit ea quis ad velit tempor sunt ullamco esse voluptate excepteur.'

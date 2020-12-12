@@ -59,13 +59,17 @@ export class CandidateListCardComponent implements OnInit {
     console.log(this.candidate);
     console.log(this.decisions);
     let maxY = 0;
+    // TODO move this into effect/selector combi
+
     for (const category in this.data.categories) {
+      const claimIds = Object.getOwnPropertyNames(this.data.claims).filter((claimId) => this.data.claims[claimId].category === category);
+
       if (this.data.categories.hasOwnProperty(category) && category !== 'howto') {
         let score = 0;
-        if (maxY < this.data.categories[category].claims.length) {
-          maxY = this.data.categories[category].claims.length;
+        if (maxY < claimIds.length) {
+          maxY = claimIds.length;
         }
-        for (const claim of this.data.categories[category].claims) {
+        for (const claim of claimIds) {
           // console.log (claim, this.decisions[claim], this.data.candidates[this.candidate]);
           if (this.decisions[claim] && this.data.candidates[this.candidate] && this.data.candidates[this.candidate].positions[claim]) {
             // console.log (claim, this.data.candidates[this.candidate].positions[claim].vote, this.decisions[claim].decision);

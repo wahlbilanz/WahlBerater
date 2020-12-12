@@ -5,6 +5,7 @@ import * as AppSelectors from '../../../+state/app.selectors';
 import { claimScore } from '../../../definitions/functions/score.function';
 import { CategoryMap } from '../../../definitions/models/category.model';
 import { CandidateMap } from '../../../definitions/models/candidate.model';
+import { Claim, ClaimMap } from '../../../definitions/models/claim.model';
 
 @Component({
   selector: 'app-auswertung-barchart-table',
@@ -18,6 +19,7 @@ export class AuswertungBarchartTableComponent implements OnInit {
   decisions = {};
   candidates: CandidateMap;
   categories: CategoryMap;
+  claims: ClaimMap;
 
   table = [];
   maxValue = 0;
@@ -26,7 +28,9 @@ export class AuswertungBarchartTableComponent implements OnInit {
 
   getCategory(claim: string): string {
     for (const category in this.categories) {
-      if (this.categories.hasOwnProperty(category) && this.categories[category].claims.includes(claim)) {
+      const claimIds = Object.getOwnPropertyNames(this.claims).filter((claimId) => this.claims[claimId].category === category);
+
+      if (this.categories.hasOwnProperty(category) && claimIds.includes(claim)) {
         return category;
       }
     }
@@ -79,6 +83,7 @@ export class AuswertungBarchartTableComponent implements OnInit {
     this.data.subscribe((d) => {
       this.candidates = d.candidates;
       this.categories = d.categories;
+      this.claims = d.claims;
       this.recalc();
     });
     this.votes.subscribe((v) => {

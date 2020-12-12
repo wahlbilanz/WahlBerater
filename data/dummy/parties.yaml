@@ -1,0 +1,58 @@
+
+parties:
+  - id: party-turquoise
+    name: Türkise Partei
+    color: 'rgb(0, 234, 222)'
+    picture: pics/cd11.png
+    links:
+      twitter: https://twitter.com/walberater
+      blog: https://example.org/party01
+      facebook: https://facebook.com/bla
+    shortDescription: Eine Partei. Zwei Farben.
+    description: |
+      Eine Partei. Eine Farbe
+    positions:
+      social01:
+        vote: -2
+        reason: '-2 Dolore reprehenderit et magna velit Lorem adipisicing aliquip nostrud duis laborum.'
+      social02:
+        vote: -1
+        reason: '-1 Nostrud ad excepteur sint magna ullamco dolore esse dolor laborum fugiat nulla sit quis.'
+      energy01:
+        vote: 1
+        reason: '1 Dolor ullamco et commodo ut laborum adipisicing.'
+      energy02:
+        vote: 2
+        reason: '2 Nisi non consequat aliquip aliquip elit esse et ipsum et.'
+      misc01:
+        vote: 0
+        reason: '0 Sit ea quis ad velit tempor sunt ullamco esse voluptate excepteur.'
+
+  - id: party-orange
+    name: Orange Partei
+    color: 'rgb(234, 140, 0)'
+    picture: pics/cd12.png
+    links:
+      twitter: https://twitter.com/walberater
+      blog: https://example.org/party02
+      facebook: https://facebook.com/bla
+    shortDescription: Orange, wie ein Kartoffel.
+    description: |
+      Orange, wie eine Kartoffel
+    positions:
+      social01:
+        vote: 0
+        reason: '0 Dolore reprehenderit et magna velit Lorem adipisicing aliquip nostrud duis laborum.'
+      social02:
+        vote: -2
+        reason: '-2 Nostrud ad excepteur sint magna ullamco dolore esse dolor laborum fugiat nulla sit quis.'
+      energy01:
+        vote: -1
+        reason: '-1 Dolor ullamco et commodo ut laborum adipisicing.'
+      energy02:
+        vote: 1
+        reason: '1 Nisi non consequat aliquip aliquip elit esse et ipsum et.'
+      misc01:
+        vote: 2
+        reason: '2 Sit ea quis ad velit tempor sunt ullamco esse voluptate excepteur.'
+

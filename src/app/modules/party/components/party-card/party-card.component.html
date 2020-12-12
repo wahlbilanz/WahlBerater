@@ -1,0 +1,29 @@
+<div class="party-card" [style.border-left-color]="party.color" *ngIf="partyData | async as party">
+  <img class="party-picture" src="{{ baseUrl }}/{{ party.picture }}" />
+  <!-- <div class="details"> -->
+  <h2 class="party-name">{{ party.name }}</h2>
+  <p class="party-description">{{ party.shortDescription }}</p>
+  <div class="party-candidates">
+    <span class="test" [style.border-color]="party.color" nz-tooltip nzTooltipTitle="Not A Candidate"></span>
+    <span class="test" [style.border-color]="party.color" nz-tooltip nzTooltipTitle="Not A Candidate"></span>
+    <span class="test" [style.border-color]="party.color" nz-tooltip nzTooltipTitle="Not A Candidate"></span>
+    <span class="test" [style.border-color]="party.color" nz-tooltip nzTooltipTitle="Not A Candidate"></span>
+    <span class="test" [style.border-color]="party.color" nz-tooltip nzTooltipTitle="Not A Candidate"></span>
+  </div>
+  <div class="party-social">
+    <a [href]="party.links.blog" title="Webseite von {{ party.name }}" *ngIf="party.links.blog"
+      ><i nz-icon nzType="home" nzTheme="fill"></i
+    ></a>
+    <a [href]="party.links.facebook" title="facebook Seite von {{ party.name }}" *ngIf="party.links.facebook"
+      ><i nz-icon nzType="facebook" nzTheme="fill"></i
+    ></a>
+    <a [href]="party.links.twitter" title="Twitter Feed von {{ party.name }}" *ngIf="party.links.twitter"
+      ><i nz-icon nzType="twitter-square" nzTheme="fill"></i
+    ></a>
+    <a [href]="party.links.instagram" title="Instagram Feed von {{ party.name }}" *ngIf="party.links.instagram"
+      ><i nz-icon nzType="instagram" nzTheme="fill"></i
+    ></a>
+  </div>
+  <a class="party-link" title="Mehr Informationen und Kandidaten von {{ party.name }}">Mehr Informationen</a>
+  <!-- </div> -->
+</div>
