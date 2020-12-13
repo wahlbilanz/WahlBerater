@@ -12,7 +12,7 @@ import {
   ApexPlotOptions,
   ApexDataLabels,
 } from 'ng-apexcharts';
-import { CandidateMap } from '../../../definitions/models/candidate.model';
+import { PoliticalCandidateMap } from '../../../definitions/models/candidate.model';
 import { claimScore } from '../../../definitions/functions/score.function';
 
 export type ChartOptions = {
@@ -30,7 +30,7 @@ export type ChartOptions = {
 })
 export class AuswertungBarchartComponent implements OnInit {
   votes = this.store.pipe(select(AppSelectors.getVotes));
-  data = this.store.pipe(select(AppSelectors.getData));
+  data = this.store.pipe(select(AppSelectors.getPoliticalData));
 
   decisions = {};
   candidates = {};

@@ -1,7 +1,11 @@
 import { PositionsMap } from './position.model';
 
-export interface CandidateMap {
-  [candidate: string]: Candidate;
+export interface PersonalCandidateMap {
+  [candidate: string]: CandidatePersonalInfo;
+}
+
+export interface PoliticalCandidateMap {
+  [candidate: string]: CandidatePoliticalInfo;
 }
 
 interface LinkMap {

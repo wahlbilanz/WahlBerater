@@ -1,0 +1,81 @@
+
+<h3>{{ category.title }}</h3>
+<nz-collapse *ngIf="claims">
+  <nz-collapse-panel
+    *ngFor="let claim of claims | keyvalue"
+    class="claim"
+    [nzHeader]="claim.value.title"
+    [nzExtra]="
+              votes[claim.key]
+                ? votes[claim.key].decision > 0
+                  ? votes[claim.key].fav
+                    ? yesyes
+                    : yes
+                  : votes[claim.key].decision < 0
+                  ? votes[claim.key].fav
+                    ? nono
+                    : no
+                  : skip
+                : skip
+            "
+  >
+    <div class="background" [innerHTML]="claim.value.description | markdown"></div>
+    <span *ngIf="votes[claim.key]"> Deine Antwort: {{ votes[claim.key].decision | decisionToWord: votes[claim.key].fav }} </span>
+    <a [routerLink]="'/quiz/' + claim.key">Zurück zur These, um Entscheidung zu ändern.</a>
+
+    <h4>Was denken die Kandidaten?</h4>
+    <nz-collapse>
+      <nz-collapse-panel
+        *ngFor="let candidate of candidates | keyvalue"
+        [nzHeader]="'TODO: ' + candidate.value.party"
+        [nzExtra]="
+                  !candidate.value.positions[claim.key] || candidate.value.positions[claim.key].vote == 0
+                    ? skip
+                    : candidate.value.positions[claim.key].vote > 0
+                    ? candidate.value.positions[claim.key].vote == 2
+                      ? yesyes
+                      : yes
+                    : candidate.value.positions[claim.key].vote == -2
+                    ? nono
+                    : no
+                "
+        class="{{
+                  votes[claim.key] &&
+                  candidate.value.positions[claim.key] &&
+                  ((votes[claim.key].decision > 0 && candidate.value.positions[claim.key].vote > 0) ||
+                    (votes[claim.key].decision < 0 && candidate.value.positions[claim.key].vote < 0))
+                    ? 'same_direction'
+                    : ''
+                }}"
+      >
+        <ng-container *ngIf="candidate.value.positions[claim.key]">
+          <a [routerLink]="'/candidates/' + candidate.key">{{ candidate.value.name }}</a>
+          denkt {{ candidate.value.positions[claim.key].vote | candidateDecisionToWord }}, denn:
+          <blockquote [innerHTML]="candidate.value.positions[claim.key].reason | markdown"></blockquote>
+        </ng-container>
+        <ng-container *ngIf="!candidate.value.positions[claim.key]">
+          <a [routerLink]="'/candidates/' + candidate.key">{{ candidate.value.name }}</a> hat diese Frage nicht beantwortet.
+        </ng-container>
+      </nz-collapse-panel>
+    </nz-collapse>
+  </nz-collapse-panel>
+</nz-collapse>
+
+
+<ng-template #skip>
+  <i nz-icon nzType="loading" nzTheme="outline" class="vote-icon"></i>
+</ng-template>
+<ng-template #nono>
+  <!--      <i nz-icon nzType="heart" nzTheme="fill" (click)="$event.stopPropagation()" class="heart-red"></i>-->
+  <i nz-icon nzType="dislike" nzTheme="fill" (click)="$event.stopPropagation()" class="vote-icon"></i>
+</ng-template>
+<ng-template #no>
+  <i nz-icon nzType="dislike" nzTheme="outline" (click)="$event.stopPropagation()" class="vote-icon"></i>
+</ng-template>
+<ng-template #yes>
+  <i nz-icon nzType="like" nzTheme="outline" (click)="$event.stopPropagation()" class="vote-icon"></i>
+</ng-template>
+<ng-template #yesyes>
+  <!--      <i nz-icon nzType="heart" nzTheme="fill" (click)="$event.stopPropagation()" class="heart-red"></i>-->
+  <i nz-icon nzType="like" nzTheme="fill" (click)="$event.stopPropagation()" class="vote-icon"></i>
+</ng-template>

@@ -13,7 +13,7 @@ import { vote } from '../../../+state/app.actions';
 })
 export class AuswertungComponent implements OnInit {
   votes = this.store.pipe(select(AppSelectors.getVotes));
-  data = this.store.pipe(select(AppSelectors.getData));
+  data = this.store.pipe(select(AppSelectors.getPoliticalData));
 
   constructor(private store: Store<AppPartialState>) {}
 

@@ -11,7 +11,7 @@ import { vote } from '../../../../+state/app.actions';
   styleUrls: ['./candidate-list-page.component.scss'],
 })
 export class CandidateListPageComponent implements OnInit {
-  data = this.store.pipe(select(AppSelectors.getData));
+  data = this.store.pipe(select(AppSelectors.getPoliticalData));
   votes = this.store.pipe(select(AppSelectors.getVotes));
 
   constructor(private store: Store<AppPartialState>) {}

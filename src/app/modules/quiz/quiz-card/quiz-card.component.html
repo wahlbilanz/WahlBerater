@@ -1,13 +1,13 @@
-<ng-container *ngIf="votes | async as v">
+<ng-container *ngIf="category && votes | async as v">
   <div id="quizcard" class="" style="border-color:{{ category.color }}">
     <h2 id="card-category">
       {{ category.title }}
     </h2>
 
-    <div id="claim-background" [innerHTML]="claim.background | markdown" class=""></div>
+    <div id="claim-background" [innerHTML]="claim.description | markdown" class=""></div>
 
     <h1 id="claim" class="">
-      {{ claim.claim }}
+      {{ claim.title }}
     </h1>
 
     <div id="decision" class="">

@@ -1,11 +1,11 @@
 import { CategoryMap } from './category.model';
-import { CandidateMap } from './candidate.model';
+import {PoliticalCandidateMap} from './candidate.model';
 import { PartyMap } from './party.model';
 import { ClaimMap } from './claim.model';
 
-export interface Data {
+export interface PoliticalData {
   claims: ClaimMap;
   categories: CategoryMap;
-  candidates: CandidateMap;
+  candidates: PoliticalCandidateMap;
   parties: PartyMap;
 }

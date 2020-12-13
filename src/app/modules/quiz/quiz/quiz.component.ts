@@ -4,8 +4,10 @@ import { map } from 'rxjs/operators';
 import { AppPartialState } from '../../../+state/app.reducer';
 import * as AppSelectors from '../../../+state/app.selectors';
 import { ActivatedRoute } from '@angular/router';
-import { Data } from '../../../definitions/models/data.model';
+import { PoliticalData } from '../../../definitions/models/political.data.model';
 import { Claim } from '../../../definitions/models/claim.model';
+import {Observable} from 'rxjs';
+import {Category} from '../../../definitions/models/category.model';
 
 @Component({
   selector: 'app-quiz',
@@ -13,9 +15,12 @@ import { Claim } from '../../../definitions/models/claim.model';
   styleUrls: ['./quiz.component.scss'],
 })
 export class QuizComponent implements OnInit {
-  data = this.store.pipe(select(AppSelectors.getData));
-  category: string;
+  data = this.store.pipe(select(AppSelectors.getPoliticalData));
+  category: Category;
   claimId: string;
+
+  prev: string;
+  next: string;
 
   // categories: string[];
   // curClaims: string[];
@@ -23,18 +28,60 @@ export class QuizComponent implements OnInit {
   // prev: string;
   // next: string;
 
-  constructor(private store: Store<AppPartialState>, private route: ActivatedRoute) {}
+  constructor(private store: Store<AppPartialState>, private route: ActivatedRoute) {
+    // this.store.pipe(select(AppSelectors.getNextQuestion, { id: '00ea1133-94d5-5a32-af57-96a322d64285' })).subscribe(c => console.log (c));
+    // this.store.pipe(select(AppSelectors.getNextQuestion, { id: '00ea1133-94d5-5a32-af57-96a322d64285' })).subscribe(c => console.log (c));
+    // this.testNext(undefined);
+    // this.testNext2('2d669678-2d4d-5d5b-9214-ad908f6cbbe9');
+    // this.testPrev2('2d669678-2d4d-5d5b-9214-ad908f6cbbe9');
+  }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((pm) => {
       this.claimId = pm.get('claim');
-      this.category = pm.get('category');
+      this.store.pipe(select(AppSelectors.getNextQuestion, { id: this.claimId })).subscribe(c => this.next = c ? '/quiz/' + c : undefined);
+      this.store.pipe(select(AppSelectors.getPrevQuestion, { id: this.claimId })).subscribe(c => this.prev = c ? '/quiz/' + c : '/quiz/howto');
+      this.store.pipe(select(AppSelectors.getCategoryByClaimId, { id: this.claimId })).subscribe(c => this.category = c);
     });
   }
 
-  getNext(d: Data): string {
+  /*testNext(id: string): void {
+    this.store.pipe(select(AppSelectors.getNextQuestion, { id })).subscribe(c => {
+      console.log ('found', c, 'after', id);
+      if (c) {
+        this.testNext (c);
+      }
+      this.testPrev2(c);
+    });
+
+  }*/
+
+  testNext2(id: string): void {
+    this.store.pipe(select(AppSelectors.getNextQuestion, { id })).subscribe(c => {
+      console.log ('found', c, 'after', id);
+      /*if (c) {
+        this.testNext (c);
+      }*/
+    });
+
+  }
+
+  testPrev2(id: string): void {
+    this.store.pipe(select(AppSelectors.getPrevQuestion, { id })).subscribe(c => {
+      console.log ('found', c, 'before', id);
+      /*if (c) {
+        this.testNext (c);
+      }*/
+    });
+
+  }
+
+
+  // getNext(d: Data): string {
     // TODO move this into effect/selector combi
-    let returnNext = false;
+
+    // return '';
+    /*let returnNext = false;
     for (const c in d.categories) {
       if (d.categories.hasOwnProperty(c)) {
         const claims: Array<[string, Claim]> = Object.getOwnPropertyNames(d.claims)
@@ -55,12 +102,13 @@ export class QuizComponent implements OnInit {
           }
         }
       }
-    }
-  }
-
-  getPrev(d: Data): string {
-    // TODO move this into effect/selector combi
-    let prev: string;
+    }*/
+  // }
+  //
+  // getPrev(d: Data): string {
+  //   TODO move this into effect/selector combi
+    // return '';
+    /*let prev: string;
     for (const c in d.categories) {
       if (d.categories.hasOwnProperty(c)) {
         const claimIds = Object.getOwnPropertyNames(d.claims).filter((claimId) => d.claims[claimId].category === c);
@@ -71,6 +119,6 @@ export class QuizComponent implements OnInit {
           prev = '/quiz/' + c + '/' + claimId;
         }
       }
-    }
-  }
+    }*/
+  // }
 }

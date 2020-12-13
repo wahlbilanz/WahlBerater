@@ -11,7 +11,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./candidate-profile-page.component.scss'],
 })
 export class CandidateProfilePageComponent implements OnInit {
-  data = this.store.pipe(select(AppSelectors.getData));
+  data = this.store.pipe(select(AppSelectors.getPoliticalData));
   candidateId: string;
 
   constructor(private store: Store<AppPartialState>, private route: ActivatedRoute) {}

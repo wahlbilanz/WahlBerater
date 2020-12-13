@@ -4,7 +4,7 @@ import { AppPartialState } from '../../../+state/app.reducer';
 import * as AppSelectors from '../../../+state/app.selectors';
 import { claimScore } from '../../../definitions/functions/score.function';
 import { CategoryMap } from '../../../definitions/models/category.model';
-import { CandidateMap } from '../../../definitions/models/candidate.model';
+import { PoliticalCandidateMap } from '../../../definitions/models/candidate.model';
 
 @Component({
   selector: 'app-auswertung-heatmap',
@@ -13,10 +13,10 @@ import { CandidateMap } from '../../../definitions/models/candidate.model';
 })
 export class AuswertungHeatmapComponent implements OnInit {
   votes = this.store.pipe(select(AppSelectors.getVotes));
-  data = this.store.pipe(select(AppSelectors.getData));
+  data = this.store.pipe(select(AppSelectors.getPoliticalData));
 
   decisions = {};
-  candidates: CandidateMap;
+  candidates: PoliticalCandidateMap;
   categories: CategoryMap;
 
   table = [];
@@ -25,7 +25,7 @@ export class AuswertungHeatmapComponent implements OnInit {
   constructor(private store: Store<AppPartialState>) {}
 
   recalc(): void {
-    this.table = [];
+    /*this.table = [];
     this.maxValue = [0, 0, 0];
     if (this.candidates && this.decisions) {
       // const scoreArray = [];
@@ -33,7 +33,8 @@ export class AuswertungHeatmapComponent implements OnInit {
       for (const c in this.candidates) {
         if (this.candidates.hasOwnProperty(c)) {
           console.log(c);
-          const candidate = { name: this.candidates[c].name, id: c, scores: {}, score: 0 };
+          const candidate = this.store.pipe(select(AppSelectors.getCandidatePersonalDataById, { id: c  }));
+          // const candidate = { name: this.candidates[c].name, id: c, scores: {}, score: 0 };
           let scoresum = 0;
           // let score = 0;
           for (const v in this.candidates[c].positions) {
@@ -58,7 +59,7 @@ export class AuswertungHeatmapComponent implements OnInit {
       }
     }
     this.table.sort((a, b) => (a.score < b.score ? 1 : -1));
-    console.log(this.table);
+    console.log(this.table);*/
   }
 
   ngOnInit(): void {

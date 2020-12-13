@@ -14,7 +14,7 @@ export class WelcomePageComponent {
   public QuizStateEnum = QuizState;
   public quizState = this.store.pipe(select(AppSelectors.getQuizState));
   public localStorageAllowed = this.store.pipe(select(AppSelectors.isLocalDataStorageAllowed));
-  public data = this.store.pipe(select(AppSelectors.getData));
+  public data = this.store.pipe(select(AppSelectors.getPoliticalData));
 
   constructor(private store: Store<AppPartialState>) {}
 

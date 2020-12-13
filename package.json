@@ -11,10 +11,10 @@
     "postinstall": "ngcc",
     "ngcc": "ngcc",
     "prettier": "prettier --write \"**/*.{js,json,css,scss,less,md,ts,html,component.html}\"",
-    "format:check": "prettier --list-different \"src/{app,environments,assets}/**/*{.ts,.js,.json,.css,.scss}\""
+    "format:check": "prettier --list-different \"src/{app,environments,assets}/**/*{.ts,.js,.json,.css,.scss}\"",
     "ts-node": "ts-node",
     "build-data-json": "ts-node --project tsconfig.scripts.json ./scripts/build-data-json.ts --",
-    "build-dummy-data": "find ./src/assets/data -type f -not -name '.gitkeep' -delete && npm run build-data-json -- --input ./data/dummy --output ./src/assets/data --anonymize-ids"
+    "build-dummy-data": "find ./src/assets/data -type f -not -name '.gitkeep' -delete && npm run build-data-json -- --input ./data/dummy --output ./src/assets/data --anonymize-ids --positioned-entities both"
   },
   "private": true,
   "dependencies": {

@@ -24,9 +24,11 @@ export class QuizCardComponent implements OnInit, OnChanges {
   fav: boolean;
   decision: number;
 
-  constructor(private store: Store<AppPartialState>, private router: Router) {}
+  constructor(private store: Store<AppPartialState>, private router: Router) {
+  }
 
   ngOnChanges(): void {
+    console.log ('prev is ', this.prev);
     this.fav = false;
     this.decision = 0;
     this.votes.pipe(first()).subscribe((v) => {
@@ -35,6 +37,18 @@ export class QuizCardComponent implements OnInit, OnChanges {
         this.decision = v[this.claimId].decision;
       }
     });
+    if (this.claimId === 'howto') {
+      this.category = {
+        color: '#333',
+        title: 'Howto'
+      };
+      this.claim = {
+        category: 'howto',
+        description: 'Hintergrundinformationen, um die These einordnen zu können. Bisschen Erklärung wie das Quiz funktioniert.',
+        provenance: [],
+        title: 'Thesen sollten relevant und kontrovers sein.'
+      };
+    }
   }
 
   ngOnInit(): void {

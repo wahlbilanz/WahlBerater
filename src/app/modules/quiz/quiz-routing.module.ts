@@ -5,9 +5,9 @@ import { QuizComponent } from './quiz/quiz.component';
 import { AuswertungComponent } from './auswertung/auswertung.component';
 
 const routes: Routes = [
-  { path: ':category/:claim', component: QuizComponent },
   { path: 'auswertung', component: AuswertungComponent },
-  { path: '', pathMatch: 'full', redirectTo: '/quiz/howto/howto' },
+  { path: ':claim', component: QuizComponent },
+  { path: '', pathMatch: 'full', redirectTo: '/quiz/howto' },
 ];
 
 @NgModule({

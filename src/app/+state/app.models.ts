@@ -1,5 +1,7 @@
 import { BreakpointBooleanMap } from 'ng-zorro-antd/core/services';
-import { Data } from '../definitions/models/data.model';
+// import { Data } from '../definitions/models/data.model';
+import {PoliticalData} from '../definitions/models/political.data.model';
+import {PersonalData} from '../definitions/models/personal.data.model';
 
 export enum QuizState {
   NOT_STARTED,
@@ -11,8 +13,8 @@ export interface State {
   /** Top menu open state */
   menuOpen: boolean;
   activeBreakpoints: BreakpointBooleanMap;
-  politicalData?: Data;
-  personalData?: any;
+  politicalData?: PoliticalData;
+  personalData?: PersonalData;
   /** True, if the political data is finished loading */
   politicalDataLoaded: boolean;
   /** True, if the personal data is finished loading */

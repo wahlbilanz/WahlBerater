@@ -1,6 +1,6 @@
 import { Component, ViewChild, Input, OnInit } from '@angular/core';
 import { Candidate } from '../../../../definitions/models/candidate.model';
-import { Data } from '../../../../definitions/models/data.model';
+import { PoliticalData } from '../../../../definitions/models/political.data.model';
 import { claimScore } from '../../../../definitions/functions/score.function';
 
 import { ApexAxisChartSeries, ApexTitleSubtitle, ApexChart, ApexXAxis, ApexYAxis, ChartComponent } from 'ng-apexcharts';
@@ -20,7 +20,7 @@ export type ChartOptions = {
 })
 export class CandidateListCardComponent implements OnInit {
   @Input() candidate: string;
-  @Input() data: Data;
+  @Input() data: PoliticalData;
   @Input() decisions;
 
   radarData = [];

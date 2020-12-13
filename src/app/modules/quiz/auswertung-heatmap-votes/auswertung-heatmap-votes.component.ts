@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import * as AppSelectors from '../../../+state/app.selectors';
-import { CandidateMap } from '../../../definitions/models/candidate.model';
+import { PoliticalCandidateMap} from '../../../definitions/models/candidate.model';
 import { CategoryMap } from '../../../definitions/models/category.model';
 import { AppPartialState } from '../../../+state/app.reducer';
 import { claimScore } from '../../../definitions/functions/score.function';
@@ -13,10 +13,10 @@ import { claimScore } from '../../../definitions/functions/score.function';
 })
 export class AuswertungHeatmapVotesComponent implements OnInit {
   votes = this.store.pipe(select(AppSelectors.getVotes));
-  data = this.store.pipe(select(AppSelectors.getData));
+  data = this.store.pipe(select(AppSelectors.getPoliticalData));
 
   decisions = {};
-  candidates: CandidateMap;
+  candidates: PoliticalCandidateMap;
   categories: CategoryMap;
 
   table = [];
@@ -34,7 +34,7 @@ export class AuswertungHeatmapVotesComponent implements OnInit {
         if (this.candidates.hasOwnProperty(c)) {
           console.log(c);
           const candidate = {
-            name: this.candidates[c].name,
+            name: this.candidates[c].party,
             id: c,
             scores: {
               yesyes: 0,
