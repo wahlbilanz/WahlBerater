@@ -1,8 +1,7 @@
 <div class="party-card" [style.border-left-color]="party.color" *ngIf="partyData | async as party">
-  <img class="party-picture" src="{{ baseUrl }}/{{ party.picture }}" [routerLink]="[partyIdent]" />
-  <!-- <div class="details"> -->
+  <img class="party-picture" src="{{ party.picture | pictureUrl }}" [routerLink]="['/', 'parties', partyIdent]" />
   <h2 class="party-name">{{ party.name }}</h2>
-  <p class="party-description">{{ party.shortDescription }}</p>
+  <p class="party-description">{{ party.shortDescription | markdown }}</p>
   <div class="party-candidates" *ngIf="partyCandidates | async as pCand">
     <a
       [routerLink]="[partyIdent, 'candidates', candidate.candidateId]"
@@ -12,12 +11,14 @@
       [nzTooltipTitle]="candidate.name"
       *ngFor="let candidate of pCand"
     >
-      <img src="{{ baseUrl }}/{{ candidate.picture }}" [title]="candidate.name" *ngIf="candidate.picture" />
+      <img src="{{ candidate.picture | pictureUrl }}" [title]="candidate.name" *ngIf="candidate.picture" />
     </a>
   </div>
-  <div class="party-social">
+  <div class="party-social" *ngIf="showSocialLinks">
     <app-social-links [links]="party.links" [name]="party.name"></app-social-links>
   </div>
-  <a class="party-link" title="Mehr Informationen und Kandidaten von {{ party.name }}" [routerLink]="[partyIdent]">Mehr Informationen</a>
+  <a class="party-link" title="Mehr Informationen und Kandidierende von {{ party.name }}" [routerLink]="['/', 'parties', partyIdent]"
+    >Mehr Informationen</a
+  >
   <!-- </div> -->
 </div>

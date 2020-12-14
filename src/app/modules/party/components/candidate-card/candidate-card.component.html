@@ -1,0 +1,22 @@
+<div class="candidate-card" *ngIf="candidateData | async as candidate">
+  <ng-container *ngIf="candidate.hasPersonalData; else hiddenPerson">
+    <img
+      class="candidate-picture"
+      src="{{ candidate.picture | pictureUrl }}"
+      [routerLink]="['/', 'parties', candidate.party, 'candidates', candidate.candidateId]"
+    />
+    <h3 class="candidate-name">{{ candidate.name }}</h3>
+    <p class="candidate-description">{{ candidate.shortDescription | markdown }}</p>
+    <div class="candidate-social" *ngIf="showSocialLinks">
+      <app-social-links [links]="candidate.links" [name]="candidate.name"></app-social-links>
+    </div>
+    <a
+      class="candidate-link"
+      title="Mehr Informationen zu {{ candidate.name }}"
+      [routerLink]="['/', 'parties', candidate.party, 'candidates', candidate.candidateId]"
+    >
+      Mehr Informationen
+    </a>
+  </ng-container>
+  <ng-template #hiddenPerson> TODO: no personal data </ng-template>
+</div>

@@ -1,5 +1,6 @@
 import { createSelector, createFeatureSelector } from '@ngrx/store';
 import { Candidate, CandidateWithID } from '../definitions/models/candidate.model';
+import { Party } from '../definitions/models/party.model';
 import { QuizState, State } from './app.models';
 import { STATE_FEATURE_KEY, AppPartialState } from './app.reducer';
 import { Category } from '../definitions/models/category.model';
@@ -37,7 +38,7 @@ export const getCandidatePersonalDataById = createSelector(getPersonalData, (per
   };
 });
 
-export const getPartyById = createSelector(getParties, (parties, props: { id: number }) => parties[props.id]);
+export const getPartyById = createSelector(getParties, (parties, props: { id: string }) => parties[props.id]);
 
 export const getCategoryByClaimId = createSelector(
   getPoliticalData,
@@ -153,5 +154,10 @@ export const getCandidateListByPartyId = createSelector(getCandidateList, (state
 export const getCandidateById = createSelector(getAppState, (state: State, props: { id: string }) =>
   !state.politicalDataLoaded || !state.personalDataLoaded
     ? null
-    : ({ ...state.politicalData.candidates[props.id], ...state.personalData[props.id] } as Candidate),
+    : ({
+        ...state.politicalData.candidates[props.id],
+        ...state.personalData[props.id],
+        candidateId: props.id,
+        hasPersonalData: !!state.personalData[props.id],
+      } as CandidateWithID),
 );

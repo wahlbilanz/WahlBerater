@@ -1,0 +1,55 @@
+@import '../../../../../assets/styles/variables';
+
+:host {
+  display: block;
+}
+
+.candidate-card {
+  display: grid;
+  gap: $wb-space-x-small;
+  grid-template:
+    'picture name name'
+    'picture desc desc'
+    'picture social link' (map-get($wb-type-paragraph, 'line-height') + $wb-space-xx-small);
+
+  min-height: 150px;
+  padding-right: $wb-space-small;
+
+  box-shadow: $wb-shadow-normal;
+  transition: color 0.3s, background-color 0.3s, box-shadow 0.3s, border-color 0.3s;
+
+  &:hover {
+    box-shadow: $wb-shadow-hover;
+  }
+}
+
+.candidate-picture {
+  grid-area: picture;
+  height: 150px;
+  max-height: 100%;
+
+  margin: $wb-space-x-small;
+  border: 2px solid $wb-color-neutral-400;
+  border-radius: 50%;
+}
+.candidate-name {
+  grid-area: name;
+  margin-top: $wb-space-small;
+  margin-bottom: 0;
+}
+.candidate-description {
+  grid-area: desc;
+  margin: 0;
+}
+.candidate-social {
+  grid-area: social;
+}
+.candidate-link {
+  grid-area: link;
+  justify-self: end;
+  text-align: right;
+}
+.candidate-social,
+.candidate-link {
+  margin-bottom: $wb-space-xx-small;
+}

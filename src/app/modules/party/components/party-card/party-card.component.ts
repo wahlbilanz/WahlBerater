@@ -1,12 +1,11 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { AppPartialState } from '../../../../+state/app.reducer';
-import { Party } from '../../../../definitions/models/party.model';
-import * as AppSelectors from '../../../../+state/app.selectors';
-import { environment } from '../../../../../environments/environment';
-import { Candidate, CandidateWithID } from '../../../../definitions/models/candidate.model';
 import { map } from 'rxjs/operators';
+import { AppPartialState } from '../../../../+state/app.reducer';
+import * as AppSelectors from '../../../../+state/app.selectors';
+import { CandidateWithID } from '../../../../definitions/models/candidate.model';
+import { Party } from '../../../../definitions/models/party.model';
 
 @Component({
   selector: 'app-party-card',
@@ -24,11 +23,12 @@ export class PartyCardComponent implements OnInit {
       map((candidateList) => (!candidateList ? null : candidateList.filter((candidate) => !!candidate.hasPersonalData))),
     );
   }
+  @Input()
+  public showSocialLinks: boolean = true;
 
   public partyIdent: string;
   public partyData: Observable<Party>;
   public partyCandidates: Observable<Array<CandidateWithID>>;
-  public baseUrl = environment.dataUrl;
 
   constructor(private store: Store<AppPartialState>) {}
 

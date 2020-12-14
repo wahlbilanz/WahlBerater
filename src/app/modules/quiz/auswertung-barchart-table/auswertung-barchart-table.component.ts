@@ -2,11 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { AppPartialState } from '../../../+state/app.reducer';
 import * as AppSelectors from '../../../+state/app.selectors';
-import { claimScore } from '../../../definitions/functions/score.function';
-import { CandidatePoliticalInfoMap } from '../../../definitions/models/candidate.model';
-import { CategoryMap } from '../../../definitions/models/category.model';
 import { PoliticalCandidateMap } from '../../../definitions/models/candidate.model';
-import { Claim, ClaimMap } from '../../../definitions/models/claim.model';
+import { CategoryMap } from '../../../definitions/models/category.model';
+import { ClaimMap } from '../../../definitions/models/claim.model';
 
 @Component({
   selector: 'app-auswertung-barchart-table',
