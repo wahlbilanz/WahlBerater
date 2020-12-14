@@ -26,12 +26,12 @@
                 }}"
       >
         <ng-container *ngIf="candidate.value.positions[claim.key]">
-          <a [routerLink]="'/candidates/' + candidate.key">{{ candidate.value.name }}</a>
+          <a [routerLink]="'/candidates/' + candidate.key">{{ (personalCandidates | personalData:candidate.key).name }}</a>
           denkt {{ candidate.value.positions[claim.key].vote | candidateDecisionToWord }}, denn:
           <blockquote [innerHTML]="candidate.value.positions[claim.key].reason | markdown"></blockquote>
         </ng-container>
         <ng-container *ngIf="!candidate.value.positions[claim.key]">
-          <a [routerLink]="'/candidates/' + candidate.key">{{ candidate.value.name }}</a> hat diese Frage nicht beantwortet.
+          <a [routerLink]="'/candidates/' + candidate.key">{{ c(personalCandidates | personalData:candidate.key).name }}</a> hat diese Frage nicht beantwortet.
         </ng-container>
       </nz-collapse-panel>
     </nz-collapse>
@@ -40,7 +40,7 @@
 
 
 <ng-template #skip>
-  <i nz-icon nzType="clear" nzTheme="outline" (click)="$event.stopPropagation()" class="vote-icon"></i>
+  ~
 </ng-template>
 <ng-template #nono>
   <nz-badge [nzCount]="star">

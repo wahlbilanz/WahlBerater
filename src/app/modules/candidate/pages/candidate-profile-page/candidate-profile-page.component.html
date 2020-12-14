@@ -1,35 +1,34 @@
-<ng-container *ngIf="candidateId && data | async as d">
+<ng-container *ngIf="candidateId && politicalData && personalInfo">
   <h1>Kandidatenprofil für die Wahl des Studierendenparlaments an der FernUniversität in Hagen</h1>
-  <nz-descriptions nzTitle="{{ d.candidates[candidateId].name }}" nzBordered [nzColumn]="{ xxl: 2, xl: 2, lg: 2, md: 2, sm: 2, xs: 1 }">
-    <nz-descriptions-item nzTitle="Name">{{ d.candidates[candidateId].name }}</nz-descriptions-item>
-    <nz-descriptions-item nzTitle="Pic">{{ d.candidates[candidateId].pic }}</nz-descriptions-item>
-    <nz-descriptions-item nzTitle="One-Liner">{{ d.candidates[candidateId].oneliner }}</nz-descriptions-item>
-    <nz-descriptions-item nzTitle="Beschreibung">{{ d.candidates[candidateId].description }}</nz-descriptions-item>
-    <nz-descriptions-item nzTitle="Liste">{{ d.candidates[candidateId].party }}</nz-descriptions-item>
-    <nz-descriptions-item nzTitle="Prosa">{{ d.candidates[candidateId].prose }}</nz-descriptions-item>
+  <nz-descriptions nzTitle="{{ personalInfo.name }}" nzBordered [nzColumn]="{ xxl: 2, xl: 2, lg: 2, md: 2, sm: 2, xs: 1 }">
+    <nz-descriptions-item nzTitle="Name">{{ personalInfo.name }}</nz-descriptions-item>
+    <nz-descriptions-item nzTitle="Pic">{{ personalInfo.picture }}</nz-descriptions-item>
+    <nz-descriptions-item nzTitle="One-Liner">{{ personalInfo.shortDescription }}</nz-descriptions-item>
+    <nz-descriptions-item nzTitle="Beschreibung">{{ personalInfo.description }}</nz-descriptions-item>
+    <nz-descriptions-item nzTitle="Liste">{{ politicalData.candidates[candidateId].party }}</nz-descriptions-item>
     <nz-descriptions-item nzTitle="Links"
       ><ul>
-        <li *ngFor="let link of d.candidates[candidateId].links | keyvalue">
+        <li *ngFor="let link of personalInfo.links | keyvalue">
           <a href="{{ link.value }}">{{ link.key }}</a>
         </li>
       </ul></nz-descriptions-item
     >
   </nz-descriptions>
 
-  <nz-divider nzText="Die Positionen von {{ d.candidates[candidateId].name }}"></nz-divider>
+  <nz-divider nzText="Die Positionen von {{ personalInfo.name }}"></nz-divider>
 
   <nz-collapse>
     <nz-collapse-panel
-      *ngFor="let position of d.candidates[candidateId].positions | keyvalue"
-      [nzHeader]="d.claims[position.key].claim"
+      *ngFor="let position of politicalData.candidates[candidateId].positions | keyvalue"
+      [nzHeader]="politicalData.claims[position.key].title"
       [nzExtra]="position.value.vote > 0 ? (position.value.vote == 2 ? icon2 : icon1) : position.value.vote == -2 ? icon_2 : icon_1"
     >
       <p>
-        {{ d.claims[position.key].background }} <strong>{{ d.claims[position.key].claim }}</strong
+        {{ politicalData.claims[position.key].description }} <strong>{{ politicalData.claims[position.key].title }}</strong
         >.
       </p>
 
-      <p>{{ d.candidates[candidateId].name }} denkt {{ position.value.vote | candidateDecisionToWord }}, denn:</p>
+      <p>{{ personalInfo.name }} denkt {{ position.value.vote | candidateDecisionToWord }}, denn:</p>
 
       <blockquote>
         {{ position.value.reason }}
