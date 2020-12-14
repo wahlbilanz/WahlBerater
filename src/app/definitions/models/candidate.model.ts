@@ -23,3 +23,7 @@ export interface CandidatePoliticalInfo {
 }
 
 export interface Candidate extends CandidatePersonalInfo, CandidatePoliticalInfo {}
+export interface CandidateWithID extends Candidate {
+  candidateId: string;
+  hasPersonalData: boolean;
+}

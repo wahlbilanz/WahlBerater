@@ -3,6 +3,7 @@ import { select, Store } from '@ngrx/store';
 import { AppPartialState } from '../../../+state/app.reducer';
 import * as AppSelectors from '../../../+state/app.selectors';
 import { claimScore } from '../../../definitions/functions/score.function';
+import { CandidatePoliticalInfoMap } from '../../../definitions/models/candidate.model';
 import { CategoryMap } from '../../../definitions/models/category.model';
 import { PoliticalCandidateMap } from '../../../definitions/models/candidate.model';
 import { Claim, ClaimMap } from '../../../definitions/models/claim.model';
@@ -50,7 +51,7 @@ export class AuswertungBarchartTableComponent implements OnInit {
       for (const c in this.candidates) {
         if (this.candidates.hasOwnProperty(c)) {
           console.log(c);
-          const candidate = { name: this.candidates[c].name, id: c, scores: {}, score: 0 };
+          const candidate = { name: c, id: c, scores: {}, score: 0 };
           let scoresum = 0;
           // let score = 0;
           for (const v in this.candidates[c].positions) {

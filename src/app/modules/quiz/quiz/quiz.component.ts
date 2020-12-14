@@ -6,8 +6,8 @@ import * as AppSelectors from '../../../+state/app.selectors';
 import { ActivatedRoute } from '@angular/router';
 import { PoliticalData } from '../../../definitions/models/political.data.model';
 import { Claim } from '../../../definitions/models/claim.model';
-import {Observable} from 'rxjs';
-import {Category} from '../../../definitions/models/category.model';
+import { Observable } from 'rxjs';
+import { Category } from '../../../definitions/models/category.model';
 
 @Component({
   selector: 'app-quiz',
@@ -39,9 +39,13 @@ export class QuizComponent implements OnInit {
   ngOnInit(): void {
     this.route.paramMap.subscribe((pm) => {
       this.claimId = pm.get('claim');
-      this.store.pipe(select(AppSelectors.getNextQuestion, { id: this.claimId })).subscribe(c => this.next = c ? '/quiz/' + c : undefined);
-      this.store.pipe(select(AppSelectors.getPrevQuestion, { id: this.claimId })).subscribe(c => this.prev = c ? '/quiz/' + c : '/quiz/howto');
-      this.store.pipe(select(AppSelectors.getCategoryByClaimId, { id: this.claimId })).subscribe(c => this.category = c);
+      this.store
+        .pipe(select(AppSelectors.getNextQuestion, { id: this.claimId }))
+        .subscribe((c) => (this.next = c ? '/quiz/' + c : undefined));
+      this.store
+        .pipe(select(AppSelectors.getPrevQuestion, { id: this.claimId }))
+        .subscribe((c) => (this.prev = c ? '/quiz/' + c : '/quiz/howto'));
+      this.store.pipe(select(AppSelectors.getCategoryByClaimId, { id: this.claimId })).subscribe((c) => (this.category = c));
     });
   }
 
@@ -57,31 +61,28 @@ export class QuizComponent implements OnInit {
   }*/
 
   testNext2(id: string): void {
-    this.store.pipe(select(AppSelectors.getNextQuestion, { id })).subscribe(c => {
-      console.log ('found', c, 'after', id);
+    this.store.pipe(select(AppSelectors.getNextQuestion, { id })).subscribe((c) => {
+      console.log('found', c, 'after', id);
       /*if (c) {
         this.testNext (c);
       }*/
     });
-
   }
 
   testPrev2(id: string): void {
-    this.store.pipe(select(AppSelectors.getPrevQuestion, { id })).subscribe(c => {
-      console.log ('found', c, 'before', id);
+    this.store.pipe(select(AppSelectors.getPrevQuestion, { id })).subscribe((c) => {
+      console.log('found', c, 'before', id);
       /*if (c) {
         this.testNext (c);
       }*/
     });
-
   }
 
-
   // getNext(d: Data): string {
-    // TODO move this into effect/selector combi
+  // TODO move this into effect/selector combi
 
-    // return '';
-    /*let returnNext = false;
+  // return '';
+  /*let returnNext = false;
     for (const c in d.categories) {
       if (d.categories.hasOwnProperty(c)) {
         const claims: Array<[string, Claim]> = Object.getOwnPropertyNames(d.claims)
@@ -107,8 +108,8 @@ export class QuizComponent implements OnInit {
   //
   // getPrev(d: Data): string {
   //   TODO move this into effect/selector combi
-    // return '';
-    /*let prev: string;
+  // return '';
+  /*let prev: string;
     for (const c in d.categories) {
       if (d.categories.hasOwnProperty(c)) {
         const claimIds = Object.getOwnPropertyNames(d.claims).filter((claimId) => d.claims[claimId].category === c);
