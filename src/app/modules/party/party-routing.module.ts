@@ -7,7 +7,7 @@ import { PartyListPageComponent } from './pages/party-list-page/party-list-page.
 const routes: Routes = [
   { path: '', pathMatch: 'full', component: PartyListPageComponent },
   { path: ':party_id', component: PartyDetailPageComponent },
-  { path: ':party_id/:candidate_id', component: CandidateDetailPageComponent },
+  { path: ':party_id/candidates/:candidate_id', component: CandidateDetailPageComponent },
 ];
 
 @NgModule({

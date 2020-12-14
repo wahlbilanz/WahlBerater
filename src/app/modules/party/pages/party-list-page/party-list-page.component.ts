@@ -13,7 +13,5 @@ export class PartyListPageComponent implements OnInit {
 
   constructor(private state: Store<AppPartialState>) {}
 
-  ngOnInit(): void {
-    this.partyIds.subscribe((data) => console.log('party ids', data));
-  }
+  ngOnInit(): void {}
 }

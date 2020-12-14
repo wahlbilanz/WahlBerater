@@ -35,13 +35,23 @@ export const appReducer = createReducer(
     ...state,
     politicalData: data,
     politicalDataLoaded: true,
-    usedCachedData: wasCached,
+    usedCachedData: state.usedCachedData || wasCached,
   })),
   on(AppActions.loadPoliticalDataError, (state: State) => ({
     ...state,
     politicalData: null,
     politicalDataLoaded: false,
-    usedCachedData: false,
+  })),
+  on(AppActions.loadPersonalDataSuccess, (state: State, { data, wasCached }) => ({
+    ...state,
+    personalData: data,
+    personalDataLoaded: true,
+    usedCachedData: state.usedCachedData || wasCached,
+  })),
+  on(AppActions.loadPersonalDataError, (state: State) => ({
+    ...state,
+    personalData: null,
+    personalDataLoaded: false,
   })),
   on(AppActions.vote, (state: State, { claimId, decision, fav }) => ({
     ...state,

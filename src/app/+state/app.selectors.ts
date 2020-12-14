@@ -1,8 +1,9 @@
 import { createSelector, createFeatureSelector } from '@ngrx/store';
+import { Candidate, CandidateWithID } from '../definitions/models/candidate.model';
 import { QuizState, State } from './app.models';
 import { STATE_FEATURE_KEY, AppPartialState } from './app.reducer';
-import {Category} from '../definitions/models/category.model';
-import {PoliticalData} from '../definitions/models/political.data.model';
+import { Category } from '../definitions/models/category.model';
+import { PoliticalData } from '../definitions/models/political.data.model';
 
 const getAppState = createFeatureSelector<AppPartialState, State>(STATE_FEATURE_KEY);
 
@@ -28,44 +29,47 @@ export const getCandidatePersonalDataById = createSelector(getPersonalData, (per
     return personalData.candidates[props.id];
   }
 
-  return  {
+  return {
     name: 'Unbekannt',
     picture: 'default.jpg',
     shortDescription: 'keine Angaben',
-    description: 'keine Angaben'
+    description: 'keine Angaben',
   };
 });
 
 export const getPartyById = createSelector(getParties, (parties, props: { id: number }) => parties[props.id]);
 
-export const getCategoryByClaimId = createSelector(getPoliticalData, (data, claim: { id: string }): Category => {
-  if (data && claim.id) {
-    const c = data.claims[claim.id];
-    if (c && c.category) {
-      return data.categories[c.category];
+export const getCategoryByClaimId = createSelector(
+  getPoliticalData,
+  (data, claim: { id: string }): Category => {
+    if (data && claim.id) {
+      const c = data.claims[claim.id];
+      if (c && c.category) {
+        return data.categories[c.category];
+      }
     }
-  }
-  return undefined;
-});
+    return undefined;
+  },
+);
 
 export const getClaimsByCategory = createSelector(getPoliticalData, (data, category: { id: string }) => {
   if (data) {
-    console.log (category);
-    console.log (data.claims);
-    const keys = Object.keys (data.claims).filter((c) => data.claims[c].category === category.id);
-    console.log (keys);
+    console.log(category);
+    console.log(data.claims);
+    const keys = Object.keys(data.claims).filter((c) => data.claims[c].category === category.id);
+    console.log(keys);
     const subset = {};
     for (let i = 0; i < keys.length; i++) {
       subset[keys[i]] = data.claims[keys[i]];
     }
-    console.log (subset);
+    console.log(subset);
     return subset;
   }
 });
 
 export const getPrevQuestion = createSelector(getPoliticalData, (data, currentClaim: { id: string }): string => {
   if (data) {
-    const categories = Object.keys (data.categories);
+    const categories = Object.keys(data.categories);
 
     if (!currentClaim.id || currentClaim.id === 'howto') {
       // no claimid yet? -> no back..
@@ -74,21 +78,21 @@ export const getPrevQuestion = createSelector(getPoliticalData, (data, currentCl
 
     let currentCategoryIdx = categories.indexOf(data.claims[currentClaim.id].category);
     let currentCategory = categories[currentCategoryIdx];
-    let claims = Object.keys (data.claims).filter (c => data.claims[c].category === currentCategory);
+    let claims = Object.keys(data.claims).filter((c) => data.claims[c].category === currentCategory);
 
     const currentIdx = claims.indexOf(currentClaim.id);
     if (currentIdx < 0) {
-       return undefined;
+      return undefined;
     }
 
     if (currentIdx > 0) {
       return claims[currentIdx - 1];
     }
-    console.log (currentCategoryIdx);
+    console.log(currentCategoryIdx);
     currentCategoryIdx -= 1;
     if (currentCategoryIdx >= 0) {
       currentCategory = categories[currentCategoryIdx];
-      claims = Object.keys(data.claims).filter(c => data.claims[c].category === currentCategory);
+      claims = Object.keys(data.claims).filter((c) => data.claims[c].category === currentCategory);
       if (claims.length > 0) {
         // console.log ('returning claims[claims.length - 1]');
         return claims[claims.length - 1];
@@ -99,20 +103,20 @@ export const getPrevQuestion = createSelector(getPoliticalData, (data, currentCl
 });
 export const getNextQuestion = createSelector(getPoliticalData, (data, currentClaim: { id: string }): string => {
   if (data) {
-    const categories = Object.keys (data.categories);
+    const categories = Object.keys(data.categories);
 
     if (!currentClaim.id || currentClaim.id === 'howto') {
       // no claimid yet, return first claim
-      return Object.keys (data.claims).filter (c => data.claims[c].category === categories[0])[0];
+      return Object.keys(data.claims).filter((c) => data.claims[c].category === categories[0])[0];
     }
 
     let currentCategoryIdx = categories.indexOf(data.claims[currentClaim.id].category);
     let currentCategory = categories[currentCategoryIdx];
-    let claims = Object.keys (data.claims).filter (c => data.claims[c].category === currentCategory);
+    let claims = Object.keys(data.claims).filter((c) => data.claims[c].category === currentCategory);
     const currentIdx = claims.indexOf(currentClaim.id);
     if (currentIdx < 0) {
       // not in? then return first question
-       return Object.keys (data.claims).filter (c => data.claims[c].category === categories[0])[0];
+      return Object.keys(data.claims).filter((c) => data.claims[c].category === categories[0])[0];
     }
 
     if (currentIdx < claims.length - 1) {
@@ -121,7 +125,7 @@ export const getNextQuestion = createSelector(getPoliticalData, (data, currentCl
     currentCategoryIdx += 1;
     if (currentCategoryIdx < categories.length) {
       currentCategory = categories[currentCategoryIdx];
-      claims = Object.keys(data.claims).filter(c => data.claims[c].category === currentCategory);
+      claims = Object.keys(data.claims).filter((c) => data.claims[c].category === currentCategory);
       if (claims.length > 0) {
         return claims[0];
       }
@@ -129,3 +133,25 @@ export const getNextQuestion = createSelector(getPoliticalData, (data, currentCl
   }
   return undefined;
 });
+
+export const getCandidateIds = createSelector(getAppState, (state: State) =>
+  !state.politicalDataLoaded || !state.personalDataLoaded ? null : Object.getOwnPropertyNames(state.politicalData.candidates),
+);
+export const getCandidateList = createSelector(getAppState, (state: State) =>
+  !state.politicalDataLoaded || !state.personalDataLoaded
+    ? null
+    : Object.getOwnPropertyNames(state.politicalData.candidates).map((candidateId) => ({
+        ...state.politicalData.candidates[candidateId],
+        ...state.personalData[candidateId],
+        candidateId,
+        hasPersonalData: !!state.personalData[candidateId],
+      })),
+);
+export const getCandidateListByPartyId = createSelector(getCandidateList, (state: Array<CandidateWithID>, props: { partyId: string }) =>
+  !state ? null : state.filter((candidate) => candidate.party === props.partyId),
+);
+export const getCandidateById = createSelector(getAppState, (state: State, props: { id: string }) =>
+  !state.politicalDataLoaded || !state.personalDataLoaded
+    ? null
+    : ({ ...state.politicalData.candidates[props.id], ...state.personalData[props.id] } as Candidate),
+);
