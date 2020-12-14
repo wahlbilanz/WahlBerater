@@ -63,11 +63,12 @@
 
 
 <ng-template #skip>
-  <i nz-icon nzType="loading" nzTheme="outline" class="vote-icon"></i>
+  <i nz-icon nzType="clear" nzTheme="outline" class="vote-icon"></i>
 </ng-template>
 <ng-template #nono>
-  <!--      <i nz-icon nzType="heart" nzTheme="fill" (click)="$event.stopPropagation()" class="heart-red"></i>-->
-  <i nz-icon nzType="dislike" nzTheme="fill" (click)="$event.stopPropagation()" class="vote-icon"></i>
+  <nz-badge [nzCount]="star">
+    <i nz-icon nzType="dislike" nzTheme="outline" (click)="$event.stopPropagation()" class="vote-icon"></i>
+  </nz-badge>
 </ng-template>
 <ng-template #no>
   <i nz-icon nzType="dislike" nzTheme="outline" (click)="$event.stopPropagation()" class="vote-icon"></i>
@@ -76,6 +77,10 @@
   <i nz-icon nzType="like" nzTheme="outline" (click)="$event.stopPropagation()" class="vote-icon"></i>
 </ng-template>
 <ng-template #yesyes>
-  <!--      <i nz-icon nzType="heart" nzTheme="fill" (click)="$event.stopPropagation()" class="heart-red"></i>-->
-  <i nz-icon nzType="like" nzTheme="fill" (click)="$event.stopPropagation()" class="vote-icon"></i>
+  <nz-badge [nzCount]="star">
+    <i nz-icon nzType="like" nzTheme="outline" (click)="$event.stopPropagation()" class="vote-icon"></i>
+  </nz-badge>
+</ng-template>
+<ng-template #star>
+  <i nz-icon nzType="star" nzTheme="fill" class="ant-scroll-number-custom-component" style="color: #f5222d"></i>
 </ng-template>
