@@ -1,4 +1,5 @@
 import { PositionsMap } from './position.model';
+import { LinkMap } from './link.model';
 
 export interface PersonalCandidateMap {
   [candidate: string]: CandidatePersonalInfo;
@@ -6,14 +7,6 @@ export interface PersonalCandidateMap {
 
 export interface PoliticalCandidateMap {
   [candidate: string]: CandidatePoliticalInfo;
-}
-
-interface LinkMap {
-  [url: string]: string;
-  twitter?: string;
-  blog?: string;
-  facebook?: string;
-  instagram?: string;
 }
 
 export interface CandidatePersonalInfo {

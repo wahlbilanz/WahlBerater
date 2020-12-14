@@ -1,0 +1,18 @@
+@import '../../../../../assets/styles/variables';
+
+:host {
+  display: flex;
+
+  a,
+  a:active,
+  a:link {
+    @include use-typography($wb-type-paragraph);
+    color: $wb-color-neutral-500;
+    &:not(:first-child) {
+      margin-left: $wb-space-xx-small;
+    }
+  }
+  a:hover {
+    color: $wb-color-secondary-600;
+  }
+}

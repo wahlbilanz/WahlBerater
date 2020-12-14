@@ -7,9 +7,10 @@ import { CandidateDetailPageComponent } from './pages/candidate-detail-page/cand
 import { PartyDetailPageComponent } from './pages/party-detail-page/party-detail-page.component';
 import { PartyListPageComponent } from './pages/party-list-page/party-list-page.component';
 import { PartyRoutingModule } from './party-routing.module';
+import { SocialLinksComponent } from './components/social-links/social-links.component';
 
 @NgModule({
-  declarations: [PartyListPageComponent, PartyDetailPageComponent, CandidateDetailPageComponent, PartyCardComponent],
+  declarations: [PartyListPageComponent, PartyDetailPageComponent, CandidateDetailPageComponent, PartyCardComponent, SocialLinksComponent],
   imports: [CommonModule, PartyRoutingModule, NzIconModule, NzToolTipModule],
 })
 export class PartyModule {}

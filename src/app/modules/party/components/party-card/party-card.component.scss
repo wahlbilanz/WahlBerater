@@ -52,27 +52,18 @@
     border: 2px solid black;
     border-radius: 50%;
 
+    // transition: transform 0.3s;
+
     &:not(:first-child) {
       margin-left: -8px;
     }
+    // &:hover:not(:last-child) {
+    //   transform: translateX(-$wb-space-x-small);
+    // }
   }
 }
 .party-social {
   grid-area: social;
-  display: flex;
-
-  a,
-  a:active,
-  a:link {
-    @include use-typography($wb-type-paragraph);
-    color: $wb-color-neutral-500;
-    &:not(:first-child) {
-      margin-left: $wb-space-xx-small;
-    }
-  }
-  a:hover {
-    color: $wb-color-secondary-600;
-  }
 }
 .party-link {
   grid-area: link;
