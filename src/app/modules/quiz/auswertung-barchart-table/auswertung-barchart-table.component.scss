@@ -18,6 +18,10 @@ table {
     &.missed {
       border: none;
     }
+    span {
+      width: 100%;
+      display: inline-block;
+    }
     /*&.hit:first-of-type {
       border-top-left-radius: $wb-space-xx-small;
       border-bottom-left-radius: $wb-space-xx-small;
