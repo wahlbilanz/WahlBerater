@@ -1,23 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import * as AppSelectors from '../../../+state/app.selectors';
-import { PoliticalCandidateMap} from '../../../definitions/models/candidate.model';
+import {PersonalCandidateMap, PoliticalCandidateMap} from '../../../definitions/models/candidate.model';
 import { CategoryMap } from '../../../definitions/models/category.model';
 import { AppPartialState } from '../../../+state/app.reducer';
 import { claimScore } from '../../../definitions/functions/score.function';
+import {getCandidatePersonalInfo} from '../../../definitions/functions/getCandidatePersonalInfo';
 
 @Component({
   selector: 'app-auswertung-heatmap-votes',
   templateUrl: './auswertung-heatmap-votes.component.html',
   styleUrls: ['./auswertung-heatmap-votes.component.scss'],
 })
-export class AuswertungHeatmapVotesComponent implements OnInit {
-  votes = this.store.pipe(select(AppSelectors.getVotes));
-  data = this.store.pipe(select(AppSelectors.getPoliticalData));
+export class AuswertungHeatmapVotesComponent implements OnInit, OnChanges {
 
-  decisions = {};
-  candidates: PoliticalCandidateMap;
-  categories: CategoryMap;
+  @Input() votes;
+  @Input() politicalCandidates: PoliticalCandidateMap;
+  @Input() personalCandidates: PersonalCandidateMap;
+  @Input() categories: CategoryMap;
 
   table = [];
   maxValue = 0;
@@ -27,14 +27,11 @@ export class AuswertungHeatmapVotesComponent implements OnInit {
   recalc(): void {
     this.table = [];
     this.maxValue = 0;
-    if (this.candidates && this.decisions) {
-      // const scoreArray = [];
-
-      for (const c in this.candidates) {
-        if (this.candidates.hasOwnProperty(c)) {
-          console.log(c);
+    if (this.politicalCandidates && this.votes) {
+      for (const c in this.politicalCandidates) {
+        if (this.politicalCandidates.hasOwnProperty(c)) {
           const candidate = {
-            name: this.candidates[c].party,
+            personal: getCandidatePersonalInfo(this.personalCandidates, c),
             id: c,
             scores: {
               yesyes: 0,
@@ -45,21 +42,14 @@ export class AuswertungHeatmapVotesComponent implements OnInit {
             score: 0,
           };
           let scoresum = 0;
-          // let score = 0;
-          for (const v in this.candidates[c].positions) {
-            if (this.candidates[c].positions.hasOwnProperty(v)) {
-              if (this.decisions[v]) {
-                console.log(c, v);
-                const s = claimScore(this.candidates[c].positions[v].vote, this.decisions[v].decision, this.decisions[v].fav);
-                /*if (!candidate.scores[s]) {
-                  candidate.scores[s] = 0;
-                }
-                candidate.scores[s]++;*/
-
-                switch (this.candidates[c].positions[v].vote) {
+          for (const v in this.politicalCandidates[c].positions) {
+            if (this.politicalCandidates[c].positions.hasOwnProperty(v)) {
+              if (this.votes[v] && this.politicalCandidates[c].positions[v]) {
+                const s = claimScore(this.politicalCandidates[c].positions[v].vote, this.votes[v].decision, this.votes[v].fav);
+                switch (this.politicalCandidates[c].positions[v].vote) {
                   case 2:
-                    if (this.decisions[v].decision === 1) {
-                      if (this.decisions[v].fav) {
+                    if (this.votes[v].decision === 1) {
+                      if (this.votes[v].fav) {
                         candidate.scores.yesyes++;
                       } else {
                         candidate.scores.yes += 0.5;
@@ -68,8 +58,8 @@ export class AuswertungHeatmapVotesComponent implements OnInit {
                     }
                     break;
                   case 1:
-                    if (this.decisions[v].decision === 1) {
-                      if (!this.decisions[v].fav) {
+                    if (this.votes[v].decision === 1) {
+                      if (!this.votes[v].fav) {
                         candidate.scores.yes++;
                       } else {
                         candidate.scores.yes += 0.5;
@@ -78,8 +68,8 @@ export class AuswertungHeatmapVotesComponent implements OnInit {
                     }
                     break;
                   case -1:
-                    if (this.decisions[v].decision === -1) {
-                      if (!this.decisions[v].fav) {
+                    if (this.votes[v].decision === -1) {
+                      if (!this.votes[v].fav) {
                         candidate.scores.no++;
                       } else {
                         candidate.scores.no += 0.5;
@@ -88,8 +78,8 @@ export class AuswertungHeatmapVotesComponent implements OnInit {
                     }
                     break;
                   case -2:
-                    if (this.decisions[v].decision === -1) {
-                      if (this.decisions[v].fav) {
+                    if (this.votes[v].decision === -1) {
+                      if (this.votes[v].fav) {
                         candidate.scores.nono++;
                       } else {
                         candidate.scores.no += 0.5;
@@ -116,18 +106,13 @@ export class AuswertungHeatmapVotesComponent implements OnInit {
       }
     }
     this.table.sort((a, b) => (a.score < b.score ? 1 : -1));
-    console.log(this.table);
   }
 
   ngOnInit(): void {
-    this.data.subscribe((d) => {
-      this.candidates = d.candidates;
-      this.categories = d.categories;
-      this.recalc();
-    });
-    this.votes.subscribe((v) => {
-      this.decisions = v;
-      this.recalc();
-    });
+    this.recalc();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.recalc();
   }
 }

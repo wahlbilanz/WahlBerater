@@ -28,5 +28,3 @@ export interface CandidatePoliticalInfo {
   party: string;
   positions: PositionsMap;
 }
-
-export interface Candidate extends CandidatePersonalInfo, CandidatePoliticalInfo {}

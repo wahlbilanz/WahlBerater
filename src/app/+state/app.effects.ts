@@ -55,11 +55,13 @@ export class AppEffects {
           merge(
             this.dataService.getPoliticalData().pipe(
               // TODO detect if offline and then try to deliver cached Variant?
+              // TODO we should create a ticket for that..?
               map((data) => AppActions.loadPoliticalDataSuccess({ data, wasCached: false })),
               catchError((error) => scheduled([AppActions.loadPoliticalDataError({ error })], asyncScheduler)),
             ),
             this.dataService.getPersonalData().pipe(
               // TODO detect if offline and then try to deliver cached Variant?
+              // TODO we should create a ticket for that..?
               map((data) => AppActions.loadPersonalDataSuccess({ data, wasCached: false })),
               catchError((error) => scheduled([AppActions.loadPersonalDataError({ error })], asyncScheduler)),
             ),

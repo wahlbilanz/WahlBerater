@@ -15,7 +15,7 @@
     <ng-container *ngFor="let candidate of table">
       <tr>
         <th>
-          <a [routerLink]="'/candidates/' + candidate.id">{{ candidate.name }}</a>
+          <a [routerLink]="'/candidates/' + candidate.id">{{ candidate.personal.name }}</a>
         </th>
         <td>
           <span
@@ -46,5 +46,5 @@
     </ng-container>
     <tr class="spacer"></tr>
   </table>
-  <strong>normalisiert ueber columns</strong>
+  <strong>normalisiert ueber columns, <i nz-icon nzType="dislike" nzTheme="outline"></i> = missmatch; <i nz-icon nzType="heart" nzTheme="outline"></i> = match; <i nz-icon nzType="fire" nzTheme="outline"></i> = beide fav!</strong>
 </div>

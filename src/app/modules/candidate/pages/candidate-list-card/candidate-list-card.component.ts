@@ -1,9 +1,9 @@
 import { Component, ViewChild, Input, OnInit } from '@angular/core';
-import { Candidate } from '../../../../definitions/models/candidate.model';
-import { PoliticalData } from '../../../../definitions/models/political.data.model';
+// import { Candidate } from '../../../../definitions/models/candidate.model';
 import { claimScore } from '../../../../definitions/functions/score.function';
 
 import { ApexAxisChartSeries, ApexTitleSubtitle, ApexChart, ApexXAxis, ApexYAxis, ChartComponent } from 'ng-apexcharts';
+import {PoliticalData} from '../../../../definitions/models/political.data.model';
 
 export type ChartOptions = {
   series: ApexAxisChartSeries;

@@ -26,8 +26,8 @@
     <h4>Was denken die Kandidaten?</h4>
     <nz-collapse>
       <nz-collapse-panel
-        *ngFor="let candidate of candidates | keyvalue"
-        [nzHeader]="'TODO: ' + candidate.value.party"
+        *ngFor="let candidate of politicalCandidates | keyvalue"
+        [nzHeader]="(personalCandidates | personalData:candidate.key).name"
         [nzExtra]="
                   !candidate.value.positions[claim.key] || candidate.value.positions[claim.key].vote == 0
                     ? skip

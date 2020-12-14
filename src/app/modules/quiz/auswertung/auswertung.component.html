@@ -1,26 +1,47 @@
 <ng-container *ngIf="votes | async as v">
-  <ng-container *ngIf="data | async as d">
+  <ng-container *ngIf="politicalData">
     <nz-tabset class="visualisations">
       <nz-tab nzTitle="Bar 1">
-        <app-auswertung-barchart></app-auswertung-barchart>
+        <app-auswertung-barchart
+          [votes]="v"
+          [politicalCandidates]="politicalData.candidates"
+          [personalCandidates]="personalData"></app-auswertung-barchart>
       </nz-tab>
       <nz-tab nzTitle="Bar 2">
-        <app-auswertung-barchart-table></app-auswertung-barchart-table>
+        <app-auswertung-barchart-table
+          [votes]="v"
+          [politicalCandidates]="politicalData.candidates"
+          [personalCandidates]="personalData"
+          [categories]="politicalData.categories"
+          [claims]="politicalData.claims"
+        >
+        </app-auswertung-barchart-table>
       </nz-tab>
       <nz-tab nzTitle="HeatMap 1">
-        <app-auswertung-heatmap></app-auswertung-heatmap>
+        <app-auswertung-heatmap
+          [votes]="v"
+          [politicalCandidates]="politicalData.candidates"
+          [personalCandidates]="personalData"
+          [categories]="politicalData.categories">
+        </app-auswertung-heatmap>
       </nz-tab>
       <nz-tab nzTitle="HeatMap 2">
-        <app-auswertung-heatmap-votes></app-auswertung-heatmap-votes>
+        <app-auswertung-heatmap-votes
+          [votes]="v"
+          [politicalCandidates]="politicalData.candidates"
+          [personalCandidates]="personalData"
+          [categories]="politicalData.categories">
+        </app-auswertung-heatmap-votes>
       </nz-tab>
     </nz-tabset>
 
     <h2>Detailierte Auswertung der Kandidaten</h2>
-    <ng-container *ngFor="let category of d.categories | keyvalue">
+    <ng-container *ngFor="let category of politicalData.categories | keyvalue">
       <div *ngIf="category.key != 'howto'" class="category" style="border-color:{{ category.value.color }}">
         <app-auswertung-category-panel
           [votes]="v"
-          [candidates]="d.candidates"
+          [politicalCandidates]="politicalData.candidates"
+          [personalCandidates]="personalData"
           [categoryId]="category.key"
           [category]="category.value">
         </app-auswertung-category-panel>

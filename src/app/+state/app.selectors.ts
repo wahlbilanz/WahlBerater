@@ -2,15 +2,18 @@ import { createSelector, createFeatureSelector } from '@ngrx/store';
 import { QuizState, State } from './app.models';
 import { STATE_FEATURE_KEY, AppPartialState } from './app.reducer';
 import {Category} from '../definitions/models/category.model';
+import {PersonalData} from '../definitions/models/personal.data.model';
 import {PoliticalData} from '../definitions/models/political.data.model';
+import {PersonalCandidateMap} from '../definitions/models/candidate.model';
+import {getCandidatePersonalInfo} from '../definitions/functions/getCandidatePersonalInfo';
 
 const getAppState = createFeatureSelector<AppPartialState, State>(STATE_FEATURE_KEY);
 
 export const isMenuOpen = createSelector(getAppState, (state: State) => state.menuOpen);
 export const isBreakpointActive = createSelector(getAppState, (state: State, props) => !!state.activeBreakpoints[props.breakpoint]);
 
-export const getPoliticalData = createSelector(getAppState, (state: State) => state.politicalData);
-export const getPersonalData = createSelector(getAppState, (state: State) => state.personalData);
+export const getPoliticalData = createSelector(getAppState, (state: State): PoliticalData => state.politicalData);
+export const getPersonalData = createSelector(getAppState, (state: State): PersonalCandidateMap => state.personalData);
 
 export const isDataLoaded = createSelector(getAppState, (state: State) => state.politicalDataLoaded && state.personalDataLoaded);
 
@@ -23,18 +26,7 @@ export const getParties = createSelector(getAppState, (state: State) => (state.p
 export const getPartyIds = createSelector(getAppState, (state: State) =>
   state.politicalDataLoaded ? Object.getOwnPropertyNames(state.politicalData.parties) : null,
 );
-export const getCandidatePersonalDataById = createSelector(getPersonalData, (personalData, props: { id: string }) => {
-  if (personalData && personalData.candidates[props.id]) {
-    return personalData.candidates[props.id];
-  }
-
-  return  {
-    name: 'Unbekannt',
-    picture: 'default.jpg',
-    shortDescription: 'keine Angaben',
-    description: 'keine Angaben'
-  };
-});
+export const getCandidatePersonalDataById = createSelector(getPersonalData, (personalData, props: { id: string }) => getCandidatePersonalInfo(personalData, props.id));
 
 export const getPartyById = createSelector(getParties, (parties, props: { id: number }) => parties[props.id]);
 
@@ -50,15 +42,11 @@ export const getCategoryByClaimId = createSelector(getPoliticalData, (data, clai
 
 export const getClaimsByCategory = createSelector(getPoliticalData, (data, category: { id: string }) => {
   if (data) {
-    console.log (category);
-    console.log (data.claims);
     const keys = Object.keys (data.claims).filter((c) => data.claims[c].category === category.id);
-    console.log (keys);
     const subset = {};
-    for (let i = 0; i < keys.length; i++) {
-      subset[keys[i]] = data.claims[keys[i]];
+    for (const key of keys) {
+      subset[key] = data.claims[key];
     }
-    console.log (subset);
     return subset;
   }
 });

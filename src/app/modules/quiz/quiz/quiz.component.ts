@@ -1,12 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
-import { map } from 'rxjs/operators';
 import { AppPartialState } from '../../../+state/app.reducer';
 import * as AppSelectors from '../../../+state/app.selectors';
 import { ActivatedRoute } from '@angular/router';
-import { PoliticalData } from '../../../definitions/models/political.data.model';
-import { Claim } from '../../../definitions/models/claim.model';
-import {Observable} from 'rxjs';
 import {Category} from '../../../definitions/models/category.model';
 
 @Component({

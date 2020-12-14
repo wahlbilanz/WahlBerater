@@ -18,7 +18,7 @@
     <ng-container *ngFor="let candidate of table">
       <tr>
         <th>
-          <a [routerLink]="'/candidates/' + candidate.id">{{ candidate.name }}</a>
+          <a [routerLink]="'/candidates/' + candidate.id">{{ candidate.personal.name }}</a>
         </th>
         <td>
           <span
