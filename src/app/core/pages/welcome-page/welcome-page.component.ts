@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import * as AppActions from '../../../+state/app.actions';
-import { QuizState } from '../../../+state/app.models';
+import { QuizState, ResultUrl, QuizFirstPage } from '../../../+state/app.models';
 import { AppPartialState } from '../../../+state/app.reducer';
 import * as AppSelectors from '../../../+state/app.selectors';
 
@@ -15,6 +15,10 @@ export class WelcomePageComponent {
   public quizState = this.store.pipe(select(AppSelectors.getQuizState));
   public localStorageAllowed = this.store.pipe(select(AppSelectors.isLocalDataStorageAllowed));
   public data = this.store.pipe(select(AppSelectors.getPoliticalData));
+
+  public ResultUrlPath = ResultUrl;
+  public QuizFirstPagePath = QuizFirstPage;
+  public lastQuizPage = this.store.pipe(select(AppSelectors.getLastQuizPage));
 
   constructor(private store: Store<AppPartialState>) {}
 

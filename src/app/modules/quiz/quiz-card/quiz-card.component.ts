@@ -7,6 +7,7 @@ import { Claim } from '../../../definitions/models/claim.model';
 import { Category } from '../../../definitions/models/category.model';
 import { vote } from '../../../+state/app.actions';
 import { first } from 'rxjs/operators';
+import {QuizFirstPage, ResultUrl} from '../../../+state/app.models';
 
 @Component({
   selector: 'app-quiz-card',
@@ -20,7 +21,7 @@ export class QuizCardComponent implements OnInit, OnChanges {
   @Input() claim: Claim;
   @Input() next: string;
   @Input() prev: string;
-
+  ResultUrlPath = ResultUrl;
   fav: boolean;
   decision: number;
 
@@ -37,7 +38,7 @@ export class QuizCardComponent implements OnInit, OnChanges {
         this.decision = v[this.claimId].decision;
       }
     });
-    if (this.claimId === 'howto') {
+    if (this.claimId === QuizFirstPage) {
       this.category = {
         color: '#333',
         title: 'Howto'
@@ -90,7 +91,7 @@ export class QuizCardComponent implements OnInit, OnChanges {
         if (this.next) {
           this.router.navigate([this.next]);
         } else {
-          this.router.navigate(['/quiz/auswertung']);
+          this.router.navigate(['/quiz/' + ResultUrl]);
         }
       }, 300);
     }

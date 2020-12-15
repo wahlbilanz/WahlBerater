@@ -1,5 +1,5 @@
 import { createSelector, createFeatureSelector } from '@ngrx/store';
-import { QuizState, State } from './app.models';
+import {QuizFirstPage, QuizState, State} from './app.models';
 import { STATE_FEATURE_KEY, AppPartialState } from './app.reducer';
 import {Category} from '../definitions/models/category.model';
 import {PersonalData} from '../definitions/models/personal.data.model';
@@ -20,6 +20,8 @@ export const isDataLoaded = createSelector(getAppState, (state: State) => state.
 export const getVotes = createSelector(getAppState, (state: State) => state.votes);
 
 export const isLocalDataStorageAllowed = createSelector(getAppState, (state: State) => state.allowLocalDataStorage);
+
+// TODO kann weg?
 export const getQuizState = createSelector(getAppState, (state: State) => QuizState.STARTED); // TODO
 
 export const getParties = createSelector(getAppState, (state: State) => (state.politicalDataLoaded ? state.politicalData.parties : null));
@@ -55,7 +57,7 @@ export const getPrevQuestion = createSelector(getPoliticalData, (data, currentCl
   if (data) {
     const categories = Object.keys (data.categories);
 
-    if (!currentClaim.id || currentClaim.id === 'howto') {
+    if (!currentClaim.id || currentClaim.id === QuizFirstPage) {
       // no claimid yet? -> no back..
       return undefined;
     }
@@ -89,7 +91,7 @@ export const getNextQuestion = createSelector(getPoliticalData, (data, currentCl
   if (data) {
     const categories = Object.keys (data.categories);
 
-    if (!currentClaim.id || currentClaim.id === 'howto') {
+    if (!currentClaim.id || currentClaim.id === QuizFirstPage) {
       // no claimid yet, return first claim
       return Object.keys (data.claims).filter (c => data.claims[c].category === categories[0])[0];
     }
@@ -117,3 +119,5 @@ export const getNextQuestion = createSelector(getPoliticalData, (data, currentCl
   }
   return undefined;
 });
+
+export const getLastQuizPage = createSelector(getAppState, (state: State) => state.quizLastPage);

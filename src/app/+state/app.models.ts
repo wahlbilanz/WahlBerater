@@ -10,6 +10,9 @@ export enum QuizState {
   CONCLUDED,
 }
 
+export const ResultUrl = 'result';
+export const QuizFirstPage = 'howto';
+
 export interface State {
   /** Top menu open state */
   menuOpen: boolean;
@@ -27,4 +30,6 @@ export interface State {
   votes: {};
   /** Indicates, if the user opted in to store data on the local device */
   allowLocalDataStorage: boolean;
+  /** Which was the last page in the quiz? */
+  quizLastPage: string;
 }

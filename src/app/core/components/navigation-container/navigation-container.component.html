@@ -11,10 +11,10 @@
 
 <a
   class="nav-block results-link"
-  routerLink="/quiz/results"
+  routerLink="/quiz/{{ResultUrlPath}}"
   routerLinkActive="active"
   title="Zur Quiz Auswertung"
-  *ngIf="(quizState | async) === QuizStateEnum.CONCLUDED"
+  *ngIf="(lastQuizPage | async) === ResultUrlPath"
 >
   <i nz-icon nzType="bar-chart" nzTheme="outline" class="nav-icon"></i>
   Auswertung
@@ -22,10 +22,10 @@
 
 <a
   class="nav-block quiz-link"
-  routerLink="/quiz"
+  routerLink="/quiz/{{lastQuizPage | async}}"
   routerLinkActive="active"
   title="Started das Quiz"
-  *ngIf="(quizState | async) !== QuizStateEnum.CONCLUDED"
+  *ngIf="(lastQuizPage | async) !== ResultUrlPath"
 >
   <i nz-icon nzType="question" nzTheme="outline" class="nav-icon"></i>
   Quiz

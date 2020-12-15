@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import * as AppActions from './app.actions';
-import { State } from './app.models';
+import {QuizFirstPage, State} from './app.models';
 
 export const STATE_FEATURE_KEY = 'app';
 
@@ -19,6 +19,7 @@ export const initialState: State = {
   usedCachedPersonalData: false,
   votes: {},
   allowLocalDataStorage: null,
+  quizLastPage: QuizFirstPage,
 };
 
 export const appReducer = createReducer(
@@ -75,5 +76,10 @@ export const appReducer = createReducer(
   on(AppActions.restoreDataStorePreference, (state, { allow }) => ({
     ...state,
     allowLocalDataStorage: allow,
+  })),
+
+  on(AppActions.updateLastQuizPage, (state: State, { lastPage }) => ({
+    ...state,
+    quizLastPage: lastPage ? lastPage : QuizFirstPage,
   })),
 );
