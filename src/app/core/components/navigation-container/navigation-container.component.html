@@ -11,7 +11,7 @@
 
 <a
   class="nav-block results-link"
-  routerLink="/quiz/{{ResultUrlPath}}"
+  routerLink="/quiz/{{ ResultUrlPath }}"
   routerLinkActive="active"
   title="Zur Quiz Auswertung"
   *ngIf="(lastQuizPage | async) === ResultUrlPath"
@@ -22,7 +22,7 @@
 
 <a
   class="nav-block quiz-link"
-  routerLink="/quiz/{{lastQuizPage | async}}"
+  routerLink="/quiz/{{ lastQuizPage | async }}"
   routerLinkActive="active"
   title="Started das Quiz"
   *ngIf="(lastQuizPage | async) !== ResultUrlPath"

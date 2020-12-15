@@ -12,7 +12,14 @@ import { PipesModule } from '../pipes/pipes.module';
 import { CandidateCardComponent } from './components/candidate-card/candidate-card.component';
 
 @NgModule({
-  declarations: [PartyListPageComponent, PartyDetailPageComponent, CandidateDetailPageComponent, PartyCardComponent, SocialLinksComponent, CandidateCardComponent],
+  declarations: [
+    PartyListPageComponent,
+    PartyDetailPageComponent,
+    CandidateDetailPageComponent,
+    PartyCardComponent,
+    SocialLinksComponent,
+    CandidateCardComponent,
+  ],
   imports: [CommonModule, PartyRoutingModule, NzIconModule, NzToolTipModule, PipesModule],
 })
 export class PartyModule {}

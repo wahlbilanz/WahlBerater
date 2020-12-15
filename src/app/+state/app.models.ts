@@ -1,7 +1,7 @@
 import { BreakpointBooleanMap } from 'ng-zorro-antd/core/services';
 import { PoliticalData } from '../definitions/models/political.data.model';
 import { PersonalData } from '../definitions/models/personal.data.model';
-import {PersonalCandidateMap} from '../definitions/models/candidate.model';
+import { PersonalCandidateMap } from '../definitions/models/candidate.model';
 
 export enum QuizState {
   NOT_STARTED,

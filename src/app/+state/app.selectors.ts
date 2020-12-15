@@ -1,13 +1,13 @@
 import { createSelector, createFeatureSelector } from '@ngrx/store';
 // import { PoliticalCandidateMap} from '../definitions/models/candidate.model';
-import {QuizFirstPage, QuizState, State} from './app.models';
+import { QuizFirstPage, QuizState, State } from './app.models';
 // import { Party } from '../definitions/models/party.model';
 import { STATE_FEATURE_KEY, AppPartialState } from './app.reducer';
 import { Category } from '../definitions/models/category.model';
 // import {PersonalData} from '../definitions/models/personal.data.model';
 import { PoliticalData } from '../definitions/models/political.data.model';
-import {PersonalCandidateMap} from '../definitions/models/candidate.model';
-import {getCandidatePersonalInfo} from '../definitions/functions/getCandidatePersonalInfo';
+import { PersonalCandidateMap } from '../definitions/models/candidate.model';
+import { getCandidatePersonalInfo } from '../definitions/functions/getCandidatePersonalInfo';
 
 const getAppState = createFeatureSelector<AppPartialState, State>(STATE_FEATURE_KEY);
 
@@ -30,10 +30,11 @@ export const getParties = createSelector(getAppState, (state: State) => (state.p
 export const getPartyIds = createSelector(getAppState, (state: State) =>
   state.politicalDataLoaded ? Object.getOwnPropertyNames(state.politicalData.parties) : null,
 );
-export const getCandidatePersonalDataById =
-  createSelector(getPersonalData, (personalData, props: { id: string }) => getCandidatePersonalInfo(personalData, props.id));
+export const getCandidatePersonalDataById = createSelector(getPersonalData, (personalData, props: { id: string }) =>
+  getCandidatePersonalInfo(personalData, props.id),
+);
 
-export const getPartyById = createSelector(getParties, (parties, props: { id: string }) => parties ? parties[props.id] : null);
+export const getPartyById = createSelector(getParties, (parties, props: { id: string }) => (parties ? parties[props.id] : null));
 
 export const getCategoryByClaimId = createSelector(
   getPoliticalData,
@@ -140,11 +141,14 @@ export const getCandidateIds = createSelector(getAppState, (state: State): strin
         hasPersonalData: !!state.personalData[candidateId],
       })),
 );*/
-export const getCandidateListByPartyId = createSelector(getAppState, (state: State, props: { partyId: string }): string[] =>
-  !state.politicalDataLoaded || !state.personalDataLoaded
-    ? null :
-    Object.keys(state.politicalData.candidates)
-      .filter((candidate) => state.politicalData.candidates[candidate].party === props.partyId)
+export const getCandidateListByPartyId = createSelector(
+  getAppState,
+  (state: State, props: { partyId: string }): string[] =>
+    !state.politicalDataLoaded || !state.personalDataLoaded
+      ? null
+      : Object.keys(state.politicalData.candidates).filter(
+          (candidate) => state.politicalData.candidates[candidate].party === props.partyId,
+        ),
   // !state ? null : state.filter((candidate) => candidate.party === props.partyId),
 );
 /*export const getCandidateById = createSelector(getAppState, (state: State, props: { id: string }) =>

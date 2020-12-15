@@ -3,7 +3,7 @@
 <section class="welcome-page-nav">
   <a
     class="nav-block results-link"
-    routerLink="/quiz/{{ResultUrlPath}}"
+    routerLink="/quiz/{{ ResultUrlPath }}"
     title="Zur Quiz Auswertung"
     *ngIf="(lastQuizPage | async) === ResultUrlPath"
   >
@@ -11,13 +11,16 @@
     Zur Quiz Auswertung
     <p class="small">Sieh dir deine Ergebnisse von dem letztem Quiz an!</p>
   </a>
-  <a class="nav-block quiz-link" routerLink="/quiz" title="Startet das Quiz"
-    *ngIf="(lastQuizPage | async) === QuizFirstPagePath">
+  <a class="nav-block quiz-link" routerLink="/quiz" title="Startet das Quiz" *ngIf="(lastQuizPage | async) === QuizFirstPagePath">
     <i nz-icon nzType="question" nzTheme="outline" class="nav-icon"></i>
     Quiz starten
   </a>
-  <a class="nav-block quiz-link" routerLink="/quiz/{{lastQuizPage | async}}" title="Setzt das Quiz fort"
-    *ngIf="(lastQuizPage | async) !== QuizFirstPagePath">
+  <a
+    class="nav-block quiz-link"
+    routerLink="/quiz/{{ lastQuizPage | async }}"
+    title="Setzt das Quiz fort"
+    *ngIf="(lastQuizPage | async) !== QuizFirstPagePath"
+  >
     <i nz-icon nzType="question" nzTheme="outline" class="nav-icon"></i>
     Quiz fortsetzen
   </a>

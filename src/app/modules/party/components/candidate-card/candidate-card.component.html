@@ -1,19 +1,19 @@
 <div class="candidate-card" *ngIf="politicalInfo && personalInfo">
-    <img
-      class="candidate-picture"
-      src="{{ personalInfo.picture | pictureUrl }}"
-      [routerLink]="['/', 'parties', politicalInfo.party, 'candidates', candidateId]"
-    />
-    <h3 class="candidate-name">{{ personalInfo.name }}</h3>
-    <p class="candidate-description">{{ personalInfo.shortDescription | markdown }}</p>
-    <div class="candidate-social" *ngIf="showSocialLinks">
-      <app-social-links [links]="personalInfo.links" [name]="personalInfo.name"></app-social-links>
-    </div>
-    <a
-      class="candidate-link"
-      title="Mehr Informationen zu {{ personalInfo.name }}"
-      [routerLink]="['/', 'parties', politicalInfo.party, 'candidates', candidateId]"
-    >
-      Mehr Informationen
-    </a>
+  <img
+    class="candidate-picture"
+    src="{{ personalInfo.picture | pictureUrl }}"
+    [routerLink]="['/', 'parties', politicalInfo.party, 'candidates', candidateId]"
+  />
+  <h3 class="candidate-name">{{ personalInfo.name }}</h3>
+  <p class="candidate-description">{{ personalInfo.shortDescription | markdown }}</p>
+  <div class="candidate-social" *ngIf="showSocialLinks">
+    <app-social-links [links]="personalInfo.links" [name]="personalInfo.name"></app-social-links>
+  </div>
+  <a
+    class="candidate-link"
+    title="Mehr Informationen zu {{ personalInfo.name }}"
+    [routerLink]="['/', 'parties', politicalInfo.party, 'candidates', candidateId]"
+  >
+    Mehr Informationen
+  </a>
 </div>

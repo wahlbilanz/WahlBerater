@@ -6,7 +6,7 @@ import { environment } from '../../../environments/environment';
 // import { Data } from '../../definitions/models/data.model';
 import { PoliticalData } from '../../definitions/models/political.data.model';
 import { PersonalData } from '../../definitions/models/personal.data.model';
-import {PersonalCandidateMap} from '../../definitions/models/candidate.model';
+import { PersonalCandidateMap } from '../../definitions/models/candidate.model';
 
 @Injectable({
   providedIn: 'root',

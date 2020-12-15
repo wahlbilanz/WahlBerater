@@ -1,11 +1,11 @@
-
 <h3>{{ category.title }}</h3>
 <nz-collapse *ngIf="claims">
   <nz-collapse-panel
     *ngFor="let claim of claims | keyvalue"
     class="claim"
     [nzHeader]="claim.value.title"
-    [nzExtra]="getUserTemplate (votes[claim.key])">
+    [nzExtra]="getUserTemplate(votes[claim.key])"
+  >
     <div class="background" [innerHTML]="claim.value.description | markdown"></div>
     <span *ngIf="votes[claim.key]"> Deine Antwort: {{ votes[claim.key].decision | decisionToWord: votes[claim.key].fav }} </span>
     <a [routerLink]="'/quiz/' + claim.key">Zurück zur These, um Entscheidung zu ändern.</a>
@@ -14,34 +14,32 @@
     <nz-collapse>
       <nz-collapse-panel
         *ngFor="let candidate of politicalCandidates | keyvalue"
-        [nzHeader]="(personalCandidates | personalDataOf:candidate.key).name"
+        [nzHeader]="(personalCandidates | personalDataOf: candidate.key).name"
         [nzExtra]="getCandidateTemplate(candidate.value.positions[claim.key], votes[claim.key])"
         class="{{
-                  votes[claim.key] &&
-                  candidate.value.positions[claim.key] &&
-                  ((votes[claim.key].decision > 0 && candidate.value.positions[claim.key].vote > 0) ||
-                    (votes[claim.key].decision < 0 && candidate.value.positions[claim.key].vote < 0))
-                    ? 'same_direction'
-                    : ''
-                }}"
+          votes[claim.key] &&
+          candidate.value.positions[claim.key] &&
+          ((votes[claim.key].decision > 0 && candidate.value.positions[claim.key].vote > 0) ||
+            (votes[claim.key].decision < 0 && candidate.value.positions[claim.key].vote < 0))
+            ? 'same_direction'
+            : ''
+        }}"
       >
         <ng-container *ngIf="candidate.value.positions[claim.key]">
-          <a [routerLink]="'/candidates/' + candidate.key">{{ (personalCandidates | personalDataOf:candidate.key).name }}</a>
+          <a [routerLink]="'/candidates/' + candidate.key">{{ (personalCandidates | personalDataOf: candidate.key).name }}</a>
           denkt {{ candidate.value.positions[claim.key].vote | candidateDecisionToWord }}, denn:
           <blockquote [innerHTML]="candidate.value.positions[claim.key].reason | markdown"></blockquote>
         </ng-container>
         <ng-container *ngIf="!candidate.value.positions[claim.key]">
-          <a [routerLink]="'/candidates/' + candidate.key">{{ c(personalCandidates | personalDataOf:candidate.key).name }}</a> hat diese Frage nicht beantwortet.
+          <a [routerLink]="'/candidates/' + candidate.key">{{ c(personalCandidates | personalDataOf: candidate.key).name }}</a> hat diese
+          Frage nicht beantwortet.
         </ng-container>
       </nz-collapse-panel>
     </nz-collapse>
   </nz-collapse-panel>
 </nz-collapse>
 
-
-<ng-template #skip>
-  ~
-</ng-template>
+<ng-template #skip> ~ </ng-template>
 <ng-template #nono>
   <nz-badge [nzCount]="star">
     <i nz-icon nzType="dislike" nzTheme="outline" (click)="$event.stopPropagation()" class="vote-icon"></i>
@@ -59,5 +57,12 @@
   </nz-badge>
 </ng-template>
 <ng-template #star>
-  <i nz-icon nzType="star" nzTheme="fill" class="ant-scroll-number-custom-component" style="color: #f5222d" (click)="$event.stopPropagation()"></i>
+  <i
+    nz-icon
+    nzType="star"
+    nzTheme="fill"
+    class="ant-scroll-number-custom-component"
+    style="color: #f5222d"
+    (click)="$event.stopPropagation()"
+  ></i>
 </ng-template>

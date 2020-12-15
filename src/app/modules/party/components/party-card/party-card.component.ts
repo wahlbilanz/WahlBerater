@@ -6,8 +6,8 @@ import { AppPartialState } from '../../../../+state/app.reducer';
 import * as AppSelectors from '../../../../+state/app.selectors';
 // import { CandidateWithID } from '../../../../definitions/models/candidate.model';
 import { Party } from '../../../../definitions/models/party.model';
-import {PoliticalData} from '../../../../definitions/models/political.data.model';
-import {PersonalCandidateMap} from '../../../../definitions/models/candidate.model';
+import { PoliticalData } from '../../../../definitions/models/political.data.model';
+import { PersonalCandidateMap } from '../../../../definitions/models/candidate.model';
 
 @Component({
   selector: 'app-party-card',
@@ -17,18 +17,7 @@ import {PersonalCandidateMap} from '../../../../definitions/models/candidate.mod
 })
 export class PartyCardComponent implements OnInit {
   @Input() partyId: string;
-
-  /*set partyId(id: string) {
-    this.partyIdent = id;
-    this.partyData = this.store.pipe(select(AppSelectors.getPartyById, { id }));
-    this.partyCandidates = this.store.pipe(
-      select(AppSelectors.getCandidateListByPartyId, { partyId: id }),
-      map((candidateList) => (!candidateList ? null : candidateList.filter((candidate) => !!candidate.hasPersonalData))),
-    );
-  }*/
   @Input() public showSocialLinks = true;
-
-  // public partyIdent: string;
   @Input() partyData: Party;
   partyCandidates: string[];
   @Input() politicalData: PoliticalData;
@@ -37,18 +26,8 @@ export class PartyCardComponent implements OnInit {
   constructor(private store: Store<AppPartialState>) {}
 
   ngOnInit(): void {
-    /*this.store.pipe(select(AppSelectors.getPersonalData)).subscribe(d => {
-      console.log ('getPersonalData', d);
-      this.ngZone.run( () => {
-      this.candidatePersonalData = d;
-      });
-    });
-    this.store.pipe(select(AppSelectors.getPoliticalData)).subscribe(d => {
-      console.log ('getPoliticalData', d);
-      this.candidatePoliticalData = d;
-      // this.partyData = d.parties[this.partyId];
-    });*/
-    this.store.pipe(select(AppSelectors.getCandidateListByPartyId, { partyId: this.partyId }))
-      .subscribe(candidates => this.partyCandidates = candidates);
+    this.store
+      .pipe(select(AppSelectors.getCandidateListByPartyId, { partyId: this.partyId }))
+      .subscribe((candidates) => (this.partyCandidates = candidates));
   }
 }

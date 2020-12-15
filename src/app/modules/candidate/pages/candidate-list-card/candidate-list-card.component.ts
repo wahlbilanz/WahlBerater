@@ -1,11 +1,9 @@
 import { Component, ViewChild, Input, OnInit } from '@angular/core';
-// import { Candidate } from '../../../../definitions/models/candidate.model';
 import { claimScore } from '../../../../definitions/functions/score.function';
 
 import { ApexAxisChartSeries, ApexTitleSubtitle, ApexChart, ApexXAxis, ApexYAxis, ChartComponent } from 'ng-apexcharts';
-import {PoliticalData} from '../../../../definitions/models/political.data.model';
-import {PersonalData} from '../../../../definitions/models/personal.data.model';
-import {PersonalCandidateMap} from '../../../../definitions/models/candidate.model';
+import { PoliticalData } from '../../../../definitions/models/political.data.model';
+import { PersonalCandidateMap } from '../../../../definitions/models/candidate.model';
 
 export type ChartOptions = {
   series: ApexAxisChartSeries;
@@ -41,9 +39,6 @@ export class CandidateListCardComponent implements OnInit {
       ],
       chart: {
         height: 250,
-        /*parentHeightOffset: 0,
-        offsetY: 0,*/
-        /*width: 350,*/
         type: 'radar',
       },
       xaxis: {
@@ -58,14 +53,13 @@ export class CandidateListCardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // console.log(this.PoliticalData);
-    // console.log(this.candidate);
-    // console.log(this.decisions);
     let maxY = 0;
     // TODO move this into effect/selector combi
 
     for (const category in this.politicalData.categories) {
-      const claimIds = Object.getOwnPropertyNames(this.politicalData.claims).filter((claimId) => this.politicalData.claims[claimId].category === category);
+      const claimIds = Object.getOwnPropertyNames(this.politicalData.claims).filter(
+        (claimId) => this.politicalData.claims[claimId].category === category,
+      );
 
       if (this.politicalData.categories.hasOwnProperty(category) && category !== 'howto') {
         let score = 0;
@@ -73,9 +67,11 @@ export class CandidateListCardComponent implements OnInit {
           maxY = claimIds.length;
         }
         for (const claim of claimIds) {
-          // console.log (claim, this.decisions[claim], this.data.candidates[this.candidate]);
-          if (this.decisions[claim] && this.politicalData.candidates[this.candidate] && this.politicalData.candidates[this.candidate].positions[claim]) {
-            // console.log (claim, this.data.candidates[this.candidate].positions[claim].vote, this.decisions[claim].decision);
+          if (
+            this.decisions[claim] &&
+            this.politicalData.candidates[this.candidate] &&
+            this.politicalData.candidates[this.candidate].positions[claim]
+          ) {
             score += claimScore(
               this.politicalData.candidates[this.candidate].positions[claim].vote,
               this.decisions[claim].decision,
@@ -84,12 +80,8 @@ export class CandidateListCardComponent implements OnInit {
           }
         }
         this.radarData.push({ category, score });
-        // console.log ({category, score});
       }
     }
-    // console.log(this.candidate);
-    // console.log(this.radarData);
-    // console.log(maxY);
     this.chartOptions.series[0].data = this.radarData.map((s) => s.score);
     this.chartOptions.xaxis.categories = this.radarData.map((s) => s.category);
     this.chartOptions.yaxis.max = maxY * 2;

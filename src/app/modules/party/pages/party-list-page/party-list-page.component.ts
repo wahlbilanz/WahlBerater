@@ -3,8 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { AppPartialState } from '../../../../+state/app.reducer';
 import * as AppSelectors from '../../../../+state/app.selectors';
-import {PoliticalData} from '../../../../definitions/models/political.data.model';
-import {PersonalCandidateMap} from '../../../../definitions/models/candidate.model';
+import { PoliticalData } from '../../../../definitions/models/political.data.model';
+import { PersonalCandidateMap } from '../../../../definitions/models/candidate.model';
 
 @Component({
   selector: 'app-party-list-page',
@@ -19,15 +19,13 @@ export class PartyListPageComponent implements OnInit {
   constructor(private state: Store<AppPartialState>, private store: Store<AppPartialState>) {}
 
   ngOnInit(): void {
-    this.store.pipe(select(AppSelectors.getPersonalData)).subscribe(d => {
-      console.log ('getPersonalData', d);
+    this.store.pipe(select(AppSelectors.getPersonalData)).subscribe((d) => {
+      console.log('getPersonalData', d);
       this.personalData = d;
     });
-    this.store.pipe(select(AppSelectors.getPoliticalData)).subscribe(d => {
-      console.log ('getPoliticalData', d);
+    this.store.pipe(select(AppSelectors.getPoliticalData)).subscribe((d) => {
+      console.log('getPoliticalData', d);
       this.politicalData = d;
     });
-    /*this.store.pipe(select(AppSelectors.getCandidateListByPartyId, { partyId: this.partyId }))
-      .subscribe(candidates => this.partyCandidates = candidates);*/
   }
 }

@@ -4,16 +4,16 @@
   <p class="party-description">{{ partyData.shortDescription | markdown }}</p>
   <div class="party-candidates" *ngIf="partyCandidates">
     <ng-container *ngFor="let candidateId of partyCandidates">
-        <a
-          [routerLink]="[partyId, 'candidates', candidateId]"
-          class="candidate-picture"
-          [style.border-color]="partyData.color"
-          nz-tooltip
-          [nzTooltipTitle]="candidate.name"
-          *ngIf="personalData |  personalDataOf:candidateId as candidate"
-        >
-          <img src="{{ candidate.picture | pictureUrl }}" [title]="candidate.name" *ngIf="candidate.picture" />
-        </a>
+      <a
+        [routerLink]="[partyId, 'candidates', candidateId]"
+        class="candidate-picture"
+        [style.border-color]="partyData.color"
+        nz-tooltip
+        [nzTooltipTitle]="candidate.name"
+        *ngIf="personalData | personalDataOf: candidateId as candidate"
+      >
+        <img src="{{ candidate.picture | pictureUrl }}" [title]="candidate.name" *ngIf="candidate.picture" />
+      </a>
     </ng-container>
   </div>
   <div class="party-social" *ngIf="showSocialLinks">

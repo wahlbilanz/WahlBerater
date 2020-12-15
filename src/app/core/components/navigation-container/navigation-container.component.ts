@@ -15,7 +15,6 @@ export class NavigationContainerComponent implements OnInit {
   public QuizStateEnum = QuizState;
   public quizState = this.store.pipe(select(AppSelectors.getQuizState));
 
-
   public ResultUrlPath = ResultUrl;
   public lastQuizPage = this.store.pipe(select(AppSelectors.getLastQuizPage));
 

@@ -30,6 +30,17 @@ import { NzBadgeModule } from 'ng-zorro-antd/badge';
     AuswertungHeatmapVotesComponent,
     AuswertungCategoryPanelComponent,
   ],
-  imports: [CommonModule, QuizRoutingModule, NzIconModule, NzCollapseModule, NzListModule, NgApexchartsModule, PipesModule, NzTabsModule, NzToolTipModule,NzBadgeModule],
+  imports: [
+    CommonModule,
+    QuizRoutingModule,
+    NzIconModule,
+    NzCollapseModule,
+    NzListModule,
+    NgApexchartsModule,
+    PipesModule,
+    NzTabsModule,
+    NzToolTipModule,
+    NzBadgeModule,
+  ],
 })
 export class QuizModule {}

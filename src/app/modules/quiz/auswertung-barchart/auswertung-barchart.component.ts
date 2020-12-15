@@ -1,4 +1,4 @@
-import {Component, Input, ViewChild, OnInit, OnChanges, SimpleChanges} from '@angular/core';
+import { Component, Input, ViewChild, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { AppPartialState } from '../../../+state/app.reducer';
 import * as AppSelectors from '../../../+state/app.selectors';
@@ -12,9 +12,9 @@ import {
   ApexPlotOptions,
   ApexDataLabels,
 } from 'ng-apexcharts';
-import {PersonalCandidateMap, PoliticalCandidateMap} from '../../../definitions/models/candidate.model';
+import { PersonalCandidateMap, PoliticalCandidateMap } from '../../../definitions/models/candidate.model';
 import { claimScore } from '../../../definitions/functions/score.function';
-import {getCandidatePersonalInfo} from '../../../definitions/functions/getCandidatePersonalInfo';
+import { getCandidatePersonalInfo } from '../../../definitions/functions/getCandidatePersonalInfo';
 
 export type ChartOptions = {
   series: ApexAxisChartSeries;
