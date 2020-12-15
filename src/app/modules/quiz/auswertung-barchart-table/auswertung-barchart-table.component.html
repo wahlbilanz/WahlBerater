@@ -3,7 +3,7 @@
     <ng-container *ngFor="let candidate of table">
       <tr>
         <th>
-          <a [routerLink]="'/candidates/' + candidate.id">{{ candidate.name }}</a>
+          <a [routerLink]="'/candidates/' + candidate.id">{{ candidate.personal.name }}</a>
         </th>
         <ng-container *ngFor="let category of candidate.scores | keyvalue">
           <td
@@ -13,7 +13,7 @@
             class="hit"
           >
             <span
-              title="{{ category.value.score }} Übereinstimmung{{ category.value.score == 1 ? '' : 'en' }} in der Kategorie {{
+              nz-tooltip nzTooltipTitle="{{ category.value.score }} Übereinstimmung{{ category.value.score == 1 ? '' : 'en' }} in der Kategorie {{
                 category.value.title
               }}"
               >{{ category.value.score }}</span

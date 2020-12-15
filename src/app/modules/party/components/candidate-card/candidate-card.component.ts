@@ -1,10 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { CandidateWithID } from '../../../../definitions/models/candidate.model';
+import {CandidatePersonalInfo, CandidatePoliticalInfo} from '../../../../definitions/models/candidate.model';
 import * as AppSelectors from '../../../../+state/app.selectors';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AppPartialState } from '../../../../+state/app.reducer';
+import {getCandidatePersonalInfo} from '../../../../definitions/functions/getCandidatePersonalInfo';
+import {PoliticalData} from '../../../../definitions/models/political.data.model';
 
 @Component({
   selector: 'app-candidate-card',
@@ -12,18 +14,25 @@ import { AppPartialState } from '../../../../+state/app.reducer';
   styleUrls: ['./candidate-card.component.scss'],
 })
 export class CandidateCardComponent implements OnInit {
-  @Input()
-  set candidateId(id: string) {
-    this.id = id;
-    this.candidateData = this.store.pipe(select(AppSelectors.getCandidateById, { id }));
-  }
-  @Input()
-  public showSocialLinks: boolean = true;
+
+  politicalInfo: CandidatePoliticalInfo = undefined;
+  personalInfo: CandidatePersonalInfo = undefined;
+
+  @Input() candidateId: string;
+  @Input() public showSocialLinks = true;
 
   public id: string;
-  public candidateData: Observable<CandidateWithID>;
+  // public candidateData: Observable<CandidateWithID>;
 
   constructor(private store: Store<AppPartialState>) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.store.pipe(select(AppSelectors.getPersonalData)).subscribe(d => {
+      // this.personalData = d;
+      this.personalInfo = getCandidatePersonalInfo(d, this.candidateId);
+    });
+    this.store.pipe(select(AppSelectors.getPoliticalData)).subscribe(d => {
+      this.politicalInfo = d.candidates[this.candidateId];
+    });
+  }
 }

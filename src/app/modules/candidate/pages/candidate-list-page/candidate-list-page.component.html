@@ -1,12 +1,17 @@
 <h1>Kandidaten für die Studierendenschaft an der FernUniversität in Hagen</h1>
 
-<ng-container *ngIf="data | async as d">
+<ng-container *ngIf="politicalData">
   <ng-container *ngIf="votes | async as v">
     <div id="candidate-list">
-      <div class="candidate-preview" *ngFor="let candidate of d.candidates | keyvalue">
+      <div class="candidate-preview" *ngFor="let candidate of politicalData.candidates | keyvalue">
         <!--<div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }" nzJustify="center" class="mt">-->
         <!--  <div nz-col [nzSpan]="12" *ngFor="let candidate of d.candidates | keyvalue" class="mt">{{candidate.key}}-->
-        <app-candidate-list-card [data]="d" [decisions]="v" [candidate]="candidate.key"></app-candidate-list-card>
+        <app-candidate-list-card
+          [politicalData]="politicalData"
+          [personalData]="personalData"
+          [decisions]="v"
+          [candidate]="candidate.key">
+        </app-candidate-list-card>
         <!--    <nz-card nzHoverable [nzCover]="coverKandidat" [routerLink]="['/candidates/' + candidate.key]">-->
         <!--      <nz-card-meta nzTitle="{{candidate.value.name}}" nzDescription="Liste: {{candidate.value.party}}"></nz-card-meta>-->
         <!--      <p class="mt">-->

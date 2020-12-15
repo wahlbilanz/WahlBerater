@@ -1,44 +1,39 @@
 import { createSelector, createFeatureSelector } from '@ngrx/store';
-import { Candidate, CandidateWithID } from '../definitions/models/candidate.model';
-import { Party } from '../definitions/models/party.model';
-import { QuizState, State } from './app.models';
+// import { PoliticalCandidateMap} from '../definitions/models/candidate.model';
+import {QuizFirstPage, QuizState, State} from './app.models';
+// import { Party } from '../definitions/models/party.model';
 import { STATE_FEATURE_KEY, AppPartialState } from './app.reducer';
 import { Category } from '../definitions/models/category.model';
+// import {PersonalData} from '../definitions/models/personal.data.model';
 import { PoliticalData } from '../definitions/models/political.data.model';
+import {PersonalCandidateMap} from '../definitions/models/candidate.model';
+import {getCandidatePersonalInfo} from '../definitions/functions/getCandidatePersonalInfo';
 
 const getAppState = createFeatureSelector<AppPartialState, State>(STATE_FEATURE_KEY);
 
 export const isMenuOpen = createSelector(getAppState, (state: State) => state.menuOpen);
 export const isBreakpointActive = createSelector(getAppState, (state: State, props) => !!state.activeBreakpoints[props.breakpoint]);
 
-export const getPoliticalData = createSelector(getAppState, (state: State) => state.politicalData);
-export const getPersonalData = createSelector(getAppState, (state: State) => state.personalData);
+export const getPoliticalData = createSelector(getAppState, (state: State): PoliticalData => state.politicalData);
+export const getPersonalData = createSelector(getAppState, (state: State): PersonalCandidateMap => state.personalData);
 
 export const isDataLoaded = createSelector(getAppState, (state: State) => state.politicalDataLoaded && state.personalDataLoaded);
 
 export const getVotes = createSelector(getAppState, (state: State) => state.votes);
 
 export const isLocalDataStorageAllowed = createSelector(getAppState, (state: State) => state.allowLocalDataStorage);
+
+// TODO kann weg?
 export const getQuizState = createSelector(getAppState, (state: State) => QuizState.STARTED); // TODO
 
 export const getParties = createSelector(getAppState, (state: State) => (state.politicalDataLoaded ? state.politicalData.parties : null));
 export const getPartyIds = createSelector(getAppState, (state: State) =>
   state.politicalDataLoaded ? Object.getOwnPropertyNames(state.politicalData.parties) : null,
 );
-export const getCandidatePersonalDataById = createSelector(getPersonalData, (personalData, props: { id: string }) => {
-  if (personalData && personalData.candidates[props.id]) {
-    return personalData.candidates[props.id];
-  }
+export const getCandidatePersonalDataById =
+  createSelector(getPersonalData, (personalData, props: { id: string }) => getCandidatePersonalInfo(personalData, props.id));
 
-  return {
-    name: 'Unbekannt',
-    picture: 'default.jpg',
-    shortDescription: 'keine Angaben',
-    description: 'keine Angaben',
-  };
-});
-
-export const getPartyById = createSelector(getParties, (parties, props: { id: string }) => parties[props.id]);
+export const getPartyById = createSelector(getParties, (parties, props: { id: string }) => parties ? parties[props.id] : null);
 
 export const getCategoryByClaimId = createSelector(
   getPoliticalData,
@@ -55,15 +50,11 @@ export const getCategoryByClaimId = createSelector(
 
 export const getClaimsByCategory = createSelector(getPoliticalData, (data, category: { id: string }) => {
   if (data) {
-    console.log(category);
-    console.log(data.claims);
     const keys = Object.keys(data.claims).filter((c) => data.claims[c].category === category.id);
-    console.log(keys);
     const subset = {};
-    for (let i = 0; i < keys.length; i++) {
-      subset[keys[i]] = data.claims[keys[i]];
+    for (const key of keys) {
+      subset[key] = data.claims[key];
     }
-    console.log(subset);
     return subset;
   }
 });
@@ -72,7 +63,7 @@ export const getPrevQuestion = createSelector(getPoliticalData, (data, currentCl
   if (data) {
     const categories = Object.keys(data.categories);
 
-    if (!currentClaim.id || currentClaim.id === 'howto') {
+    if (!currentClaim.id || currentClaim.id === QuizFirstPage) {
       // no claimid yet? -> no back..
       return undefined;
     }
@@ -106,7 +97,7 @@ export const getNextQuestion = createSelector(getPoliticalData, (data, currentCl
   if (data) {
     const categories = Object.keys(data.categories);
 
-    if (!currentClaim.id || currentClaim.id === 'howto') {
+    if (!currentClaim.id || currentClaim.id === QuizFirstPage) {
       // no claimid yet, return first claim
       return Object.keys(data.claims).filter((c) => data.claims[c].category === categories[0])[0];
     }
@@ -135,10 +126,11 @@ export const getNextQuestion = createSelector(getPoliticalData, (data, currentCl
   return undefined;
 });
 
-export const getCandidateIds = createSelector(getAppState, (state: State) =>
+export const getLastQuizPage = createSelector(getAppState, (state: State) => state.quizLastPage);
+export const getCandidateIds = createSelector(getAppState, (state: State): string[] =>
   !state.politicalDataLoaded || !state.personalDataLoaded ? null : Object.getOwnPropertyNames(state.politicalData.candidates),
 );
-export const getCandidateList = createSelector(getAppState, (state: State) =>
+/*export const getCandidateList = createSelector(getAppState, (state: State) =>
   !state.politicalDataLoaded || !state.personalDataLoaded
     ? null
     : Object.getOwnPropertyNames(state.politicalData.candidates).map((candidateId) => ({
@@ -147,11 +139,15 @@ export const getCandidateList = createSelector(getAppState, (state: State) =>
         candidateId,
         hasPersonalData: !!state.personalData[candidateId],
       })),
+);*/
+export const getCandidateListByPartyId = createSelector(getAppState, (state: State, props: { partyId: string }): string[] =>
+  !state.politicalDataLoaded || !state.personalDataLoaded
+    ? null :
+    Object.keys(state.politicalData.candidates)
+      .filter((candidate) => state.politicalData.candidates[candidate].party === props.partyId)
+  // !state ? null : state.filter((candidate) => candidate.party === props.partyId),
 );
-export const getCandidateListByPartyId = createSelector(getCandidateList, (state: Array<CandidateWithID>, props: { partyId: string }) =>
-  !state ? null : state.filter((candidate) => candidate.party === props.partyId),
-);
-export const getCandidateById = createSelector(getAppState, (state: State, props: { id: string }) =>
+/*export const getCandidateById = createSelector(getAppState, (state: State, props: { id: string }) =>
   !state.politicalDataLoaded || !state.personalDataLoaded
     ? null
     : ({
@@ -160,4 +156,4 @@ export const getCandidateById = createSelector(getAppState, (state: State, props
         candidateId: props.id,
         hasPersonalData: !!state.personalData[props.id],
       } as CandidateWithID),
-);
+);*/

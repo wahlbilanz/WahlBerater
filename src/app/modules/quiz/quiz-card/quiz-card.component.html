@@ -38,7 +38,7 @@
         <a class="votebtn votesmaller" *ngIf="next" [routerLink]="next" title="Überspringen und weiter zur nächten These."
           ><i nz-icon nzType="forward" nzTheme="outline"></i
         ></a>
-        <a class="votebtn votesmaller" *ngIf="!next" [routerLink]="'/quiz/auswertung'" title="Weiter zur Auswertung."
+        <a class="votebtn votesmaller" *ngIf="!next" [routerLink]="'/quiz/' + ResultUrlPath" title="Weiter zur Auswertung."
           ><i nz-icon nzType="bar-chart" nzTheme="outline"></i
         ></a>
       </div>
@@ -63,7 +63,7 @@
         ></a>
       </div>
       <div class="">
-        <a class="cardnavbtn" [routerLink]="'/quiz/auswertung'" title="Direkt zur Auswertung."
+        <a class="cardnavbtn" [routerLink]="'/quiz/' + ResultUrlPath" title="Direkt zur Auswertung."
           ><i nz-icon nzType="bar-chart" nzTheme="outline"></i
         ></a>
       </div>

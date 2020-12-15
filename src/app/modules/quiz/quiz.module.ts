@@ -11,11 +11,12 @@ import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { AuswertungBarchartComponent } from './auswertung-barchart/auswertung-barchart.component';
 import { AuswertungBarchartTableComponent } from './auswertung-barchart-table/auswertung-barchart-table.component';
-// import {DecisionToWord, CandidateDecisionToWord} from '../../definitions/functions/decision-mapping.function';
+import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 import { PipesModule } from '../pipes/pipes.module';
 import { AuswertungHeatmapComponent } from './auswertung-heatmap/auswertung-heatmap.component';
 import { AuswertungHeatmapVotesComponent } from './auswertung-heatmap-votes/auswertung-heatmap-votes.component';
 import { AuswertungCategoryPanelComponent } from './auswertung-category-panel/auswertung-category-panel.component';
+import { NzBadgeModule } from 'ng-zorro-antd/badge';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,6 @@ import { AuswertungCategoryPanelComponent } from './auswertung-category-panel/au
     AuswertungHeatmapVotesComponent,
     AuswertungCategoryPanelComponent,
   ],
-  imports: [CommonModule, QuizRoutingModule, NzIconModule, NzCollapseModule, NzListModule, NgApexchartsModule, PipesModule, NzTabsModule],
+  imports: [CommonModule, QuizRoutingModule, NzIconModule, NzCollapseModule, NzListModule, NgApexchartsModule, PipesModule, NzTabsModule, NzToolTipModule,NzBadgeModule],
 })
 export class QuizModule {}

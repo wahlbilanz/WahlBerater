@@ -1,9 +1,11 @@
 import { Component, ViewChild, Input, OnInit } from '@angular/core';
-import { Candidate } from '../../../../definitions/models/candidate.model';
-import { PoliticalData } from '../../../../definitions/models/political.data.model';
+// import { Candidate } from '../../../../definitions/models/candidate.model';
 import { claimScore } from '../../../../definitions/functions/score.function';
 
 import { ApexAxisChartSeries, ApexTitleSubtitle, ApexChart, ApexXAxis, ApexYAxis, ChartComponent } from 'ng-apexcharts';
+import {PoliticalData} from '../../../../definitions/models/political.data.model';
+import {PersonalData} from '../../../../definitions/models/personal.data.model';
+import {PersonalCandidateMap} from '../../../../definitions/models/candidate.model';
 
 export type ChartOptions = {
   series: ApexAxisChartSeries;
@@ -20,7 +22,8 @@ export type ChartOptions = {
 })
 export class CandidateListCardComponent implements OnInit {
   @Input() candidate: string;
-  @Input() data: PoliticalData;
+  @Input() politicalData: PoliticalData;
+  @Input() personalData: PersonalCandidateMap;
   @Input() decisions;
 
   radarData = [];
@@ -55,26 +58,26 @@ export class CandidateListCardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.data);
-    console.log(this.candidate);
-    console.log(this.decisions);
+    // console.log(this.PoliticalData);
+    // console.log(this.candidate);
+    // console.log(this.decisions);
     let maxY = 0;
     // TODO move this into effect/selector combi
 
-    for (const category in this.data.categories) {
-      const claimIds = Object.getOwnPropertyNames(this.data.claims).filter((claimId) => this.data.claims[claimId].category === category);
+    for (const category in this.politicalData.categories) {
+      const claimIds = Object.getOwnPropertyNames(this.politicalData.claims).filter((claimId) => this.politicalData.claims[claimId].category === category);
 
-      if (this.data.categories.hasOwnProperty(category) && category !== 'howto') {
+      if (this.politicalData.categories.hasOwnProperty(category) && category !== 'howto') {
         let score = 0;
         if (maxY < claimIds.length) {
           maxY = claimIds.length;
         }
         for (const claim of claimIds) {
           // console.log (claim, this.decisions[claim], this.data.candidates[this.candidate]);
-          if (this.decisions[claim] && this.data.candidates[this.candidate] && this.data.candidates[this.candidate].positions[claim]) {
+          if (this.decisions[claim] && this.politicalData.candidates[this.candidate] && this.politicalData.candidates[this.candidate].positions[claim]) {
             // console.log (claim, this.data.candidates[this.candidate].positions[claim].vote, this.decisions[claim].decision);
             score += claimScore(
-              this.data.candidates[this.candidate].positions[claim].vote,
+              this.politicalData.candidates[this.candidate].positions[claim].vote,
               this.decisions[claim].decision,
               this.decisions[claim].fav,
             );
@@ -84,9 +87,9 @@ export class CandidateListCardComponent implements OnInit {
         // console.log ({category, score});
       }
     }
-    console.log(this.candidate);
-    console.log(this.radarData);
-    console.log(maxY);
+    // console.log(this.candidate);
+    // console.log(this.radarData);
+    // console.log(maxY);
     this.chartOptions.series[0].data = this.radarData.map((s) => s.score);
     this.chartOptions.xaxis.categories = this.radarData.map((s) => s.category);
     this.chartOptions.yaxis.max = maxY * 2;

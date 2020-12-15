@@ -1,5 +1,12 @@
 <h1>Wahllisten</h1>
 
 <section class="party-list">
-  <app-party-card [partyId]="id" [showSocialLinks]="false" *ngFor="let id of partyIds | async"></app-party-card>
+  <app-party-card
+    [partyId]="id"
+    [showSocialLinks]="false"
+    [politicalData]="politicalData"
+    [personalData]="personalData"
+    [partyData]="politicalData.parties[id]"
+    *ngFor="let id of partyIds | async">
+  </app-party-card>
 </section>

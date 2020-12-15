@@ -1,22 +1,19 @@
-<div class="candidate-card" *ngIf="candidateData | async as candidate">
-  <ng-container *ngIf="candidate.hasPersonalData; else hiddenPerson">
+<div class="candidate-card" *ngIf="politicalInfo && personalInfo">
     <img
       class="candidate-picture"
-      src="{{ candidate.picture | pictureUrl }}"
-      [routerLink]="['/', 'parties', candidate.party, 'candidates', candidate.candidateId]"
+      src="{{ personalInfo.picture | pictureUrl }}"
+      [routerLink]="['/', 'parties', politicalInfo.party, 'candidates', candidateId]"
     />
-    <h3 class="candidate-name">{{ candidate.name }}</h3>
-    <p class="candidate-description">{{ candidate.shortDescription | markdown }}</p>
+    <h3 class="candidate-name">{{ personalInfo.name }}</h3>
+    <p class="candidate-description">{{ personalInfo.shortDescription | markdown }}</p>
     <div class="candidate-social" *ngIf="showSocialLinks">
-      <app-social-links [links]="candidate.links" [name]="candidate.name"></app-social-links>
+      <app-social-links [links]="personalInfo.links" [name]="personalInfo.name"></app-social-links>
     </div>
     <a
       class="candidate-link"
-      title="Mehr Informationen zu {{ candidate.name }}"
-      [routerLink]="['/', 'parties', candidate.party, 'candidates', candidate.candidateId]"
+      title="Mehr Informationen zu {{ personalInfo.name }}"
+      [routerLink]="['/', 'parties', politicalInfo.party, 'candidates', candidateId]"
     >
       Mehr Informationen
     </a>
-  </ng-container>
-  <ng-template #hiddenPerson> TODO: no personal data </ng-template>
 </div>

@@ -1,12 +1,14 @@
-<a [href]="links.blog" [title]="!!name ? 'Webseite von ' + name : 'Webseite'" *ngIf="links.blog"
-  ><i nz-icon nzType="home" nzTheme="fill"></i
-></a>
-<a [href]="links.facebook" [title]="!!name ? 'facebook Seite von ' + name : 'facebook Seite'" *ngIf="links.facebook"
-  ><i nz-icon nzType="facebook" nzTheme="fill"></i
-></a>
-<a [href]="links.twitter" [title]="!!name ? 'Twitter Feed von ' + name : 'Twitter'" *ngIf="links.twitter"
-  ><i nz-icon nzType="twitter-square" nzTheme="fill"></i
-></a>
-<a [href]="links.instagram" [title]="!!name ? 'Instagram von ' + name : 'Instagram'" *ngIf="links.instagram"
-  ><i nz-icon nzType="instagram" nzTheme="fill"></i
-></a>
+<ng-container *ngIf="links">
+  <a [href]="links.blog" [title]="!!name ? 'Webseite von ' + name : 'Webseite'" *ngIf="links.blog"
+    ><i nz-icon nzType="home" nzTheme="fill"></i
+  ></a>
+  <a [href]="links.facebook" [title]="!!name ? 'facebook Seite von ' + name : 'facebook Seite'" *ngIf="links.facebook"
+    ><i nz-icon nzType="facebook" nzTheme="fill"></i
+  ></a>
+  <a [href]="links.twitter" [title]="!!name ? 'Twitter Feed von ' + name : 'Twitter'" *ngIf="links.twitter"
+    ><i nz-icon nzType="twitter-square" nzTheme="fill"></i
+  ></a>
+  <a [href]="links.instagram" [title]="!!name ? 'Instagram von ' + name : 'Instagram'" *ngIf="links.instagram"
+    ><i nz-icon nzType="instagram" nzTheme="fill"></i
+  ></a>
+</ng-container>

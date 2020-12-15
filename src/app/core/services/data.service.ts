@@ -6,6 +6,7 @@ import { environment } from '../../../environments/environment';
 // import { Data } from '../../definitions/models/data.model';
 import { PoliticalData } from '../../definitions/models/political.data.model';
 import { PersonalData } from '../../definitions/models/personal.data.model';
+import {PersonalCandidateMap} from '../../definitions/models/candidate.model';
 
 @Injectable({
   providedIn: 'root',
@@ -19,7 +20,7 @@ export class DataService {
     return this.http.get(`${this.baseUrl}/political.json`).pipe(map((data: any) => data as PoliticalData));
   }
 
-  getPersonalData(): Observable<PersonalData> {
-    return this.http.get(`${this.baseUrl}/personal.json`).pipe(map((data: any) => data as PersonalData));
+  getPersonalData(): Observable<PersonalCandidateMap> {
+    return this.http.get(`${this.baseUrl}/personal.json`).pipe(map((data: any) => data as PersonalCandidateMap));
   }
 }

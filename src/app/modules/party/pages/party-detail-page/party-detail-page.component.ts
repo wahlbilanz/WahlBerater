@@ -14,7 +14,7 @@ export class PartyDetailPageComponent implements OnInit {
   public partyId = this.route.params.pipe(map((params) => params.partyId as string));
   public partyData = this.partyId.pipe(switchMap((partyId) => this.state.pipe(select(AppSelectors.getPartyById, { id: partyId }))));
   public partyCandidates = this.partyId.pipe(
-    switchMap((partyId) => this.state.pipe(select(AppSelectors.getCandidateListByPartyId, { partyId: partyId }))),
+    switchMap((partyId) => this.state.pipe(select(AppSelectors.getCandidateListByPartyId, { partyId }))),
   );
 
   constructor(private state: Store<AppPartialState>, private route: ActivatedRoute) {}

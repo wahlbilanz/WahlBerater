@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild, OnInit } from '@angular/core';
+import {Component, Input, ViewChild, OnInit, OnChanges, SimpleChanges} from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { AppPartialState } from '../../../+state/app.reducer';
 import * as AppSelectors from '../../../+state/app.selectors';
@@ -12,8 +12,9 @@ import {
   ApexPlotOptions,
   ApexDataLabels,
 } from 'ng-apexcharts';
-import { PoliticalCandidateMap } from '../../../definitions/models/candidate.model';
+import {PersonalCandidateMap, PoliticalCandidateMap} from '../../../definitions/models/candidate.model';
 import { claimScore } from '../../../definitions/functions/score.function';
+import {getCandidatePersonalInfo} from '../../../definitions/functions/getCandidatePersonalInfo';
 
 export type ChartOptions = {
   series: ApexAxisChartSeries;
@@ -28,9 +29,10 @@ export type ChartOptions = {
   templateUrl: './auswertung-barchart.component.html',
   styleUrls: ['./auswertung-barchart.component.scss'],
 })
-export class AuswertungBarchartComponent implements OnInit {
-  votes = this.store.pipe(select(AppSelectors.getVotes));
-  data = this.store.pipe(select(AppSelectors.getPoliticalData));
+export class AuswertungBarchartComponent implements OnInit, OnChanges {
+  @Input() votes;
+  @Input() politicalCandidates: PoliticalCandidateMap;
+  @Input() personalCandidates: PersonalCandidateMap;
 
   decisions = {};
   candidates = {};
@@ -65,20 +67,20 @@ export class AuswertungBarchartComponent implements OnInit {
   }
 
   recalc(): void {
-    if (this.candidates && this.decisions) {
+    if (this.politicalCandidates && this.votes) {
       const scoreArray = [];
-      for (const c in this.candidates) {
-        if (this.candidates.hasOwnProperty(c)) {
+      for (const c in this.politicalCandidates) {
+        if (this.politicalCandidates.hasOwnProperty(c)) {
           let score = 0;
-          for (const v in this.candidates[c].positions) {
-            if (this.candidates[c].positions.hasOwnProperty(v)) {
-              if (this.decisions[v]) {
-                score += claimScore(this.candidates[c].positions[v].vote, this.decisions[v].decision, this.decisions[v].fav);
+          for (const v in this.politicalCandidates[c].positions) {
+            if (this.politicalCandidates[c].positions.hasOwnProperty(v)) {
+              if (this.votes[v]) {
+                score += claimScore(this.politicalCandidates[c].positions[v].vote, this.votes[v].decision, this.votes[v].fav);
               }
             }
           }
           scoreArray.push({
-            candidate: c,
+            candidate: getCandidatePersonalInfo(this.personalCandidates, c).name,
             score,
           });
         }
@@ -89,22 +91,19 @@ export class AuswertungBarchartComponent implements OnInit {
         this.chart &&
         this.chartOptions.series &&
         this.chartOptions.series[0].data &&
-        scoreArray.length === Object.keys(this.candidates).length
+        scoreArray.length === Object.keys(this.politicalCandidates).length
       ) {
-        console.log(this.chartOptions.series[0].data);
+        this.chart.updateOptions(this.chartOptions);
         this.chart.updateSeries([{ data: this.chartOptions.series[0].data }]);
       }
     }
   }
 
   ngOnInit(): void {
-    this.data.subscribe((d) => {
-      this.candidates = d.candidates;
-      this.recalc();
-    });
-    this.votes.subscribe((v) => {
-      this.decisions = v;
-      this.recalc();
-    });
+    this.recalc();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.recalc();
   }
 }

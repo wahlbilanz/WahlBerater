@@ -18,14 +18,10 @@ table {
     &.missed {
       border: none;
     }
-    /*&.hit:first-of-type {
-      border-top-left-radius: $wb-space-xx-small;
-      border-bottom-left-radius: $wb-space-xx-small;
+    span {
+      width: 100%;
+      display: inline-block;
     }
-    &.hit:last-of-type {
-      border-top-right-radius: $wb-space-small;
-      border-bottom-right-radius: $wb-space-small;
-    }*/
   }
   tr#axis {
     border-top: 1px solid #888;
