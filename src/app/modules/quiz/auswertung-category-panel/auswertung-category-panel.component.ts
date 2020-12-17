@@ -7,6 +7,7 @@ import {PersonalCandidateMap, PoliticalCandidateMap} from '../../../definitions/
 import {Position} from '../../../definitions/models/position.model';
 import {ClaimMap} from '../../../definitions/models/claim.model';
 import {PoliticalData} from '../../../definitions/models/political.data.model';
+import {DecisionTemplatesComponent} from '../../helpers/decision-templates/decision-templates.component';
 
 @Component({
   selector: 'app-auswertung-category-panel',
@@ -22,11 +23,7 @@ export class AuswertungCategoryPanelComponent implements OnInit {
   @Input() personalCandidates: PersonalCandidateMap;
   @Input() claims: ClaimMap;
 
-  @ViewChild('nono', {static : true}) nonoTempleate: TemplateRef<any>;
-  @ViewChild('no', {static : true}) noTempleate: TemplateRef<any>;
-  @ViewChild('yes', {static : true}) yesTempleate: TemplateRef<any>;
-  @ViewChild('yesyes', {static : true}) yesyesTempleate: TemplateRef<any>;
-  @ViewChild('skip', {static : true}) skipTempleate: TemplateRef<any>;
+  @ViewChild('decisionTemplates', {static : true}) decisionTemplates: DecisionTemplatesComponent;
 
   constructor(private store: Store<AppPartialState>) { }
 
@@ -40,19 +37,19 @@ export class AuswertungCategoryPanelComponent implements OnInit {
 
   getUserTemplate(userDecision: any): TemplateRef<any> {
     if (!userDecision || userDecision === 0) {
-      return this.skipTempleate;
+      return this.decisionTemplates.skipTempleate;
     }
 
     if (userDecision.decision > 0) {
       if (userDecision.fav) {
-        return this.yesyesTempleate;
+        return this.decisionTemplates.yesyesTempleate;
       }
-      return this.yesTempleate;
+      return this.decisionTemplates.yesTempleate;
     } else {
       if (userDecision.fav) {
-        return this.nonoTempleate;
+        return this.decisionTemplates.nonoTempleate;
       }
-      return this.noTempleate;
+      return this.decisionTemplates.noTempleate;
     }
   }
 }

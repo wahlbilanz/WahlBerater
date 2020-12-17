@@ -32,26 +32,5 @@
   </nz-collapse-panel>
 </nz-collapse>
 
+<app-decision-templates #decisionTemplates></app-decision-templates>
 
-<ng-template #skip>
-  ~
-</ng-template>
-<ng-template #nono>
-  <nz-badge [nzCount]="star">
-    <i nz-icon nzType="dislike" nzTheme="outline" (click)="$event.stopPropagation()" class="vote-icon"></i>
-  </nz-badge>
-</ng-template>
-<ng-template #no>
-  <i nz-icon nzType="dislike" nzTheme="outline" (click)="$event.stopPropagation()" class="vote-icon"></i>
-</ng-template>
-<ng-template #yes>
-  <i nz-icon nzType="like" nzTheme="outline" (click)="$event.stopPropagation()" class="vote-icon"></i>
-</ng-template>
-<ng-template #yesyes>
-  <nz-badge [nzCount]="star">
-    <i nz-icon nzType="like" nzTheme="outline" (click)="$event.stopPropagation()" class="vote-icon"></i>
-  </nz-badge>
-</ng-template>
-<ng-template #star>
-  <i nz-icon nzType="star" nzTheme="fill" class="ant-scroll-number-custom-component" style="color: #f5222d" (click)="$event.stopPropagation()"></i>
-</ng-template>

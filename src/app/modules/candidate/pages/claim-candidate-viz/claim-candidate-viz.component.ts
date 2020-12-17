@@ -4,6 +4,7 @@ import {Claim} from '../../../../definitions/models/claim.model';
 import {PersonalCandidateMap, PoliticalCandidateMap} from '../../../../definitions/models/candidate.model';
 import {PoliticalData} from '../../../../definitions/models/political.data.model';
 import {Votes} from '../../../../definitions/models/votes.mode';
+import {DecisionTemplatesComponent} from '../../../helpers/decision-templates/decision-templates.component';
 
 @Component({
   selector: 'app-claim-candidate-viz',
@@ -12,11 +13,7 @@ import {Votes} from '../../../../definitions/models/votes.mode';
 })
 export class ClaimCandidateVizComponent implements OnInit {
 
-  @ViewChild('nono', {static : true}) nonoTempleate: TemplateRef<any>;
-  @ViewChild('no', {static : true}) noTempleate: TemplateRef<any>;
-  @ViewChild('yes', {static : true}) yesTempleate: TemplateRef<any>;
-  @ViewChild('yesyes', {static : true}) yesyesTempleate: TemplateRef<any>;
-  @ViewChild('skip', {static : true}) skipTempleate: TemplateRef<any>;
+  @ViewChild('decisionTemplates', {static : true}) decisionTemplates: DecisionTemplatesComponent;
 
   @Input() claimId: string;
   @Input() claim: Claim;
@@ -32,19 +29,19 @@ export class ClaimCandidateVizComponent implements OnInit {
 
   getCandidateTemplate(candidateDecision: Position, userDecision: any): TemplateRef<any> {
     if (!candidateDecision || candidateDecision.vote === 0)  {
-      return this.skipTempleate;
+      return this.decisionTemplates.skipTempleate;
     }
 
     if (candidateDecision.vote > 0) {
       if (candidateDecision.vote === 2 && userDecision && userDecision.decision > 0 && userDecision.fav) {
-        return this.yesyesTempleate;
+        return this.decisionTemplates.yesyesTempleate;
       }
-      return this.yesTempleate;
+      return this.decisionTemplates.yesTempleate;
     } else {
       if (candidateDecision.vote === -2 && userDecision && userDecision.decision < 0 && userDecision.fav) {
-        return this.nonoTempleate;
+        return this.decisionTemplates.nonoTempleate;
       }
-      return this.noTempleate;
+      return this.decisionTemplates.noTempleate;
     }
   }
 }
