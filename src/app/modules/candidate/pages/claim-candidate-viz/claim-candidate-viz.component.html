@@ -1,0 +1,57 @@
+<nz-collapse>
+  <nz-collapse-panel
+    *ngFor="let candidate of politicalData.candidates | keyvalue"
+    [nzHeader]="(personalCandidates | personalData:candidate.key).name + ' ('+politicalData.parties[candidate.value.party].name+')'"
+    [nzExtra]="getCandidateTemplate(candidate.value.positions[claimId], votes[claimId])"
+    class="{{
+                  votes[claimId] &&
+                  candidate.value.positions[claimId] &&
+                  ((votes[claimId].decision > 0 && candidate.value.positions[claimId].vote > 0) ||
+                    (votes[claimId].decision < 0 && candidate.value.positions[claimId].vote < 0))
+                    ? 'same_direction'
+                    : ''
+                }}"
+  >
+    <ng-container *ngIf="candidate.value.positions[claimId]">
+      <a [routerLink]="'/candidates/' + candidate.key">{{ (personalCandidates | personalData:candidate.key).name }}</a>
+      von der Liste <a [routerLink]="'/parties/' + candidate.value.party">{{politicalData.parties[candidate.value.party].name}}</a>
+      denkt <em><ng-container *ngTemplateOutlet="getCandidateTemplate(candidate.value.positions[claimId], votes[claimId])"></ng-container>&nbsp;{{ candidate.value.positions[claimId].vote | candidateDecisionToWord }},</em> denn:
+      <blockquote [innerHTML]="candidate.value.positions[claimId].reason | markdown"></blockquote>
+      <ng-container *ngIf="votes && votes[claimId]">
+        <ng-container *ngIf="((votes[claimId].decision > 0 && candidate.value.positions[claimId].vote > 0) || (votes[claimId].decision < 0 && candidate.value.positions[claimId].vote < 0))">
+          <strong>Du hast dich in die gleiche Richtung entschieden!</strong>
+        </ng-container>
+        <ng-container *ngIf="((votes[claimId].decision > 0 && votes[claimId].fav && candidate.value.positions[claimId].vote === 2) || (votes[claimId].decision < 0 && votes[claimId].fav && candidate.value.positions[claimId].vote === -2))">
+          &nbsp;<strong><nz-badge [nzCount]="star">Euch beiden ist diese These sehr wichtig!</nz-badge></strong>
+        </ng-container>
+      </ng-container>
+    </ng-container>
+    <ng-container *ngIf="!candidate.value.positions[claimId]">
+      <a [routerLink]="'/candidates/' + candidate.key">{{ (personalCandidates | personalData:candidate.key).name }}</a> hat diese Frage nicht beantwortet.
+    </ng-container>
+  </nz-collapse-panel>
+</nz-collapse>
+
+
+<ng-template #skip>
+  ~
+</ng-template>
+<ng-template #nono>
+  <nz-badge [nzCount]="star">
+    <i nz-icon nzType="dislike" nzTheme="outline" (click)="$event.stopPropagation()" class="vote-icon"></i>
+  </nz-badge>
+</ng-template>
+<ng-template #no>
+  <i nz-icon nzType="dislike" nzTheme="outline" (click)="$event.stopPropagation()" class="vote-icon"></i>
+</ng-template>
+<ng-template #yes>
+  <i nz-icon nzType="like" nzTheme="outline" (click)="$event.stopPropagation()" class="vote-icon"></i>
+</ng-template>
+<ng-template #yesyes>
+  <nz-badge [nzCount]="star">
+    <i nz-icon nzType="like" nzTheme="outline" (click)="$event.stopPropagation()" class="vote-icon"></i>
+  </nz-badge>
+</ng-template>
+<ng-template #star>
+  <i nz-icon nzType="star" nzTheme="fill" class="ant-scroll-number-custom-component" style="color: #f5222d" (click)="$event.stopPropagation()"></i>
+</ng-template>
