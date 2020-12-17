@@ -4,17 +4,9 @@ import { DecisionTemplatesComponent } from './decision-templates/decision-templa
 import { NzBadgeModule } from 'ng-zorro-antd/badge';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 
-
-
 @NgModule({
   declarations: [DecisionTemplatesComponent],
-  exports: [
-    DecisionTemplatesComponent
-  ],
-  imports: [
-    CommonModule,
-    NzBadgeModule,
-    NzIconModule
-  ]
+  exports: [DecisionTemplatesComponent],
+  imports: [CommonModule, NzBadgeModule, NzIconModule],
 })
-export class HelpersModule { }
+export class HelpersModule {}

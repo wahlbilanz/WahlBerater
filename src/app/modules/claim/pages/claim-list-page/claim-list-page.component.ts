@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {select, Store} from '@ngrx/store';
-import {AppPartialState} from '../../../../+state/app.reducer';
+import { select, Store } from '@ngrx/store';
+import { AppPartialState } from '../../../../+state/app.reducer';
 import * as AppSelectors from '../../../../+state/app.selectors';
 
 @Component({

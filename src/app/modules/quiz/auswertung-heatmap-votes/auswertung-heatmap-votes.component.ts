@@ -1,11 +1,11 @@
-import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import * as AppSelectors from '../../../+state/app.selectors';
-import {PersonalCandidateMap, PoliticalCandidateMap} from '../../../definitions/models/candidate.model';
+import { PersonalCandidateMap, PoliticalCandidateMap } from '../../../definitions/models/candidate.model';
 import { CategoryMap } from '../../../definitions/models/category.model';
 import { AppPartialState } from '../../../+state/app.reducer';
 import { claimScore } from '../../../definitions/functions/score.function';
-import {getCandidatePersonalInfo} from '../../../definitions/functions/getCandidatePersonalInfo';
+import { getCandidatePersonalInfo } from '../../../definitions/functions/getCandidatePersonalInfo';
 
 @Component({
   selector: 'app-auswertung-heatmap-votes',
@@ -13,7 +13,6 @@ import {getCandidatePersonalInfo} from '../../../definitions/functions/getCandid
   styleUrls: ['./auswertung-heatmap-votes.component.scss'],
 })
 export class AuswertungHeatmapVotesComponent implements OnInit, OnChanges {
-
   @Input() votes;
   @Input() politicalCandidates: PoliticalCandidateMap;
   @Input() personalCandidates: PersonalCandidateMap;

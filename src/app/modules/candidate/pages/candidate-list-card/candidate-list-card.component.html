@@ -14,7 +14,7 @@
       </div>
     </div>
     <div class="candidate-content">
-      <h5 class="card-title">{{ (personalData | personalData:candidate).name }}</h5>
+      <h5 class="card-title">{{ (personalData | personalData: candidate).name }}</h5>
       <!-- <p class="card-text">{{ data.candidates[candidate].oneliner }}</p> -->
       <a [routerLink]="'/candidates/' + candidate" class="btn btn-primary">Profil öffnen</a>
     </div>

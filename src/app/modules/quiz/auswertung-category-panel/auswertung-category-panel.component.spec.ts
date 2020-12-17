@@ -8,9 +8,8 @@ describe('AuswertungCategoryPanelComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AuswertungCategoryPanelComponent ]
-    })
-    .compileComponents();
+      declarations: [AuswertungCategoryPanelComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

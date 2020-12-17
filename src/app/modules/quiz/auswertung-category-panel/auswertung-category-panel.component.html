@@ -1,4 +1,3 @@
-
 <h3>{{ category.title }}</h3>
 <nz-collapse *ngIf="claims">
   <ng-container *ngFor="let claim of claims | keyvalue">
@@ -6,9 +5,18 @@
       *ngIf="claim.value.category === categoryId"
       class="claim"
       [nzHeader]="claim.value.title"
-      [nzExtra]="getUserTemplate (votes[claim.key])">
-      <p class="background" *ngIf="claim.value.description"><strong>Hintergrund:</strong>&nbsp;<span [innerHTML]="claim.value.description | markdown"></span></p>
-      <p class="owndecision" *ngIf="votes[claim.key]"><strong>Deine Antwort:</strong>&nbsp;<em><ng-container *ngTemplateOutlet="getUserTemplate (votes[claim.key])"></ng-container>&nbsp;{{ votes[claim.key].decision | decisionToWord: votes[claim.key].fav }}</em></p>
+      [nzExtra]="getUserTemplate(votes[claim.key])"
+    >
+      <p class="background" *ngIf="claim.value.description">
+        <strong>Hintergrund:</strong>&nbsp;<span [innerHTML]="claim.value.description | markdown"></span>
+      </p>
+      <p class="owndecision" *ngIf="votes[claim.key]">
+        <strong>Deine Antwort:</strong>&nbsp;<em
+          ><ng-container *ngTemplateOutlet="getUserTemplate(votes[claim.key])"></ng-container>&nbsp;{{
+            votes[claim.key].decision | decisionToWord: votes[claim.key].fav
+          }}</em
+        >
+      </p>
 
       <p>
         <a [routerLink]="'/quiz/' + claim.key">Zurück zur These, um Entscheidung zu ändern.</a>
@@ -26,10 +34,8 @@
       <p>
         <a [routerLink]="'/claim/' + claim.key">Erfahre mehr über diese These.</a>
       </p>
-
     </nz-collapse-panel>
   </ng-container>
 </nz-collapse>
-
 
 <app-decision-templates #decisionTemplates></app-decision-templates>

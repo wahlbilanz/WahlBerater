@@ -6,11 +6,7 @@
       <div class="candidate-preview" *ngFor="let candidate of politicalData.candidates | keyvalue">
         <!--<div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }" nzJustify="center" class="mt">-->
         <!--  <div nz-col [nzSpan]="12" *ngFor="let candidate of d.candidates | keyvalue" class="mt">{{candidate.key}}-->
-        <app-candidate-list-card
-          [politicalData]="politicalData"
-          [personalData]="personalData"
-          [decisions]="v"
-          [candidate]="candidate.key">
+        <app-candidate-list-card [politicalData]="politicalData" [personalData]="personalData" [decisions]="v" [candidate]="candidate.key">
         </app-candidate-list-card>
         <!--    <nz-card nzHoverable [nzCover]="coverKandidat" [routerLink]="['/candidates/' + candidate.key]">-->
         <!--      <nz-card-meta nzTitle="{{candidate.value.name}}" nzDescription="Liste: {{candidate.value.party}}"></nz-card-meta>-->

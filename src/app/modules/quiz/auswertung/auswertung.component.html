@@ -5,7 +5,8 @@
         <app-auswertung-barchart
           [votes]="v"
           [politicalCandidates]="politicalData.candidates"
-          [personalCandidates]="personalData"></app-auswertung-barchart>
+          [personalCandidates]="personalData"
+        ></app-auswertung-barchart>
       </nz-tab>
       <nz-tab nzTitle="Bar 2">
         <app-auswertung-barchart-table
@@ -22,7 +23,8 @@
           [votes]="v"
           [politicalCandidates]="politicalData.candidates"
           [personalCandidates]="personalData"
-          [categories]="politicalData.categories">
+          [categories]="politicalData.categories"
+        >
         </app-auswertung-heatmap>
       </nz-tab>
       <nz-tab nzTitle="HeatMap 2">
@@ -30,7 +32,8 @@
           [votes]="v"
           [politicalCandidates]="politicalData.candidates"
           [personalCandidates]="personalData"
-          [categories]="politicalData.categories">
+          [categories]="politicalData.categories"
+        >
         </app-auswertung-heatmap-votes>
       </nz-tab>
     </nz-tabset>
@@ -44,7 +47,8 @@
           [personalCandidates]="personalData"
           [categoryId]="category.key"
           [claims]="politicalData.claims"
-          [category]="category.value">
+          [category]="category.value"
+        >
         </app-auswertung-category-panel>
       </div>
     </ng-container>

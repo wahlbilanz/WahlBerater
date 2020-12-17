@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import * as AppActions from './app.actions';
-import {QuizFirstPage, State} from './app.models';
+import { QuizFirstPage, State } from './app.models';
 
 export const STATE_FEATURE_KEY = 'app';
 

@@ -8,9 +8,8 @@ describe('ClaimCandidateVizComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ClaimCandidateVizComponent ]
-    })
-    .compileComponents();
+      declarations: [ClaimCandidateVizComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

@@ -8,9 +8,8 @@ describe('ImprintPageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ImprintPageComponent ]
-    })
-    .compileComponents();
+      declarations: [ImprintPageComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

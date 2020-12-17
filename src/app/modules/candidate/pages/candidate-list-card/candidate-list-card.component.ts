@@ -3,9 +3,9 @@ import { Component, ViewChild, Input, OnInit } from '@angular/core';
 import { claimScore } from '../../../../definitions/functions/score.function';
 
 import { ApexAxisChartSeries, ApexTitleSubtitle, ApexChart, ApexXAxis, ApexYAxis, ChartComponent } from 'ng-apexcharts';
-import {PoliticalData} from '../../../../definitions/models/political.data.model';
-import {PersonalData} from '../../../../definitions/models/personal.data.model';
-import {PersonalCandidateMap} from '../../../../definitions/models/candidate.model';
+import { PoliticalData } from '../../../../definitions/models/political.data.model';
+import { PersonalData } from '../../../../definitions/models/personal.data.model';
+import { PersonalCandidateMap } from '../../../../definitions/models/candidate.model';
 
 export type ChartOptions = {
   series: ApexAxisChartSeries;
@@ -65,26 +65,34 @@ export class CandidateListCardComponent implements OnInit {
     // TODO move this into effect/selector combi
 
     for (const category in this.politicalData.categories) {
-      const claimIds = Object.getOwnPropertyNames(this.politicalData.claims).filter((claimId) => this.politicalData.claims[claimId].category === category);
+      if (this.politicalData.categories.hasOwnProperty(category)) {
+        const claimIds = Object.getOwnPropertyNames(this.politicalData.claims).filter(
+          (claimId) => this.politicalData.claims[claimId].category === category,
+        );
 
-      if (this.politicalData.categories.hasOwnProperty(category) && category !== 'howto') {
-        let score = 0;
-        if (maxY < claimIds.length) {
-          maxY = claimIds.length;
-        }
-        for (const claim of claimIds) {
-          // console.log (claim, this.decisions[claim], this.data.candidates[this.candidate]);
-          if (this.decisions[claim] && this.politicalData.candidates[this.candidate] && this.politicalData.candidates[this.candidate].positions[claim]) {
-            // console.log (claim, this.data.candidates[this.candidate].positions[claim].vote, this.decisions[claim].decision);
-            score += claimScore(
-              this.politicalData.candidates[this.candidate].positions[claim].vote,
-              this.decisions[claim].decision,
-              this.decisions[claim].fav,
-            );
+        if (this.politicalData.categories.hasOwnProperty(category) && category !== 'howto') {
+          let score = 0;
+          if (maxY < claimIds.length) {
+            maxY = claimIds.length;
           }
+          for (const claim of claimIds) {
+            // console.log (claim, this.decisions[claim], this.data.candidates[this.candidate]);
+            if (
+              this.decisions[claim] &&
+              this.politicalData.candidates[this.candidate] &&
+              this.politicalData.candidates[this.candidate].positions[claim]
+            ) {
+              // console.log (claim, this.data.candidates[this.candidate].positions[claim].vote, this.decisions[claim].decision);
+              score += claimScore(
+                this.politicalData.candidates[this.candidate].positions[claim].vote,
+                this.decisions[claim].decision,
+                this.decisions[claim].fav,
+              );
+            }
+          }
+          this.radarData.push({ category, score });
+          // console.log ({category, score});
         }
-        this.radarData.push({ category, score });
-        // console.log ({category, score});
       }
     }
     // console.log(this.candidate);

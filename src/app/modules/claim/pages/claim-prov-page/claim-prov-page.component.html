@@ -1,15 +1,21 @@
 <ng-container *ngIf="claimId && politicalData">
   <div id="claimprov" class="" style="border-color:{{ politicalData.categories[politicalData.claims[claimId].category].color }}">
-    <h2 id="claim-category">Eine These in der Kategorie <strong>{{politicalData.categories[politicalData.claims[claimId].category].title}}.</strong></h2>
-    <h1>These: {{politicalData.claims[claimId].title}}</h1>
-    <p *ngIf="politicalData.claims[claimId].description"><strong>Hintergrund:</strong> {{politicalData.claims[claimId].description}}</p>
-    <p><a [routerLink]="'/quiz/' + claimId"><i nz-icon nzType="double-right" nzTheme="outline"></i>&nbsp;Springe zur These im Quiz</a></p>
-    <p *ngIf="votes && votes[claimId]">Du denkst: {{votes[claimId].decision}}</p>
+    <h2 id="claim-category">
+      Eine These in der Kategorie <strong>{{ politicalData.categories[politicalData.claims[claimId].category].title }}.</strong>
+    </h2>
+    <h1>These: {{ politicalData.claims[claimId].title }}</h1>
+    <p *ngIf="politicalData.claims[claimId].description"><strong>Hintergrund:</strong> {{ politicalData.claims[claimId].description }}</p>
+    <p>
+      <a [routerLink]="'/quiz/' + claimId"><i nz-icon nzType="double-right" nzTheme="outline"></i>&nbsp;Springe zur These im Quiz</a>
+    </p>
+    <p *ngIf="votes && votes[claimId]">Du denkst: {{ votes[claimId].decision }}</p>
 
     <div class="provenance" *ngIf="politicalData.claims[claimId].provenance">
       <h2>Die These ist aus den folgenden Thesen entstanden:</h2>
       <ul>
-        <li *ngFor="let prov of politicalData.claims[claimId].provenance">{{prov.description}} <strong>{{prov.claim}}</strong></li>
+        <li *ngFor="let prov of politicalData.claims[claimId].provenance">
+          {{ prov.description }} <strong>{{ prov.claim }}</strong>
+        </li>
       </ul>
     </div>
 
@@ -26,7 +32,7 @@
     <nz-list>
       <ng-container *ngFor="let item of politicalData.claims | keyvalue">
         <nz-list-item *ngIf="item.value.category === politicalData.claims[claimId].category && item.key !== claimId">
-          <a [routerLink]="'/claim/' + item.key">{{item.value.title}}</a>
+          <a [routerLink]="'/claim/' + item.key">{{ item.value.title }}</a>
         </nz-list-item>
       </ng-container>
     </nz-list>

@@ -4,8 +4,8 @@ import { AppPartialState } from '../../../+state/app.reducer';
 import * as AppSelectors from '../../../+state/app.selectors';
 import * as AppActions from '../../../+state/app.actions';
 import { ActivatedRoute } from '@angular/router';
-import {Category} from '../../../definitions/models/category.model';
-import {QuizFirstPage} from '../../../+state/app.models';
+import { Category } from '../../../definitions/models/category.model';
+import { QuizFirstPage } from '../../../+state/app.models';
 
 @Component({
   selector: 'app-quiz',
@@ -37,9 +37,11 @@ export class QuizComponent implements OnInit {
   ngOnInit(): void {
     this.route.paramMap.subscribe((pm) => {
       this.claimId = pm.get('claim');
-      this.store.dispatch(AppActions.updateLastQuizPage({lastPage: this.claimId}));
-      this.store.pipe(select(AppSelectors.getNextQuestion, { id: this.claimId })).subscribe(c => this.next = c ? '/quiz/' + c : undefined);
-      this.store.pipe(select(AppSelectors.getPrevQuestion, { id: this.claimId })).subscribe(c => {
+      this.store.dispatch(AppActions.updateLastQuizPage({ lastPage: this.claimId }));
+      this.store
+        .pipe(select(AppSelectors.getNextQuestion, { id: this.claimId }))
+        .subscribe((c) => (this.next = c ? '/quiz/' + c : undefined));
+      this.store.pipe(select(AppSelectors.getPrevQuestion, { id: this.claimId })).subscribe((c) => {
         if (c) {
           this.prev = '/quiz/' + c;
         } else {
@@ -50,7 +52,7 @@ export class QuizComponent implements OnInit {
           }
         }
       });
-      this.store.pipe(select(AppSelectors.getCategoryByClaimId, { id: this.claimId })).subscribe(c => this.category = c);
+      this.store.pipe(select(AppSelectors.getCategoryByClaimId, { id: this.claimId })).subscribe((c) => (this.category = c));
     });
   }
 
@@ -85,12 +87,11 @@ export class QuizComponent implements OnInit {
   //
   // }
 
-
   // getNext(d: Data): string {
-    // TODO move this into effect/selector combi
+  // TODO move this into effect/selector combi
 
-    // return '';
-    /*let returnNext = false;
+  // return '';
+  /*let returnNext = false;
     for (const c in d.categories) {
       if (d.categories.hasOwnProperty(c)) {
         const claims: Array<[string, Claim]> = Object.getOwnPropertyNames(d.claims)
@@ -116,8 +117,8 @@ export class QuizComponent implements OnInit {
   //
   // getPrev(d: Data): string {
   //   TODO move this into effect/selector combi
-    // return '';
-    /*let prev: string;
+  // return '';
+  /*let prev: string;
     for (const c in d.categories) {
       if (d.categories.hasOwnProperty(c)) {
         const claimIds = Object.getOwnPropertyNames(d.claims).filter((claimId) => d.claims[claimId].category === c);

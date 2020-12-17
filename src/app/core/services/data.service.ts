@@ -4,8 +4,8 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 // import { Data } from '../../definitions/models/data.model';
-import {PoliticalData} from '../../definitions/models/political.data.model';
-import {PersonalData} from '../../definitions/models/personal.data.model';
+import { PoliticalData } from '../../definitions/models/political.data.model';
+import { PersonalData } from '../../definitions/models/personal.data.model';
 
 @Injectable({
   providedIn: 'root',

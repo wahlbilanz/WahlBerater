@@ -3,8 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { QuizCardComponent } from './quiz-card/quiz-card.component';
 import { QuizComponent } from './quiz/quiz.component';
 import { AuswertungComponent } from './auswertung/auswertung.component';
-import {ResultUrl, QuizFirstPage} from '../../+state/app.models';
-
+import { ResultUrl, QuizFirstPage } from '../../+state/app.models';
 
 const routes: Routes = [
   { path: ResultUrl, component: AuswertungComponent },

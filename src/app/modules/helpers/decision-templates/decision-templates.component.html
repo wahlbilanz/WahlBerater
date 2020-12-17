@@ -1,7 +1,4 @@
-
-<ng-template #skip>
-  ~
-</ng-template>
+<ng-template #skip> ~ </ng-template>
 <ng-template #nono>
   <nz-badge [nzCount]="star">
     <i nz-icon nzType="dislike" nzTheme="outline" (click)="$event.stopPropagation()" class="vote-icon"></i>
@@ -19,5 +16,12 @@
   </nz-badge>
 </ng-template>
 <ng-template #star>
-  <i nz-icon nzType="star" nzTheme="fill" class="ant-scroll-number-custom-component" style="color: #f5222d" (click)="$event.stopPropagation()"></i>
+  <i
+    nz-icon
+    nzType="star"
+    nzTheme="fill"
+    class="ant-scroll-number-custom-component"
+    style="color: #f5222d"
+    (click)="$event.stopPropagation()"
+  ></i>
 </ng-template>

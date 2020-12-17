@@ -5,7 +5,7 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { ClaimRoutingModule } from './claim-routing.module';
 import { ClaimListPageComponent } from './pages/claim-list-page/claim-list-page.component';
 import { ClaimProvPageComponent } from './pages/claim-prov-page/claim-prov-page.component';
-import {CandidateModule} from '../candidate/candidate.module';
+import { CandidateModule } from '../candidate/candidate.module';
 
 @NgModule({
   declarations: [ClaimListPageComponent, ClaimProvPageComponent],

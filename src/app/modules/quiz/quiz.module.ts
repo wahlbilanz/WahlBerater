@@ -17,8 +17,8 @@ import { PipesModule } from '../pipes/pipes.module';
 import { AuswertungHeatmapComponent } from './auswertung-heatmap/auswertung-heatmap.component';
 import { AuswertungHeatmapVotesComponent } from './auswertung-heatmap-votes/auswertung-heatmap-votes.component';
 import { AuswertungCategoryPanelComponent } from './auswertung-category-panel/auswertung-category-panel.component';
-import { CandidateModule} from '../candidate/candidate.module';
-import {HelpersModule} from '../helpers/helpers.module';
+import { CandidateModule } from '../candidate/candidate.module';
+import { HelpersModule } from '../helpers/helpers.module';
 
 @NgModule({
   declarations: [
@@ -32,7 +32,19 @@ import {HelpersModule} from '../helpers/helpers.module';
     AuswertungHeatmapVotesComponent,
     AuswertungCategoryPanelComponent,
   ],
-  imports: [CommonModule, QuizRoutingModule, NzIconModule, NzCollapseModule, NzListModule, NgApexchartsModule,
-    PipesModule, NzTabsModule, NzToolTipModule, NzBadgeModule, CandidateModule, HelpersModule, ],
+  imports: [
+    CommonModule,
+    QuizRoutingModule,
+    NzIconModule,
+    NzCollapseModule,
+    NzListModule,
+    NgApexchartsModule,
+    PipesModule,
+    NzTabsModule,
+    NzToolTipModule,
+    NzBadgeModule,
+    CandidateModule,
+    HelpersModule,
+  ],
 })
 export class QuizModule {}

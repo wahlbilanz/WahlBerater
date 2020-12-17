@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import {select, Store} from '@ngrx/store';
-import {AppPartialState} from '../../../../+state/app.reducer';
+import { select, Store } from '@ngrx/store';
+import { AppPartialState } from '../../../../+state/app.reducer';
 import * as AppSelectors from '../../../../+state/app.selectors';
-import {PoliticalData} from '../../../../definitions/models/political.data.model';
-import {PersonalCandidateMap} from '../../../../definitions/models/candidate.model';
-import {Votes} from '../../../../definitions/models/votes.mode';
-
+import { PoliticalData } from '../../../../definitions/models/political.data.model';
+import { PersonalCandidateMap } from '../../../../definitions/models/candidate.model';
+import { Votes } from '../../../../definitions/models/votes.mode';
 
 @Component({
   selector: 'app-thesis-prov-page',
@@ -24,13 +23,13 @@ export class ClaimProvPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.store.pipe(select(AppSelectors.getPersonalData)).subscribe(d => {
+    this.store.pipe(select(AppSelectors.getPersonalData)).subscribe((d) => {
       this.personalData = d;
     });
-    this.store.pipe(select(AppSelectors.getPoliticalData)).subscribe(d => {
+    this.store.pipe(select(AppSelectors.getPoliticalData)).subscribe((d) => {
       this.politicalData = d;
     });
-    this.store.pipe(select(AppSelectors.getVotes)).subscribe(d => {
+    this.store.pipe(select(AppSelectors.getVotes)).subscribe((d) => {
       this.votes = d;
     });
   }

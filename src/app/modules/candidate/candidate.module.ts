@@ -9,7 +9,7 @@ import { NzCollapseModule } from 'ng-zorro-antd/collapse';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { NzBadgeModule } from 'ng-zorro-antd/badge';
 import { NzIconModule } from 'ng-zorro-antd/icon';
-import {HelpersModule} from '../helpers/helpers.module';
+import { HelpersModule } from '../helpers/helpers.module';
 
 import { CandidateRoutingModule } from './candidate-routing.module';
 import { CandidateListPageComponent } from './pages/candidate-list-page/candidate-list-page.component';
@@ -34,8 +34,6 @@ import { ClaimCandidateVizComponent } from './pages/claim-candidate-viz/claim-ca
     NzBadgeModule,
     HelpersModule,
   ],
-  exports: [
-    ClaimCandidateVizComponent
-  ]
+  exports: [ClaimCandidateVizComponent],
 })
 export class CandidateModule {}
