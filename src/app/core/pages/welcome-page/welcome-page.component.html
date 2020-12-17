@@ -50,7 +50,7 @@
       amet, consectetur adipiscing elit. Mauris et pharetra magna.
     </p>
     <p>
-      <a routerLink="/docs/about">Hier mehr lesen!</a>
+      <a routerLink="/docs/about">Hier mehr erfahren!</a> &mdash; <a routerLink="/docs/privacy">Datenschutz</a> &mdash; <a routerLink="/docs/imprint">Impressum</a>
     </p>
   </div>
 </section>
@@ -109,70 +109,3 @@
     </nz-card>
   </div>
 </div> -->
-
-<ng-container *ngIf="false && data | async as d">
-  <nz-divider nzText="Debug"></nz-divider>
-
-  <h2>Thesen</h2>
-  <ul *ngIf="d?.categories">
-    <li *ngFor="let category of d.categories | keyvalue" class="kategorie" style="background-color:{{ category.value.color }}">
-      Kategorie <strong>{{ category.value.title }}</strong> hat folgende thesen:
-      <ul>
-        <li *ngFor="let these of category.value.claims">
-          Background: <em>{{ d.claims[these].background }}</em
-          ><br />
-          These: <strong>{{ d.claims[these].claim }}</strong
-          ><br />
-          <small>entstanden aus:</small>
-          <ul>
-            <li *ngFor="let orgclaim of d.claims[these].provenance">
-              <em>{{ orgclaim.background }}</em> -- <strong>{{ orgclaim.claim }}</strong>
-            </li>
-          </ul>
-        </li>
-      </ul>
-    </li>
-  </ul>
-
-  <h2>Listen</h2>
-  <ul *ngIf="d?.parties">
-    <li *ngFor="let liste of d.parties | keyvalue" class="liste" style="background-color:{{ liste.value.color }}">
-      <a href="{{ liste.value.link }}"
-        ><strong>{{ liste.value.name }}:</strong></a
-      >
-      {{ liste.value.description }}
-    </li>
-  </ul>
-
-  <h2>Kandidaten</h2>
-  <ul *ngIf="d?.candidates">
-    <li *ngFor="let candidate of d.candidates | keyvalue">
-      <strong>{{ candidate.value.name }}</strong>
-      von der Liste
-      <em>{{ d.parties[candidate.value.party].name }}</em>
-      <ul>
-        <li><strong>bild:</strong> {{ candidate.value.pic }}</li>
-        <li><strong>oneliner:</strong> {{ candidate.value.oneliner }}</li>
-        <li><strong>beschreibung:</strong> {{ candidate.value.description }}</li>
-        <li><strong>freitext:</strong> {{ candidate.value.prose }}</li>
-        <li>
-          <strong>links:</strong>
-          <ul>
-            <li *ngFor="let link of candidate.value.links | keyvalue">
-              <a href="{{ link.value }}">{{ link.key }}</a>
-            </li>
-          </ul>
-        </li>
-        <li>
-          <strong>positionen:</strong>
-          <ul>
-            <li *ngFor="let position of candidate.value.positions | keyvalue">
-              <strong>These:</strong> {{ position.key }} -- position: <strong>{{ position.value.vote }}</strong> weil
-              <em>{{ position.value.reason }}</em>
-            </li>
-          </ul>
-        </li>
-      </ul>
-    </li>
-  </ul>
-</ng-container>

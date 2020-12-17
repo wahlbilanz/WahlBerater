@@ -21,5 +21,14 @@
       [politicalData]="politicalData"
       [personalCandidates]="personalData"
     ></app-claim-candidate-viz>
+
+    <h2>Weitere Thesen in der Kategorie {{ politicalData.categories[politicalData.claims[claimId].category].title }}</h2>
+    <nz-list>
+      <ng-container *ngFor="let item of politicalData.claims | keyvalue">
+        <nz-list-item *ngIf="item.value.category === politicalData.claims[claimId].category && item.key !== claimId">
+          <a [routerLink]="'/claim/' + item.key">{{item.value.title}}</a>
+        </nz-list-item>
+      </ng-container>
+    </nz-list>
   </div>
 </ng-container>
