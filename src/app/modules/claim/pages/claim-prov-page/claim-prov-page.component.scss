@@ -1,0 +1,16 @@
+@import '../../../../../assets/styles/variables';
+
+#claimprov {
+  border: $category-border-size solid;
+  border-radius: $category-border-radius;
+  padding: $wb-space-x-large;
+  margin: $wb-space-x-large 0;
+
+  #claim-category {
+    margin-top: -2em;
+    background: white;
+    padding: 0 0.5em;
+    width: max-content;
+    margin-left: auto;
+  }
+}

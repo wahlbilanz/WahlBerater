@@ -1,8 +1,8 @@
 @import '../../../../assets/styles/index';
 
 .category {
-  border: 2px solid;
-  border-radius: 7px;
+  border: $category-border-size solid;
+  border-radius: $category-border-radius;
   margin: 20px 0;
   padding: 1rem;
 }

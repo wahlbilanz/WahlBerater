@@ -18,3 +18,8 @@ blockquote {
   border-left: 3px solid #ccc;
   color: #555;
 }
+
+p {
+  margin-top: $wb-space-medium;
+  margin-bottom: $wb-space-medium;
+}

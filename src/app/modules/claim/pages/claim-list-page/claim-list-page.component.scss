@@ -4,6 +4,9 @@
     font-weight: bold;
   }
 }
-nz-list {
+.category {
   margin: $wb-space-medium 0;
+  border: $category-border-size solid;
+  border-radius: $category-border-radius;
+  padding: 1rem;
 }

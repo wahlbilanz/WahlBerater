@@ -5,8 +5,8 @@
   /*width: 100%;
   padding: 15px;
   margin: 6rem auto 0 auto;*/
-  border: 4px solid;
-  border-radius: 7px;
+  border: $category-border-size solid;
+  border-radius: $category-border-radius;
 
   padding: $wb-space-x-large;
   margin: $wb-space-x-large auto;
