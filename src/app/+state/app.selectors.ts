@@ -6,6 +6,7 @@ import {PersonalData} from '../definitions/models/personal.data.model';
 import {PoliticalData} from '../definitions/models/political.data.model';
 import {PersonalCandidateMap} from '../definitions/models/candidate.model';
 import {getCandidatePersonalInfo} from '../definitions/functions/getCandidatePersonalInfo';
+import {Votes} from '../definitions/models/votes.mode';
 
 const getAppState = createFeatureSelector<AppPartialState, State>(STATE_FEATURE_KEY);
 
@@ -17,7 +18,7 @@ export const getPersonalData = createSelector(getAppState, (state: State): Perso
 
 export const isDataLoaded = createSelector(getAppState, (state: State) => state.politicalDataLoaded && state.personalDataLoaded);
 
-export const getVotes = createSelector(getAppState, (state: State) => state.votes);
+export const getVotes = createSelector(getAppState, (state: State): Votes => state.votes);
 
 export const isLocalDataStorageAllowed = createSelector(getAppState, (state: State) => state.allowLocalDataStorage);
 

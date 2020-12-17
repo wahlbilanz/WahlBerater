@@ -10,31 +10,19 @@
     <span *ngIf="votes[claim.key]"> Deine Antwort: {{ votes[claim.key].decision | decisionToWord: votes[claim.key].fav }} </span>
     <a [routerLink]="'/quiz/' + claim.key">Zurück zur These, um Entscheidung zu ändern.</a>
 
-    <h4>Was denken die Kandidaten?</h4>
-    <nz-collapse>
-      <nz-collapse-panel
-        *ngFor="let candidate of politicalCandidates | keyvalue"
-        [nzHeader]="(personalCandidates | personalData:candidate.key).name"
-        [nzExtra]="getCandidateTemplate(candidate.value.positions[claim.key], votes[claim.key])"
-        class="{{
-                  votes[claim.key] &&
-                  candidate.value.positions[claim.key] &&
-                  ((votes[claim.key].decision > 0 && candidate.value.positions[claim.key].vote > 0) ||
-                    (votes[claim.key].decision < 0 && candidate.value.positions[claim.key].vote < 0))
-                    ? 'same_direction'
-                    : ''
-                }}"
-      >
-        <ng-container *ngIf="candidate.value.positions[claim.key]">
-          <a [routerLink]="'/candidates/' + candidate.key">{{ (personalCandidates | personalData:candidate.key).name }}</a>
-          denkt {{ candidate.value.positions[claim.key].vote | candidateDecisionToWord }}, denn:
-          <blockquote [innerHTML]="candidate.value.positions[claim.key].reason | markdown"></blockquote>
-        </ng-container>
-        <ng-container *ngIf="!candidate.value.positions[claim.key]">
-          <a [routerLink]="'/candidates/' + candidate.key">{{ c(personalCandidates | personalData:candidate.key).name }}</a> hat diese Frage nicht beantwortet.
-        </ng-container>
-      </nz-collapse-panel>
-    </nz-collapse>
+<h4>Was denken die Kandidaten?</h4>
+<app-claim-candidate-viz
+  [claimId]="claim.key"
+  [claim]="claim.value"
+  [votes]="votes"
+  [politicalData]="politicalData"
+  [personalCandidates]="personalCandidates"
+></app-claim-candidate-viz>
+
+
+
+
+
   </nz-collapse-panel>
 </nz-collapse>
 

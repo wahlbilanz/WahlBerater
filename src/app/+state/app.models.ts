@@ -3,6 +3,7 @@ import { BreakpointBooleanMap } from 'ng-zorro-antd/core/services';
 import {PoliticalData} from '../definitions/models/political.data.model';
 import {PersonalData} from '../definitions/models/personal.data.model';
 import {PersonalCandidateMap} from '../definitions/models/candidate.model';
+import {Votes} from '../definitions/models/votes.mode';
 
 export enum QuizState {
   NOT_STARTED,
@@ -27,7 +28,7 @@ export interface State {
   usedCachedPoliticalData: boolean;
   usedCachedPersonalData: boolean;
   /** The decisions of the user on the claims */
-  votes: {};
+  votes: Votes;
   /** Indicates, if the user opted in to store data on the local device */
   allowLocalDataStorage: boolean;
   /** Which was the last page in the quiz? */

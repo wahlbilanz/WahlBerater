@@ -1,0 +1,9 @@
+@import '../../../../../assets/styles/variables';
+:host ::ng-deep {
+  .ant-list-header {
+    font-weight: bold;
+  }
+}
+nz-list {
+  margin: $wb-space-medium 0;
+}

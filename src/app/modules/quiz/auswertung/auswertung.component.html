@@ -40,7 +40,7 @@
       <div *ngIf="category.key != 'howto'" class="category" style="border-color:{{ category.value.color }}">
         <app-auswertung-category-panel
           [votes]="v"
-          [politicalCandidates]="politicalData.candidates"
+          [politicalData]="politicalData"
           [personalCandidates]="personalData"
           [categoryId]="category.key"
           [claims]="politicalData.claims"

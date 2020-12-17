@@ -5,7 +5,7 @@ import { ClaimProvPageComponent } from './pages/claim-prov-page/claim-prov-page.
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', component: ClaimListPageComponent },
-  { path: ':thesis_id', component: ClaimProvPageComponent },
+  { path: ':claimId', component: ClaimProvPageComponent },
 ];
 
 @NgModule({

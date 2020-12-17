@@ -1,1 +1,13 @@
-<p>thesis-list-page works!</p>
+<h1>Übersicht über die Thesen</h1>
+<p>Die folgenden Thesen, sortiert nach Kategorien, haben es in den finalen WahlBerater geschafft. Klick eine These an um mehr Informationen zu erhalten.</p>
+<ng-container *ngIf="data | async as d">
+  <nz-list nzBordered [nzHeader]="category.value.title" *ngFor="let category of d.categories | keyvalue" style="border-color: {{category.value.color}}; background-color: {{category.value.color}}">
+    <ng-container *ngFor="let item of d.claims | keyvalue">
+      <nz-list-item *ngIf="item.value.category === category.key" style="background-color:#fff">
+        <a [routerLink]="'/claim/' + item.key">{{item.value.title}}</a>
+      </nz-list-item>
+    </ng-container>
+  </nz-list>
+</ng-container>
+
+<p><small>Du hast eine These eingereicht und sie ist nicht dabei? Uns erreichten während der Entwicklung viele weitere Thesen, die aber es aus verschiedenen Gründen nicht in die finale Version des Tools geschafft haben..</small></p>

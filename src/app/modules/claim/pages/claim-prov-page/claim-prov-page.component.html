@@ -1,1 +1,24 @@
-<p>thesis-prov-page works!</p>
+<ng-container *ngIf="claimId && politicalData">
+  <h1>{{politicalData.claims[claimId].title}}</h1>
+  <p>Eine These in der Kategorie <strong>{{politicalData.categories[politicalData.claims[claimId].category].title}}.</strong></p>
+  <p *ngIf="politicalData.claims[claimId].description"><strong>Hintergrund:</strong> {{politicalData.claims[claimId].description}}</p>
+  <p><a [routerLink]="'/quiz/' + claimId"><i nz-icon nzType="double-right" nzTheme="outline"></i>&nbsp;Springe zur These im Quiz</a></p>
+  <p *ngIf="votes && votes[claimId]">Du denkst: {{votes[claimId].decision}}</p>
+
+  <div class="provenance" *ngIf="politicalData.claims[claimId].provenance">
+    <h2>Die These ist aus diesen Thesen entstanden:</h2>
+    <ul>
+      <li *ngFor="let prov of politicalData.claims[claimId].provenance">{{prov.description}} <strong>{{prov.claim}}</strong></li>
+    </ul>
+  </div>
+
+  <h2>Was denken die Kandidaten zu dieser These?</h2>
+  <app-claim-candidate-viz
+    [claimId]="claimId"
+    [claim]="politicalData.claims[claimId]"
+    [votes]="votes"
+    [politicalData]="politicalData"
+    [personalCandidates]="personalData"
+  ></app-claim-candidate-viz>
+
+</ng-container>
