@@ -10,5 +10,6 @@ RUN npm run build --prod
 
 # deploy to an nginx
 FROM nginx
+ADD nginx.conf /etc/nginx/conf.d/default.conf
 COPY --from=donator /data/dist/wahlberater /usr/share/nginx/html
 
