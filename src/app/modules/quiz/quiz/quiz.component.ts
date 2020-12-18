@@ -27,11 +27,6 @@ export class QuizComponent implements OnInit {
   // next: string;
 
   constructor(private store: Store<AppPartialState>, private route: ActivatedRoute) {
-    // this.store.pipe(select(AppSelectors.getNextQuestion, { id: '00ea1133-94d5-5a32-af57-96a322d64285' })).subscribe(c => console.log (c));
-    // this.store.pipe(select(AppSelectors.getNextQuestion, { id: '00ea1133-94d5-5a32-af57-96a322d64285' })).subscribe(c => console.log (c));
-    // this.testNext(undefined);
-    // this.testNext2('2d669678-2d4d-5d5b-9214-ad908f6cbbe9');
-    // this.testPrev2('2d669678-2d4d-5d5b-9214-ad908f6cbbe9');
   }
 
   ngOnInit(): void {
