@@ -6,6 +6,7 @@ import { CategoryMap } from '../../../definitions/models/category.model';
 import { AppPartialState } from '../../../+state/app.reducer';
 import { claimScore } from '../../../definitions/functions/score.function';
 import { getCandidatePersonalInfo } from '../../../definitions/functions/getCandidatePersonalInfo';
+import {Score} from '../../../definitions/models/score.model';
 
 @Component({
   selector: 'app-auswertung-heatmap-votes',
@@ -38,9 +39,9 @@ export class AuswertungHeatmapVotesComponent implements OnInit, OnChanges {
               no: 0,
               nono: 0,
             },
-            score: 0,
+            score: new Score(),
           };
-          let scoresum = 0;
+          // let scoresum = 0;
           for (const v in this.politicalCandidates[c].positions) {
             if (this.politicalCandidates[c].positions.hasOwnProperty(v)) {
               if (this.votes[v] && this.politicalCandidates[c].positions[v]) {
@@ -88,7 +89,7 @@ export class AuswertungHeatmapVotesComponent implements OnInit, OnChanges {
                     break;
                 }
 
-                scoresum += s;
+                candidate.score.add(s);
                 this.maxValue = Math.max(
                   this.maxValue,
                   candidate.scores.nono,
@@ -99,7 +100,7 @@ export class AuswertungHeatmapVotesComponent implements OnInit, OnChanges {
               }
             }
           }
-          candidate.score = scoresum;
+          // candidate.score = scoresum;
           this.table.push(candidate);
         }
       }

@@ -1,14 +1,7 @@
 <ng-container *ngIf="votes | async as v">
   <ng-container *ngIf="politicalData">
     <nz-tabset class="visualisations">
-      <nz-tab nzTitle="Bar 1">
-        <app-auswertung-barchart
-          [votes]="v"
-          [politicalCandidates]="politicalData.candidates"
-          [personalCandidates]="personalData"
-        ></app-auswertung-barchart>
-      </nz-tab>
-      <nz-tab nzTitle="Bar 2">
+      <nz-tab nzTitle="Bars">
         <app-auswertung-barchart-table
           [votes]="v"
           [politicalCandidates]="politicalData.candidates"

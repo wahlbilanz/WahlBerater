@@ -15,6 +15,7 @@ import {
 import { PersonalCandidateMap, PoliticalCandidateMap } from '../../../definitions/models/candidate.model';
 import { claimScore } from '../../../definitions/functions/score.function';
 import { getCandidatePersonalInfo } from '../../../definitions/functions/getCandidatePersonalInfo';
+import {Score} from '../../../definitions/models/score.model';
 
 export type ChartOptions = {
   series: ApexAxisChartSeries;
@@ -29,6 +30,9 @@ export type ChartOptions = {
   templateUrl: './auswertung-barchart.component.html',
   styleUrls: ['./auswertung-barchart.component.scss'],
 })
+/**
+ * @deprecated since version 2.0
+ */
 export class AuswertungBarchartComponent implements OnInit, OnChanges {
   @Input() votes;
   @Input() politicalCandidates: PoliticalCandidateMap;
@@ -64,6 +68,7 @@ export class AuswertungBarchartComponent implements OnInit, OnChanges {
         categories: [],
       },
     };
+    console.warn('using the apex charts component is deprecated!');
   }
 
   recalc(): void {
@@ -71,11 +76,11 @@ export class AuswertungBarchartComponent implements OnInit, OnChanges {
       const scoreArray = [];
       for (const c in this.politicalCandidates) {
         if (this.politicalCandidates.hasOwnProperty(c)) {
-          let score = 0;
+          const score = new Score();
           for (const v in this.politicalCandidates[c].positions) {
             if (this.politicalCandidates[c].positions.hasOwnProperty(v)) {
               if (this.votes[v]) {
-                score += claimScore(this.politicalCandidates[c].positions[v].vote, this.votes[v].decision, this.votes[v].fav);
+                score.add(claimScore(this.politicalCandidates[c].positions[v].vote, this.votes[v].decision, this.votes[v].fav));
               }
             }
           }

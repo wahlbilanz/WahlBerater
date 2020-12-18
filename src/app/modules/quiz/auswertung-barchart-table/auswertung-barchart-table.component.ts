@@ -7,6 +7,7 @@ import { CategoryMap } from '../../../definitions/models/category.model';
 import { PersonalCandidateMap, PoliticalCandidateMap } from '../../../definitions/models/candidate.model';
 import { Claim, ClaimMap } from '../../../definitions/models/claim.model';
 import { getCandidatePersonalInfo } from '../../../definitions/functions/getCandidatePersonalInfo';
+import {Score} from '../../../definitions/models/score.model';
 
 @Component({
   selector: 'app-auswertung-barchart-table',
@@ -38,8 +39,8 @@ export class AuswertungBarchartTableComponent implements OnInit, OnChanges {
     if (this.politicalCandidates && this.votes) {
       for (const c in this.politicalCandidates) {
         if (this.politicalCandidates.hasOwnProperty(c)) {
-          const candidate = { personal: getCandidatePersonalInfo(this.personalCandidates, c), id: c, scores: {}, score: 0 };
-          let scoresum = 0;
+          const candidate = { personal: getCandidatePersonalInfo(this.personalCandidates, c), id: c, scores: {}, score: new Score() };
+          // const score = new Score();
           for (const v in this.politicalCandidates[c].positions) {
             if (this.politicalCandidates[c].positions.hasOwnProperty(v)) {
               if (this.votes[v] && this.politicalCandidates[c].positions[v]) {
@@ -48,14 +49,14 @@ export class AuswertungBarchartTableComponent implements OnInit, OnChanges {
                   candidate.scores[cat] = { title: this.categories[cat].title, color: this.categories[cat].color, score: 0 };
                 }
                 const s = claimScore(this.politicalCandidates[c].positions[v].vote, this.votes[v].decision, this.votes[v].fav);
-                candidate.scores[cat].score += s;
-                scoresum += s;
+                candidate.scores[cat].score += s.score;
+                candidate.score.add(s);
               }
             }
           }
-          candidate.score = scoresum;
-          if (this.maxValue < scoresum) {
-            this.maxValue = scoresum;
+          // candidate.score = score;
+          if (this.maxValue < candidate.score.score) {
+            this.maxValue = candidate.score.score;
           }
           this.table.push(candidate);
         }

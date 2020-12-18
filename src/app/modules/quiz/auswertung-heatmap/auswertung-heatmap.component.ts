@@ -6,6 +6,7 @@ import { claimScore } from '../../../definitions/functions/score.function';
 import { CategoryMap } from '../../../definitions/models/category.model';
 import { PersonalCandidateMap, PoliticalCandidateMap } from '../../../definitions/models/candidate.model';
 import { getCandidatePersonalInfo } from '../../../definitions/functions/getCandidatePersonalInfo';
+import {Score} from '../../../definitions/models/score.model';
 
 @Component({
   selector: 'app-auswertung-heatmap',
@@ -29,24 +30,24 @@ export class AuswertungHeatmapComponent implements OnInit, OnChanges {
     if (this.politicalCandidates && this.votes) {
       for (const c in this.politicalCandidates) {
         if (this.politicalCandidates.hasOwnProperty(c)) {
-          const candidate = { personal: getCandidatePersonalInfo(this.personalCandidates, c), id: c, scores: {}, score: 0 };
-          let scoresum = 0;
+          const candidate = { personal: getCandidatePersonalInfo(this.personalCandidates, c), id: c, scores: {}, score: new Score() };
+          // let scoresum = 0;
           for (const v in this.politicalCandidates[c].positions) {
             if (this.politicalCandidates[c].positions.hasOwnProperty(v)) {
               if (this.votes[v]) {
                 const s = claimScore(this.politicalCandidates[c].positions[v].vote, this.votes[v].decision, this.votes[v].fav);
-                if (!candidate.scores[s]) {
-                  candidate.scores[s] = 0;
+                if (!candidate.scores[s.score + s.stars]) {
+                  candidate.scores[s.score + s.stars] = 0;
                 }
-                candidate.scores[s]++;
-                scoresum += s;
-                if (this.maxValue[s] < candidate.scores[s]) {
-                  this.maxValue[s] = candidate.scores[s];
+                candidate.scores[s.score + s.stars]++;
+                candidate.score.add(s);
+                if (this.maxValue[s.score + s.stars] < candidate.scores[s.score + s.stars]) {
+                  this.maxValue[s.score + s.stars] = candidate.scores[s.score + s.stars];
                 }
               }
             }
           }
-          candidate.score = scoresum;
+          // candidate.score = scoresum;
           this.table.push(candidate);
         }
       }

@@ -6,6 +6,7 @@ import { ApexAxisChartSeries, ApexTitleSubtitle, ApexChart, ApexXAxis, ApexYAxis
 import { PoliticalData } from '../../../../definitions/models/political.data.model';
 import { PersonalData } from '../../../../definitions/models/personal.data.model';
 import { PersonalCandidateMap } from '../../../../definitions/models/candidate.model';
+import {Score} from '../../../../definitions/models/score.model';
 
 export type ChartOptions = {
   series: ApexAxisChartSeries;
@@ -71,7 +72,7 @@ export class CandidateListCardComponent implements OnInit {
         );
 
         if (this.politicalData.categories.hasOwnProperty(category) && category !== 'howto') {
-          let score = 0;
+          const score = new Score();
           if (maxY < claimIds.length) {
             maxY = claimIds.length;
           }
@@ -83,14 +84,14 @@ export class CandidateListCardComponent implements OnInit {
               this.politicalData.candidates[this.candidate].positions[claim]
             ) {
               // console.log (claim, this.data.candidates[this.candidate].positions[claim].vote, this.decisions[claim].decision);
-              score += claimScore(
+              score.add(claimScore(
                 this.politicalData.candidates[this.candidate].positions[claim].vote,
                 this.decisions[claim].decision,
                 this.decisions[claim].fav,
-              );
+              ));
             }
           }
-          this.radarData.push({ category, score });
+          this.radarData.push({ category, score: score.score });
           // console.log ({category, score});
         }
       }
@@ -100,8 +101,8 @@ export class CandidateListCardComponent implements OnInit {
     // console.log(maxY);
     this.chartOptions.series[0].data = this.radarData.map((s) => s.score);
     this.chartOptions.xaxis.categories = this.radarData.map((s) => s.category);
-    this.chartOptions.yaxis.max = maxY * 2;
-    this.chartOptions.yaxis.tickAmount = maxY * 2;
+    this.chartOptions.yaxis.max = maxY;
+    this.chartOptions.yaxis.tickAmount = maxY;
     if (this.chart) {
       this.chart.updateSeries([{ data: this.chartOptions.series[0].data }]);
     }
