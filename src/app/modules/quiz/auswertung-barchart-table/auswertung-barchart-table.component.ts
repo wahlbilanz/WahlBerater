@@ -46,11 +46,10 @@ export class AuswertungBarchartTableComponent implements OnInit, OnChanges {
   @Input() categories: CategoryMap;
   @Input() claims: ClaimMap;
 
-  // table = [];
-  // partyScores: Record<string, PartyResult>;
   partyScores: PartyResult[];
   maxValue = 0;
   maxParty = 0;
+  showCandidates = false;
 
   constructor(private store: Store<AppPartialState>) {}
 
@@ -144,5 +143,8 @@ export class AuswertungBarchartTableComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     this.recalc();
+  }
+  toggleShowCandidates (){
+    this.showCandidates = !this.showCandidates;
   }
 }

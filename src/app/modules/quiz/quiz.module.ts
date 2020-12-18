@@ -19,7 +19,8 @@ import { AuswertungHeatmapVotesComponent } from './auswertung-heatmap-votes/ausw
 import { AuswertungCategoryPanelComponent } from './auswertung-category-panel/auswertung-category-panel.component';
 import { CandidateModule } from '../candidate/candidate.module';
 import { HelpersModule } from '../helpers/helpers.module';
-
+import { NzSwitchModule } from 'ng-zorro-antd/switch';
+import { FormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     QuizCardComponent,
@@ -45,6 +46,8 @@ import { HelpersModule } from '../helpers/helpers.module';
     NzBadgeModule,
     CandidateModule,
     HelpersModule,
+    NzSwitchModule,
+    FormsModule,
   ],
 })
 export class QuizModule {}

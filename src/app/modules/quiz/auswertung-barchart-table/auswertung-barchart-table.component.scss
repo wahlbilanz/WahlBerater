@@ -1,4 +1,10 @@
 @import '../../../../assets/styles/index';
+#mybarchartchart .controls {
+  text-align: right;
+  nz-switch {
+    margin: 0 $wb-space-x-small;
+  }
+}
 table {
   margin: $wb-space-x-large 0;
   padding-right: $wb-space-small;
