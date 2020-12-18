@@ -1,37 +1,72 @@
 <div id="mybarchartchart">
   <table>
-    <ng-container *ngFor="let candidate of table">
-      <tr>
+    <ng-container *ngFor="let party of partyScores">
+      <!-- Party -->
+      <tr class="party-row">
         <th>
-          <a [routerLink]="'/candidates/' + candidate.id">{{ candidate.personal.name }}</a>
+<!--          <a [routerLink]="'/candidates/' + candidate.id">{{ candidate.personal.name }}</a> <small>({{politicalData.parties[candidate.political.party].name}})</small>-->
+          {{politicalData.parties[party.party].name}}
         </th>
-        <ng-container *ngFor="let category of candidate.scores | keyvalue">
-          <td
-            *ngIf="category.value.score > 0"
-            [colSpan]="category.value.score"
-            style="width:{{ (100 * category.value.score) / maxValue }}%;background-color:{{ category.value.color }}"
-            class="hit"
-          >
-            <span
-              nz-tooltip
-              nzTooltipTitle="{{ category.value.score }} Übereinstimmung{{ category.value.score == 1 ? '' : 'en' }} in der Kategorie {{
-                category.value.title
-              }}"
-              >{{ category.value.score }}</span
-            >
-          </td>
-        </ng-container>
-        <td
-          *ngIf="candidate.score < maxValue"
-          [colSpan]="maxValue - candidate.score"
-          style="width:{{ (100 * (maxValue - candidate.score)) / maxValue }}%"
-          class="missed"
-        >
-          <!--        {{maxValue - candidate.score}}-->
-        </td>
+        <td>
+          <ng-container *ngFor="let category of party.scores | keyvalue">
+              <span
+                *ngIf="category.value.score.score > 0"
+                [style.width]="(100 * (category.value.score.score) / maxParty) + '%'"
+                [style.background-color]="politicalData.categories[category.key].color"
+                class="hit"
+                nz-tooltip
+                nzTooltipTitle="{{ category.value.score.score | number:'1.0-2' }} Punkt{{ category.value.score.score == 1 ? '' : 'e' }} in der Kategorie {{politicalData.categories[category.key].title}}"
+                title="{{ category.value.score.score | number:'1.0-2' }} Punkt{{ category.value.score.score == 1 ? '' : 'e' }} in der Kategorie {{politicalData.categories[category.key].title}}"
+                >{{ category.value.score.score | number:'1.0-2' }}
+              </span>
+          </ng-container>
+      </td>
+<!--        <td-->
+<!--          *ngIf="party.score.score < maxValue"-->
+<!--          [colSpan]="maxValue - party.score.score"-->
+<!--          class="missed"-->
+<!--        >-->
+<!--&lt;!&ndash;          style="width:{{ (100 * (maxValue - candidate.score)) / maxValue }}%"&ndash;&gt;-->
+<!--          &lt;!&ndash;        {{maxValue - candidate.score}}&ndash;&gt;-->
+<!--        </td>-->
       </tr>
-      <tr class="spacer"></tr>
-    </ng-container>
+
+      <!-- candidates -->
+      <ng-container *ngFor="let candidate of party.candidates">
+        <tr class="candidate-spacer"></tr>
+        <tr class="candidate-row">
+          <th>
+  <!--          <a [routerLink]="'/candidates/' + candidate.id">{{ candidate.personal.name }}</a> <small>({{politicalData.parties[candidate.political.party].name}})</small>-->
+            {{candidate.personal.name}}
+          </th>
+          <td>
+            <ng-container *ngFor="let category of candidate.scores | keyvalue">
+                <span
+                  *ngIf="category.value.score.score > 0"
+                  [style.width]="(100 * category.value.score.score / maxValue) + '%'"
+                  [style.background-color]="politicalData.categories[category.key].color"
+                  class="hit"
+                  nz-tooltip
+                  nzTooltipTitle="{{ category.value.score.score }} Übereinstimmung{{ category.value.score.score == 1 ? '' : 'en' }} in der Kategorie {{
+                    politicalData.categories[category.key].title
+                  }}"
+                  >&nbsp;
+<!--                  {{ category.value.score.score }}-->
+                </span
+                >
+            </ng-container>
+          </td>
+<!--          <td-->
+<!--            *ngIf="candidate.score.score < maxValue"-->
+<!--            [colSpan]="maxValue - party.score.score"-->
+<!--            class="missed"-->
+<!--          >-->
+<!--  &lt;!&ndash;          style="width:{{ (100 * (maxValue - candidate.score)) / maxValue }}%"&ndash;&gt;-->
+<!--            &lt;!&ndash;        {{maxValue - candidate.score}}&ndash;&gt;-->
+<!--          </td>-->
+        </tr>
+      </ng-container>
+<!--      <tr class="party-spacer"></tr>-->
     <tr class="spacer"></tr>
     <tr id="axis">
       <th></th>
@@ -41,5 +76,7 @@
         </td>
       </ng-container>
     </tr>
+    <tr class="spacer"></tr>
+    </ng-container>
   </table>
 </div>

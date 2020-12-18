@@ -11,4 +11,9 @@ export class Score {
     this.score += score.score;
     this.stars += score.stars;
   }
+
+  normalise(n: number) {
+    this.score /= n;
+    this.stars /= n;
+  }
 }

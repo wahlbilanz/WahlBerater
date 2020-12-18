@@ -4,32 +4,69 @@ table {
   padding-right: $wb-space-small;
   width: 100%;
   overflow: visible;
+  tr.party-spacer {
+    height: $wb-space-x-small;
+    border-top: 1px solid black;
+  }
   tr.spacer {
+    height: $wb-space-x-small;
+  }
+  tr.candidate-spacer {
     height: $wb-space-xx-small;
   }
-  th {
-    white-space: nowrap;
-    width: 1%;
-    padding-right: $wb-space-x-small;
-  }
-  td {
-    //border: 1px solid;
-    text-align: center;
-    &.missed {
-      border: none;
+  tr {
+    th {
+      white-space: nowrap;
+      width: 1%;
+      padding-right: $wb-space-x-small;
     }
-    span {
+    &.party-row th {
+      font-weight: bold;
+    }
+
+    &.candidate-row th {
+      font-weight: normal;
+      text-align: right;
+    }
+
+    &.candidate-row {
+      font-size: .8em;
+      td {
+        opacity: .3;
+        &:hover {
+          opacity: 1;
+        }
+        span {
+          font-size: .5em;
+        }
+      }
+    }
+
+    td {
+      //border: 1px solid;
+      //text-align: center;
+      float: left;
       width: 100%;
-      display: inline-block;
+
+      &.missed {
+        border: none;
+      }
+
+      span {
+        width: 100%;
+        display: inline-block;
+        text-align: center;
+      }
+
     }
   }
   tr#axis {
-    border-top: 1px solid #888;
+    border-top: 1px solid #aaa;
     td {
       border: none;
       text-align: right;
       @include use-typography($wb-type-paragraph-small);
-      color: #888;
+      color: #aaa;
       span.axis-label {
         margin-right: -$wb-space-small;
         width: 2 * $wb-space-small;
