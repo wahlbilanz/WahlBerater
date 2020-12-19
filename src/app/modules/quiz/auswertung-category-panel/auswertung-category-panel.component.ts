@@ -11,8 +11,6 @@ import { DecisionTemplatesComponent } from '../../helpers/decision-templates/dec
 import { PartyResult } from '../../../definitions/models/results.model';
 import { Vote, Votes } from '../../../definitions/models/votes.mode';
 
-class partyScoreResult {}
-
 @Component({
   selector: 'app-auswertung-category-panel',
   templateUrl: './auswertung-category-panel.component.html',
