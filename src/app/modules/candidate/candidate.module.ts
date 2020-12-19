@@ -10,7 +10,6 @@ import { NgApexchartsModule } from 'ng-apexcharts';
 import { NzBadgeModule } from 'ng-zorro-antd/badge';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { HelpersModule } from '../helpers/helpers.module';
-import { NzTableModule } from 'ng-zorro-antd/table';
 import { CandidateRoutingModule } from './candidate-routing.module';
 import { CandidateListPageComponent } from './pages/candidate-list-page/candidate-list-page.component';
 import { CandidateProfilePageComponent } from './pages/candidate-profile-page/candidate-profile-page.component';
@@ -33,7 +32,6 @@ import { ClaimCandidateVizComponent } from './pages/claim-candidate-viz/claim-ca
     PipesModule,
     NzBadgeModule,
     HelpersModule,
-    NzTableModule,
   ],
   exports: [ClaimCandidateVizComponent],
 })

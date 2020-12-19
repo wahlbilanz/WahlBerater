@@ -4,7 +4,6 @@
       <!-- Party -->
       <tr class="party-row">
         <th>
-          <!--          <a [routerLink]="'/candidates/' + candidate.id">{{ candidate.personal.name }}</a> <small>({{politicalData.parties[candidate.political.party].name}})</small>-->
           {{ politicalData.parties[party.party].name }}
         </th>
         <td>
@@ -25,14 +24,6 @@
             </span>
           </ng-container>
         </td>
-        <!--        <td-->
-        <!--          *ngIf="party.score.score < maxValue"-->
-        <!--          [colSpan]="maxValue - party.score.score"-->
-        <!--          class="missed"-->
-        <!--        >-->
-        <!--&lt;!&ndash;          style="width:{{ (100 * (maxValue - candidate.score)) / maxValue }}%"&ndash;&gt;-->
-        <!--          &lt;!&ndash;        {{maxValue - candidate.score}}&ndash;&gt;-->
-        <!--        </td>-->
       </tr>
 
       <!-- candidates -->
@@ -60,17 +51,8 @@
                 </span>
               </ng-container>
             </td>
-            <!--          <td-->
-            <!--            *ngIf="candidate.score.score < maxValue"-->
-            <!--            [colSpan]="maxValue - party.score.score"-->
-            <!--            class="missed"-->
-            <!--          >-->
-            <!--  &lt;!&ndash;          style="width:{{ (100 * (maxValue - candidate.score)) / maxValue }}%"&ndash;&gt;-->
-            <!--            &lt;!&ndash;        {{maxValue - candidate.score}}&ndash;&gt;-->
-            <!--          </td>-->
           </tr>
         </ng-container>
-        <!--      <tr class="party-spacer"></tr>-->
         <tr class="spacer"></tr>
         <tr id="axis">
           <th></th>

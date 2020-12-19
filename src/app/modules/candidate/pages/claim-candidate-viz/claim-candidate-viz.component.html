@@ -36,13 +36,8 @@
       </ng-container>
 
       <ng-container *ngIf="showCandidates">
-        <nz-table
-          #candidateTable
-          nzSize="small"
-          [nzData]="party.candidates | keyvalue"
-          [nzFrontPagination]="false"
-          [nzShowPagination]="false"
-        >
+        <div>Die Meinungen der Kandidierenden:</div>
+        <table>
           <thead>
             <tr>
               <th>Name</th>
@@ -51,7 +46,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let data of candidateTable.data">
+            <tr *ngFor="let data of party.candidates | keyvalue">
               <td>{{ (personalCandidates | personalData: data.key).name }}</td>
               <td>
                 <ng-container
@@ -67,7 +62,7 @@
               <td>{{ politicalData.candidates[data.key].positions[claimId].reason | markdown }}</td>
             </tr>
           </tbody>
-        </nz-table>
+        </table>
       </ng-container>
     </nz-collapse-panel>
   </ng-container>

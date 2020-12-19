@@ -37,9 +37,7 @@ export class ClaimCandidateVizComponent implements OnInit {
   ngOnInit(): void {
     if (!this.partySeq) {
       this.partySeq = Object.keys(this.politicalData.parties);
-      console.log(this.partySeq);
     }
-    console.log(this.partySeq);
   }
 
   getPartyTemplate(direction: number, userDecision: Vote): TemplateRef<any> {
