@@ -74,11 +74,17 @@
         <tr class="spacer"></tr>
         <tr id="axis">
           <th></th>
-          <ng-container *ngFor="let value of maxValueArray()">
-            <td style="width:{{ 100 / maxValue }}%">
+          <td>
+            <span
+              nz-tooltip
+              nzTooltipTitle="Achse zeigt die Punkte der Kandidaten."
+              title="Achse zeigt die Punkte der Kandidaten."
+              [style.width]="100 / partyScoreResult.maxValue + '%'"
+              *ngFor="let value of maxValueArray()"
+            >
               <span class="axis-label">{{ value + 1 }}</span>
-            </td>
-          </ng-container>
+            </span>
+          </td>
         </tr>
       </ng-container>
       <tr class="spacer"></tr>

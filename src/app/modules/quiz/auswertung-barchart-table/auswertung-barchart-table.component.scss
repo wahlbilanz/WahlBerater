@@ -74,7 +74,7 @@ table {
         float: right;
         text-align: center;
       }
-      &:last-child span.axis-label {
+      span:last-child span.axis-label {
         margin-right: 0;
         text-align: right;
       }

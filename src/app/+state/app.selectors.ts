@@ -80,7 +80,6 @@ export const getPrevQuestion = createSelector(getPoliticalData, (data, currentCl
     if (currentIdx > 0) {
       return claims[currentIdx - 1];
     }
-    console.log(currentCategoryIdx);
     currentCategoryIdx -= 1;
     if (currentCategoryIdx >= 0) {
       currentCategory = categories[currentCategoryIdx];

@@ -98,9 +98,13 @@ export class QuizCardComponent implements OnInit, OnChanges {
   swipeCoord?: [number, number];
   swipeTime?: number;
 
+  containerHeight: number;
+
   constructor(private store: Store<AppPartialState>, private router: Router) {}
 
   ngOnChanges(): void {
+    // 100 = 46 of top menu plus padding/margin of surrounding containers
+    this.containerHeight = window.innerHeight - 100;
     this.leaveLeft = false;
     this.leaveRight = false;
     this.leaveTop = false;

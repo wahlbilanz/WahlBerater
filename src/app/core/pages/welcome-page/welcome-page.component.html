@@ -5,7 +5,7 @@
     class="nav-block results-link"
     routerLink="/quiz/{{ ResultUrlPath }}"
     title="Zur Quiz Auswertung"
-    *ngIf="(lastQuizPage | async) === ResultUrlPath"
+    *ngIf="(lastQuizPage | async) !== QuizFirstPagePath"
   >
     <i nz-icon nzType="bar-chart" nzTheme="outline" class="nav-icon"></i>
     Zur Quiz Auswertung

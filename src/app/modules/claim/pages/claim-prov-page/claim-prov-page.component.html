@@ -6,7 +6,7 @@
     <h1>These: {{ politicalData.claims[claimId].title }}</h1>
     <p><strong>Kategorie:</strong> {{ politicalData.categories[politicalData.claims[claimId].category].title }}</p>
     <p *ngIf="politicalData.claims[claimId].description">
-      <strong>Hintergrund:</strong> {{ politicalData.claims[claimId].description | markdown }}
+      <strong>Hintergrund:</strong>&nbsp;<span [innerHTML]="politicalData.claims[claimId].description | markdown"></span>
     </p>
     <p>
       <a [routerLink]="'/quiz/' + claimId"><i nz-icon nzType="double-right" nzTheme="outline"></i>&nbsp;Springe zur These im Quiz</a>
