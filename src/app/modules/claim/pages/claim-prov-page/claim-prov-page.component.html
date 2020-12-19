@@ -1,10 +1,13 @@
 <ng-container *ngIf="claimId && politicalData">
   <div id="claimprov" class="" style="border-color:{{ politicalData.categories[politicalData.claims[claimId].category].color }}">
     <h2 id="claim-category">
-      Eine These in der Kategorie <strong>{{ politicalData.categories[politicalData.claims[claimId].category].title }}.</strong>
+      <strong>{{ politicalData.categories[politicalData.claims[claimId].category].title }}.</strong>
     </h2>
     <h1>These: {{ politicalData.claims[claimId].title }}</h1>
-    <p *ngIf="politicalData.claims[claimId].description"><strong>Hintergrund:</strong> {{ politicalData.claims[claimId].description }}</p>
+    <p><strong>Kategorie:</strong> {{ politicalData.categories[politicalData.claims[claimId].category].title }}</p>
+    <p *ngIf="politicalData.claims[claimId].description">
+      <strong>Hintergrund:</strong> {{ politicalData.claims[claimId].description | markdown }}
+    </p>
     <p>
       <a [routerLink]="'/quiz/' + claimId"><i nz-icon nzType="double-right" nzTheme="outline"></i>&nbsp;Springe zur These im Quiz</a>
     </p>
@@ -14,7 +17,7 @@
       <h2>Die These ist aus den folgenden Thesen entstanden:</h2>
       <ul>
         <li *ngFor="let prov of politicalData.claims[claimId].provenance">
-          {{ prov.description }} <strong>{{ prov.claim }}</strong>
+          <span class="hintergrund" *ngIf="prov.description">{{ prov.description }}</span> <strong>{{ prov.claim }}</strong>
         </li>
       </ul>
     </div>
@@ -47,6 +50,9 @@
       <span *ngIf="next">
         Nächste These: <a [routerLink]="['/claim/', next]">{{ politicalData.claims[next].title }}</a>
       </span>
+      <br />
+      <br />
+      <span *ngIf="next"> Alle Thesen in der <a [routerLink]="['/claim/']">Thesenübersicht</a> </span>
     </div>
   </div>
 </ng-container>

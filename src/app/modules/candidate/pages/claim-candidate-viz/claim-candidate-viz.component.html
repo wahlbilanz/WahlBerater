@@ -6,7 +6,7 @@
       [nzHeader]="politicalData.parties[party.party].name"
       [nzExtra]="getPartyTemplate(party.scores[politicalData.claims[claimId].category].decisions[claimId], votes[claimId])"
     >
-      <div *ngIf="party.scores[politicalData.claims[claimId].category]">
+      <div class="party-decision" *ngIf="party.scores[politicalData.claims[claimId].category]">
         Die Kandidierenden der Partei {{ politicalData.parties[party.party].name }} haben sich insgesamt für
         <em
           ><ng-container
@@ -64,7 +64,7 @@
                   "
                 ></ng-container>
               </td>
-              <td>{{ politicalData.candidates[data.key].positions[claimId].reason }}</td>
+              <td>{{ politicalData.candidates[data.key].positions[claimId].reason | markdown }}</td>
             </tr>
           </tbody>
         </nz-table>

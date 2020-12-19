@@ -6,9 +6,10 @@ import { ClaimRoutingModule } from './claim-routing.module';
 import { ClaimListPageComponent } from './pages/claim-list-page/claim-list-page.component';
 import { ClaimProvPageComponent } from './pages/claim-prov-page/claim-prov-page.component';
 import { CandidateModule } from '../candidate/candidate.module';
+import { PipesModule } from '../pipes/pipes.module';
 
 @NgModule({
   declarations: [ClaimListPageComponent, ClaimProvPageComponent],
-  imports: [CommonModule, ClaimRoutingModule, NzListModule, CandidateModule, NzIconModule],
+  imports: [CommonModule, ClaimRoutingModule, NzListModule, CandidateModule, NzIconModule, PipesModule],
 })
 export class ClaimModule {}

@@ -32,13 +32,9 @@ export class ClaimProvPageComponent implements OnInit, OnChanges {
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
       this.claimId = params.get('claimId');
-      this.store
-        .pipe(select(AppSelectors.getNextQuestion, { id: this.claimId }))
-        .pipe(take(1))
-        .subscribe((c) => (this.next = c ? c : undefined));
+      this.store.pipe(select(AppSelectors.getNextQuestion, { id: this.claimId })).subscribe((c) => (this.next = c ? c : undefined));
       this.store
         .pipe(select(AppSelectors.getPrevQuestion, { id: this.claimId }))
-        .pipe(take(1))
         .subscribe((c) => (this.prev = c && c !== QuizFirstPage ? c : undefined));
     });
     this.store.pipe(select(AppSelectors.getPersonalData)).subscribe((d) => {
