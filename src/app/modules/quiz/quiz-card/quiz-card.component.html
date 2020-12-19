@@ -4,6 +4,8 @@
     [@leaveLeft]="leaveLeft ? 'gone' : 'there'"
     [@leaveTop]="leaveTop ? 'gone' : 'there'"
     [@leaveRight]="leaveRight ? 'gone' : 'there'"
+    (touchstart)="swipe($event, true)"
+    (touchend)="swipe($event, false)"
     class=""
     style="border-color:{{ category.color }}"
   >

@@ -95,6 +95,9 @@ export class QuizCardComponent implements OnInit, OnChanges {
   leaveRight = false;
   leaveTop = false;
 
+  swipeCoord?: [number, number];
+  swipeTime?: number;
+
   constructor(private store: Store<AppPartialState>, private router: Router) {}
 
   ngOnChanges(): void {
@@ -131,6 +134,30 @@ export class QuizCardComponent implements OnInit, OnChanges {
     });
   }
 
+  swipe(e: TouchEvent, start: boolean): void {
+    if (start) {
+      this.swipeCoord = [e.changedTouches[0].clientX, e.changedTouches[0].clientY];
+      this.swipeTime = new Date().getTime();
+    } else {
+      if (new Date().getTime() - this.swipeTime < 1000) {
+        const direction = [e.changedTouches[0].clientX - this.swipeCoord[0], e.changedTouches[0].clientY - this.swipeCoord[1]];
+        if (Math.abs(direction[0]) > 30 && Math.abs(direction[0]) > Math.abs(direction[1] * 3)) {
+          if (direction[0] < 0) {
+            this.no();
+          } else {
+            this.yes();
+          }
+        }
+        if (Math.abs(direction[1]) > 30 && Math.abs(direction[1]) > Math.abs(direction[0] * 3)) {
+          if (direction[1] < 0) {
+            this.go(true);
+          } else {
+            this.go(false);
+          }
+        }
+      }
+    }
+  }
   toggleFav(): void {
     this.fav = !this.fav;
     this.updateVote(false);
