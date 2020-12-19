@@ -7,12 +7,79 @@ import { Claim } from '../../../definitions/models/claim.model';
 import { Category } from '../../../definitions/models/category.model';
 import { vote } from '../../../+state/app.actions';
 import { first } from 'rxjs/operators';
-import { QuizFirstPage, ResultUrl } from '../../../+state/app.models';
+import {
+  QuizFirstPage,
+  ResultUrl,
+  QuizAnimationDelay,
+  QuizAnimationDurationIn,
+  QuizAnimationDurationOut,
+} from '../../../+state/app.models';
+import {
+  trigger,
+  state,
+  style,
+  animate,
+  transition,
+  // ...
+} from '@angular/animations';
 
 @Component({
   selector: 'app-quiz-card',
   templateUrl: './quiz-card.component.html',
   styleUrls: ['./quiz-card.component.scss'],
+  animations: [
+    trigger('leaveLeft', [
+      state(
+        'there',
+        style({
+          opacity: 1,
+        }),
+      ),
+      state(
+        'gone',
+        style({
+          opacity: 0.1,
+          transform: 'translateX(-' + window.innerWidth + 'px)',
+        }),
+      ),
+      transition('there => gone', [animate(QuizAnimationDurationOut)]),
+      transition('gone => there', [animate(QuizAnimationDurationIn)]),
+    ]),
+    trigger('leaveRight', [
+      state(
+        'there',
+        style({
+          opacity: 1,
+        }),
+      ),
+      state(
+        'gone',
+        style({
+          opacity: 0.1,
+          transform: 'translateX(' + window.innerWidth + 'px)',
+        }),
+      ),
+      transition('there => gone', [animate(QuizAnimationDurationOut)]),
+      transition('gone => there', [animate(QuizAnimationDurationIn)]),
+    ]),
+    trigger('leaveTop', [
+      state(
+        'there',
+        style({
+          opacity: 1,
+        }),
+      ),
+      state(
+        'gone',
+        style({
+          opacity: 0.1,
+          transform: 'translateY(-' + window.innerHeight + 'px)',
+        }),
+      ),
+      transition('there => gone', [animate(QuizAnimationDurationOut)]),
+      transition('gone => there', [animate(QuizAnimationDurationIn)]),
+    ]),
+  ],
 })
 export class QuizCardComponent implements OnInit, OnChanges {
   votes = this.store.pipe(select(AppSelectors.getVotes));
@@ -24,10 +91,16 @@ export class QuizCardComponent implements OnInit, OnChanges {
   ResultUrlPath = ResultUrl;
   fav: boolean;
   decision: number;
+  leaveLeft = false;
+  leaveRight = false;
+  leaveTop = false;
 
   constructor(private store: Store<AppPartialState>, private router: Router) {}
 
   ngOnChanges(): void {
+    this.leaveLeft = false;
+    this.leaveRight = false;
+    this.leaveTop = false;
     console.log('prev is ', this.prev);
     this.fav = false;
     this.decision = 0;
@@ -69,6 +142,9 @@ export class QuizCardComponent implements OnInit, OnChanges {
     } else {
       this.decision = -1;
     }
+    setTimeout(() => {
+      this.leaveLeft = true;
+    }, QuizAnimationDelay);
     this.updateVote(true);
   }
 
@@ -78,7 +154,25 @@ export class QuizCardComponent implements OnInit, OnChanges {
     } else {
       this.decision = 1;
     }
+    setTimeout(() => {
+      this.leaveRight = true;
+    }, QuizAnimationDelay);
     this.updateVote(true);
+  }
+
+  go(next: boolean) {
+    setTimeout(() => {
+      this.leaveTop = true;
+    }, QuizAnimationDelay);
+    setTimeout(() => {
+      if (next && this.next) {
+        this.router.navigate([this.next]);
+      } else if (next) {
+        this.router.navigate(['/quiz/' + ResultUrl]);
+      } else {
+        this.router.navigate([this.prev]);
+      }
+    }, QuizAnimationDelay + QuizAnimationDurationOut);
   }
 
   private updateVote(goahead: boolean): void {
@@ -92,7 +186,7 @@ export class QuizCardComponent implements OnInit, OnChanges {
         } else {
           this.router.navigate(['/quiz/' + ResultUrl]);
         }
-      }, 300);
+      }, QuizAnimationDelay + QuizAnimationDurationOut);
     }
   }
 }

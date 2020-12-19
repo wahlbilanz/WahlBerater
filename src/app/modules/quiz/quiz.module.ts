@@ -21,6 +21,8 @@ import { CandidateModule } from '../candidate/candidate.module';
 import { HelpersModule } from '../helpers/helpers.module';
 import { NzSwitchModule } from 'ng-zorro-antd/switch';
 import { FormsModule } from '@angular/forms';
+// import { BrowserModule } from '@angular/platform-browser';
+// import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 @NgModule({
   declarations: [
     QuizCardComponent,
