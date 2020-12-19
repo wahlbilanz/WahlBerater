@@ -8,7 +8,7 @@ import { Position } from '../../../definitions/models/position.model';
 import { ClaimMap } from '../../../definitions/models/claim.model';
 import { PoliticalData } from '../../../definitions/models/political.data.model';
 import { DecisionTemplatesComponent } from '../../helpers/decision-templates/decision-templates.component';
-import { PartyResult } from '../../../definitions/models/results.model';
+import { PartyResult, PartyScoreResult } from '../../../definitions/models/results.model';
 import { Vote, Votes } from '../../../definitions/models/votes.mode';
 
 @Component({
@@ -24,7 +24,7 @@ export class AuswertungCategoryPanelComponent implements OnInit {
   @Input() personalCandidates: PersonalCandidateMap;
   @Input() claims: ClaimMap;
 
-  @Input() partyScoreResult: partyScoreResult;
+  @Input() partyScoreResult: PartyScoreResult;
   @Input() showCandidates = false;
 
   @ViewChild('decisionTemplates', { static: true }) decisionTemplates: DecisionTemplatesComponent;
