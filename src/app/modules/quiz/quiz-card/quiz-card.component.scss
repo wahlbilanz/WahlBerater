@@ -2,9 +2,6 @@
 
 #quizcard {
   max-width: 500px;
-  /*width: 100%;
-  padding: 15px;
-  margin: 6rem auto 0 auto;*/
   border: $category-border-size solid;
   border-radius: $category-border-radius;
 
@@ -33,15 +30,18 @@
     flex-wrap: wrap;
     margin-right: -15px;
     margin-left: -15px;
-    align-items: center;
+    align-items: start;
+
+    svg {
+      width: 100%;
+      max-width: 80px;
+    }
 
     #decision-left,
     #decision-right,
     #decision-center {
       position: relative;
       width: 100%;
-      padding-right: 15px;
-      padding-left: 15px;
       text-align: center;
     }
     #decision-left,
@@ -55,44 +55,18 @@
     }
 
     .votebtn {
-      font-size: 3.5rem;
-      width: 6rem;
-      height: 6rem;
-      border-radius: 50%;
       margin: 0 auto;
       display: block;
-      border: 2px solid $wb-color-primary-600;
-      color: $wb-color-primary-600;
-      background-color: white;
 
       &.votesmaller {
-        font-size: 2.5rem;
-        width: 4rem;
-        height: 4rem;
-      }
-
-      &.selected {
-        color: white;
-        background-color: $wb-color-primary-600;
+        svg {
+          max-width: 60px;
+        }
       }
 
       &.votefav {
-        border-color: $favcolor;
         color: $favcolor;
       }
-
-      &.votefav.selected {
-        color: white;
-        background-color: $favcolor;
-      }
-
-      //i {
-      //width: 100%;
-      //height: 100%;
-      //}
-      //padding: 0.25em 0.75em;
-      //min-width: 10ch;
-      //min-height: 44px;
     }
   }
   #cardnav {
