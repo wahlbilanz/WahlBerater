@@ -1,19 +1,26 @@
-<ng-container *ngIf="votes | async as v">
+<div id="results" *ngIf="votes">
   <ng-container *ngIf="politicalData">
+    <div class="controls">
+      Kandidierenden anzeigen:&nbsp;<nz-switch id="showCandidatesSwitch" [ngModel]="showCandidates" (click)="toggleShowCandidates()"></nz-switch>
+    </div>
     <nz-tabset class="visualisations">
       <nz-tab nzTitle="Bars">
         <app-auswertung-barchart-table
-          [votes]="v"
+          [votes]="votes"
           [politicalData]="politicalData"
           [personalCandidates]="personalData"
           [categories]="politicalData.categories"
           [claims]="politicalData.claims"
+          [partyScores]="partyScores"
+          [maxValue]="maxValue"
+          [maxParty]="maxParty"
+          [showCandidates]="showCandidates"
         >
         </app-auswertung-barchart-table>
       </nz-tab>
       <nz-tab nzTitle="HeatMap 1">
         <app-auswertung-heatmap
-          [votes]="v"
+          [votes]="votes"
           [politicalCandidates]="politicalData.candidates"
           [personalCandidates]="personalData"
           [categories]="politicalData.categories"
@@ -22,7 +29,7 @@
       </nz-tab>
       <nz-tab nzTitle="HeatMap 2">
         <app-auswertung-heatmap-votes
-          [votes]="v"
+          [votes]="votes"
           [politicalCandidates]="politicalData.candidates"
           [personalCandidates]="personalData"
           [categories]="politicalData.categories"
@@ -35,12 +42,17 @@
     <ng-container *ngFor="let category of politicalData.categories | keyvalue">
       <div *ngIf="category.key != 'howto'" class="category" style="border-color:{{ category.value.color }}">
         <app-auswertung-category-panel
-          [votes]="v"
+          [votes]="votes"
           [politicalData]="politicalData"
           [personalCandidates]="personalData"
           [categoryId]="category.key"
           [claims]="politicalData.claims"
           [category]="category.value"
+
+          [partyScores]="partyScores"
+          [maxValue]="maxValue"
+          [maxParty]="maxParty"
+          [showCandidates]="showCandidates"
         >
         </app-auswertung-category-panel>
       </div>
@@ -48,4 +60,4 @@
 
     <a (click)="sampleVotes()"><i nz-icon nzType="fork" nzTheme="outline"></i> Sample Votes</a>
   </ng-container>
-</ng-container>
+</div>

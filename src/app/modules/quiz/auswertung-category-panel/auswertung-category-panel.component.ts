@@ -8,6 +8,8 @@ import { Position } from '../../../definitions/models/position.model';
 import { ClaimMap } from '../../../definitions/models/claim.model';
 import { PoliticalData } from '../../../definitions/models/political.data.model';
 import { DecisionTemplatesComponent } from '../../helpers/decision-templates/decision-templates.component';
+import {PartyResult} from '../../../definitions/models/results.model';
+import {Vote, Votes} from '../../../definitions/models/votes.mode';
 
 @Component({
   selector: 'app-auswertung-category-panel',
@@ -17,10 +19,15 @@ import { DecisionTemplatesComponent } from '../../helpers/decision-templates/dec
 export class AuswertungCategoryPanelComponent implements OnInit {
   @Input() categoryId: string;
   @Input() category: Category;
-  @Input() votes;
+  @Input() votes: Votes;
   @Input() politicalData: PoliticalData;
   @Input() personalCandidates: PersonalCandidateMap;
   @Input() claims: ClaimMap;
+
+  @Input() partyScores: PartyResult[];
+  @Input() maxValue = 0;
+  @Input() maxParty = 0;
+  @Input() showCandidates = false;
 
   @ViewChild('decisionTemplates', { static: true }) decisionTemplates: DecisionTemplatesComponent;
 
@@ -33,8 +40,8 @@ export class AuswertungCategoryPanelComponent implements OnInit {
     });*/
   }
 
-  getUserTemplate(userDecision: any): TemplateRef<any> {
-    if (!userDecision || userDecision === 0) {
+  getUserTemplate(userDecision: Vote): TemplateRef<any> {
+    if (!userDecision || userDecision.decision === 0) {
       return this.decisionTemplates.skipTempleate;
     }
 

@@ -1,7 +1,4 @@
 <div id="mybarchartchart">
-  <div class="controls">
-      Kandidierenden anzeigen:&nbsp;<nz-switch id="showCandidatesSwitch" [ngModel]="showCandidates" (click)="toggleShowCandidates()"></nz-switch>
-  </div>
   <table>
     <ng-container *ngFor="let party of partyScores">
       <!-- Party -->
@@ -35,16 +32,16 @@
       </tr>
 
       <!-- candidates -->
-      <ng-container *ngIf="showCandidates">
-        <ng-container *ngFor="let candidate of party.candidates">
+      <ng-container *ngIf="showCandidates && party.candidates">
+        <ng-container *ngFor="let candidate of party.candidates | keyvalue">
           <tr class="candidate-spacer"></tr>
           <tr class="candidate-row">
             <th>
     <!--          <a [routerLink]="'/candidates/' + candidate.id">{{ candidate.personal.name }}</a> <small>({{politicalData.parties[candidate.political.party].name}})</small>-->
-              {{candidate.personal.name}}
+              {{candidate.value.personal.name}}
             </th>
             <td>
-              <ng-container *ngFor="let category of candidate.scores | keyvalue">
+              <ng-container *ngFor="let category of candidate.value.scores | keyvalue">
                   <span
                     *ngIf="category.value.score.score > 0"
                     [style.width]="(100 * category.value.score.score / maxValue) + '%'"

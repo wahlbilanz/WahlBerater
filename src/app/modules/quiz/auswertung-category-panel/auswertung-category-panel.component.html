@@ -22,13 +22,19 @@
         <a [routerLink]="'/quiz/' + claim.key">Zurück zur These, um Entscheidung zu ändern.</a>
       </p>
 
-      <h4>Was denken die Kandidaten?</h4>
+      <h4>Was denken die Kandidierenden?</h4>
       <app-claim-candidate-viz
         [claimId]="claim.key"
         [claim]="claim.value"
         [votes]="votes"
         [politicalData]="politicalData"
         [personalCandidates]="personalCandidates"
+
+          [partyScores]="partyScores"
+          [maxValue]="maxValue"
+          [maxParty]="maxParty"
+          [showCandidates]="showCandidates"
+
       ></app-claim-candidate-viz>
 
       <p>

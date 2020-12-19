@@ -11,6 +11,7 @@ export class DecisionTemplatesComponent implements OnInit {
   @ViewChild('yes', { static: true }) yesTempleate: TemplateRef<any>;
   @ViewChild('yesyes', { static: true }) yesyesTempleate: TemplateRef<any>;
   @ViewChild('skip', { static: true }) skipTempleate: TemplateRef<any>;
+  @ViewChild('star', { static: true }) starTempleate: TemplateRef<any>;
 
   constructor() {}
 

@@ -1,5 +1,10 @@
 @import '../../../../assets/styles/index';
-
+#results .controls {
+  text-align: right;
+  nz-switch {
+    margin: 0 $wb-space-x-small;
+  }
+}
 .category {
   border: $category-border-size solid;
   border-radius: $category-border-radius;
