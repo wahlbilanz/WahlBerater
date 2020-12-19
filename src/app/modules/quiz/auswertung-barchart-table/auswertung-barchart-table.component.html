@@ -1,6 +1,6 @@
 <div id="mybarchartchart">
   <table>
-    <ng-container *ngFor="let party of partyScores">
+    <ng-container *ngFor="let party of partyScoreResult.partyScores">
       <!-- Party -->
       <tr class="party-row">
         <th>
@@ -11,7 +11,7 @@
           <ng-container *ngFor="let category of party.scores | keyvalue">
               <span
                 *ngIf="category.value.score.score > 0"
-                [style.width]="(100 * (category.value.score.score) / maxParty) + '%'"
+                [style.width]="(100 * (category.value.score.score) / partyScoreResult.maxParty) + '%'"
                 [style.background-color]="politicalData.categories[category.key].color"
                 class="hit"
                 nz-tooltip
@@ -44,7 +44,7 @@
               <ng-container *ngFor="let category of candidate.value.scores | keyvalue">
                   <span
                     *ngIf="category.value.score.score > 0"
-                    [style.width]="(100 * category.value.score.score / maxValue) + '%'"
+                    [style.width]="(100 * category.value.score.score / partyScoreResult.maxValue) + '%'"
                     [style.background-color]="politicalData.categories[category.key].color"
                     class="hit"
                     nz-tooltip

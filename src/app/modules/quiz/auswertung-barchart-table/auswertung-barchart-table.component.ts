@@ -14,7 +14,7 @@ import { Claim, ClaimMap } from '../../../definitions/models/claim.model';
 import { getCandidatePersonalInfo } from '../../../definitions/functions/getCandidatePersonalInfo';
 import {Score} from '../../../definitions/models/score.model';
 import {PoliticalData} from '../../../definitions/models/political.data.model';
-import {CandidateResult, PartyResult} from '../../../definitions/models/results.model';
+import {CandidateResult, PartyResult, PartyScoreResult} from '../../../definitions/models/results.model';
 
 
 
@@ -31,9 +31,7 @@ export class AuswertungBarchartTableComponent implements OnInit {
   @Input() categories: CategoryMap;
   @Input() claims: ClaimMap;
 
-  @Input() partyScores: PartyResult[];
-  @Input() maxValue = 0;
-  @Input() maxParty = 0;
+  @Input() partyScoreResult: PartyScoreResult;
   @Input() showCandidates = false;
 
   constructor(private store: Store<AppPartialState>) {}
@@ -42,7 +40,7 @@ export class AuswertungBarchartTableComponent implements OnInit {
    * this is just a hack to get an array with increasing numbers [0..maxValue) in frontend...
    */
   maxValueArray(): number[] {
-    const a = [...Array(this.maxValue).keys()];
+    const a = [...Array(this.partyScoreResult.maxValue).keys()];
     return a;
   }
 

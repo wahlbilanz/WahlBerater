@@ -1,9 +1,9 @@
 <nz-collapse>
 
-  <ng-container *ngIf="partyScores">
+  <ng-container *ngIf="partyScoreResult">
 <!--    <div *ngFor="let party of partyScores">{{politicalData.parties[party.party].name}}</div>-->
     <nz-collapse-panel
-      *ngFor="let party of partyScores"
+      *ngFor="let party of partyScoreResult.partyScores"
       [nzHeader]="politicalData.parties[party.party].name"
       [nzExtra]="getPartyTemplate(party.scores[politicalData.claims[claimId].category].decisions[claimId], votes[claimId])"
     >

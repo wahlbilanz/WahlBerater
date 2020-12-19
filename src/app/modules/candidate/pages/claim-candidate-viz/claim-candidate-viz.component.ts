@@ -10,7 +10,7 @@ import {
 import { PoliticalData } from '../../../../definitions/models/political.data.model';
 import {Vote, Votes} from '../../../../definitions/models/votes.mode';
 import { DecisionTemplatesComponent } from '../../../helpers/decision-templates/decision-templates.component';
-import {PartyResult} from '../../../../definitions/models/results.model';
+import {PartyResult, PartyScoreResult} from '../../../../definitions/models/results.model';
 import {Score} from '../../../../definitions/models/score.model';
 import {getCandidatePersonalInfo} from '../../../../definitions/functions/getCandidatePersonalInfo';
 
@@ -29,9 +29,7 @@ export class ClaimCandidateVizComponent implements OnInit {
   @Input() personalCandidates: PersonalCandidateMap;
   @Input() partySeq: string[];
 
-  @Input() partyScores: PartyResult[];
-  @Input() maxValue = 0;
-  @Input() maxParty = 0;
+  @Input() partyScoreResult: PartyScoreResult;
   @Input() showCandidates = false;
 
 
@@ -76,7 +74,7 @@ export class ClaimCandidateVizComponent implements OnInit {
       }
       return this.decisionTemplates.yesTempleate;
     } else {
-      if (userDecision && candidateDecision.vote < 1 && userDecision.decision < 0 && userDecision.fav) {
+      if (userDecision && candidateDecision.vote < -1 && userDecision.decision < 0 && userDecision.fav) {
         return this.decisionTemplates.nonoTempleate;
       }
       return this.decisionTemplates.noTempleate;

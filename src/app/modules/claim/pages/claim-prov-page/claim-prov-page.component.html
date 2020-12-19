@@ -19,22 +19,34 @@
       </ul>
     </div>
 
-    <h2>Was denken die Kandidaten zu dieser These?</h2>
+    <h2>Was denken die Kandidierenden zu dieser These?</h2>
     <app-claim-candidate-viz
       [claimId]="claimId"
       [claim]="politicalData.claims[claimId]"
       [votes]="votes"
       [politicalData]="politicalData"
       [personalCandidates]="personalData"
+      [partyScoreResult]="partyScoreResult"
+      [showCandidates]="true"
     ></app-claim-candidate-viz>
 
     <h2>Weitere Thesen in der Kategorie {{ politicalData.categories[politicalData.claims[claimId].category].title }}</h2>
     <nz-list>
       <ng-container *ngFor="let item of politicalData.claims | keyvalue">
         <nz-list-item *ngIf="item.value.category === politicalData.claims[claimId].category && item.key !== claimId">
-          <a [routerLink]="'/claim/' + item.key">{{ item.value.title }}</a>
+          <a [routerLink]="['/claim/', item.key]">{{ item.value.title }}</a>
         </nz-list-item>
       </ng-container>
     </nz-list>
+    <h2>Navigation in der Thesenliste</h2>
+    <div class="claimNav">
+      <span *ngIf="prev">
+        Vorherige These: <a [routerLink]="['/claim/', prev]">{{politicalData.claims[prev].title}}</a>
+      </span>
+      <br>
+      <span *ngIf="next">
+        Nächste These: <a [routerLink]="['/claim/', next]">{{politicalData.claims[next].title}}</a>
+      </span>
+    </div>
   </div>
 </ng-container>
