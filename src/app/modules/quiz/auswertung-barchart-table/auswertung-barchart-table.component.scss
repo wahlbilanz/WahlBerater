@@ -31,14 +31,14 @@ table {
     }
 
     &.candidate-row {
-      font-size: .8em;
+      font-size: 0.8em;
       td {
-        opacity: .3;
+        opacity: 0.3;
         &:hover {
           opacity: 1;
         }
         span {
-          font-size: .5em;
+          font-size: 0.5em;
         }
       }
     }
@@ -58,7 +58,6 @@ table {
         display: inline-block;
         text-align: center;
       }
-
     }
   }
   tr#axis {

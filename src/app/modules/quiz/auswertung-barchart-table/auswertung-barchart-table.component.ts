@@ -8,16 +8,13 @@ import {
   CandidatePersonalInfo,
   CandidatePoliticalInfo,
   PersonalCandidateMap,
-  PoliticalCandidateMap
+  PoliticalCandidateMap,
 } from '../../../definitions/models/candidate.model';
 import { Claim, ClaimMap } from '../../../definitions/models/claim.model';
 import { getCandidatePersonalInfo } from '../../../definitions/functions/getCandidatePersonalInfo';
-import {Score} from '../../../definitions/models/score.model';
-import {PoliticalData} from '../../../definitions/models/political.data.model';
-import {CandidateResult, PartyResult, PartyScoreResult} from '../../../definitions/models/results.model';
-
-
-
+import { Score } from '../../../definitions/models/score.model';
+import { PoliticalData } from '../../../definitions/models/political.data.model';
+import { CandidateResult, PartyResult, PartyScoreResult } from '../../../definitions/models/results.model';
 
 @Component({
   selector: 'app-auswertung-barchart-table',

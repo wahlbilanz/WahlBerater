@@ -1,4 +1,4 @@
-import {Component, ViewChild, OnInit, Pipe, PipeTransform, SimpleChanges, OnChanges} from '@angular/core';
+import { Component, ViewChild, OnInit, Pipe, PipeTransform, SimpleChanges, OnChanges } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { AppPartialState } from '../../../+state/app.reducer';
 import * as AppSelectors from '../../../+state/app.selectors';
@@ -10,11 +10,11 @@ import { PersonalCandidateMap } from '../../../definitions/models/candidate.mode
 import { PoliticalData } from '../../../definitions/models/political.data.model';
 // import {DecisionToWord, CandidateDecisionToWord} from '../../../definitions/functions/decision-mapping.function';
 import { ResultUrl } from '../../../+state/app.models';
-import {CandidateResult, PartyResult, PartyScoreResult, prepareResults} from '../../../definitions/models/results.model';
-import {Score} from '../../../definitions/models/score.model';
-import {getCandidatePersonalInfo} from '../../../definitions/functions/getCandidatePersonalInfo';
-import {claimScore} from '../../../definitions/functions/score.function';
-import {Votes} from '../../../definitions/models/votes.mode';
+import { CandidateResult, PartyResult, PartyScoreResult, prepareResults } from '../../../definitions/models/results.model';
+import { Score } from '../../../definitions/models/score.model';
+import { getCandidatePersonalInfo } from '../../../definitions/functions/getCandidatePersonalInfo';
+import { claimScore } from '../../../definitions/functions/score.function';
+import { Votes } from '../../../definitions/models/votes.mode';
 
 @Component({
   selector: 'app-auswertung',
@@ -63,10 +63,9 @@ export class AuswertungComponent implements OnInit, OnChanges {
     }
   }
 
-
   recalc(): void {
     if (this.personalData && this.politicalData) {
-      this.partyScoreResult = prepareResults (this.politicalData, this.personalData, this.votes);
+      this.partyScoreResult = prepareResults(this.politicalData, this.personalData, this.votes);
       // // this.table = [];
       // this.maxValue = 0;
       // this.maxParty = 0;
@@ -160,7 +159,7 @@ export class AuswertungComponent implements OnInit, OnChanges {
       // })*/
     }
   }
-  toggleShowCandidates(){
+  toggleShowCandidates() {
     this.showCandidates = !this.showCandidates;
   }
 }

@@ -1,15 +1,19 @@
 <nz-collapse>
-
   <ng-container *ngIf="partyScoreResult">
-<!--    <div *ngFor="let party of partyScores">{{politicalData.parties[party.party].name}}</div>-->
+    <!--    <div *ngFor="let party of partyScores">{{politicalData.parties[party.party].name}}</div>-->
     <nz-collapse-panel
       *ngFor="let party of partyScoreResult.partyScores"
       [nzHeader]="politicalData.parties[party.party].name"
       [nzExtra]="getPartyTemplate(party.scores[politicalData.claims[claimId].category].decisions[claimId], votes[claimId])"
     >
       <div *ngIf="party.scores[politicalData.claims[claimId].category]">
-        Die Kandidierenden der Partei {{politicalData.parties[party.party].name}} haben sich insgesamt für
-        <em><ng-container *ngTemplateOutlet="getPartyTemplate(party.scores[politicalData.claims[claimId].category].decisions[claimId], votes[claimId])"></ng-container></em> entschieden.
+        Die Kandidierenden der Partei {{ politicalData.parties[party.party].name }} haben sich insgesamt für
+        <em
+          ><ng-container
+            *ngTemplateOutlet="getPartyTemplate(party.scores[politicalData.claims[claimId].category].decisions[claimId], votes[claimId])"
+          ></ng-container
+        ></em>
+        entschieden.
       </div>
       <ng-container *ngIf="votes && votes[claimId]">
         <ng-container
@@ -21,20 +25,24 @@
           <strong>Du hast dich in die gleiche Richtung entschieden!</strong>
           <ng-container
             *ngIf="
-            votes[claimId].fav && (party.scores[politicalData.claims[claimId].category].decisions[claimId] > 1 ||
-            party.scores[politicalData.claims[claimId].category].decisions[claimId] < -1)
-          "
+              votes[claimId].fav &&
+              (party.scores[politicalData.claims[claimId].category].decisions[claimId] > 1 ||
+                party.scores[politicalData.claims[claimId].category].decisions[claimId] < -1)
+            "
           >
             &nbsp;<strong><nz-badge [nzCount]="getStarTemplate()">Euch beiden ist diese These sehr wichtig!</nz-badge></strong>
           </ng-container>
-
         </ng-container>
       </ng-container>
 
       <ng-container *ngIf="showCandidates">
-        <nz-table #candidateTable nzSize="small" [nzData]="party.candidates | keyvalue"
-      [nzFrontPagination]="false"
-      [nzShowPagination]="false">
+        <nz-table
+          #candidateTable
+          nzSize="small"
+          [nzData]="party.candidates | keyvalue"
+          [nzFrontPagination]="false"
+          [nzShowPagination]="false"
+        >
           <thead>
             <tr>
               <th>Name</th>
@@ -45,64 +53,72 @@
           <tbody>
             <tr *ngFor="let data of candidateTable.data">
               <td>{{ (personalCandidates | personalData: data.key).name }}</td>
-              <td><ng-container *ngTemplateOutlet="getCandidateTemplate(politicalData.candidates[data.key].positions[claimId], data.value.scores[politicalData.claims[claimId].category]?.claims[claimId]?.score, votes[claimId])"></ng-container></td>
+              <td>
+                <ng-container
+                  *ngTemplateOutlet="
+                    getCandidateTemplate(
+                      politicalData.candidates[data.key].positions[claimId],
+                      data.value.scores[politicalData.claims[claimId].category]?.claims[claimId]?.score,
+                      votes[claimId]
+                    )
+                  "
+                ></ng-container>
+              </td>
               <td>{{ politicalData.candidates[data.key].positions[claimId].reason }}</td>
             </tr>
           </tbody>
         </nz-table>
       </ng-container>
-
     </nz-collapse-panel>
   </ng-container>
 
-
-<!--  <nz-collapse-panel-->
-<!--    *ngFor="let candidate of politicalData.candidates | keyvalue"-->
-<!--    [nzHeader]="(personalCandidates | personalData: candidate.key).name + ' (' + politicalData.parties[candidate.value.party].name + ')'"-->
-<!--    [nzExtra]="getCandidateTemplate(candidate.value.positions[claimId], votes[claimId])"-->
-<!--    class="{{-->
-<!--      votes[claimId] &&-->
-<!--      candidate.value.positions[claimId] &&-->
-<!--      ((votes[claimId].decision > 0 && candidate.value.positions[claimId].vote > 0) ||-->
-<!--        (votes[claimId].decision < 0 && candidate.value.positions[claimId].vote < 0))-->
-<!--        ? 'same_direction'-->
-<!--        : ''-->
-<!--    }}"-->
-<!--  >-->
-<!--    <ng-container *ngIf="candidate.value.positions[claimId]">-->
-<!--      <a [routerLink]="'/candidates/' + candidate.key">{{ (personalCandidates | personalData: candidate.key).name }}</a>-->
-<!--      von der Liste <a [routerLink]="'/parties/' + candidate.value.party">{{ politicalData.parties[candidate.value.party].name }}</a> denkt-->
-<!--      <em-->
-<!--        ><ng-container *ngTemplateOutlet="getCandidateTemplate(candidate.value.positions[claimId], votes[claimId])"></ng-container>&nbsp;{{-->
-<!--          candidate.value.positions[claimId].vote | candidateDecisionToWord-->
-<!--        }},</em-->
-<!--      >-->
-<!--      denn:-->
-<!--      <blockquote [innerHTML]="candidate.value.positions[claimId].reason | markdown"></blockquote>-->
-<!--      <ng-container *ngIf="votes && votes[claimId]">-->
-<!--        <ng-container-->
-<!--          *ngIf="-->
-<!--            (votes[claimId].decision > 0 && candidate.value.positions[claimId].vote > 0) ||-->
-<!--            (votes[claimId].decision < 0 && candidate.value.positions[claimId].vote < 0)-->
-<!--          "-->
-<!--        >-->
-<!--          <strong>Du hast dich in die gleiche Richtung entschieden!</strong>-->
-<!--        </ng-container>-->
-<!--        <ng-container-->
-<!--          *ngIf="-->
-<!--            (votes[claimId].decision > 0 && votes[claimId].fav && candidate.value.positions[claimId].vote === 2) ||-->
-<!--            (votes[claimId].decision < 0 && votes[claimId].fav && candidate.value.positions[claimId].vote === -2)-->
-<!--          "-->
-<!--        >-->
-<!--          &nbsp;<strong><nz-badge [nzCount]="star">Euch beiden ist diese These sehr wichtig!</nz-badge></strong>-->
-<!--        </ng-container>-->
-<!--      </ng-container>-->
-<!--    </ng-container>-->
-<!--    <ng-container *ngIf="!candidate.value.positions[claimId]">-->
-<!--      <a [routerLink]="'/candidates/' + candidate.key">{{ (personalCandidates | personalData: candidate.key).name }}</a> hat diese Frage-->
-<!--      nicht beantwortet.-->
-<!--    </ng-container>-->
-<!--  </nz-collapse-panel>-->
+  <!--  <nz-collapse-panel-->
+  <!--    *ngFor="let candidate of politicalData.candidates | keyvalue"-->
+  <!--    [nzHeader]="(personalCandidates | personalData: candidate.key).name + ' (' + politicalData.parties[candidate.value.party].name + ')'"-->
+  <!--    [nzExtra]="getCandidateTemplate(candidate.value.positions[claimId], votes[claimId])"-->
+  <!--    class="{{-->
+  <!--      votes[claimId] &&-->
+  <!--      candidate.value.positions[claimId] &&-->
+  <!--      ((votes[claimId].decision > 0 && candidate.value.positions[claimId].vote > 0) ||-->
+  <!--        (votes[claimId].decision < 0 && candidate.value.positions[claimId].vote < 0))-->
+  <!--        ? 'same_direction'-->
+  <!--        : ''-->
+  <!--    }}"-->
+  <!--  >-->
+  <!--    <ng-container *ngIf="candidate.value.positions[claimId]">-->
+  <!--      <a [routerLink]="'/candidates/' + candidate.key">{{ (personalCandidates | personalData: candidate.key).name }}</a>-->
+  <!--      von der Liste <a [routerLink]="'/parties/' + candidate.value.party">{{ politicalData.parties[candidate.value.party].name }}</a> denkt-->
+  <!--      <em-->
+  <!--        ><ng-container *ngTemplateOutlet="getCandidateTemplate(candidate.value.positions[claimId], votes[claimId])"></ng-container>&nbsp;{{-->
+  <!--          candidate.value.positions[claimId].vote | candidateDecisionToWord-->
+  <!--        }},</em-->
+  <!--      >-->
+  <!--      denn:-->
+  <!--      <blockquote [innerHTML]="candidate.value.positions[claimId].reason | markdown"></blockquote>-->
+  <!--      <ng-container *ngIf="votes && votes[claimId]">-->
+  <!--        <ng-container-->
+  <!--          *ngIf="-->
+  <!--            (votes[claimId].decision > 0 && candidate.value.positions[claimId].vote > 0) ||-->
+  <!--            (votes[claimId].decision < 0 && candidate.value.positions[claimId].vote < 0)-->
+  <!--          "-->
+  <!--        >-->
+  <!--          <strong>Du hast dich in die gleiche Richtung entschieden!</strong>-->
+  <!--        </ng-container>-->
+  <!--        <ng-container-->
+  <!--          *ngIf="-->
+  <!--            (votes[claimId].decision > 0 && votes[claimId].fav && candidate.value.positions[claimId].vote === 2) ||-->
+  <!--            (votes[claimId].decision < 0 && votes[claimId].fav && candidate.value.positions[claimId].vote === -2)-->
+  <!--          "-->
+  <!--        >-->
+  <!--          &nbsp;<strong><nz-badge [nzCount]="star">Euch beiden ist diese These sehr wichtig!</nz-badge></strong>-->
+  <!--        </ng-container>-->
+  <!--      </ng-container>-->
+  <!--    </ng-container>-->
+  <!--    <ng-container *ngIf="!candidate.value.positions[claimId]">-->
+  <!--      <a [routerLink]="'/candidates/' + candidate.key">{{ (personalCandidates | personalData: candidate.key).name }}</a> hat diese Frage-->
+  <!--      nicht beantwortet.-->
+  <!--    </ng-container>-->
+  <!--  </nz-collapse-panel>-->
 </nz-collapse>
 
 <app-decision-templates #decisionTemplates></app-decision-templates>

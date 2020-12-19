@@ -1,9 +1,9 @@
-import {Score} from './score.model';
-import {CandidatePersonalInfo, CandidatePoliticalInfo, PersonalCandidateMap} from './candidate.model';
-import {PoliticalData} from './political.data.model';
-import {getCandidatePersonalInfo} from '../functions/getCandidatePersonalInfo';
-import {claimScore} from '../functions/score.function';
-import {Votes} from './votes.mode';
+import { Score } from './score.model';
+import { CandidatePersonalInfo, CandidatePoliticalInfo, PersonalCandidateMap } from './candidate.model';
+import { PoliticalData } from './political.data.model';
+import { getCandidatePersonalInfo } from '../functions/getCandidatePersonalInfo';
+import { claimScore } from '../functions/score.function';
+import { Votes } from './votes.mode';
 
 export interface ClaimResult {
   claim: string;
@@ -36,7 +36,7 @@ export interface PartyScoreResult {
 }
 
 // export function prepareResults(politicalData: PoliticalData, personalData: PersonalCandidateMap, votes: Votes): Record<string, PartyResult>  {
-export function prepareResults(politicalData: PoliticalData, personalData: PersonalCandidateMap, votes: Votes): PartyScoreResult  {
+export function prepareResults(politicalData: PoliticalData, personalData: PersonalCandidateMap, votes: Votes): PartyScoreResult {
   const partyResults: Record<string, PartyResult> = {};
   let maxValue = 0;
   let maxParty = 0;
@@ -48,7 +48,7 @@ export function prepareResults(politicalData: PoliticalData, personalData: Perso
         party: politicalData.candidates[candidate].party,
         candidates: {},
         scores: {},
-        score: new Score()
+        score: new Score(),
       };
       partyResults[politicalData.candidates[candidate].party] = partyResult;
     }
@@ -58,19 +58,18 @@ export function prepareResults(politicalData: PoliticalData, personalData: Perso
       political: politicalData.candidates[candidate],
       id: candidate,
       scores: {},
-      score: new Score()
+      score: new Score(),
     };
     partyResult.candidates[candidate] = candidateResult;
 
     for (const claim of Object.keys(politicalData.candidates[candidate].positions)) {
       const category = politicalData.claims[claim].category;
 
-
       if (!candidateResult.scores[category]) {
-        candidateResult.scores[category] = {category, score: new Score(), claims: {}, decisions: {}};
+        candidateResult.scores[category] = { category, score: new Score(), claims: {}, decisions: {} };
       }
       if (!partyResult.scores[category]) {
-        partyResult.scores[category] = {category, score: new Score(), claims: {}, decisions: {}};
+        partyResult.scores[category] = { category, score: new Score(), claims: {}, decisions: {} };
       }
 
       candidateResult.scores[category].decisions[claim] = politicalData.candidates[candidate].positions[claim].vote;
@@ -84,10 +83,10 @@ export function prepareResults(politicalData: PoliticalData, personalData: Perso
         const s = claimScore(politicalData.candidates[candidate].positions[claim].vote, votes[claim].decision, votes[claim].fav);
 
         candidateResult.scores[category].score.add(s);
-        candidateResult.scores[category].claims[claim] = {claim, score: s};
+        candidateResult.scores[category].claims[claim] = { claim, score: s };
 
         partyResult.scores[category].score.add(s);
-        partyResult.scores[category].claims[claim] = {claim, score: s};
+        partyResult.scores[category].claims[claim] = { claim, score: s };
 
         candidateResult.score.add(s);
         partyResult.score.add(s);
@@ -133,4 +132,3 @@ export function prepareResults(politicalData: PoliticalData, personalData: Perso
     maxParty,
   };
 }
-

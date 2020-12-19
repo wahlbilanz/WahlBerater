@@ -26,8 +26,7 @@ export class QuizComponent implements OnInit {
   // prev: string;
   // next: string;
 
-  constructor(private store: Store<AppPartialState>, private route: ActivatedRoute) {
-  }
+  constructor(private store: Store<AppPartialState>, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((pm) => {

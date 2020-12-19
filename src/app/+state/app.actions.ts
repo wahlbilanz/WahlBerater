@@ -26,6 +26,6 @@ export const loadPersonalDataError = createAction('[app] Load Personal Data JSON
 export const vote = createAction('[app] Vote', props<{ claimId: string; decision: number; fav: boolean }>());
 
 export const changeDataStorePreference = createAction('[app] User changed data store preference', props<{ allow: boolean }>());
-export const restoreDataStorePreference = createAction('[app] Restored user\'s data store preference', props<{ allow: boolean }>());
+export const restoreDataStorePreference = createAction("[app] Restored user's data store preference", props<{ allow: boolean }>());
 
 export const updateLastQuizPage = createAction('[app] updating last quiz page', props<{ lastPage?: string }>());

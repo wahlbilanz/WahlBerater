@@ -15,7 +15,7 @@ import {
 import { PersonalCandidateMap, PoliticalCandidateMap } from '../../../definitions/models/candidate.model';
 import { claimScore } from '../../../definitions/functions/score.function';
 import { getCandidatePersonalInfo } from '../../../definitions/functions/getCandidatePersonalInfo';
-import {Score} from '../../../definitions/models/score.model';
+import { Score } from '../../../definitions/models/score.model';
 
 export type ChartOptions = {
   series: ApexAxisChartSeries;

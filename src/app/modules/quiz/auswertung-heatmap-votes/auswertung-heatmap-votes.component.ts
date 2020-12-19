@@ -6,7 +6,7 @@ import { CategoryMap } from '../../../definitions/models/category.model';
 import { AppPartialState } from '../../../+state/app.reducer';
 import { claimScore } from '../../../definitions/functions/score.function';
 import { getCandidatePersonalInfo } from '../../../definitions/functions/getCandidatePersonalInfo';
-import {Score} from '../../../definitions/models/score.model';
+import { Score } from '../../../definitions/models/score.model';
 
 @Component({
   selector: 'app-auswertung-heatmap-votes',

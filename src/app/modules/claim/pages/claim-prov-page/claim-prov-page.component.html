@@ -41,11 +41,11 @@
     <h2>Navigation in der Thesenliste</h2>
     <div class="claimNav">
       <span *ngIf="prev">
-        Vorherige These: <a [routerLink]="['/claim/', prev]">{{politicalData.claims[prev].title}}</a>
+        Vorherige These: <a [routerLink]="['/claim/', prev]">{{ politicalData.claims[prev].title }}</a>
       </span>
-      <br>
+      <br />
       <span *ngIf="next">
-        Nächste These: <a [routerLink]="['/claim/', next]">{{politicalData.claims[next].title}}</a>
+        Nächste These: <a [routerLink]="['/claim/', next]">{{ politicalData.claims[next].title }}</a>
       </span>
     </div>
   </div>

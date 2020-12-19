@@ -8,11 +8,10 @@ import { Position } from '../../../definitions/models/position.model';
 import { ClaimMap } from '../../../definitions/models/claim.model';
 import { PoliticalData } from '../../../definitions/models/political.data.model';
 import { DecisionTemplatesComponent } from '../../helpers/decision-templates/decision-templates.component';
-import {PartyResult} from '../../../definitions/models/results.model';
-import {Vote, Votes} from '../../../definitions/models/votes.mode';
+import { PartyResult } from '../../../definitions/models/results.model';
+import { Vote, Votes } from '../../../definitions/models/votes.mode';
 
-class partyScoreResult {
-}
+class partyScoreResult {}
 
 @Component({
   selector: 'app-auswertung-category-panel',

@@ -5,14 +5,14 @@ import {
   CandidatePersonalInfo,
   CandidatePoliticalInfo,
   PersonalCandidateMap,
-  PoliticalCandidateMap
+  PoliticalCandidateMap,
 } from '../../../../definitions/models/candidate.model';
 import { PoliticalData } from '../../../../definitions/models/political.data.model';
-import {Vote, Votes} from '../../../../definitions/models/votes.mode';
+import { Vote, Votes } from '../../../../definitions/models/votes.mode';
 import { DecisionTemplatesComponent } from '../../../helpers/decision-templates/decision-templates.component';
-import {PartyResult, PartyScoreResult} from '../../../../definitions/models/results.model';
-import {Score} from '../../../../definitions/models/score.model';
-import {getCandidatePersonalInfo} from '../../../../definitions/functions/getCandidatePersonalInfo';
+import { PartyResult, PartyScoreResult } from '../../../../definitions/models/results.model';
+import { Score } from '../../../../definitions/models/score.model';
+import { getCandidatePersonalInfo } from '../../../../definitions/functions/getCandidatePersonalInfo';
 
 @Component({
   selector: 'app-claim-candidate-viz',
@@ -32,15 +32,14 @@ export class ClaimCandidateVizComponent implements OnInit {
   @Input() partyScoreResult: PartyScoreResult;
   @Input() showCandidates = false;
 
-
   constructor() {}
 
   ngOnInit(): void {
     if (!this.partySeq) {
       this.partySeq = Object.keys(this.politicalData.parties);
-      console.log (this.partySeq);
+      console.log(this.partySeq);
     }
-    console.log (this.partySeq);
+    console.log(this.partySeq);
   }
 
   getPartyTemplate(direction: number, userDecision: Vote): TemplateRef<any> {
@@ -55,7 +54,6 @@ export class ClaimCandidateVizComponent implements OnInit {
     } else {
       return this.decisionTemplates.skipTempleate;
     }
-
   }
 
   getCandidateTemplate(candidateDecision: Position, candidateScore: Score, userDecision: Vote): TemplateRef<any> {

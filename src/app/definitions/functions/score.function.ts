@@ -1,5 +1,5 @@
 import { CandidatePoliticalInfo } from '../models/candidate.model';
-import {Score} from '../models/score.model';
+import { Score } from '../models/score.model';
 
 export function candidateScore(candidate: CandidatePoliticalInfo, decisions: any): void {}
 

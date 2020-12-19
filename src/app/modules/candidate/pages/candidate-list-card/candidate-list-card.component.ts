@@ -6,7 +6,7 @@ import { ApexAxisChartSeries, ApexTitleSubtitle, ApexChart, ApexXAxis, ApexYAxis
 import { PoliticalData } from '../../../../definitions/models/political.data.model';
 import { PersonalData } from '../../../../definitions/models/personal.data.model';
 import { PersonalCandidateMap } from '../../../../definitions/models/candidate.model';
-import {Score} from '../../../../definitions/models/score.model';
+import { Score } from '../../../../definitions/models/score.model';
 
 export type ChartOptions = {
   series: ApexAxisChartSeries;
@@ -84,11 +84,13 @@ export class CandidateListCardComponent implements OnInit {
               this.politicalData.candidates[this.candidate].positions[claim]
             ) {
               // console.log (claim, this.data.candidates[this.candidate].positions[claim].vote, this.decisions[claim].decision);
-              score.add(claimScore(
-                this.politicalData.candidates[this.candidate].positions[claim].vote,
-                this.decisions[claim].decision,
-                this.decisions[claim].fav,
-              ));
+              score.add(
+                claimScore(
+                  this.politicalData.candidates[this.candidate].positions[claim].vote,
+                  this.decisions[claim].decision,
+                  this.decisions[claim].fav,
+                ),
+              );
             }
           }
           this.radarData.push({ category, score: score.score });
