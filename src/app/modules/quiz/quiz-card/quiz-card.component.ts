@@ -39,7 +39,7 @@ import {
         'gone',
         style({
           opacity: 0.1,
-          transform: 'translateX(-' + window.innerWidth + 'px)',
+          transform: 'translateX(-' + window.innerWidth + 'px) rotate(-45deg)',
         }),
       ),
       transition('there => gone', [animate(QuizAnimationDurationOut)]),
@@ -56,7 +56,7 @@ import {
         'gone',
         style({
           opacity: 0.1,
-          transform: 'translateX(' + window.innerWidth + 'px)',
+          transform: 'translateX(' + window.innerWidth + 'px) rotate(45deg)',
         }),
       ),
       transition('there => gone', [animate(QuizAnimationDurationOut)]),
