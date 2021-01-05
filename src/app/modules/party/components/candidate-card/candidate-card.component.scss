@@ -10,8 +10,9 @@
   grid-template:
     'picture name name'
     'picture desc desc'
-    'picture social link' (map-get($wb-type-paragraph, 'line-height') + $wb-space-xx-small);
+    'picture link link' (map-get($wb-type-paragraph, 'line-height') + $wb-space-xx-small);
 
+  height: 100%;
   min-height: 150px;
   padding-right: $wb-space-small;
 
@@ -20,6 +21,13 @@
 
   &:hover {
     box-shadow: $wb-shadow-hover;
+  }
+  @media screen and (max-width: $wb-breakpoint-medium) {
+    min-height: 100px;
+    grid-template:
+      'picture name name'
+      'picture desc desc'
+      'link link link' (map-get($wb-type-paragraph, 'line-height') + $wb-space-xx-small);
   }
 }
 
@@ -31,6 +39,10 @@
   margin: $wb-space-x-small;
   border: 2px solid $wb-color-neutral-400;
   border-radius: 50%;
+
+  @media screen and (max-width: $wb-breakpoint-medium) {
+    height: 100px;
+  }
 }
 .candidate-name {
   grid-area: name;
@@ -43,6 +55,7 @@
 }
 .candidate-social {
   grid-area: social;
+  display: none;
 }
 .candidate-link {
   grid-area: link;
@@ -52,4 +65,18 @@
 .candidate-social,
 .candidate-link {
   margin-bottom: $wb-space-xx-small;
+}
+
+// only show candidate social icons on x-large screen,
+// because otherwise the more-info links has not enough room
+@media screen and (min-width: $wb-breakpoint-x-large) {
+  .candidate-card {
+    grid-template:
+      'picture name name'
+      'picture desc desc'
+      'picture social link' (map-get($wb-type-paragraph, 'line-height') + $wb-space-xx-small);
+  }
+  .candidate-social {
+    display: block;
+  }
 }

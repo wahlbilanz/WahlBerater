@@ -68,6 +68,7 @@ header {
 main {
   margin: 0;
   padding-top: $wb-space-small;
+  padding-bottom: $wb-space-large;
   grid-area: main;
   overflow: auto;
 }

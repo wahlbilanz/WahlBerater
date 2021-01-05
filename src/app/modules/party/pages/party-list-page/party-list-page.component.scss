@@ -11,3 +11,9 @@
 
   padding: 0 $wb-space-medium;
 }
+
+@media screen and (max-width: $wb-breakpoint-medium) {
+  .party-list {
+    grid-template-columns: 1fr;
+  }
+}

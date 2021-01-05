@@ -26,8 +26,13 @@
 }
 
 .party-picture {
-  height: 100%;
+  // height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+
   grid-area: picture;
+  justify-self: center;
+  align-self: center;
 }
 .party-name {
   grid-area: name;
@@ -43,7 +48,6 @@
   grid-area: candidates;
   display: flex;
 
-  .test,
   .candidate-picture {
     content: ' ';
     display: block;
@@ -54,14 +58,9 @@
     border: 2px solid black;
     border-radius: 50%;
 
-    // transition: transform 0.3s;
-
     &:not(:first-child) {
       margin-left: -8px;
     }
-    // &:hover:not(:last-child) {
-    //   transform: translateX(-$wb-space-x-small);
-    // }
 
     img {
       display: block;

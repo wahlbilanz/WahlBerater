@@ -7,7 +7,6 @@
 .candidate-info {
   display: grid;
   gap: $wb-space-x-small;
-  // 'picture none social' (map-get($wb-type-paragraph, 'line-height') + $wb-space-xx-small)
   grid-template:
     'picture name social' (
       map-get($wb-type-h2, 'line-height') + map-get($wb-type-paragraph, 'line-height') + $wb-space-xx-small
@@ -16,7 +15,6 @@
     minmax(150px, min-content) 1fr 1fr;
 
   min-height: 200px;
-  // max-width: 650px;
   margin: $wb-space-medium 0;
 }
 
@@ -51,4 +49,21 @@
   grid-area: social;
   align-self: start;
   margin-top: $wb-space-xx-small;
+}
+
+@media screen and (max-width: $wb-breakpoint-medium) {
+  .candidate-info {
+    grid-template:
+      'nope1 picture nope2'
+      'name name social' min-content
+      'desc desc desc' /
+      1fr minmax(150px, min-content) 1fr;
+  }
+  .candidate-picture {
+    margin-bottom: $wb-space-large;
+    height: 150px;
+  }
+  .candidate-social {
+    justify-self: end;
+  }
 }

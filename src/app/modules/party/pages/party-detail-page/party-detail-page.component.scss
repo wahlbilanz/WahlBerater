@@ -46,4 +46,8 @@
   grid-template-columns: repeat(2, 1fr);
 
   margin: 0 $wb-space-medium;
+
+  @media screen and (max-width: $wb-breakpoint-small) {
+    grid-template-columns: 1fr;
+  }
 }
