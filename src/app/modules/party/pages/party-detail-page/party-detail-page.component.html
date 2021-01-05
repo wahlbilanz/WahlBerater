@@ -12,7 +12,7 @@
 </ng-container>
 
 <ng-container *ngIf="partyCandidates | async as candidates">
-  <h2>Kandidierende</h2>
+  <h2 class="candidate-headline">Kandidierende</h2>
   <div class="candidate-list">
     <app-candidate-card [candidateId]="candidate" *ngFor="let candidate of candidates"></app-candidate-card>
   </div>

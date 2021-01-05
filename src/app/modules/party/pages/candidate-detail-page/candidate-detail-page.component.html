@@ -1,1 +1,24 @@
-<p>candidate-detail-page works!</p>
+<a
+  class="back-to-party"
+  [routerLink]="['/parties', (partyData | async)?.id]"
+  *ngIf=""
+  [class.hidden]="!partyData">
+  <i nz-icon nzType="left" nzTheme="outline"></i> {{ (partyData | async)?.name }}
+</a>
+<ng-container *ngIf="candidateData | async as candidate">
+
+  <div class="candidate-info">
+    <img class="candidate-picture" src="{{ candidate.picture | pictureUrl }}">
+    <h2 class="candidate-name">
+      {{ candidate.name }}
+      <p class="party">Bal Party</p>
+    </h2>
+    <p class="candidate-description">{{ candidate.shortDescription | markdown }}</p>
+
+    <div class="candidate-social">
+      <app-social-links [links]="candidate.links" [name]="candidate.name"></app-social-links>
+    </div>
+  </div>
+
+  <div class="candidate-description">{{ candidate.description | markdown }}</div>
+</ng-container>

@@ -37,6 +37,9 @@
   }
 }
 
+.candidate-headline {
+  margin-top: $wb-space-large;
+}
 .candidate-list {
   display: grid;
   gap: $wb-space-medium;

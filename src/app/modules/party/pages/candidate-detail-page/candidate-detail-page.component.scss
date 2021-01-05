@@ -1,0 +1,54 @@
+@import '../../../../../assets/styles/variables';
+
+:host {
+  display: block;
+}
+
+.candidate-info {
+  display: grid;
+  gap: $wb-space-x-small;
+  // 'picture none social' (map-get($wb-type-paragraph, 'line-height') + $wb-space-xx-small)
+  grid-template:
+    'picture name social' (
+      map-get($wb-type-h2, 'line-height') + map-get($wb-type-paragraph, 'line-height') + $wb-space-xx-small
+    ) 'picture desc desc'
+    'picture desc desc' /
+    minmax(150px, min-content) 1fr 1fr;
+
+  min-height: 200px;
+  // max-width: 650px;
+  margin: $wb-space-medium 0;
+}
+
+.candidate-picture {
+  grid-area: picture;
+  height: 200px;
+  max-height: 100%;
+
+  margin: 0;
+  margin-right: $wb-space-medium;
+  border: 2px solid $wb-color-neutral-400;
+  border-radius: 50%;
+}
+.candidate-name {
+  display: block;
+  grid-area: name;
+  margin: 0;
+  margin-bottom: $wb-space-medium;
+
+  .party {
+    display: block;
+    @include use-typography($wb-type-paragraph-small);
+    font-style: italic;
+    color: $wb-color-neutral-500;
+  }
+}
+.candidate-description {
+  grid-area: desc;
+  margin: 0;
+}
+.candidate-social {
+  grid-area: social;
+  align-self: start;
+  margin-top: $wb-space-xx-small;
+}
