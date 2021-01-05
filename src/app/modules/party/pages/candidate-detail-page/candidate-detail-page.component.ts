@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { select, Store } from '@ngrx/store';
+import { asyncScheduler, combineLatest, scheduled } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { AppPartialState } from 'src/app/+state/app.reducer';
 import * as AppSelectors from '../../../../+state/app.selectors';
@@ -20,8 +21,15 @@ export class CandidateDetailPageComponent implements OnInit {
   public partyData = this.candidateAndPartyId.pipe(
     switchMap(({ partyId }) => this.state.pipe(select(AppSelectors.getPartyById, { id: partyId }))),
   );
-  public candidateData = this.candidateAndPartyId.pipe(
-    switchMap(({ candidateId }) => this.state.pipe(select(AppSelectors.getCandidatePersonalDataById, { id: candidateId }))),
+  public data = this.candidateAndPartyId.pipe(
+    switchMap(({ partyId, candidateId }) =>
+      combineLatest([
+        this.state.pipe(select(AppSelectors.getCandidatePersonalDataById, { id: candidateId })),
+        this.state.pipe(select(AppSelectors.getPartyById, { id: partyId })),
+        scheduled([{ partyId, candidateId }], asyncScheduler),
+      ]),
+    ),
+    map(([candidate, party, { partyId, candidateId }]) => ({ candidateId, candidate, partyId, party })),
   );
 
   constructor(private state: Store<AppPartialState>, private route: ActivatedRoute) {}
