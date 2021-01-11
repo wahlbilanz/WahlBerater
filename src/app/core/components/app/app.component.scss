@@ -74,7 +74,7 @@ main {
 }
 
 nav {
-  position: absolute;
+  position: fixed;
   z-index: 9001; // over 9000!!
   right: $wb-space-medium;
   top: $nav-height + $wb-space-small;
