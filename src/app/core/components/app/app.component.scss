@@ -32,8 +32,16 @@ header {
   display: grid;
   // grid-template-columns: subgrid;
   grid-template-columns: minmax($wb-space-medium, 33vw) minmax($wb-breakpoint-medium, 98vw) minmax($wb-space-medium, 33vw);
+
   @media screen and (max-width: $wb-breakpoint-medium) {
     grid-template-columns: 0 auto 0;
+
+    .logo {
+      margin-left: $wb-space-medium;
+    }
+    .menu-toggle {
+      margin-right: $wb-space-medium;
+    }
   }
   position: fixed;
   z-index: 90999;
@@ -45,14 +53,14 @@ header {
   .container {
     grid-column: 2 / 3;
     display: flex;
+    align-items: baseline;
   }
 
   .logo {
     display: block;
 
     height: 100%;
-    min-width: 120px;
-    padding: $wb-space-x-small $wb-space-medium;
+    width: 85px;
     img,
     svg {
       max-height: 100%;
@@ -62,7 +70,6 @@ header {
   .menu-toggle {
     display: block;
     margin-left: auto;
-    padding: $wb-space-small $wb-space-medium;
 
     font-size: 14px;
 
@@ -73,6 +80,12 @@ header {
     &:active {
       color: $wb-color-primary-200;
     }
+  }
+
+  .logo,
+  .menu-toggle {
+    margin-top: $wb-space-x-small;
+    margin-bottom: $wb-space-x-small;
   }
 }
 
