@@ -10,7 +10,8 @@
   grid-template:
     'picture name name'
     'picture desc desc'
-    'picture link link' (map-get($wb-type-paragraph, 'line-height') + $wb-space-xx-small);
+    'picture link link' (map-get($wb-type-paragraph, 'line-height') + $wb-space-xx-small) /
+    minmax(150px, min-content) 1fr 1fr;
 
   height: 100%;
   min-height: 150px;
@@ -27,44 +28,46 @@
     grid-template:
       'picture name name'
       'picture desc desc'
-      'link link link' (map-get($wb-type-paragraph, 'line-height') + $wb-space-xx-small);
+      'link link link' (map-get($wb-type-paragraph, 'line-height') + $wb-space-xx-small) /
+      minmax(100px, min-content) 1fr min-content;
   }
-}
+  .picture {
+    grid-area: picture;
+    height: 150px;
+    max-height: 100%;
 
-.candidate-picture {
-  grid-area: picture;
-  height: 150px;
-  max-height: 100%;
+    margin: $wb-space-x-small;
+    border: 2px solid $wb-color-neutral-400;
+    border-radius: 50%;
 
-  margin: $wb-space-x-small;
-  border: 2px solid $wb-color-neutral-400;
-  border-radius: 50%;
-
-  @media screen and (max-width: $wb-breakpoint-medium) {
-    height: 100px;
+    @media screen and (max-width: $wb-breakpoint-medium) {
+      height: 100px;
+    }
   }
-}
-.candidate-name {
-  grid-area: name;
-  margin-top: $wb-space-small;
-  margin-bottom: 0;
-}
-.candidate-description {
-  grid-area: desc;
-  margin: 0;
-}
-.candidate-social {
-  grid-area: social;
-  display: none;
-}
-.candidate-link {
-  grid-area: link;
-  justify-self: end;
-  text-align: right;
-}
-.candidate-social,
-.candidate-link {
-  margin-bottom: $wb-space-xx-small;
+  .name {
+    grid-area: name;
+    margin-top: $wb-space-small;
+    margin-bottom: 0;
+  }
+  .description {
+    grid-area: desc;
+    margin: 0;
+  }
+  .social {
+    grid-area: social;
+    display: none;
+    margin-right: $wb-space-x-small;
+    justify-self: end;
+  }
+  .link {
+    grid-area: link;
+    justify-self: end;
+    text-align: right;
+  }
+  .social,
+  .link {
+    margin-bottom: $wb-space-xx-small;
+  }
 }
 
 // only show candidate social icons on x-large screen,
@@ -74,9 +77,14 @@
     grid-template:
       'picture name name'
       'picture desc desc'
-      'picture social link' (map-get($wb-type-paragraph, 'line-height') + $wb-space-xx-small);
-  }
-  .candidate-social {
-    display: block;
+      'picture social link' (map-get($wb-type-paragraph, 'line-height') + $wb-space-xx-small) /
+      minmax(150px, min-content) 1fr min-content;
+
+    .link {
+      white-space: nowrap;
+    }
+    .social {
+      display: block;
+    }
   }
 }

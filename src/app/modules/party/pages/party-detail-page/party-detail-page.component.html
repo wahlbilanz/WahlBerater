@@ -1,9 +1,9 @@
 <ng-container *ngIf="partyData | async as party">
-  <h1>{{ party.name }}</h1>
   <div class="party-info">
-    <img class="party-picture" src="{{ party.picture | pictureUrl }}" />
-    <p class="party-description">{{ party.shortDescription | markdown }}</p>
-    <div class="party-social">
+    <h1 class="name">{{ party.name }}</h1>
+    <img class="picture" src="{{ party.picture | pictureUrl }}" />
+    <p class="description">{{ party.shortDescription | markdown }}</p>
+    <div class="social">
       <app-social-links [links]="party.links" [name]="party.name"></app-social-links>
     </div>
   </div>

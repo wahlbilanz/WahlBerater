@@ -8,32 +8,57 @@
   display: grid;
   gap: $wb-space-x-small;
   grid-template:
-    'picture desc desc'
-    'picture desc desc'
-    'picture social social' (map-get($wb-type-paragraph, 'line-height') + $wb-space-xx-small) /
-    minmax(150px, min-content) 1fr 1fr;
+    'picture name social' (
+      map-get($wb-type-h2, 'line-height') + map-get($wb-type-paragraph, 'line-height') + $wb-space-xx-small
+    ) 'picture desc desc'
+    'picture desc desc' /
+    minmax(150px, min-content) minmax(min-content, 2fr) minmax(min-content, 1fr);
 
   min-height: 150px;
-  max-width: 645px;
-  margin: $wb-space-medium;
-  padding-right: $wb-space-small;
+  margin: $wb-space-medium 0;
 
-  box-shadow: $wb-shadow-normal;
   transition: color 0.3s, background-color 0.3s, box-shadow 0.3s, border-color 0.3s;
-
-  .party-picture {
-    height: 100%;
-    grid-area: picture;
+  .name {
+    display: block;
+    grid-area: name;
+    margin: 0;
+    margin-bottom: $wb-space-medium;
   }
-  .party-description {
+  .picture {
+    grid-area: picture;
+    height: 150px;
+    max-height: 100%;
+
+    margin: 0;
+    margin-right: $wb-space-medium;
+  }
+  .description {
     grid-area: desc;
     margin: 0;
-    padding: $wb-space-small 0;
   }
-  .party-social {
+  .social {
     grid-area: social;
-    justify-self: end;
+    align-self: start;
     padding-bottom: $wb-space-xx-small;
+  }
+}
+
+@media screen and (max-width: $wb-breakpoint-medium) {
+  .party-info {
+    grid-template:
+      'name name social'
+      'picture desc desc' minmax(100px, min-content)
+      'nope desc desc' /
+      minmax(100px, min-content) minmax(min-content, 2fr) minmax(min-content, 1fr);
+
+    .picture {
+      height: 100px;
+      margin-right: $wb-space-xx-small;
+    }
+    .social {
+      justify-self: end;
+      margin-right: $wb-space-small;
+    }
   }
 }
 
@@ -43,7 +68,7 @@
 .candidate-list {
   display: grid;
   gap: $wb-space-medium;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(1, 1fr);
 
   margin: 0 $wb-space-medium;
 
