@@ -29,6 +29,20 @@ $nav-height: 46px;
 header {
   grid-area: nav;
   display: flex;
+  display: grid;
+  // grid-template-columns: subgrid;
+  grid-template-columns: minmax($wb-space-medium, 33vw) minmax($wb-breakpoint-medium, 98vw) minmax($wb-space-medium, 33vw);
+
+  @media screen and (max-width: $wb-breakpoint-medium) {
+    grid-template-columns: 0 auto 0;
+
+    .logo {
+      margin-left: $wb-space-medium;
+    }
+    .menu-toggle {
+      margin-right: $wb-space-medium;
+    }
+  }
   position: fixed;
   z-index: 90999;
   width: 100%;
@@ -36,12 +50,17 @@ header {
   margin: 0;
   background-color: $wb-color-primary-600;
 
+  .container {
+    grid-column: 2 / 3;
+    display: flex;
+    align-items: baseline;
+  }
+
   .logo {
     display: block;
 
     height: 100%;
-    min-width: 120px;
-    padding: $wb-space-x-small $wb-space-medium;
+    width: 85px;
     img,
     svg {
       max-height: 100%;
@@ -51,7 +70,6 @@ header {
   .menu-toggle {
     display: block;
     margin-left: auto;
-    padding: $wb-space-small $wb-space-medium;
 
     font-size: 14px;
 
@@ -63,17 +81,24 @@ header {
       color: $wb-color-primary-200;
     }
   }
+
+  .logo,
+  .menu-toggle {
+    margin-top: $wb-space-x-small;
+    margin-bottom: $wb-space-x-small;
+  }
 }
 
 main {
   margin: 0;
   padding-top: $wb-space-small;
+  padding-bottom: $wb-space-large;
   grid-area: main;
   overflow: auto;
 }
 
 nav {
-  position: absolute;
+  position: fixed;
   z-index: 9001; // over 9000!!
   right: $wb-space-medium;
   top: $nav-height + $wb-space-small;

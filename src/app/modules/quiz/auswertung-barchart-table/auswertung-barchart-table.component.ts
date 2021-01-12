@@ -1,20 +1,11 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { select, Store } from '@ngrx/store';
+import { Component, Input, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { AppPartialState } from '../../../+state/app.reducer';
-import * as AppSelectors from '../../../+state/app.selectors';
-import { claimScore } from '../../../definitions/functions/score.function';
+import { PersonalCandidateMap } from '../../../definitions/models/candidate.model';
 import { CategoryMap } from '../../../definitions/models/category.model';
-import {
-  CandidatePersonalInfo,
-  CandidatePoliticalInfo,
-  PersonalCandidateMap,
-  PoliticalCandidateMap,
-} from '../../../definitions/models/candidate.model';
-import { Claim, ClaimMap } from '../../../definitions/models/claim.model';
-import { getCandidatePersonalInfo } from '../../../definitions/functions/getCandidatePersonalInfo';
-import { Score } from '../../../definitions/models/score.model';
+import { ClaimMap } from '../../../definitions/models/claim.model';
 import { PoliticalData } from '../../../definitions/models/political.data.model';
-import { CandidateResult, PartyResult, PartyScoreResult } from '../../../definitions/models/results.model';
+import { PartyScoreResult } from '../../../definitions/models/results.model';
 
 @Component({
   selector: 'app-auswertung-barchart-table',

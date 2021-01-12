@@ -1,11 +1,8 @@
-import { Component, ViewChild, Input, OnInit } from '@angular/core';
-// import { Candidate } from '../../../../definitions/models/candidate.model';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { ApexAxisChartSeries, ApexChart, ApexTitleSubtitle, ApexXAxis, ApexYAxis, ChartComponent } from 'ng-apexcharts';
 import { claimScore } from '../../../../definitions/functions/score.function';
-
-import { ApexAxisChartSeries, ApexTitleSubtitle, ApexChart, ApexXAxis, ApexYAxis, ChartComponent } from 'ng-apexcharts';
-import { PoliticalData } from '../../../../definitions/models/political.data.model';
-import { PersonalData } from '../../../../definitions/models/personal.data.model';
 import { PersonalCandidateMap } from '../../../../definitions/models/candidate.model';
+import { PoliticalData } from '../../../../definitions/models/political.data.model';
 import { Score } from '../../../../definitions/models/score.model';
 
 export type ChartOptions = {
@@ -42,9 +39,6 @@ export class CandidateListCardComponent implements OnInit {
       ],
       chart: {
         height: 250,
-        /*parentHeightOffset: 0,
-        offsetY: 0,*/
-        /*width: 350,*/
         type: 'radar',
       },
       xaxis: {
@@ -59,9 +53,6 @@ export class CandidateListCardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // console.log(this.PoliticalData);
-    // console.log(this.candidate);
-    // console.log(this.decisions);
     let maxY = 0;
     // TODO move this into effect/selector combi
 
@@ -98,9 +89,6 @@ export class CandidateListCardComponent implements OnInit {
         }
       }
     }
-    // console.log(this.candidate);
-    // console.log(this.radarData);
-    // console.log(maxY);
     this.chartOptions.series[0].data = this.radarData.map((s) => s.score);
     this.chartOptions.xaxis.categories = this.radarData.map((s) => s.category);
     this.chartOptions.yaxis.max = maxY;

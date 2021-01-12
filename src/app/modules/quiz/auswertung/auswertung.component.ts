@@ -1,19 +1,13 @@
-import { Component, ViewChild, OnInit, Pipe, PipeTransform, SimpleChanges, OnChanges } from '@angular/core';
+import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { select, Store } from '@ngrx/store';
+import * as AppActions from '../../../+state/app.actions';
+import { vote } from '../../../+state/app.actions';
+import { ResultUrl } from '../../../+state/app.models';
 import { AppPartialState } from '../../../+state/app.reducer';
 import * as AppSelectors from '../../../+state/app.selectors';
-import * as AppActions from '../../../+state/app.actions';
-import { first } from 'rxjs/operators';
-import { vote } from '../../../+state/app.actions';
-import { PersonalData } from '../../../definitions/models/personal.data.model';
 import { PersonalCandidateMap } from '../../../definitions/models/candidate.model';
 import { PoliticalData } from '../../../definitions/models/political.data.model';
-// import {DecisionToWord, CandidateDecisionToWord} from '../../../definitions/functions/decision-mapping.function';
-import { ResultUrl } from '../../../+state/app.models';
-import { CandidateResult, PartyResult, PartyScoreResult, prepareResults } from '../../../definitions/models/results.model';
-import { Score } from '../../../definitions/models/score.model';
-import { getCandidatePersonalInfo } from '../../../definitions/functions/getCandidatePersonalInfo';
-import { claimScore } from '../../../definitions/functions/score.function';
+import { PartyScoreResult, prepareResults } from '../../../definitions/models/results.model';
 import { Votes } from '../../../definitions/models/votes.mode';
 
 @Component({

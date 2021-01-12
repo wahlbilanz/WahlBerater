@@ -1,11 +1,10 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { select, Store } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { AppPartialState } from '../../../+state/app.reducer';
-import * as AppSelectors from '../../../+state/app.selectors';
-import { claimScore } from '../../../definitions/functions/score.function';
-import { CategoryMap } from '../../../definitions/models/category.model';
-import { PersonalCandidateMap, PoliticalCandidateMap } from '../../../definitions/models/candidate.model';
 import { getCandidatePersonalInfo } from '../../../definitions/functions/getCandidatePersonalInfo';
+import { claimScore } from '../../../definitions/functions/score.function';
+import { PersonalCandidateMap, PoliticalCandidateMap } from '../../../definitions/models/candidate.model';
+import { CategoryMap } from '../../../definitions/models/category.model';
 import { Score } from '../../../definitions/models/score.model';
 
 @Component({

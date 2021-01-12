@@ -15,7 +15,6 @@ import { getCandidatePersonalInfo } from '../../../../definitions/functions/getC
 })
 export class CandidateProfilePageComponent implements OnInit {
   votes = this.store.pipe(select(AppSelectors.getVotes));
-  // personalData: PersonalCandidateMap = undefined;
   politicalData: PoliticalData = undefined;
   personalInfo: CandidatePersonalInfo = undefined;
   candidateId: string;

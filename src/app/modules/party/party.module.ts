@@ -7,9 +7,19 @@ import { CandidateDetailPageComponent } from './pages/candidate-detail-page/cand
 import { PartyDetailPageComponent } from './pages/party-detail-page/party-detail-page.component';
 import { PartyListPageComponent } from './pages/party-list-page/party-list-page.component';
 import { PartyRoutingModule } from './party-routing.module';
+import { SocialLinksComponent } from './components/social-links/social-links.component';
+import { PipesModule } from '../pipes/pipes.module';
+import { CandidateCardComponent } from './components/candidate-card/candidate-card.component';
 
 @NgModule({
-  declarations: [PartyListPageComponent, PartyDetailPageComponent, CandidateDetailPageComponent, PartyCardComponent],
-  imports: [CommonModule, PartyRoutingModule, NzIconModule, NzToolTipModule],
+  declarations: [
+    PartyListPageComponent,
+    PartyDetailPageComponent,
+    CandidateDetailPageComponent,
+    PartyCardComponent,
+    SocialLinksComponent,
+    CandidateCardComponent,
+  ],
+  imports: [CommonModule, PartyRoutingModule, NzIconModule, NzToolTipModule, PipesModule],
 })
 export class PartyModule {}

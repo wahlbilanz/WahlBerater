@@ -1,12 +1,11 @@
-import { createSelector, createFeatureSelector } from '@ngrx/store';
-import { QuizFirstPage, QuizState, State } from './app.models';
-import { STATE_FEATURE_KEY, AppPartialState } from './app.reducer';
-import { Category } from '../definitions/models/category.model';
-import { PersonalData } from '../definitions/models/personal.data.model';
-import { PoliticalData } from '../definitions/models/political.data.model';
-import { PersonalCandidateMap } from '../definitions/models/candidate.model';
+import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { getCandidatePersonalInfo } from '../definitions/functions/getCandidatePersonalInfo';
+import { PersonalCandidateMap } from '../definitions/models/candidate.model';
+import { Category } from '../definitions/models/category.model';
+import { PoliticalData } from '../definitions/models/political.data.model';
 import { Votes } from '../definitions/models/votes.mode';
+import { QuizFirstPage, QuizState, State } from './app.models';
+import { AppPartialState, STATE_FEATURE_KEY } from './app.reducer';
 
 const getAppState = createFeatureSelector<AppPartialState, State>(STATE_FEATURE_KEY);
 
@@ -33,7 +32,7 @@ export const getCandidatePersonalDataById = createSelector(getPersonalData, (per
   getCandidatePersonalInfo(personalData, props.id),
 );
 
-export const getPartyById = createSelector(getParties, (parties, props: { id: number }) => parties[props.id]);
+export const getPartyById = createSelector(getParties, (parties, props: { id: string }) => (parties ? parties[props.id] : null));
 
 export const getCategoryByClaimId = createSelector(
   getPoliticalData,
@@ -126,3 +125,36 @@ export const getNextQuestion = createSelector(getPoliticalData, (data, currentCl
 });
 
 export const getLastQuizPage = createSelector(getAppState, (state: State) => state.quizLastPage);
+export const getCandidateIds = createSelector(getAppState, (state: State): string[] =>
+  !state.politicalDataLoaded || !state.personalDataLoaded ? null : Object.getOwnPropertyNames(state.politicalData.candidates),
+);
+/*export const getCandidateList = createSelector(getAppState, (state: State) =>
+  !state.politicalDataLoaded || !state.personalDataLoaded
+    ? null
+    : Object.getOwnPropertyNames(state.politicalData.candidates).map((candidateId) => ({
+        ...state.politicalData.candidates[candidateId],
+        ...state.personalData[candidateId],
+        candidateId,
+        hasPersonalData: !!state.personalData[candidateId],
+      })),
+);*/
+export const getCandidateListByPartyId = createSelector(
+  getAppState,
+  (state: State, props: { partyId: string }): string[] =>
+    !state.politicalDataLoaded || !state.personalDataLoaded
+      ? null
+      : Object.keys(state.politicalData.candidates)
+          .filter((candidate) => state.politicalData.candidates[candidate].party === props.partyId)
+          .sort((a, b) => (state.politicalData.candidates[a].listOrder > state.politicalData.candidates[b].listOrder ? 1 : -1)),
+  // !state ? null : state.filter((candidate) => candidate.party === props.partyId),
+);
+/*export const getCandidateById = createSelector(getAppState, (state: State, props: { id: string }) =>
+  !state.politicalDataLoaded || !state.personalDataLoaded
+    ? null
+    : ({
+        ...state.politicalData.candidates[props.id],
+        ...state.personalData[props.id],
+        candidateId: props.id,
+        hasPersonalData: !!state.personalData[props.id],
+      } as CandidateWithID),
+);*/

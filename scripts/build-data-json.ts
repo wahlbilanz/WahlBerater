@@ -1,13 +1,12 @@
-import debug from 'debug';
-import { readdirSync, readFileSync, stat, statSync, mkdirSync, writeFileSync, mkdir } from 'fs';
-import * as yaml from 'js-yaml';
-import { join as joinPath, extname } from 'path';
-import * as yargs from 'yargs';
-import { v5 as uuidv5 } from 'uuid';
-import * as sharp from 'sharp';
-import { ClaimRoutingModule } from '../src/app/modules/claim/claim-routing.module';
 import * as Color from 'color';
+import debug from 'debug';
+import { mkdirSync, readdirSync, readFileSync, statSync, writeFileSync } from 'fs';
+import * as yaml from 'js-yaml';
+import { extname, join as joinPath } from 'path';
+import * as sharp from 'sharp';
 import { URL } from 'url';
+import { v5 as uuidv5 } from 'uuid';
+import * as yargs from 'yargs';
 
 interface ClaimProvenance {
   claim: string;
@@ -37,6 +36,7 @@ interface VotePosition {
 interface Candidate {
   id: string;
   publishPersonalInfo?: boolean;
+  listOrder: number;
   name: string;
   party: string;
   picture: string;
@@ -84,8 +84,8 @@ interface PositionedEntities {
 
 const UUID_NAMESPACE = 'b1c7c198-31bd-11eb-adc1-0242ac120002';
 const IMAGE_DIMENSIONS = { width: 250, height: 250 };
-const IMAGE_BACKGROUND = { r: 245, g: 245, b: 245 };
-const IMAGE_QUALITY = 80;
+const IMAGE_BACKGROUND = { r: 255, g: 255, b: 255 };
+const IMAGE_QUALITY = 85;
 
 debug.enable('*');
 const log = debug('data-builder');
@@ -269,6 +269,7 @@ function cleanCandidate(candidate: Candidate, hasPositions: boolean): Candidate 
   candidate = {
     id: cleanId(candidate.id),
     publishPersonalInfo: candidate.publishPersonalInfo === true,
+    listOrder: +candidate.listOrder,
     name: cleanString(candidate.name),
     party: cleanId(candidate.party),
     picture: cleanString(candidate.picture),
@@ -301,6 +302,9 @@ function cleanCandidate(candidate: Candidate, hasPositions: boolean): Candidate 
 
   if (!candidate.id) {
     throw Error(`Candidate is missing an ID`);
+  }
+  if (candidate.listOrder == null || isNaN(candidate.listOrder)) {
+    throw Error(`Candidate ${candidate.id} is missing a list order`);
   }
   if (!candidate.party) {
     throw Error(`Candidate ${candidate.id} has no party`);
@@ -412,6 +416,7 @@ function cleanData(data: DataDocument, positionedEntities: PositionedEntities): 
     candidates: new Map<string, Candidate>(
       Array.from(data.candidates.values())
         .map((entry) => cleanCandidate(entry, positionedEntities.candidateHasPositions))
+        .sort((a, b) => (a.listOrder > b.listOrder ? 1 : -1)) // sort according to order on the list
         .map((entry) => [entry.id, entry]),
     ),
     categories: new Map<string, Category>(
@@ -607,7 +612,11 @@ function generatePoliticalJson(data: DataDocument, positionedEntities: Positione
     candidates: Array.from(data.candidates.values()).reduce(
       (obj, entry) => ({
         ...obj,
-        [entry.id]: { party: entry.party, positions: positionedEntities.candidateHasPositions ? entry.positions : undefined },
+        [entry.id]: {
+          party: entry.party,
+          listOrder: entry.listOrder,
+          positions: positionedEntities.candidateHasPositions ? entry.positions : undefined,
+        },
       }),
       {},
     ),

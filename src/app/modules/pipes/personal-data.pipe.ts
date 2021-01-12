@@ -3,9 +3,9 @@ import { CandidatePersonalInfo, PersonalCandidateMap } from '../../definitions/m
 import { getCandidatePersonalInfo } from '../../definitions/functions/getCandidatePersonalInfo';
 
 @Pipe({
-  name: 'personalData',
+  name: 'personalDataOf',
 })
-export class PersonalDataPipe implements PipeTransform {
+export class PersonalDataOfPipe implements PipeTransform {
   transform(value: PersonalCandidateMap, id: string): CandidatePersonalInfo {
     return getCandidatePersonalInfo(value, id);
   }

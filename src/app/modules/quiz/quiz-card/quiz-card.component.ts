@@ -1,27 +1,20 @@
+import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
-import { select, Store } from '@ngrx/store';
-import { AppPartialState } from '../../../+state/app.reducer';
-import * as AppSelectors from '../../../+state/app.selectors';
 import { Router } from '@angular/router';
-import { Claim } from '../../../definitions/models/claim.model';
-import { Category } from '../../../definitions/models/category.model';
-import { vote } from '../../../+state/app.actions';
+import { select, Store } from '@ngrx/store';
 import { first } from 'rxjs/operators';
+import { vote } from '../../../+state/app.actions';
 import {
-  QuizFirstPage,
-  ResultUrl,
   QuizAnimationDelay,
   QuizAnimationDurationIn,
   QuizAnimationDurationOut,
+  QuizFirstPage,
+  ResultUrl,
 } from '../../../+state/app.models';
-import {
-  trigger,
-  state,
-  style,
-  animate,
-  transition,
-  // ...
-} from '@angular/animations';
+import { AppPartialState } from '../../../+state/app.reducer';
+import * as AppSelectors from '../../../+state/app.selectors';
+import { Category } from '../../../definitions/models/category.model';
+import { Claim } from '../../../definitions/models/claim.model';
 
 @Component({
   selector: 'app-quiz-card',

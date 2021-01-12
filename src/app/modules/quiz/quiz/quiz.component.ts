@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { select, Store } from '@ngrx/store';
+import * as AppActions from '../../../+state/app.actions';
+import { QuizFirstPage } from '../../../+state/app.models';
 import { AppPartialState } from '../../../+state/app.reducer';
 import * as AppSelectors from '../../../+state/app.selectors';
-import * as AppActions from '../../../+state/app.actions';
-import { ActivatedRoute } from '@angular/router';
 import { Category } from '../../../definitions/models/category.model';
-import { QuizFirstPage } from '../../../+state/app.models';
 
 @Component({
   selector: 'app-quiz',

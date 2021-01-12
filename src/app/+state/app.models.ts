@@ -1,8 +1,6 @@
 import { BreakpointBooleanMap } from 'ng-zorro-antd/core/services';
-// import { Data } from '../definitions/models/data.model';
-import { PoliticalData } from '../definitions/models/political.data.model';
-import { PersonalData } from '../definitions/models/personal.data.model';
 import { PersonalCandidateMap } from '../definitions/models/candidate.model';
+import { PoliticalData } from '../definitions/models/political.data.model';
 import { Votes } from '../definitions/models/votes.mode';
 
 export enum QuizState {

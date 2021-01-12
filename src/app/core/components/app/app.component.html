@@ -1,11 +1,13 @@
 <header>
+  <div class="container">
   <a class="logo" routerLink="/">
-    <img src="assets/static/wahlberater-horizontal-inverted-optm.svg" />
+    <img src="assets/static/wahlberater-horizontal-inverted-optm.png" />
   </a>
 
   <a class="menu-toggle" [title]="(isMenuOpen | async) === true ? 'Menü schließen' : 'Menü öffnen'" (click)="toggleMenu($event)">
     <i nz-icon nzType="menu" nzTheme="outline"></i>
   </a>
+</div>
 </header>
 
 <nav *ngIf="(isMenuOpen | async) === true" @menuAnimation aria-modal="true">

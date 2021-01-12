@@ -112,7 +112,7 @@
 
   @media screen and (max-width: $wb-breakpoint-small) {
     flex-flow: column nowrap;
-    justify-content: start;
+    justify-content: flex-start;
     li:not(:first-child) {
       margin-left: 0;
     }

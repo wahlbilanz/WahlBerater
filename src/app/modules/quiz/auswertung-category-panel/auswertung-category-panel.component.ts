@@ -1,15 +1,13 @@
 import { Component, Input, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import { select, Store } from '@ngrx/store';
-import * as AppSelectors from '../../../+state/app.selectors';
-import { Category } from '../../../definitions/models/category.model';
+import { Store } from '@ngrx/store';
 import { AppPartialState } from '../../../+state/app.reducer';
-import { PersonalCandidateMap, PoliticalCandidateMap } from '../../../definitions/models/candidate.model';
-import { Position } from '../../../definitions/models/position.model';
+import { PersonalCandidateMap } from '../../../definitions/models/candidate.model';
+import { Category } from '../../../definitions/models/category.model';
 import { ClaimMap } from '../../../definitions/models/claim.model';
 import { PoliticalData } from '../../../definitions/models/political.data.model';
-import { DecisionTemplatesComponent } from '../../helpers/decision-templates/decision-templates.component';
-import { PartyResult, PartyScoreResult } from '../../../definitions/models/results.model';
+import { PartyScoreResult } from '../../../definitions/models/results.model';
 import { Vote, Votes } from '../../../definitions/models/votes.mode';
+import { DecisionTemplatesComponent } from '../../helpers/decision-templates/decision-templates.component';
 
 @Component({
   selector: 'app-auswertung-category-panel',

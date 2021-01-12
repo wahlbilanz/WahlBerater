@@ -1,20 +1,10 @@
-import { Component, Input, ViewChild, OnInit, OnChanges, SimpleChanges } from '@angular/core';
-import { select, Store } from '@ngrx/store';
+import { Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { ApexAxisChartSeries, ApexChart, ApexDataLabels, ApexPlotOptions, ApexXAxis, ChartComponent } from 'ng-apexcharts';
 import { AppPartialState } from '../../../+state/app.reducer';
-import * as AppSelectors from '../../../+state/app.selectors';
-
-import {
-  ApexAxisChartSeries,
-  ApexTitleSubtitle,
-  ApexChart,
-  ApexXAxis,
-  ChartComponent,
-  ApexPlotOptions,
-  ApexDataLabels,
-} from 'ng-apexcharts';
-import { PersonalCandidateMap, PoliticalCandidateMap } from '../../../definitions/models/candidate.model';
-import { claimScore } from '../../../definitions/functions/score.function';
 import { getCandidatePersonalInfo } from '../../../definitions/functions/getCandidatePersonalInfo';
+import { claimScore } from '../../../definitions/functions/score.function';
+import { PersonalCandidateMap, PoliticalCandidateMap } from '../../../definitions/models/candidate.model';
 import { Score } from '../../../definitions/models/score.model';
 
 export type ChartOptions = {

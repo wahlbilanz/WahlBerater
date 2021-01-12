@@ -1,0 +1,90 @@
+@import '../../../../../assets/styles/variables';
+
+:host {
+  display: block;
+}
+
+.candidate-card {
+  display: grid;
+  gap: $wb-space-x-small;
+  grid-template:
+    'picture name name'
+    'picture desc desc'
+    'picture link link' (map-get($wb-type-paragraph, 'line-height') + $wb-space-xx-small) /
+    minmax(150px, min-content) 1fr 1fr;
+
+  height: 100%;
+  min-height: 150px;
+  padding-right: $wb-space-small;
+
+  box-shadow: $wb-shadow-normal;
+  transition: color 0.3s, background-color 0.3s, box-shadow 0.3s, border-color 0.3s;
+
+  &:hover {
+    box-shadow: $wb-shadow-hover;
+  }
+  @media screen and (max-width: $wb-breakpoint-medium) {
+    min-height: 100px;
+    grid-template:
+      'picture name name'
+      'picture desc desc'
+      'link link link' (map-get($wb-type-paragraph, 'line-height') + $wb-space-xx-small) /
+      minmax(100px, min-content) 1fr min-content;
+  }
+  .picture {
+    grid-area: picture;
+    height: 150px;
+    max-height: 100%;
+
+    margin: $wb-space-x-small;
+    border: 2px solid $wb-color-neutral-400;
+    border-radius: 50%;
+
+    @media screen and (max-width: $wb-breakpoint-medium) {
+      height: 100px;
+    }
+  }
+  .name {
+    grid-area: name;
+    margin-top: $wb-space-small;
+    margin-bottom: 0;
+  }
+  .description {
+    grid-area: desc;
+    margin: 0;
+  }
+  .social {
+    grid-area: social;
+    display: none;
+    margin-right: $wb-space-x-small;
+    justify-self: end;
+  }
+  .link {
+    grid-area: link;
+    justify-self: end;
+    text-align: right;
+  }
+  .social,
+  .link {
+    margin-bottom: $wb-space-xx-small;
+  }
+}
+
+// only show candidate social icons on x-large screen,
+// because otherwise the more-info links has not enough room
+@media screen and (min-width: $wb-breakpoint-x-large) {
+  .candidate-card {
+    grid-template:
+      'picture name name'
+      'picture desc desc'
+      'picture social link' (map-get($wb-type-paragraph, 'line-height') + $wb-space-xx-small) /
+      minmax(150px, min-content) 1fr min-content;
+
+    .link {
+      white-space: nowrap;
+    }
+    .social {
+      display: block;
+    }
+  }
+}

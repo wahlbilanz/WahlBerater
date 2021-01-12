@@ -1,1 +1,19 @@
-<p>party-detail-page works!</p>
+<ng-container *ngIf="partyData | async as party">
+  <div class="party-info">
+    <h1 class="name">{{ party.name }}</h1>
+    <img class="picture" src="{{ party.picture | pictureUrl }}" />
+    <p class="description">{{ party.shortDescription | markdown }}</p>
+    <div class="social">
+      <app-social-links [links]="party.links" [name]="party.name"></app-social-links>
+    </div>
+  </div>
+
+  <div>{{ party.description | markdown }}</div>
+</ng-container>
+
+<ng-container *ngIf="partyCandidates | async as candidates">
+  <h2 class="candidate-headline">Kandidierende</h2>
+  <div class="candidate-list">
+    <app-candidate-card [candidateId]="candidate" *ngFor="let candidate of candidates"></app-candidate-card>
+  </div>
+</ng-container>
