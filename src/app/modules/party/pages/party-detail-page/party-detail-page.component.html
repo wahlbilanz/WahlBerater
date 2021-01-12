@@ -1,4 +1,10 @@
 <ng-container *ngIf="partyData | async as party">
+  <nz-breadcrumb>
+    <nz-breadcrumb-item><a routerLink="/">Start</a></nz-breadcrumb-item>
+    <nz-breadcrumb-item><a routerLink="/parties">Wahllisten</a></nz-breadcrumb-item>
+    <nz-breadcrumb-item>{{ party.name }}</nz-breadcrumb-item>
+  </nz-breadcrumb>
+
   <div class="party-info">
     <h1 class="name">{{ party.name }}</h1>
     <img class="picture" src="{{ party.picture | pictureUrl }}" />
