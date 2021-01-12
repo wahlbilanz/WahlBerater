@@ -46,6 +46,7 @@ header {
   position: fixed;
   z-index: 90999;
   width: 100%;
+  height: $nav-height;
 
   margin: 0;
   background-color: $wb-color-primary-600;
@@ -78,7 +79,7 @@ header {
       color: $wb-color-primary-900;
     }
     &:active {
-      color: $wb-color-primary-200;
+      color: $wb-color-primary-200 !important;
     }
   }
 
