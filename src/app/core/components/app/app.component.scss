@@ -2,6 +2,10 @@
 
 $nav-height: 46px;
 
+$main-grid-column-template: minmax($wb-space-medium, 33vw) minmax($wb-breakpoint-medium - (2 * $wb-space-medium), 98vw)
+  minmax($wb-space-medium, 33vw);
+$main-grid-column-template-mobile: 0 auto 0;
+
 :host {
   display: grid;
   width: 100%;
@@ -11,7 +15,7 @@ $nav-height: 46px;
   grid-template:
     'nav nav nav' 46px
     'space-left main space-right' auto
-    / minmax($wb-space-medium, 33vw) minmax($wb-breakpoint-medium, 98vw) minmax($wb-space-medium, 33vw);
+    / $main-grid-column-template;
 
   // no side-spacing on smaller devices
   @media screen and (max-width: $wb-breakpoint-medium) {
@@ -31,7 +35,7 @@ header {
   display: flex;
   display: grid;
   // grid-template-columns: subgrid;
-  grid-template-columns: minmax($wb-space-medium, 33vw) minmax($wb-breakpoint-medium, 98vw) minmax($wb-space-medium, 33vw);
+  grid-template-columns: $main-grid-column-template;
 
   position: fixed;
   z-index: 90999;
@@ -129,7 +133,7 @@ header {
   }
 
   @media screen and (max-width: $wb-breakpoint-medium) {
-    grid-template-columns: 0 auto 0;
+    grid-template-columns: $main-grid-column-template-mobile;
 
     .logo {
       margin-left: $wb-space-medium;
