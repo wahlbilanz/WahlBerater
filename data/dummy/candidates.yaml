@@ -1,6 +1,6 @@
-
 candidates:
   - id: cd01
+    listOrder: 1
     publishPersonalInfo: true
     name: Hans Franz
     party: party-turquoise
@@ -35,6 +35,7 @@ candidates:
         reason: '0 Sit ea quis ad velit tempor sunt ullamco esse voluptate excepteur.'
 
   - id: cd02
+    listOrder: 2
     publishPersonalInfo: true
     name: Anette Anagram
     party: party-turquoise
@@ -70,6 +71,7 @@ candidates:
         reason: '2 Sit ea quis ad velit tempor sunt ullamco esse voluptate excepteur.'
 
   - id: cd03
+    listOrder: 4
     publishPersonalInfo: true
     name: Maxi Muster
     party: party-turquoise
@@ -102,9 +104,9 @@ candidates:
         vote: 1
         reason: '1 Sit ea quis ad velit tempor sunt ullamco esse voluptate excepteur.'
 ---
-
 candidates:
   - id: cd04
+    listOrder: 3
     publishPersonalInfo: true
     name: Maxi Muster
     party: party-orange
@@ -142,6 +144,7 @@ candidates:
         reason: '-1 Sit ea quis ad velit tempor sunt ullamco esse voluptate excepteur.'
 
   - id: cd05
+    listOrder: 6
     publishPersonalInfo: false
     name: Lisa Lustig
     party: party-orange

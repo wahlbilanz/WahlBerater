@@ -1,13 +1,10 @@
-import { createSelector, createFeatureSelector } from '@ngrx/store';
-// import { PoliticalCandidateMap} from '../definitions/models/candidate.model';
-import { QuizFirstPage, QuizState, State } from './app.models';
-// import { Party } from '../definitions/models/party.model';
-import { STATE_FEATURE_KEY, AppPartialState } from './app.reducer';
-import { Category } from '../definitions/models/category.model';
-// import {PersonalData} from '../definitions/models/personal.data.model';
-import { PoliticalData } from '../definitions/models/political.data.model';
-import { PersonalCandidateMap } from '../definitions/models/candidate.model';
+import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { getCandidatePersonalInfo } from '../definitions/functions/getCandidatePersonalInfo';
+import { PersonalCandidateMap } from '../definitions/models/candidate.model';
+import { Category } from '../definitions/models/category.model';
+import { PoliticalData } from '../definitions/models/political.data.model';
+import { QuizFirstPage, QuizState, State } from './app.models';
+import { AppPartialState, STATE_FEATURE_KEY } from './app.reducer';
 
 const getAppState = createFeatureSelector<AppPartialState, State>(STATE_FEATURE_KEY);
 
@@ -146,9 +143,9 @@ export const getCandidateListByPartyId = createSelector(
   (state: State, props: { partyId: string }): string[] =>
     !state.politicalDataLoaded || !state.personalDataLoaded
       ? null
-      : Object.keys(state.politicalData.candidates).filter(
-          (candidate) => state.politicalData.candidates[candidate].party === props.partyId,
-        ),
+      : Object.keys(state.politicalData.candidates)
+          .filter((candidate) => state.politicalData.candidates[candidate].party === props.partyId)
+          .sort((a, b) => (state.politicalData.candidates[a].listOrder > state.politicalData.candidates[b].listOrder ? 1 : -1)),
   // !state ? null : state.filter((candidate) => candidate.party === props.partyId),
 );
 /*export const getCandidateById = createSelector(getAppState, (state: State, props: { id: string }) =>

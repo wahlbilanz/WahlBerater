@@ -19,6 +19,7 @@ export interface CandidatePersonalInfo {
 
 export interface CandidatePoliticalInfo {
   party: string;
+  listOrder: number;
   positions: PositionsMap;
 }
 
