@@ -8,7 +8,7 @@ export function getCandidatePersonalInfo(candidateMap: PersonalCandidateMap, can
     description: 'Unbekannt',
     links: undefined,
     name: 'Unbekannt',
-    picture: 'default.jpg',
+    picture: undefined,
     shortDescription: 'Unbekannt',
   };
 }

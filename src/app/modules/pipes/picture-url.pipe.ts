@@ -8,6 +8,6 @@ export class PictureUrlPipe implements PipeTransform {
   public readonly baseUrl = environment.dataUrl;
 
   transform(value: string): string {
-    return !!value ? `${this.baseUrl}/${value}` : undefined;
+    return !!value ? `${this.baseUrl}/${value}` : '/assets/static/default.jpg';
   }
 }
