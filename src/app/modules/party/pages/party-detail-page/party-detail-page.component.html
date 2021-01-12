@@ -1,8 +1,10 @@
 <ng-container *ngIf="partyData | async as party">
   <nz-breadcrumb>
-    <nz-breadcrumb-item><a routerLink="/">Start</a></nz-breadcrumb-item>
-    <nz-breadcrumb-item><a routerLink="/parties">Wahllisten</a></nz-breadcrumb-item>
-    <nz-breadcrumb-item>{{ party.name }}</nz-breadcrumb-item>
+    <nz-breadcrumb-item><a routerLink="/" title="Zurück zur Startseite">Start</a></nz-breadcrumb-item>
+    <nz-breadcrumb-item><a routerLink="/parties" title="Zur Übersicht der Wahllisten">Wahllisten</a></nz-breadcrumb-item>
+    <nz-breadcrumb-item
+      ><span title="Aktuelle Seite: Wahlliste {{ party.name }}">{{ party.name }}</span></nz-breadcrumb-item
+    >
   </nz-breadcrumb>
 
   <div class="party-info">
