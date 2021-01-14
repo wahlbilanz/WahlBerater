@@ -3,6 +3,7 @@ import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular
 import { select, Store } from '@ngrx/store';
 import { NzBreakpointService, siderResponsiveMap } from 'ng-zorro-antd/core/services';
 import * as AppActions from '../../../+state/app.actions';
+import { ResultUrl } from '../../../+state/app.models';
 import { AppPartialState } from '../../../+state/app.reducer';
 import * as AppSelectors from '../../../+state/app.selectors';
 
@@ -28,6 +29,9 @@ import * as AppSelectors from '../../../+state/app.selectors';
 export class AppComponent implements OnInit {
   public isMenuOpen = this.store.pipe(select(AppSelectors.isMenuOpen));
   public navRightOffset = 16;
+
+  public ResultUrlPath = ResultUrl;
+  public lastQuizPage = this.store.pipe(select(AppSelectors.getLastQuizPage));
 
   @ViewChild('navToggle', { read: ElementRef, static: true }) navToggleElement: ElementRef;
 

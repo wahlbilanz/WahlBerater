@@ -1,15 +1,16 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
+import { PipesModule } from '../pipes/pipes.module';
+import { CandidateCardComponent } from './components/candidate-card/candidate-card.component';
 import { PartyCardComponent } from './components/party-card/party-card.component';
+import { SocialLinksComponent } from './components/social-links/social-links.component';
 import { CandidateDetailPageComponent } from './pages/candidate-detail-page/candidate-detail-page.component';
 import { PartyDetailPageComponent } from './pages/party-detail-page/party-detail-page.component';
 import { PartyListPageComponent } from './pages/party-list-page/party-list-page.component';
 import { PartyRoutingModule } from './party-routing.module';
-import { SocialLinksComponent } from './components/social-links/social-links.component';
-import { PipesModule } from '../pipes/pipes.module';
-import { CandidateCardComponent } from './components/candidate-card/candidate-card.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,6 @@ import { CandidateCardComponent } from './components/candidate-card/candidate-ca
     SocialLinksComponent,
     CandidateCardComponent,
   ],
-  imports: [CommonModule, PartyRoutingModule, NzIconModule, NzToolTipModule, PipesModule],
+  imports: [CommonModule, PartyRoutingModule, NzIconModule, NzToolTipModule, PipesModule, NzBreadCrumbModule],
 })
 export class PartyModule {}

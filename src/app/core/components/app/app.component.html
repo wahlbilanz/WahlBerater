@@ -1,13 +1,36 @@
 <header>
   <div class="container">
-  <a class="logo" routerLink="/">
-    <img src="assets/static/wahlberater-horizontal-inverted-optm.png" />
-  </a>
+    <a class="logo" routerLink="/">
+      <img src="assets/static/wahlberater-horizontal-inverted-optm.png" />
+    </a>
 
-  <a #navToggle class="menu-toggle" [title]="(isMenuOpen | async) === true ? 'Menü schließen' : 'Menü öffnen'" (click)="toggleMenu($event)">
-    <i nz-icon nzType="menu" nzTheme="outline"></i>
-  </a>
-</div>
+    <ol class="inline-menu">
+      <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+        <a routerLink="/" title="Zurück zur Startseite">Start</a>
+      </li>
+      <li routerLinkActive="active" *ngIf="(lastQuizPage | async) === ResultUrlPath">
+        <a routerLink="/quiz/{{ ResultUrlPath }}" title="Zur Quiz Auswertung">Auswertung</a>
+      </li>
+      <li routerLinkActive="active" *ngIf="(lastQuizPage | async) !== ResultUrlPath">
+        <a routerLink="/quiz/{{ lastQuizPage | async }}" title="Started das Quiz">Quiz</a>
+      </li>
+      <li routerLinkActive="active">
+        <a routerLink="/parties" title="Zur Liste aller Wahllisten">Wahllisten</a>
+      </li>
+      <li routerLinkActive="active">
+        <a routerLink="/claim" title="Zur Liste aller Thesen die die Kandidierenden beantwortet haben">Thesen</a>
+      </li>
+    </ol>
+
+    <a
+      #navToggle
+      class="menu-toggle"
+      [title]="(isMenuOpen | async) === true ? 'Menü schließen' : 'Menü öffnen'"
+      (click)="toggleMenu($event)"
+    >
+      <i nz-icon nzType="menu" nzTheme="outline"></i>
+    </a>
+  </div>
 </header>
 
 <nav [style.right]="navRightOffset + 'px'" *ngIf="(isMenuOpen | async) === true" @menuAnimation aria-modal="true">

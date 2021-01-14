@@ -2,6 +2,10 @@
 
 $nav-height: 46px;
 
+$main-grid-column-template: minmax($wb-space-medium, 33vw) minmax($wb-breakpoint-medium - (2 * $wb-space-medium), 98vw)
+  minmax($wb-space-medium, 33vw);
+$main-grid-column-template-mobile: 0 auto 0;
+
 :host {
   display: grid;
   width: 100%;
@@ -11,7 +15,7 @@ $nav-height: 46px;
   grid-template:
     'nav nav nav' 46px
     'space-left main space-right' auto
-    / minmax($wb-space-medium, 33vw) minmax($wb-breakpoint-medium, 98vw) minmax($wb-space-medium, 33vw);
+    / $main-grid-column-template;
 
   // no side-spacing on smaller devices
   @media screen and (max-width: $wb-breakpoint-medium) {
@@ -31,18 +35,8 @@ header {
   display: flex;
   display: grid;
   // grid-template-columns: subgrid;
-  grid-template-columns: minmax($wb-space-medium, 33vw) minmax($wb-breakpoint-medium, 98vw) minmax($wb-space-medium, 33vw);
+  grid-template-columns: $main-grid-column-template;
 
-  @media screen and (max-width: $wb-breakpoint-medium) {
-    grid-template-columns: 0 auto 0;
-
-    .logo {
-      margin-left: $wb-space-medium;
-    }
-    .menu-toggle {
-      margin-right: $wb-space-medium;
-    }
-  }
   position: fixed;
   z-index: 90999;
   width: 100%;
@@ -70,16 +64,17 @@ header {
 
   .menu-toggle {
     display: block;
-    margin-left: auto;
-
+    // margin-left: auto;
+    margin-left: $wb-space-small;
+    transition: color 0.3s;
     font-size: 14px;
 
-    color: $wb-color-primary-200;
+    color: $wb-color-primary-0;
     &:hover {
-      color: $wb-color-primary-900;
+      color: $wb-color-primary-500;
     }
     &:active {
-      color: $wb-color-primary-200 !important;
+      color: $wb-color-primary-0 !important;
     }
   }
 
@@ -87,6 +82,69 @@ header {
   .menu-toggle {
     margin-top: $wb-space-x-small;
     margin-bottom: $wb-space-x-small;
+  }
+
+  .inline-menu {
+    display: flex;
+    flex-flow: row nowrap;
+
+    height: 100%;
+    align-self: center;
+    margin: 0;
+    margin-left: auto;
+    padding: 0;
+    list-style: none;
+
+    @include use-typography($wb-type-strong-small);
+    color: $wb-color-primary-100;
+    line-height: 1;
+
+    li {
+      display: inline;
+      margin: 0;
+      padding: 14px $wb-space-x-small;
+      border-bottom: 2px solid transparent;
+      transition: color 0.3s, border-color 0.3s, background-color 0.3s;
+      a {
+        color: $wb-color-primary-100;
+      }
+
+      &:hover {
+        border-bottom-color: $wb-color-primary-300;
+        a {
+          color: $wb-color-primary-300;
+        }
+      }
+      &.active,
+      &:active {
+        border-bottom-color: $wb-color-primary-0;
+        a {
+          color: $wb-color-primary-100;
+        }
+      }
+      &.active:hover,
+      &:active:hover {
+        border-bottom-color: $wb-color-primary-300;
+        a {
+          color: $wb-color-primary-300;
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: $wb-breakpoint-medium) {
+    grid-template-columns: $main-grid-column-template-mobile;
+
+    .logo {
+      margin-left: $wb-space-medium;
+    }
+    .menu-toggle {
+      margin-right: $wb-space-medium;
+      margin-left: auto;
+    }
+    .inline-menu {
+      display: none;
+    }
   }
 }
 
