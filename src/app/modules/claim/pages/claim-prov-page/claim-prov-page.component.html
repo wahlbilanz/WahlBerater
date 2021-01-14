@@ -1,4 +1,14 @@
 <ng-container *ngIf="claimId && politicalData">
+  <nz-breadcrumb>
+    <nz-breadcrumb-item><a routerLink="/" title="Zurück zur Startseite">Start</a></nz-breadcrumb-item>
+    <nz-breadcrumb-item><a routerLink="/claim" title="Übersicht über alle Thesen">Thesenübersicht</a></nz-breadcrumb-item>
+    <nz-breadcrumb-item
+      ><span title="Aktuelle Seite: {{ politicalData.claims[claimId].title }}">{{
+        politicalData.claims[claimId].title
+      }}</span></nz-breadcrumb-item
+    >
+  </nz-breadcrumb>
+
   <div id="claimprov" class="" style="border-color:{{ politicalData.categories[politicalData.claims[claimId].category].color }}">
     <h2 id="claim-category">
       <strong>{{ politicalData.categories[politicalData.claims[claimId].category].title }}.</strong>
