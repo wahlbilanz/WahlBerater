@@ -1,7 +1,8 @@
 import { animate, style, transition, trigger } from '@angular/animations';
-import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Host, HostBinding, HostListener, OnInit, ViewChild } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { NzBreakpointService, siderResponsiveMap } from 'ng-zorro-antd/core/services';
+import { Subscription } from 'rxjs';
 import * as AppActions from '../../../+state/app.actions';
 import { ResultUrl } from '../../../+state/app.models';
 import { AppPartialState } from '../../../+state/app.reducer';
@@ -35,6 +36,15 @@ export class AppComponent implements OnInit {
 
   @ViewChild('navToggle', { read: ElementRef, static: true }) navToggleElement: ElementRef;
 
+  @HostBinding('@.disabled')
+  @HostBinding('nzNoAnimation')
+  @HostBinding('class.no-animation')
+  @HostBinding('class.nz-animate-disabled')
+  @HostBinding('class.accessible')
+  public accessibilityModeActive = false;
+
+  private accessibilityModeSubscription: Subscription;
+
   constructor(private store: Store<AppPartialState>, private breakpointService: NzBreakpointService) {
     this.breakpointService.subscribe(siderResponsiveMap, true).subscribe((activeBreakpoints) => {
       this.store.dispatch(AppActions.updateActiveBreakpoints({ activeBreakpoints }));
@@ -51,6 +61,8 @@ export class AppComponent implements OnInit {
     this.store.dispatch(AppActions.loadData());
     // initially calculate offset for nav container
     this.calculateNavOffset();
+    // enable NgRx pipeline for global accessibility annotations
+    this.accessibilityModePipe();
   }
 
   toggleMenu(event: MouseEvent) {
@@ -63,6 +75,7 @@ export class AppComponent implements OnInit {
   }
 
   /** Hides menu, when main container received click */
+  @HostListener('click')
   mainClicked(event: MouseEvent) {
     this.store.dispatch(AppActions.toggleMenu({ open: false }));
   }
@@ -75,5 +88,24 @@ export class AppComponent implements OnInit {
       const el: HTMLElement = this.navToggleElement.nativeElement;
       this.navRightOffset = document.body.clientWidth - (el.offsetLeft + el.clientWidth);
     }
+  }
+
+  private accessibilityModePipe() {
+    if (!!this.accessibilityModeSubscription) {
+      this.accessibilityModeSubscription.unsubscribe();
+    }
+
+    if (!!window.matchMedia) {
+      // check for reduced motion system settings
+      // TODO check if clashes with restore from DOM-storage
+      const mediaQueryReduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+      if (!!mediaQueryReduceMotion && mediaQueryReduceMotion.matches) {
+        this.store.dispatch(AppActions.restoreAccessibilityMode({ active: true }));
+      }
+    }
+
+    this.accessibilityModeSubscription = this.store.pipe(select(AppSelectors.isAccessibilityModeActive)).subscribe((active) => {
+      this.accessibilityModeActive = active == null ? false : active;
+    });
   }
 }

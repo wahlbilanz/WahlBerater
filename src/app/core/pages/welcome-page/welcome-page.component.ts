@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { select, Store } from '@ngrx/store';
+import { map } from 'rxjs/operators';
 import * as AppActions from '../../../+state/app.actions';
 import { QuizState, ResultUrl, QuizFirstPage } from '../../../+state/app.models';
 import { AppPartialState } from '../../../+state/app.reducer';
@@ -14,6 +15,10 @@ export class WelcomePageComponent {
   public QuizStateEnum = QuizState;
   public quizState = this.store.pipe(select(AppSelectors.getQuizState));
   public localStorageAllowed = this.store.pipe(select(AppSelectors.isLocalDataStorageAllowed));
+  public accessibilityModeActive = this.store.pipe(
+    select(AppSelectors.isAccessibilityModeActive),
+    map((active) => (active == null ? false : !!active)),
+  );
   public data = this.store.pipe(select(AppSelectors.getPoliticalData));
 
   public ResultUrlPath = ResultUrl;
@@ -24,5 +29,9 @@ export class WelcomePageComponent {
 
   public updateLocalStorageOptIn(allow: boolean) {
     this.store.dispatch(AppActions.changeDataStorePreference({ allow }));
+  }
+
+  public updateAccessibilityMode(active: boolean) {
+    this.store.dispatch(AppActions.toggleAccessibilityMode({ active }));
   }
 }

@@ -80,6 +80,7 @@ section.welcome-page-nav {
 
     &.results-link,
     &.privacy-block,
+    &.accessibility-mode-block,
     &.about-block {
       @include wide-block();
     }

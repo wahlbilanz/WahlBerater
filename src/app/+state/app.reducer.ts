@@ -20,6 +20,7 @@ export const initialState: State = {
   votes: {},
   allowLocalDataStorage: null,
   quizLastPage: QuizFirstPage,
+  accessibilityMode: null,
 };
 
 export const appReducer = createReducer(
@@ -79,5 +80,15 @@ export const appReducer = createReducer(
   on(AppActions.updateLastQuizPage, (state: State, { lastPage }) => ({
     ...state,
     quizLastPage: lastPage ? lastPage : QuizFirstPage,
+  })),
+  // Accessibility Mode
+  on(AppActions.toggleAccessibilityMode, (state: State, { active }) => ({
+    ...state,
+    accessibilityMode: !!active,
+  })),
+  on(AppActions.restoreAccessibilityMode, (state: State, { active }) => ({
+    ...state,
+    // only restore state, but do not override user choice
+    accessibilityMode: state.accessibilityMode == null ? !!active : state.accessibilityMode,
   })),
 );

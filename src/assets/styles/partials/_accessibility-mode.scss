@@ -1,0 +1,13 @@
+// disable all transitions
+.no-animation,
+.no-animation * {
+  transition: none !important;
+  animation: none !important;
+
+  &::before,
+  &::after {
+    // required for ng-zorro
+    transition: none !important;
+    animation: none !important;
+  }
+}

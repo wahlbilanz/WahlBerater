@@ -35,4 +35,6 @@ export interface State {
   allowLocalDataStorage: boolean;
   /** Which was the last page in the quiz? */
   quizLastPage: string;
+  /** True, when the accessibility mode is active. Tri-State - null indicating that user did not make a choice yet or was not restored */
+  accessibilityMode: boolean;
 }

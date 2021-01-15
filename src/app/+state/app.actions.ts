@@ -29,3 +29,6 @@ export const changeDataStorePreference = createAction('[app] User changed data s
 export const restoreDataStorePreference = createAction("[app] Restored user's data store preference", props<{ allow: boolean }>());
 
 export const updateLastQuizPage = createAction('[app] updating last quiz page', props<{ lastPage?: string }>());
+
+export const toggleAccessibilityMode = createAction('[app] Toggle accessibility mode', props<{ active: boolean }>());
+export const restoreAccessibilityMode = createAction('[app] Restore accessibility mode', props<{ active: boolean }>());

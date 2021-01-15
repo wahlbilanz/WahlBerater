@@ -1,4 +1,4 @@
-<header>
+<header [nzNoAnimation]="accessibilityModeActive">
   <div class="container">
     <a class="logo" routerLink="/">
       <img src="assets/static/wahlberater-horizontal-inverted-optm.png" />
@@ -33,10 +33,16 @@
   </div>
 </header>
 
-<nav [style.right]="navRightOffset + 'px'" *ngIf="(isMenuOpen | async) === true" @menuAnimation aria-modal="true">
+<nav
+  [style.right]="navRightOffset + 'px'"
+  *ngIf="(isMenuOpen | async) === true"
+  @menuAnimation
+  [nzNoAnimation]="accessibilityModeActive"
+  aria-modal="true"
+>
   <app-navigation-container></app-navigation-container>
 </nav>
 
-<main (click)="mainClicked($event)">
+<main [nzNoAnimation]="accessibilityModeActive" (click)="mainClicked($event)">
   <router-outlet></router-outlet>
 </main>

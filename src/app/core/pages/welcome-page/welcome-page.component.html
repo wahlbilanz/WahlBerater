@@ -41,7 +41,21 @@
     <p class="small">
       Bevor du deine persönlichen Einstellungen einer Webseite preisgibst solltest du unbedingt
       <i>immer die Datenschutzerklärung lesen und verstehen!</i> Nimm dir daher kurz Zeit und schaue in
-      <a routerLink="/docs/privacy">unsere Datenschutzerklärung.</a>
+      <a routerLink="/docs/privacy">unsere Datenschutzerklärung</a>.
+    </p>
+  </div>
+
+  <div class="nav-block accessibility-mode-block" [@.disabled]="true">
+    <label nz-checkbox nzNoAnimation [ngModel]="accessibilityModeActive | async" (ngModelChange)="updateAccessibilityMode($event)"
+      >Aktiviere einen barrierefreien Modus ohne Animationen und reduzierten grafischen Elementen</label
+    >
+    <p class="small">
+      Manchen Menschen fällt der Zugang zu Informationen schwer, die nur visuell aufbereitet sind oder mit vielen Animationen versehen
+      wurden. Um allen den Zugang zum WahlBerater zu ermöglichen, bieten wir einen barrierefreien Modus ohne Animationen und mit textuellen,
+      anstatt visueller, Aufbereitung von Informationen. Falls du Anregungen oder Fragen zu diesem Modus hast,
+      <i>dann zögere bitte nicht uns zu <a routerLink="/docs/about">kontaktieren</a>.</i><br />
+      Wenn du die Speicherung der Quizergebnisse erlaubst, wird auch deine Einstellung zum barrierefreien Modus gespeichert. Bitte lies dazu
+      <a routerLink="/docs/privacy">unsere Datenschutzerklärung</a>.
     </p>
   </div>
 

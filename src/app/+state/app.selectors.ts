@@ -21,7 +21,7 @@ export const getVotes = createSelector(getAppState, (state: State): Votes => sta
 
 export const isLocalDataStorageAllowed = createSelector(getAppState, (state: State) => state.allowLocalDataStorage);
 
-// TODO kann weg?
+// TODO kann weg?  -- ne, das sollst du nutzen!
 export const getQuizState = createSelector(getAppState, (state: State) => QuizState.STARTED); // TODO
 
 export const getParties = createSelector(getAppState, (state: State) => (state.politicalDataLoaded ? state.politicalData.parties : null));
@@ -158,3 +158,5 @@ export const getCandidateListByPartyId = createSelector(
         hasPersonalData: !!state.personalData[props.id],
       } as CandidateWithID),
 );*/
+
+export const isAccessibilityModeActive = createSelector(getAppState, (state: State) => state.accessibilityMode);
