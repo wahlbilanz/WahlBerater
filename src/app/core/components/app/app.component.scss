@@ -65,7 +65,13 @@ header {
   .menu-toggle {
     display: block;
     // margin-left: auto;
-    margin-left: $wb-space-small;
+    margin-right: -($wb-space-small / 2);
+    margin-left: $wb-space-small / 2;
+    padding-left: $wb-space-small / 2;
+    padding-right: $wb-space-small / 2;
+    padding-top: $wb-space-x-small;
+    padding-bottom: $wb-space-x-small;
+
     transition: color 0.3s;
     font-size: 14px;
 
@@ -78,8 +84,7 @@ header {
     }
   }
 
-  .logo,
-  .menu-toggle {
+  .logo {
     margin-top: $wb-space-x-small;
     margin-bottom: $wb-space-x-small;
   }
@@ -102,10 +107,14 @@ header {
     li {
       display: inline;
       margin: 0;
-      padding: 14px $wb-space-x-small;
+      padding: 0;
+
       border-bottom: 2px solid transparent;
       transition: color 0.3s, border-color 0.3s, background-color 0.3s;
+
       a {
+        display: inline-block;
+        padding: 14px $wb-space-x-small;
         color: $wb-color-primary-100;
       }
 

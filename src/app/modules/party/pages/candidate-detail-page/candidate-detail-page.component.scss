@@ -38,6 +38,7 @@
       @include use-typography($wb-type-paragraph-small);
       font-style: italic;
       color: $wb-color-neutral-500;
+      margin-top: 0;
     }
   }
   .description {

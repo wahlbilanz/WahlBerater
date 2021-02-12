@@ -89,7 +89,7 @@ export class AppComponent implements OnInit {
       this.navRightOffset = 0;
     } else if (!!this.navToggleElement && !!this.navToggleElement.nativeElement) {
       const el: HTMLElement = this.navToggleElement.nativeElement;
-      this.navRightOffset = document.body.clientWidth - (el.offsetLeft + el.clientWidth);
+      this.navRightOffset = document.body.clientWidth - (el.offsetLeft + el.clientWidth) + 6;
     }
   }
 
