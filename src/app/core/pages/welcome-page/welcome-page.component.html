@@ -45,9 +45,21 @@
     </p>
   </div>
 
-  <div class="nav-block accessibility-mode-block" [@.disabled]="true">
-    <label nz-checkbox nzNoAnimation [ngModel]="accessibilityModeActive | async" (ngModelChange)="updateAccessibilityMode($event)"
-      >Aktiviere einen barrierefreien Modus ohne Animationen und reduzierten grafischen Elementen</label
+  <div class="nav-block accessibility-mode-block no-animation nz-animate-disabled" [@.disabled]="true">
+    <label
+      nz-checkbox
+      nzNoAnimation
+      [ngModel]="(accessibilityModes | async)?.isReducedMotionModeActive"
+      (ngModelChange)="updateReducedMotionMode($event)"
+      >Aktiviere einen Modus ohne Animationen</label
+    >
+    <br />
+    <label
+      nz-checkbox
+      nzNoAnimation
+      [ngModel]="(accessibilityModes | async)?.isAccessibilityModeActive"
+      (ngModelChange)="updateAccessibilityMode($event)"
+      >Aktiviere einen barrierefreien Modus mit reduzierten grafischen Elementen</label
     >
     <p class="small">
       Manchen Menschen fällt der Zugang zu Informationen schwer, die nur visuell aufbereitet sind oder mit vielen Animationen versehen

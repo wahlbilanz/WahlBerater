@@ -32,3 +32,6 @@ export const updateLastQuizPage = createAction('[app] updating last quiz page', 
 
 export const toggleAccessibilityMode = createAction('[app] Toggle accessibility mode', props<{ active: boolean }>());
 export const restoreAccessibilityMode = createAction('[app] Restore accessibility mode', props<{ active: boolean }>());
+
+export const toggleReducedMotionMode = createAction('[app] Toggle reduced motion mode', props<{ active: boolean }>());
+export const restoreReducedMotionMode = createAction('[app] Restore reduced motion mode', props<{ active: boolean }>());

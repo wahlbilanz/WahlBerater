@@ -3,6 +3,7 @@ import { Component, ElementRef, Host, HostBinding, HostListener, OnInit, ViewChi
 import { select, Store } from '@ngrx/store';
 import { NzBreakpointService, siderResponsiveMap } from 'ng-zorro-antd/core/services';
 import { Subscription } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 import * as AppActions from '../../../+state/app.actions';
 import { ResultUrl } from '../../../+state/app.models';
 import { AppPartialState } from '../../../+state/app.reducer';
@@ -36,12 +37,14 @@ export class AppComponent implements OnInit {
 
   @ViewChild('navToggle', { read: ElementRef, static: true }) navToggleElement: ElementRef;
 
+  @HostBinding('class.accessible')
+  public accessibilityModeActive = false;
+
   @HostBinding('@.disabled')
   @HostBinding('nzNoAnimation')
   @HostBinding('class.no-animation')
   @HostBinding('class.nz-animate-disabled')
-  @HostBinding('class.accessible')
-  public accessibilityModeActive = false;
+  public reducedMotionModeActive = false;
 
   private accessibilityModeSubscription: Subscription;
 
@@ -96,16 +99,20 @@ export class AppComponent implements OnInit {
     }
 
     if (!!window.matchMedia) {
-      // check for reduced motion system settings
+      // when browser supports JavaScript media queries, than check for reduced motion system settings
       // TODO check if clashes with restore from DOM-storage
       const mediaQueryReduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
       if (!!mediaQueryReduceMotion && mediaQueryReduceMotion.matches) {
-        this.store.dispatch(AppActions.restoreAccessibilityMode({ active: true }));
+        this.store.dispatch(AppActions.restoreReducedMotionMode({ active: true }));
       }
     }
 
-    this.accessibilityModeSubscription = this.store.pipe(select(AppSelectors.isAccessibilityModeActive)).subscribe((active) => {
-      this.accessibilityModeActive = active == null ? false : active;
-    });
+    this.accessibilityModeSubscription = this.store
+      .pipe(select(AppSelectors.getAllAccessibilityModes), debounceTime(100))
+      .subscribe((modes) => {
+        console.log(modes);
+        this.reducedMotionModeActive = modes.isReducedMotionModeActive;
+        this.accessibilityModeActive = modes.isAccessibilityModeActive;
+      });
   }
 }

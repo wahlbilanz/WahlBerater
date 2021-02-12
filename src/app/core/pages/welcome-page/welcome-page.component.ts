@@ -15,6 +15,7 @@ export class WelcomePageComponent {
   public QuizStateEnum = QuizState;
   public quizState = this.store.pipe(select(AppSelectors.getQuizState));
   public localStorageAllowed = this.store.pipe(select(AppSelectors.isLocalDataStorageAllowed));
+  public accessibilityModes = this.store.pipe(select(AppSelectors.getAllAccessibilityModes));
   public accessibilityModeActive = this.store.pipe(
     select(AppSelectors.isAccessibilityModeActive),
     map((active) => (active == null ? false : !!active)),
@@ -33,5 +34,9 @@ export class WelcomePageComponent {
 
   public updateAccessibilityMode(active: boolean) {
     this.store.dispatch(AppActions.toggleAccessibilityMode({ active }));
+  }
+
+  public updateReducedMotionMode(active: boolean) {
+    this.store.dispatch(AppActions.toggleReducedMotionMode({ active }));
   }
 }

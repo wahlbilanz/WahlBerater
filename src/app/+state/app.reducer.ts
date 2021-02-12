@@ -21,6 +21,7 @@ export const initialState: State = {
   allowLocalDataStorage: null,
   quizLastPage: QuizFirstPage,
   accessibilityMode: null,
+  reducedMotionMode: null,
 };
 
 export const appReducer = createReducer(
@@ -81,6 +82,7 @@ export const appReducer = createReducer(
     ...state,
     quizLastPage: lastPage ? lastPage : QuizFirstPage,
   })),
+
   // Accessibility Mode
   on(AppActions.toggleAccessibilityMode, (state: State, { active }) => ({
     ...state,
@@ -90,5 +92,16 @@ export const appReducer = createReducer(
     ...state,
     // only restore state, but do not override user choice
     accessibilityMode: state.accessibilityMode == null ? !!active : state.accessibilityMode,
+  })),
+
+  // Reduced Motion Mode
+  on(AppActions.toggleReducedMotionMode, (state: State, { active }) => ({
+    ...state,
+    reducedMotionMode: !!active,
+  })),
+  on(AppActions.restoreReducedMotionMode, (state: State, { active }) => ({
+    ...state,
+    // only restore state, but do not override user choice
+    reducedMotionMode: state.reducedMotionMode == null ? !!active : state.reducedMotionMode,
   })),
 );
