@@ -16,10 +16,6 @@ export class WelcomePageComponent {
   public quizState = this.store.pipe(select(AppSelectors.getQuizState));
   public localStorageAllowed = this.store.pipe(select(AppSelectors.isLocalDataStorageAllowed));
   public accessibilityModes = this.store.pipe(select(AppSelectors.getAllAccessibilityModes));
-  public accessibilityModeActive = this.store.pipe(
-    select(AppSelectors.isAccessibilityModeActive),
-    map((active) => (active == null ? false : !!active)),
-  );
   public data = this.store.pipe(select(AppSelectors.getPoliticalData));
 
   public ResultUrlPath = ResultUrl;

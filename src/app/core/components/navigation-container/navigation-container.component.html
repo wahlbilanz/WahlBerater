@@ -51,3 +51,21 @@
   <li><a routerLink="/docs/privacy" routerLinkActive="active">Datenschutz</a></li>
   <li><a routerLink="/docs/imprint" routerLinkActive="active">Impressum</a></li>
 </ul>
+
+<div class="accessibility-switches">
+  <label
+    nz-checkbox
+    nzNoAnimation
+    [ngModel]="(accessibilityModes | async)?.isReducedMotionModeActive"
+    (ngModelChange)="updateReducedMotionMode($event)"
+    >Modus ohne Animationen</label
+  >
+  <br />
+  <label
+    nz-checkbox
+    nzNoAnimation
+    [ngModel]="(accessibilityModes | async)?.isAccessibilityModeActive"
+    (ngModelChange)="updateAccessibilityMode($event)"
+    >Modus mit reduzierten grafischen Elementen</label
+  >
+</div>
