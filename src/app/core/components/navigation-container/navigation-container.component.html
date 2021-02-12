@@ -56,7 +56,7 @@
   <label
     nz-checkbox
     nzNoAnimation
-    [ngModel]="(accessibilityModes | async)?.isReducedMotionModeActive"
+    [ngModel]="(accessibilityModes | async)?.reducedMotionMode"
     (ngModelChange)="updateReducedMotionMode($event)"
     >Modus ohne Animationen</label
   >
@@ -64,7 +64,7 @@
   <label
     nz-checkbox
     nzNoAnimation
-    [ngModel]="(accessibilityModes | async)?.isAccessibilityModeActive"
+    [ngModel]="(accessibilityModes | async)?.accessibilityMode"
     (ngModelChange)="updateAccessibilityMode($event)"
     >Modus mit reduzierten grafischen Elementen</label
   >

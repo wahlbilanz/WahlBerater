@@ -30,8 +30,9 @@ export const restoreDataStorePreference = createAction("[app] Restored user's da
 
 export const updateLastQuizPage = createAction('[app] updating last quiz page', props<{ lastPage?: string }>());
 
+export const restoreAccessibilityModeChoices = createAction(
+  '[app] Restore accessibility mode choices',
+  props<{ reducedMotionMode: boolean; accessibilityMode: boolean }>(),
+);
 export const toggleAccessibilityMode = createAction('[app] Toggle accessibility mode', props<{ active: boolean }>());
-export const restoreAccessibilityMode = createAction('[app] Restore accessibility mode', props<{ active: boolean }>());
-
 export const toggleReducedMotionMode = createAction('[app] Toggle reduced motion mode', props<{ active: boolean }>());
-export const restoreReducedMotionMode = createAction('[app] Restore reduced motion mode', props<{ active: boolean }>());

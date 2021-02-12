@@ -83,25 +83,19 @@ export const appReducer = createReducer(
     quizLastPage: lastPage ? lastPage : QuizFirstPage,
   })),
 
-  // Accessibility Mode
+  // Accessibility and Reduced Motion Modes
   on(AppActions.toggleAccessibilityMode, (state: State, { active }) => ({
     ...state,
     accessibilityMode: !!active,
   })),
-  on(AppActions.restoreAccessibilityMode, (state: State, { active }) => ({
-    ...state,
-    // only restore state, but do not override user choice
-    accessibilityMode: state.accessibilityMode == null ? !!active : state.accessibilityMode,
-  })),
-
-  // Reduced Motion Mode
   on(AppActions.toggleReducedMotionMode, (state: State, { active }) => ({
     ...state,
     reducedMotionMode: !!active,
   })),
-  on(AppActions.restoreReducedMotionMode, (state: State, { active }) => ({
+  on(AppActions.restoreAccessibilityModeChoices, (state: State, { reducedMotionMode, accessibilityMode }) => ({
     ...state,
     // only restore state, but do not override user choice
-    reducedMotionMode: state.reducedMotionMode == null ? !!active : state.reducedMotionMode,
+    accessibilityMode: state.accessibilityMode == null ? accessibilityMode : state.accessibilityMode,
+    reducedMotionMode: state.reducedMotionMode == null ? reducedMotionMode : state.reducedMotionMode,
   })),
 );

@@ -160,8 +160,8 @@ export const getCandidateListByPartyId = createSelector(
 );*/
 
 export const getAllAccessibilityModes = createSelector(getAppState, (state: State) => ({
-  isAccessibilityModeActive: state.accessibilityMode === true,
-  isReducedMotionModeActive: state.reducedMotionMode === true,
+  accessibilityMode: state.accessibilityMode === true,
+  reducedMotionMode: state.reducedMotionMode === true,
 }));
-export const isAccessibilityModeActive = createSelector(getAllAccessibilityModes, (state) => state.isAccessibilityModeActive);
-export const isReducedMotionModeActive = createSelector(getAllAccessibilityModes, (state) => state.isAccessibilityModeActive);
+export const isAccessibilityModeActive = createSelector(getAllAccessibilityModes, (state) => state.accessibilityMode);
+export const isReducedMotionModeActive = createSelector(getAllAccessibilityModes, (state) => state.accessibilityMode);

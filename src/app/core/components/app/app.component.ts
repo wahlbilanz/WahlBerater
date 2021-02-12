@@ -98,21 +98,11 @@ export class AppComponent implements OnInit {
       this.accessibilityModeSubscription.unsubscribe();
     }
 
-    if (!!window.matchMedia) {
-      // when browser supports JavaScript media queries, than check for reduced motion system settings
-      // TODO check if clashes with restore from DOM-storage
-      const mediaQueryReduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-      if (!!mediaQueryReduceMotion && mediaQueryReduceMotion.matches) {
-        this.store.dispatch(AppActions.restoreReducedMotionMode({ active: true }));
-      }
-    }
-
     this.accessibilityModeSubscription = this.store
       .pipe(select(AppSelectors.getAllAccessibilityModes), debounceTime(100))
       .subscribe((modes) => {
-        console.log(modes);
-        this.reducedMotionModeActive = modes.isReducedMotionModeActive;
-        this.accessibilityModeActive = modes.isAccessibilityModeActive;
+        this.reducedMotionModeActive = modes.reducedMotionMode;
+        this.accessibilityModeActive = modes.accessibilityMode;
       });
   }
 }
