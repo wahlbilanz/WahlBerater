@@ -35,9 +35,19 @@
   </a>
 
   <div class="nav-block privacy-block">
-    <label nz-checkbox [ngModel]="localStorageAllowed | async" (ngModelChange)="updateLocalStorageOptIn($event)"
+    <label
+      nz-checkbox
+      [ngModel]="localStorageAllowed | async"
+      (ngModelChange)="updateLocalStorageOptIn($event)"
+      [nzDisabled]="(localStorageSupported | async) !== true"
       >Speichere die Quizergebnisse auf meinem Gerät</label
     >
+    <p class="small" *ngIf="(localStorageSupported | async) !== true">
+      Dein Browser unterstützt die <i>localStorage</i> Funktion leider nicht. Diese benötigt der WahlBerater zum Speichern von Einstellungen
+      und Abstimmungsergebnissen. Falls du ein PlugIn zum Blockieren dieser Funktion einsetzt, solltest du es deaktivieren falls du die
+      Quizergebnisse auf diesem Gerät speichern möchtest. Der WahlBerater funktioniert auch ohne diese Funktion.
+    </p>
+
     <p class="small">
       Bevor du deine persönlichen Einstellungen einer Webseite preisgibst solltest du unbedingt
       <i>immer die Datenschutzerklärung lesen und verstehen!</i> Nimm dir daher kurz Zeit und schaue in

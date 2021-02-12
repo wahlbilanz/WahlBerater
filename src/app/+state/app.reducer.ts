@@ -18,6 +18,7 @@ export const initialState: State = {
   usedCachedPoliticalData: false,
   usedCachedPersonalData: false,
   votes: {},
+  localStorageSupported: null,
   allowLocalDataStorage: null,
   quizLastPage: QuizFirstPage,
   accessibilityMode: null,
@@ -69,18 +70,23 @@ export const appReducer = createReducer(
       },
     },
   })),
+  on(AppActions.updateLastQuizPage, (state: State, { lastPage }) => ({
+    ...state,
+    quizLastPage: lastPage ? lastPage : QuizFirstPage,
+  })),
+
+  // User data store preference
+  on(AppActions.updateLocalStorageSupport, (state, { isSupported }) => ({
+    ...state,
+    localStorageSupported: isSupported,
+  })),
   on(AppActions.changeDataStorePreference, (state, { allow }) => ({
     ...state,
-    allowLocalDataStorage: allow,
+    allowLocalDataStorage: state.localStorageSupported ? allow : null,
   })),
   on(AppActions.restoreDataStorePreference, (state, { allow }) => ({
     ...state,
     allowLocalDataStorage: allow,
-  })),
-
-  on(AppActions.updateLastQuizPage, (state: State, { lastPage }) => ({
-    ...state,
-    quizLastPage: lastPage ? lastPage : QuizFirstPage,
   })),
 
   // Accessibility and Reduced Motion Modes

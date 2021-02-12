@@ -19,6 +19,7 @@ export const isDataLoaded = createSelector(getAppState, (state: State) => state.
 
 export const getVotes = createSelector(getAppState, (state: State): Votes => state.votes);
 
+export const isLocalStorageSupported = createSelector(getAppState, (state: State) => state.localStorageSupported);
 export const isLocalDataStorageAllowed = createSelector(getAppState, (state: State) => state.allowLocalDataStorage);
 
 // TODO kann weg?  -- ne, das sollst du nutzen!

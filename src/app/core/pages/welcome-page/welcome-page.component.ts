@@ -14,6 +14,8 @@ import * as AppSelectors from '../../../+state/app.selectors';
 export class WelcomePageComponent {
   public QuizStateEnum = QuizState;
   public quizState = this.store.pipe(select(AppSelectors.getQuizState));
+
+  public localStorageSupported = this.store.pipe(select(AppSelectors.isLocalStorageSupported));
   public localStorageAllowed = this.store.pipe(select(AppSelectors.isLocalDataStorageAllowed));
   public accessibilityModes = this.store.pipe(select(AppSelectors.getAllAccessibilityModes));
   public data = this.store.pipe(select(AppSelectors.getPoliticalData));

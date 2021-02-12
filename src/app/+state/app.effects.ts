@@ -83,8 +83,14 @@ export class AppEffects {
     { dispatch: false },
   );
 
+  // pushes the user consent for local storage into the state
   restoreLocalStorageOptIn = createEffect(() =>
     scheduled([AppActions.restoreDataStorePreference({ allow: this.dataPersistanceService.getUserOptInStatus() })], asyncScheduler),
+  );
+
+  // pushes the flag, wether the browser supports local Storage or not, into the state
+  flagBrowserLocalStorageSupport = createEffect(() =>
+    scheduled([AppActions.updateLocalStorageSupport({ isSupported: this.dataPersistanceService.getBrowserSupport() })], asyncScheduler),
   );
 
   persistAccessibilityModeChoice = createEffect(

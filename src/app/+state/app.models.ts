@@ -31,6 +31,8 @@ export interface State {
   usedCachedPersonalData: boolean;
   /** The decisions of the user on the claims */
   votes: Votes;
+  /** True if the browser supports local storage, otherwise not ¯\_(ツ)_/¯ */
+  localStorageSupported: boolean;
   /** Indicates, if the user opted in to store data on the local device */
   allowLocalDataStorage: boolean;
   /** Which was the last page in the quiz? */
