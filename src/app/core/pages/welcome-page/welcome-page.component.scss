@@ -80,6 +80,7 @@ section.welcome-page-nav {
 
     &.results-link,
     &.privacy-block,
+    &.accessibility-mode-block,
     &.about-block {
       @include wide-block();
     }
@@ -105,5 +106,10 @@ section.welcome-page-nav {
     .small {
       color: $wb-color-secondary-400;
     }
+  }
+  h2,
+  h3,
+  h4 {
+    margin-top: 0;
   }
 }

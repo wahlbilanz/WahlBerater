@@ -31,8 +31,14 @@ export interface State {
   usedCachedPersonalData: boolean;
   /** The decisions of the user on the claims */
   votes: Votes;
+  /** True if the browser supports local storage, otherwise not ¯\_(ツ)_/¯ */
+  localStorageSupported: boolean;
   /** Indicates, if the user opted in to store data on the local device */
   allowLocalDataStorage: boolean;
   /** Which was the last page in the quiz? */
   quizLastPage: string;
+  /** True, when the accessibility mode is active. Tri-State - null indicating that user did not make a choice yet or was not restored */
+  accessibilityMode: boolean;
+  /** True, when the reduced motion mode (no animations) is active. Tri-State - null indicating that user did not make a choice yet or was not restored */
+  reducedMotionMode: boolean;
 }

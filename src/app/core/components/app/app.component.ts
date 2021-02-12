@@ -1,7 +1,9 @@
 import { animate, style, transition, trigger } from '@angular/animations';
-import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Host, HostBinding, HostListener, OnInit, ViewChild } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { NzBreakpointService, siderResponsiveMap } from 'ng-zorro-antd/core/services';
+import { Subscription } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 import * as AppActions from '../../../+state/app.actions';
 import { ResultUrl } from '../../../+state/app.models';
 import { AppPartialState } from '../../../+state/app.reducer';
@@ -35,6 +37,17 @@ export class AppComponent implements OnInit {
 
   @ViewChild('navToggle', { read: ElementRef, static: true }) navToggleElement: ElementRef;
 
+  @HostBinding('class.accessible')
+  public accessibilityModeActive = false;
+
+  @HostBinding('@.disabled')
+  @HostBinding('nzNoAnimation')
+  @HostBinding('class.no-animation')
+  @HostBinding('class.nz-animate-disabled')
+  public reducedMotionModeActive = false;
+
+  private accessibilityModeSubscription: Subscription;
+
   constructor(private store: Store<AppPartialState>, private breakpointService: NzBreakpointService) {
     this.breakpointService.subscribe(siderResponsiveMap, true).subscribe((activeBreakpoints) => {
       this.store.dispatch(AppActions.updateActiveBreakpoints({ activeBreakpoints }));
@@ -51,6 +64,8 @@ export class AppComponent implements OnInit {
     this.store.dispatch(AppActions.loadData());
     // initially calculate offset for nav container
     this.calculateNavOffset();
+    // enable NgRx pipeline for global accessibility annotations
+    this.accessibilityModePipe();
   }
 
   toggleMenu(event: MouseEvent) {
@@ -63,6 +78,7 @@ export class AppComponent implements OnInit {
   }
 
   /** Hides menu, when main container received click */
+  @HostListener('click')
   mainClicked(event: MouseEvent) {
     this.store.dispatch(AppActions.toggleMenu({ open: false }));
   }
@@ -75,5 +91,18 @@ export class AppComponent implements OnInit {
       const el: HTMLElement = this.navToggleElement.nativeElement;
       this.navRightOffset = document.body.clientWidth - (el.offsetLeft + el.clientWidth);
     }
+  }
+
+  private accessibilityModePipe() {
+    if (!!this.accessibilityModeSubscription) {
+      this.accessibilityModeSubscription.unsubscribe();
+    }
+
+    this.accessibilityModeSubscription = this.store
+      .pipe(select(AppSelectors.getAllAccessibilityModes), debounceTime(100))
+      .subscribe((modes) => {
+        this.reducedMotionModeActive = modes.reducedMotionMode;
+        this.accessibilityModeActive = modes.accessibilityMode;
+      });
   }
 }

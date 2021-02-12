@@ -25,7 +25,16 @@ export const loadPersonalDataError = createAction('[app] Load Personal Data JSON
 
 export const vote = createAction('[app] Vote', props<{ claimId: string; decision: number; fav: boolean }>());
 
+export const updateLocalStorageSupport = createAction('[app] Set support flag of local storage', props<{ isSupported: boolean }>());
 export const changeDataStorePreference = createAction('[app] User changed data store preference', props<{ allow: boolean }>());
 export const restoreDataStorePreference = createAction("[app] Restored user's data store preference", props<{ allow: boolean }>());
 
 export const updateLastQuizPage = createAction('[app] updating last quiz page', props<{ lastPage?: string }>());
+
+// Accessibility Modes
+export const restoreAccessibilityModeChoices = createAction(
+  '[app] Restore accessibility mode choices',
+  props<{ reducedMotionMode: boolean; accessibilityMode: boolean }>(),
+);
+export const toggleAccessibilityMode = createAction('[app] Toggle accessibility mode', props<{ active: boolean }>());
+export const toggleReducedMotionMode = createAction('[app] Toggle reduced motion mode', props<{ active: boolean }>());

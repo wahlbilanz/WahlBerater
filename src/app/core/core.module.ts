@@ -21,6 +21,7 @@ import { AppComponent } from './components/app/app.component';
 import { CoreRoutingModule } from './core-routing.module';
 import { WelcomePageComponent } from './pages/welcome-page/welcome-page.component';
 import { NavigationContainerComponent } from './components/navigation-container/navigation-container.component';
+import { NzNoAnimationModule } from 'ng-zorro-antd/core/no-animation';
 
 registerLocaleData(en);
 
@@ -49,6 +50,7 @@ registerLocaleData(en);
     StoreRouterConnectingModule.forRoot(),
     EffectsModule.forRoot([AppEffects]),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
+    NzNoAnimationModule,
     NzIconModule,
     NzMenuModule,
     NzDividerModule,

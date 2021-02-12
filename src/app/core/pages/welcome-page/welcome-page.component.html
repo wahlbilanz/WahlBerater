@@ -35,13 +35,49 @@
   </a>
 
   <div class="nav-block privacy-block">
-    <label nz-checkbox [ngModel]="localStorageAllowed | async" (ngModelChange)="updateLocalStorageOptIn($event)"
+    <label
+      nz-checkbox
+      [ngModel]="localStorageAllowed | async"
+      (ngModelChange)="updateLocalStorageOptIn($event)"
+      [nzDisabled]="(localStorageSupported | async) !== true"
       >Speichere die Quizergebnisse auf meinem Gerät</label
     >
+    <p class="small" *ngIf="(localStorageSupported | async) !== true">
+      Dein Browser unterstützt die <i>localStorage</i> Funktion leider nicht. Diese benötigt der WahlBerater zum Speichern von Einstellungen
+      und Abstimmungsergebnissen. Falls du ein PlugIn zum Blockieren dieser Funktion einsetzt, solltest du es deaktivieren falls du die
+      Quizergebnisse auf diesem Gerät speichern möchtest. Der WahlBerater funktioniert auch ohne diese Funktion.
+    </p>
+
     <p class="small">
       Bevor du deine persönlichen Einstellungen einer Webseite preisgibst solltest du unbedingt
       <i>immer die Datenschutzerklärung lesen und verstehen!</i> Nimm dir daher kurz Zeit und schaue in
-      <a routerLink="/docs/privacy">unsere Datenschutzerklärung.</a>
+      <a routerLink="/docs/privacy">unsere Datenschutzerklärung</a>.
+    </p>
+  </div>
+
+  <div class="nav-block accessibility-mode-block no-animation nz-animate-disabled" [@.disabled]="true">
+    <label
+      nz-checkbox
+      nzNoAnimation
+      [ngModel]="(accessibilityModes | async)?.reducedMotionMode"
+      (ngModelChange)="updateReducedMotionMode($event)"
+      >Aktiviere einen Modus ohne Animationen</label
+    >
+    <br />
+    <label
+      nz-checkbox
+      nzNoAnimation
+      [ngModel]="(accessibilityModes | async)?.accessibilityMode"
+      (ngModelChange)="updateAccessibilityMode($event)"
+      >Aktiviere einen barrierefreien Modus mit reduzierten grafischen Elementen</label
+    >
+    <p class="small">
+      Manchen Menschen fällt der Zugang zu Informationen schwer, die nur visuell aufbereitet sind oder mit vielen Animationen versehen
+      wurden. Um allen den Zugang zum WahlBerater zu ermöglichen, bieten wir einen barrierefreien Modus ohne Animationen und mit textuellen,
+      anstatt visueller, Aufbereitung von Informationen. Falls du Anregungen oder Fragen zu diesem Modus hast,
+      <i>dann zögere bitte nicht uns zu <a routerLink="/docs/about">kontaktieren</a>.</i><br />
+      Wenn du die Speicherung der Quizergebnisse erlaubst, wird auch deine Einstellung zum barrierefreien Modus gespeichert. Bitte lies dazu
+      <a routerLink="/docs/privacy">unsere Datenschutzerklärung</a>.
     </p>
   </div>
 

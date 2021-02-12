@@ -18,8 +18,11 @@ export const initialState: State = {
   usedCachedPoliticalData: false,
   usedCachedPersonalData: false,
   votes: {},
+  localStorageSupported: null,
   allowLocalDataStorage: null,
   quizLastPage: QuizFirstPage,
+  accessibilityMode: null,
+  reducedMotionMode: null,
 };
 
 export const appReducer = createReducer(
@@ -67,17 +70,38 @@ export const appReducer = createReducer(
       },
     },
   })),
+  on(AppActions.updateLastQuizPage, (state: State, { lastPage }) => ({
+    ...state,
+    quizLastPage: lastPage ? lastPage : QuizFirstPage,
+  })),
+
+  // User data store preference
+  on(AppActions.updateLocalStorageSupport, (state, { isSupported }) => ({
+    ...state,
+    localStorageSupported: isSupported,
+  })),
   on(AppActions.changeDataStorePreference, (state, { allow }) => ({
     ...state,
-    allowLocalDataStorage: allow,
+    allowLocalDataStorage: state.localStorageSupported ? allow : null,
   })),
   on(AppActions.restoreDataStorePreference, (state, { allow }) => ({
     ...state,
     allowLocalDataStorage: allow,
   })),
 
-  on(AppActions.updateLastQuizPage, (state: State, { lastPage }) => ({
+  // Accessibility and Reduced Motion Modes
+  on(AppActions.toggleAccessibilityMode, (state: State, { active }) => ({
     ...state,
-    quizLastPage: lastPage ? lastPage : QuizFirstPage,
+    accessibilityMode: !!active,
+  })),
+  on(AppActions.toggleReducedMotionMode, (state: State, { active }) => ({
+    ...state,
+    reducedMotionMode: !!active,
+  })),
+  on(AppActions.restoreAccessibilityModeChoices, (state: State, { reducedMotionMode, accessibilityMode }) => ({
+    ...state,
+    // only restore state, but do not override user choice
+    accessibilityMode: state.accessibilityMode == null ? accessibilityMode : state.accessibilityMode,
+    reducedMotionMode: state.reducedMotionMode == null ? reducedMotionMode : state.reducedMotionMode,
   })),
 );

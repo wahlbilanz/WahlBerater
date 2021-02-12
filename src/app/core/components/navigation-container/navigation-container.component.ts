@@ -18,7 +18,17 @@ export class NavigationContainerComponent implements OnInit {
   public ResultUrlPath = ResultUrl;
   public lastQuizPage = this.store.pipe(select(AppSelectors.getLastQuizPage));
 
+  public accessibilityModes = this.store.pipe(select(AppSelectors.getAllAccessibilityModes));
+
   constructor(private store: Store<AppPartialState>) {}
 
   ngOnInit(): void {}
+
+  public updateAccessibilityMode(active: boolean) {
+    this.store.dispatch(AppActions.toggleAccessibilityMode({ active }));
+  }
+
+  public updateReducedMotionMode(active: boolean) {
+    this.store.dispatch(AppActions.toggleReducedMotionMode({ active }));
+  }
 }
