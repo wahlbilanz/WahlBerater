@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
+import { NzCollapseModule } from 'ng-zorro-antd/collapse';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 import { PipesModule } from '../pipes/pipes.module';
@@ -21,6 +22,6 @@ import { PartyRoutingModule } from './party-routing.module';
     SocialLinksComponent,
     CandidateCardComponent,
   ],
-  imports: [CommonModule, PartyRoutingModule, NzIconModule, NzToolTipModule, PipesModule, NzBreadCrumbModule],
+  imports: [CommonModule, PartyRoutingModule, NzIconModule, NzToolTipModule, PipesModule, NzBreadCrumbModule, NzCollapseModule],
 })
 export class PartyModule {}

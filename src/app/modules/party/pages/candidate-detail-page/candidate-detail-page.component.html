@@ -26,4 +26,19 @@
 
     <div class="candidate-description">{{ data.candidate.description | markdown }}</div>
   </div>
+
+  <h3>Standpunkte von {{ data.candidate.name }}</h3>
+  <section *ngFor="let category of data.claimPositions">
+    <h4>{{ category.category.title }}</h4>
+
+    <nz-collapse>
+      <nz-collapse-panel *ngFor="let claim of category.claims" [nzHeader]="claim.claim.title">
+        <p class="small">{{ claim.claim.description | markdown }}</p>
+        <p *ngIf="claim.position.vote > 0">{{ data.candidate.name }} stimmt {{ claim.position.vote >= 2 ? 'vehement ' : '' }}dafür.</p>
+        <p *ngIf="claim.position.vote < 0">{{ data.candidate.name }} stimmt {{ claim.position.vote <= -2 ? 'vehement ' : '' }}dagegen.</p>
+        <p *ngIf="claim.position.vote == 0">{{ data.candidate.name }} hat zu dieser These keine Position bezogen.</p>
+        <p>{{ claim.position.reason }}</p>
+      </nz-collapse-panel>
+    </nz-collapse>
+  </section>
 </ng-container>

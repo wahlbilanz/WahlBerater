@@ -33,6 +33,35 @@ export const getCandidatePersonalDataById = createSelector(getPersonalData, (per
   getCandidatePersonalInfo(personalData, props.id),
 );
 
+export const getCandidateClaimDecisions = createSelector(getPoliticalData, (data: PoliticalData, props: { id: string }) => {
+  if (data == null) {
+    return null;
+  }
+  const candidate = data.candidates[props.id];
+  // no candidate, no data
+  if (candidate == null) {
+    return null;
+  }
+
+  return (
+    Object.getOwnPropertyNames(data.categories)
+      // expand all categories
+      .map((categoryId) => ({
+        categoryId,
+        category: data.categories[categoryId],
+        // expand all claims within this category
+        claims: Object.getOwnPropertyNames(data.claims)
+          .filter((claimId) => data.claims[claimId].category === categoryId)
+          // join candidate position to the respective claim
+          .map((claimId) => ({
+            claimId,
+            claim: data.claims[claimId],
+            position: candidate.positions[claimId],
+          })),
+      }))
+  );
+});
+
 export const getPartyById = createSelector(getParties, (parties, props: { id: string }) => (parties ? parties[props.id] : null));
 
 export const getCategoryByClaimId = createSelector(

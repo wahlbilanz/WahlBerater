@@ -18,18 +18,16 @@ export class CandidateDetailPageComponent implements OnInit {
       candidateId: params.candidateId as string,
     })),
   );
-  public partyData = this.candidateAndPartyId.pipe(
-    switchMap(({ partyId }) => this.state.pipe(select(AppSelectors.getPartyById, { id: partyId }))),
-  );
   public data = this.candidateAndPartyId.pipe(
     switchMap(({ partyId, candidateId }) =>
       combineLatest([
         this.state.pipe(select(AppSelectors.getCandidatePersonalDataById, { id: candidateId })),
         this.state.pipe(select(AppSelectors.getPartyById, { id: partyId })),
+        this.state.pipe(select(AppSelectors.getCandidateClaimDecisions, { id: candidateId })),
         scheduled([{ partyId, candidateId }], asyncScheduler),
       ]),
     ),
-    map(([candidate, party, { partyId, candidateId }]) => ({ candidateId, candidate, partyId, party })),
+    map(([candidate, party, claimPositions, { partyId, candidateId }]) => ({ candidateId, candidate, claimPositions, partyId, party })),
   );
 
   constructor(private state: Store<AppPartialState>, private route: ActivatedRoute) {}
