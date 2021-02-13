@@ -11,10 +11,12 @@ candidates:
       facebook: https://facebook.com/bla
     shortDescription: Ich bin der Hans. Der Franz Hans.
     description: |
-      Cupidatat irure elit exercitation ad cupidatat aliquip. Adipisicing irure pariatur labore amet mollit ut minim pariatur. Non in aute commodo quis laborum ex. Do qui fugiat cupidatat reprehenderit do sint laboris adipisicing in.
+      Cupidatat **irure elit exercitation** ad cupidatat aliquip. Adipisicing irure pariatur labore amet mollit ut minim pariatur. Non in aute commodo quis laborum ex. Do qui fugiat cupidatat reprehenderit do sint laboris adipisicing in.
       Aute eiusmod commodo sit excepteur laborum voluptate qui et irure incididunt voluptate irure reprehenderit consectetur. Magna pariatur Lorem irure adipisicing deserunt ut aliquip do velit cillum. Ad sit reprehenderit consectetur labore sit culpa nostrud enim duis magna commodo mollit nulla. Reprehenderit dolor duis consectetur anim enim cupidatat duis.
 
-      Laborum ex pariatur laboris eiusmod ipsum velit excepteur laborum deserunt. Velit eiusmod amet ad duis in sunt non sint fugiat veniam excepteur. Nulla excepteur non et cillum quis nisi ex minim est in mollit nisi.
+        - Laborum ex pariatur laboris eiusmod ipsum velit excepteur laborum deserunt.
+        - Velit eiusmod amet ad duis in sunt non sint fugiat veniam excepteur.
+        - Nulla excepteur non et cillum quis nisi ex minim est in mollit nisi.
 
       Lorem minim nulla minim Lorem consectetur do voluptate veniam ea. Adipisicing sint esse officia aute nisi duis officia voluptate exercitation velit minim anim. Esse ex in veniam laborum. Et sint aliqua duis eiusmod incididunt.
     positions:

@@ -1,27 +1,15 @@
-<ng-template #skip> ~ </ng-template>
+<ng-template #skip>
+  <app-decision-icon [vote]="0"></app-decision-icon>
+</ng-template>
 <ng-template #nono>
-  <nz-badge [nzCount]="star">
-    <i nz-icon nzType="dislike" nzTheme="outline" (click)="$event.stopPropagation()" class="vote-icon"></i>
-  </nz-badge>
+  <app-decision-icon [vote]="-2"></app-decision-icon>
 </ng-template>
 <ng-template #no>
-  <i nz-icon nzType="dislike" nzTheme="outline" (click)="$event.stopPropagation()" class="vote-icon"></i>
+  <app-decision-icon [vote]="-1"></app-decision-icon>
 </ng-template>
 <ng-template #yes>
-  <i nz-icon nzType="like" nzTheme="outline" (click)="$event.stopPropagation()" class="vote-icon"></i>
+  <app-decision-icon [vote]="1"></app-decision-icon>
 </ng-template>
 <ng-template #yesyes>
-  <nz-badge [nzCount]="star">
-    <i nz-icon nzType="like" nzTheme="outline" (click)="$event.stopPropagation()" class="vote-icon"></i>
-  </nz-badge>
-</ng-template>
-<ng-template #star>
-  <i
-    nz-icon
-    nzType="star"
-    nzTheme="fill"
-    class="ant-scroll-number-custom-component"
-    style="color: #f5222d"
-    (click)="$event.stopPropagation()"
-  ></i>
+  <app-decision-icon [vote]="2"></app-decision-icon>
 </ng-template>

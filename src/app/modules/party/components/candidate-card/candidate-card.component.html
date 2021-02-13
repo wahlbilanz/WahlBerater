@@ -6,7 +6,7 @@
     alt="Bild von {{ personalInfo.name }}"
   />
   <h3 class="name">{{ personalInfo.name }}</h3>
-  <p class="description">{{ personalInfo.shortDescription | markdown }}</p>
+  <p class="description" [innerHTML]="personalInfo.shortDescription | markdown"></p>
   <div class="social" *ngIf="showSocialLinks">
     <app-social-links [links]="personalInfo.links" [name]="personalInfo.name"></app-social-links>
   </div>

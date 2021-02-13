@@ -4,6 +4,7 @@ import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
 import { NzCollapseModule } from 'ng-zorro-antd/collapse';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
+import { HelpersModule } from '../helpers/helpers.module';
 import { PipesModule } from '../pipes/pipes.module';
 import { CandidateCardComponent } from './components/candidate-card/candidate-card.component';
 import { PartyCardComponent } from './components/party-card/party-card.component';
@@ -22,6 +23,15 @@ import { PartyRoutingModule } from './party-routing.module';
     SocialLinksComponent,
     CandidateCardComponent,
   ],
-  imports: [CommonModule, PartyRoutingModule, NzIconModule, NzToolTipModule, PipesModule, NzBreadCrumbModule, NzCollapseModule],
+  imports: [
+    CommonModule,
+    PartyRoutingModule,
+    HelpersModule,
+    NzIconModule,
+    NzToolTipModule,
+    PipesModule,
+    NzBreadCrumbModule,
+    NzCollapseModule,
+  ],
 })
 export class PartyModule {}
