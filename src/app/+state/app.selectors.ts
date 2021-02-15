@@ -61,6 +61,12 @@ export const getCandidateClaimDecisions = createSelector(getPoliticalData, (data
       }))
   );
 });
+export const getUserVoteByClaimId = createSelector(getVotes, (votes: Votes, props: { claimId: string }) => {
+  if (votes == null || votes[props.claimId] == null) {
+    return null;
+  }
+  return votes[props.claimId].fav ? votes[props.claimId].decision * 2 : votes[props.claimId].decision;
+});
 
 export const getPartyById = createSelector(getParties, (parties, props: { id: string }) => (parties ? parties[props.id] : null));
 

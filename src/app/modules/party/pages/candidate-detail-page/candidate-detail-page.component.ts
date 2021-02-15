@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { asyncScheduler, combineLatest, scheduled } from 'rxjs';
@@ -10,6 +10,7 @@ import * as AppSelectors from '../../../../+state/app.selectors';
   selector: 'app-candidate-detail-page',
   templateUrl: './candidate-detail-page.component.html',
   styleUrls: ['./candidate-detail-page.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CandidateDetailPageComponent implements OnInit {
   public candidateAndPartyId = this.route.params.pipe(
@@ -33,4 +34,8 @@ export class CandidateDetailPageComponent implements OnInit {
   constructor(private state: Store<AppPartialState>, private route: ActivatedRoute) {}
 
   ngOnInit(): void {}
+
+  public getUserVote(claimId: string) {
+    return this.state.pipe(select(AppSelectors.getUserVoteByClaimId, { claimId }));
+  }
 }

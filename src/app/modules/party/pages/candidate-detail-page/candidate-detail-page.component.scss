@@ -64,6 +64,11 @@
     }
   }
 }
+
+.candidate-claims nz-collapse {
+  margin: 0 $wb-space-small;
+}
+
 @media screen and (max-width: $wb-breakpoint-medium) {
   .candidate-info {
     grid-template:
@@ -80,10 +85,7 @@
       justify-self: end;
     }
   }
-}
-
-.claim-section {
-  nz-collapse {
-    margin: 0 $wb-space-small;
+  .candidate-claims nz-collapse {
+    margin: 0;
   }
 }

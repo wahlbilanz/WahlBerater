@@ -26,7 +26,7 @@
   <div class="candidate-description" [innerHTML]="data.candidate.description | markdown"></div>
 
   <h3>Standpunkte von {{ data.candidate.name }}</h3>
-  <section class="claim-section" *ngFor="let category of data.claimPositions">
+  <section class="candidate-claims" *ngFor="let category of data.claimPositions">
     <h4>{{ category.category.title }}</h4>
 
     <nz-collapse class="color-band">
@@ -37,16 +37,29 @@
         [style.border-left-color]="category.category.color"
       >
         <p class="small" [innerHTML]="claim.claim.description | markdown" *ngIf="claim.claim.description"></p>
-        <p *ngIf="claim.position.vote > 0">
-          {{ data.candidate.name }} stimmt {{ claim.position.vote >= 2 ? 'vehement ' : '' }}dafür.
-          <app-decision-icon [vote]="claim.position.vote"></app-decision-icon>
-        </p>
-        <p *ngIf="claim.position.vote < 0">
-          {{ data.candidate.name }} stimmt {{ claim.position.vote <= -2 ? 'vehement ' : '' }}dagegen.
-          <app-decision-icon [vote]="claim.position.vote"></app-decision-icon>
-        </p>
-        <p *ngIf="claim.position.vote == 0">
-          {{ data.candidate.name }} hat zu dieser These keine Position bezogen.
+        <p>
+          <!-- User Vote -->
+          <ng-container *ngIf="getUserVote(claim.claimId) | async as userVote">
+            <ng-container *ngIf="userVote > 0">
+              Du hast <em>dafür</em> gestimmt{{ userVote >= 2 ? ' und diese These als für dich wichtig markiert' : '' }}.
+            </ng-container>
+            <ng-container *ngIf="userVote < 0">
+              Du hast <em>dagegen</em> gestimmt{{ userVote <= -2 ? ' und diese These als für dich wichtig markiert' : '' }}.
+            </ng-container>
+            <ng-container *ngIf="userVote == 0"> Du hast hast zu dieser These keine Position bezogen. </ng-container>
+            <app-decision-icon [vote]="userVote"></app-decision-icon>
+            <br />
+          </ng-container>
+          <!-- Candidate Vote -->
+          <ng-container *ngIf="claim.position.vote > 0">
+            {{ data.candidate.name }} stimmt <em>{{ claim.position.vote >= 2 ? 'vehement ' : '' }}dafür</em>.
+          </ng-container>
+          <ng-container *ngIf="claim.position.vote < 0">
+            {{ data.candidate.name }} stimmt <em>{{ claim.position.vote <= -2 ? 'vehement ' : '' }}dagegen</em>.
+          </ng-container>
+          <ng-container *ngIf="claim.position.vote == 0">
+            {{ data.candidate.name }} hat zu dieser These keine Position bezogen.
+          </ng-container>
           <app-decision-icon [vote]="claim.position.vote"></app-decision-icon>
         </p>
         <blockquote>
