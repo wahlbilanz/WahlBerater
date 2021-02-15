@@ -68,7 +68,9 @@
 .candidate-claims nz-collapse {
   margin: 0 $wb-space-small;
 
-  nz-collapse-panel {
+  .more-info-link {
+    display: block;
+    text-align: right;
   }
 }
 

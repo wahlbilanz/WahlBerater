@@ -66,6 +66,8 @@
           <p [innerHTML]="claim.position.reason | markdown" *ngIf="claim.position.reason"></p>
         </blockquote>
 
+        <a class="more-info-link" [routerLink]="['/', 'claim', claim.claimId]">Mehr Informationen zu dieser These</a>
+
         <ng-template #voteIcon>
           <app-decision-icon [vote]="claim.position.vote"></app-decision-icon>
         </ng-template>
