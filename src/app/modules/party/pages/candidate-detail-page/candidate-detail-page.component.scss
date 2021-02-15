@@ -67,6 +67,9 @@
 
 .candidate-claims nz-collapse {
   margin: 0 $wb-space-small;
+
+  nz-collapse-panel {
+  }
 }
 
 @media screen and (max-width: $wb-breakpoint-medium) {
