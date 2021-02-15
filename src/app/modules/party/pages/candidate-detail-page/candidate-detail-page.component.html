@@ -26,11 +26,16 @@
   <div class="candidate-description" [innerHTML]="data.candidate.description | markdown"></div>
 
   <h3>Standpunkte von {{ data.candidate.name }}</h3>
-  <section *ngFor="let category of data.claimPositions">
+  <section class="claim-section" *ngFor="let category of data.claimPositions">
     <h4>{{ category.category.title }}</h4>
 
-    <nz-collapse>
-      <nz-collapse-panel *ngFor="let claim of category.claims" [nzHeader]="claim.claim.title" [nzExtra]="voteIcon">
+    <nz-collapse class="color-band">
+      <nz-collapse-panel
+        *ngFor="let claim of category.claims"
+        [nzHeader]="claim.claim.title"
+        [nzExtra]="voteIcon"
+        [style.border-left-color]="category.category.color"
+      >
         <p class="small" [innerHTML]="claim.claim.description | markdown" *ngIf="claim.claim.description"></p>
         <p *ngIf="claim.position.vote > 0">
           {{ data.candidate.name }} stimmt {{ claim.position.vote >= 2 ? 'vehement ' : '' }}dafür.
@@ -44,7 +49,9 @@
           {{ data.candidate.name }} hat zu dieser These keine Position bezogen.
           <app-decision-icon [vote]="claim.position.vote"></app-decision-icon>
         </p>
-        <p [innerHTML]="claim.position.reason | markdown" *ngIf="claim.position.reason"></p>
+        <blockquote>
+          <p [innerHTML]="claim.position.reason | markdown" *ngIf="claim.position.reason"></p>
+        </blockquote>
 
         <ng-template #voteIcon>
           <app-decision-icon [vote]="claim.position.vote"></app-decision-icon>

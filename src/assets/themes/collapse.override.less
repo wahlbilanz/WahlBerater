@@ -1,0 +1,34 @@
+@import './wahlberater.variables.less';
+
+// Collapse
+// ---
+
+nz-collapse.ant-collapse,
+nz-collapse.ant-collapse.ant-collapse-icon-position-left {
+  box-shadow: @wb-shadow-normal;
+  border: none;
+
+  nz-collapse-panel.ant-collapse-item {
+    border-bottom-color: @wb-color-neutral-200;
+    .ant-collapse-header {
+      background-color: @wb-color-neutral-0;
+    }
+  }
+}
+
+nz-collapse.ant-collapse-icon-position-left.color-band {
+  transition: box-shadow, border-size, border-color, background-color 0.3s;
+
+  nz-collapse-panel {
+    border-left: 3px solid transparent;
+    transition: border-size, all 0.3s;
+
+    .ant-collapse-content {
+      border-top-color: @wb-color-neutral-100;
+    }
+
+    &.ant-collapse-item-active {
+      border-left-width: 5px;
+    }
+  }
+}
