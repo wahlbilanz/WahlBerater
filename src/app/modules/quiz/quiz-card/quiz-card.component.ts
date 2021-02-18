@@ -1,4 +1,4 @@
-import { animate, state, style, transition, trigger } from '@angular/animations';
+import { animate, keyframes, state, style, transition, trigger } from '@angular/animations';
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
@@ -21,7 +21,7 @@ import { Claim } from '../../../definitions/models/claim.model';
   templateUrl: './quiz-card.component.html',
   styleUrls: ['./quiz-card.component.scss'],
   animations: [
-    trigger('leaveLeft', [
+    trigger('swipeAnimation', [
       state(
         'there',
         style({
@@ -29,48 +29,36 @@ import { Claim } from '../../../definitions/models/claim.model';
         }),
       ),
       state(
-        'gone',
+        'leavingLeft',
         style({
-          opacity: 0.1,
+          opacity: 0,
           transform: 'translateX(-' + window.innerWidth + 'px) rotate(-45deg)',
         }),
       ),
-      transition('there => gone', [animate(QuizAnimationDurationOut)]),
-      transition('gone => there', [animate(QuizAnimationDurationIn)]),
-    ]),
-    trigger('leaveRight', [
       state(
-        'there',
+        'leavingRight',
         style({
-          opacity: 1,
-        }),
-      ),
-      state(
-        'gone',
-        style({
-          opacity: 0.1,
+          opacity: 0,
           transform: 'translateX(' + window.innerWidth + 'px) rotate(45deg)',
         }),
       ),
-      transition('there => gone', [animate(QuizAnimationDurationOut)]),
-      transition('gone => there', [animate(QuizAnimationDurationIn)]),
-    ]),
-    trigger('leaveTop', [
       state(
-        'there',
+        'leavingTop',
         style({
-          opacity: 1,
+          opacity: 0,
+          transform: 'translateY(-' + window.innerHeight + 'px)',
         }),
       ),
       state(
         'gone',
         style({
-          opacity: 0.1,
-          transform: 'translateY(-' + window.innerHeight + 'px)',
+          opacity: 1,
+          transform: 'scale(0.8)',
         }),
       ),
-      transition('there => gone', [animate(QuizAnimationDurationOut)]),
-      transition('gone => there', [animate(QuizAnimationDurationIn)]),
+      transition('there => *', [animate(QuizAnimationDurationOut + 'ms ease-out')]),
+      transition('* => gone', [animate(0)]),
+      transition('gone => there', [animate(QuizAnimationDurationIn + 'ms ease-in')]),
     ]),
   ],
 })
@@ -84,9 +72,9 @@ export class QuizCardComponent implements OnInit, OnChanges {
   ResultUrlPath = ResultUrl;
   fav: boolean;
   decision: number;
-  leaveLeft = false;
-  leaveRight = false;
-  leaveTop = false;
+  swipeAnimation = 'gone';
+  // leaveRight = false;
+  // leaveTop = false;
 
   swipeCoord?: [number, number];
   swipeTime?: number;
@@ -98,9 +86,9 @@ export class QuizCardComponent implements OnInit, OnChanges {
   ngOnChanges(): void {
     // 100 = 46 of top menu plus padding/margin of surrounding containers
     this.containerHeight = window.innerHeight - 100;
-    this.leaveLeft = false;
-    this.leaveRight = false;
-    this.leaveTop = false;
+    this.swipeAnimation = 'gone';
+    // this.leaveRight = false;
+    // this.leaveTop = false;
     console.log('prev is ', this.prev);
     this.fav = false;
     this.decision = 0;
@@ -122,6 +110,9 @@ export class QuizCardComponent implements OnInit, OnChanges {
         title: 'Thesen sollten relevant und kontrovers sein.',
       };
     }
+    setTimeout(() => {
+      this.swipeAnimation = 'there';
+    }, 50);
   }
 
   ngOnInit(): void {
@@ -167,7 +158,10 @@ export class QuizCardComponent implements OnInit, OnChanges {
       this.decision = -1;
     }
     setTimeout(() => {
-      this.leaveLeft = true;
+      this.swipeAnimation = 'leavingLeft';
+      setTimeout(() => {
+        this.swipeAnimation = 'gone';
+      }, QuizAnimationDurationOut);
     }, QuizAnimationDelay);
     this.updateVote(true);
   }
@@ -179,14 +173,20 @@ export class QuizCardComponent implements OnInit, OnChanges {
       this.decision = 1;
     }
     setTimeout(() => {
-      this.leaveRight = true;
+      this.swipeAnimation = 'leavingRight';
+      setTimeout(() => {
+        this.swipeAnimation = 'gone';
+      }, QuizAnimationDurationOut);
     }, QuizAnimationDelay);
     this.updateVote(true);
   }
 
   go(next: boolean) {
     setTimeout(() => {
-      this.leaveTop = true;
+      this.swipeAnimation = 'leavingTop';
+      setTimeout(() => {
+        this.swipeAnimation = 'gone';
+      }, QuizAnimationDurationOut);
     }, QuizAnimationDelay);
     setTimeout(() => {
       if (next && this.next) {

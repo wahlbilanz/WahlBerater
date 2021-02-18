@@ -5,14 +5,10 @@
     (touchend)="swipe($event, false)"
     style="height:{{ containerHeight }}px; width: 100%"
   >
-    <div
-      id="quizcard"
-      [@leaveLeft]="leaveLeft ? 'gone' : 'there'"
-      [@leaveTop]="leaveTop ? 'gone' : 'there'"
-      [@leaveRight]="leaveRight ? 'gone' : 'there'"
-      class=""
-      style="border-color:{{ category.color }}"
-    >
+    <!--    [@leaveLeft]="leaveLeft"-->
+    <!--    [@leaveTop]="leaveTop ? 'gone' : 'there'"-->
+    <!--    [@leaveRight]="leaveRight ? 'gone' : 'there'"-->
+    <div [@swipeAnimation]="swipeAnimation" id="quizcard" class="" style="border-color:{{ category.color }}">
       <h2 id="card-category">
         {{ category.title }}
       </h2>
