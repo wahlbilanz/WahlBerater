@@ -13,7 +13,7 @@ export const ResultUrl = 'result';
 export const QuizFirstPage = 'howto';
 
 export const QuizAnimationDelay = 300;
-export const QuizAnimationDurationIn = 500;
+export const QuizAnimationDurationIn = 300;
 export const QuizAnimationDurationOut = 300;
 
 export interface State {

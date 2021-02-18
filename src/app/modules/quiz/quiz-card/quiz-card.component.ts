@@ -80,6 +80,7 @@ export class QuizCardComponent implements OnInit, OnChanges {
   swipeTime?: number;
 
   containerHeight: number;
+  public accessibilityModes = this.store.pipe(select(AppSelectors.getAllAccessibilityModes));
 
   constructor(private store: Store<AppPartialState>, private router: Router) {}
 
@@ -112,7 +113,7 @@ export class QuizCardComponent implements OnInit, OnChanges {
     }
     setTimeout(() => {
       this.swipeAnimation = 'there';
-    }, 50);
+    }, 100);
   }
 
   ngOnInit(): void {

@@ -8,7 +8,12 @@
     <!--    [@leaveLeft]="leaveLeft"-->
     <!--    [@leaveTop]="leaveTop ? 'gone' : 'there'"-->
     <!--    [@leaveRight]="leaveRight ? 'gone' : 'there'"-->
-    <div [@swipeAnimation]="swipeAnimation" id="quizcard" class="" style="border-color:{{ category.color }}">
+    <div
+      [@swipeAnimation]="(accessibilityModes | async)?.reducedMotionMode ? 'there' : swipeAnimation"
+      id="quizcard"
+      class=""
+      style="border-color:{{ category.color }}"
+    >
       <h2 id="card-category">
         {{ category.title }}
       </h2>
