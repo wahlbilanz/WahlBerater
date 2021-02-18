@@ -1,5 +1,10 @@
 <div class="party-card" [style.border-left-color]="partyData.color" *ngIf="politicalData && personalData">
-  <img class="party-picture" src="{{ partyData.picture | pictureUrl }}" [routerLink]="['/', 'parties', partyId]" />
+  <img
+    class="party-picture"
+    src="{{ partyData.picture | pictureUrl }}"
+    [routerLink]="['/', 'parties', partyId]"
+    alt="Logo der Partei {{ partyData.name }}"
+  />
   <h2 class="party-name">{{ partyData.name }}</h2>
   <p class="party-description">{{ partyData.shortDescription | markdown }}</p>
   <div class="party-candidates" *ngIf="partyCandidates">
@@ -12,7 +17,18 @@
         [nzTooltipTitle]="candidate.name"
         *ngIf="personalData | personalDataOf: candidateId as candidate"
       >
-        <img src="{{ candidate.picture | pictureUrl }}" [title]="candidate.name" *ngIf="candidate.picture" />
+        <img
+          src="{{ candidate.picture | pictureUrl }}"
+          title="Bild von {{ candidate.name }}"
+          [alt]="candidate.name"
+          *ngIf="candidate.picture"
+        />
+        <img
+          src="/assets/static/placeholder/unknown-person.jpg"
+          title="{{ candidate.name }} hat kein Bild"
+          [alt]="candidate.name"
+          *ngIf="!candidate.picture"
+        />
       </a>
     </ng-container>
   </div>

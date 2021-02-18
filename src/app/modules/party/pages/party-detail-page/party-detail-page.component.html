@@ -9,7 +9,7 @@
 
   <div class="party-info">
     <h1 class="name">{{ party.name }}</h1>
-    <img class="picture" src="{{ party.picture | pictureUrl }}" />
+    <img class="picture" src="{{ party.picture | pictureUrl }}" alt="Logo der Partei {{ personalInfo.name }}" />
     <p class="description">{{ party.shortDescription | markdown }}</p>
     <div class="social">
       <app-social-links [links]="party.links" [name]="party.name"></app-social-links>
