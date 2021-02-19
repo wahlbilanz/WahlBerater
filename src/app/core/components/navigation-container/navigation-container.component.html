@@ -5,7 +5,7 @@
   [routerLinkActiveOptions]="{ exact: true }"
   title="Zurück zur Startseite"
 >
-  <i nz-icon nzType="home" nzTheme="outline" class="nav-icon"></i>
+  <i nz-icon nzType="home" nzTheme="outline" class="nav-icon" alt="House Icon"></i>
   Start
 </a>
 
@@ -16,7 +16,7 @@
   title="Zur Quiz Auswertung"
   *ngIf="(lastQuizPage | async) === ResultUrlPath"
 >
-  <i nz-icon nzType="bar-chart" nzTheme="outline" class="nav-icon"></i>
+  <i nz-icon nzType="bar-chart" nzTheme="outline" class="nav-icon" alt="Chart Icon"></i>
   Auswertung
 </a>
 
@@ -27,12 +27,12 @@
   title="Started das Quiz"
   *ngIf="(lastQuizPage | async) !== ResultUrlPath"
 >
-  <i nz-icon nzType="question" nzTheme="outline" class="nav-icon"></i>
+  <i nz-icon nzType="question" nzTheme="outline" class="nav-icon" alt="Question Icon"></i>
   Quiz
 </a>
 
 <a class="nav-block candidates-link" routerLink="/parties" routerLinkActive="active" title="Zur Liste aller Wahllisten">
-  <i nz-icon nzType="user" nzTheme="outline" class="nav-icon"></i>
+  <i nz-icon nzType="user" nzTheme="outline" class="nav-icon" alt="User Icon"></i>
   Wahl&shy;listen
 </a>
 
@@ -42,7 +42,7 @@
   routerLinkActive="active"
   title="Zur Liste aller Thesen die die Kandidierenden beantwortet haben"
 >
-  <i nz-icon nzType="unordered-list" nzTheme="outline" class="nav-icon"></i>
+  <i nz-icon nzType="unordered-list" nzTheme="outline" class="nav-icon" alt="Menu Icon"></i>
   Thesen
 </a>
 

@@ -20,8 +20,6 @@ export class CandidateCardComponent implements OnInit {
   @Input() candidateId: string;
   @Input() public showSocialLinks = true;
 
-  myDate = new Date();
-
   public id: string;
   // public candidateData: Observable<CandidateWithID>;
 

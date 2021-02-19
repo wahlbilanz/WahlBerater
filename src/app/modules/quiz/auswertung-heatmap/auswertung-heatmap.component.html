@@ -3,13 +3,13 @@
     <tr>
       <th></th>
       <td>
-        <i nz-icon nzType="dislike" nzTheme="outline"></i>
+        <i nz-icon nzType="dislike" nzTheme="outline" alt="Mismatch"></i>
       </td>
       <td>
-        <i nz-icon nzType="heart" nzTheme="outline"></i>
+        <i nz-icon nzType="heart" nzTheme="outline" alt="Match"></i>
       </td>
       <td>
-        <i nz-icon nzType="fire" nzTheme="outline"></i>
+        <i nz-icon nzType="fire" nzTheme="outline" alt="Favorisiert von euch beiden"></i>
       </td>
     </tr>
     <ng-container *ngFor="let candidate of table">
@@ -47,7 +47,8 @@
     <tr class="spacer"></tr>
   </table>
   <strong
-    >normalisiert ueber columns, <i nz-icon nzType="dislike" nzTheme="outline"></i> = missmatch;
-    <i nz-icon nzType="heart" nzTheme="outline"></i> = match; <i nz-icon nzType="fire" nzTheme="outline"></i> = beide fav!</strong
+    >normalisiert ueber columns, <i nz-icon nzType="dislike" nzTheme="outline" alt="Mismatch"></i> = missmatch;
+    <i nz-icon nzType="heart" nzTheme="outline" alt="Match"></i> = match;
+    <i nz-icon nzType="fire" nzTheme="outline" alt="Favorisiert von euch beiden"></i> = beide favorisieren!</strong
   >
 </div>
