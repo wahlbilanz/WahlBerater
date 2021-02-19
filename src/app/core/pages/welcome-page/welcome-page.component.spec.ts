@@ -19,14 +19,14 @@ import { IconDefinition } from '@ant-design/icons-angular';
 import * as AllIcons from '@ant-design/icons-angular/icons';
 import { DebugElement } from '@angular/core';
 import { RouterTestingModule } from '@angular/router/testing';
+import * as axe from 'axe-core';
+
 const antDesignIcons = AllIcons as {
   [key: string]: IconDefinition;
 };
 const icons: IconDefinition[] = Object.keys(antDesignIcons).map((key) => antDesignIcons[key]);
 
 describe('WelcomePageComponent', () => {
-  let router: Router;
-
   let component: WelcomePageComponent;
   let fixture: ComponentFixture<WelcomePageComponent>;
 
@@ -63,13 +63,21 @@ describe('WelcomePageComponent', () => {
 
   beforeEach(() => {
     fixture = TestBed.createComponent(WelcomePageComponent);
-    router = TestBed.get(Router);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should create', (done) => {
     expect(component).toBeTruthy();
+
+    const debug: DebugElement = fixture.debugElement;
+
+    axe.run(debug.nativeElement, (err, result) => {
+      expect(err).toBe(null);
+      console.log(result.violations);
+      expect(result.violations.length).toBe(0);
+      done();
+    });
   });
 
   it('certain elements should have alt texts', () => {
@@ -96,19 +104,5 @@ describe('WelcomePageComponent', () => {
       expect(element.nativeElement.getAttribute('aria-labelledby')).toBeTruthy(element);
       expect(debug.queryAll(By.css('#' + element.nativeElement.getAttribute('aria-labelledby'))).length).toBe(1);
     }
-  });
-
-  it('should react to keyboard events', () => {
-    const debug: DebugElement = fixture.debugElement;
-    const navigateSpy = spyOn(router, 'navigate');
-
-    const element = debug.query(By.css('.quiz-link'));
-    element.nativeElement.click();
-
-    /*const event1 = new KeyboardEvent('keydown', { key: 'q' });
-    window.dispatchEvent(event1);*/
-    fixture.detectChanges();
-    // tick();
-    expect(navigateSpy).toHaveBeenCalledWith(['/quiz']);
   });
 });

@@ -11,3 +11,10 @@
     animation: none !important;
   }
 }
+
+.ant-breadcrumb a {
+  color: #757575;
+}
+.ant-checkbox-disabled + span {
+  color: rgb(0, 0, 0, 54%);
+}

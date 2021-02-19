@@ -5,7 +5,8 @@
     "ng": "ng",
     "start": "npm run build-dummy-data && ng serve",
     "build": "find ./src/assets/data -type f -not -name '.gitkeep' -delete && ng build",
-    "test": "ng test",
+    "build:prod": "find ./src/assets/data -type f -not -name '.gitkeep' -delete && npm run test && ng build --prod",
+    "test": "ng test && npm run accessibility",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "postinstall": "ngcc",
@@ -14,7 +15,13 @@
     "format:check": "prettier --list-different \"src/{app,environments,assets}/**/*{.ts,.js,.json,.css,.scss}\"",
     "ts-node": "ts-node",
     "build-data-json": "ts-node --project tsconfig.scripts.json ./scripts/build-data-json.ts --",
-    "build-dummy-data": "find ./src/assets/data -type f -not -name '.gitkeep' -delete && npm run build-data-json -- --input ./data/dummy --output ./src/assets/data --anonymize-ids --positioned-entities both"
+    "build-dummy-data": "find ./src/assets/data -type f -not -name '.gitkeep' -delete && npm run build-data-json -- --input ./data/dummy --output ./src/assets/data --anonymize-ids --positioned-entities both",
+    "preaccessibility": "npm run build",
+    "accessibility": "npm run check-axe-tests && npm-run-all --parallel --race server accessibility:run",
+    "accessibility:run": "pa11y-ci",
+    "check-axe-tests": "./check-axe-tests.sh",
+    "server": "angular-http-server -p 4000 --rootFile src/index.html",
+    "server2": "node ./server.js"
   },
   "husky": {
     "hooks": {
@@ -61,6 +68,8 @@
     "@types/sharp": "^0.26.1",
     "@types/uuid": "^8.3.0",
     "@types/yargs": "^15.0.10",
+    "angular-http-server": "^1.10.0",
+    "axe-core": "^3.5.5",
     "codelyzer": "^6.0.0",
     "color": "^3.1.3",
     "husky": "^4.3.6",
@@ -73,6 +82,8 @@
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "^1.5.0",
     "lint-staged": "^10.5.3",
+    "npm-run-all": "^4.1.5",
+    "pa11y-ci": "^2.4.0",
     "prettier": "^2.1.2",
     "protractor": "~7.0.0",
     "sharp": "^0.26.3",

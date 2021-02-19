@@ -1,0 +1,27 @@
+{
+  "defaults": {
+    "standard": "WCAG2AAA",
+    "timeout": 10000,
+    "wait": 2000,
+    "ignore": [
+      "notice"
+    ]
+  },
+  "urls": [ "http://localhost:4000" ,
+
+{
+    "url": "http://localhost:4000/",
+"actions": [
+    "wait for element .quiz-link to be visible",
+    "screen capture /tmp/my-screen-capture.png"
+]
+},
+{
+    "url": "http://localhost:4000/",
+    "actions": [
+        "click element .quiz-link",
+"wait for element modal-container to be hidden"
+]
+}
+]
+}
