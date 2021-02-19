@@ -16,7 +16,6 @@ import { PipesModule } from '../../pipes/pipes.module';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 import { NzBadgeModule } from 'ng-zorro-antd/badge';
-import { CandidateModule } from '../../candidate/candidate.module';
 import { HelpersModule } from '../../helpers/helpers.module';
 import { NzSwitchModule } from 'ng-zorro-antd/switch';
 import { FormsModule } from '@angular/forms';
@@ -48,7 +47,6 @@ describe('QuizComponent', () => {
         NzTabsModule,
         NzToolTipModule,
         NzBadgeModule,
-        CandidateModule,
         HelpersModule,
         NzSwitchModule,
         FormsModule,

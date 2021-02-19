@@ -78,6 +78,6 @@ describe('AppComponent', () => {
 
   it('should render title', () => {
     const compiled = fixture.nativeElement;
-    expect(compiled.querySelector('.content span').textContent).toContain('wahlberater app is running!');
+    expect(compiled.querySelector('.logo img').getAttribute('src')).toBe('assets/static/wahlberater-horizontal-inverted-optm.png');
   });
 });

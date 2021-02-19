@@ -30,7 +30,9 @@ export class CandidateCardComponent implements OnInit {
       this.personalInfo = getCandidatePersonalInfo(d, this.candidateId);
     });
     this.store.pipe(select(AppSelectors.getPoliticalData)).subscribe((d) => {
-      this.politicalInfo = d.candidates[this.candidateId];
+      if (d && d.candidates) {
+        this.politicalInfo = d.candidates[this.candidateId];
+      }
     });
   }
 }

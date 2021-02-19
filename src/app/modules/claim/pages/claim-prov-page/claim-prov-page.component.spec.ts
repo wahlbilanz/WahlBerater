@@ -10,7 +10,6 @@ import { StoreModule } from '@ngrx/store';
 import { appReducer, STATE_FEATURE_KEY } from '../../../../+state/app.reducer';
 import { ClaimRoutingModule } from '../../claim-routing.module';
 import { NzListModule } from 'ng-zorro-antd/list';
-import { CandidateModule } from '../../../candidate/candidate.module';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { PipesModule } from '../../../pipes/pipes.module';
 
@@ -33,7 +32,6 @@ describe('ThesisProvPageComponent', () => {
         CommonModule,
         ClaimRoutingModule,
         NzListModule,
-        CandidateModule,
         NzIconModule.forRoot(icons),
         RouterTestingModule.withRoutes([]),
         PipesModule,

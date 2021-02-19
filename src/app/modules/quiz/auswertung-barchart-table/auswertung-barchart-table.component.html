@@ -1,5 +1,5 @@
 <div id="mybarchartchart">
-  <table>
+  <table *ngIf="partyScoreResult?.partyScores">
     <ng-container *ngFor="let party of partyScoreResult.partyScores">
       <!-- Party -->
       <tr class="party-row">

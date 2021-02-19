@@ -13,7 +13,6 @@ import { PipesModule } from '../../../pipes/pipes.module';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 import { NzBadgeModule } from 'ng-zorro-antd/badge';
-import { CandidateModule } from '../../../candidate/candidate.module';
 import { HelpersModule } from '../../../helpers/helpers.module';
 import { NzSwitchModule } from 'ng-zorro-antd/switch';
 import { FormsModule } from '@angular/forms';
@@ -24,6 +23,8 @@ import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
 
 import * as AllIcons from '@ant-design/icons-angular/icons';
 import { IconDefinition } from '@ant-design/icons-angular';
+import { RouterTestingModule } from '@angular/router/testing';
+import { Router } from '@angular/router';
 const antDesignIcons = AllIcons as {
   [key: string]: IconDefinition;
 };
@@ -37,6 +38,7 @@ describe('PartyListPageComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [PartyListPageComponent],
       imports: [
+        RouterTestingModule,
         CommonModule,
         PartyRoutingModule,
         NzIconModule.forRoot(icons),

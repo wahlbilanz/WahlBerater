@@ -14,6 +14,8 @@ import { appReducer, STATE_FEATURE_KEY } from '../../../../+state/app.reducer';
 
 import * as AllIcons from '@ant-design/icons-angular/icons';
 import { IconDefinition } from '@ant-design/icons-angular';
+import { Router } from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing';
 const antDesignIcons = AllIcons as {
   [key: string]: IconDefinition;
 };
@@ -22,11 +24,11 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map((key) => antDesi
 describe('PartyDetailPageComponent', () => {
   let component: PartyDetailPageComponent;
   let fixture: ComponentFixture<PartyDetailPageComponent>;
-
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [PartyDetailPageComponent],
       imports: [
+        RouterTestingModule,
         CommonModule,
         PartyRoutingModule,
         NzIconModule.forRoot(icons),

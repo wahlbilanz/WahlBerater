@@ -14,6 +14,7 @@ import { appReducer, STATE_FEATURE_KEY } from '../../../../+state/app.reducer';
 
 import * as AllIcons from '@ant-design/icons-angular/icons';
 import { IconDefinition } from '@ant-design/icons-angular';
+import { RouterTestingModule } from '@angular/router/testing';
 const antDesignIcons = AllIcons as {
   [key: string]: IconDefinition;
 };
@@ -27,6 +28,7 @@ describe('CandidateDetailPageComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [CandidateDetailPageComponent],
       imports: [
+        RouterTestingModule,
         CommonModule,
         PartyRoutingModule,
         NzIconModule.forRoot(icons),

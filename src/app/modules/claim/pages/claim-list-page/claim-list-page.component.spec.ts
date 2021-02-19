@@ -7,7 +7,6 @@ import { appReducer, STATE_FEATURE_KEY } from '../../../../+state/app.reducer';
 import { StoreModule } from '@ngrx/store';
 import { CommonModule } from '@angular/common';
 import { NzListModule } from 'ng-zorro-antd/list';
-import { CandidateModule } from '../../../candidate/candidate.module';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { PipesModule } from '../../../pipes/pipes.module';
 import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
@@ -31,7 +30,6 @@ describe('ThesisListPageComponent', () => {
       imports: [
         CommonModule,
         NzListModule,
-        CandidateModule,
         NzIconModule.forRoot(icons),
         RouterTestingModule.withRoutes([]),
         PipesModule,
