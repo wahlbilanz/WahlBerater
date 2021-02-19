@@ -4,8 +4,6 @@ declare var require: any;
 import { ComponentFixture, inject, TestBed } from '@angular/core/testing';
 
 import { CandidateCardComponent } from './candidate-card.component';
-import { DebugElement } from '@angular/core';
-import * as axe from 'axe-core';
 import { CommonModule } from '@angular/common';
 import { PartyRoutingModule } from '../../party-routing.module';
 import { NzIconModule } from 'ng-zorro-antd/icon';
