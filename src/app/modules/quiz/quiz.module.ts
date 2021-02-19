@@ -9,7 +9,6 @@ import { NzListModule } from 'ng-zorro-antd/list';
 import { NzSwitchModule } from 'ng-zorro-antd/switch';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
-import { CandidateModule } from '../candidate/candidate.module';
 import { HelpersModule } from '../helpers/helpers.module';
 import { PipesModule } from '../pipes/pipes.module';
 import { AuswertungBarchartTableComponent } from './auswertung-barchart-table/auswertung-barchart-table.component';
@@ -46,7 +45,6 @@ import { QuizComponent } from './quiz/quiz.component';
     NzTabsModule,
     NzToolTipModule,
     NzBadgeModule,
-    CandidateModule,
     HelpersModule,
     NzSwitchModule,
     FormsModule,
