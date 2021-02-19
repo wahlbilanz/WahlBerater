@@ -22,6 +22,7 @@ import { FormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
 import { appReducer, STATE_FEATURE_KEY } from '../../../+state/app.reducer';
 import { RouterTestingModule } from '@angular/router/testing';
+import { testAccessibility } from '../../helpers/test-helpers';
 const antDesignIcons = AllIcons as {
   [key: string]: IconDefinition;
 };
@@ -75,13 +76,6 @@ describe('QuizComponent', () => {
   it('should create', (done) => {
     expect(component).toBeTruthy();
 
-    const debug: DebugElement = fixture.debugElement;
-
-    axe.run(debug.nativeElement, (err, result) => {
-      expect(err).toBe(null);
-      console.log(result.violations);
-      expect(result.violations.length).toBe(0);
-      done();
-    });
+    testAccessibility(fixture.debugElement, done);
   });
 });

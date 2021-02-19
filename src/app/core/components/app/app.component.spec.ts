@@ -15,6 +15,7 @@ import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import * as AllIcons from '@ant-design/icons-angular/icons';
 import { IconDefinition } from '@ant-design/icons-angular';
+import { testAccessibility } from '../../../modules/helpers/test-helpers';
 
 const antDesignIcons = AllIcons as {
   [key: string]: IconDefinition;
@@ -66,14 +67,7 @@ describe('AppComponent', () => {
   it('should create the app', (done) => {
     expect(component).toBeTruthy();
 
-    const debug: DebugElement = fixture.debugElement;
-
-    axe.run(debug.nativeElement, (err, result) => {
-      expect(err).toBe(null);
-      console.log(result.violations);
-      expect(result.violations.length).toBe(0);
-      done();
-    });
+    testAccessibility(fixture.debugElement, done);
   });
 
   it('should render title', () => {
