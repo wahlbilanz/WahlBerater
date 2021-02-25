@@ -11,7 +11,12 @@
     Zur Quiz Auswertung
     <p class="small">Sieh dir deine Ergebnisse von dem letztem Quiz an!</p>
   </a>
-  <a class="nav-block quiz-link" routerLink="/quiz" title="Startet das Quiz" *ngIf="(lastQuizPage | async) === QuizFirstPagePath">
+  <a
+    class="nav-block quiz-link"
+    routerLink="/quiz{{ (accessibilityModes | async)?.accessibilityMode ? '/accessible' : '' }}"
+    title="Startet das Quiz"
+    *ngIf="(lastQuizPage | async) === QuizFirstPagePath"
+  >
     <i nz-icon nzType="question" nzTheme="outline" class="nav-icon" alt="Fragen Icon"></i>
     Quiz starten
   </a>

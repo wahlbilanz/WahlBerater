@@ -43,6 +43,10 @@
   <app-navigation-container></app-navigation-container>
 </nav>
 
-<main [nzNoAnimation]="accessibilityModeActive" (click)="mainClicked($event)">
+<main
+  [nzNoAnimation]="accessibilityModeActive"
+  (click)="mainClicked($event)"
+  class="{{ accessibilityModeActive ? 'accessibilityMode' : '' }}"
+>
   <router-outlet></router-outlet>
 </main>

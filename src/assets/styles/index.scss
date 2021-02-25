@@ -4,7 +4,7 @@
 @import 'partials/accessibility-mode';
 
 body {
-  background-color: #fff;
+  background-color: $wb-color-page-background;
 }
 .my {
   margin-top: $component-margin;

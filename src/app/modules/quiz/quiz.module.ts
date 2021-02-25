@@ -20,6 +20,8 @@ import { AuswertungComponent } from './auswertung/auswertung.component';
 import { QuizCardComponent } from './quiz-card/quiz-card.component';
 import { QuizRoutingModule } from './quiz-routing.module';
 import { QuizComponent } from './quiz/quiz.component';
+import { AccessibleQuizComponent } from './accessible-quiz/accessible-quiz.component';
+import { NzButtonModule } from 'ng-zorro-antd/button';
 // import { BrowserModule } from '@angular/platform-browser';
 // import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 @NgModule({
@@ -33,6 +35,7 @@ import { QuizComponent } from './quiz/quiz.component';
     AuswertungHeatmapComponent,
     AuswertungHeatmapVotesComponent,
     AuswertungCategoryPanelComponent,
+    AccessibleQuizComponent,
   ],
   imports: [
     CommonModule,
@@ -48,6 +51,7 @@ import { QuizComponent } from './quiz/quiz.component';
     HelpersModule,
     NzSwitchModule,
     FormsModule,
+    NzButtonModule,
   ],
 })
 export class QuizModule {}

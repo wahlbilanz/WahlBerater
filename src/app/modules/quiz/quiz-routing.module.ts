@@ -4,9 +4,11 @@ import { QuizCardComponent } from './quiz-card/quiz-card.component';
 import { QuizComponent } from './quiz/quiz.component';
 import { AuswertungComponent } from './auswertung/auswertung.component';
 import { ResultUrl, QuizFirstPage } from '../../+state/app.models';
+import { AccessibleQuizComponent } from './accessible-quiz/accessible-quiz.component';
 
 const routes: Routes = [
   { path: ResultUrl, component: AuswertungComponent },
+  { path: 'accessible', component: AccessibleQuizComponent },
   { path: ':claim', component: QuizComponent },
   { path: '', pathMatch: 'full', redirectTo: '/quiz/' + QuizFirstPage },
 ];
