@@ -22,3 +22,10 @@
 .ant-btn-primary {
   font-weight: bold;
 }
+
+.ant-breadcrumb a {
+  color: #484747;
+}
+nz-breadcrumb-item:last-child {
+  color: #111;
+}

@@ -5,6 +5,7 @@
 }
 
 .candidate-card {
+  background-color: $wb-color-page-foreground-background;
   display: grid;
   gap: $wb-space-x-small;
   grid-template:
@@ -15,7 +16,7 @@
 
   height: 100%;
   min-height: 150px;
-  padding-right: $wb-space-small;
+  padding: $wb-space-small;
 
   box-shadow: $wb-shadow-normal;
   transition: color 0.3s, background-color 0.3s, box-shadow 0.3s, border-color 0.3s;

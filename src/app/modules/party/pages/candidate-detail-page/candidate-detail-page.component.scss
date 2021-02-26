@@ -3,55 +3,63 @@
 :host {
   display: block;
 }
+.candidate-card {
+  background-color: $wb-color-page-foreground-background;
+  box-shadow: $wb-shadow-normal;
+  padding: $wb-space-medium $wb-space-large;
+  margin: $wb-space-large $wb-space-medium;
 
-.candidate-info {
-  display: grid;
-  gap: $wb-space-x-small;
-  grid-template:
-    'picture name social' (
-      map-get($wb-type-h2, 'line-height') + map-get($wb-type-paragraph, 'line-height') + $wb-space-xx-small
-    ) 'picture desc desc'
-    'picture desc desc' /
-    minmax(150px, min-content) minmax(min-content, 2fr) minmax(min-content, 1fr);
+  .candidate-info {
+    display: grid;
+    gap: $wb-space-x-small;
+    grid-template:
+      'picture name social' (
+        map-get($wb-type-h2, 'line-height') + map-get($wb-type-paragraph, 'line-height') + $wb-space-xx-small
+      ) 'picture desc desc'
+      'picture desc desc' /
+      minmax(150px, min-content) minmax(min-content, 2fr) minmax(min-content, 1fr);
 
-  min-height: 200px;
-  margin: $wb-space-medium 0;
+    min-height: 200px;
+    margin: $wb-space-medium 0;
 
-  .picture {
-    grid-area: picture;
-    height: 200px;
-    max-height: 100%;
+    .picture {
+      grid-area: picture;
+      height: 200px;
+      max-height: 100%;
 
-    margin: 0;
-    margin-right: $wb-space-medium;
-    border: 2px solid $wb-color-neutral-400;
-    border-radius: 50%;
-  }
-  .name {
-    display: block;
-    grid-area: name;
-    margin: 0;
-    margin-bottom: $wb-space-medium;
+      margin: 0;
+      margin-right: $wb-space-medium;
+      border: 2px solid $wb-color-neutral-400;
+      border-radius: 50%;
+    }
 
-    .party {
+    .name {
       display: block;
-      @include use-typography($wb-type-paragraph-small);
-      font-style: italic;
-      color: $wb-color-neutral-500;
-      margin-top: 0;
+      grid-area: name;
+      margin: 0;
+      margin-bottom: $wb-space-medium;
+
+      .party {
+        display: block;
+        @include use-typography($wb-type-paragraph-small);
+        font-style: italic;
+        color: $wb-color-neutral-500;
+        margin-top: 0;
+      }
+    }
+
+    .description {
+      grid-area: desc;
+      margin: 0;
+    }
+
+    .social {
+      grid-area: social;
+      align-self: flex-start;
+      margin-top: $wb-space-xx-small;
     }
   }
-  .description {
-    grid-area: desc;
-    margin: 0;
-  }
-  .social {
-    grid-area: social;
-    align-self: flex-start;
-    margin-top: $wb-space-xx-small;
-  }
 }
-
 @media screen and (max-width: $wb-breakpoint-medium) {
   .candidate-info {
     grid-template:

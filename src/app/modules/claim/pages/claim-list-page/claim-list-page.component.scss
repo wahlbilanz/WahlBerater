@@ -3,10 +3,49 @@
   .ant-list-header {
     font-weight: bold;
   }
-}
+} /*
 .category {
   margin: $wb-space-medium 0;
   border: $category-border-size solid;
   border-radius: $category-border-radius;
   padding: 1rem;
+}*/
+h1,
+.category {
+  background-color: $wb-color-page-foreground-background;
+  border-left: 5px solid;
+  padding: $wb-space-medium $wb-space-large;
+  margin: $wb-space-large 0;
+  .ant-list-vertical nz-list-item {
+    ::ng-deep {
+      .ant-list-item-meta-description {
+        color: #373635;
+      }
+    }
+    .btn-fav {
+      margin-bottom: $wb-space-x-large;
+    }
+    ul {
+      margin-left: auto;
+      margin-top: $wb-space-large;
+      padding: 0;
+      font-size: 0;
+      list-style: none;
+      margin-bottom: 16px;
+
+      ::ng-deep {
+        li {
+          display: inline-block;
+          padding: 0 16px;
+          padding-left: 0;
+          @media screen and (max-width: 465px) {
+            padding: 0;
+            .ant-list-item-action-split {
+              display: none;
+            }
+          }
+        }
+      }
+    }
+  }
 }

@@ -10,18 +10,20 @@
     >
   </nz-breadcrumb>
 
-  <div class="candidate-info">
-    <img class="picture" src="{{ data.candidate.picture | pictureUrl }}" />
-    <h2 class="name">
-      {{ data.candidate.name }}
-      <p class="party">{{ data.party?.name }}</p>
-    </h2>
-    <p class="description">{{ data.candidate.shortDescription | markdown }}</p>
+  <div class="candidate-card">
+    <div class="candidate-info">
+      <img class="picture" src="{{ data.candidate.picture | pictureUrl }}" />
+      <h2 class="name">
+        {{ data.candidate.name }}
+        <p class="party">{{ data.party?.name }}</p>
+      </h2>
+      <p class="description">{{ data.candidate.shortDescription | markdown }}</p>
 
-    <div class="social">
-      <app-social-links [links]="data.candidate.links" [name]="data.candidate.name"></app-social-links>
+      <div class="social">
+        <app-social-links [links]="data.candidate.links" [name]="data.candidate.name"></app-social-links>
+      </div>
     </div>
-  </div>
 
-  <div class="candidate-description">{{ data.candidate.description | markdown }}</div>
+    <div class="candidate-description">{{ data.candidate.description | markdown }}</div>
+  </div>
 </ng-container>

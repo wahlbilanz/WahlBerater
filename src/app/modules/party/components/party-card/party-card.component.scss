@@ -5,6 +5,7 @@
 }
 
 .party-card {
+  background-color: $wb-color-page-foreground-background;
   display: grid;
   gap: $wb-space-x-small;
   grid-template:

@@ -7,21 +7,23 @@
     >
   </nz-breadcrumb>
 
-  <div class="party-info">
-    <h1 class="name">{{ party.name }}</h1>
-    <img class="picture" src="{{ party.picture | pictureUrl }}" alt="Logo der Partei {{ personalInfo.name }}" />
-    <p class="description">{{ party.shortDescription | markdown }}</p>
-    <div class="social">
-      <app-social-links [links]="party.links" [name]="party.name"></app-social-links>
+  <div class="party-card">
+    <div class="party-info">
+      <h1 class="name">{{ party.name }}</h1>
+      <img class="picture" src="{{ party.picture | pictureUrl }}" alt="Logo der Partei {{ party.name }}" />
+      <p class="description">{{ party.shortDescription | markdown }}</p>
+      <div class="social">
+        <app-social-links [links]="party.links" [name]="party.name"></app-social-links>
+      </div>
     </div>
+
+    <div>{{ party.description | markdown }}</div>
   </div>
 
-  <div>{{ party.description | markdown }}</div>
-</ng-container>
-
-<ng-container *ngIf="partyCandidates | async as candidates">
-  <h2 class="candidate-headline">Kandidierende</h2>
-  <div class="candidate-list">
-    <app-candidate-card [candidateId]="candidate" *ngFor="let candidate of candidates"></app-candidate-card>
-  </div>
+  <ng-container *ngIf="partyCandidates | async as candidates">
+    <h2 class="candidate-headline">Kandidierende</h2>
+    <div class="candidate-list">
+      <app-candidate-card [candidateId]="candidate" *ngFor="let candidate of candidates"></app-candidate-card>
+    </div>
+  </ng-container>
 </ng-container>
