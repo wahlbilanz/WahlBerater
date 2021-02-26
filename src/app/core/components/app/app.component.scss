@@ -49,6 +49,7 @@ header {
     grid-column: 2 / 3;
     display: flex;
     align-items: baseline;
+    padding: 0 $wb-space-medium;
   }
 
   .logo {

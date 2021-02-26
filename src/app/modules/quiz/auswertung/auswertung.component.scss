@@ -2,7 +2,7 @@
 .results {
   .controls {
     text-align: right;
-
+    margin: 0 $wb-space-medium;
     nz-switch {
       margin: 0 $wb-space-x-small;
     }
@@ -23,11 +23,11 @@
     background-color: $wb-color-page-foreground-background;
     border-left: 5px solid;
     padding: $wb-space-medium $wb-space-large;
-    margin: $wb-space-large $wb-space-medium; /*
-  border: $category-border-size solid;
-  border-radius: $category-border-radius;
-  margin: 20px 0;
-  padding: 1rem;*/
+    margin: $wb-space-large $wb-space-medium;
+    box-shadow: $wb-shadow-normal;
+    &:hover {
+      box-shadow: $wb-shadow-hover;
+    }
   }
 }
 

@@ -23,7 +23,11 @@
   <ng-container *ngIf="partyCandidates | async as candidates">
     <h2 class="candidate-headline">Kandidierende</h2>
     <div class="candidate-list">
-      <app-candidate-card [candidateId]="candidate" *ngFor="let candidate of candidates"></app-candidate-card>
+      <ng-container *ngFor="let candidate of candidates">
+        <a class="link" [routerLink]="['/', 'parties', partyId | async, 'candidates', candidate]">
+          <app-candidate-card [candidateId]="candidate"></app-candidate-card>
+        </a>
+      </ng-container>
     </div>
   </ng-container>
 </ng-container>

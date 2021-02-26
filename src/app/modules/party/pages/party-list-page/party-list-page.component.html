@@ -6,13 +6,19 @@
 <h1>Wahllisten</h1>
 
 <section class="party-list">
-  <app-party-card
-    [partyId]="id"
-    [showSocialLinks]="false"
-    [politicalData]="politicalData"
-    [personalData]="personalData"
-    [partyData]="politicalData.parties[id]"
+  <a
+    class="party-link"
+    title="Mehr Informationen und Kandidierende von {{ politicalData.parties[id].name }}"
+    [routerLink]="['/', 'parties', id]"
     *ngFor="let id of partyIds | async"
   >
-  </app-party-card>
+    <app-party-card
+      [partyId]="id"
+      [showSocialLinks]="false"
+      [politicalData]="politicalData"
+      [personalData]="personalData"
+      [partyData]="politicalData.parties[id]"
+    >
+    </app-party-card>
+  </a>
 </section>
