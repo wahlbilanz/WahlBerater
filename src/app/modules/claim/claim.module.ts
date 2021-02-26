@@ -36,5 +36,6 @@ import { HelpersModule } from '../helpers/helpers.module';
     NzBadgeModule,
     HelpersModule,
   ],
+  exports: [ClaimCandidateVizComponent],
 })
 export class ClaimModule {}

@@ -1,3 +1,4 @@
+<app-decision-templates #decisionTemplates></app-decision-templates>
 <ng-container *ngIf="category">
   <h3>{{ category.title }}</h3>
   <nz-collapse *ngIf="claims">
@@ -40,6 +41,4 @@
       </nz-collapse-panel>
     </ng-container>
   </nz-collapse>
-
-  <app-decision-templates #decisionTemplates></app-decision-templates>
 </ng-container>

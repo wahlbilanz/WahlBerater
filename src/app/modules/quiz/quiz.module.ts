@@ -22,6 +22,7 @@ import { QuizRoutingModule } from './quiz-routing.module';
 import { QuizComponent } from './quiz/quiz.component';
 import { AccessibleQuizComponent } from './accessible-quiz/accessible-quiz.component';
 import { NzButtonModule } from 'ng-zorro-antd/button';
+import { ClaimModule } from '../claim/claim.module';
 // import { BrowserModule } from '@angular/platform-browser';
 // import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 @NgModule({
@@ -52,6 +53,7 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
     NzSwitchModule,
     FormsModule,
     NzButtonModule,
+    ClaimModule,
   ],
 })
 export class QuizModule {}

@@ -15,6 +15,7 @@ import { DecisionTemplatesComponent } from '../../helpers/decision-templates/dec
   styleUrls: ['./auswertung-category-panel.component.scss'],
 })
 export class AuswertungCategoryPanelComponent implements OnInit {
+  @ViewChild('decisionTemplates', { static: true }) decisionTemplates: DecisionTemplatesComponent;
   @Input() categoryId: string;
   @Input() category: Category;
   @Input() votes: Votes;
@@ -25,8 +26,6 @@ export class AuswertungCategoryPanelComponent implements OnInit {
   @Input() partyScoreResult: PartyScoreResult;
   @Input() showCandidates = false;
 
-  @ViewChild('decisionTemplates', { static: true }) decisionTemplates: DecisionTemplatesComponent;
-
   constructor(private store: Store<AppPartialState>) {}
 
   ngOnInit(): void {
@@ -36,21 +35,24 @@ export class AuswertungCategoryPanelComponent implements OnInit {
     });*/
   }
 
-  getUserTemplate(userDecision: Vote): TemplateRef<any> {
-    if (!userDecision || userDecision.decision === 0) {
-      return this.decisionTemplates.skipTempleate;
-    }
+  getUserTemplate(userDecision: Vote): TemplateRef<any> | undefined {
+    if (this.decisionTemplates) {
+      if (!userDecision || userDecision.decision === 0) {
+        return this.decisionTemplates.skipTempleate;
+      }
 
-    if (userDecision.decision > 0) {
-      if (userDecision.fav) {
-        return this.decisionTemplates.yesyesTempleate;
+      if (userDecision.decision > 0) {
+        if (userDecision.fav) {
+          return this.decisionTemplates.yesyesTempleate;
+        }
+        return this.decisionTemplates.yesTempleate;
+      } else {
+        if (userDecision.fav) {
+          return this.decisionTemplates.nonoTempleate;
+        }
+        return this.decisionTemplates.noTempleate;
       }
-      return this.decisionTemplates.yesTempleate;
-    } else {
-      if (userDecision.fav) {
-        return this.decisionTemplates.nonoTempleate;
-      }
-      return this.decisionTemplates.noTempleate;
     }
+    return undefined;
   }
 }
