@@ -25,10 +25,11 @@ export class AuswertungComponent implements OnInit, OnChanges {
   maxParty = 0;
   showCandidates = false;
 
-  constructor(private store: Store<AppPartialState>) {}
+  constructor(private store: Store<AppPartialState>) {
+    this.store.dispatch(AppActions.updateLastQuizPage({ lastPage: ResultUrl }));
+  }
 
   ngOnInit(): void {
-    this.store.dispatch(AppActions.updateLastQuizPage({ lastPage: ResultUrl }));
     this.store.pipe(select(AppSelectors.getPersonalData)).subscribe((d) => {
       this.personalData = d;
       this.recalc();

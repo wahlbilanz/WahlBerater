@@ -8,7 +8,6 @@ import { QuizRoutingModule } from '../quiz-routing.module';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzCollapseModule } from 'ng-zorro-antd/collapse';
 import { NzListModule } from 'ng-zorro-antd/list';
-import { NgApexchartsModule } from 'ng-apexcharts';
 import { PipesModule } from '../../pipes/pipes.module';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
@@ -42,7 +41,6 @@ describe('AuswertungHeatmapComponent', () => {
         NzIconModule.forRoot(icons),
         NzCollapseModule,
         NzListModule,
-        NgApexchartsModule,
         PipesModule,
         NzTabsModule,
         NzToolTipModule,

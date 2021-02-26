@@ -26,9 +26,7 @@ export class QuizComponent implements OnInit {
   // prev: string;
   // next: string;
 
-  constructor(private store: Store<AppPartialState>, private route: ActivatedRoute) {}
-
-  ngOnInit(): void {
+  constructor(private store: Store<AppPartialState>, private route: ActivatedRoute) {
     this.route.paramMap.subscribe((pm) => {
       this.claimId = pm.get('claim');
       this.store.dispatch(AppActions.updateLastQuizPage({ lastPage: this.claimId }));
@@ -49,6 +47,8 @@ export class QuizComponent implements OnInit {
       this.store.pipe(select(AppSelectors.getCategoryByClaimId, { id: this.claimId })).subscribe((c) => (this.category = c));
     });
   }
+
+  ngOnInit(): void {}
 
   /*testNext(id: string): void {
     this.store.pipe(select(AppSelectors.getNextQuestion, { id })).subscribe(c => {
