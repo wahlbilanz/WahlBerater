@@ -9,7 +9,7 @@ do
         echo "missing test for $i"
         ok=1
     else
-        grep 'axe-core' "$spec" > /dev/null
+        grep 'testAccessibility *(' "$spec" > /dev/null
         if [ "$?" -ne 0 ]
         then
             echo "no accessibility test in $spec"

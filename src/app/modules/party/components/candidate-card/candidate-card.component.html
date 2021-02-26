@@ -3,7 +3,7 @@
     class="picture"
     src="{{ personalInfo.picture | pictureUrl }}"
     [routerLink]="['/', 'parties', politicalInfo.party, 'candidates', candidateId]"
-    alt="Logo der Partei {{ personalInfo.name }}"
+    alt="Bild von {{ personalInfo.name }}"
   />
   <h3 class="name">{{ personalInfo.name }}</h3>
   <p class="description">{{ personalInfo.shortDescription | markdown }}</p>

@@ -27,9 +27,11 @@ export class CandidateCardComponent implements OnInit {
 
   ngOnInit(): void {
     this.store.pipe(select(AppSelectors.getPersonalData)).subscribe((d) => {
+      console.log(d);
       this.personalInfo = getCandidatePersonalInfo(d, this.candidateId);
     });
     this.store.pipe(select(AppSelectors.getPoliticalData)).subscribe((d) => {
+      console.log(d);
       if (d && d.candidates) {
         this.politicalInfo = d.candidates[this.candidateId];
       }
