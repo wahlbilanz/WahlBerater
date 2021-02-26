@@ -1,0 +1,50 @@
+<div id="accessible-auswertung">
+  <div *ngIf="partyScoreResult?.partyScores">
+    <div *ngFor="let party of partyScoreResult.partyScores">
+      Die
+      <a
+        class="party-link"
+        title="Mehr Informationen und Kandidierende von {{ politicalData.parties[party.party].name }}"
+        [routerLink]="['/', 'parties', party.party]"
+        >{{ politicalData.parties[party.party].name }}</a
+      >
+      hat einen Punktestand von {{ party.score.score | number: '1.0-2' }} mit {{ party.score.stars | number: '1.0-2' }} Sternchen erreicht.
+      <ng-container *ngIf="party.score.score > 0">
+        Dabei konnte sie in den folgenden Kategorien punkten:
+        <ul>
+          <ng-container *ngFor="let category of party.scores | keyvalue">
+            <li *ngIf="category.value.score.score > 0">
+              {{ politicalData.categories[category.key].title }}: {{ category.value.score.score | number: '1.0-2' }} Punkt{{
+                category.value.score.score == 1 ? '' : 'e'
+              }}
+            </li>
+          </ng-container>
+        </ul>
+        <!-- candidates -->
+        <ng-container *ngIf="showCandidates && party.candidates">
+          Die Kandidaten der Liste haben wie folge abgeschnitten:
+          <ul>
+            <ng-container *ngFor="let candidate of party.candidates | keyvalue">
+              <li>
+                <!--          <a [routerLink]="'/candidates/' + candidate.id">{{ candidate.personal.name }}</a> <small>({{politicalData.parties[candidate.political.party].name}})</small>-->
+                {{ candidate.value.personal.name }} erzielte {{ candidate.value.score.score }} Punkte und
+                {{ candidate.value.score.stars }} Sternchen<ng-container *ngIf="candidate.value.score.score <= 0">.</ng-container
+                ><ng-container *ngIf="candidate.value.score.score > 0"
+                  >:
+                  <ul>
+                    <ng-container *ngFor="let category of candidate.value.scores | keyvalue">
+                      <li *ngIf="category.value.score.score > 0">
+                        {{ category.value.score.score }} Punkt{{ category.value.score.score == 1 ? '' : 'e' }} in der Kategorie
+                        {{ politicalData.categories[category.key].title }}
+                      </li>
+                    </ng-container>
+                  </ul>
+                </ng-container>
+              </li>
+            </ng-container>
+          </ul>
+        </ng-container>
+      </ng-container>
+    </div>
+  </div>
+</div>

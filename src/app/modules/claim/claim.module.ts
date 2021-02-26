@@ -14,7 +14,6 @@ import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { NzDescriptionsModule } from 'ng-zorro-antd/descriptions';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzCollapseModule } from 'ng-zorro-antd/collapse';
-import { NgApexchartsModule } from 'ng-apexcharts';
 import { NzBadgeModule } from 'ng-zorro-antd/badge';
 import { HelpersModule } from '../helpers/helpers.module';
 
@@ -32,7 +31,6 @@ import { HelpersModule } from '../helpers/helpers.module';
     NzDescriptionsModule,
     NzDividerModule,
     NzCollapseModule,
-    NgApexchartsModule,
     NzBadgeModule,
     HelpersModule,
   ],
