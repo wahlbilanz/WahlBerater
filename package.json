@@ -5,7 +5,7 @@
     "ng": "ng",
     "start": "npm run build-dummy-data && ng serve",
     "build": "find ./src/assets/data -type f -not -name '.gitkeep' -delete && ng build",
-    "build:prod": "find ./src/assets/data -type f -not -name '.gitkeep' -delete && npm run test && ng build --prod",
+    "build:prod": "find ./src/assets/data -type f -not -name '.gitkeep' -delete && ng build --prod",
     "test": "ng test && npm run accessibility",
     "lint": "ng lint",
     "e2e": "ng e2e",
