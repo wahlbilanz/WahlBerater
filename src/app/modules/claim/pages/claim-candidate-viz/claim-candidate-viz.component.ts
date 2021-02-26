@@ -35,7 +35,7 @@ export class ClaimCandidateVizComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    if (!this.partySeq) {
+    if (!this.partySeq && this.politicalData) {
       this.partySeq = Object.keys(this.politicalData.parties);
     }
   }

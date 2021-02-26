@@ -94,7 +94,7 @@
             "karmaConfig": "karma.conf.js",
             "assets": ["src/assets/static/favicon.ico", "src/assets/static"],
             "styles": ["src/assets/themes/ng-zorro.theme.less", "src/assets/styles/index.scss"],
-            "scripts": ["node_modules/apexcharts/dist/apexcharts.min.js"]
+            "scripts": []
           }
         },
         "lint": {
