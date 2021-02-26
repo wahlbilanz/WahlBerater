@@ -33,6 +33,7 @@ steps:
       from_secret: drone_mail_user
     password:
       from_secret: drone_mail_password
-    from: drone_mail_noreply
+    from:
+      from_secret: drone_mail_noreply
   when:
     status: [ success, failure ]
