@@ -25,6 +25,8 @@ export class AuswertungComponent implements OnInit, OnChanges {
   maxParty = 0;
   showCandidates = false;
 
+  public accessibilityModes = this.store.pipe(select(AppSelectors.getAllAccessibilityModes));
+
   constructor(private store: Store<AppPartialState>) {
     this.store.dispatch(AppActions.updateLastQuizPage({ lastPage: ResultUrl }));
   }

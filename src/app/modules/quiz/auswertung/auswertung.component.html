@@ -8,7 +8,7 @@
       ></nz-switch>
     </div>
     <nz-tabset class="visualisations" *ngIf="partyScoreResult">
-      <nz-tab nzTitle="Barrierefreie Auswertung">
+      <nz-tab nzTitle="Auswertung" *ngIf="(accessibilityModes | async)?.accessibilityMode">
         <app-accessible-auswertungs-chart
           [votes]="votes"
           [politicalData]="politicalData"
@@ -20,7 +20,7 @@
         >
         </app-accessible-auswertungs-chart>
       </nz-tab>
-      <nz-tab nzTitle="Bars">
+      <nz-tab nzTitle="Bar Chart">
         <app-auswertung-barchart-table
           [votes]="votes"
           [politicalData]="politicalData"
@@ -49,6 +49,18 @@
           [categories]="politicalData.categories"
         >
         </app-auswertung-heatmap-votes>
+      </nz-tab>
+      <nz-tab nzTitle="Barrierefreie Auswertung" *ngIf="!(accessibilityModes | async)?.accessibilityMode">
+        <app-accessible-auswertungs-chart
+          [votes]="votes"
+          [politicalData]="politicalData"
+          [personalCandidates]="personalData"
+          [categories]="politicalData.categories"
+          [claims]="politicalData.claims"
+          [partyScoreResult]="partyScoreResult"
+          [showCandidates]="showCandidates"
+        >
+        </app-accessible-auswertungs-chart>
       </nz-tab>
     </nz-tabset>
 

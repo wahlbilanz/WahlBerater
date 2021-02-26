@@ -36,6 +36,9 @@
                       <li *ngIf="category.value.score.score > 0">
                         {{ category.value.score.score }} Punkt{{ category.value.score.score == 1 ? '' : 'e' }} in der Kategorie
                         {{ politicalData.categories[category.key].title }}
+                        <ng-container *ngIf="category.value.score.stars > 0">
+                          sogar mit {{ category.value.score.stars }} Sternchen
+                        </ng-container>
                       </li>
                     </ng-container>
                   </ul>
