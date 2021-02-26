@@ -17,10 +17,11 @@ export class AccessibleQuizComponent implements OnInit {
   votes: Votes;
   ResultUrlPath = ResultUrl;
 
-  constructor(private store: Store<AppPartialState>) {}
+  constructor(private store: Store<AppPartialState>) {
+    this.store.dispatch(AppActions.updateLastQuizPage({ lastPage: 'accessible' }));
+  }
 
   ngOnInit(): void {
-    this.store.dispatch(AppActions.updateLastQuizPage({ lastPage: 'accessible' }));
     this.store.pipe(select(AppSelectors.getVotes)).subscribe((v) => {
       this.votes = v;
     });

@@ -21,11 +21,6 @@ h1,
   border-left: 5px solid;
   padding: $wb-space-medium $wb-space-large;
   box-shadow: $wb-shadow-normal;
-}
-.category {
-  &:hover {
-    box-shadow: $wb-shadow-hover;
-  }
 
   .ant-list-vertical nz-list-item {
     ::ng-deep {
