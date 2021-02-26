@@ -1,16 +1,35 @@
 @import '../../../../assets/styles/index';
-#results .controls {
-  text-align: right;
-  nz-switch {
-    margin: 0 $wb-space-x-small;
+.results {
+  .controls {
+    text-align: right;
+
+    nz-switch {
+      margin: 0 $wb-space-x-small;
+    }
   }
-}
-.category {
+
+  nz-tabset {
+    background-color: $wb-color-page-foreground-background;
+    box-shadow: $wb-shadow-normal;
+    padding: $wb-space-medium $wb-space-large;
+    margin: $wb-space-large $wb-space-medium;
+  }
+  > h2 {
+    margin: $wb-space-large $wb-space-medium;
+  }
+
+  .category {
+    background-color: $wb-color-page-foreground-background;
+    border-left: 5px solid;
+    padding: $wb-space-medium $wb-space-large;
+    margin: $wb-space-large $wb-space-medium; /*
   border: $category-border-size solid;
   border-radius: $category-border-radius;
   margin: 20px 0;
-  padding: 1rem;
+  padding: 1rem;*/
+  }
 }
+
 .heart-red {
   color: $favcolor;
 }
