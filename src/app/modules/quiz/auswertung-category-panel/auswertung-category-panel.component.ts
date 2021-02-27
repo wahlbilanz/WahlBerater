@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
 import { AppPartialState } from '../../../+state/app.reducer';
 import { PersonalCandidateMap } from '../../../definitions/models/candidate.model';
 import { Category } from '../../../definitions/models/category.model';
@@ -8,6 +8,8 @@ import { PoliticalData } from '../../../definitions/models/political.data.model'
 import { PartyScoreResult } from '../../../definitions/models/results.model';
 import { Vote, Votes } from '../../../definitions/models/votes.mode';
 import { DecisionTemplatesComponent } from '../../helpers/decision-templates/decision-templates.component';
+import * as AppSelectors from '../../../+state/app.selectors';
+import { AccessibilityModes, AccessibleUrl, AccessibleUrlFragment } from '../../../+state/app.models';
 
 @Component({
   selector: 'app-auswertung-category-panel',
@@ -25,8 +27,13 @@ export class AuswertungCategoryPanelComponent implements OnInit {
 
   @Input() partyScoreResult: PartyScoreResult;
   @Input() showCandidates = false;
+  public accessibilityModes?: AccessibilityModes;
+  public AccessibleUrlPath = AccessibleUrl;
+  public sAccessibleUrlFragment = AccessibleUrlFragment;
 
-  constructor(private store: Store<AppPartialState>) {}
+  constructor(private store: Store<AppPartialState>) {
+    this.store.pipe(select(AppSelectors.getAllAccessibilityModes)).subscribe((am) => (this.accessibilityModes = am));
+  }
 
   ngOnInit(): void {
     // TODO is this necessary!?
@@ -34,6 +41,14 @@ export class AuswertungCategoryPanelComponent implements OnInit {
       this.claims = c;
     });*/
   }
+
+  /*getClaimLink(claimId: string): string {
+    if (this.accessibilityModes?.accessibilityMode) {
+      return '/quiz/' + AccessibleUrl + '#accessible-' + claimId;
+    } else {
+      return '/quiz/' + claimId;
+    }
+  }*/
 
   getUserTemplate(userDecision: Vote): TemplateRef<any> | undefined {
     if (this.decisionTemplates) {

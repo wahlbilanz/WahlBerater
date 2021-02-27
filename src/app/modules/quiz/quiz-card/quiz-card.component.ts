@@ -5,6 +5,9 @@ import { select, Store } from '@ngrx/store';
 import { first } from 'rxjs/operators';
 import { vote } from '../../../+state/app.actions';
 import {
+  AccessibilityModes,
+  AccessibleUrl,
+  AccessibleUrlFragment,
   QuizAnimationDelay,
   QuizAnimationDurationIn,
   QuizAnimationDurationOut,
@@ -80,9 +83,16 @@ export class QuizCardComponent implements OnInit, OnChanges {
   swipeTime?: number;
 
   containerHeight: number;
-  public accessibilityModes = this.store.pipe(select(AppSelectors.getAllAccessibilityModes));
+  public accessibilityModes: AccessibilityModes;
 
-  constructor(private store: Store<AppPartialState>, private router: Router) {}
+  constructor(private store: Store<AppPartialState>, private router: Router) {
+    this.store.pipe(select(AppSelectors.getAllAccessibilityModes)).subscribe((am) => {
+      this.accessibilityModes = am;
+      if (am.accessibilityMode) {
+        this.router.navigate(['quiz', AccessibleUrl], { fragment: AccessibleUrlFragment + this.claimId });
+      }
+    });
+  }
 
   ngOnChanges(): void {
     // 100 = 46 of top menu plus padding/margin of surrounding containers

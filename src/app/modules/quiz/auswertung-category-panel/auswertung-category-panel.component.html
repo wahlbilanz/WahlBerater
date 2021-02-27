@@ -21,7 +21,15 @@
         </p>
 
         <p>
-          <a [routerLink]="'/quiz/' + claim.key">Zurück zur These, um Entscheidung zu ändern.</a>
+          <a [routerLink]="'/quiz/' + claim.key" *ngIf="!this.accessibilityModes?.accessibilityMode"
+            >Zurück zur These, um Entscheidung zu ändern.</a
+          >
+          <a
+            [routerLink]="'/quiz/' + AccessibleUrlPath"
+            [fragment]="sAccessibleUrlFragment + claim.key"
+            *ngIf="this.accessibilityModes?.accessibilityMode"
+            >Zurück zur These, um Entscheidung zu ändern.</a
+          >
         </p>
 
         <h4>Was denken die Listen?</h4>

@@ -4,7 +4,7 @@
     <h3>Kategorie: {{ category.value.title }}</h3>
     <nz-list nzItemLayout="vertical">
       <ng-container *ngFor="let item of d.claims | keyvalue">
-        <nz-list-item *ngIf="item.value.category === category.key">
+        <nz-list-item *ngIf="item.value.category === category.key" id="{{ sAccessibleUrlFragment }}{{ item.key }}">
           <nz-list-item-meta>
             <nz-list-item-meta-title> </nz-list-item-meta-title>
             <nz-list-item-meta-description>
@@ -14,11 +14,6 @@
             </nz-list-item-meta-description>
           </nz-list-item-meta>
           <h4>{{ item.value.title }}</h4>
-          <!--          <ul nz-list-item-actions>-->
-          <!--            <nz-list-item-action><button nz-button nzSize="large" [nzType]="votes[item.key] && votes[item.key].decision === 1 ? 'primary' : 'secondary'" (click)="vote(item.key, 1)">Dagegen</button></nz-list-item-action>-->
-          <!--            <nz-list-item-action><button nz-button nzSize="large" [nzType]="votes[item.key] && votes[item.key].decision === 0 ? 'primary' : 'secondary'" (click)="vote(item.key, 0)">Neutral</button></nz-list-item-action>-->
-          <!--            <nz-list-item-action><button nz-button nzSize="large" [nzType]="votes[item.key] && votes[item.key].decision === -1 ? 'primary' : 'secondary'" (click)="vote(item.key, -1)">Dafür</button></nz-list-item-action>-->
-          <!--          </ul>-->
           <ul>
             <li>
               <button

@@ -10,11 +10,18 @@ export enum QuizState {
 }
 
 export const ResultUrl = 'result';
+export const AccessibleUrl = 'accessible';
+export const AccessibleUrlFragment = 'accessible';
 export const QuizFirstPage = 'howto';
 
 export const QuizAnimationDelay = 300;
 export const QuizAnimationDurationIn = 500;
 export const QuizAnimationDurationOut = 500;
+
+export interface AccessibilityModes {
+  accessibilityMode: boolean;
+  reducedMotionMode: boolean;
+}
 
 export interface State {
   /** Top menu open state */

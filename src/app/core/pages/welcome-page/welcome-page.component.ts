@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { map } from 'rxjs/operators';
 import * as AppActions from '../../../+state/app.actions';
-import { QuizState, ResultUrl, QuizFirstPage } from '../../../+state/app.models';
+import { QuizState, ResultUrl, QuizFirstPage, AccessibleUrl, AccessibilityModes } from '../../../+state/app.models';
 import { AppPartialState } from '../../../+state/app.reducer';
 import * as AppSelectors from '../../../+state/app.selectors';
 
@@ -17,16 +17,24 @@ export class WelcomePageComponent {
 
   public localStorageSupported = this.store.pipe(select(AppSelectors.isLocalStorageSupported));
   public localStorageAllowed = this.store.pipe(select(AppSelectors.isLocalDataStorageAllowed));
-  public accessibilityModes = this.store.pipe(select(AppSelectors.getAllAccessibilityModes));
+  public accessibilityModes?: AccessibilityModes;
   public data = this.store.pipe(select(AppSelectors.getPoliticalData));
 
   public ResultUrlPath = ResultUrl;
   public QuizFirstPagePath = QuizFirstPage;
+  public AccessibleUrlPath = AccessibleUrl;
   public lastQuizPage: string;
 
   constructor(private store: Store<AppPartialState>) {
     this.lastQuizPage = QuizFirstPage;
-    this.store.pipe(select(AppSelectors.getLastQuizPage)).subscribe((p) => (this.lastQuizPage = p));
+    this.store.pipe(select(AppSelectors.getLastQuizPage)).subscribe((p) => {
+      console.log(p);
+      this.lastQuizPage = p;
+    });
+    this.store.pipe(select(AppSelectors.getAllAccessibilityModes)).subscribe((am) => {
+      console.log(am);
+      this.accessibilityModes = am;
+    });
   }
 
   public updateLocalStorageOptIn(allow: boolean) {

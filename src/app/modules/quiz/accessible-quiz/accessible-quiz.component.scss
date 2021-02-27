@@ -6,6 +6,10 @@ h1,
   border-left: 5px solid;
   padding: $wb-space-medium $wb-space-large;
   margin: $wb-space-large $wb-space-medium;
+  @media screen and (max-width: $wb-breakpoint-medium) {
+    padding: $wb-space-small $wb-space-medium;
+    margin: $wb-space-large 0;
+  }
   .ant-list-vertical nz-list-item {
     ::ng-deep {
       .ant-list-item-meta-description {

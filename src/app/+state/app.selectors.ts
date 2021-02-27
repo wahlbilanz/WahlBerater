@@ -4,7 +4,7 @@ import { PersonalCandidateMap } from '../definitions/models/candidate.model';
 import { Category } from '../definitions/models/category.model';
 import { PoliticalData } from '../definitions/models/political.data.model';
 import { Votes } from '../definitions/models/votes.mode';
-import { QuizFirstPage, QuizState, State } from './app.models';
+import { AccessibilityModes, QuizFirstPage, QuizState, State } from './app.models';
 import { AppPartialState, STATE_FEATURE_KEY } from './app.reducer';
 
 const getAppState = createFeatureSelector<AppPartialState, State>(STATE_FEATURE_KEY);
@@ -160,9 +160,12 @@ export const getCandidateListByPartyId = createSelector(
       } as CandidateWithID),
 );*/
 
-export const getAllAccessibilityModes = createSelector(getAppState, (state: State) => ({
-  accessibilityMode: state.accessibilityMode === true,
-  reducedMotionMode: state.reducedMotionMode === true,
-}));
+export const getAllAccessibilityModes = createSelector(
+  getAppState,
+  (state: State): AccessibilityModes => ({
+    accessibilityMode: state.accessibilityMode === true,
+    reducedMotionMode: state.reducedMotionMode === true,
+  }),
+);
 export const isAccessibilityModeActive = createSelector(getAllAccessibilityModes, (state) => state.accessibilityMode);
 export const isReducedMotionModeActive = createSelector(getAllAccessibilityModes, (state) => state.accessibilityMode);

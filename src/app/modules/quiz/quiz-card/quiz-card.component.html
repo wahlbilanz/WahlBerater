@@ -9,7 +9,7 @@
     <!--    [@leaveTop]="leaveTop ? 'gone' : 'there'"-->
     <!--    [@leaveRight]="leaveRight ? 'gone' : 'there'"-->
     <div
-      [@swipeAnimation]="(accessibilityModes | async)?.reducedMotionMode ? 'there' : swipeAnimation"
+      [@swipeAnimation]="accessibilityModes?.reducedMotionMode ? 'there' : swipeAnimation"
       id="quizcard"
       class=""
       style="border-color:{{ category.color }}"
