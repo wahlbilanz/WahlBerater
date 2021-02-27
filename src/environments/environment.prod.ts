@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  dataUrl: '',
+  dataUrl: '/assets/data',
 };
