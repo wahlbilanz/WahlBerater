@@ -20,12 +20,6 @@ export class QuizComponent implements OnInit {
   prev: string;
   next: string;
 
-  // categories: string[];
-  // curClaims: string[];
-  //
-  // prev: string;
-  // next: string;
-
   constructor(private store: Store<AppPartialState>, private route: ActivatedRoute) {
     this.route.paramMap.subscribe((pm) => {
       this.claimId = pm.get('claim');
@@ -49,80 +43,4 @@ export class QuizComponent implements OnInit {
   }
 
   ngOnInit(): void {}
-
-  /*testNext(id: string): void {
-    this.store.pipe(select(AppSelectors.getNextQuestion, { id })).subscribe(c => {
-      console.log ('found', c, 'after', id);
-      if (c) {
-        this.testNext (c);
-      }
-      this.testPrev2(c);
-    });
-
-  }*/
-
-  // testNext2(id: string): void {
-  //   this.store.pipe(select(AppSelectors.getNextQuestion, { id })).subscribe(c => {
-  //     console.log ('found', c, 'after', id);
-  //     /*if (c) {
-  //       this.testNext (c);
-  //     }*/
-  //   });
-  //
-  // }
-  //
-  // testPrev2(id: string): void {
-  //   this.store.pipe(select(AppSelectors.getPrevQuestion, { id })).subscribe(c => {
-  //     console.log ('found', c, 'before', id);
-  //     /*if (c) {
-  //       this.testNext (c);
-  //     }*/
-  //   });
-  //
-  // }
-
-  // getNext(d: Data): string {
-  // TODO move this into effect/selector combi
-
-  // return '';
-  /*let returnNext = false;
-    for (const c in d.categories) {
-      if (d.categories.hasOwnProperty(c)) {
-        const claims: Array<[string, Claim]> = Object.getOwnPropertyNames(d.claims)
-          .map((claimId) => [claimId, d.claims[c]] as [string, Claim])
-          .filter(([claimId, claim]: [string, Claim]) => claim.category === c);
-        const claimIds = claims.map(([claimId, _]) => claimId);
-
-        if (returnNext) {
-          return '/quiz/' + c + '/' + claims[0][0];
-        }
-        if (c === this.category) {
-          const curClaim = claimIds.indexOf(this.claimId);
-          // const curClaim = d.categories[c].claims.indexOf(this.claimId);
-          if (curClaim === claimIds.length - 1) {
-            returnNext = true;
-          } else {
-            return '/quiz/' + c + '/' + claimIds[curClaim + 1];
-          }
-        }
-      }
-    }*/
-  // }
-  //
-  // getPrev(d: Data): string {
-  //   TODO move this into effect/selector combi
-  // return '';
-  /*let prev: string;
-    for (const c in d.categories) {
-      if (d.categories.hasOwnProperty(c)) {
-        const claimIds = Object.getOwnPropertyNames(d.claims).filter((claimId) => d.claims[claimId].category === c);
-        for (const claimId of claimIds) {
-          if (c === this.category && claimId === this.claimId) {
-            return prev;
-          }
-          prev = '/quiz/' + c + '/' + claimId;
-        }
-      }
-    }*/
-  // }
 }

@@ -149,7 +149,7 @@ export class QuizCardComponent implements OnInit, OnChanges {
   }
   toggleFav(): void {
     this.fav = !this.fav;
-    this.updateVote(false);
+    this.updateVote(false, true, 'noanimation');
   }
 
   no(): void {
@@ -158,13 +158,8 @@ export class QuizCardComponent implements OnInit, OnChanges {
     } else {
       this.decision = -1;
     }
-    setTimeout(() => {
-      this.swipeAnimation = 'leavingLeft';
-      setTimeout(() => {
-        this.swipeAnimation = 'gone';
-      }, QuizAnimationDurationOut);
-    }, QuizAnimationDelay);
-    this.updateVote(true);
+    // this.animateCardChange('leavingLeft');
+    this.updateVote(true, true, 'leavingLeft');
   }
 
   yes(): void {
@@ -173,45 +168,44 @@ export class QuizCardComponent implements OnInit, OnChanges {
     } else {
       this.decision = 1;
     }
-    setTimeout(() => {
-      this.swipeAnimation = 'leavingRight';
-      setTimeout(() => {
-        this.swipeAnimation = 'gone';
-      }, QuizAnimationDurationOut);
-    }, QuizAnimationDelay);
-    this.updateVote(true);
+    // this.animateCardChange('leavingRight');
+    this.updateVote(true, true, 'leavingRight');
   }
 
   go(next: boolean) {
-    setTimeout(() => {
-      this.swipeAnimation = 'leavingTop';
-      setTimeout(() => {
-        this.swipeAnimation = 'gone';
-      }, QuizAnimationDurationOut);
-    }, QuizAnimationDelay);
-    setTimeout(() => {
-      if (next && this.next) {
-        this.router.navigate([this.next]);
-      } else if (next) {
-        this.router.navigate(['/quiz/' + ResultUrl]);
-      } else {
-        this.router.navigate([this.prev]);
-      }
-    }, QuizAnimationDelay + QuizAnimationDurationOut);
+    // this.animateCardChange('leavingTop');
+    this.updateVote(true, next, 'leavingTop');
+    // this.changePage(next);
   }
 
-  private updateVote(goahead: boolean): void {
+  private updateVote(goahead: boolean, forward: boolean, animation: string): void {
     console.log('dispatching:');
     console.log({ claimId: this.claimId, decision: this.decision, fav: this.fav });
     this.store.dispatch(vote({ claimId: this.claimId, decision: this.decision, fav: this.fav }));
     if (goahead) {
-      setTimeout(() => {
-        if (this.next) {
-          this.router.navigate([this.next]);
-        } else {
-          this.router.navigate(['/quiz/' + ResultUrl]);
-        }
-      }, QuizAnimationDelay + QuizAnimationDurationOut);
+      this.animateCardChange(animation);
+      this.changePage(forward);
     }
+  }
+
+  private animateCardChange(animation: string) {
+    setTimeout(() => {
+      this.swipeAnimation = 'gone';
+    }, QuizAnimationDurationOut + QuizAnimationDelay);
+    setTimeout(() => {
+      this.swipeAnimation = animation;
+    }, QuizAnimationDelay);
+  }
+
+  private changePage(forward: boolean) {
+    setTimeout(() => {
+      if (forward && this.next) {
+        this.router.navigate([this.next]);
+      } else if (forward) {
+        this.router.navigate(['/quiz/' + ResultUrl]);
+      } else {
+        this.router.navigate([this.prev]);
+      }
+    }, QuizAnimationDelay + QuizAnimationDurationOut - 20);
   }
 }
