@@ -1,4 +1,4 @@
-import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { AppPartialState } from '../../../../+state/app.reducer';
@@ -9,13 +9,14 @@ import { Votes } from '../../../../definitions/models/votes.mode';
 import { PartyResult, PartyScoreResult, prepareResults } from '../../../../definitions/models/results.model';
 import { QuizFirstPage } from '../../../../+state/app.models';
 import { first, take } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-thesis-prov-page',
   templateUrl: './claim-prov-page.component.html',
   styleUrls: ['./claim-prov-page.component.scss'],
 })
-export class ClaimProvPageComponent implements OnInit, OnChanges {
+export class ClaimProvPageComponent implements OnInit, OnChanges, OnDestroy {
   claimId: string;
   votes: Votes = {};
   personalData: PersonalCandidateMap = undefined;
@@ -26,29 +27,44 @@ export class ClaimProvPageComponent implements OnInit, OnChanges {
 
   prev: string;
   next: string;
+  private subscriptions: Subscription[] = [];
 
   constructor(private route: ActivatedRoute, private store: Store<AppPartialState>) {}
 
+  ngOnDestroy() {
+    for (const s of this.subscriptions) {
+      s.unsubscribe();
+    }
+  }
+
   ngOnInit(): void {
-    this.route.paramMap.subscribe((params) => {
-      this.claimId = params.get('claimId');
-      this.store.pipe(select(AppSelectors.getNextQuestion, { id: this.claimId })).subscribe((c) => (this.next = c ? c : undefined));
-      this.store
-        .pipe(select(AppSelectors.getPrevQuestion, { id: this.claimId }))
-        .subscribe((c) => (this.prev = c && c !== QuizFirstPage ? c : undefined));
-    });
-    this.store.pipe(select(AppSelectors.getPersonalData)).subscribe((d) => {
-      this.personalData = d;
-      this.recalc();
-    });
-    this.store.pipe(select(AppSelectors.getPoliticalData)).subscribe((d) => {
-      this.politicalData = d;
-      this.recalc();
-    });
-    this.store.pipe(select(AppSelectors.getVotes)).subscribe((d) => {
-      this.votes = d;
-      this.recalc();
-    });
+    this.subscriptions.push(
+      this.route.paramMap.subscribe((params) => {
+        this.claimId = params.get('claimId');
+        this.store.pipe(select(AppSelectors.getNextQuestion, { id: this.claimId })).subscribe((c) => (this.next = c ? c : undefined));
+        this.store
+          .pipe(select(AppSelectors.getPrevQuestion, { id: this.claimId }))
+          .subscribe((c) => (this.prev = c && c !== QuizFirstPage ? c : undefined));
+      }),
+    );
+    this.subscriptions.push(
+      this.store.pipe(select(AppSelectors.getPersonalData)).subscribe((d) => {
+        this.personalData = d;
+        this.recalc();
+      }),
+    );
+    this.subscriptions.push(
+      this.store.pipe(select(AppSelectors.getPoliticalData)).subscribe((d) => {
+        this.politicalData = d;
+        this.recalc();
+      }),
+    );
+    this.subscriptions.push(
+      this.store.pipe(select(AppSelectors.getVotes)).subscribe((d) => {
+        this.votes = d;
+        this.recalc();
+      }),
+    );
   }
 
   recalc(): void {

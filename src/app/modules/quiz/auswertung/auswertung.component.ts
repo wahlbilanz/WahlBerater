@@ -1,4 +1,4 @@
-import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import * as AppActions from '../../../+state/app.actions';
 import { vote } from '../../../+state/app.actions';
@@ -9,13 +9,14 @@ import { PersonalCandidateMap } from '../../../definitions/models/candidate.mode
 import { PoliticalData } from '../../../definitions/models/political.data.model';
 import { PartyScoreResult, prepareResults } from '../../../definitions/models/results.model';
 import { Votes } from '../../../definitions/models/votes.mode';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-auswertung',
   templateUrl: './auswertung.component.html',
   styleUrls: ['./auswertung.component.scss'],
 })
-export class AuswertungComponent implements OnInit, OnChanges {
+export class AuswertungComponent implements OnInit, OnChanges, OnDestroy {
   votes: Votes = undefined;
   personalData: PersonalCandidateMap = undefined;
   politicalData: PoliticalData = undefined;
@@ -26,24 +27,37 @@ export class AuswertungComponent implements OnInit, OnChanges {
   showCandidates = false;
 
   public accessibilityModes = this.store.pipe(select(AppSelectors.getAllAccessibilityModes));
+  private subscriptions: Subscription[] = [];
 
   constructor(private store: Store<AppPartialState>) {
     this.store.dispatch(AppActions.updateLastQuizPage({ lastPage: ResultUrl }));
   }
 
+  ngOnDestroy(): void {
+    for (const s of this.subscriptions) {
+      s.unsubscribe();
+    }
+  }
+
   ngOnInit(): void {
-    this.store.pipe(select(AppSelectors.getPersonalData)).subscribe((d) => {
-      this.personalData = d;
-      this.recalc();
-    });
-    this.store.pipe(select(AppSelectors.getPoliticalData)).subscribe((d) => {
-      this.politicalData = d;
-      this.recalc();
-    });
-    this.store.pipe(select(AppSelectors.getVotes)).subscribe((votes) => {
-      this.votes = votes;
-      this.recalc();
-    });
+    this.subscriptions.push(
+      this.store.pipe(select(AppSelectors.getPersonalData)).subscribe((d) => {
+        this.personalData = d;
+        this.recalc();
+      }),
+    );
+    this.subscriptions.push(
+      this.store.pipe(select(AppSelectors.getPoliticalData)).subscribe((d) => {
+        this.politicalData = d;
+        this.recalc();
+      }),
+    );
+    this.subscriptions.push(
+      this.store.pipe(select(AppSelectors.getVotes)).subscribe((votes) => {
+        this.votes = votes;
+        this.recalc();
+      }),
+    );
   }
 
   ngOnChanges(changes: SimpleChanges) {

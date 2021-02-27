@@ -11,7 +11,7 @@ export enum QuizState {
 
 export const ResultUrl = 'result';
 export const AccessibleUrl = 'accessible';
-export const AccessibleUrlFragment = 'accessible';
+export const AccessibleUrlFragment = 'accessible-';
 export const QuizFirstPage = 'howto';
 
 export const QuizAnimationDelay = 300;

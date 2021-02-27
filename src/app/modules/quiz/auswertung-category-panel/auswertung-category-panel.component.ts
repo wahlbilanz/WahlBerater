@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, Input, OnChanges, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { AppPartialState } from '../../../+state/app.reducer';
 import { PersonalCandidateMap } from '../../../definitions/models/candidate.model';
@@ -10,13 +10,14 @@ import { Vote, Votes } from '../../../definitions/models/votes.mode';
 import { DecisionTemplatesComponent } from '../../helpers/decision-templates/decision-templates.component';
 import * as AppSelectors from '../../../+state/app.selectors';
 import { AccessibilityModes, AccessibleUrl, AccessibleUrlFragment } from '../../../+state/app.models';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-auswertung-category-panel',
   templateUrl: './auswertung-category-panel.component.html',
   styleUrls: ['./auswertung-category-panel.component.scss'],
 })
-export class AuswertungCategoryPanelComponent implements OnInit {
+export class AuswertungCategoryPanelComponent implements OnInit, OnDestroy {
   @ViewChild('decisionTemplates', { static: true }) decisionTemplates: DecisionTemplatesComponent;
   @Input() categoryId: string;
   @Input() category: Category;
@@ -30,9 +31,18 @@ export class AuswertungCategoryPanelComponent implements OnInit {
   public accessibilityModes?: AccessibilityModes;
   public AccessibleUrlPath = AccessibleUrl;
   public sAccessibleUrlFragment = AccessibleUrlFragment;
+  private subscriptions: Subscription[] = [];
 
   constructor(private store: Store<AppPartialState>) {
-    this.store.pipe(select(AppSelectors.getAllAccessibilityModes)).subscribe((am) => (this.accessibilityModes = am));
+    this.subscriptions.push(
+      this.store.pipe(select(AppSelectors.getAllAccessibilityModes)).subscribe((am) => (this.accessibilityModes = am)),
+    );
+  }
+
+  ngOnDestroy(): void {
+    for (const s of this.subscriptions) {
+      s.unsubscribe();
+    }
   }
 
   ngOnInit(): void {

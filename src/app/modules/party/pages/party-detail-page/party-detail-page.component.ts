@@ -20,6 +20,6 @@ export class PartyDetailPageComponent implements OnInit {
   constructor(private state: Store<AppPartialState>, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.route.params.subscribe((p) => console.log('params', p));
+    // this.route.params.subscribe((p) => console.log('params', p));
   }
 }

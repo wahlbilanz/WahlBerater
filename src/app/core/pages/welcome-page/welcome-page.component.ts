@@ -1,17 +1,18 @@
-import { Component } from '@angular/core';
+import { Component, OnChanges, OnDestroy } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { map } from 'rxjs/operators';
 import * as AppActions from '../../../+state/app.actions';
 import { QuizState, ResultUrl, QuizFirstPage, AccessibleUrl, AccessibilityModes, AccessibleUrlFragment } from '../../../+state/app.models';
 import { AppPartialState } from '../../../+state/app.reducer';
 import * as AppSelectors from '../../../+state/app.selectors';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-welcome-page',
   templateUrl: './welcome-page.component.html',
   styleUrls: ['./welcome-page.component.scss'],
 })
-export class WelcomePageComponent {
+export class WelcomePageComponent implements OnDestroy {
   public QuizStateEnum = QuizState;
   public quizState = this.store.pipe(select(AppSelectors.getQuizState));
 
@@ -25,17 +26,28 @@ export class WelcomePageComponent {
   public AccessibleUrlPath = AccessibleUrl;
   public sAccessibleUrlFragment = AccessibleUrlFragment;
   public lastQuizPage: string;
+  private subscriptions: Subscription[] = [];
 
   constructor(private store: Store<AppPartialState>) {
     this.lastQuizPage = QuizFirstPage;
-    this.store.pipe(select(AppSelectors.getLastQuizPage)).subscribe((p) => {
-      console.log(p);
-      this.lastQuizPage = p;
-    });
-    this.store.pipe(select(AppSelectors.getAllAccessibilityModes)).subscribe((am) => {
-      console.log(am);
-      this.accessibilityModes = am;
-    });
+    this.subscriptions.push(
+      this.store.pipe(select(AppSelectors.getLastQuizPage)).subscribe((p) => {
+        console.log(p);
+        this.lastQuizPage = p;
+      }),
+    );
+    this.subscriptions.push(
+      this.store.pipe(select(AppSelectors.getAllAccessibilityModes)).subscribe((am) => {
+        console.log(am);
+        this.accessibilityModes = am;
+      }),
+    );
+  }
+
+  ngOnDestroy(): void {
+    for (const s of this.subscriptions) {
+      s.unsubscribe();
+    }
   }
 
   public updateLocalStorageOptIn(allow: boolean) {

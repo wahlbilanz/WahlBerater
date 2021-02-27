@@ -1,5 +1,5 @@
 import { animate, keyframes, state, style, transition, trigger } from '@angular/animations';
-import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { first } from 'rxjs/operators';
@@ -18,6 +18,7 @@ import { AppPartialState } from '../../../+state/app.reducer';
 import * as AppSelectors from '../../../+state/app.selectors';
 import { Category } from '../../../definitions/models/category.model';
 import { Claim } from '../../../definitions/models/claim.model';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-quiz-card',
@@ -65,7 +66,7 @@ import { Claim } from '../../../definitions/models/claim.model';
     ]),
   ],
 })
-export class QuizCardComponent implements OnInit, OnChanges {
+export class QuizCardComponent implements OnInit, OnChanges, OnDestroy {
   votes = this.store.pipe(select(AppSelectors.getVotes));
   @Input() category: Category;
   @Input() claimId: string;
@@ -84,14 +85,14 @@ export class QuizCardComponent implements OnInit, OnChanges {
 
   containerHeight: number;
   public accessibilityModes: AccessibilityModes;
+  private subscriptions: Subscription[] = [];
 
-  constructor(private store: Store<AppPartialState>, private router: Router) {
-    this.store.pipe(select(AppSelectors.getAllAccessibilityModes)).subscribe((am) => {
-      this.accessibilityModes = am;
-      if (am.accessibilityMode) {
-        // this.router.navigate(['quiz', AccessibleUrl], { fragment: AccessibleUrlFragment + this.claimId });
-      }
-    });
+  constructor(private store: Store<AppPartialState>, private router: Router) {}
+
+  ngOnDestroy(): void {
+    for (const s of this.subscriptions) {
+      s.unsubscribe();
+    }
   }
 
   ngOnChanges(): void {
@@ -127,10 +128,14 @@ export class QuizCardComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
-    // Todo: remove debug
-    /*this.store.pipe(select(AppSelectors.getVotes)).subscribe((x) => {
-      console.log(x);
-    });*/
+    this.subscriptions.push(
+      this.store.pipe(select(AppSelectors.getAllAccessibilityModes)).subscribe((am) => {
+        this.accessibilityModes = am;
+        if (am.accessibilityMode) {
+          this.router.navigate(['quiz', AccessibleUrl], { fragment: AccessibleUrlFragment + this.claimId });
+        }
+      }),
+    );
   }
 
   swipe(e: TouchEvent, start: boolean): void {
