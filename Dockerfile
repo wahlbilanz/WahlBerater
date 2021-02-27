@@ -6,7 +6,7 @@ COPY . /data
 WORKDIR /data
 RUN npm ci
 RUN npm run lint
-RUN npm run build:prod
+RUN npm run build:staging
 
 # deploy to an nginx
 FROM nginx

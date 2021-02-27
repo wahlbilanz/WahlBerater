@@ -6,6 +6,7 @@
     "start": "npm run build-dummy-data && ng serve",
     "build": "find ./src/assets/data -type f -not -name '.gitkeep' -delete && ng build",
     "build:prod": "find ./src/assets/data -type f -not -name '.gitkeep' -delete && ng build --prod",
+    "build:staging": "npm run build-dummy-data && ng build --prod",
     "test": "ng test && npm run accessibility",
     "lint": "ng lint",
     "e2e": "ng e2e",
@@ -19,7 +20,7 @@
     "preaccessibility": "npm run build",
     "accessibility": "npm run check-axe-tests && npm-run-all --parallel --race server accessibility:run",
     "accessibility:run": "pa11y-ci",
-    "check-axe-tests": "./check-axe-tests.sh",
+    "check-axe-tests": "./scripts/check-axe-tests.sh",
     "server": "angular-http-server -p 4000 --rootFile src/index.html",
     "server2": "node ./server.js"
   },
