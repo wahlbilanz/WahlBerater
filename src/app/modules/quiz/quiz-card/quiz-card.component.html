@@ -5,9 +5,6 @@
     (touchend)="swipe($event, false)"
     style="height:{{ containerHeight }}px; width: 100%"
   >
-    <!--    [@leaveLeft]="leaveLeft"-->
-    <!--    [@leaveTop]="leaveTop ? 'gone' : 'there'"-->
-    <!--    [@leaveRight]="leaveRight ? 'gone' : 'there'"-->
     <div
       [@swipeAnimation]="accessibilityModes?.reducedMotionMode ? 'there' : swipeAnimation"
       id="quizcard"
@@ -23,12 +20,6 @@
       <h1 id="claim" class="">
         {{ claim.title }}
       </h1>
-
-      <!--    <ul class="decision-buttons">-->
-      <!--      <li class="decision-button"><span><i nz-icon nzType="like" nzTheme="fill"></i></span></li>-->
-      <!--      <li class="decision-button"><span><i nz-icon nzType="like" nzTheme="fill"></i></span></li>-->
-      <!--      <li class="decision-button"><span><i nz-icon nzType="like" nzTheme="fill"></i></span></li>-->
-      <!--    </ul>-->
 
       <div id="decision" class="">
         <div id="decision-left" class="">

@@ -84,10 +84,23 @@ export class QuizCardComponent implements OnInit, OnChanges, OnDestroy {
   swipeTime?: number;
 
   containerHeight: number;
-  public accessibilityModes: AccessibilityModes;
+  public accessibilityModes: AccessibilityModes = {
+    reducedMotionMode: true,
+    accessibilityMode: false,
+  };
   private subscriptions: Subscription[] = [];
 
-  constructor(private store: Store<AppPartialState>, private router: Router) {}
+  constructor(private store: Store<AppPartialState>, private router: Router) {
+    this.subscriptions.push(
+      this.store.pipe(select(AppSelectors.getAllAccessibilityModes)).subscribe((am) => {
+        this.accessibilityModes = am;
+        // we cannot do this in oninit as we would then play an animation even if the user doesn't want it
+        if (am.reducedMotionMode) {
+          this.swipeAnimation = 'there';
+        }
+      }),
+    );
+  }
 
   ngOnDestroy(): void {
     for (const s of this.subscriptions) {
@@ -98,7 +111,9 @@ export class QuizCardComponent implements OnInit, OnChanges, OnDestroy {
   ngOnChanges(): void {
     // 100 = 46 of top menu plus padding/margin of surrounding containers
     this.containerHeight = window.innerHeight - 100;
-    this.swipeAnimation = 'gone';
+    if (!this.accessibilityModes?.reducedMotionMode) {
+      this.swipeAnimation = 'gone';
+    }
     // this.leaveRight = false;
     // this.leaveTop = false;
     console.log('prev is ', this.prev);
@@ -130,7 +145,7 @@ export class QuizCardComponent implements OnInit, OnChanges, OnDestroy {
   ngOnInit(): void {
     this.subscriptions.push(
       this.store.pipe(select(AppSelectors.getAllAccessibilityModes)).subscribe((am) => {
-        this.accessibilityModes = am;
+        // we cannot do this in constructor, as the routes won't be ready
         if (am.accessibilityMode) {
           this.router.navigate(['quiz', AccessibleUrl], { fragment: AccessibleUrlFragment + this.claimId });
         }
@@ -204,15 +219,18 @@ export class QuizCardComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   private animateCardChange(animation: string) {
-    setTimeout(() => {
-      this.swipeAnimation = 'gone';
-    }, QuizAnimationDurationOut + QuizAnimationDelay);
-    setTimeout(() => {
-      this.swipeAnimation = animation;
-    }, QuizAnimationDelay);
+    if (!this.accessibilityModes?.reducedMotionMode) {
+      setTimeout(() => {
+        this.swipeAnimation = 'gone';
+      }, QuizAnimationDurationOut + QuizAnimationDelay);
+      setTimeout(() => {
+        this.swipeAnimation = animation;
+      }, QuizAnimationDelay);
+    }
   }
 
   private changePage(forward: boolean) {
+    const timeout = this.accessibilityModes?.reducedMotionMode ? QuizAnimationDelay : QuizAnimationDelay + QuizAnimationDurationOut - 20;
     setTimeout(() => {
       if (forward && this.next) {
         this.router.navigate([this.next]);
@@ -221,6 +239,6 @@ export class QuizCardComponent implements OnInit, OnChanges, OnDestroy {
       } else {
         this.router.navigate([this.prev]);
       }
-    }, QuizAnimationDelay + QuizAnimationDurationOut - 20);
+    }, timeout);
   }
 }

@@ -164,7 +164,7 @@ export const getAllAccessibilityModes = createSelector(
   getAppState,
   (state: State): AccessibilityModes => ({
     accessibilityMode: state.accessibilityMode === true,
-    reducedMotionMode: state.reducedMotionMode === true,
+    reducedMotionMode: state.reducedMotionMode !== false,
   }),
 );
 export const isAccessibilityModeActive = createSelector(getAllAccessibilityModes, (state) => state.accessibilityMode);
