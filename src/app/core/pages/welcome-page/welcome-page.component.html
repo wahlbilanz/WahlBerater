@@ -5,7 +5,7 @@
     class="nav-block results-link"
     routerLink="/quiz/{{ ResultUrlPath }}"
     title="Zur Quiz Auswertung"
-    *ngIf="(lastQuizPage | async) !== QuizFirstPagePath"
+    *ngIf="lastQuizPage !== QuizFirstPagePath"
   >
     <i nz-icon nzType="bar-chart" nzTheme="outline" class="nav-icon"></i>
     Zur Quiz Auswertung
@@ -15,16 +15,16 @@
     class="nav-block quiz-link"
     routerLink="/quiz{{ (accessibilityModes | async)?.accessibilityMode ? '/accessible' : '' }}"
     title="Startet das Quiz"
-    *ngIf="(lastQuizPage | async) === QuizFirstPagePath"
+    *ngIf="lastQuizPage === QuizFirstPagePath || lastQuizPage === ResultUrlPath"
   >
     <i nz-icon nzType="question" nzTheme="outline" class="nav-icon" alt="Fragen Icon"></i>
     Quiz starten
   </a>
   <a
     class="nav-block quiz-link"
-    routerLink="/quiz/{{ lastQuizPage | async }}"
+    routerLink="/quiz/{{ lastQuizPage }}"
     title="Setzt das Quiz fort"
-    *ngIf="(lastQuizPage | async) !== QuizFirstPagePath"
+    *ngIf="lastQuizPage !== QuizFirstPagePath && lastQuizPage !== ResultUrlPath"
   >
     <i nz-icon nzType="question" nzTheme="outline" class="nav-icon"></i>
     Quiz fortsetzen

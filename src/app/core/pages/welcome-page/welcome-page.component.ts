@@ -22,9 +22,12 @@ export class WelcomePageComponent {
 
   public ResultUrlPath = ResultUrl;
   public QuizFirstPagePath = QuizFirstPage;
-  public lastQuizPage = this.store.pipe(select(AppSelectors.getLastQuizPage));
+  public lastQuizPage: string;
 
-  constructor(private store: Store<AppPartialState>) {}
+  constructor(private store: Store<AppPartialState>) {
+    this.lastQuizPage = QuizFirstPage;
+    this.store.pipe(select(AppSelectors.getLastQuizPage)).subscribe((p) => (this.lastQuizPage = p));
+  }
 
   public updateLocalStorageOptIn(allow: boolean) {
     this.store.dispatch(AppActions.changeDataStorePreference({ allow }));
