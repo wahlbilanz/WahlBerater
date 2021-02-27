@@ -11,7 +11,9 @@
 
 $nav-row-size: 2 * $wb-space-medium + map-get($wb-type-paragraph, 'line-height');
 h1 {
-  padding: 0 $wb-space-medium;
+  @media screen and (min-width: $wb-breakpoint-medium) {
+    padding: 0 $wb-space-medium;
+  }
 }
 section.welcome-page-nav {
   display: grid;

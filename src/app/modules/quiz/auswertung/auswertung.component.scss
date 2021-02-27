@@ -3,6 +3,9 @@
   .controls {
     text-align: right;
     margin: 0 $wb-space-medium;
+    @media screen and (max-width: $wb-breakpoint-medium) {
+      margin: 0;
+    }
     nz-switch {
       margin: 0 $wb-space-x-small;
     }
@@ -13,10 +16,17 @@
     box-shadow: $wb-shadow-normal;
     padding: $wb-space-medium $wb-space-large;
     margin: $wb-space-large $wb-space-medium;
+    @media screen and (max-width: $wb-breakpoint-medium) {
+      padding: $wb-space-small $wb-space-medium;
+      margin: $wb-space-large 0;
+    }
   }
   > h2,
   > a {
     margin: $wb-space-large $wb-space-medium;
+    @media screen and (max-width: $wb-breakpoint-medium) {
+      margin: $wb-space-large 0;
+    }
   }
 
   .category {
@@ -25,6 +35,10 @@
     padding: $wb-space-medium $wb-space-large;
     margin: $wb-space-large $wb-space-medium;
     box-shadow: $wb-shadow-normal;
+    @media screen and (max-width: $wb-breakpoint-medium) {
+      padding: $wb-space-small $wb-space-medium;
+      margin: $wb-space-large 0;
+    }
   }
 }
 

@@ -9,6 +9,10 @@
   box-shadow: $wb-shadow-normal;
   padding: $wb-space-medium $wb-space-large;
   margin: $wb-space-large $wb-space-medium;
+  @media screen and (max-width: $wb-breakpoint-medium) {
+    padding: $wb-space-small $wb-space-medium;
+    margin: $wb-space-large 0;
+  }
 
   .party-info {
     display: grid;
@@ -75,6 +79,9 @@
 
 .candidate-headline {
   margin: $wb-space-large $wb-space-medium $wb-space-medium;
+  @media screen and (max-width: $wb-breakpoint-medium) {
+    margin: $wb-space-large 0 $wb-space-medium;
+  }
 }
 .candidate-list {
   display: grid;
@@ -82,6 +89,9 @@
   grid-template-columns: repeat(1, 1fr);
 
   margin: 0 $wb-space-medium;
+  @media screen and (max-width: $wb-breakpoint-medium) {
+    margin: 0;
+  }
 
   @media screen and (max-width: $wb-breakpoint-small) {
     grid-template-columns: 1fr;

@@ -8,6 +8,10 @@
   box-shadow: $wb-shadow-normal;
   padding: $wb-space-medium $wb-space-large;
   margin: $wb-space-large $wb-space-medium;
+  @media screen and (max-width: $wb-breakpoint-medium) {
+    padding: $wb-space-small $wb-space-medium;
+    margin: $wb-space-large 0;
+  }
 
   .candidate-info {
     display: grid;
