@@ -89,7 +89,7 @@ export class QuizCardComponent implements OnInit, OnChanges {
     this.store.pipe(select(AppSelectors.getAllAccessibilityModes)).subscribe((am) => {
       this.accessibilityModes = am;
       if (am.accessibilityMode) {
-        this.router.navigate(['quiz', AccessibleUrl], { fragment: AccessibleUrlFragment + this.claimId });
+        // this.router.navigate(['quiz', AccessibleUrl], { fragment: AccessibleUrlFragment + this.claimId });
       }
     });
   }
@@ -128,9 +128,9 @@ export class QuizCardComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     // Todo: remove debug
-    this.store.pipe(select(AppSelectors.getVotes)).subscribe((x) => {
+    /*this.store.pipe(select(AppSelectors.getVotes)).subscribe((x) => {
       console.log(x);
-    });
+    });*/
   }
 
   swipe(e: TouchEvent, start: boolean): void {

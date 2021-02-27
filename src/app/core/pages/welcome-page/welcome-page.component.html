@@ -11,6 +11,7 @@
     Zur Quiz Auswertung
     <p class="small">Sieh dir deine Ergebnisse von dem letztem Quiz an!</p>
   </a>
+  <!-- Quiz link, wenn das Quiz noch nie gespielt oder durchgespielt wurde -->
   <a
     class="nav-block quiz-link"
     routerLink="/quiz/{{ accessibilityModes?.accessibilityMode ? AccessibleUrlPath : QuizFirstPagePath }}"
@@ -20,11 +21,23 @@
     <i nz-icon nzType="question" nzTheme="outline" class="nav-icon" alt="Fragen Icon"></i>
     Quiz starten
   </a>
+  <!-- Quiz link, wenn es mittendrin beendet wurde und accessibilityMode **AUS** ist -->
   <a
     class="nav-block quiz-link"
     routerLink="/quiz/{{ lastQuizPage }}"
     title="Setzt das Quiz fort"
-    *ngIf="lastQuizPage !== QuizFirstPagePath && lastQuizPage !== ResultUrlPath"
+    *ngIf="lastQuizPage !== QuizFirstPagePath && lastQuizPage !== ResultUrlPath && !accessibilityModes?.accessibilityMode"
+  >
+    <i nz-icon nzType="question" nzTheme="outline" class="nav-icon"></i>
+    Quiz fortsetzen
+  </a>
+  <!-- Quiz link, wenn es mittendrin beendet wurde und accessibilityMode **AN** ist -->
+  <a
+    class="nav-block quiz-link"
+    routerLink="/quiz/{{ AccessibleUrlPath }}"
+    [fragment]="sAccessibleUrlFragment + lastQuizPage"
+    title="Setzt das Quiz fort"
+    *ngIf="lastQuizPage !== QuizFirstPagePath && lastQuizPage !== ResultUrlPath && accessibilityModes?.accessibilityMode"
   >
     <i nz-icon nzType="question" nzTheme="outline" class="nav-icon"></i>
     Quiz fortsetzen

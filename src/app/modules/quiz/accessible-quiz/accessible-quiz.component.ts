@@ -22,7 +22,7 @@ export class AccessibleQuizComponent implements OnInit, AfterViewInit {
   private sAccessibleUrlFragment = AccessibleUrlFragment;
 
   constructor(private store: Store<AppPartialState>, private route: ActivatedRoute) {
-    this.store.dispatch(AppActions.updateLastQuizPage({ lastPage: 'accessible' }));
+    // this.store.dispatch(AppActions.updateLastQuizPage({ lastPage: 'accessible' }));
     this.store.pipe(select(AppSelectors.getAllAccessibilityModes)).subscribe((am) => (this.accessibilityModes = am));
   }
 

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { map } from 'rxjs/operators';
 import * as AppActions from '../../../+state/app.actions';
-import { QuizState, ResultUrl, QuizFirstPage, AccessibleUrl, AccessibilityModes } from '../../../+state/app.models';
+import { QuizState, ResultUrl, QuizFirstPage, AccessibleUrl, AccessibilityModes, AccessibleUrlFragment } from '../../../+state/app.models';
 import { AppPartialState } from '../../../+state/app.reducer';
 import * as AppSelectors from '../../../+state/app.selectors';
 
@@ -23,6 +23,7 @@ export class WelcomePageComponent {
   public ResultUrlPath = ResultUrl;
   public QuizFirstPagePath = QuizFirstPage;
   public AccessibleUrlPath = AccessibleUrl;
+  public sAccessibleUrlFragment = AccessibleUrlFragment;
   public lastQuizPage: string;
 
   constructor(private store: Store<AppPartialState>) {
