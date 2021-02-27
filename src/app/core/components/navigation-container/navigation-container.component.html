@@ -1,5 +1,5 @@
 <a
-  class="nav-block home-link"
+  class="nav-block shadow-hover home-link"
   routerLink="/"
   routerLinkActive="active"
   [routerLinkActiveOptions]="{ exact: true }"
@@ -10,7 +10,7 @@
 </a>
 
 <a
-  class="nav-block results-link"
+  class="nav-block shadow-hover results-link"
   routerLink="/quiz/{{ ResultUrlPath }}"
   routerLinkActive="active"
   title="Zur Quiz Auswertung"
@@ -21,7 +21,7 @@
 </a>
 
 <a
-  class="nav-block quiz-link"
+  class="nav-block shadow-hover quiz-link"
   routerLink="/quiz/{{ lastQuizPage | async }}"
   routerLinkActive="active"
   title="Started das Quiz"
@@ -31,13 +31,13 @@
   Quiz
 </a>
 
-<a class="nav-block candidates-link" routerLink="/parties" routerLinkActive="active" title="Zur Liste aller Wahllisten">
+<a class="nav-block shadow-hover candidates-link" routerLink="/parties" routerLinkActive="active" title="Zur Liste aller Wahllisten">
   <i nz-icon nzType="user" nzTheme="outline" class="nav-icon" alt="User Icon"></i>
   Wahl&shy;listen
 </a>
 
 <a
-  class="nav-block claims-link"
+  class="nav-block shadow-hover claims-link"
   routerLink="/claim"
   routerLinkActive="active"
   title="Zur Liste aller Thesen die die Kandidierenden beantwortet haben"

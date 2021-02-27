@@ -21,9 +21,6 @@
   box-shadow: $wb-shadow-normal;
   transition: color 0.3s, background-color 0.3s, box-shadow 0.3s, border-color 0.3s;
 
-  &:hover {
-    box-shadow: $wb-shadow-hover;
-  }
   @media screen and (max-width: $wb-breakpoint-medium) {
     min-height: 100px;
     grid-template:

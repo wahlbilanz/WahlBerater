@@ -40,3 +40,7 @@ nz-breadcrumb {
     margin: $wb-space-small 0 !important;
   }
 }
+
+app-root:not(.no-animation) .shadow-hover:hover {
+  box-shadow: $wb-shadow-hover !important;
+}

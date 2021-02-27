@@ -20,10 +20,6 @@
   border-left: $wb-space-xx-small solid transparent;
   box-shadow: $wb-shadow-normal;
   transition: color 0.3s, background-color 0.3s, box-shadow 0.3s, border-color 0.3s;
-
-  &:hover {
-    box-shadow: $wb-shadow-hover;
-  }
 }
 
 .party-picture {

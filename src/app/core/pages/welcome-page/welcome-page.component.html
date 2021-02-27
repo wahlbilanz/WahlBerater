@@ -2,7 +2,7 @@
 
 <section class="welcome-page-nav">
   <a
-    class="nav-block results-link"
+    class="nav-block shadow-hover results-link"
     routerLink="/quiz/{{ ResultUrlPath }}"
     title="Zur Quiz Auswertung"
     *ngIf="lastQuizPage !== QuizFirstPagePath"
@@ -13,7 +13,7 @@
   </a>
   <!-- Quiz link, wenn das Quiz noch nie gespielt oder durchgespielt wurde -->
   <a
-    class="nav-block quiz-link"
+    class="nav-block shadow-hover quiz-link"
     routerLink="/quiz/{{ accessibilityModes?.accessibilityMode ? AccessibleUrlPath : QuizFirstPagePath }}"
     title="Startet das Quiz"
     *ngIf="lastQuizPage === QuizFirstPagePath || lastQuizPage === ResultUrlPath"
@@ -23,7 +23,7 @@
   </a>
   <!-- Quiz link, wenn es mittendrin beendet wurde und accessibilityMode **AUS** ist -->
   <a
-    class="nav-block quiz-link"
+    class="nav-block shadow-hover quiz-link"
     routerLink="/quiz/{{ lastQuizPage }}"
     title="Setzt das Quiz fort"
     *ngIf="lastQuizPage !== QuizFirstPagePath && lastQuizPage !== ResultUrlPath && !accessibilityModes?.accessibilityMode"
@@ -33,7 +33,7 @@
   </a>
   <!-- Quiz link, wenn es mittendrin beendet wurde und accessibilityMode **AN** ist -->
   <a
-    class="nav-block quiz-link"
+    class="nav-block shadow-hover quiz-link"
     routerLink="/quiz/{{ AccessibleUrlPath }}"
     [fragment]="sAccessibleUrlFragment + lastQuizPage"
     title="Setzt das Quiz fort"
@@ -42,12 +42,12 @@
     <i nz-icon nzType="question" nzTheme="outline" class="nav-icon"></i>
     Quiz fortsetzen
   </a>
-  <a class="nav-block candidates-link" routerLink="/parties" title="Zur Liste aller Kandidierenden">
+  <a class="nav-block shadow-hover candidates-link" routerLink="/parties" title="Zur Liste aller Kandidierenden">
     <i nz-icon nzType="user" nzTheme="outline" class="nav-icon" alt="Personen Icon"></i>
     <!-- damn it. it's too long -->
     Wahl&shy;listen
   </a>
-  <a class="nav-block claims-link" routerLink="/claim" title="Zur Liste aller Thesen die die Kandidierenden beantwortet haben">
+  <a class="nav-block shadow-hover claims-link" routerLink="/claim" title="Zur Liste aller Thesen die die Kandidierenden beantwortet haben">
     <i nz-icon nzType="unordered-list" nzTheme="outline" class="nav-icon" alt="Thesen Icon"></i>
     Thesen
   </a>
