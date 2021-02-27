@@ -8,11 +8,14 @@
       <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
         <a routerLink="/" title="Zurück zur Startseite">Start</a>
       </li>
-      <li routerLinkActive="active" *ngIf="(lastQuizPage | async) === ResultUrlPath">
-        <a routerLink="/quiz/{{ ResultUrlPath }}" title="Zur Quiz Auswertung">Auswertung</a>
-      </li>
       <li routerLinkActive="active" *ngIf="(lastQuizPage | async) !== ResultUrlPath">
         <a routerLink="/quiz/{{ lastQuizPage | async }}" title="Started das Quiz">Quiz</a>
+      </li>
+      <li routerLinkActive="active" *ngIf="(lastQuizPage | async) === ResultUrlPath">
+        <a routerLink="/quiz/{{ QuizFirstPagePath }}" title="Started das Quiz nochmal von vorn">Quiz</a>
+      </li>
+      <li routerLinkActive="active" *ngIf="(lastQuizPage | async) === ResultUrlPath">
+        <a routerLink="/quiz/{{ ResultUrlPath }}" title="Zur Quiz Auswertung">Auswertung</a>
       </li>
       <li routerLinkActive="active">
         <a routerLink="/parties" title="Zur Liste aller Wahllisten">Wahllisten</a>

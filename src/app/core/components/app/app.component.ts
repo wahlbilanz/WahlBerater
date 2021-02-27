@@ -5,7 +5,7 @@ import { NzBreakpointService, siderResponsiveMap } from 'ng-zorro-antd/core/serv
 import { Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import * as AppActions from '../../../+state/app.actions';
-import { ResultUrl } from '../../../+state/app.models';
+import { QuizFirstPage, ResultUrl } from '../../../+state/app.models';
 import { AppPartialState } from '../../../+state/app.reducer';
 import * as AppSelectors from '../../../+state/app.selectors';
 
@@ -33,6 +33,7 @@ export class AppComponent implements OnInit {
   public navRightOffset = 16;
 
   public ResultUrlPath = ResultUrl;
+  public QuizFirstPagePath = QuizFirstPage;
   public lastQuizPage = this.store.pipe(select(AppSelectors.getLastQuizPage));
 
   @ViewChild('navToggle', { read: ElementRef, static: true }) navToggleElement: ElementRef;
