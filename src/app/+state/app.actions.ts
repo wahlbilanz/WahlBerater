@@ -4,6 +4,7 @@ import { BreakpointBooleanMap } from 'ng-zorro-antd/core/services';
 import { PoliticalData } from '../definitions/models/political.data.model';
 import { PersonalData } from '../definitions/models/personal.data.model';
 import { PersonalCandidateMap } from '../definitions/models/candidate.model';
+import { Votes } from '../definitions/models/votes.mode';
 
 export const toggleMenu = createAction('[app] Toggle Menu', props<{ open?: boolean }>());
 export const updateActiveBreakpoints = createAction(
@@ -30,6 +31,10 @@ export const changeDataStorePreference = createAction('[app] User changed data s
 export const restoreDataStorePreference = createAction("[app] Restored user's data store preference", props<{ allow: boolean }>());
 
 export const updateLastQuizPage = createAction('[app] updating last quiz page', props<{ lastPage?: string }>());
+
+export const saveVotes = createAction('[app] User saved votes', props<{ votes: Votes }>());
+export const restoreVotes = createAction('[app] Restored saved votes');
+export const restoreVotesSuccess = createAction('[app] Successfully restored saved votes', props<{ votes: Votes }>());
 
 // Accessibility Modes
 export const restoreAccessibilityModeChoices = createAction(

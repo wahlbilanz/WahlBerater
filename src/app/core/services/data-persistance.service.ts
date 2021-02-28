@@ -2,11 +2,13 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppPartialState } from '../../+state/app.reducer';
 import { AccessibilityModeSettings } from '../../definitions/interfaces/accessibility-mode-settings.interface';
+import { Vote, Votes } from '../../definitions/models/votes.mode';
 
 const STORE_PREFIX = 'walberater_';
 export const OPTIN_STORE_KEY = `${STORE_PREFIX}user_storage_optin`;
 export const QUIZ_ANSWER_STORE_KEY = `${STORE_PREFIX}quiz_answers`;
 export const ACCESSIBILITY_MODE_STORE_KEY = `${STORE_PREFIX}accessibility_mode`;
+export const VOTES_STORE_KEY = `${STORE_PREFIX}votes`;
 
 @Injectable({
   providedIn: 'root',
@@ -36,6 +38,7 @@ export class DataPersistanceService {
     if (allow) {
       localStorage.setItem(OPTIN_STORE_KEY, 'true');
     } else {
+      localStorage.removeItem(VOTES_STORE_KEY);
       localStorage.removeItem(OPTIN_STORE_KEY);
       localStorage.removeItem(QUIZ_ANSWER_STORE_KEY);
       localStorage.removeItem(ACCESSIBILITY_MODE_STORE_KEY);
@@ -69,6 +72,22 @@ export class DataPersistanceService {
         accessibilityMode: this.toTriState(modes.accessibilityMode),
       }),
     );
+  }
+
+  public getVotes(): Votes {
+    if (!this.browserSupport) {
+      return {};
+    }
+
+    return JSON.parse(localStorage.getItem(VOTES_STORE_KEY) || '{}');
+  }
+
+  public updateVotes(votes: Votes): void {
+    if (!this.browserSupport) {
+      return;
+    }
+
+    localStorage.setItem(VOTES_STORE_KEY, JSON.stringify(votes));
   }
 
   // TODO provide methods to store stuff in `QUIZ_ANSWER_STORE_KEY`

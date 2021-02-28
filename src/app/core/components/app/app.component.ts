@@ -63,6 +63,8 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     // first things first! Let's load some data.
     this.store.dispatch(AppActions.loadData());
+    // restore votes if possible
+    this.store.dispatch(AppActions.restoreVotes());
     // initially calculate offset for nav container
     this.calculateNavOffset();
     // enable NgRx pipeline for global accessibility annotations

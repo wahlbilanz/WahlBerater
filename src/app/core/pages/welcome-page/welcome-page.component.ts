@@ -32,13 +32,11 @@ export class WelcomePageComponent implements OnDestroy {
     this.lastQuizPage = QuizFirstPage;
     this.subscriptions.push(
       this.store.pipe(select(AppSelectors.getLastQuizPage)).subscribe((p) => {
-        console.log(p);
         this.lastQuizPage = p;
       }),
     );
     this.subscriptions.push(
       this.store.pipe(select(AppSelectors.getAllAccessibilityModes)).subscribe((am) => {
-        console.log(am);
         this.accessibilityModes = am;
       }),
     );

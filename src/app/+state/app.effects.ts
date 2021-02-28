@@ -13,6 +13,7 @@ import * as AppActions from './app.actions';
 import { State } from './app.models';
 import { AppPartialState } from './app.reducer';
 import * as AppSelectors from './app.selectors';
+import { Votes } from '../definitions/models/votes.mode';
 
 @Injectable()
 export class AppEffects {
@@ -130,6 +131,32 @@ export class AppEffects {
         return AppActions.restoreAccessibilityModeChoices(restored);
       }),
     ),
+  );
+
+  saveVotes = createEffect(
+    () =>
+      this.actions.pipe(
+        ofType(AppActions.saveVotes),
+        map(({ votes }) => this.dataPersistanceService.updateVotes(votes)),
+      ),
+    { dispatch: false },
+  );
+
+  restoreVotes = createEffect(() =>
+    scheduled([AppActions.restoreVotesSuccess({ votes: this.dataPersistanceService.getVotes() })], asyncScheduler),
+  );
+
+  vote = createEffect(
+    () =>
+      this.actions.pipe(
+        ofType(AppActions.vote),
+        withLatestFrom(
+          this.store.pipe(select(AppSelectors.getVotes), startWith({})),
+          this.store.pipe(select(AppSelectors.isLocalDataStorageAllowed)),
+        ),
+        map(([{}, votes, localStorageAllowed]: [any, Votes, boolean]) => this.dataPersistanceService.updateVotes(votes)),
+      ),
+    { dispatch: false },
   );
 
   constructor(

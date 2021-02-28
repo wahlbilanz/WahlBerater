@@ -104,4 +104,8 @@ export const appReducer = createReducer(
     accessibilityMode: state.accessibilityMode == null ? accessibilityMode : state.accessibilityMode,
     reducedMotionMode: state.reducedMotionMode == null ? reducedMotionMode : state.reducedMotionMode,
   })),
+  on(AppActions.restoreVotesSuccess, (state: State, { votes }) => ({
+    ...state,
+    votes,
+  })),
 );
