@@ -61,7 +61,7 @@ export const getClaimsByCategory = createSelector(getPoliticalData, (data, categ
 
 export const getPrevQuestion = createSelector(getPoliticalData, (data, currentClaim: { id: string }): string => {
   if (data) {
-    const categories = Object.keys(data.categories);
+    const categories = Object.keys(data.categories).sort();
 
     if (!currentClaim.id || currentClaim.id === QuizFirstPage) {
       // no claimid yet? -> no back..
@@ -94,7 +94,7 @@ export const getPrevQuestion = createSelector(getPoliticalData, (data, currentCl
 });
 export const getNextQuestion = createSelector(getPoliticalData, (data, currentClaim: { id: string }): string => {
   if (data) {
-    const categories = Object.keys(data.categories);
+    const categories = Object.keys(data.categories).sort();
 
     if (!currentClaim.id || currentClaim.id === QuizFirstPage) {
       // no claimid yet, return first claim
