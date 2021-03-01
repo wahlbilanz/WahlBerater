@@ -3,16 +3,24 @@
 :host {
   display: block;
 }
-.candidate-card {
+.candidate-card,
+h3,
+section {
+  margin: $wb-space-large $wb-space-medium;
+  @media screen and (max-width: $wb-breakpoint-medium) {
+    margin: $wb-space-large 0;
+  }
+}
+.candidate-card,
+section {
   background-color: $wb-color-page-foreground-background;
   box-shadow: $wb-shadow-normal;
   padding: $wb-space-medium $wb-space-large;
-  margin: $wb-space-large $wb-space-medium;
   @media screen and (max-width: $wb-breakpoint-medium) {
     padding: $wb-space-small $wb-space-medium;
-    margin: $wb-space-large 0;
   }
-
+}
+.candidate-card {
   .candidate-info {
     display: grid;
     gap: $wb-space-x-small;
