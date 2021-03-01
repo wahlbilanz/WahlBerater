@@ -9,7 +9,7 @@
             <nz-list-item-meta-title> </nz-list-item-meta-title>
             <nz-list-item-meta-description>
               <ng-container *ngIf="item.value.description">
-                {{ item.value.description }}
+                <span [innerHTML]="item.value.description | markdown"></span>
               </ng-container>
             </nz-list-item-meta-description>
           </nz-list-item-meta>
@@ -19,8 +19,8 @@
               <button
                 nz-button
                 nzSize="large"
-                [nzType]="votes[item.key] && votes[item.key].decision === 1 ? 'primary' : 'secondary'"
-                (click)="vote(item.key, 1)"
+                [nzType]="votes[item.key] && votes[item.key].decision === -1 ? 'primary' : 'secondary'"
+                (click)="vote(item.key, -1)"
               >
                 Dagegen
               </button>
@@ -39,8 +39,8 @@
               <button
                 nz-button
                 nzSize="large"
-                [nzType]="votes[item.key] && votes[item.key].decision === -1 ? 'primary' : 'secondary'"
-                (click)="vote(item.key, -1)"
+                [nzType]="votes[item.key] && votes[item.key].decision === 1 ? 'primary' : 'secondary'"
+                (click)="vote(item.key, 1)"
               >
                 Dafür
               </button>
