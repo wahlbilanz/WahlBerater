@@ -59,7 +59,7 @@
 }
 
 @media screen and (max-width: $wb-breakpoint-medium) {
-  .party-info {
+  .party-card .party-info {
     grid-template:
       'name name social'
       'picture desc desc' minmax(100px, min-content)
