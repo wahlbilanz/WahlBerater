@@ -1,9 +1,17 @@
 <div class="candidate-card shadow-hover" *ngIf="politicalInfo && personalInfo">
   <img
     class="picture"
-    src="{{ personalInfo.picture | pictureUrl }}"
+    [src]="personalInfo.picture | pictureUrl"
     [routerLink]="['/', 'parties', politicalInfo.party, 'candidates', candidateId]"
     alt="Bild von {{ personalInfo.name }}"
+    *ngIf="personalInfo.picture"
+  />
+  <img
+    class="picture"
+    src="/assets/static/placeholder/unknown-person.jpg"
+    [routerLink]="['/', 'parties', politicalInfo.party, 'candidates', candidateId]"
+    alt="{{ personalInfo.name }} hat kein Bild"
+    *ngIf="!personalInfo.picture"
   />
   <h3 class="name">{{ personalInfo.name }}</h3>
   <p class="description" [innerHTML]="personalInfo.shortDescription | markdown"></p>

@@ -12,7 +12,18 @@
 
   <div class="candidate-card">
     <div class="candidate-info">
-      <img class="picture" src="{{ data.candidate.picture | pictureUrl }}" alt="Bild von {{ data.candidate.name }}" />
+      <img
+        class="picture"
+        [src]="data.candidate.picture | pictureUrl"
+        alt="Bild von {{ data.candidate.name }}"
+        *ngIf="data.candidate.picture"
+      />
+      <img
+        class="picture"
+        src="/assets/static/placeholder/unknown-person.jpg"
+        alt="{{ data.candidate.name }} hat kein Bild"
+        *ngIf="!data.candidate.picture"
+      />
       <h1 class="name">
         {{ data.candidate.name }}
         <p class="party">{{ data.party?.name }}</p>
