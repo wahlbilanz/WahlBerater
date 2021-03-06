@@ -4,6 +4,12 @@
   display: block;
 }
 
+:host:hover {
+  a.party-link {
+    color: $wb-color-secondary-500;
+  }
+}
+
 .party-card {
   background-color: $wb-color-page-foreground-background;
   display: grid;
