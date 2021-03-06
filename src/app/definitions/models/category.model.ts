@@ -5,6 +5,7 @@ export interface CategoryMap {
 }
 
 export interface Category {
+  order: number;
   title: string;
   color: string;
 }

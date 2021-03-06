@@ -8,6 +8,7 @@ export interface ClaimProvenanceEntry {
 }
 
 export interface Claim {
+  order: number;
   title: string;
   category: string;
   description: string;

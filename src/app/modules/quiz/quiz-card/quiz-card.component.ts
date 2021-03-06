@@ -127,10 +127,12 @@ export class QuizCardComponent implements OnInit, OnChanges, OnDestroy {
     });
     if (this.claimId === QuizFirstPage) {
       this.category = {
+        order: -9001,
         color: '#333',
         title: 'Howto',
       };
       this.claim = {
+        order: -9001,
         category: 'howto',
         description: 'Hintergrundinformationen, um die These einordnen zu können. Bisschen Erklärung wie das Quiz funktioniert.',
         provenance: [],

@@ -94,9 +94,18 @@ export const getClaimsByCategory = createSelector(getPoliticalData, (data, categ
   }
 });
 
+/** Utility function returning the category IDs, sorted by the categories order attribute. */
+const getSortedCategoryIDs = (data: PoliticalData) =>
+  Object.getOwnPropertyNames(data.categories).sort((a, b) => data.categories[a].order - data.categories[b].order);
+/** Utility function returning all claim IDs in the given category, sorted by their order attribute. */
+const getSortedClaimIDsByCategory = (data: PoliticalData, category: string) =>
+  Object.getOwnPropertyNames(data.claims)
+    .filter((c) => data.claims[c].category === category)
+    .sort((a, b) => data.claims[a].order - data.claims[b].order);
+
 export const getPrevQuestion = createSelector(getPoliticalData, (data, currentClaim: { id: string }): string => {
   if (data) {
-    const categories = Object.keys(data.categories).sort();
+    const categories = getSortedCategoryIDs(data);
 
     if (!currentClaim.id || currentClaim.id === QuizFirstPage) {
       // no claimid yet? -> no back..
@@ -105,7 +114,7 @@ export const getPrevQuestion = createSelector(getPoliticalData, (data, currentCl
 
     let currentCategoryIdx = categories.indexOf(data.claims[currentClaim.id].category);
     let currentCategory = categories[currentCategoryIdx];
-    let claims = Object.keys(data.claims).filter((c) => data.claims[c].category === currentCategory);
+    let claims = getSortedClaimIDsByCategory(data, currentCategory);
 
     const currentIdx = claims.indexOf(currentClaim.id);
     if (currentIdx < 0) {
@@ -118,7 +127,7 @@ export const getPrevQuestion = createSelector(getPoliticalData, (data, currentCl
     currentCategoryIdx -= 1;
     if (currentCategoryIdx >= 0) {
       currentCategory = categories[currentCategoryIdx];
-      claims = Object.keys(data.claims).filter((c) => data.claims[c].category === currentCategory);
+      claims = getSortedClaimIDsByCategory(data, currentCategory);
       if (claims.length > 0) {
         // console.log ('returning claims[claims.length - 1]');
         return claims[claims.length - 1];
@@ -127,22 +136,24 @@ export const getPrevQuestion = createSelector(getPoliticalData, (data, currentCl
   }
   return undefined;
 });
-export const getNextQuestion = createSelector(getPoliticalData, (data, currentClaim: { id: string }): string => {
+
+export const getNextQuestion = createSelector(getPoliticalData, (data: PoliticalData, currentClaim: { id: string }): string => {
   if (data) {
-    const categories = Object.keys(data.categories).sort();
+    const categories = getSortedCategoryIDs(data);
 
     if (!currentClaim.id || currentClaim.id === QuizFirstPage) {
       // no claimid yet, return first claim
-      return Object.keys(data.claims).filter((c) => data.claims[c].category === categories[0])[0];
+      return getSortedClaimIDsByCategory(data, categories[0])[0];
     }
 
     let currentCategoryIdx = categories.indexOf(data.claims[currentClaim.id].category);
     let currentCategory = categories[currentCategoryIdx];
-    let claims = Object.keys(data.claims).filter((c) => data.claims[c].category === currentCategory);
+    let claims = getSortedClaimIDsByCategory(data, currentCategory);
+
     const currentIdx = claims.indexOf(currentClaim.id);
     if (currentIdx < 0) {
       // not in? then return first question
-      return Object.keys(data.claims).filter((c) => data.claims[c].category === categories[0])[0];
+      return getSortedClaimIDsByCategory(data, categories[0])[0];
     }
 
     if (currentIdx < claims.length - 1) {
@@ -151,7 +162,7 @@ export const getNextQuestion = createSelector(getPoliticalData, (data, currentCl
     currentCategoryIdx += 1;
     if (currentCategoryIdx < categories.length) {
       currentCategory = categories[currentCategoryIdx];
-      claims = Object.keys(data.claims).filter((c) => data.claims[c].category === currentCategory);
+      claims = getSortedClaimIDsByCategory(data, currentCategory);
       if (claims.length > 0) {
         return claims[0];
       }
