@@ -29,3 +29,7 @@
 nz-breadcrumb-item:last-child {
   color: #111;
 }
+
+app-root:not(.no-animation) .shadow-hover:hover {
+  box-shadow: $wb-shadow-hover !important;
+}
