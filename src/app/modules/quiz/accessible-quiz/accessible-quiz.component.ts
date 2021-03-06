@@ -15,12 +15,13 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./accessible-quiz.component.scss'],
 })
 export class AccessibleQuizComponent implements OnInit, AfterViewInit, OnDestroy {
-  data = this.store.pipe(select(AppSelectors.getPoliticalData));
+  categoryData = this.store.pipe(select(AppSelectors.getCategoriesWithClaims));
+
   votes: Votes;
   ResultUrlPath = ResultUrl;
   private fragment?: string;
   public accessibilityModes?: AccessibilityModes;
-  private sAccessibleUrlFragment = AccessibleUrlFragment;
+  public sAccessibleUrlFragment = AccessibleUrlFragment;
   private subscriptions: Subscription[] = [];
 
   constructor(private store: Store<AppPartialState>, private route: ActivatedRoute) {

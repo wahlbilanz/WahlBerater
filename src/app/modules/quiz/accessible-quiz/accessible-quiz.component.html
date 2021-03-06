@@ -1,26 +1,29 @@
 <h1>Quiz in barrierefreiem Modus</h1>
-<ng-container *ngIf="votes && data | async as d">
-  <div class="category" *ngFor="let category of d.categories | keyvalue" style="border-color:{{ category.value.color }}">
-    <h3>Kategorie: {{ category.value.title }}</h3>
+<ng-container *ngIf="votes && categoryData | async as d">
+  <div class="category" *ngFor="let category of d" [style.border-color]="category.category.color">
+    <h3>Kategorie: {{ category.category.title }}</h3>
     <nz-list nzItemLayout="vertical">
-      <ng-container *ngFor="let item of d.claims | keyvalue">
-        <nz-list-item *ngIf="item.value.category === category.key" id="{{ sAccessibleUrlFragment }}{{ item.key }}">
+      <ng-container *ngFor="let claim of category.claims">
+        <nz-list-item id="{{ sAccessibleUrlFragment }}-{{ claim.claimId }}">
           <nz-list-item-meta>
             <nz-list-item-meta-title> </nz-list-item-meta-title>
+
             <nz-list-item-meta-description>
-              <ng-container *ngIf="item.value.description">
-                <span [innerHTML]="item.value.description | markdown"></span>
+              <ng-container *ngIf="claim.description">
+                <span [innerHTML]="claim.description | markdown"></span>
               </ng-container>
             </nz-list-item-meta-description>
           </nz-list-item-meta>
-          <h4>{{ item.value.title }}</h4>
+
+          <h4>{{ claim.title }}</h4>
+
           <ul>
             <li>
               <button
                 nz-button
                 nzSize="large"
-                [nzType]="votes[item.key] && votes[item.key].decision === -1 ? 'primary' : 'secondary'"
-                (click)="vote(item.key, -1)"
+                [nzType]="votes[claim.claimId] && votes[claim.claimId].decision === -1 ? 'primary' : 'secondary'"
+                (click)="vote(claim.claimId, -1)"
               >
                 Dagegen
               </button>
@@ -29,8 +32,8 @@
               <button
                 nz-button
                 nzSize="large"
-                [nzType]="votes[item.key] && votes[item.key].decision === 0 ? 'primary' : 'secondary'"
-                (click)="vote(item.key, 0)"
+                [nzType]="votes[claim.claimId] && votes[claim.claimId].decision === 0 ? 'primary' : 'secondary'"
+                (click)="vote(claim.claimId, 0)"
               >
                 Neutral
               </button>
@@ -39,8 +42,8 @@
               <button
                 nz-button
                 nzSize="large"
-                [nzType]="votes[item.key] && votes[item.key].decision === 1 ? 'primary' : 'secondary'"
-                (click)="vote(item.key, 1)"
+                [nzType]="votes[claim.claimId] && votes[claim.claimId].decision === 1 ? 'primary' : 'secondary'"
+                (click)="vote(claim.claimId, 1)"
               >
                 Dafür
               </button>
@@ -50,17 +53,19 @@
             nz-button
             nzSize="large"
             class="btn-fav"
-            [nzType]="votes[item.key] && votes[item.key].fav ? 'primary' : 'secondary'"
-            (click)="fav(item.key)"
+            [nzType]="votes[claim.claimId] && votes[claim.claimId].fav ? 'primary' : 'secondary'"
+            (click)="fav(claim.claimId)"
           >
             Das ist mir wichtig!
           </button>
+
           <nz-list-item-extra> </nz-list-item-extra>
         </nz-list-item>
       </ng-container>
     </nz-list>
   </div>
 </ng-container>
+
 <div class="auswertungslink">
   <a [routerLink]="'/quiz/' + ResultUrlPath">Weiter zur Auswertung</a>
 </div>
