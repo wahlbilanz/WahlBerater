@@ -8,13 +8,13 @@
   Die folgenden Thesen, sortiert nach Kategorien, haben es in den finalen WahlBerater geschafft. Klick eine These an um mehr Informationen
   zu erhalten.
 </p>
-<ng-container *ngIf="data | async as d">
-  <div class="category" *ngFor="let category of d.categories | keyvalue" style="border-color: {{ category.value.color }}">
-    <h3>{{ category.value.title }}</h3>
+<ng-container *ngIf="sortedData | async as d">
+  <div class="category" *ngFor="let category of d" [style.border-color]="category.category.color">
+    <h3>{{ category.category.title }}</h3>
     <nz-list>
-      <ng-container *ngFor="let item of d.claims | keyvalue">
-        <nz-list-item *ngIf="item.value.category === category.key">
-          <a [routerLink]="'/claim/' + item.key">{{ item.value.title }}</a>
+      <ng-container *ngFor="let claim of category.claims">
+        <nz-list-item>
+          <a [routerLink]="'/claim/' + claim.claimId">{{ claim.title }}</a>
         </nz-list-item>
       </ng-container>
     </nz-list>
@@ -24,6 +24,6 @@
 <p>
   <small>
     Du hast eine These eingereicht und sie ist nicht dabei? Uns erreichten während der Entwicklung viele weitere Thesen. Leider haben es
-    nicht alle in die finale Version des Tools geschafft..
+    nicht alle in die finale Version des Tools geschafft.
   </small>
 </p>

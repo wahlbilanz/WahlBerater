@@ -44,14 +44,13 @@ export const getCandidateClaimDecisions = createSelector(getPoliticalData, (data
   }
 
   return (
-    Object.getOwnPropertyNames(data.categories)
+    getSortedCategoryIDs(data)
       // expand all categories
       .map((categoryId) => ({
         categoryId,
         category: data.categories[categoryId],
         // expand all claims within this category
-        claims: Object.getOwnPropertyNames(data.claims)
-          .filter((claimId) => data.claims[claimId].category === categoryId)
+        claims: getSortedClaimIDsByCategory(data, categoryId)
           // join candidate position to the respective claim
           .map((claimId) => ({
             claimId,
@@ -85,7 +84,7 @@ export const getCategoryByClaimId = createSelector(
 
 export const getClaimsByCategory = createSelector(getPoliticalData, (data, category: { id: string }) => {
   if (data) {
-    const keys = Object.keys(data.claims).filter((c) => data.claims[c].category === category.id);
+    const keys = getSortedClaimIDsByCategory(data, category.id);
     const subset = {};
     for (const key of keys) {
       subset[key] = data.claims[key];
@@ -205,6 +204,18 @@ export const getCandidateListByPartyId = createSelector(
         hasPersonalData: !!state.personalData[props.id],
       } as CandidateWithID),
 );*/
+
+export const getCategoriesWithClaims = createSelector(getPoliticalData, (data) =>
+  data == null
+    ? null
+    : getSortedCategoryIDs(data).map((categoryId) => ({
+        categoryId,
+        category: data.categories[categoryId],
+        claims: getSortedClaimIDsByCategory(data, categoryId)
+          // expand claims
+          .map((claimId) => ({ ...data.claims[claimId], claimId })),
+      })),
+);
 
 export const getAllAccessibilityModes = createSelector(
   getAppState,
