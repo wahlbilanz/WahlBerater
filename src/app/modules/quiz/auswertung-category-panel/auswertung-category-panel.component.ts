@@ -59,25 +59,4 @@ export class AuswertungCategoryPanelComponent implements OnInit, OnDestroy {
       return '/quiz/' + claimId;
     }
   }*/
-
-  getUserTemplate(userDecision: Vote): TemplateRef<any> | undefined {
-    if (this.decisionTemplates) {
-      if (!userDecision || userDecision.decision === 0) {
-        return this.decisionTemplates.skipTempleate;
-      }
-
-      if (userDecision.decision > 0) {
-        if (userDecision.fav) {
-          return this.decisionTemplates.yesyesTempleate;
-        }
-        return this.decisionTemplates.yesTempleate;
-      } else {
-        if (userDecision.fav) {
-          return this.decisionTemplates.nonoTempleate;
-        }
-        return this.decisionTemplates.noTempleate;
-      }
-    }
-    return undefined;
-  }
 }

@@ -1,15 +1,33 @@
 <ng-container [ngSwitch]="vote">
-  <nz-badge [nzCount]="star" *ngSwitchCase="-2">
-    <i nz-icon nzType="dislike" nzTheme="outline" (click)="$event.stopPropagation()" class="vote-icon"></i>
+  <nz-badge [nzCount]="star" aria-readonly="true" role="img" [title]="titles['-2']" *ngSwitchCase="-2">
+    <i nz-icon nzType="dislike" nzTheme="outline" class="vote-icon"></i>
   </nz-badge>
-  <i nz-icon nzType="dislike" nzTheme="outline" (click)="$event.stopPropagation()" class="vote-icon" *ngSwitchCase="-1"></i>
-  <i nz-icon nzType="meh" nzTheme="outline" (click)="$event.stopPropagation()" class="vote-icon" *ngSwitchCase="0"></i>
-  <i nz-icon nzType="like" nzTheme="outline" (click)="$event.stopPropagation()" class="vote-icon" *ngSwitchCase="1"></i>
-  <nz-badge [nzCount]="star" *ngSwitchCase="2">
-    <i nz-icon nzType="like" nzTheme="outline" (click)="$event.stopPropagation()" class="vote-icon"></i>
+  <i
+    nz-icon
+    nzType="dislike"
+    nzTheme="outline"
+    class="vote-icon"
+    aria-readonly="true"
+    role="img"
+    [title]="titles['-1']"
+    *ngSwitchCase="-1"
+  ></i>
+  <i nz-icon nzType="meh" nzTheme="outline" class="vote-icon" aria-readonly="true" role="img" [title]="titles['0']" *ngSwitchCase="0"></i>
+  <i nz-icon nzType="like" nzTheme="outline" class="vote-icon" aria-readonly="true" role="img" [title]="titles['1']" *ngSwitchCase="1"></i>
+  <nz-badge [nzCount]="star" aria-readonly="true" role="img" [title]="titles['2']" *ngSwitchCase="2">
+    <i nz-icon nzType="like" nzTheme="outline" class="vote-icon"></i>
   </nz-badge>
-  <i nz-icon nzType="question" nzTheme="outline" (click)="$event.stopPropagation()" class="vote-icon" *ngSwitchDefault></i>
+  <i
+    nz-icon
+    nzType="question"
+    nzTheme="outline"
+    class="vote-icon"
+    aria-readonly="true"
+    role="img"
+    [title]="titles[null]"
+    *ngSwitchDefault
+  ></i>
 </ng-container>
 <ng-template #star>
-  <i nz-icon nzType="star" nzTheme="fill" class="ant-scroll-number-custom-component vote-icon-badge" (click)="$event.stopPropagation()"></i>
+  <i nz-icon nzType="star" nzTheme="fill" class="ant-scroll-number-custom-component vote-icon-badge"></i>
 </ng-template>

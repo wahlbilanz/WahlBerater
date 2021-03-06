@@ -12,7 +12,7 @@
 
   <div class="candidate-card">
     <div class="candidate-info">
-      <img class="picture" src="{{ data.candidate.picture | pictureUrl }}" />
+      <img class="picture" src="{{ data.candidate.picture | pictureUrl }}" alt="Bild von {{ data.candidate.name }}" />
       <h1 class="name">
         {{ data.candidate.name }}
         <p class="party">{{ data.party?.name }}</p>
@@ -49,7 +49,7 @@
               Du hast <em>dagegen</em> gestimmt{{ userVote <= -2 ? ' und diese These als für dich wichtig markiert' : '' }}.
             </ng-container>
             <ng-container *ngIf="userVote == 0"> Du hast hast zu dieser These keine Position bezogen. </ng-container>
-            <app-decision-icon [vote]="userVote"></app-decision-icon>
+            <app-decision-icon [vote]="userVote" voteContext="USER"></app-decision-icon>
             <br />
           </ng-container>
           <!-- Candidate Vote -->
@@ -62,7 +62,7 @@
           <ng-container *ngIf="claim.position.vote == 0">
             {{ data.candidate.name }} hat zu dieser These keine Position bezogen.
           </ng-container>
-          <app-decision-icon [vote]="claim.position.vote"></app-decision-icon>
+          <app-decision-icon [vote]="claim.position.vote" voteContext="CANDIDATE"></app-decision-icon>
         </p>
         <blockquote>
           <p [innerHTML]="claim.position.reason | markdown" *ngIf="claim.position.reason"></p>
@@ -71,7 +71,7 @@
         <a class="more-info-link" [routerLink]="['/', 'claim', claim.claimId]">Mehr Informationen zu dieser These</a>
 
         <ng-template #voteIcon>
-          <app-decision-icon [vote]="claim.position.vote"></app-decision-icon>
+          <app-decision-icon [vote]="claim.position.vote" voteContext="CANDIDATE"></app-decision-icon>
         </ng-template>
       </nz-collapse-panel>
     </nz-collapse>
