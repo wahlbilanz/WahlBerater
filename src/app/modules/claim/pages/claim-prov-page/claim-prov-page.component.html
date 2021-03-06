@@ -17,13 +17,23 @@
     <p>
       Eine These in der Kategorie <strong>{{ politicalData.categories[politicalData.claims[claimId].category].title }}</strong>
     </p>
-    <p *ngIf="politicalData.claims[claimId].description">
-      <strong>Hintergrund:</strong>&nbsp;<span [innerHTML]="politicalData.claims[claimId].description | markdown"></span>
-    </p>
+    <ng-container *ngIf="politicalData.claims[claimId].description">
+      <h5>Hintergrund</h5>
+      <p [innerHTML]="politicalData.claims[claimId].description | markdown"></p>
+    </ng-container>
     <p>
       <a [routerLink]="'/quiz/' + claimId"><i nz-icon nzType="double-right" nzTheme="outline"></i>&nbsp;Springe zur These im Quiz</a>
     </p>
     <p *ngIf="votes && votes[claimId]">Du denkst: {{ votes[claimId].decision }}</p>
+
+    <ng-container *ngIf="politicalData.claims[claimId].links && politicalData.claims[claimId].links.length > 0">
+      <h5>Weiterführende Informationen</h5>
+      <ul>
+        <li *ngFor="let link of politicalData.claims[claimId].links">
+          <a [href]="link.url" target="_blank" [title]="link.title">{{ link.title || link.url }}</a>
+        </li>
+      </ul>
+    </ng-container>
 
     <div class="provenance" *ngIf="politicalData.claims[claimId].provenance && politicalData.claims[claimId].provenance.length">
       <h3>Die These ist aus den folgenden Thesen entstanden:</h3>

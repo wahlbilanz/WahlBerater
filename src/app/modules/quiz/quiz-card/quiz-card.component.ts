@@ -135,6 +135,7 @@ export class QuizCardComponent implements OnInit, OnChanges, OnDestroy {
         description: 'Hintergrundinformationen, um die These einordnen zu können. Bisschen Erklärung wie das Quiz funktioniert.',
         provenance: [],
         title: 'Thesen sollten relevant und kontrovers sein.',
+        links: [],
       };
     }
     setTimeout(() => {
