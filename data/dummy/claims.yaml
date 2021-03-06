@@ -1,6 +1,4 @@
-
 claims:
-
   - id: social01
     title: Du bist asozial
     category: social-stuff
@@ -11,6 +9,11 @@ claims:
         description: mensch = assi
       - claim: asi, jah!
         description: Wattn Assi, ey!
+    links:
+      - title: Smithsonian National Museum of Natural History
+        url: https://naturalhistory.si.edu/
+      - title: Wikipedia
+        url: https://www.wikipedia.org/
 
   - id: social02
     title: Alles sollte gegendert werden
@@ -31,6 +34,9 @@ claims:
     provenance:
       - claim: Mehr grüne Energie
         description: null
+    links:
+      - title: Greenpeace
+        url: https://www.greenpeace.de/
 
   - id: energy02
     title: Die Umwelt sollte mehr Energiesteuern zahlen

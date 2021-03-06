@@ -13,12 +13,18 @@ interface ClaimProvenance {
   description: string;
 }
 
+interface NamedLink {
+  title: string;
+  url: string;
+}
+
 interface Claim {
   id: string;
   title: string;
   category: string;
   description?: string;
   provenance?: ClaimProvenance[];
+  links?: NamedLink[];
 }
 
 interface EntityLinks {
@@ -196,6 +202,25 @@ function cleanUrl(link: string): string {
   }
 }
 
+function cleanNamedLink(link: NamedLink): NamedLink {
+  if (!link) {
+    return null;
+  }
+
+  link = {
+    title: cleanString(link.title),
+    url: cleanUrl(link.url),
+  };
+
+  if (!link.url) {
+    throw Error('Link is missing an URL');
+  }
+  if (!link.title) {
+    warning('Link %s has no title.', link.url);
+  }
+  return link;
+}
+
 function cleanVote(vote: string | number): -2 | -1 | 0 | 1 | 2 {
   if (typeof vote === 'string') {
     try {
@@ -222,6 +247,7 @@ function cleanClaim(claim: Claim): Claim {
       !claim.provenance || claim.provenance.length === 0
         ? []
         : claim.provenance.map((prov) => ({ claim: cleanString(prov.claim), description: cleanString(prov.description) })),
+    links: !claim.links || claim.links.length === 0 ? [] : claim.links.map((link) => cleanNamedLink(link)).filter((link) => !!link),
   };
 
   if (!claim.id) {
