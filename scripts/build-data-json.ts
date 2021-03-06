@@ -2,6 +2,7 @@ import * as Color from 'color';
 import debug from 'debug';
 import { mkdirSync, readdirSync, readFileSync, statSync, writeFileSync } from 'fs';
 import * as yaml from 'js-yaml';
+import { wrongSortOrder } from 'ng-zorro-antd/core/time';
 import { extname, join as joinPath } from 'path';
 import * as sharp from 'sharp';
 import { URL } from 'url';
@@ -15,6 +16,7 @@ interface ClaimProvenance {
 
 interface Claim {
   id: string;
+  order: number;
   title: string;
   category: string;
   description?: string;
@@ -48,6 +50,7 @@ interface Candidate {
 
 interface Category {
   id: string;
+  order: number;
   title: string;
   color: string;
 }
@@ -215,6 +218,7 @@ function cleanVote(vote: string | number): -2 | -1 | 0 | 1 | 2 {
 function cleanClaim(claim: Claim): Claim {
   claim = {
     id: cleanId(claim.id),
+    order: +claim.order,
     title: cleanString(claim.title),
     category: cleanId(claim.category),
     description: cleanString(claim.description),
@@ -248,6 +252,7 @@ function cleanClaim(claim: Claim): Claim {
 function cleanCategory(category: Category): Category {
   category = {
     id: cleanId(category.id),
+    order: +category.order,
     title: cleanString(category.title),
     color: cleanColor(category.color),
   };
@@ -411,22 +416,60 @@ function cleanParty(party: Party, hasPositions: boolean): Party {
   return party;
 }
 
+function compareDeep(features: [any, any][]): number {
+  if (features.length === 0) {
+    return 0;
+  }
+
+  const [a, b] = features[0];
+  if (a === b || (a == null && b == null)) {
+    // this feature is equal, so we need to go deeper
+    return compareDeep(features.slice(1));
+  } else if (a == null) {
+    return -1;
+  } else if (b == null) {
+    return 1;
+  } else {
+    return a > b ? 1 : -1;
+  }
+}
+
 function cleanData(data: DataDocument, positionedEntities: PositionedEntities): DataDocument {
   return {
     candidates: new Map<string, Candidate>(
       Array.from(data.candidates.values())
         .map((entry) => cleanCandidate(entry, positionedEntities.candidateHasPositions))
-        .sort((a, b) => (a.listOrder > b.listOrder ? 1 : -1)) // sort according to order on the list
+        .sort((a, b) =>
+          compareDeep([
+            [a.listOrder, b.listOrder],
+            [a.id, b.id],
+            [a.name, b.name],
+          ]),
+        )
         .map((entry) => [entry.id, entry]),
     ),
     categories: new Map<string, Category>(
       Array.from(data.categories.values())
         .map((entry) => cleanCategory(entry))
+        .sort((a, b) =>
+          compareDeep([
+            [a.order, b.order],
+            [a.id, b.id],
+            [a.title, b.title],
+          ]),
+        )
         .map((entry) => [entry.id, entry]),
     ),
     claims: new Map<string, Claim>(
       Array.from(data.claims.values())
         .map((entry) => cleanClaim(entry))
+        .sort((a, b) =>
+          compareDeep([
+            [a.order, b.order],
+            [a.id, b.id],
+            [a.title, b.title],
+          ]),
+        )
         .map((entry) => [entry.id, entry]),
     ),
     parties: new Map<string, Party>(
@@ -435,6 +478,34 @@ function cleanData(data: DataDocument, positionedEntities: PositionedEntities): 
         .map((entry) => [entry.id, entry]),
     ),
   };
+}
+
+function reWriteClaimOrderByCategory(data: DataDocument): Map<string, Claim> {
+  log('Re-Write claim order numbers by category');
+  const categoryCounter: { [key: string]: number } = {};
+
+  return new Map<string, Claim>(
+    Array.from(data.claims.values())
+      .sort((a, b) =>
+        compareDeep([
+          [a.order, b.order],
+          [a.id, b.id],
+          [a.title, b.title],
+        ]),
+      )
+      .map((entry) => {
+        const order = categoryCounter[entry.category] || 0;
+        categoryCounter[entry.category] = order + 1;
+        return { ...entry, order };
+      })
+      .sort((a, b) =>
+        compareDeep([
+          [data.categories.get(a.category).order, data.categories.get(b.category).order],
+          [a.order, b.order],
+        ]),
+      )
+      .map((entry) => [entry.id, entry]),
+  );
 }
 
 function validateClaimPositions(data: DataDocument, positions: { [claimId: string]: VotePosition }, entity: string): boolean {
@@ -681,6 +752,10 @@ async function main() {
       description: 'Random seed for UUID generation',
       type: 'string',
     })
+    .option('rewrite-order', {
+      description: 'Re-Writes order for claims, grouped by their category',
+      type: 'boolean',
+    })
     .option('positioned-entities', {
       alias: 'p',
       description: 'Which entities can provide positions',
@@ -719,6 +794,10 @@ async function main() {
       log('ID reference check failed.');
       process.exit(1);
     }
+  }
+
+  if (argv['rewrite-order'] === true) {
+    data.claims = reWriteClaimOrderByCategory(data);
   }
 
   mkdirSync(argv.output, { recursive: true });

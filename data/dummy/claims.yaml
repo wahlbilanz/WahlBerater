@@ -1,7 +1,6 @@
-
 claims:
-
   - id: social01
+    order: 1
     title: Du bist asozial
     category: social-stuff
     description: |
@@ -13,6 +12,7 @@ claims:
         description: Wattn Assi, ey!
 
   - id: social02
+    order: 2
     title: Alles sollte gegendert werden
     category: social-stuff
     description: |
@@ -24,6 +24,7 @@ claims:
         description: Noch mehr gendern!
 
   - id: energy01
+    order: 1
     title: Energie sollte grün sein
     category: energy
     description: |
@@ -33,6 +34,7 @@ claims:
         description: null
 
   - id: energy02
+    order: 4
     title: Die Umwelt sollte mehr Energiesteuern zahlen
     category: energy
     description: |
@@ -44,5 +46,6 @@ claims:
         description: null
 
   - id: misc01
+    order: 1
     title: Sonstige Fragen sind auch wichtig
     category: misc

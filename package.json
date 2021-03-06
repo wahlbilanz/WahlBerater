@@ -16,7 +16,7 @@
     "format:check": "prettier --list-different \"src/{app,environments,assets}/**/*{.ts,.js,.json,.css,.scss}\"",
     "ts-node": "ts-node",
     "build-data-json": "ts-node --project tsconfig.scripts.json ./scripts/build-data-json.ts --",
-    "build-dummy-data": "find ./src/assets/data -type f -not -name '.gitkeep' -delete && npm run build-data-json -- --input ./data/dummy --output ./src/assets/data --anonymize-ids --positioned-entities both",
+    "build-dummy-data": "find ./src/assets/data -type f -not -name '.gitkeep' -delete && npm run build-data-json -- --input ./data/dummy --output ./src/assets/data --anonymize-ids --rewrite-order --positioned-entities both",
     "preaccessibility": "npm run build",
     "accessibility": "npm run check-axe-tests && npm-run-all --parallel --race server accessibility:run",
     "accessibility:run": "pa11y-ci",
