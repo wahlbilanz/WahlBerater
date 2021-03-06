@@ -8,6 +8,6 @@ export class PictureUrlPipe implements PipeTransform {
   public readonly baseUrl = environment.dataUrl;
 
   transform(value: string): string {
-    return !!value ? `${this.baseUrl}/${value}` : '/assets/static/placeholder/unknown-person.jpg';
+    return !!value ? `${this.baseUrl}/${value}` : '/assets/static/placeholder/unknown-person.svg';
   }
 }

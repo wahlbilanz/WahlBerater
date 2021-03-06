@@ -20,7 +20,7 @@
       />
       <img
         class="picture"
-        src="/assets/static/placeholder/unknown-person.jpg"
+        src="/assets/static/placeholder/unknown-person.svg"
         alt="{{ data.candidate.name }} hat kein Bild"
         *ngIf="!data.candidate.picture"
       />
@@ -35,7 +35,7 @@
       </div>
     </div>
 
-    <div class="candidate-description" [innerHTML]="data.candidate.description | markdown"></div>
+    <div class="candidate-description" [innerHTML]="data.candidate.description | markdown" *ngIf="data.candidate.description"></div>
   </div>
 
   <h2>Standpunkte von {{ data.candidate.name }}</h2>
