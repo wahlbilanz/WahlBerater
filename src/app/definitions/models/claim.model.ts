@@ -7,10 +7,16 @@ export interface ClaimProvenanceEntry {
   description?: string;
 }
 
+export interface NamedLink {
+  title: string;
+  url: string;
+}
+
 export interface Claim {
   order: number;
   title: string;
   category: string;
   description: string;
   provenance: ClaimProvenanceEntry[];
+  links: NamedLink[];
 }

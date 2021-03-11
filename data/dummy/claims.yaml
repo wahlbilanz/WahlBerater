@@ -10,6 +10,11 @@ claims:
         description: mensch = assi
       - claim: asi, jah!
         description: Wattn Assi, ey!
+    links:
+      - title: Smithsonian National Museum of Natural History
+        url: https://naturalhistory.si.edu/
+      - title: Wikipedia
+        url: https://www.wikipedia.org/
 
   - id: social02
     order: 2
@@ -32,6 +37,9 @@ claims:
     provenance:
       - claim: Mehr grüne Energie
         description: null
+    links:
+      - title: Greenpeace
+        url: https://www.greenpeace.de/
 
   - id: energy02
     order: 4
