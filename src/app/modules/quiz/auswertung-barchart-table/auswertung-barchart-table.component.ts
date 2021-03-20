@@ -36,9 +36,5 @@ export class AuswertungBarchartTableComponent implements OnInit {
     return a;
   }
 
-  ngOnInit(): void {
-    // this.recalc();
-    console.log(this.partyScoreResult);
-    console.log(this.politicalData);
-  }
+  ngOnInit(): void {}
 }
