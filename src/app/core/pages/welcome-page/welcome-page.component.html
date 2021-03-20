@@ -53,12 +53,14 @@
   </a>
 
   <div class="nav-block privacy-block">
+    <h3>Speichern</h3>
     <label
       nz-checkbox
       [ngModel]="localStorageAllowed | async"
       (ngModelChange)="updateLocalStorageOptIn($event)"
       [nzDisabled]="(localStorageSupported | async) !== true"
-      >Speichere die Quizergebnisse auf meinem Gerät</label
+      >Speichere die Quizergebnisse auf meinem Gerät
+      <ng-container *ngIf="(localStorageSupported | async) !== true">(nicht unterstützt, siehe unten)</ng-container></label
     >
     <p class="small" *ngIf="(localStorageSupported | async) !== true">
       Dein Browser unterstützt die <em>localStorage</em> Funktion leider nicht. Diese benötigt der WahlBerater zum Speichern von
@@ -66,7 +68,7 @@
       falls du die Quizergebnisse auf diesem Gerät speichern möchtest. Der WahlBerater funktioniert auch ohne diese Funktion.
     </p>
 
-    <p class="small">
+    <p class="small" *ngIf="(localStorageSupported | async) === true">
       Bevor du deine persönlichen Einstellungen einer Webseite preisgibst solltest du unbedingt
       <em>immer die Datenschutzerklärung lesen und verstehen!</em> Nimm dir daher kurz Zeit und schaue in
       <a routerLink="/docs/privacy">unsere Datenschutzerklärung</a>.
@@ -74,26 +76,31 @@
   </div>
 
   <div class="nav-block accessibility-mode-block no-animation nz-animate-disabled" [@.disabled]="true">
+    <h3>Barrierefreiheit</h3>
+    <p class="small">
+      Der WahlBerater soll alle Wählenden sinnvoll bei ihrer Wahlentscheidung unterstützen! Manchen Menschen fällt der Zugang zu
+      Informationen jedoch schwerer, wenn sie vornehmlich visuell aufbereitet sind oder mit vielen Animationen versehen wurden. Andere nervt
+      dieses animierte Internet einfach nur. Hier kannst du jedenfalls auf einen reduzierten Modus wechseln:
+    </p>
     <label nz-checkbox nzNoAnimation [ngModel]="accessibilityModes?.reducedMotionMode" (ngModelChange)="updateReducedMotionMode($event)"
-      >Aktiviere einen Modus ohne Animationen</label
+      >Modus ohne Animationen</label
     >
     <br />
     <label nz-checkbox nzNoAnimation [ngModel]="accessibilityModes?.accessibilityMode" (ngModelChange)="updateAccessibilityMode($event)"
-      >Aktiviere einen barrierefreien Modus mit reduzierten grafischen Elementen</label
+      >Barrierefreier Modus mit reduzierten grafischen Elementen</label
     >
     <p class="small">
-      Manchen Menschen fällt der Zugang zu Informationen schwer, die nur visuell aufbereitet sind oder mit vielen Animationen versehen
-      wurden. Um allen den Zugang zum WahlBerater zu ermöglichen, bieten wir einen barrierefreien Modus ohne Animationen und mit textuellen,
-      anstatt visueller, Aufbereitung von Informationen. Falls du Anregungen oder Fragen zu diesem Modus hast,
+      Falls du Anregungen oder Fragen zu diesem Modus hast,
       <em>dann zögere bitte nicht uns zu <a routerLink="/docs/about">kontaktieren</a>.</em><br />
-      Wenn du die Speicherung der Quizergebnisse erlaubst, wird auch deine Einstellung zum barrierefreien Modus gespeichert. Bitte lies dazu
+      Wenn du die Speicherung der Quizergebnisse erlaubst, wird deine Einstellung zum barrierefreien Modus ebenfalls gespeichert. Bitte lies
+      dazu
       <a routerLink="/docs/privacy">unsere Datenschutzerklärung</a>.
     </p>
   </div>
 
   <div class="nav-block about-block">
     <h2>Was ist ein Wahl Berater?</h2>
-    <p>Der WahlBerater ist dein Berater für die Wahlen des Studierendenparlaments 2021 an der FernUniversität in Hagen.</p>
+    <p>Dieser WahlBerater möchte dich bei den Wahlen des Studierendenparlaments 2021 an der FernUniversität in Hagen beraten.</p>
     <p>
       Es ist ein offenes Projekt... Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et pharetra magna.Lorem ipsum dolor sit
       amet, consectetur adipiscing elit. Mauris et pharetra magna.

@@ -64,7 +64,7 @@
       </nz-tab>
     </nz-tabset>
 
-    <h2>Detailierte Auswertung der Kandidaten</h2>
+    <h2>Detailierte Auswertung der Thesen</h2>
     <ng-container *ngFor="let category of politicalData.categories | keyvalue">
       <div *ngIf="category.key != 'howto'" class="category" style="border-color:{{ category.value.color }}">
         <app-auswertung-category-panel
