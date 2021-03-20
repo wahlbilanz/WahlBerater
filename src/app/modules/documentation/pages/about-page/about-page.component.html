@@ -4,13 +4,27 @@
 </nz-breadcrumb>
 
 <h1>Über den WahlBerater</h1>
-Der WahlBerater wird entwickelt von
 
-<ul>
-  <li>Martin Peters</li>
-  <li>Sophie Flack</li>
-  <li>Dr. Martin Scharm</li>
-</ul>
+<section class="about-page">
+  Der WahlBerater wird entwickelt von
+  <ul>
+    <li>Martin Peters</li>
+    <li>Sophie Flack</li>
+    <li>Dr. Martin Scharm</li>
+  </ul>
 
-Wir haben uns bei der Entwicklung um maximale Transparenz bemüht. So steht der Code des WahlBeraters beispielsweise unter ... frei zur
-Verfügung und die Provinienz der finalen Thesen kann unter ... eingesehen werden! und noch ein paar mehr saetze...
+  Wir haben uns bei der Entwicklung um maximale Transparenz bemüht. So steht der Code des WahlBeraters beispielsweise unter ... frei zur
+  Verfügung und die Provinienz der finalen Thesen kann unter ... eingesehen werden! und noch ein paar mehr saetze...
+</section>
+
+<h2 id="faq">Häufig gestellte und ausgedachte Fragen</h2>
+
+<section class="faq-section">
+  <nz-collapse>
+    <nz-collapse-panel *ngFor="let f of faq" [nzHeader]="f.question">
+      <p>
+        {{ f.answer }}
+      </p>
+    </nz-collapse-panel>
+  </nz-collapse>
+</section>

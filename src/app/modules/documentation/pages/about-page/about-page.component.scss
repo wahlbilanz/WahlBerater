@@ -1,0 +1,17 @@
+@import '../../../../../assets/styles/variables';
+h1,
+h2 {
+  @media screen and (min-width: $wb-breakpoint-medium) {
+    padding: 0 $wb-space-medium;
+  }
+}
+.faq-section,
+.about-page {
+  background-color: $wb-color-page-foreground-background;
+  padding: $wb-space-medium $wb-space-large;
+  margin: $wb-space-large $wb-space-medium;
+  @media screen and (max-width: $wb-breakpoint-medium) {
+    padding: $wb-space-small $wb-space-medium;
+    margin: $wb-space-large 0;
+  }
+}
