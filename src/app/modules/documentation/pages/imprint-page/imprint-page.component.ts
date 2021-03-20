@@ -6,7 +6,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./imprint-page.component.scss'],
 })
 export class ImprintPageComponent implements OnInit {
-  constructor() {}
+  mail: string;
+
+  constructor() {
+    this.mail = 'wahlberatung';
+    this.mail += '@codeahoi.de';
+  }
 
   ngOnInit(): void {}
 }
