@@ -1,11 +1,13 @@
+import { KeyValue } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { candidateKeyValueSorter } from 'src/app/definitions/functions/candidate-sort.function';
 import { AppPartialState } from '../../../+state/app.reducer';
 import { PersonalCandidateMap } from '../../../definitions/models/candidate.model';
 import { CategoryMap } from '../../../definitions/models/category.model';
 import { ClaimMap } from '../../../definitions/models/claim.model';
 import { PoliticalData } from '../../../definitions/models/political.data.model';
-import { PartyScoreResult } from '../../../definitions/models/results.model';
+import { CandidateResult, PartyScoreResult } from '../../../definitions/models/results.model';
 
 @Component({
   selector: 'app-auswertung-barchart-table',
@@ -22,6 +24,8 @@ export class AuswertungBarchartTableComponent implements OnInit {
   @Input() partyScoreResult: PartyScoreResult;
   @Input() showCandidates = false;
 
+  candidateSorter = candidateKeyValueSorter;
+
   constructor(private store: Store<AppPartialState>) {}
 
   /**
@@ -34,5 +38,7 @@ export class AuswertungBarchartTableComponent implements OnInit {
 
   ngOnInit(): void {
     // this.recalc();
+    console.log(this.partyScoreResult);
+    console.log(this.politicalData);
   }
 }

@@ -24,7 +24,7 @@
         <ng-container *ngIf="showCandidates && party.candidates">
           Die Kandidierenden der Liste haben wie folge abgeschnitten:
           <ul>
-            <ng-container *ngFor="let candidate of party.candidates | keyvalue">
+            <ng-container *ngFor="let candidate of party.candidates | keyvalue: candidateSorter">
               <li>
                 <!--          <a [routerLink]="'/candidates/' + candidate.id">{{ candidate.personal.name }}</a> <small>({{politicalData.parties[candidate.political.party].name}})</small>-->
                 {{ candidate.value.personal.name }} erzielte {{ candidate.value.score.score }} Punkte und

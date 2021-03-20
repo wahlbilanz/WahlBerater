@@ -28,7 +28,7 @@
 
       <!-- candidates -->
       <ng-container *ngIf="showCandidates && party.candidates">
-        <ng-container *ngFor="let candidate of party.candidates | keyvalue">
+        <ng-container *ngFor="let candidate of party.candidates | keyvalue: candidateSorter">
           <tr class="candidate-spacer"></tr>
           <tr class="candidate-row">
             <th>
@@ -72,4 +72,9 @@
       <tr class="spacer"></tr>
     </ng-container>
   </table>
+
+  <p class="small">
+    Die Reihenfolge der Listen entspricht der Übereinstimmung mit deinen Antworten.
+    <ng-container *ngIf="showCandidates"> Die Reihenfolge der Kandidierenden wurde von den Listen festgelegt. </ng-container>
+  </p>
 </div>
