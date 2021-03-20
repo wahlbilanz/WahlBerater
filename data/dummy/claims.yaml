@@ -1,32 +1,30 @@
 claims:
   - id: social01
     order: 1
-    title: Du bist asozial
+    title: Unsoziale Menschen sollten sozialer sein
     category: social-stuff
     description: |
-      Amerikanische Wissenschaftler haben herausgefunden, dass mancheiner asozial ist.
-    provenance:
-      - claim: assi
-        description: mensch = assi
-      - claim: asi, jah!
-        description: Wattn Assi, ey!
+      Amerikanische Wissenschaftler haben herausgefunden, dass Sozialität viel sozialer ist.
     links:
       - title: Smithsonian National Museum of Natural History
         url: https://naturalhistory.si.edu/
-      - title: Wikipedia
-        url: https://www.wikipedia.org/
+      - title: Wikipediaeintrag zum Buckelwal
+        url: https://de.wikipedia.org/wiki/Buckelwal
 
   - id: social02
     order: 2
-    title: Alles sollte gegendert werden
+    title: Alles sollte gegendert werden.
     category: social-stuff
     description: |
-      Manchmal wird gegendert, finden einige bisschen komisch lesbar.
+      Es gibt verschiedene Möglichkeiten zu gendern, bspw mit dem sogenannten Gender-Sternchen (Kolleg*in), dem Gender-Gap (Künstler_innen) oder dem Gender-Doppelpunkt (Mitarbeiter:innen).Ziel ist dabei neben dem männlichen und weiblichen auch weitere Geschlechter und Geschlechtsidentitäten typografisch sichtbar zu machen und einzubeziehen.
     provenance:
       - claim: Gendern
         description: Mehr gendern!
       - claim: Gendern2
         description: Noch mehr gendern!
+    links:
+      - title: Wikipedia zum Gendersternchen
+        url: https://de.wikipedia.org/wiki/Gendersternchen
 
   - id: energy01
     order: 1
@@ -37,20 +35,17 @@ claims:
     provenance:
       - claim: Mehr grüne Energie
         description: null
-    links:
-      - title: Greenpeace
-        url: https://www.greenpeace.de/
 
   - id: energy02
     order: 4
     title: Die Umwelt sollte mehr Energiesteuern zahlen
     category: energy
     description: |
-      Mehr Steuern sind mehr besser!
+      Mehr Steuern sind immer besser!
     provenance:
-      - claim: Umweltsteuern
+      - claim: Umwelt sollte steuern
         description: Umweltsteuern sollten ein Thema sein
-      - claim: Steuern für Umwelt
+      - claim: Steuern für die Umwelt!
         description: null
 
   - id: misc01
