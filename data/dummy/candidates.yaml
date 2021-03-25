@@ -6,35 +6,29 @@ candidates:
     party: party-turquoise
     picture: pics/cd01.png
     links:
-      twitter: https://twitter.com/walberater
+      twitter: https://twitter.com/wahlberater
       blog: https://some.blog.martin2
-      facebook: https://facebook.com/bla
     shortDescription: Ich bin der Hans. Der Franz Hans.
     description: |
-      Cupidatat **irure elit exercitation** ad cupidatat aliquip. Adipisicing irure pariatur labore amet mollit ut minim pariatur. Non in aute commodo quis laborum ex. Do qui fugiat cupidatat reprehenderit do sint laboris adipisicing in.
-      Aute eiusmod commodo sit excepteur laborum voluptate qui et irure incididunt voluptate irure reprehenderit consectetur. Magna pariatur Lorem irure adipisicing deserunt ut aliquip do velit cillum. Ad sit reprehenderit consectetur labore sit culpa nostrud enim duis magna commodo mollit nulla. Reprehenderit dolor duis consectetur anim enim cupidatat duis.
-
-        - Laborum ex pariatur laboris eiusmod ipsum velit excepteur laborum deserunt.
-        - Velit eiusmod amet ad duis in sunt non sint fugiat veniam excepteur.
-        - Nulla excepteur non et cillum quis nisi ex minim est in mollit nisi.
-
-      Lorem minim nulla minim Lorem consectetur do voluptate veniam ea. Adipisicing sint esse officia aute nisi duis officia voluptate exercitation velit minim anim. Esse ex in veniam laborum. Et sint aliqua duis eiusmod incididunt.
+      Hans ist 18 Jahre und geht noch in die Grundschule. Er lebt bei seinen Eltern und interessiert sich für Mode. Dabei spielt für ihn vor allem die Marke eine Rolle. Hans ist generell preisbewusst, jedoch nicht dann, wenn ein Teil besonders modern und populär ist, sodass er in einer solchen Situation auch öfters auf die finanzielle Unterstützung seiner Eltern zurückgreift.
+      
+      Hans wünscht sich, in bestimmten sozialen Kreisen dazuzugehören und schätzt diesen Wunsch als erfüllbar durch das Tragen angesagter Markenmode ein. Dabei wird er von Trends und aktuellen Influencern beeinflusst. Mit seiner Mode möchte Hans auffallen und fragt daher vor der endgültigen Kaufentscheidung immer seine Kumpels, um einen Rat zu bekommen.
     positions:
       social01:
         vote: -2
-        reason: '-2 Dolore reprehenderit et magna velit Lorem adipisicing aliquip nostrud duis laborum.'
+        reason: 'Finde ich nicht! Unsoziale Menschen sollen ruhig noch unsozialer sein als sie es ohnehin schon sind!'
       social02:
         vote: -1
-        reason: '-1 Nostrud ad excepteur sint magna ullamco dolore esse dolor laborum fugiat nulla sit quis.'
+        reason: 'Naja, weiss nicht. Bin ich aber eher dagegen.'
       energy01:
         vote: 1
-        reason: '1 Dolor ullamco et commodo ut laborum adipisicing.'
+        reason: 'Ja na klar. Grün ist auf jeden Fall besser.'
       energy02:
         vote: 2
-        reason: '2 Nisi non consequat aliquip aliquip elit esse et ipsum et.'
+        reason: 'Auf jeden Fall! Warum müssen wir den Mist mit der Kohle ausbaden!? Haben wir die Kohle produziert, oder die Umwelt?'
       misc01:
         vote: 0
-        reason: '0 Sit ea quis ad velit tempor sunt ullamco esse voluptate excepteur.'
+        reason: 'Watt interessieren mich sonstige Fragen...?'
 
   - id: cd02
     listOrder: 2
@@ -43,34 +37,30 @@ candidates:
     party: party-turquoise
     picture: pics/cd02.png
     links:
-      twitter: https://twitter.com/walberater
-      blog: https://some.blog.martin2
+      twitter: https://twitter.com/wahlberater
       facebook: https://facebook.com/bla
-    shortDescription: Anette Anagram Margana Ettena
+    shortDescription: Anette Anagram Margana Ettena.
     description: |
-      Reprehenderit esse laboris culpa consectetur pariatur sint ut cillum eiusmod deserunt exercitation ut tempor ut. Occaecat officia ad sint quis ipsum in id. Eiusmod minim pariatur magna laboris cillum. Reprehenderit labore laboris ex nisi qui eu tempor id aliquip.
+      Annette ist 42 Jahre alt und arbeitet 30 Stunden die Woche als Wissenschaftlerin an der  **Christian-Albrechts-Universität zu Kiel**. Den Rest ihrer Zeit widmet sie sich sozialen Projekten.
 
-      Reprehenderit ut in mollit voluptate aute aute consequat ea nulla aliquip. Nisi adipisicing ex ad deserunt aliquip deserunt quis. Quis cupidatat dolore est reprehenderit eiusmod velit. Est Lorem consectetur qui in labore ad mollit minim exercitation id non ut.
 
-      Voluptate tempor aliqua magna cupidatat non pariatur nulla proident adipisicing occaecat proident. Incididunt mollit Lorem labore consequat veniam proident. Commodo quis anim ullamco nisi dolore et do eiusmod aliqua et adipisicing quis. Exercitation qui cupidatat esse nulla anim adipisicing.
-
-      Eiusmod ex tempor est irure irure non irure tempor. Incididunt culpa ullamco exercitation sunt duis mollit irure ad cillum. Pariatur ut magna cillum deserunt irure duis quis et ullamco et.
+      Annettes Familie lebt in einer Neubausiedlung am Rande von Kiel. Annette hat aber ein eigenes Haus mit großem Garten. Zwei der drei Kinder (21,19) sind bereits aus dem Haus und studieren, der jüngste Sohn (13) wohnt noch zu Hause. Annetes Ehemann Karl-Heinz hat vor zehn Jahren wieder angefangen halbtags zu arbeiten. Mittlerweile arbeitet er Vollzeit als Maskottchen bei seinem Lieblingsfussballverein.
     positions:
       social01:
         vote: 0
-        reason: '0 Dolore reprehenderit et magna velit Lorem adipisicing aliquip nostrud duis laborum.'
+        reason: 'Mir doch egal. Soll jeder sein wie er will!'
       social02:
         vote: -2
-        reason: '-2 Nostrud ad excepteur sint magna ullamco dolore esse dolor laborum fugiat nulla sit quis.'
+        reason: 'Ich mag das mit dem gendern absolut nicht!'
       energy01:
         vote: -1
-        reason: '-1 Dolor ullamco et commodo ut laborum adipisicing.'
+        reason: 'Mir wäre türkise Energie eigentlich lieber.'
       energy02:
         vote: 1
-        reason: '1 Nisi non consequat aliquip aliquip elit esse et ipsum et.'
+        reason: 'Ja, Energie kommt schließlich aus der Umwelt!'
       misc01:
         vote: 2
-        reason: '2 Sit ea quis ad velit tempor sunt ullamco esse voluptate excepteur.'
+        reason: 'Auf jeden Fall mehr von den sonstigen Fragen!'
 
   - id: cd03
     listOrder: 4
@@ -79,32 +69,60 @@ candidates:
     party: party-turquoise
     picture: pics/cd03.png
     links:
-      twitter: https://twitter.com/walberater
+      twitter: https://twitter.com/wahlberater
       blog: https://some.blog.martin2
       facebook: https://facebook.com/bla
-    shortDescription: Anette Anagram Margana Ettena
+    shortDescription: Dr. Maxi Muster hat die volle Kontrolle!
     description: |
-      Ipsum sint velit laboris reprehenderit laborum qui elit labore sunt. Excepteur est esse ut excepteur non proident exercitation do sint eu elit officia. Cillum laborum pariatur in aute nostrud adipisicing duis ullamco laborum esse irure nulla ut deserunt.
-
-      Nisi sint pariatur sit voluptate deserunt. Nulla pariatur occaecat consequat ex proident officia. Exercitation ex voluptate enim sint sunt commodo qui. Incididunt sit et aliqua voluptate aute in mollit aliqua. Pariatur duis quis minim cupidatat nulla duis cillum cillum non. Dolor pariatur adipisicing dolore cillum esse ipsum commodo minim nostrud eiusmod qui.
-
-      Consectetur occaecat deserunt minim eu mollit aute eiusmod esse anim laboris id. Irure veniam dolor fugiat magna et aliquip dolore. Sit cillum sunt irure proident. Enim elit anim ex velit proident sit ex aute officia deserunt do sit culpa. In est duis voluptate commodo officia aliqua amet laborum labore ipsum. Ullamco nulla anim irure ad ut. Tempor cupidatat ut laboris qui ut labore dolore.
+      Herr Dr. Muster ist 55 Jahre alt. Er ist Geschäftsführer eines mittelständischen Unternehmens in Kassel. Sein Unternehmen hat 555 Mitarbeiter und stellt elektrotechnische Anlagen im Bereich Industrieautomation her. Die Geschäftsführung teilt er sich mit seinem Kollegen Dr. Beispiel, der den fachlichen Bereich übernimmt. Dr. Muster ist der kaufmännische Geschäftsführer und hat einen Führungskreis von sieben Abteilungsleitern unter sich.
+      
+      Dr. Muster bewohnt eine preiswerte 2-Zimmer-Mietwohnung in einer Kleinstadt. 
+      Er verwöhnt gern seine drei Enkel und unternimmt ab und zu etwas mit ihnen.
     positions:
       social01:
         vote: 2
-        reason: '2 Dolore reprehenderit et magna velit Lorem adipisicing aliquip nostrud duis laborum.'
+        reason: 'Menschen mit sozialem Bewusstsein braucht das Land!'
       social02:
         vote: 0
-        reason: '0 Nostrud ad excepteur sint magna ullamco dolore esse dolor laborum fugiat nulla sit quis.'
+        reason: 'Ach, schon wieder geht\u0027s um\u0027s genedern.. Watt geht\u0027s mich an!?'
       energy01:
         vote: -2
-        reason: '-2 Dolor ullamco et commodo ut laborum adipisicing.'
+        reason: 'NE!! Bloß nicht noch mehr grüne Energie!'
       energy02:
         vote: -1
-        reason: '-1 Nisi non consequat aliquip aliquip elit esse et ipsum et.'
+        reason: 'Na ich weiss nicht. Wie soll die Umwelt das denn bezahlen!?'
       misc01:
         vote: 1
-        reason: '1 Sit ea quis ad velit tempor sunt ullamco esse voluptate excepteur.'
+        reason: 'Sonstige Fragen finde ich gut!'
+
+  - id: cd06
+    listOrder: 6
+    publishPersonalInfo: false
+    name: Some Name that wont be published
+    party: party-turquoise
+    picture: pics/cd05.png
+    links:
+      blog: https://some.blog.martin2
+      facebook: https://facebook.com/bla
+    shortDescription: Will not be published
+    description: |
+      This description will not be published.
+    positions:
+      social01:
+        vote: -1
+        reason: 'Quatsch, der Mensch ist per definition sozial.'
+      social02:
+        vote: 1
+        reason: 'Ja. Wie es da steht.'
+      energy01:
+        vote: 2
+        reason: 'Grün ist immerhin die Farbe der Saison.'
+      energy02:
+        vote: 0
+        reason: 'Mit Steuern kenn ich mich nicht so gut aus..'
+      misc01:
+        vote: 0
+        reason: 'Was war die Frage nochmal?'
 ---
 candidates:
   - id: cd04
@@ -114,67 +132,60 @@ candidates:
     party: party-orange
     picture: pics/cd04.png
     links:
-      twitter: https://twitter.com/walberater
+      twitter: https://twitter.com/wahlberater
       blog: https://some.blog.martin2
       facebook: https://facebook.com/bla
-    shortDescription: Anette Anagram Margana Ettena
+    shortDescription: Maxi will hier durchstarten.
     description: |
-      Consectetur voluptate adipisicing velit magna adipisicing fugiat laborum. Nulla ad reprehenderit laborum excepteur minim sit labore commodo ad. Consequat irure exercitation excepteur sunt deserunt exercitation minim laboris sit dolore Lorem sint consectetur ad. Aliquip laborum irure quis sint irure nisi cillum ex veniam. Aliqua ea eiusmod mollit anim aute nostrud irure ex adipisicing est aliqua. Culpa labore dolor duis nulla.
+      Maxi hat es mit 45 Jahre schon zum Leiter einer Personalabteilung gebracht. Er ist geschieden und hat zwei Kinder (9 und 5).
+      Maxi ist ein eher ruhiger Typ und legt Wert auf einen ausgeglichene Work/Life-Balance und dass alle Mitarbeiter zufrieden sind.
 
-      Consectetur est eu dolor ea ex laboris ea minim ullamco tempor aute laborum tempor. Esse ex enim ad pariatur amet irure cillum dolore ipsum qui enim ea voluptate. Ullamco exercitation tempor do cillum velit adipisicing culpa id occaecat exercitation aliquip est. Ipsum deserunt ex dolore eu sunt magna ea qui in qui esse nostrud quis eiusmod.
-
-      Lorem sint veniam sit laborum ea ut. Ullamco officia elit sunt ex dolor labore. Sint minim quis dolor in magna. Aliqua laboris pariatur qui dolor. Excepteur amet laboris commodo ea cupidatat officia incididunt cillum. Aute officia laboris cillum occaecat ea adipisicing consequat. Reprehenderit magna incididunt nulla occaecat esse voluptate sit anim.
-
-      Sunt amet sunt ipsum minim minim occaecat nulla nisi sit eiusmod nostrud elit commodo et. Commodo aute amet consequat dolor esse deserunt cupidatat. Nulla aute voluptate duis magna minim velit ut. Duis proident occaecat laborum anim aliqua ipsum. Veniam dolore proident dolor laboris consectetur ullamco cillum.
-
-      Nostrud exercitation est culpa aliquip do ea velit fugiat. Ex duis mollit occaecat sunt nisi. Nostrud irure et ex Lorem aliqua amet velit nisi magna id voluptate. Sunt laboris anim eu sunt aute sunt officia ipsum est. Proident Lorem cupidatat culpa consectetur eu nulla ullamco ad id anim esse quis. Aliqua qui est commodo labore. Pariatur aliqua reprehenderit ad sunt voluptate elit duis.
+      Seit seiner Scheidung vor fünf Jahren ist Maxi ein wenig eigenbrötlerisch geworden. Er bewegt sich wenig und verbringt viel Zeit vor dem Fernseher. Seine Gesundheitswerte haben sich in letzter Zeit sehr verschlechtert. Er müsste in jeder Hinsicht mehr für sich tun. Einer der wenigen verbliebenen Freunde hat ihm jetzt ein Fitnessarmband geschenkt. Leider kehrt auch damit die Lebensfreude nicht wirklich zurück.
     positions:
       social01:
         vote: 1
-        reason: '1 Dolore reprehenderit et magna velit Lorem adipisicing aliquip nostrud duis laborum.'
+        reason: 'Klingt für mich absolut plausibel.'
       social02:
         vote: 2
-        reason: '2 Nostrud ad excepteur sint magna ullamco dolore esse dolor laborum fugiat nulla sit quis.'
+        reason: 'Hier muss auf jeden Fall mehr gender rein!'
       energy01:
         vote: 0
-        reason: '0 Dolor ullamco et commodo ut laborum adipisicing.'
+        reason: 'Energie hin oder her, hauptsache der Strom kommt aus der Steckdose.'
       energy02:
         vote: -2
-        reason: '-2 Nisi non consequat aliquip aliquip elit esse et ipsum et.'
+        reason: 'Auf keinen Fall! Was wollen wir denn noch alles von der Umwelt verlangen!?'
       misc01:
         vote: -1
-        reason: '-1 Sit ea quis ad velit tempor sunt ullamco esse voluptate excepteur.'
+        reason: 'Langsam reicht\u0027s aber mit dem gefrage.'
 
   - id: cd05
     listOrder: 6
-    publishPersonalInfo: false
+    publishPersonalInfo: true
     name: Lisa Lustig
     party: party-orange
     picture: pics/cd05.png
     links:
-      twitter: https://twitter.com/walberater
       blog: https://some.blog.martin2
       facebook: https://facebook.com/bla
-    shortDescription: Anette Anagram Margana Ettena
+    shortDescription: Lisa ist Lustig.
     description: |
-      Ipsum sint velit laboris reprehenderit laborum qui elit labore sunt. Excepteur est esse ut excepteur non proident exercitation do sint eu elit officia. Cillum laborum pariatur in aute nostrud adipisicing duis ullamco laborum esse irure nulla ut deserunt.
+      Elisabeth ist eine junggebliebene Rentnerin aus Bottrop. Sie lebt allein, besitzt eine größere Eigentumswohnung und ein schickes Cabriolet. Nach einer Hüft-OP ist sie leicht gehbehindert, umarmt aber dennoch begeistert das Leben. Nach dem Tod ihres Mannes hat sie das Reisen für sich entdeckt und auch schon ferne Länder erkundet. 
 
-      Nisi sint pariatur sit voluptate deserunt. Nulla pariatur occaecat consequat ex proident officia. Exercitation ex voluptate enim sint sunt commodo qui. Incididunt sit et aliqua voluptate aute in mollit aliqua. Pariatur duis quis minim cupidatat nulla duis cillum cillum non. Dolor pariatur adipisicing dolore cillum esse ipsum commodo minim nostrud eiusmod qui.
-
-      Consectetur occaecat deserunt minim eu mollit aute eiusmod esse anim laboris id. Irure veniam dolor fugiat magna et aliquip dolore. Sit cillum sunt irure proident. Enim elit anim ex velit proident sit ex aute officia deserunt do sit culpa. In est duis voluptate commodo officia aliqua amet laborum labore ipsum. Ullamco nulla anim irure ad ut. Tempor cupidatat ut laboris qui ut labore dolore.
+      Elisabeth nennt sich selbst eigentlich nur Lisa. Gemeinsam mit einer Freundin geht sie zudem gern shoppen und genießt das Kulturangebot in ihrer Stadt. Das Internet nutzt sie sehr extensiv, um immer auf dem Laufenden zu sein. Auch ihr Smartphone neuester Generation ist ständig im Einsatz. Und auf Facebook hat sie ihre Jugendliebe wiedergefunden.
+      Lisa ist sich nicht sicher, ob sie den Inhaltsangaben auf der Milch vertrauen kann und verlässt sich lieber auf sachverständige Verwandte.
     positions:
       social01:
         vote: -1
-        reason: '-1 Dolore reprehenderit et magna velit Lorem adipisicing aliquip nostrud duis laborum.'
+        reason: 'Unsoziale Menschen sollten sich nicht verbiegen müssen...'
       social02:
         vote: 1
-        reason: '1 Nostrud ad excepteur sint magna ullamco dolore esse dolor laborum fugiat nulla sit quis.'
+        reason: 'Ja, ich bin kein Rentner!'
       energy01:
         vote: 2
-        reason: '2 Dolor ullamco et commodo ut laborum adipisicing.'
+        reason: 'Grün! Natürlich! Liest man doch überall in den Zeitungen!'
       energy02:
         vote: 0
-        reason: '0 Nisi non consequat aliquip aliquip elit esse et ipsum et.'
+        reason: 'Keine Ahnung, aber zahlt die denn nicht schon genug Steuern?'
       misc01:
         vote: -2
-        reason: '-2 Sit ea quis ad velit tempor sunt ullamco esse voluptate excepteur.'
+        reason: 'Jetzt hab ich keine Lust mehr auf Fragen...'

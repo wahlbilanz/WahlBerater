@@ -35,7 +35,7 @@
       </div>
     </div>
 
-    <div class="candidate-description" [innerHTML]="data.candidate.description | markdown" *ngIf="data.candidate.description"></div>
+    <div class="candidate-description" [innerHTML]="data.candidate.description | markdown: false" *ngIf="data.candidate.description"></div>
   </div>
 
   <h2>Standpunkte von {{ data.candidate.name }}</h2>
