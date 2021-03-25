@@ -13,6 +13,7 @@ import { DecisionTemplatesComponent } from '../../../helpers/decision-templates/
 import { PartyResult, PartyScoreResult } from '../../../../definitions/models/results.model';
 import { Score } from '../../../../definitions/models/score.model';
 import { getCandidatePersonalInfo } from '../../../../definitions/functions/getCandidatePersonalInfo';
+import { candidateKeyValueSorter } from 'src/app/definitions/functions/candidate-sort.function';
 
 @Component({
   selector: 'app-claim-candidate-viz',
@@ -31,6 +32,8 @@ export class ClaimCandidateVizComponent implements OnInit {
 
   @Input() partyScoreResult: PartyScoreResult;
   @Input() showCandidates = false;
+
+  candidateSorter = candidateKeyValueSorter;
 
   constructor() {}
 

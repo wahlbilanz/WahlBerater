@@ -46,7 +46,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let data of party.candidates | keyvalue">
+            <tr *ngFor="let data of party.candidates | keyvalue: candidateSorter">
               <td>{{ (personalCandidates | personalDataOf: data.key).name }}</td>
               <td>
                 <ng-container

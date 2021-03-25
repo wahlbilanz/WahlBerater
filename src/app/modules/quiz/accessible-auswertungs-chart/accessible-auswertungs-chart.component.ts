@@ -6,6 +6,7 @@ import { ClaimMap } from '../../../definitions/models/claim.model';
 import { PartyScoreResult } from '../../../definitions/models/results.model';
 import { Store } from '@ngrx/store';
 import { AppPartialState } from '../../../+state/app.reducer';
+import { candidateKeyValueSorter } from 'src/app/definitions/functions/candidate-sort.function';
 
 @Component({
   selector: 'app-accessible-auswertungs-chart',
@@ -21,6 +22,8 @@ export class AccessibleAuswertungsChartComponent implements OnInit {
 
   @Input() partyScoreResult: PartyScoreResult;
   @Input() showCandidates = false;
+
+  candidateSorter = candidateKeyValueSorter;
 
   constructor(private store: Store<AppPartialState>) {}
 
