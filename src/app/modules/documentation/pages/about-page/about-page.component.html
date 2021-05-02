@@ -30,7 +30,18 @@
   </p>
 
   <!-- TODO: hier sind noch einige Platzhalter zu fuellen... -->
+</section>
 
+<h2 id="faq">Häufig gestellte und ausgedachte Fragen</h2>
+
+<section class="faq-section">
+  <nz-collapse>
+    <nz-collapse-panel *ngFor="let f of faq" [nzHeader]="f.question">
+      <p>
+        {{ f.answer }}
+      </p>
+    </nz-collapse-panel>
+  </nz-collapse>
   <p>
     <a routerLink="/docs/privacy">Datenschutz</a> &mdash;
     <a routerLink="/docs/imprint">Impressum</a>

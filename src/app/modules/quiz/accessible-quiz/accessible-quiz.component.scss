@@ -1,5 +1,10 @@
 @import '../../../../assets/styles/variables';
 // h1,
+h1 {
+  @media screen and (min-width: $wb-breakpoint-medium) {
+    padding: 0 $wb-space-medium;
+  }
+}
 .auswertungslink,
 .category {
   background-color: $wb-color-page-foreground-background;
