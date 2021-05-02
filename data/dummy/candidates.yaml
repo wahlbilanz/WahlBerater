@@ -2,16 +2,16 @@ candidates:
   - id: cd01
     listOrder: 1
     publishPersonalInfo: true
-    name: Hans Franz
+    name: Hans Löffler
     party: party-turquoise
-    picture: pics/cd01.png
+    picture: pics/hans.jpeg
     links:
       twitter: https://twitter.com/wahlberater
       blog: https://some.blog.martin2
-    shortDescription: Ich bin der Hans. Der Franz Hans.
+    shortDescription: Ich bin der Hans. Der Hans Löffler.
     description: |
       Hans ist 18 Jahre und geht noch in die Grundschule. Er lebt bei seinen Eltern und interessiert sich für Mode. Dabei spielt für ihn vor allem die Marke eine Rolle. Hans ist generell preisbewusst, jedoch nicht dann, wenn ein Teil besonders modern und populär ist, sodass er in einer solchen Situation auch öfters auf die finanzielle Unterstützung seiner Eltern zurückgreift.
-      
+
       Hans wünscht sich, in bestimmten sozialen Kreisen dazuzugehören und schätzt diesen Wunsch als erfüllbar durch das Tragen angesagter Markenmode ein. Dabei wird er von Trends und aktuellen Influencern beeinflusst. Mit seiner Mode möchte Hans auffallen und fragt daher vor der endgültigen Kaufentscheidung immer seine Kumpels, um einen Rat zu bekommen.
     positions:
       social01:
@@ -35,11 +35,11 @@ candidates:
     publishPersonalInfo: true
     name: Anette Anagram
     party: party-turquoise
-    picture: pics/cd02.png
+    picture: pics/anette.jpeg
     links:
       twitter: https://twitter.com/wahlberater
       facebook: https://facebook.com/bla
-    shortDescription: Anette Anagram Margana Ettena.
+    shortDescription: Anette Anagram wird die Politik revolutionieren.
     description: |
       Annette ist 42 Jahre alt und arbeitet 30 Stunden die Woche als Wissenschaftlerin an der  **Christian-Albrechts-Universität zu Kiel**. Den Rest ihrer Zeit widmet sie sich sozialen Projekten.
 
@@ -65,18 +65,18 @@ candidates:
   - id: cd03
     listOrder: 4
     publishPersonalInfo: true
-    name: Maxi Muster
+    name: Peter Muster
     party: party-turquoise
-    picture: pics/cd03.png
+    picture: pics/maxi1.jpeg
     links:
       twitter: https://twitter.com/wahlberater
       blog: https://some.blog.martin2
       facebook: https://facebook.com/bla
-    shortDescription: Dr. Maxi Muster hat die volle Kontrolle!
+    shortDescription: Dr. Peter Muster hat die volle Kontrolle!
     description: |
       Herr Dr. Muster ist 55 Jahre alt. Er ist Geschäftsführer eines mittelständischen Unternehmens in Kassel. Sein Unternehmen hat 555 Mitarbeiter und stellt elektrotechnische Anlagen im Bereich Industrieautomation her. Die Geschäftsführung teilt er sich mit seinem Kollegen Dr. Beispiel, der den fachlichen Bereich übernimmt. Dr. Muster ist der kaufmännische Geschäftsführer und hat einen Führungskreis von sieben Abteilungsleitern unter sich.
-      
-      Dr. Muster bewohnt eine preiswerte 2-Zimmer-Mietwohnung in einer Kleinstadt. 
+
+      Dr. Muster bewohnt eine preiswerte 2-Zimmer-Mietwohnung in einer Kleinstadt.
       Er verwöhnt gern seine drei Enkel und unternimmt ab und zu etwas mit ihnen.
     positions:
       social01:
@@ -130,7 +130,7 @@ candidates:
     publishPersonalInfo: true
     name: Maxi Muster
     party: party-orange
-    picture: pics/cd04.png
+    picture: pics/maxi2.jpeg
     links:
       twitter: https://twitter.com/wahlberater
       blog: https://some.blog.martin2
@@ -163,13 +163,13 @@ candidates:
     publishPersonalInfo: true
     name: Lisa Lustig
     party: party-orange
-    picture: pics/cd05.png
+    picture: pics/lisa.jpeg
     links:
       blog: https://some.blog.martin2
       facebook: https://facebook.com/bla
     shortDescription: Lisa ist Lustig.
     description: |
-      Elisabeth ist eine junggebliebene Rentnerin aus Bottrop. Sie lebt allein, besitzt eine größere Eigentumswohnung und ein schickes Cabriolet. Nach einer Hüft-OP ist sie leicht gehbehindert, umarmt aber dennoch begeistert das Leben. Nach dem Tod ihres Mannes hat sie das Reisen für sich entdeckt und auch schon ferne Länder erkundet. 
+      Elisabeth ist eine junggebliebene Rentnerin aus Bottrop. Sie lebt allein, besitzt eine größere Eigentumswohnung und ein schickes Cabriolet. Nach einer Hüft-OP ist sie leicht gehbehindert, umarmt aber dennoch begeistert das Leben. Nach dem Tod ihres Mannes hat sie das Reisen für sich entdeckt und auch schon ferne Länder erkundet.
 
       Elisabeth nennt sich selbst eigentlich nur Lisa. Gemeinsam mit einer Freundin geht sie zudem gern shoppen und genießt das Kulturangebot in ihrer Stadt. Das Internet nutzt sie sehr extensiv, um immer auf dem Laufenden zu sein. Auch ihr Smartphone neuester Generation ist ständig im Einsatz. Und auf Facebook hat sie ihre Jugendliebe wiedergefunden.
       Lisa ist sich nicht sicher, ob sie den Inhaltsangaben auf der Milch vertrauen kann und verlässt sich lieber auf sachverständige Verwandte.

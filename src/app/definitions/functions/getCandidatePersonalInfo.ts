@@ -5,10 +5,10 @@ export function getCandidatePersonalInfo(candidateMap: PersonalCandidateMap, can
     return candidateMap[candidateId];
   }
   return {
-    description: 'Unbekannt',
+    description: 'Diese Person hat entweder keine persönlichen Informationen angebeben oder diese in der Zwischenzeit löschen lassen.',
     links: undefined,
     name: 'Unbekannt',
     picture: undefined,
-    shortDescription: 'Unbekannt',
+    shortDescription: 'Diese Person hat entweder keine persönlichen Informationen angebeben oder diese in der Zwischenzeit löschen lassen.',
   };
 }

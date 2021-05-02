@@ -1,7 +1,7 @@
 claims:
   - id: social01
     order: 1
-    title: Unsoziale Menschen sollten sozialer sein
+    title: Unsoziale Menschen sollten sozialer sein.
     category: social-stuff
     description: |
       Amerikanische Wissenschaftler haben herausgefunden, dass Sozialität viel sozialer ist.
@@ -16,7 +16,7 @@ claims:
     title: Alles sollte gegendert werden.
     category: social-stuff
     description: |
-      Es gibt verschiedene Möglichkeiten zu gendern, bspw mit dem sogenannten Gender-Sternchen (Kolleg*in), dem Gender-Gap (Künstler_innen) oder dem Gender-Doppelpunkt (Mitarbeiter:innen).Ziel ist dabei neben dem männlichen und weiblichen auch weitere Geschlechter und Geschlechtsidentitäten typografisch sichtbar zu machen und einzubeziehen.
+      Es gibt verschiedene Möglichkeiten zu gendern, bspw. mit dem sogenannten Gender-Sternchen (Kolleg*in), dem Gender-Gap (Künstler_innen) oder dem Gender-Doppelpunkt (Mitarbeiter:innen). Ziel ist dabei neben dem männlichen und weiblichen auch weitere Geschlechter und Geschlechtsidentitäten typografisch sichtbar zu machen und einzubeziehen.
     provenance:
       - claim: Gendern
         description: Mehr gendern!
@@ -28,17 +28,17 @@ claims:
 
   - id: energy01
     order: 1
-    title: Energie sollte grün sein
+    title: Energie sollte grün sein.
     category: energy
     description: |
-      Ungarische Wissenschaftler haben herausgefunden, das grüne Energie besser _riecht_.
+      Ungarische Wissenschaftler haben herausgefunden, dass grüne Energie besser _riecht_.
     provenance:
       - claim: Mehr grüne Energie
         description: null
 
   - id: energy02
     order: 4
-    title: Die Umwelt sollte mehr Energiesteuern zahlen
+    title: Die Umwelt sollte mehr Energiesteuern zahlen.
     category: energy
     description: |
       Mehr Steuern sind immer besser!
