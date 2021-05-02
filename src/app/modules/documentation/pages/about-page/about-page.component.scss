@@ -1,0 +1,22 @@
+@import '../../../../../assets/styles/variables';
+
+h1,
+.about,
+p {
+  margin: $wb-space-large $wb-space-medium;
+  @media screen and (max-width: $wb-breakpoint-medium) {
+    margin: $wb-space-large 0;
+  }
+}
+.about {
+  background-color: $wb-color-page-foreground-background;
+  padding: $wb-space-medium $wb-space-large;
+  box-shadow: $wb-shadow-normal;
+  @media screen and (max-width: $wb-breakpoint-medium) {
+    padding: $wb-space-small $wb-space-medium;
+  }
+  img {
+    width: 100%;
+    max-width: 800px;
+  }
+}
