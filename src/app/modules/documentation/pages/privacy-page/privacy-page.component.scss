@@ -1,14 +1,14 @@
 @import '../../../../../assets/styles/variables';
 
 h1,
-.privacy,
+section,
 p {
   margin: $wb-space-large $wb-space-medium;
   @media screen and (max-width: $wb-breakpoint-medium) {
     margin: $wb-space-large 0;
   }
 }
-.privacy {
+section {
   background-color: $wb-color-page-foreground-background;
   padding: $wb-space-medium $wb-space-large;
   box-shadow: $wb-shadow-normal;

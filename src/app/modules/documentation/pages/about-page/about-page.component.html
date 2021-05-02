@@ -37,11 +37,11 @@
 <section class="faq-section">
   <nz-collapse>
     <nz-collapse-panel *ngFor="let f of faq" [nzHeader]="f.question">
-      <p>
-        {{ f.answer }}
-      </p>
+      <p [innerHTML]="f.answer | markdown"></p>
     </nz-collapse-panel>
   </nz-collapse>
+</section>
+<section>
   <p>
     <a routerLink="/docs/privacy">Datenschutz</a> &mdash;
     <a routerLink="/docs/imprint">Impressum</a>
