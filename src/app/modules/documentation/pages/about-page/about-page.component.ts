@@ -57,7 +57,7 @@ export class AboutPageComponent implements OnInit {
           'Der AStA war nicht in die Thesengenerierung und -auswahl einbezogen und hat die Thesen auch erst am Tag der Veröffentlichung gesehen.',
       },
       {
-        question: 'wie berechnet ihr die auswertung?',
+        question: 'Wie berechnet ihr die auswertung?',
         answer: '',
       },
       {
@@ -69,15 +69,15 @@ export class AboutPageComponent implements OnInit {
         answer: '',
       },
       {
-        question: 'mit wem teilt ihr meine Daten?',
+        question: 'Wer hat alles Zugriff auf meine Daten?',
         answer: '',
       },
       {
-        question: 'wie kann ich meine Daten löschen?',
+        question: 'Wie kann ich meine Daten löschen?',
         answer: '',
       },
       {
-        question: 'kann ich den Code zur App bekommen?',
+        question: 'Kann ich den Code zur App bekommen?',
         answer: '',
       },
       {
@@ -93,7 +93,7 @@ export class AboutPageComponent implements OnInit {
           '\n\n' +
           'Die Entwicklung einer Wahlentscheidungshilfe ist jedoch wesentlich aufwändiger als es im ersten Moment scheint! ' +
           'Wir helfen dir aber gern als unabhängiges Team. ' +
-          'Schreib uns einfach eine E-Mail wofür du den WahlBerater brauchst und wir finden dann sicher auch eine Lösung für dich :)',
+          'Schreib uns einfach eine E-Mail wofür du den WahlBerater brauchst und wir finden dann sicher auch eine Lösung für dich!',
       },
     ];
   }
