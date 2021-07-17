@@ -16,26 +16,35 @@ export class AboutPageComponent implements OnInit {
   constructor() {
     this.faq = [
       {
-        question: 'Was soll ich fragen?',
-        answer: 'Vielleicht fragst du das am besten jemand anderes...',
-      },
-      {
         question: 'Wie kommt ihr auf den Namen?',
-        answer: 'Wir haben locker 100+ Vorschläge diskutiert. Am Ende gab es natürlich eine demokratische Entscheidung! :)',
+        answer:
+          'Wir haben locker 100+ Vorschläge diskutiert. Am Ende gab es natürlich eine demokratische Entscheidung! Und WahlBerater ist doch eigentlich ganz passend, oder? :)',
       },
       {
         question: 'Wer seid ihr?',
-        answer: '',
+        answer:
+          'Sophie Flack ist eine Politikwissenschaftlerin, die sich nicht nur auf Parteienforschung spezialisiert hat, ' +
+          'sondern auch eine außergewöhnlich internationale Perspektive mitbringt: Sie hat beispielsweise in Deutschland, ' +
+          'den Niederlanden, und Spanien studiert und zuletzt im chilenischen Generalkonsulat gearbeitet.<br>' +
+          'Martin Peters hat als DevOps Engineer und Software Entwickler ein beeindruckendes Gespür für Webanwendungen. ' +
+          'Er arbeitet hauptberuflich für ein Unternehmen in der Martimen Logistik und Tracking Industrie. ' +
+          'Sein Fokus liegt auf der Entwicklung moderner Webanwendungen, Optimierung der Entwicklunsabläufe und Anaylse von Stromdaten.<br>' +
+          'Martin Scharm ist einer der DeinWal-Gründer und hat mal was mit Bioinformatik und Systembiologie gelernt. Er arbeitet seit 10+ Jahren als Systemingenieur und ' +
+          'sucht freiberuflich nach spannenden IT-Projekten und Herausforderungen.<br>' +
+          'Wir haben alle Spaß an interdisziplinärer Arbeit. Insbesondere Politik sollte für jeden einfach zugänglich sein!',
       },
       {
         question: 'Welcher Liste gehört ihr an?',
         answer:
-          'Wir gehören keiner Liste an und kennen die Kandidierenden auch nicht. ' +
-          'Wir sind parteilos und haben einfach nur Spaß an Politik und Demokratie.',
+          'Wir gehören keiner Liste an und kennen die Kandidierenden auch nicht. Wir studieren nichtmal an der FernUniversität. ' +
+          'Wir sind parteilos und haben einfach nur Spaß an Politik, Demokratie und coolen Projekten.',
       },
       {
         question: 'Wo habt ihr die Thesen her?',
-        answer: '',
+        answer:
+          'Die Thesen kommen im Wesentlichen von euch! Wir haben mittels Limesurvey Thesenvorschläge gesammelt und ' +
+          'für die Einreichung Werbung in der Zeitschrift der Studierendenschaft der FernUniversität in Hagen (Sprachrohre 04/20, 02/21, 03/21) ' +
+          'und in den sozialen Medien gemacht. #TODO',
       },
       {
         question: 'Wie habt ihr die Thesen ausgewählt?',
@@ -61,7 +70,7 @@ export class AboutPageComponent implements OnInit {
         answer: '',
       },
       {
-        question: 'Welche Daten sammelt ihr?',
+        question: 'Welche Daten sammelt ihr auf der Webseite?',
         answer: '',
       },
       {
@@ -84,16 +93,17 @@ export class AboutPageComponent implements OnInit {
         question: 'Wo kann ich mich registrieren?',
         answer:
           'Ähm, wofür willst du dich nochmal registrieren? ' +
-          'Hier gibt es keine Accounts und zum Kandidieren kommst du ein bisschen zu spät.',
+          'Hier gibt es keine Accounts. Wenn du für das StuPA kandidieren möchtest wende dich am besten an den <a href="https://www.fernstudis.de/index.php?menuid=4">AStA</a> (für diese Wahl kommst du aber ein bisschen zu spät).',
       },
       {
         question: 'Kann ich auch einen WahlBerater bekommen?',
         answer:
-          'Klar! Der WahlBerater ist Quelloffen und steht unter einer *freien* Lizenz zur Verfügung! Du kannst ihn wirklich benutzen wie und wofür du möchtest!  ' +
+          'Klar! Der WahlBerater ist Quelloffen und steht unter einer freien Lizenz zur Verfügung! Du kannst ihn benutzen wie und wofür du möchtest.  ' +
           '\n\n' +
           'Die Entwicklung einer Wahlentscheidungshilfe ist jedoch wesentlich aufwändiger als es im ersten Moment scheint! ' +
+          'Die Entwicklung einer Software ist da eher Nebensache. ' +
           'Wir helfen dir aber gern als unabhängiges Team. ' +
-          'Schreib uns einfach eine E-Mail wofür du den WahlBerater brauchst und wir finden dann sicher auch eine Lösung für dich!',
+          '[Schreib uns](/docs/imprint) einfach eine E-Mail wofür du den WahlBerater brauchst und wir finden dann sicher auch eine Lösung für dich!',
       },
     ];
   }
