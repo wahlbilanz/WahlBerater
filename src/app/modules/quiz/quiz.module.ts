@@ -22,6 +22,7 @@ import { AccessibleQuizComponent } from './accessible-quiz/accessible-quiz.compo
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { ClaimModule } from '../claim/claim.module';
 import { AccessibleAuswertungsChartComponent } from './accessible-auswertungs-chart/accessible-auswertungs-chart.component';
+import { NzGridModule } from 'ng-zorro-antd/grid';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { AccessibleAuswertungsChartComponent } from './accessible-auswertungs-ch
     FormsModule,
     NzButtonModule,
     ClaimModule,
+    NzGridModule,
   ],
 })
 export class QuizModule {}

@@ -13,3 +13,9 @@
 <ng-template #yesyes>
   <app-decision-icon [vote]="2"></app-decision-icon>
 </ng-template>
+<ng-template #noDisagree>
+  <app-decision-icon [vote]="-1" [disagree]="true"></app-decision-icon>
+</ng-template>
+<ng-template #yesDisagree>
+  <app-decision-icon [vote]="1" [disagree]="true"></app-decision-icon>
+</ng-template>

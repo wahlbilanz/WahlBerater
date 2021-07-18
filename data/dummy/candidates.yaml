@@ -156,7 +156,7 @@ candidates:
         reason: 'Auf keinen Fall! Was wollen wir denn noch alles von der Umwelt verlangen!?'
       misc01:
         vote: -1
-        reason: 'Langsam reicht\u0027s aber mit dem gefrage.'
+        reason: 'Langsam reicht es aber mit dem gefrage.'
 
   - id: cd05
     listOrder: 6

@@ -47,11 +47,19 @@ export class ClaimCandidateVizComponent implements OnInit {
     if (direction > 1 && userDecision && userDecision.decision > 0 && userDecision.fav) {
       return this.decisionTemplates.yesyesTempleate;
     } else if (direction > 1 / 3) {
-      return this.decisionTemplates.yesTempleate;
+      if (userDecision?.decision > 0) {
+        return this.decisionTemplates.yesTempleate;
+      } else {
+        return this.decisionTemplates.yesDisagreeTempleate;
+      }
     } else if (direction < -1 && userDecision && userDecision.decision < 0 && userDecision.fav) {
       return this.decisionTemplates.nonoTempleate;
     } else if (direction < -1 / 3) {
-      return this.decisionTemplates.noTempleate;
+      if (userDecision?.decision < 0) {
+        return this.decisionTemplates.noTempleate;
+      } else {
+        return this.decisionTemplates.noDisagreeTempleate;
+      }
     } else {
       return this.decisionTemplates.skipTempleate;
     }
@@ -60,9 +68,9 @@ export class ClaimCandidateVizComponent implements OnInit {
   getCandidateTemplate(candidateDecision: Position, candidateScore: Score, userDecision: Vote): TemplateRef<any> {
     if (!candidateScore || candidateScore.score === 0) {
       if (candidateDecision.vote > 0) {
-        return this.decisionTemplates.yesTempleate;
+        return this.decisionTemplates.yesDisagreeTempleate;
       } else if (candidateDecision.vote < 0) {
-        return this.decisionTemplates.noTempleate;
+        return this.decisionTemplates.noDisagreeTempleate;
       }
       return this.decisionTemplates.skipTempleate;
     }
@@ -71,12 +79,18 @@ export class ClaimCandidateVizComponent implements OnInit {
       if (userDecision && candidateDecision.vote > 1 && userDecision.decision > 0 && userDecision.fav) {
         return this.decisionTemplates.yesyesTempleate;
       }
-      return this.decisionTemplates.yesTempleate;
+      if (userDecision?.decision > 0) {
+        return this.decisionTemplates.yesTempleate;
+      }
+      return this.decisionTemplates.yesDisagreeTempleate;
     } else {
       if (userDecision && candidateDecision.vote < -1 && userDecision.decision < 0 && userDecision.fav) {
         return this.decisionTemplates.nonoTempleate;
       }
-      return this.decisionTemplates.noTempleate;
+      if (userDecision?.decision < 0) {
+        return this.decisionTemplates.noTempleate;
+      }
+      return this.decisionTemplates.noDisagreeTempleate;
     }
   }
 

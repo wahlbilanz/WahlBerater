@@ -4,7 +4,9 @@
       <!-- Party -->
       <tr class="party-row">
         <th>
-          {{ politicalData.parties[party.party].name }}
+          <a [routerLink]="'/parties/' + party.party">
+            {{ politicalData.parties[party.party].name }}
+          </a>
         </th>
         <td>
           <ng-container *ngFor="let category of party.scores | keyvalue">
@@ -32,8 +34,9 @@
           <tr class="candidate-spacer"></tr>
           <tr class="candidate-row">
             <th>
-              <!--          <a [routerLink]="'/candidates/' + candidate.id">{{ candidate.personal.name }}</a> <small>({{politicalData.parties[candidate.political.party].name}})</small>-->
-              {{ candidate.value.personal.name }}
+              <a [routerLink]="'/parties/' + party.party + '/candidates/' + candidate.value.id">
+                {{ candidate.value.personal.name }}
+              </a>
             </th>
             <td>
               <ng-container *ngFor="let category of candidate.value.scores | keyvalue">
@@ -47,7 +50,6 @@
                     category.value.score.score == 1 ? '' : 'en'
                   }} in der Kategorie {{ politicalData.categories[category.key].title }}"
                   >&nbsp;
-                  <!--                  {{ category.value.score.score }}-->
                 </span>
               </ng-container>
             </td>

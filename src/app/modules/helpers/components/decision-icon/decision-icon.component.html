@@ -1,21 +1,30 @@
 <ng-container [ngSwitch]="vote">
   <nz-badge [nzCount]="star" aria-readonly="true" role="img" [title]="titles['-2']" *ngSwitchCase="-2">
-    <i nz-icon nzType="dislike" nzTheme="outline" class="vote-icon"></i>
+    <i nz-icon nzType="dislike" [nzTheme]="theme" class="vote-icon decision-{{ theme }}"></i>
   </nz-badge>
   <i
     nz-icon
     nzType="dislike"
-    nzTheme="outline"
-    class="vote-icon"
+    [nzTheme]="theme"
+    class="vote-icon decision-{{ theme }}"
     aria-readonly="true"
     role="img"
     [title]="titles['-1']"
     *ngSwitchCase="-1"
   ></i>
   <i nz-icon nzType="meh" nzTheme="outline" class="vote-icon" aria-readonly="true" role="img" [title]="titles['0']" *ngSwitchCase="0"></i>
-  <i nz-icon nzType="like" nzTheme="outline" class="vote-icon" aria-readonly="true" role="img" [title]="titles['1']" *ngSwitchCase="1"></i>
+  <i
+    nz-icon
+    nzType="like"
+    [nzTheme]="theme"
+    class="vote-icon decision-{{ theme }}"
+    aria-readonly="true"
+    role="img"
+    [title]="titles['1']"
+    *ngSwitchCase="1"
+  ></i>
   <nz-badge [nzCount]="star" aria-readonly="true" role="img" [title]="titles['2']" *ngSwitchCase="2">
-    <i nz-icon nzType="like" nzTheme="outline" class="vote-icon"></i>
+    <i nz-icon nzType="like" [nzTheme]="theme" class="vote-icon decision-{{ theme }}"></i>
   </nz-badge>
   <i
     nz-icon
@@ -27,7 +36,8 @@
     [title]="titles[null]"
     *ngSwitchDefault
   ></i>
+  <span class="decision-icon-text">{{ titles[vote] }}</span>
 </ng-container>
 <ng-template #star>
-  <i nz-icon nzType="star" nzTheme="fill" class="ant-scroll-number-custom-component vote-icon-badge"></i>
+  <i nz-icon nzType="star" nzTheme="twotone" [nzTwotoneColor]="'#ff2f00'" class="ant-scroll-number-custom-component vote-icon-badge"></i>
 </ng-template>

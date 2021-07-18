@@ -8,24 +8,10 @@
           <strong>Hintergrund:</strong>&nbsp;<span [innerHTML]="claim.value.description | markdown"></span>
         </p>
         <p class="owndecision" *ngIf="votes[claim.key]">
-          <strong>Deine Antwort:</strong>&nbsp;<em
-            ><app-decision-icon [vote]="votes[claim.key]" voteContext="USER"></app-decision-icon>&nbsp;{{
-              votes[claim.key].decision | decisionToWord: votes[claim.key].fav
-            }}</em
-          >
+          <strong>Deine Antwort:</strong>&nbsp;<app-decision-icon [vote]="votes[claim.key]" voteContext="USER"></app-decision-icon>
         </p>
 
-        <p>
-          <a [routerLink]="'/quiz/' + claim.key" *ngIf="!this.accessibilityModes?.accessibilityMode"
-            >Zurück zur These, um Entscheidung zu ändern.</a
-          >
-          <a
-            [routerLink]="'/quiz/' + AccessibleUrlPath"
-            [fragment]="sAccessibleUrlFragment + claim.key"
-            *ngIf="this.accessibilityModes?.accessibilityMode"
-            >Zurück zur These, um Entscheidung zu ändern.</a
-          >
-        </p>
+        <p></p>
 
         <h4>Was denken die Listen?</h4>
         <app-claim-candidate-viz
@@ -38,8 +24,21 @@
           [showCandidates]="showCandidates"
         ></app-claim-candidate-viz>
 
-        <p>
-          <a [routerLink]="'/claim/' + claim.key">Erfahre mehr über diese These.</a>
+        <p class="small claim-bottom" nz-row>
+          <span class="redecide" nz-col nzXs="24" nzSm="24" nzLg="12" nzXl="12">
+            <a [routerLink]="'/quiz/' + claim.key" *ngIf="!this.accessibilityModes?.accessibilityMode"
+              >Zurück zur These, um Entscheidung zu ändern.</a
+            >
+            <a
+              [routerLink]="'/quiz/' + AccessibleUrlPath"
+              [fragment]="sAccessibleUrlFragment + claim.key"
+              *ngIf="this.accessibilityModes?.accessibilityMode"
+              >Zurück zur These, um Entscheidung zu ändern.</a
+            >
+          </span>
+          <span class="more-info" nz-col nzXs="24" nzSm="24" nzLg="12" nzXl="12">
+            <a [routerLink]="'/claim/' + claim.key">Mehr Informationen zu dieser These.</a>
+          </span>
         </p>
         <ng-template #voteIcon>
           <app-decision-icon [vote]="votes[claim.key]" voteContext="USER"></app-decision-icon>

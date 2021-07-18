@@ -49,19 +49,17 @@ export class DecisionIconComponent {
 
   @Input('voteContext')
   set voteContextInput(value: VoteContext | null) {
-    if (value === VoteContext.USER_VOTE) {
-      this.voteContext = VoteContext.USER_VOTE;
-      this.titles = USER_CONTEXT_TITLES;
-    } else if (value === VoteContext.CANDIDATE_VOTE) {
-      this.voteContext = VoteContext.CANDIDATE_VOTE;
-      this.titles = CANDIDATE_CONTEXT_TITLES;
-    } else {
-      this.voteContext = VoteContext.NO_CONTEXT;
-      this.titles = NO_CONTEXT_TITLES;
-    }
+    this.voteContext = VoteContext.NO_CONTEXT;
+    this.titles = NO_CONTEXT_TITLES;
+  }
+
+  @Input('disagree')
+  set disagreeInput(value: boolean | null) {
+    this.theme = value ? 'outline' : 'twotone';
   }
 
   public vote: number = null;
   public voteContext: VoteContext = VoteContext.NO_CONTEXT;
   public titles = NO_CONTEXT_TITLES;
+  public theme = 'twotone';
 }
