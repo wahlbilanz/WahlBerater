@@ -32,24 +32,24 @@
         >
         </app-auswertung-barchart-table>
       </nz-tab>
-      <nz-tab nzTitle="HeatMap 1">
-        <app-auswertung-heatmap
-          [votes]="votes"
-          [politicalCandidates]="politicalData.candidates"
-          [personalCandidates]="personalData"
-          [categories]="politicalData.categories"
-        >
-        </app-auswertung-heatmap>
-      </nz-tab>
-      <nz-tab nzTitle="HeatMap 2">
-        <app-auswertung-heatmap-votes
-          [votes]="votes"
-          [politicalCandidates]="politicalData.candidates"
-          [personalCandidates]="personalData"
-          [categories]="politicalData.categories"
-        >
-        </app-auswertung-heatmap-votes>
-      </nz-tab>
+      <!--      <nz-tab nzTitle="HeatMap 1">-->
+      <!--        <app-auswertung-heatmap-->
+      <!--          [votes]="votes"-->
+      <!--          [politicalCandidates]="politicalData.candidates"-->
+      <!--          [personalCandidates]="personalData"-->
+      <!--          [categories]="politicalData.categories"-->
+      <!--        >-->
+      <!--        </app-auswertung-heatmap>-->
+      <!--      </nz-tab>-->
+      <!--      <nz-tab nzTitle="HeatMap 2">-->
+      <!--        <app-auswertung-heatmap-votes-->
+      <!--          [votes]="votes"-->
+      <!--          [politicalCandidates]="politicalData.candidates"-->
+      <!--          [personalCandidates]="personalData"-->
+      <!--          [categories]="politicalData.categories"-->
+      <!--        >-->
+      <!--        </app-auswertung-heatmap-votes>-->
+      <!--      </nz-tab>-->
       <nz-tab nzTitle="Barrierefreie Auswertung" *ngIf="!(accessibilityModes | async)?.accessibilityMode">
         <app-accessible-auswertungs-chart
           [votes]="votes"

@@ -1,27 +1,21 @@
 import { Component, Input, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import { Position } from '../../../../definitions/models/position.model';
-import { Claim } from '../../../../definitions/models/claim.model';
-import {
-  CandidatePersonalInfo,
-  CandidatePoliticalInfo,
-  PersonalCandidateMap,
-  PoliticalCandidateMap,
-} from '../../../../definitions/models/candidate.model';
-import { PoliticalData } from '../../../../definitions/models/political.data.model';
-import { Vote, Votes } from '../../../../definitions/models/votes.mode';
 import { DecisionTemplatesComponent } from '../../../helpers/decision-templates/decision-templates.component';
-import { PartyResult, PartyScoreResult } from '../../../../definitions/models/results.model';
+import { Claim } from '../../../../definitions/models/claim.model';
+import { Vote, Votes } from '../../../../definitions/models/votes.mode';
+import { PoliticalData } from '../../../../definitions/models/political.data.model';
+import { PersonalCandidateMap } from '../../../../definitions/models/candidate.model';
+import { PartyScoreResult } from '../../../../definitions/models/results.model';
+import { candidateKeyValueSorter } from '../../../../definitions/functions/candidate-sort.function';
+import { Position } from '../../../../definitions/models/position.model';
 import { Score } from '../../../../definitions/models/score.model';
-import { getCandidatePersonalInfo } from '../../../../definitions/functions/getCandidatePersonalInfo';
-import { candidateKeyValueSorter } from 'src/app/definitions/functions/candidate-sort.function';
 import { PartyDecisionThreshold } from '../../../../+state/app.models';
 
 @Component({
-  selector: 'app-claim-candidate-viz',
-  templateUrl: './claim-candidate-viz.component.html',
-  styleUrls: ['./claim-candidate-viz.component.scss'],
+  selector: 'app-claim-party-buttons',
+  templateUrl: './claim-party-buttons.component.html',
+  styleUrls: ['./claim-party-buttons.component.scss'],
 })
-export class ClaimCandidateVizComponent implements OnInit {
+export class ClaimPartyButtonsComponent implements OnInit {
   @ViewChild('decisionTemplates', { static: true }) decisionTemplates: DecisionTemplatesComponent;
 
   @Input() claimId: string;
@@ -35,9 +29,6 @@ export class ClaimCandidateVizComponent implements OnInit {
   @Input() showCandidates = false;
 
   candidateSorter = candidateKeyValueSorter;
-  PartyDecisionThreshold = PartyDecisionThreshold;
-
-  activePanels: boolean[];
 
   constructor() {}
 
@@ -45,18 +36,34 @@ export class ClaimCandidateVizComponent implements OnInit {
     if (!this.partySeq && this.politicalData) {
       this.partySeq = Object.keys(this.politicalData.parties);
     }
-    this.activePanels = [];
-    for (const c in this.partyScoreResult.partyScores) {
-      if (this.partyScoreResult.partyScores.hasOwnProperty(c)) {
-        this.activePanels.push(false);
+  }
+
+  getPartyAlignment(direction: number, userDecision: Vote): number {
+    if (direction > 1 && userDecision && userDecision.decision > 0 && userDecision.fav) {
+      return 2;
+    } else if (direction > PartyDecisionThreshold) {
+      if (userDecision?.decision > 0) {
+        return 2;
+      } else {
+        return 1;
       }
+    } else if (direction < -1 && userDecision && userDecision.decision < 0 && userDecision.fav) {
+      return -2;
+    } else if (direction < -PartyDecisionThreshold) {
+      if (userDecision?.decision < 0) {
+        return -2;
+      } else {
+        return -1;
+      }
+    } else {
+      return 0;
     }
   }
 
   getPartyTemplate(direction: number, userDecision: Vote): TemplateRef<any> {
     if (direction > 1 && userDecision && userDecision.decision > 0 && userDecision.fav) {
       return this.decisionTemplates.yesyesTempleate;
-    } else if (direction > PartyDecisionThreshold) {
+    } else if (direction > 0.5) {
       if (userDecision?.decision > 0) {
         return this.decisionTemplates.yesTempleate;
       } else {
@@ -64,7 +71,7 @@ export class ClaimCandidateVizComponent implements OnInit {
       }
     } else if (direction < -1 && userDecision && userDecision.decision < 0 && userDecision.fav) {
       return this.decisionTemplates.nonoTempleate;
-    } else if (direction < -PartyDecisionThreshold) {
+    } else if (direction < 0.5) {
       if (userDecision?.decision < 0) {
         return this.decisionTemplates.noTempleate;
       } else {
@@ -106,9 +113,5 @@ export class ClaimCandidateVizComponent implements OnInit {
 
   getStarTemplate(): TemplateRef<any> {
     return this.decisionTemplates.starTempleate;
-  }
-
-  activate(i: number): void {
-    this.activePanels[i] = true;
   }
 }

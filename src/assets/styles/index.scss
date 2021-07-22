@@ -44,3 +44,9 @@ nz-breadcrumb {
 .ant-collapse-header .decision-icon-text {
   display: none;
 }
+
+app-root nz-collapse.ant-collapse nz-collapse-panel.ant-collapse-item .ant-collapse-header,
+app-root nz-collapse.ant-collapse.ant-collapse-icon-position-left nz-collapse-panel.ant-collapse-item .ant-collapse-header {
+  background-color: #fafafa;
+  color: rgba(0, 0, 0, 0.96);
+}

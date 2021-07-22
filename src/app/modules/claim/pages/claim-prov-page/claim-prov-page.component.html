@@ -13,21 +13,30 @@
     <!--    <h2 class="claim-category">-->
     <!--      <strong>{{ politicalData.categories[politicalData.claims[claimId].category].title }}.</strong>-->
     <!--    </h2>-->
+    <div class="category">
+      Kategorie <strong>{{ politicalData.categories[politicalData.claims[claimId].category].title }}</strong>
+    </div>
     <h1>{{ politicalData.claims[claimId].title }}</h1>
-    <p>
-      Eine These in der Kategorie <strong>{{ politicalData.categories[politicalData.claims[claimId].category].title }}</strong>
-    </p>
     <ng-container *ngIf="politicalData.claims[claimId].description">
-      <h5>Hintergrund</h5>
       <p [innerHTML]="politicalData.claims[claimId].description | markdown"></p>
     </ng-container>
-    <p>
-      <a [routerLink]="'/quiz/' + claimId"><i nz-icon nzType="double-right" nzTheme="outline"></i>&nbsp;Springe zur These im Quiz</a>
-    </p>
-    <p *ngIf="votes && votes[claimId]">Du denkst: {{ votes[claimId].decision }}</p>
+
+    <app-decision-button *ngIf="votes[claimId]" [icon]="votes[claimId]" [ownDecision]="true" label="Dein Antwort"></app-decision-button>
+    <a [routerLink]="'/quiz/' + claimId"><i nz-icon nzType="double-right" nzTheme="outline"></i>&nbsp;Springe zur These im Quiz</a>
+
+    <h3>Wie positionieren sich die Kandidierenden?</h3>
+    <app-claim-candidate-viz
+      [claimId]="claimId"
+      [claim]="politicalData.claims[claimId]"
+      [votes]="votes"
+      [politicalData]="politicalData"
+      [personalCandidates]="personalData"
+      [partyScoreResult]="partyScoreResult"
+      [showCandidates]="true"
+    ></app-claim-candidate-viz>
 
     <ng-container *ngIf="politicalData.claims[claimId].links && politicalData.claims[claimId].links.length > 0">
-      <h5>Weiterführende Informationen</h5>
+      <h5>Weiterführende Informationen zur These</h5>
       <ul>
         <li *ngFor="let link of politicalData.claims[claimId].links">
           <a [href]="link.url" target="_blank" [title]="link.title">{{ link.title || link.url }}</a>
@@ -45,20 +54,9 @@
       </ul>
     </div>
 
-    <h3>Was denken die Kandidierenden zu dieser These?</h3>
-    <app-claim-candidate-viz
-      [claimId]="claimId"
-      [claim]="politicalData.claims[claimId]"
-      [votes]="votes"
-      [politicalData]="politicalData"
-      [personalCandidates]="personalData"
-      [partyScoreResult]="partyScoreResult"
-      [showCandidates]="true"
-    ></app-claim-candidate-viz>
-
     <h3>Weitere Thesen in der Kategorie {{ politicalData.categories[politicalData.claims[claimId].category].title }}</h3>
     <nz-list>
-      <ng-container *ngFor="let item of politicalData.claims | keyvalue">
+      <ng-container *ngFor="let item of politicalData.claims | keyvalue | slice: 0:5">
         <nz-list-item *ngIf="item.value.category === politicalData.claims[claimId].category && item.key !== claimId">
           <a [routerLink]="['/claim/', item.key]">{{ item.value.title }}</a>
         </nz-list-item>

@@ -1,6 +1,9 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { VoteContext } from '../../../../definitions/enums/vote-context.enum';
 import { Vote } from '../../../../definitions/models/votes.mode';
+import { select, Store } from '@ngrx/store';
+import * as AppSelectors from '../../../../+state/app.selectors';
+import { AppPartialState } from '../../../../+state/app.reducer';
 
 const NO_CONTEXT_TITLES = {
   '-2': 'Starke Ablehnung',
@@ -58,8 +61,12 @@ export class DecisionIconComponent {
     this.theme = value ? 'outline' : 'twotone';
   }
 
+  public accessibilityModes = this.store.pipe(select(AppSelectors.getAllAccessibilityModes));
+
   public vote: number = null;
   public voteContext: VoteContext = VoteContext.NO_CONTEXT;
   public titles = NO_CONTEXT_TITLES;
   public theme = 'twotone';
+
+  constructor(private store: Store<AppPartialState>) {}
 }

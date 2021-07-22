@@ -1,7 +1,15 @@
-p.claim-bottom {
-  .more-info {
+@import '../../../../assets/styles/variables';
+
+.claim-bottom {
+  /*.more-info {
     @media (min-width: 992px) {
       text-align: right;
     }
+  }*/
+  padding: 0;
+  list-style: none;
+  i {
+    font-size: 0.8em;
+    margin-right: $wb-space-xx-small;
   }
 }

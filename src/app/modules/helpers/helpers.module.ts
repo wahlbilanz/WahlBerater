@@ -4,10 +4,12 @@ import { DecisionTemplatesComponent } from './decision-templates/decision-templa
 import { NzBadgeModule } from 'ng-zorro-antd/badge';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { DecisionIconComponent } from './components/decision-icon/decision-icon.component';
+import { DecisionButtonComponent } from './components/decision-button/decision-button.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
-  declarations: [DecisionTemplatesComponent, DecisionIconComponent],
-  exports: [DecisionTemplatesComponent, DecisionIconComponent],
-  imports: [CommonModule, NzBadgeModule, NzIconModule],
+  declarations: [DecisionTemplatesComponent, DecisionIconComponent, DecisionButtonComponent],
+  exports: [DecisionTemplatesComponent, DecisionIconComponent, DecisionButtonComponent],
+  imports: [CommonModule, NzBadgeModule, NzIconModule, RouterModule],
 })
 export class HelpersModule {}

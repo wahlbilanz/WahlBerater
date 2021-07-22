@@ -4,6 +4,7 @@ import { PoliticalData } from './political.data.model';
 import { getCandidatePersonalInfo } from '../functions/getCandidatePersonalInfo';
 import { claimScore } from '../functions/score.function';
 import { Votes } from './votes.mode';
+import { StopClock } from '../../modules/helpers/utils/stop-clock';
 
 export interface ClaimResult {
   claim: string;

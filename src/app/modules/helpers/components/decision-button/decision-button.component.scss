@@ -1,0 +1,19 @@
+@import 'src/assets/styles/variables';
+.party-button {
+  display: inline-block;
+  border: 1px dashed black;
+  padding: $wb-space-small;
+  margin: $wb-space-small;
+  &__text {
+    margin: $wb-space-small;
+  }
+  &__icon {
+    margin: $wb-space-small;
+  }
+
+  &.party-button--own-true,
+  &.party-button--2,
+  &.party-button---2 {
+    border: 2px solid $wb-logo-wal-color;
+  }
+}

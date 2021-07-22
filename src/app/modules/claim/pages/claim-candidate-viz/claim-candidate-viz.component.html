@@ -2,74 +2,72 @@
   <ng-container *ngIf="partyScoreResult">
     <!--    <div *ngFor="let party of partyScores">{{politicalData.parties[party.party].name}}</div>-->
     <nz-collapse-panel
-      *ngFor="let party of partyScoreResult.partyScores"
+      *ngFor="let party of partyScoreResult.partyScores; let i = index"
       [nzHeader]="politicalData.parties[party.party].name"
       [nzExtra]="getPartyTemplate(party.scores[politicalData.claims[claimId].category].decisions[claimId], votes[claimId])"
+      (nzActiveChange)="activate(i)"
     >
-      <div class="party-decision" *ngIf="party.scores[politicalData.claims[claimId].category]">
-        Die Kandidierenden der Liste <a [routerLink]="'/parties/' + party.party">{{ politicalData.parties[party.party].name }}</a> haben
-        sich insgesamt für
-        <em
-          ><ng-container
-            *ngTemplateOutlet="getPartyTemplate(party.scores[politicalData.claims[claimId].category].decisions[claimId], votes[claimId])"
-          ></ng-container
-          >{{ party.scores[politicalData.claims[claimId].category].decisions[claimId] | partyDecisionToWord }}</em
-        >
-        entschieden.
-      </div>
-      <ng-container *ngIf="votes && votes[claimId]">
-        <ng-container
-          *ngIf="
-            (votes[claimId].decision > 0 && party.scores[politicalData.claims[claimId].category].decisions[claimId] > 0) ||
-            (votes[claimId].decision < 0 && party.scores[politicalData.claims[claimId].category].decisions[claimId] < 0)
-          "
-        >
-          <strong>Du hast dich in die gleiche Richtung entschieden!</strong>
+      <div *ngIf="activePanels[i]">
+        <div class="party-decision" *ngIf="party.scores[politicalData.claims[claimId].category]">
+          Die Kandidierenden der Liste <a [routerLink]="'/parties/' + party.party">{{ politicalData.parties[party.party].name }}</a> haben
+          sich insgesamt für
+          <em
+            ><ng-container
+              *ngTemplateOutlet="getPartyTemplate(party.scores[politicalData.claims[claimId].category].decisions[claimId], votes[claimId])"
+            ></ng-container
+          ></em>
+          entschieden.
+        </div>
+        <ng-container *ngIf="votes && votes[claimId]">
           <ng-container
             *ngIf="
-              votes[claimId].fav &&
-              (party.scores[politicalData.claims[claimId].category].decisions[claimId] > 1 ||
-                party.scores[politicalData.claims[claimId].category].decisions[claimId] < -1)
+              (votes[claimId].decision > 0 &&
+                party.scores[politicalData.claims[claimId].category].decisions[claimId] > PartyDecisionThreshold) ||
+              (votes[claimId].decision < 0 &&
+                party.scores[politicalData.claims[claimId].category].decisions[claimId] < -PartyDecisionThreshold)
             "
           >
-            &nbsp;<strong><nz-badge [nzCount]="getStarTemplate()">Euch beiden ist diese These sehr wichtig!</nz-badge></strong>
+            <strong>Du hast dich in die gleiche Richtung entschieden!</strong>
           </ng-container>
         </ng-container>
-      </ng-container>
 
-      <ng-container *ngIf="showCandidates">
-        <div>Die Meinungen der Kandidierenden:</div>
-        <table>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Position</th>
-              <th>Begründung</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let data of party.candidates | keyvalue: candidateSorter">
-              <td>
-                <a [routerLink]="'/parties/' + party.party + '/candidates/' + data.key">
-                  {{ (personalCandidates | personalDataOf: data.key).name }}
-                </a>
-              </td>
-              <td>
-                <ng-container
-                  *ngTemplateOutlet="
-                    getCandidateTemplate(
-                      politicalData.candidates[data.key].positions[claimId],
-                      data.value.scores[politicalData.claims[claimId].category]?.claims[claimId]?.score,
-                      votes[claimId]
-                    )
-                  "
-                ></ng-container>
-              </td>
-              <td>{{ politicalData.candidates[data.key].positions[claimId].reason | markdown }}</td>
-            </tr>
-          </tbody>
-        </table>
-      </ng-container>
+        <ng-container *ngIf="showCandidates">
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Position</th>
+                <th>Begründung</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let data of party.candidates | keyvalue: candidateSorter">
+                <td>
+                  <a [routerLink]="'/parties/' + party.party + '/candidates/' + data.key">
+                    {{ (personalCandidates | personalDataOf: data.key).name }}
+                  </a>
+                </td>
+                <td>
+                  <ng-container
+                    *ngTemplateOutlet="
+                      getCandidateTemplate(
+                        politicalData.candidates[data.key].positions[claimId],
+                        data.value.scores[politicalData.claims[claimId].category]?.claims[claimId]?.score,
+                        votes[claimId]
+                      )
+                    "
+                  ></ng-container>
+                </td>
+                <td>
+                  <ng-container *ngIf="politicalData.candidates[data.key]?.positions[claimId]?.reason">{{
+                    politicalData.candidates[data.key].positions[claimId].reason | markdown
+                  }}</ng-container>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </ng-container>
+      </div>
     </nz-collapse-panel>
   </ng-container>
 </nz-collapse>

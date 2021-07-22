@@ -33,6 +33,8 @@ export class AuswertungCategoryPanelComponent implements OnInit, OnDestroy {
   public sAccessibleUrlFragment = AccessibleUrlFragment;
   private subscriptions: Subscription[] = [];
 
+  activePanels: boolean[];
+
   constructor(private store: Store<AppPartialState>) {
     this.subscriptions.push(
       this.store.pipe(select(AppSelectors.getAllAccessibilityModes)).subscribe((am) => (this.accessibilityModes = am)),
@@ -50,6 +52,17 @@ export class AuswertungCategoryPanelComponent implements OnInit, OnDestroy {
     /*this.store.pipe(select(AppSelectors.getClaimsByCategory, { id: this.categoryId })).subscribe(c => {
       this.claims = c;
     });*/
+    this.activePanels = [];
+    for (const c in this.claims) {
+      if (this.claims.hasOwnProperty(c)) {
+        this.activePanels.push(false);
+      }
+    }
+    // this.activePanels = this.claims
+  }
+
+  activate(i: number): void {
+    this.activePanels[i] = true;
   }
 
   /*getClaimLink(claimId: string): string {

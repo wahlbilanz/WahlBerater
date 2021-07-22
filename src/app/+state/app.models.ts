@@ -18,6 +18,8 @@ export const QuizAnimationDelay = 300;
 export const QuizAnimationDurationIn = 500;
 export const QuizAnimationDurationOut = 500;
 
+export const PartyDecisionThreshold = 0.5;
+
 export interface AccessibilityModes {
   accessibilityMode: boolean;
   reducedMotionMode: boolean;

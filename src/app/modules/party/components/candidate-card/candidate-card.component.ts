@@ -35,13 +35,13 @@ export class CandidateCardComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.subscriptions.push(
       this.store.pipe(select(AppSelectors.getPersonalData)).subscribe((d) => {
-        console.log(d);
+        // console.log(d);
         this.personalInfo = getCandidatePersonalInfo(d, this.candidateId);
       }),
     );
     this.subscriptions.push(
       this.store.pipe(select(AppSelectors.getPoliticalData)).subscribe((d) => {
-        console.log(d);
+        // console.log(d);
         if (d && d.candidates) {
           this.politicalInfo = d.candidates[this.candidateId];
         }

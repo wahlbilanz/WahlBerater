@@ -1,11 +1,13 @@
+import { PartyDecisionThreshold } from '../../+state/app.models';
+
 export function partyDecisionToWord(decision: number): string {
   if (decision < -1) {
     return 'auf keinen Fall';
   }
-  if (decision < -1 / 3) {
+  if (decision < -PartyDecisionThreshold) {
     return 'nein';
   }
-  if (decision > 1 / 3) {
+  if (decision > PartyDecisionThreshold) {
     return 'ja';
   }
   if (decision > 1) {

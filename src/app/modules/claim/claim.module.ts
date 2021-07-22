@@ -16,9 +16,11 @@ import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzCollapseModule } from 'ng-zorro-antd/collapse';
 import { NzBadgeModule } from 'ng-zorro-antd/badge';
 import { HelpersModule } from '../helpers/helpers.module';
+import { ClaimPartyButtonsComponent } from './pages/claim-party-buttons/claim-party-buttons.component';
+import { NzTagModule } from 'ng-zorro-antd/tag';
 
 @NgModule({
-  declarations: [ClaimListPageComponent, ClaimProvPageComponent, ClaimCandidateVizComponent],
+  declarations: [ClaimListPageComponent, ClaimProvPageComponent, ClaimCandidateVizComponent, ClaimPartyButtonsComponent],
   imports: [
     CommonModule,
     ClaimRoutingModule,
@@ -33,7 +35,8 @@ import { HelpersModule } from '../helpers/helpers.module';
     NzCollapseModule,
     NzBadgeModule,
     HelpersModule,
+    NzTagModule,
   ],
-  exports: [ClaimCandidateVizComponent],
+  exports: [ClaimCandidateVizComponent, ClaimPartyButtonsComponent],
 })
 export class ClaimModule {}

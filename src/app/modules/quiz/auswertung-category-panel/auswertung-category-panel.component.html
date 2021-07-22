@@ -2,44 +2,62 @@
 <ng-container *ngIf="category">
   <h3>{{ category.title }}</h3>
   <nz-collapse *ngIf="claims">
-    <ng-container *ngFor="let claim of claims | keyvalue">
-      <nz-collapse-panel *ngIf="claim.value.category === categoryId" class="claim" [nzHeader]="claim.value.title" [nzExtra]="voteIcon">
-        <p class="background" *ngIf="claim.value.description">
-          <strong>Hintergrund:</strong>&nbsp;<span [innerHTML]="claim.value.description | markdown"></span>
-        </p>
-        <p class="owndecision" *ngIf="votes[claim.key]">
-          <strong>Deine Antwort:</strong>&nbsp;<app-decision-icon [vote]="votes[claim.key]" voteContext="USER"></app-decision-icon>
-        </p>
+    <ng-container *ngFor="let claim of claims | keyvalue; let i = index">
+      <nz-collapse-panel
+        *ngIf="claim.value.category === categoryId"
+        class="claim"
+        [nzHeader]="claim.value.title"
+        [nzExtra]="voteIcon"
+        (nzActiveChange)="activate(i)"
+      >
+        <div *ngIf="activePanels[i]">
+          <div nz-row>
+            <p class="background" *ngIf="claim.value.description" nz-col nzXs="24" nzSm="24" nzLg="12" nzXl="12">
+              <span [innerHTML]="claim.value.description | markdown"></span>
+            </p>
 
-        <p></p>
+            <app-decision-button
+              *ngIf="votes[claim.key]"
+              [icon]="votes[claim.key]"
+              [ownDecision]="true"
+              label="Dein Antwort"
+              nz-col
+              nzXs="24"
+              nzSm="24"
+              nzLg="12"
+              nzXl="12"
+            ></app-decision-button>
+          </div>
+          <h4>Positionen der Listen:</h4>
+          <app-claim-party-buttons
+            [claimId]="claim.key"
+            [claim]="claim.value"
+            [votes]="votes"
+            [politicalData]="politicalData"
+            [personalCandidates]="personalCandidates"
+            [partyScoreResult]="partyScoreResult"
+            [showCandidates]="false"
+          ></app-claim-party-buttons>
 
-        <h4>Was denken die Listen?</h4>
-        <app-claim-candidate-viz
-          [claimId]="claim.key"
-          [claim]="claim.value"
-          [votes]="votes"
-          [politicalData]="politicalData"
-          [personalCandidates]="personalCandidates"
-          [partyScoreResult]="partyScoreResult"
-          [showCandidates]="showCandidates"
-        ></app-claim-candidate-viz>
-
-        <p class="small claim-bottom" nz-row>
-          <span class="redecide" nz-col nzXs="24" nzSm="24" nzLg="12" nzXl="12">
-            <a [routerLink]="'/quiz/' + claim.key" *ngIf="!this.accessibilityModes?.accessibilityMode"
-              >Zurück zur These, um Entscheidung zu ändern.</a
-            >
-            <a
-              [routerLink]="'/quiz/' + AccessibleUrlPath"
-              [fragment]="sAccessibleUrlFragment + claim.key"
-              *ngIf="this.accessibilityModes?.accessibilityMode"
-              >Zurück zur These, um Entscheidung zu ändern.</a
-            >
-          </span>
-          <span class="more-info" nz-col nzXs="24" nzSm="24" nzLg="12" nzXl="12">
-            <a [routerLink]="'/claim/' + claim.key">Mehr Informationen zu dieser These.</a>
-          </span>
-        </p>
+          <ul class="small claim-bottom">
+            <li class="more-info">
+              <i nz-icon nzType="double-right" nzTheme="outline"></i
+              ><a [routerLink]="'/claim/' + claim.key">Mehr Informationen zu dieser These mit detailierten Antworten der Kandidierenden.</a>
+            </li>
+            <li class="redecide">
+              <i nz-icon nzType="double-right" nzTheme="outline"></i
+              ><a [routerLink]="'/quiz/' + claim.key" *ngIf="!this.accessibilityModes?.accessibilityMode"
+                >Zurück zum Quiz, um Entscheidung zu ändern.</a
+              >
+              <a
+                [routerLink]="'/quiz/' + AccessibleUrlPath"
+                [fragment]="sAccessibleUrlFragment + claim.key"
+                *ngIf="this.accessibilityModes?.accessibilityMode"
+                >Zurück zum Quiz, um Entscheidung zu ändern.</a
+              >
+            </li>
+          </ul>
+        </div>
         <ng-template #voteIcon>
           <app-decision-icon [vote]="votes[claim.key]" voteContext="USER"></app-decision-icon>
         </ng-template>

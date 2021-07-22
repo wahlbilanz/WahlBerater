@@ -75,7 +75,7 @@ export class AuswertungComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   recalc(): void {
-    if (this.personalData && this.politicalData) {
+    if (this.personalData && this.politicalData && this.votes) {
       this.partyScoreResult = prepareResults(this.politicalData, this.personalData, this.votes);
     }
   }

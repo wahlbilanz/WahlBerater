@@ -52,14 +52,14 @@
         <p class="small" [innerHTML]="claim.claim.description | markdown" *ngIf="claim.claim.description"></p>
         <p>
           <!-- User Vote -->
-          <ng-container *ngIf="getUserVote(claim.claimId) | async as userVote">
-            <ng-container *ngIf="userVote > 0">
-              Du hast <em>dafür</em> gestimmt{{ userVote >= 2 ? ' und diese These als für dich wichtig markiert' : '' }}.
+          <ng-container *ngIf="votes[claim.claimId] as userVote">
+            <ng-container *ngIf="userVote.decision > 0">
+              Du hast <em>dafür</em> gestimmt{{ userVote.fav ? ' und diese These als für dich wichtig markiert' : '' }}.
             </ng-container>
-            <ng-container *ngIf="userVote < 0">
-              Du hast <em>dagegen</em> gestimmt{{ userVote <= -2 ? ' und diese These als für dich wichtig markiert' : '' }}.
+            <ng-container *ngIf="userVote.decision < 0">
+              Du hast <em>dagegen</em> gestimmt{{ userVote.fav ? ' und diese These als für dich wichtig markiert' : '' }}.
             </ng-container>
-            <ng-container *ngIf="userVote == 0"> Du hast hast zu dieser These keine Position bezogen. </ng-container>
+            <ng-container *ngIf="userVote.decision == 0"> Du hast hast zu dieser These keine Position bezogen. </ng-container>
             <app-decision-icon [vote]="userVote" voteContext="USER"></app-decision-icon>
             <br />
           </ng-container>
@@ -73,16 +73,23 @@
           <ng-container *ngIf="claim.position.vote == 0">
             {{ data.candidate.name }} hat zu dieser These keine Position bezogen.
           </ng-container>
-          <app-decision-icon [vote]="claim.position.vote" voteContext="CANDIDATE"></app-decision-icon>
+          <app-decision-icon
+            [vote]="claim.position.vote"
+            [disagree]="claim.position.vote !== votes[claim.claimId]?.decision"
+            voteContext="CANDIDATE"
+          ></app-decision-icon>
         </p>
-        <blockquote>
-          <p [innerHTML]="claim.position.reason | markdown" *ngIf="claim.position.reason"></p>
-        </blockquote>
+
+        <blockquote *ngIf="claim.position.reason" [innerHTML]="claim.position.reason | markdown"></blockquote>
 
         <a class="more-info-link" [routerLink]="['/', 'claim', claim.claimId]">Mehr Informationen zu dieser These</a>
 
         <ng-template #voteIcon>
-          <app-decision-icon [vote]="claim.position.vote" voteContext="CANDIDATE"></app-decision-icon>
+          <app-decision-icon
+            [vote]="claim.position.vote"
+            [disagree]="claim.position.vote !== votes[claim.claimId]?.decision"
+            voteContext="CANDIDATE"
+          ></app-decision-icon>
         </ng-template>
       </nz-collapse-panel>
     </nz-collapse>

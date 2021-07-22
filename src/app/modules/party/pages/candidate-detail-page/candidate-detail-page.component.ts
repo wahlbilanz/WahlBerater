@@ -1,10 +1,11 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { select, Store } from '@ngrx/store';
-import { asyncScheduler, combineLatest, scheduled } from 'rxjs';
+import { asyncScheduler, combineLatest, scheduled, Subscription } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { AppPartialState } from 'src/app/+state/app.reducer';
 import * as AppSelectors from '../../../../+state/app.selectors';
+import { Votes } from '../../../../definitions/models/votes.mode';
 
 @Component({
   selector: 'app-candidate-detail-page',
@@ -12,7 +13,7 @@ import * as AppSelectors from '../../../../+state/app.selectors';
   styleUrls: ['./candidate-detail-page.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CandidateDetailPageComponent implements OnInit {
+export class CandidateDetailPageComponent implements OnInit, OnDestroy {
   public candidateAndPartyId = this.route.params.pipe(
     map((params) => ({
       partyId: params.partyId as string,
@@ -31,11 +32,26 @@ export class CandidateDetailPageComponent implements OnInit {
     map(([candidate, party, claimPositions, { partyId, candidateId }]) => ({ candidateId, candidate, claimPositions, partyId, party })),
   );
 
-  constructor(private state: Store<AppPartialState>, private route: ActivatedRoute) {}
+  public votes: Votes;
+  private subscriptions: Subscription[] = [];
 
-  ngOnInit(): void {}
+  constructor(private state: Store<AppPartialState>, private route: ActivatedRoute, private store: Store<AppPartialState>) {}
 
-  public getUserVote(claimId: string) {
-    return this.state.pipe(select(AppSelectors.getUserVoteByClaimId, { claimId }));
+  ngOnInit(): void {
+    this.subscriptions.push(
+      this.store.pipe(select(AppSelectors.getVotes)).subscribe((d: Votes) => {
+        this.votes = d;
+      }),
+    );
   }
+
+  ngOnDestroy(): void {
+    for (const s of this.subscriptions) {
+      s.unsubscribe();
+    }
+  }
+
+  /*public getUserVote(claimId: string) {
+    return this.state.pipe(select(AppSelectors.getUserVoteByClaimId, { claimId }));
+  }*/
 }

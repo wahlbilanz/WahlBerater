@@ -36,8 +36,8 @@
     [title]="titles[null]"
     *ngSwitchDefault
   ></i>
-  <span class="decision-icon-text">{{ titles[vote] }}</span>
+  <span class="decision-icon-text" *ngIf="(accessibilityModes | async)?.accessibilityMode">{{ titles[vote] }}</span>
 </ng-container>
 <ng-template #star>
-  <i nz-icon nzType="star" nzTheme="twotone" [nzTwotoneColor]="'#ff2f00'" class="ant-scroll-number-custom-component vote-icon-badge"></i>
+  <i nz-icon nzType="heart" nzTheme="twotone" [nzTwotoneColor]="'#ff2f00'" class="ant-scroll-number-custom-component vote-icon-badge"></i>
 </ng-template>
