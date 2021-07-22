@@ -25,16 +25,27 @@ export class AuswertungBarchartTableComponent implements OnInit {
   @Input() showCandidates = false;
 
   candidateSorter = candidateKeyValueSorter;
+  displayCandidates: number[];
+  nCandidates: number[];
+  maxValueArray: number[];
 
   constructor(private store: Store<AppPartialState>) {}
 
   /**
    * this is just a hack to get an array with increasing numbers [0..maxValue) in frontend...
    */
-  maxValueArray(): number[] {
+  /*maxValueArray(): number[] {
     const a = [...Array(this.partyScoreResult.maxValue).keys()];
     return a;
+  }*/
+
+  ngOnInit(): void {
+    this.maxValueArray = [...Array(this.partyScoreResult.maxValue).keys()];
+    this.displayCandidates = this.partyScoreResult.partyScores.map((_) => 7);
+    this.nCandidates = this.partyScoreResult.partyScores.map((s) => Object.keys(s.candidates).length);
   }
 
-  ngOnInit(): void {}
+  showAll(i: number): void {
+    this.displayCandidates[i] = this.nCandidates[i] + 1;
+  }
 }

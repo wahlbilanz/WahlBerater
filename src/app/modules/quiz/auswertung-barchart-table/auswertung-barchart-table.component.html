@@ -1,6 +1,6 @@
 <div id="mybarchartchart">
   <table *ngIf="partyScoreResult?.partyScores">
-    <ng-container *ngFor="let party of partyScoreResult.partyScores">
+    <ng-container *ngFor="let party of partyScoreResult.partyScores; let partyIndex = index">
       <!-- Party -->
       <tr class="party-row">
         <th>
@@ -30,7 +30,7 @@
 
       <!-- candidates -->
       <ng-container *ngIf="showCandidates && party.candidates">
-        <ng-container *ngFor="let candidate of party.candidates | keyvalue: candidateSorter">
+        <ng-container *ngFor="let candidate of party.candidates | keyvalue: candidateSorter | slice: 0:displayCandidates[partyIndex] + 1">
           <tr class="candidate-spacer"></tr>
           <tr class="candidate-row">
             <th>
@@ -55,6 +55,15 @@
             </td>
           </tr>
         </ng-container>
+        <ng-container *ngIf="nCandidates[partyIndex] > displayCandidates[partyIndex]">
+          <tr class="candidate-spacer"></tr>
+          <tr class="candidate-row">
+            <th>
+              <a (click)="showAll(partyIndex)">{{ nCandidates[partyIndex] - displayCandidates[partyIndex] }} weitere anzeigen</a>
+            </th>
+            <td></td>
+          </tr>
+        </ng-container>
         <tr class="spacer"></tr>
         <tr id="axis">
           <th></th>
@@ -64,7 +73,7 @@
               nzTooltipTitle="Achse zeigt die Punkte der Kandidaten."
               title="Achse zeigt die Punkte der Kandidaten."
               [style.width]="100 / partyScoreResult.maxValue + '%'"
-              *ngFor="let value of maxValueArray()"
+              *ngFor="let value of maxValueArray"
             >
               <span class="axis-label">{{ value + 1 }}</span>
             </span>
