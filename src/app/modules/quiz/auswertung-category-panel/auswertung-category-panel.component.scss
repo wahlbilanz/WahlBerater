@@ -1,11 +1,21 @@
 @import '../../../../assets/styles/variables';
-
+@media (min-width: 992px) {
+  .claim-info {
+    .own-decision {
+      display: flex;
+      app-decision-button {
+        margin-left: auto;
+      }
+    }
+  }
+}
 .claim-bottom {
   /*.more-info {
     @media (min-width: 992px) {
       text-align: right;
     }
   }*/
+  margin-top: $wb-space-large;
   padding: 0;
   list-style: none;
   i {

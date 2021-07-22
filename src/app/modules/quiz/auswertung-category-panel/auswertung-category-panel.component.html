@@ -11,24 +11,23 @@
         (nzActiveChange)="activate(i)"
       >
         <div *ngIf="activePanels[i]">
-          <div nz-row>
+          <div nz-row class="claim-info">
             <p class="background" *ngIf="claim.value.description" nz-col nzXs="24" nzSm="24" nzLg="12" nzXl="12">
               <span [innerHTML]="claim.value.description | markdown"></span>
             </p>
-
-            <app-decision-button
-              *ngIf="votes[claim.key]"
-              [icon]="votes[claim.key]"
-              [ownDecision]="true"
-              label="Dein Antwort"
+            <div
               nz-col
+              *ngIf="votes[claim.key]"
+              class="own-decision"
               nzXs="24"
               nzSm="24"
-              nzLg="12"
-              nzXl="12"
-            ></app-decision-button>
+              [nzLg]="claim.value.description ? 12 : 24"
+              [nzXl]="claim.value.description ? 12 : 24"
+            >
+              <app-decision-button [icon]="votes[claim.key]" [ownDecision]="true" label="Dein Antwort"></app-decision-button>
+            </div>
           </div>
-          <h4>Positionen der Listen:</h4>
+          <h4 *ngIf="this.accessibilityModes?.accessibilityMode">Positionen der Listen:</h4>
           <app-claim-party-buttons
             [claimId]="claim.key"
             [claim]="claim.value"

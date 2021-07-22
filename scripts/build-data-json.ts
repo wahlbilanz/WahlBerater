@@ -98,7 +98,7 @@ const IMAGE_QUALITY = 85;
 
 debug.enable('*');
 const log = debug('data-builder');
-const warning = debug('data-builder-validation');
+const warning = (...args: any) => {}; // debug('data-builder-validation');
 
 function readYaml(path: string): InputDocument[] {
   log('Read yaml file %s', path);
@@ -216,7 +216,7 @@ function cleanNamedLink(link: NamedLink): NamedLink {
   };
 
   if (!link.url) {
-    throw Error('Link is missing an URL');
+    warning('Link is missing an URL');
   }
   if (!link.title) {
     warning('Link %s has no title.', link.url);
@@ -335,7 +335,8 @@ function cleanCandidate(candidate: Candidate, hasPositions: boolean): Candidate 
     throw Error(`Candidate is missing an ID`);
   }
   if (candidate.listOrder == null || isNaN(candidate.listOrder)) {
-    throw Error(`Candidate ${candidate.id} is missing a list order`);
+    // throw Error(`Candidate ${candidate.id} is missing a list order`);
+    candidate.listOrder = 0;
   }
   if (!candidate.party) {
     throw Error(`Candidate ${candidate.id} has no party`);
@@ -430,7 +431,7 @@ function cleanParty(party: Party, hasPositions: boolean): Party {
 
   if (hasPositions) {
     if (!party.positions || Object.getOwnPropertyNames(party.positions).length === 0) {
-      throw Error(`Party ${party.id} has no position votes`);
+      warning(`Party ${party.id} has no position votes`);
     }
     for (const claim of Object.getOwnPropertyNames(party.positions)) {
       if (!party.positions[claim].reason) {
@@ -811,14 +812,14 @@ async function main() {
   data = cleanData(data, positionedEntities);
   if (!validateIdRefs(data, positionedEntities)) {
     log('ID reference check failed.');
-    process.exit(1);
+    // process.exit(1);
   }
 
   if (argv['anonymize-ids'] === true) {
     data = shuffleIds(data, argv.seed, positionedEntities);
     if (!validateIdRefs(data, positionedEntities)) {
       log('ID reference check failed.');
-      process.exit(1);
+      // process.exit(1);
     }
   }
 

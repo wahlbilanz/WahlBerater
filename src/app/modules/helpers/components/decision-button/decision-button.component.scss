@@ -3,9 +3,10 @@
   display: inline-block;
   border: 1px dashed black;
   padding: $wb-space-small;
-  margin: $wb-space-small;
+  margin: 0 $wb-space-small $wb-space-small 0;
   &__text {
     margin: $wb-space-small;
+    margin-right: 0;
   }
   &__icon {
     margin: $wb-space-small;
