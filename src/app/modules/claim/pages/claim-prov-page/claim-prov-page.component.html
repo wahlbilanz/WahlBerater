@@ -39,7 +39,8 @@
       <h5>Weiterführende Informationen zur These</h5>
       <ul>
         <li *ngFor="let link of politicalData.claims[claimId].links">
-          <a [href]="link.url" target="_blank" [title]="link.title">{{ link.title || link.url }}</a>
+          <a *ngIf="link.url" [href]="link.url" target="_blank" [title]="link.title">{{ link.title || link.url }}</a>
+          <ng-container *ngIf="!link.url">{{ link.title }}</ng-container>
         </li>
       </ul>
     </ng-container>
@@ -54,26 +55,35 @@
       </ul>
     </div>
 
-    <h3>Weitere Thesen in der Kategorie {{ politicalData.categories[politicalData.claims[claimId].category].title }}</h3>
-    <nz-list>
-      <ng-container *ngFor="let item of politicalData.claims | keyvalue | slice: 0:5">
-        <nz-list-item *ngIf="item.value.category === politicalData.claims[claimId].category && item.key !== claimId">
-          <a [routerLink]="['/claim/', item.key]">{{ item.value.title }}</a>
-        </nz-list-item>
-      </ng-container>
-    </nz-list>
-    <h3>Navigation in der Thesenliste</h3>
-    <div class="claimNav">
-      <span *ngIf="prev">
-        Vorherige These: <a [routerLink]="['/claim/', prev]">{{ politicalData.claims[prev].title }}</a>
-      </span>
-      <br />
-      <span *ngIf="next">
-        Nächste These: <a [routerLink]="['/claim/', next]">{{ politicalData.claims[next].title }}</a>
-      </span>
-      <br />
-      <br />
-      <span *ngIf="next"> Alle Thesen in der <a [routerLink]="['/claim/']">Thesenübersicht</a> </span>
+    <div nz-row class="claimNav">
+      <div nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="12" nzXl="12">
+        <h3>Weitere Thesen in der Kategorie {{ politicalData.categories[politicalData.claims[claimId].category].title }}</h3>
+        <nz-list>
+          <ng-container *ngFor="let item of politicalData.claims | keyvalue | slice: 0:6">
+            <nz-list-item *ngIf="item.value.category === politicalData.claims[claimId].category && item.key !== claimId">
+              <a [routerLink]="['/claim/', item.key]">{{ item.value.title }}</a>
+            </nz-list-item>
+          </ng-container>
+        </nz-list>
+      </div>
+      <div nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="12" nzXl="12">
+        <h3>Navigation in der Thesenliste</h3>
+        <nz-list>
+          <nz-list-item *ngIf="prev">
+            <span
+              >Vorherige These: <a [routerLink]="['/claim/', prev]">{{ politicalData.claims[prev].title }}</a></span
+            >
+          </nz-list-item>
+          <nz-list-item *ngIf="next">
+            <span
+              >Nächste These: <a [routerLink]="['/claim/', next]">{{ politicalData.claims[next].title }}</a></span
+            >
+          </nz-list-item>
+          <nz-list-item>
+            <span> Alle Thesen in der <a [routerLink]="['/claim/']">Thesenübersicht</a></span>
+          </nz-list-item>
+        </nz-list>
+      </div>
     </div>
   </div>
 </ng-container>

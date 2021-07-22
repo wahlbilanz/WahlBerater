@@ -17,3 +17,13 @@
     text-align: right;
   }
 }
+.claimNav {
+  @media (min-width: $wb-breakpoint-large) {
+    > div:first-of-type {
+      padding-right: $wb-space-medium;
+    }
+    > div:last-of-type {
+      padding-left: $wb-space-medium;
+    }
+  }
+}

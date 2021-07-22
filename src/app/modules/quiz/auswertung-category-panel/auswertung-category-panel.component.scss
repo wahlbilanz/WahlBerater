@@ -1,5 +1,5 @@
 @import '../../../../assets/styles/variables';
-@media (min-width: 992px) {
+@media (min-width: $wb-breakpoint-large) {
   .claim-info {
     .own-decision {
       display: flex;
