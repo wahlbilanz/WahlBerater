@@ -16,6 +16,13 @@
   .category {
     text-align: right;
   }
+
+  h3 {
+    margin-top: $wb-space-xxl-large;
+  }
+  app-claim-candidate-viz {
+    margin-bottom: $wb-space-small;
+  }
 }
 .claimNav {
   @media (min-width: $wb-breakpoint-large) {
