@@ -52,6 +52,8 @@
   #claim {
     margin-bottom: $wb-space-x-large;
     padding: $wb-space-small;
+    hyphens: none;
+    text-align: center;
   }
 
   #decision {

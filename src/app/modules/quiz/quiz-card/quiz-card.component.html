@@ -17,9 +17,7 @@
 
       <div id="claim-background" [innerHTML]="claim.description | markdown" class=""></div>
 
-      <h1 id="claim" class="">
-        {{ claim.title }}
-      </h1>
+      <h1 id="claim" class="" [innerHTML]="claim.title"></h1>
 
       <div id="decision" class="">
         <div id="decision-left" class="">

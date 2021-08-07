@@ -1,6 +1,6 @@
-import { PersonalCandidateMap } from '../models/candidate.model';
+import { CandidatePersonalInfo, PersonalCandidateMap } from '../models/candidate.model';
 
-export function getCandidatePersonalInfo(candidateMap: PersonalCandidateMap, candidateId: string) {
+export function getCandidatePersonalInfo(candidateMap: PersonalCandidateMap, candidateId: string): CandidatePersonalInfo {
   if (candidateMap && candidateMap[candidateId]) {
     return candidateMap[candidateId];
   }
@@ -10,5 +10,7 @@ export function getCandidatePersonalInfo(candidateMap: PersonalCandidateMap, can
     name: 'Unbekannt',
     picture: undefined,
     shortDescription: 'Diese Person hat entweder keine persönlichen Informationen angebeben oder diese in der Zwischenzeit löschen lassen.',
+    color1: '#888',
+    color2: '#888',
   };
 }

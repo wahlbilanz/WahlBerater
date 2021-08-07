@@ -15,6 +15,8 @@ export interface CandidatePersonalInfo {
   shortDescription: string;
   description: string;
   links: LinkMap;
+  color1: string;
+  color2: string;
 }
 
 export interface CandidatePoliticalInfo {

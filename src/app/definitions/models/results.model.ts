@@ -64,6 +64,9 @@ export function prepareResults(politicalData: PoliticalData, personalData: Perso
     partyResult.candidates[candidate] = candidateResult;
 
     for (const claim of Object.keys(politicalData.candidates[candidate].positions)) {
+      if (!politicalData.claims[claim]) {
+        continue;
+      }
       const category = politicalData.claims[claim].category;
 
       if (!candidateResult.scores[category]) {
