@@ -24,6 +24,7 @@ export class AuswertungHeatmapComponent implements OnInit, OnChanges {
   constructor(private store: Store<AppPartialState>) {}
 
   recalc(): void {
+    /* TODO disabled until we rethought stuff..
     this.table = [];
     this.maxValue = [0, 0, 0];
     if (this.politicalCandidates && this.votes) {
@@ -52,6 +53,7 @@ export class AuswertungHeatmapComponent implements OnInit, OnChanges {
       }
     }
     this.table.sort((a, b) => (a.score < b.score ? 1 : -1));
+    */
   }
 
   ngOnChanges(changes: SimpleChanges) {

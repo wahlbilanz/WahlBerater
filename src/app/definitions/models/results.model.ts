@@ -123,9 +123,9 @@ export function prepareResults(politicalData: PoliticalData, personalData: Perso
     }
   });
   partyScores.sort((a: PartyResult, b: PartyResult): number => {
-    if (a.score.score === b.score.score) {
+    /*if (a.score.score === b.score.score) {
       return b.score.stars - a.score.stars;
-    }
+    }*/
     return b.score.score - a.score.score;
   });
   // console.log(partyScores);
