@@ -21,8 +21,12 @@ table {
       width: 1%;
       padding-right: $wb-space-x-small;
     }
-    &.party-row th {
-      font-weight: bold;
+    &.party-row {
+      border-left: 5px solid;
+      th {
+        padding-left: $wb-space-x-small;
+        font-weight: bold;
+      }
     }
 
     &.candidate-row th {

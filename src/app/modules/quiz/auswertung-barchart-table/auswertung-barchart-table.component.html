@@ -2,7 +2,7 @@
   <table *ngIf="partyScoreResult?.partyScores">
     <ng-container *ngFor="let party of partyScoreResult.partyScores; let partyIndex = index">
       <!-- Party -->
-      <tr class="party-row">
+      <tr class="party-row" style="border-color:{{ politicalData.parties[party.party].color }}">
         <th>
           <a [routerLink]="'/parties/' + party.party">
             {{ politicalData.parties[party.party].name }}
