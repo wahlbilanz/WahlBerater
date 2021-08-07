@@ -1,7 +1,7 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { getCandidatePersonalInfo } from '../definitions/functions/getCandidatePersonalInfo';
 import { PersonalCandidateMap } from '../definitions/models/candidate.model';
-import { Category } from '../definitions/models/category.model';
+import { Category, CategoryWithClaims } from '../definitions/models/category.model';
 import { PoliticalData } from '../definitions/models/political.data.model';
 import { Votes } from '../definitions/models/votes.mode';
 import { AccessibilityModes, QuizFirstPage, QuizState, State } from './app.models';
@@ -205,9 +205,9 @@ export const getCandidateListByPartyId = createSelector(
       } as CandidateWithID),
 );*/
 
-export const getCategoriesWithClaims = createSelector(getPoliticalData, (data) =>
+export const getCategoriesWithClaims = createSelector(getPoliticalData, (data): CategoryWithClaims[] =>
   data == null
-    ? null
+    ? undefined
     : getSortedCategoryIDs(data).map((categoryId) => ({
         categoryId,
         category: data.categories[categoryId],

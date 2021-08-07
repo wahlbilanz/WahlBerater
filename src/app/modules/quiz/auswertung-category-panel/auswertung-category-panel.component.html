@@ -2,35 +2,35 @@
 <ng-container *ngIf="category">
   <h3>{{ category.title }}</h3>
   <nz-collapse *ngIf="claims">
-    <ng-container *ngFor="let claim of claims | keyvalue; let i = index">
+    <ng-container *ngFor="let claim of claims; let i = index">
       <nz-collapse-panel
-        *ngIf="claim.value.category === categoryId"
+        *ngIf="claim.category === categoryId"
         class="claim"
-        [nzHeader]="claim.value.title"
+        [nzHeader]="claim.title"
         [nzExtra]="voteIcon"
         (nzActiveChange)="activate(i)"
       >
         <div *ngIf="activePanels[i]">
           <div nz-row class="claim-info">
-            <p class="background" *ngIf="claim.value.description" nz-col nzXs="24" nzSm="24" nzLg="12" nzXl="12">
-              <span [innerHTML]="claim.value.description | markdown"></span>
+            <p class="background" *ngIf="claim.description" nz-col nzXs="24" nzSm="24" nzLg="12" nzXl="12">
+              <span [innerHTML]="claim.description | markdown"></span>
             </p>
             <div
               nz-col
-              *ngIf="votes[claim.key]"
+              *ngIf="votes[claim.claimId]"
               class="own-decision"
               nzXs="24"
               nzSm="24"
-              [nzLg]="claim.value.description ? 12 : 24"
-              [nzXl]="claim.value.description ? 12 : 24"
+              [nzLg]="claim.description ? 12 : 24"
+              [nzXl]="claim.description ? 12 : 24"
             >
-              <app-decision-button [icon]="votes[claim.key]" [ownDecision]="true" label="Dein Antwort"></app-decision-button>
+              <app-decision-button [icon]="votes[claim.claimId]" [ownDecision]="true" label="Dein Antwort"></app-decision-button>
             </div>
           </div>
           <h4 *ngIf="this.accessibilityModes?.accessibilityMode">Positionen der Listen:</h4>
           <app-claim-party-buttons
-            [claimId]="claim.key"
-            [claim]="claim.value"
+            [claimId]="claim.claimId"
+            [claim]="claim"
             [votes]="votes"
             [politicalData]="politicalData"
             [personalCandidates]="personalCandidates"
@@ -41,16 +41,18 @@
           <ul class="small claim-bottom">
             <li class="more-info">
               <i nz-icon nzType="double-right" nzTheme="outline"></i
-              ><a [routerLink]="'/claim/' + claim.key">Mehr Informationen zu dieser These mit detailierten Antworten der Kandidierenden.</a>
+              ><a [routerLink]="'/claim/' + claim.claimId"
+                >Mehr Informationen zu dieser These mit detailierten Antworten der Kandidierenden.</a
+              >
             </li>
             <li class="redecide">
               <i nz-icon nzType="double-right" nzTheme="outline"></i
-              ><a [routerLink]="'/quiz/' + claim.key" *ngIf="!this.accessibilityModes?.accessibilityMode"
+              ><a [routerLink]="'/quiz/' + claim.claimId" *ngIf="!this.accessibilityModes?.accessibilityMode"
                 >Zurück zum Quiz, um Entscheidung zu ändern.</a
               >
               <a
                 [routerLink]="'/quiz/' + AccessibleUrlPath"
-                [fragment]="sAccessibleUrlFragment + claim.key"
+                [fragment]="sAccessibleUrlFragment + claim.claimId"
                 *ngIf="this.accessibilityModes?.accessibilityMode"
                 >Zurück zum Quiz, um Entscheidung zu ändern.</a
               >
@@ -58,7 +60,7 @@
           </ul>
         </div>
         <ng-template #voteIcon>
-          <app-decision-icon [vote]="votes[claim.key]" voteContext="USER"></app-decision-icon>
+          <app-decision-icon [vote]="votes[claim.claimId]" voteContext="USER"></app-decision-icon>
         </ng-template>
       </nz-collapse-panel>
     </ng-container>

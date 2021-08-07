@@ -3,7 +3,7 @@ import { select, Store } from '@ngrx/store';
 import { AppPartialState } from '../../../+state/app.reducer';
 import { PersonalCandidateMap } from '../../../definitions/models/candidate.model';
 import { Category } from '../../../definitions/models/category.model';
-import { ClaimMap } from '../../../definitions/models/claim.model';
+import { ClaimMap, ClaimWithId } from '../../../definitions/models/claim.model';
 import { PoliticalData } from '../../../definitions/models/political.data.model';
 import { PartyScoreResult } from '../../../definitions/models/results.model';
 import { Vote, Votes } from '../../../definitions/models/votes.mode';
@@ -24,7 +24,7 @@ export class AuswertungCategoryPanelComponent implements OnInit, OnDestroy {
   @Input() votes: Votes;
   @Input() politicalData: PoliticalData;
   @Input() personalCandidates: PersonalCandidateMap;
-  @Input() claims: ClaimMap;
+  @Input() claims: ClaimWithId[];
 
   @Input() partyScoreResult: PartyScoreResult;
   @Input() showCandidates = false;

@@ -20,3 +20,7 @@ export interface Claim {
   provenance: ClaimProvenanceEntry[];
   links: NamedLink[];
 }
+
+export interface ClaimWithId extends Claim {
+  claimId: string;
+}

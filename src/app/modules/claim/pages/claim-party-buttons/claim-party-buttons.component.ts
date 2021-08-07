@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { DecisionTemplatesComponent } from '../../../helpers/decision-templates/decision-templates.component';
-import { Claim } from '../../../../definitions/models/claim.model';
+import { Claim, ClaimWithId } from '../../../../definitions/models/claim.model';
 import { Vote, Votes } from '../../../../definitions/models/votes.mode';
 import { PoliticalData } from '../../../../definitions/models/political.data.model';
 import { PersonalCandidateMap } from '../../../../definitions/models/candidate.model';
@@ -19,7 +19,7 @@ export class ClaimPartyButtonsComponent implements OnInit {
   @ViewChild('decisionTemplates', { static: true }) decisionTemplates: DecisionTemplatesComponent;
 
   @Input() claimId: string;
-  @Input() claim: Claim;
+  @Input() claim: ClaimWithId;
   @Input() votes: Votes;
   @Input() politicalData: PoliticalData;
   @Input() personalCandidates: PersonalCandidateMap;

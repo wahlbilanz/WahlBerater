@@ -9,7 +9,8 @@ import { PersonalCandidateMap } from '../../../definitions/models/candidate.mode
 import { PoliticalData } from '../../../definitions/models/political.data.model';
 import { PartyScoreResult, prepareResults } from '../../../definitions/models/results.model';
 import { Votes } from '../../../definitions/models/votes.mode';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
+import { CategoryWithClaims } from '../../../definitions/models/category.model';
 
 @Component({
   selector: 'app-auswertung',
@@ -25,6 +26,7 @@ export class AuswertungComponent implements OnInit, OnChanges, OnDestroy {
   maxValue = 0;
   maxParty = 0;
   showCandidates = false;
+  sortedCategroies: Observable<CategoryWithClaims[]> = this.store.pipe(select(AppSelectors.getCategoriesWithClaims));
 
   public accessibilityModes = this.store.pipe(select(AppSelectors.getAllAccessibilityModes));
   private subscriptions: Subscription[] = [];
