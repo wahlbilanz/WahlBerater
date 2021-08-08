@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { select, Store } from '@ngrx/store';
-import { asyncScheduler, combineLatest, scheduled, Subscription } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
+import { asyncScheduler, combineLatest, scheduled, Subject } from 'rxjs';
+import { map, switchMap, takeUntil } from 'rxjs/operators';
 import { AppPartialState } from 'src/app/+state/app.reducer';
 import * as AppSelectors from '../../../../+state/app.selectors';
 import { Vote, Votes } from '../../../../definitions/models/votes.mode';
@@ -36,7 +36,7 @@ export class CandidateDetailPageComponent implements OnInit, OnDestroy {
   );
 
   public votes: Votes;
-  private subscriptions: Subscription[] = [];
+  private destroy$: Subject<void> = new Subject<void>();
   public agreement = AGREEMENT;
 
   voteThreshold = PartyDecisionThreshold;
@@ -46,17 +46,14 @@ export class CandidateDetailPageComponent implements OnInit, OnDestroy {
   constructor(private state: Store<AppPartialState>, private route: ActivatedRoute, private store: Store<AppPartialState>) {}
 
   ngOnInit(): void {
-    this.subscriptions.push(
-      this.store.pipe(select(AppSelectors.getVotes)).subscribe((d: Votes) => {
-        this.votes = d;
-      }),
-    );
+    this.store.pipe(select(AppSelectors.getVotes), takeUntil(this.destroy$)).subscribe((d: Votes) => {
+      this.votes = d;
+    });
   }
 
   ngOnDestroy(): void {
-    for (const s of this.subscriptions) {
-      s.unsubscribe();
-    }
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   calcAgreement(party: number, user: Vote) {

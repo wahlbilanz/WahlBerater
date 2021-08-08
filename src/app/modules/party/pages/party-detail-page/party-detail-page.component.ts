@@ -1,11 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { select, Store } from '@ngrx/store';
-import { map, switchMap, tap } from 'rxjs/operators';
+import { map, switchMap, takeUntil, tap } from 'rxjs/operators';
 import { AppPartialState } from '../../../../+state/app.reducer';
 import * as AppSelectors from '../../../../+state/app.selectors';
 import { IncludeCandidates, PartyDecisionThreshold } from '../../../../+state/app.models';
-import { asyncScheduler, combineLatest, Observable, scheduled, Subscription } from 'rxjs';
+import { asyncScheduler, combineLatest, Observable, scheduled, Subject } from 'rxjs';
 import { Vote, Votes } from '../../../../definitions/models/votes.mode';
 import { AGREEMENT } from '../../../../definitions/enums/agreement.enum';
 import { getAgreement } from '../../../../definitions/functions/agreement.function';
@@ -49,7 +49,7 @@ export class PartyDetailPageComponent implements OnInit, OnDestroy {
   );
   public votes: Votes;
   public agreement = AGREEMENT;
-  private subscriptions: Subscription[] = [];
+  private destroy$: Subject<void> = new Subject<void>();
   politicalData: PoliticalData;
   personalData: PersonalCandidateMap;
   partyScoreResult: PartyScoreResult;
@@ -65,38 +65,29 @@ export class PartyDetailPageComponent implements OnInit, OnDestroy {
   constructor(private state: Store<AppPartialState>, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    // this.route.params.subscribe((p) => console.log('params', p));
-    this.subscriptions.push(
-      this.state.pipe(select(AppSelectors.getPersonalData)).subscribe((d) => {
-        // console.log('getPersonalData', d);
-        this.personalData = d;
-      }),
-    );
-    this.subscriptions.push(
-      this.state.pipe(select(AppSelectors.getPoliticalData)).subscribe((d) => {
-        // console.log('getPoliticalData', d);
-        this.politicalData = d;
-        this.activePanels = [];
-        if (d) {
-          for (const c in d.claims) {
-            if (d.hasOwnProperty(c)) {
-              this.activePanels.push(false);
-            }
+    this.state.pipe(select(AppSelectors.getPersonalData), takeUntil(this.destroy$)).subscribe((d) => {
+      // console.log('getPersonalData', d);
+      this.personalData = d;
+    });
+    this.state.pipe(select(AppSelectors.getPoliticalData), takeUntil(this.destroy$)).subscribe((d) => {
+      // console.log('getPoliticalData', d);
+      this.politicalData = d;
+      this.activePanels = [];
+      if (d) {
+        for (const c in d.claims) {
+          if (d.hasOwnProperty(c)) {
+            this.activePanels.push(false);
           }
         }
-      }),
-    );
-    this.subscriptions.push(
-      this.state.pipe(select(AppSelectors.getVotes)).subscribe((votes: Votes) => {
-        this.votes = votes;
-      }),
-    );
-    this.subscriptions.push(
-      this.state.pipe(select(AppSelectors.getPartyScoreResult)).subscribe((partyScoreResult) => {
-        this.partyScoreResult = partyScoreResult;
-        this.getPartyResult();
-      }),
-    );
+      }
+    });
+    this.state.pipe(select(AppSelectors.getVotes), takeUntil(this.destroy$)).subscribe((votes: Votes) => {
+      this.votes = votes;
+    });
+    this.state.pipe(select(AppSelectors.getPartyScoreResult), takeUntil(this.destroy$)).subscribe((partyScoreResult) => {
+      this.partyScoreResult = partyScoreResult;
+      this.getPartyResult();
+    });
   }
 
   getPartyResult() {
@@ -110,9 +101,8 @@ export class PartyDetailPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    for (const s of this.subscriptions) {
-      s.unsubscribe();
-    }
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   calcAgreement(party: number, user: Vote) {

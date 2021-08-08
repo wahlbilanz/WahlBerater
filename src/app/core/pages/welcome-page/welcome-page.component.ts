@@ -1,11 +1,11 @@
-import { Component, OnChanges, OnDestroy } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { select, Store } from '@ngrx/store';
-import { map } from 'rxjs/operators';
+import { map, takeUntil } from 'rxjs/operators';
 import * as AppActions from '../../../+state/app.actions';
 import { QuizState, ResultUrl, QuizFirstPage, AccessibleUrl, AccessibilityModes, AccessibleUrlFragment } from '../../../+state/app.models';
 import { AppPartialState } from '../../../+state/app.reducer';
 import * as AppSelectors from '../../../+state/app.selectors';
-import { Subscription } from 'rxjs';
+import { Subject } from 'rxjs';
 import { saveVotes, vote } from '../../../+state/app.actions';
 
 @Component({
@@ -27,26 +27,21 @@ export class WelcomePageComponent implements OnDestroy {
   public AccessibleUrlPath = AccessibleUrl;
   public sAccessibleUrlFragment = AccessibleUrlFragment;
   public lastQuizPage: string;
-  private subscriptions: Subscription[] = [];
+  private destroy$: Subject<void> = new Subject<void>();
 
   constructor(private store: Store<AppPartialState>) {
     this.lastQuizPage = QuizFirstPage;
-    this.subscriptions.push(
-      this.store.pipe(select(AppSelectors.getLastQuizPage)).subscribe((p) => {
-        this.lastQuizPage = p;
-      }),
-    );
-    this.subscriptions.push(
-      this.store.pipe(select(AppSelectors.getAllAccessibilityModes)).subscribe((am) => {
-        this.accessibilityModes = am;
-      }),
-    );
+    this.store.pipe(select(AppSelectors.getLastQuizPage), takeUntil(this.destroy$)).subscribe((p) => {
+      this.lastQuizPage = p;
+    });
+    this.store.pipe(select(AppSelectors.getAllAccessibilityModes), takeUntil(this.destroy$)).subscribe((am) => {
+      this.accessibilityModes = am;
+    });
   }
 
   ngOnDestroy(): void {
-    for (const s of this.subscriptions) {
-      s.unsubscribe();
-    }
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   public updateLocalStorageOptIn(allow: boolean) {

@@ -7,7 +7,8 @@ import { Votes } from '../../../definitions/models/votes.mode';
 import { vote } from '../../../+state/app.actions';
 import { AccessibilityModes, AccessibleUrlFragment, ResultUrl } from '../../../+state/app.models';
 import { ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-accessible-quiz',
@@ -22,32 +23,26 @@ export class AccessibleQuizComponent implements OnInit, AfterViewInit, OnDestroy
   private fragment?: string;
   public accessibilityModes?: AccessibilityModes;
   public sAccessibleUrlFragment = AccessibleUrlFragment;
-  private subscriptions: Subscription[] = [];
+  private destroy$: Subject<void> = new Subject<void>();
 
   constructor(private store: Store<AppPartialState>, private route: ActivatedRoute) {
-    // this.store.dispatch(AppActions.updateLastQuizPage({ lastPage: 'accessible' }));
-    this.subscriptions.push(
-      this.store.pipe(select(AppSelectors.getAllAccessibilityModes)).subscribe((am) => (this.accessibilityModes = am)),
-    );
+    this.store
+      .pipe(select(AppSelectors.getAllAccessibilityModes), takeUntil(this.destroy$))
+      .subscribe((am) => (this.accessibilityModes = am));
   }
 
   ngOnDestroy() {
-    for (const s of this.subscriptions) {
-      s.unsubscribe();
-    }
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   ngOnInit(): void {
-    this.subscriptions.push(
-      this.route.fragment.subscribe((fragment) => {
-        this.fragment = fragment;
-      }),
-    );
-    this.subscriptions.push(
-      this.store.pipe(select(AppSelectors.getVotes)).subscribe((v) => {
-        this.votes = v;
-      }),
-    );
+    this.route.fragment.pipe(takeUntil(this.destroy$)).subscribe((fragment) => {
+      this.fragment = fragment;
+    });
+    this.store.pipe(select(AppSelectors.getVotes), takeUntil(this.destroy$)).subscribe((v) => {
+      this.votes = v;
+    });
   }
 
   ngAfterViewInit(): void {

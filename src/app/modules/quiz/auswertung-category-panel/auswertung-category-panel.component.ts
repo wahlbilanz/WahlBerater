@@ -10,8 +10,9 @@ import { Vote, Votes } from '../../../definitions/models/votes.mode';
 import { DecisionTemplatesComponent } from '../../helpers/decision-templates/decision-templates.component';
 import * as AppSelectors from '../../../+state/app.selectors';
 import { AccessibilityModes, AccessibleUrl, AccessibleUrlFragment, IncludeCandidates } from '../../../+state/app.models';
-import { Subscription } from 'rxjs';
+import { Subject } from 'rxjs';
 import { AGREEMENT } from '../../../definitions/enums/agreement.enum';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-auswertung-category-panel',
@@ -37,20 +38,19 @@ export class AuswertungCategoryPanelComponent implements OnInit, OnDestroy {
   public accessibilityModes?: AccessibilityModes;
   public AccessibleUrlPath = AccessibleUrl;
   public sAccessibleUrlFragment = AccessibleUrlFragment;
-  private subscriptions: Subscription[] = [];
+  private destroy$: Subject<void> = new Subject<void>();
 
   activePanels: boolean[];
 
   constructor(private store: Store<AppPartialState>) {
-    this.subscriptions.push(
-      this.store.pipe(select(AppSelectors.getAllAccessibilityModes)).subscribe((am) => (this.accessibilityModes = am)),
-    );
+    this.store
+      .pipe(select(AppSelectors.getAllAccessibilityModes), takeUntil(this.destroy$))
+      .subscribe((am) => (this.accessibilityModes = am));
   }
 
   ngOnDestroy(): void {
-    for (const s of this.subscriptions) {
-      s.unsubscribe();
-    }
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   ngOnInit(): void {

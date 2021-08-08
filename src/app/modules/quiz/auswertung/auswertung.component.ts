@@ -9,8 +9,9 @@ import { PersonalCandidateMap } from '../../../definitions/models/candidate.mode
 import { PoliticalData } from '../../../definitions/models/political.data.model';
 import { PartyScoreResult } from '../../../definitions/models/results.model';
 import { Votes } from '../../../definitions/models/votes.mode';
-import { Observable, Subscription } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { CategoryWithClaims } from '../../../definitions/models/category.model';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-auswertung',
@@ -31,35 +32,28 @@ export class AuswertungComponent implements OnInit, OnDestroy {
   sortedCategroies: Observable<CategoryWithClaims[]> = this.store.pipe(select(AppSelectors.getCategoriesWithClaims));
 
   public accessibilityModes = this.store.pipe(select(AppSelectors.getAllAccessibilityModes));
-  private subscriptions: Subscription[] = [];
+  private destroy$: Subject<void> = new Subject<void>();
 
   constructor(private store: Store<AppPartialState>) {
     this.store.dispatch(AppActions.updateLastQuizPage({ lastPage: ResultUrl }));
   }
 
   ngOnDestroy(): void {
-    for (const s of this.subscriptions) {
-      s.unsubscribe();
-    }
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   ngOnInit(): void {
-    this.subscriptions.push(
-      this.store.pipe(select(AppSelectors.getPersonalData)).subscribe((d) => {
-        this.personalData = d;
-      }),
-    );
-    this.subscriptions.push(
-      this.store.pipe(select(AppSelectors.getPoliticalData)).subscribe((d) => {
-        this.politicalData = d;
-      }),
-    );
-    this.subscriptions.push(
-      this.store.pipe(select(AppSelectors.getVotes)).subscribe((votes) => {
-        this.votes = votes;
-      }),
-    );
-    this.subscriptions.push(this.store.pipe(select(AppSelectors.getPartyScoreResult)).subscribe((r) => (this.partyScoreResult = r)));
+    this.store.pipe(select(AppSelectors.getPersonalData), takeUntil(this.destroy$)).subscribe((d) => {
+      this.personalData = d;
+    });
+    this.store.pipe(select(AppSelectors.getPoliticalData), takeUntil(this.destroy$)).subscribe((d) => {
+      this.politicalData = d;
+    });
+    this.store.pipe(select(AppSelectors.getVotes), takeUntil(this.destroy$)).subscribe((votes) => {
+      this.votes = votes;
+    });
+    this.store.pipe(select(AppSelectors.getPartyScoreResult), takeUntil(this.destroy$)).subscribe((r) => (this.partyScoreResult = r));
   }
 
   sampleVotes(): void {

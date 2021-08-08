@@ -1,14 +1,13 @@
 import { ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import { select, Store } from '@ngrx/store';
-import { Observable, Subscription } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { AppPartialState } from '../../../../+state/app.reducer';
 import * as AppSelectors from '../../../../+state/app.selectors';
-// import { CandidateWithID } from '../../../../definitions/models/candidate.model';
 import { Party } from '../../../../definitions/models/party.model';
 import { PoliticalData } from '../../../../definitions/models/political.data.model';
 import { PersonalCandidateMap } from '../../../../definitions/models/candidate.model';
 import { PartyResult } from '../../../../definitions/models/results.model';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-party-card',
@@ -38,22 +37,19 @@ export class PartyCardComponent implements OnInit, OnDestroy {
   maxPartyValue: number;
   maxValueArray: number[] = [];
 
-  private subscriptions: Subscription[] = [];
+  private destroy$: Subject<void> = new Subject<void>();
 
   constructor(private store: Store<AppPartialState>) {}
 
   ngOnDestroy() {
-    for (const s of this.subscriptions) {
-      s.unsubscribe();
-    }
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   ngOnInit(): void {
-    this.subscriptions.push(
-      this.store
-        .pipe(select(AppSelectors.getCandidateListByPartyId, { partyId: this.partyId }))
-        .subscribe((candidates) => (this.partyCandidates = candidates)),
-    );
+    this.store
+      .pipe(select(AppSelectors.getCandidateListByPartyId, { partyId: this.partyId }), takeUntil(this.destroy$))
+      .subscribe((candidates) => (this.partyCandidates = candidates));
   }
 
   recalcAxes() {

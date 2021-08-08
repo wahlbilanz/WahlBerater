@@ -1,8 +1,8 @@
-import { animate, keyframes, state, style, transition, trigger } from '@angular/animations';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 import { AfterViewInit, Component, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
-import { first, take, tap } from 'rxjs/operators';
+import { first, take, takeUntil } from 'rxjs/operators';
 import { vote } from '../../../+state/app.actions';
 import {
   AccessibilityModes,
@@ -18,7 +18,7 @@ import { AppPartialState } from '../../../+state/app.reducer';
 import * as AppSelectors from '../../../+state/app.selectors';
 import { Category } from '../../../definitions/models/category.model';
 import { Claim } from '../../../definitions/models/claim.model';
-import { Subscription } from 'rxjs';
+import { Subject } from 'rxjs';
 import * as introJs from 'intro.js/intro.js';
 import { Votes } from '../../../definitions/models/votes.mode';
 
@@ -92,24 +92,21 @@ export class QuizCardComponent implements OnInit, OnChanges, OnDestroy, AfterVie
     reducedMotionMode: true,
     accessibilityMode: false,
   };
-  private subscriptions: Subscription[] = [];
+  private destroy$: Subject<void> = new Subject<void>();
 
   constructor(private store: Store<AppPartialState>, private router: Router) {
-    this.subscriptions.push(
-      this.store.pipe(select(AppSelectors.getAllAccessibilityModes)).subscribe((am) => {
-        this.accessibilityModes = am;
-        // we cannot do this in oninit as we would then play an animation even if the user doesn't want it
-        if (am.reducedMotionMode) {
-          this.swipeAnimation = 'there';
-        }
-      }),
-    );
+    this.store.pipe(select(AppSelectors.getAllAccessibilityModes), takeUntil(this.destroy$)).subscribe((am) => {
+      this.accessibilityModes = am;
+      // we cannot do this in oninit as we would then play an animation even if the user doesn't want it
+      if (am.reducedMotionMode) {
+        this.swipeAnimation = 'there';
+      }
+    });
   }
 
   ngOnDestroy(): void {
-    for (const s of this.subscriptions) {
-      s.unsubscribe();
-    }
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   ngOnChanges(): void {
@@ -151,16 +148,14 @@ export class QuizCardComponent implements OnInit, OnChanges, OnDestroy, AfterVie
   }
 
   ngOnInit(): void {
-    this.subscriptions.push(
-      this.store.pipe(select(AppSelectors.getAllAccessibilityModes)).subscribe((am) => {
-        // we cannot do this in constructor, as the routes won't be ready
-        if (am.accessibilityMode) {
-          this.router.navigate(['quiz', AccessibleUrl], { fragment: AccessibleUrlFragment + this.claimId });
-        } else if (this.claimId === QuizFirstPage) {
-          this.router.navigate([this.next]);
-        }
-      }),
-    );
+    this.store.pipe(select(AppSelectors.getAllAccessibilityModes), takeUntil(this.destroy$)).subscribe((am) => {
+      // we cannot do this in constructor, as the routes won't be ready
+      if (am.accessibilityMode) {
+        this.router.navigate(['quiz', AccessibleUrl], { fragment: AccessibleUrlFragment + this.claimId });
+      } else if (this.claimId === QuizFirstPage) {
+        this.router.navigate([this.next]);
+      }
+    });
     this.setupIntroJS();
   }
 

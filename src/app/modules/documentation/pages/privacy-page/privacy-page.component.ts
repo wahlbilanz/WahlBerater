@@ -2,9 +2,10 @@ import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import * as AppSelectors from '../../../../+state/app.selectors';
-import { Subscription } from 'rxjs';
+import { Subject } from 'rxjs';
 import { AccessibilityModes, AccessibleUrlFragment } from 'src/app/+state/app.models';
 import { AppPartialState } from 'src/app/+state/app.reducer';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-privacy-page',
@@ -15,25 +16,22 @@ export class PrivacyPageComponent implements OnInit, AfterViewInit, OnDestroy {
   private fragment?: string;
   public accessibilityModes?: AccessibilityModes;
   public sAccessibleUrlFragment = AccessibleUrlFragment;
-  private subscriptions: Subscription[] = [];
+  private destroy$: Subject<void> = new Subject<void>();
   constructor(private store: Store<AppPartialState>, private route: ActivatedRoute) {
-    this.subscriptions.push(
-      this.store.pipe(select(AppSelectors.getAllAccessibilityModes)).subscribe((am) => (this.accessibilityModes = am)),
-    );
+    this.store
+      .pipe(select(AppSelectors.getAllAccessibilityModes), takeUntil(this.destroy$))
+      .subscribe((am) => (this.accessibilityModes = am));
   }
 
   ngOnDestroy() {
-    for (const s of this.subscriptions) {
-      s.unsubscribe();
-    }
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   ngOnInit(): void {
-    this.subscriptions.push(
-      this.route.fragment.subscribe((fragment) => {
-        this.fragment = fragment;
-      }),
-    );
+    this.route.fragment.pipe(takeUntil(this.destroy$)).subscribe((fragment) => {
+      this.fragment = fragment;
+    });
   }
 
   ngAfterViewInit(): void {

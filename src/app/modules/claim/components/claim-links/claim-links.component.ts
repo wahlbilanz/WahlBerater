@@ -2,8 +2,9 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { AccessibilityModes, AccessibleUrl, AccessibleUrlFragment, IncludeCandidates } from '../../../../+state/app.models';
 import { select, Store } from '@ngrx/store';
 import * as AppSelectors from '../../../../+state/app.selectors';
-import { Subscription } from 'rxjs';
+import { Subject } from 'rxjs';
 import { AppPartialState } from '../../../../+state/app.reducer';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-claim-links',
@@ -16,21 +17,20 @@ export class ClaimLinksComponent implements OnInit, OnDestroy {
   @Input() claimId: string;
   includeCandidates = IncludeCandidates;
   public accessibilityModes?: AccessibilityModes;
-  private subscriptions: Subscription[] = [];
+  private destroy$: Subject<void> = new Subject<void>();
   public sAccessibleUrlFragment = AccessibleUrlFragment;
   public AccessibleUrlPath = AccessibleUrl;
 
   constructor(private store: Store<AppPartialState>) {
-    this.subscriptions.push(
-      this.store.pipe(select(AppSelectors.getAllAccessibilityModes)).subscribe((am) => (this.accessibilityModes = am)),
-    );
+    this.store
+      .pipe(select(AppSelectors.getAllAccessibilityModes), takeUntil(this.destroy$))
+      .subscribe((am) => (this.accessibilityModes = am));
   }
 
   ngOnInit(): void {}
 
   ngOnDestroy(): void {
-    for (const s of this.subscriptions) {
-      s.unsubscribe();
-    }
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }
