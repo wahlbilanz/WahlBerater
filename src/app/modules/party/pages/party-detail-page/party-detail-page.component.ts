@@ -13,7 +13,6 @@ import { CategoryWithClaims } from '../../../../definitions/models/category.mode
 import { Party } from '../../../../definitions/models/party.model';
 import { PoliticalData } from '../../../../definitions/models/political.data.model';
 import { PersonalCandidateMap } from '../../../../definitions/models/candidate.model';
-import { prepareResults } from '../../../../definitions/functions/score-result.function';
 import { PartyResult, PartyScoreResult } from '../../../../definitions/models/results.model';
 
 @Component({
@@ -37,7 +36,6 @@ export class PartyDetailPageComponent implements OnInit, OnDestroy {
         scheduled([partyId], asyncScheduler),
       ]),
     ),
-    // tap (([party, candidates, categoriesWithClaims, partyId]) => console.log (party, candidates, categoriesWithClaims, partyId)),
     map(([party, candidates, categoriesWithClaims, partyId]: [Party, string[], CategoryWithClaims[], string]) => ({
       partyId,
       candidates,
@@ -46,7 +44,7 @@ export class PartyDetailPageComponent implements OnInit, OnDestroy {
     })),
     tap((d) => {
       this.party = d.partyId;
-      this.recalc();
+      this.getPartyResult();
     }),
   );
   public votes: Votes;
@@ -54,6 +52,7 @@ export class PartyDetailPageComponent implements OnInit, OnDestroy {
   private subscriptions: Subscription[] = [];
   politicalData: PoliticalData;
   personalData: PersonalCandidateMap;
+  partyScoreResult: PartyScoreResult;
   partyResult: PartyResult;
   sortedCategroies: Observable<CategoryWithClaims[]> = this.state.pipe(select(AppSelectors.getCategoriesWithClaims));
 
@@ -71,7 +70,6 @@ export class PartyDetailPageComponent implements OnInit, OnDestroy {
       this.state.pipe(select(AppSelectors.getPersonalData)).subscribe((d) => {
         // console.log('getPersonalData', d);
         this.personalData = d;
-        this.recalc();
       }),
     );
     this.subscriptions.push(
@@ -85,16 +83,30 @@ export class PartyDetailPageComponent implements OnInit, OnDestroy {
               this.activePanels.push(false);
             }
           }
-          this.recalc();
         }
       }),
     );
     this.subscriptions.push(
       this.state.pipe(select(AppSelectors.getVotes)).subscribe((votes: Votes) => {
         this.votes = votes;
-        this.recalc();
       }),
     );
+    this.subscriptions.push(
+      this.state.pipe(select(AppSelectors.getPartyScoreResult)).subscribe((partyScoreResult) => {
+        this.partyScoreResult = partyScoreResult;
+        this.getPartyResult();
+      }),
+    );
+  }
+
+  getPartyResult() {
+    if (this.partyScoreResult && this.party) {
+      for (const p of Object.values(this.partyScoreResult)) {
+        if (p.party === this.party) {
+          this.partyResult = p;
+        }
+      }
+    }
   }
 
   ngOnDestroy(): void {
@@ -105,18 +117,6 @@ export class PartyDetailPageComponent implements OnInit, OnDestroy {
 
   calcAgreement(party: number, user: Vote) {
     return getAgreement(party, user);
-  }
-
-  recalc(): void {
-    // console.log('reaclc', this.personalData, this.politicalData, this.votes);
-    if (this.personalData && this.politicalData && this.votes && this.data && !this.partyResult) {
-      const partyScoreResult = prepareResults(this.politicalData, this.personalData, this.votes);
-      for (const p of Object.values(partyScoreResult)) {
-        if (p.party === this.party) {
-          this.partyResult = p;
-        }
-      }
-    }
   }
 
   activate(i: number): void {

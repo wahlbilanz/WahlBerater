@@ -207,7 +207,11 @@ function calcUsingParties(politicalData: PoliticalData, personalData: PersonalCa
   };
 }
 
-export function prepareResults(politicalData: PoliticalData, personalData: PersonalCandidateMap, votes: Votes): PartyScoreResult {
+export function preparePartyResults(politicalData: PoliticalData, personalData: PersonalCandidateMap, votes: Votes): PartyScoreResult {
+  if (!politicalData || !personalData || !votes) {
+    console.log('not enough data to prepare restuls');
+    return;
+  }
   console.log('preparing results...');
   if (IncludeCandidates) {
     return calcUsingCandidates(politicalData, personalData, votes);

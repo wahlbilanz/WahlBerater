@@ -8,6 +8,7 @@ import { AccessibilityModes, QuizFirstPage, QuizState, State } from './app.model
 import { AppPartialState, STATE_FEATURE_KEY } from './app.reducer';
 import { Party, PartyMap } from '../definitions/models/party.model';
 import { Claim } from '../definitions/models/claim.model';
+import { PartyScoreResult } from '../definitions/models/results.model';
 
 const getAppState = createFeatureSelector<AppPartialState, State>(STATE_FEATURE_KEY);
 
@@ -260,3 +261,5 @@ export const getAllAccessibilityModes = createSelector(
 );
 export const isAccessibilityModeActive = createSelector(getAllAccessibilityModes, (state) => state.accessibilityMode);
 export const isReducedMotionModeActive = createSelector(getAllAccessibilityModes, (state) => state.accessibilityMode);
+
+export const getPartyScoreResult = createSelector(getAppState, (state: State): PartyScoreResult => state.partyScoreResult);

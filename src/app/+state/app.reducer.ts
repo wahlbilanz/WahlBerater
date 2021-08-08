@@ -2,6 +2,7 @@ import { createReducer, on } from '@ngrx/store';
 import * as AppActions from './app.actions';
 import { QuizFirstPage, State } from './app.models';
 import { updateLastQuizPage } from './app.actions';
+import { preparePartyResults } from '../definitions/functions/score-result.function';
 
 export const STATE_FEATURE_KEY = 'app';
 
@@ -24,6 +25,7 @@ export const initialState: State = {
   quizLastPage: QuizFirstPage,
   accessibilityMode: null,
   reducedMotionMode: null,
+  partyScoreResult: null,
 };
 
 export const appReducer = createReducer(
@@ -42,6 +44,7 @@ export const appReducer = createReducer(
     politicalData: data,
     politicalDataLoaded: true,
     usedCachedPoliticalData: state.usedCachedPoliticalData || wasCached,
+    partyScoreResult: preparePartyResults(data, state.personalData, state.votes),
   })),
   on(AppActions.loadPoliticalDataError, (state: State) => ({
     ...state,
@@ -54,6 +57,7 @@ export const appReducer = createReducer(
     personalData: data,
     personalDataLoaded: true,
     usedCachedPersonalData: state.usedCachedPersonalData || wasCached,
+    partyScoreResult: preparePartyResults(state.politicalData, data, state.votes),
   })),
   on(AppActions.loadPersonalDataError, (state: State) => ({
     ...state,
@@ -70,6 +74,13 @@ export const appReducer = createReducer(
         fav,
       },
     },
+    partyScoreResult: preparePartyResults(state.politicalData, state.personalData, {
+      ...state.votes,
+      [claimId]: {
+        decision,
+        fav,
+      },
+    }),
   })),
   on(AppActions.updateLastQuizPage, (state: State, { lastPage }) => ({
     ...state,
@@ -108,6 +119,7 @@ export const appReducer = createReducer(
   on(AppActions.restoreVotesSuccess, (state: State, { votes }) => ({
     ...state,
     votes,
+    partyScoreResult: preparePartyResults(state.politicalData, state.personalData, votes),
   })),
   on(AppActions.restoreLastQuizPageSuccess, (state: State, { lastPage }) => ({
     ...state,

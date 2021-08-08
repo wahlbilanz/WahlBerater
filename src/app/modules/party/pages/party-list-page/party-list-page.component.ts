@@ -8,14 +8,13 @@ import { PersonalCandidateMap } from '../../../../definitions/models/candidate.m
 import { Subscription } from 'rxjs';
 import { PartyScoreResult } from '../../../../definitions/models/results.model';
 import { Votes } from '../../../../definitions/models/votes.mode';
-import { prepareResults } from '../../../../definitions/functions/score-result.function';
 
 @Component({
   selector: 'app-party-list-page',
   templateUrl: './party-list-page.component.html',
   styleUrls: ['./party-list-page.component.scss'],
 })
-export class PartyListPageComponent implements OnInit, OnChanges, OnDestroy {
+export class PartyListPageComponent implements OnInit, OnDestroy {
   public partyIds = this.state.pipe(select(AppSelectors.getPartyIds));
   politicalData: PoliticalData;
   personalData: PersonalCandidateMap;
@@ -36,39 +35,23 @@ export class PartyListPageComponent implements OnInit, OnChanges, OnDestroy {
   ngOnInit(): void {
     this.subscriptions.push(
       this.store.pipe(select(AppSelectors.getPersonalData)).subscribe((d) => {
-        // console.log('getPersonalData', d);
         this.personalData = d;
-        this.recalc();
       }),
     );
     this.subscriptions.push(
       this.store.pipe(select(AppSelectors.getPoliticalData)).subscribe((d) => {
-        // console.log('getPoliticalData', d);
         this.politicalData = d;
         if (d) {
           const parties = Object.values(d.parties);
           this.sortedParties = !parties.every((v) => v.order === parties[0].order);
-          this.recalc();
         }
       }),
     );
     this.subscriptions.push(
       this.store.pipe(select(AppSelectors.getVotes)).subscribe((votes) => {
         this.votes = votes;
-        this.recalc();
       }),
     );
-  }
-
-  ngOnChanges(changes: SimpleChanges) {
-    this.recalc();
-  }
-
-  recalc(): void {
-    // console.log('reaclc', this.personalData, this.politicalData, this.votes);
-    if (this.personalData && this.politicalData && this.votes) {
-      this.partyScoreResult = prepareResults(this.politicalData, this.personalData, this.votes);
-      // console.log(this.partyScoreResult);
-    }
+    this.subscriptions.push(this.store.pipe(select(AppSelectors.getPartyScoreResult)).subscribe((r) => (this.partyScoreResult = r)));
   }
 }

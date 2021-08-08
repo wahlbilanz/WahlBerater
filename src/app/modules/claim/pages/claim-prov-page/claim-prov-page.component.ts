@@ -11,14 +11,13 @@ import { IncludeCandidates, QuizFirstPage } from '../../../../+state/app.models'
 import { first, take } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 import { AGREEMENT } from '../../../../definitions/enums/agreement.enum';
-import { prepareResults } from '../../../../definitions/functions/score-result.function';
 
 @Component({
   selector: 'app-thesis-prov-page',
   templateUrl: './claim-prov-page.component.html',
   styleUrls: ['./claim-prov-page.component.scss'],
 })
-export class ClaimProvPageComponent implements OnInit, OnChanges, OnDestroy {
+export class ClaimProvPageComponent implements OnInit, OnDestroy {
   claimId: string;
   votes: Votes = {};
   personalData: PersonalCandidateMap = undefined;
@@ -55,30 +54,18 @@ export class ClaimProvPageComponent implements OnInit, OnChanges, OnDestroy {
     this.subscriptions.push(
       this.store.pipe(select(AppSelectors.getPersonalData)).subscribe((d) => {
         this.personalData = d;
-        this.recalc();
       }),
     );
     this.subscriptions.push(
       this.store.pipe(select(AppSelectors.getPoliticalData)).subscribe((d) => {
         this.politicalData = d;
-        this.recalc();
       }),
     );
     this.subscriptions.push(
       this.store.pipe(select(AppSelectors.getVotes)).subscribe((d) => {
         this.votes = d;
-        this.recalc();
       }),
     );
-  }
-
-  recalc(): void {
-    if (this.personalData && this.politicalData) {
-      this.partyScoreResult = prepareResults(this.politicalData, this.personalData, this.votes);
-    }
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    this.recalc();
+    this.subscriptions.push(this.store.pipe(select(AppSelectors.getPartyScoreResult)).subscribe((r) => (this.partyScoreResult = r)));
   }
 }

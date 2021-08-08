@@ -2,6 +2,7 @@ import { BreakpointBooleanMap } from 'ng-zorro-antd/core/services';
 import { PersonalCandidateMap } from '../definitions/models/candidate.model';
 import { PoliticalData } from '../definitions/models/political.data.model';
 import { Votes } from '../definitions/models/votes.mode';
+import { PartyScoreResult } from '../definitions/models/results.model';
 
 export enum QuizState {
   NOT_STARTED,
@@ -52,4 +53,6 @@ export interface State {
   accessibilityMode: boolean;
   /** True, when the reduced motion mode (no animations) is active. Tri-State - null indicating that user did not make a choice yet or was not restored */
   reducedMotionMode: boolean;
+  /** the resulting score of the lists and candidates */
+  partyScoreResult: PartyScoreResult;
 }

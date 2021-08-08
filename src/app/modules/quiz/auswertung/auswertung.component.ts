@@ -11,14 +11,13 @@ import { PartyScoreResult } from '../../../definitions/models/results.model';
 import { Votes } from '../../../definitions/models/votes.mode';
 import { Observable, Subscription } from 'rxjs';
 import { CategoryWithClaims } from '../../../definitions/models/category.model';
-import { prepareResults } from '../../../definitions/functions/score-result.function';
 
 @Component({
   selector: 'app-auswertung',
   templateUrl: './auswertung.component.html',
   styleUrls: ['./auswertung.component.scss'],
 })
-export class AuswertungComponent implements OnInit, OnChanges, OnDestroy {
+export class AuswertungComponent implements OnInit, OnDestroy {
   includeCandidates = IncludeCandidates;
 
   votes: Votes = undefined;
@@ -48,25 +47,19 @@ export class AuswertungComponent implements OnInit, OnChanges, OnDestroy {
     this.subscriptions.push(
       this.store.pipe(select(AppSelectors.getPersonalData)).subscribe((d) => {
         this.personalData = d;
-        this.recalc();
       }),
     );
     this.subscriptions.push(
       this.store.pipe(select(AppSelectors.getPoliticalData)).subscribe((d) => {
         this.politicalData = d;
-        this.recalc();
       }),
     );
     this.subscriptions.push(
       this.store.pipe(select(AppSelectors.getVotes)).subscribe((votes) => {
         this.votes = votes;
-        this.recalc();
       }),
     );
-  }
-
-  ngOnChanges(changes: SimpleChanges) {
-    this.recalc();
+    this.subscriptions.push(this.store.pipe(select(AppSelectors.getPartyScoreResult)).subscribe((r) => (this.partyScoreResult = r)));
   }
 
   sampleVotes(): void {
@@ -79,13 +72,6 @@ export class AuswertungComponent implements OnInit, OnChanges, OnDestroy {
     }
   }
 
-  recalc(): void {
-    if (this.personalData && this.politicalData && this.votes) {
-      this.partyScoreResult = prepareResults(this.politicalData, this.personalData, this.votes);
-      // console.log(this.partyScoreResult);
-      // console.log(this.votes);
-    }
-  }
   toggleShowCandidates() {
     this.showCandidates = !this.showCandidates;
   }
