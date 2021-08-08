@@ -51,3 +51,28 @@ app-root nz-collapse.ant-collapse.ant-collapse-icon-position-left nz-collapse-pa
   background-color: #fafafa;
   color: rgba(0, 0, 0, 0.96);
 }
+
+.introjs-tooltipReferenceLayer {
+  @include use-typography($wb-type-paragraph);
+  & * {
+    @include use-typography($wb-type-paragraph);
+  }
+
+  .introjs-tooltip-title {
+    @include use-typography($wb-type-h5);
+    font-weight: 700;
+    line-height: 32px;
+  }
+
+  .introjs-tooltiptext {
+    // padding: 20px;
+  }
+  .introjs-tooltip {
+    // letter-spacing: normal;
+    // color: #2c3e50;
+    //min-width: 350px;
+  }
+  .introjs-button {
+    @include use-typography($wb-type-paragraph-small);
+  }
+}

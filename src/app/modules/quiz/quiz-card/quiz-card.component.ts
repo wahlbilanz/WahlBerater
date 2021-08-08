@@ -19,6 +19,7 @@ import * as AppSelectors from '../../../+state/app.selectors';
 import { Category } from '../../../definitions/models/category.model';
 import { Claim } from '../../../definitions/models/claim.model';
 import { Subscription } from 'rxjs';
+import * as introJs from 'intro.js/intro.js';
 
 @Component({
   selector: 'app-quiz-card',
@@ -83,6 +84,8 @@ export class QuizCardComponent implements OnInit, OnChanges, OnDestroy {
   swipeCoord?: [number, number];
   swipeTime?: number;
 
+  introJS = introJs();
+
   containerHeight: number;
   public accessibilityModes: AccessibilityModes = {
     reducedMotionMode: true,
@@ -134,9 +137,9 @@ export class QuizCardComponent implements OnInit, OnChanges, OnDestroy {
       this.claim = {
         order: -9001,
         category: 'howto',
-        description: 'Hintergrundinformationen, um die These einordnen zu können. Bisschen Erklärung wie das Quiz funktioniert.',
+        description: 'Hier finden Sie Hintergrundinformationen, um die These besser einordnen zu können.',
         provenance: [],
-        title: 'Thesen sollten relevant und kontrovers sein.',
+        title: 'Eine These steht immer prominent in der Mitte der Quizkarte.',
         links: [],
       };
     }
@@ -154,6 +157,84 @@ export class QuizCardComponent implements OnInit, OnChanges, OnDestroy {
         }
       }),
     );
+    this.setupIntroJS();
+    if (this.claimId === QuizFirstPage) {
+      this.startIntro();
+    }
+  }
+  private setupIntroJS(): void {
+    this.introJS.setOptions({
+      nextLabel: 'Weiter',
+      prevLabel: 'Zurück',
+      doneLabel: 'Fertig',
+      hidePrev: true,
+      // skipLabel: 'Beenden',
+      steps: [
+        {
+          title: 'WahlBeratungsQuiz',
+          intro:
+            'Sie bekommen nun eine kleine Einführung in die Benutzung des Quiz.' +
+            'Sollten Sie schon wissen, wie das Quiz funktioniert, klicken Sie einfach auf das × oben rechts.',
+        },
+        {
+          element: '#card-category',
+          intro: 'Jede These gehört zu einer Kategorie.',
+          position: 'right',
+        },
+        {
+          element: '#claim-background',
+          intro: 'Manche Thesen benötigen Hintergrundinformationen. Der Hintergrund erscheint dann im oberen Teil der Quizkarte.',
+          position: 'right',
+        },
+        {
+          element: '#claim',
+          intro: 'Die eigentliche These steht prominent in der Mitte der Quizkarte.',
+          position: 'right',
+        },
+        {
+          element: '#decision-center',
+          intro:
+            'Klicken Sie auf das Herz, um eine These als besonders wichtig zu markieren. Kandidierende, die die gleiche Position beziehen, bekommen dann doppelte Punktzahl.',
+          position: 'bottom',
+        },
+        {
+          element: '#decision-left',
+          intro: 'Sind Sie gegen die These klicken Sie auf den Daumen nach unten oder wischen auf mobilen Geräten nach links.',
+          position: 'bottom',
+        },
+        {
+          element: '#decision-right',
+          intro: 'Stimmen Sie für die These klicken Sie auf den Daumen nach oben oder wischen auf mobilen Geräten nach rechts.',
+          position: 'bottom',
+        },
+        {
+          element: '#claim-back',
+          intro:
+            'Wenn es sich nicht um die erste These im Quiz handelt erscheint hier ein Feld mit dem Sie zur vorherigen These springen können.',
+          position: 'top',
+        },
+        {
+          element: '#claim-next',
+          intro:
+            'Mit diesem Knopf können Sie zur nächsten These springen. Sie müssen nicht alle Thesen beantworten, sondern können Thesen überspringen wenn Sie keine starke Meinung zum Thema haben!',
+          position: 'top',
+        },
+        {
+          element: '#forward-auswertung',
+          intro: 'Sie können jederzeit die weiteren Thesen überspringen und mit diesem Knopf direkt in die Auswertung gelangen.',
+          position: 'top',
+        },
+        {
+          element: '#introjs-start',
+          intro: 'Diese Einführung in die Benutzung kann jederzeit über diesen Knopf nochmal gestartet werden.',
+          position: 'top',
+        },
+      ],
+    });
+  }
+
+  startIntro(): void {
+    this.introJS.start();
   }
 
   swipe(e: TouchEvent, start: boolean): void {

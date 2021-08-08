@@ -34,8 +34,13 @@
                 "output": "/assets/"
               }
             ],
-            "styles": ["src/assets/themes/ng-zorro.theme.less", "src/assets/styles/index.scss"],
-            "scripts": []
+            "styles": [
+              "src/assets/themes/ng-zorro.theme.less",
+              "src/assets/styles/index.scss",
+              "node_modules/intro.js/introjs.css",
+              "node_modules/intro.js/themes/introjs-flattener.css"
+            ],
+            "scripts": ["node_modules/intro.js/intro.js"]
           },
           "configurations": {
             "production": {

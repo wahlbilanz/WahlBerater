@@ -101,17 +101,22 @@
       </div>
 
       <div id="cardnav" class="">
-        <div class="">
+        <div id="claim-back" class="">
           <a class="cardnavbtn" *ngIf="prev" (click)="go(false)" title="Zurück zur vorherigen These."
             ><i nz-icon nzType="left" nzTheme="outline"></i
           ></a>
         </div>
-        <div class="">
+        <div id="introjs-start" class="">
+          <a class="cardnavbtn" title="Information zur Benutzung des Quiz" (click)="startIntro()"
+            ><i nz-icon nzType="info-circle" nzTheme="outline"></i
+          ></a>
+        </div>
+        <div id="forward-auswertung" class="">
           <a class="cardnavbtn" [routerLink]="'/quiz/' + ResultUrlPath" title="Direkt zur Auswertung."
             ><i nz-icon nzType="bar-chart" nzTheme="outline"></i
           ></a>
         </div>
-        <div class="">
+        <div id="claim-next" class="">
           <a class="cardnavbtn" *ngIf="next" (click)="go(true)" title="Weiter zur nächten These."
             ><i nz-icon nzType="right" nzTheme="outline"></i
           ></a>
