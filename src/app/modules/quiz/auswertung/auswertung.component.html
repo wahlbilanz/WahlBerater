@@ -1,6 +1,6 @@
 <div class="results" *ngIf="votes">
   <ng-container *ngIf="politicalData">
-    <div class="controls">
+    <div class="controls" *ngIf="includeCandidates">
       Kandidierenden anzeigen:&nbsp;<nz-switch
         id="showCandidatesSwitch"
         [ngModel]="showCandidates"

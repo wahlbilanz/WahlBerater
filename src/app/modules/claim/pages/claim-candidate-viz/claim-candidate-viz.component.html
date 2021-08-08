@@ -9,38 +9,23 @@
     >
       <div *ngIf="activePanels[i]">
         <div class="party-decision" *ngIf="party.scores[politicalData.claims[claimId].category]">
-          Die Kandidierenden der Liste <a [routerLink]="'/parties/' + party.party">{{ politicalData.parties[party.party].name }}</a>
-          <ng-container *ngIf="party.scores[politicalData.claims[claimId].category].decisions[claimId] > voteThreshold">
-            haben insgesamt <em>dafür</em> gestimmt.
-          </ng-container>
-          <ng-container *ngIf="party.scores[politicalData.claims[claimId].category].decisions[claimId] < -voteThreshold">
-            haben insgesamt <em>dagegen</em> gestimmt.
-          </ng-container>
-          <ng-container
-            *ngIf="
-              party.scores[politicalData.claims[claimId].category].decisions[claimId] >= -voteThreshold &&
-              party.scores[politicalData.claims[claimId].category].decisions[claimId] <= voteThreshold
-            "
-          >
-            haben zu dieser These keine Position bezogen.
-          </ng-container>
-          <app-decision-icon
+          <app-decision-button
+            [vote]="votes[claimId]"
+            [agreement]="votes[claimId]?.fav ? agreement.USER_FAV : agreement.USER"
+            label="Deine Antwort"
+          ></app-decision-button>
+
+          <app-decision-button
             [vote]="party.scores[politicalData.claims[claimId].category].decisions[claimId]"
-            [agreement]="calcAgreement(party.scores[politicalData.claims[claimId].category].decisions[claimId], votes[claimId])"
-          ></app-decision-icon>
+            [agreement]="calcAgreement(party.scores[politicalData.claims[claimId].category]?.decisions[claimId] || 0, votes[claimId])"
+            [label]="politicalData.parties[party.party].name"
+            [link]="'/parties/' + party.party"
+          ></app-decision-button>
         </div>
-        <ng-container *ngIf="votes && votes[claimId]">
-          <ng-container
-            *ngIf="
-              (votes[claimId].decision > 0 &&
-                party.scores[politicalData.claims[claimId].category].decisions[claimId] > PartyDecisionThreshold) ||
-              (votes[claimId].decision < 0 &&
-                party.scores[politicalData.claims[claimId].category].decisions[claimId] < -PartyDecisionThreshold)
-            "
-          >
-            <strong>Du hast dich in die gleiche Richtung entschieden!</strong>
-          </ng-container>
-        </ng-container>
+        <div class="party-reason" *ngIf="politicalData.parties[party.party]?.positions[claimId]?.reason">
+          <p>Begründung der Liste:</p>
+          <blockquote [innerHTML]="politicalData.parties[party.party].positions[claimId].reason | markdown"></blockquote>
+        </div>
 
         <ng-container *ngIf="showCandidates">
           <table>
@@ -73,6 +58,8 @@
             </tbody>
           </table>
         </ng-container>
+
+        <app-claim-links [claimId]="claimId" [showMoreInfoLink]="false"></app-claim-links>
       </div>
       <ng-template #voteIcon>
         <app-decision-icon

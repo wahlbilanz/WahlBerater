@@ -51,9 +51,6 @@
           nzTooltipTitle="{{ category.value.score.score | number: '1.0-2' }} Punkt{{
             category.value.score.score == 1 ? '' : 'e'
           }} in der Kategorie {{ politicalData.categories[category.key].title }}"
-          title="{{ category.value.score.score | number: '1.0-2' }} Punkt{{
-            category.value.score.score == 1 ? '' : 'e'
-          }} in der Kategorie {{ politicalData.categories[category.key].title }}"
           >{{ category.value.score.score | number: '1.0-2' }}
         </span>
       </ng-container>
@@ -62,12 +59,12 @@
       <span
         nz-tooltip
         nzTooltipTitle="Achse zeigt die Punkte der Kandidaten."
-        title="Achse zeigt die Punkte der Kandidaten."
-        [style.width]="100 / maxPartyValue + '%'"
+        [style.width]="axeTiksWidth + '%'"
         *ngFor="let value of maxValueArray"
       >
-        <span class="axis-label">{{ value + 1 }}</span>
+        <span class="axis-label">{{ value }}</span>
       </span>
+      <span [style.width]="tiksPadding + '%'"> </span>
     </div>
   </div>
 </div>

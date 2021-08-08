@@ -18,9 +18,16 @@ import { NzBadgeModule } from 'ng-zorro-antd/badge';
 import { HelpersModule } from '../helpers/helpers.module';
 import { ClaimPartyButtonsComponent } from './pages/claim-party-buttons/claim-party-buttons.component';
 import { NzTagModule } from 'ng-zorro-antd/tag';
+import { ClaimLinksComponent } from './components/claim-links/claim-links.component';
 
 @NgModule({
-  declarations: [ClaimListPageComponent, ClaimProvPageComponent, ClaimCandidateVizComponent, ClaimPartyButtonsComponent],
+  declarations: [
+    ClaimListPageComponent,
+    ClaimProvPageComponent,
+    ClaimCandidateVizComponent,
+    ClaimPartyButtonsComponent,
+    ClaimLinksComponent,
+  ],
   imports: [
     CommonModule,
     ClaimRoutingModule,
@@ -37,6 +44,6 @@ import { NzTagModule } from 'ng-zorro-antd/tag';
     HelpersModule,
     NzTagModule,
   ],
-  exports: [ClaimCandidateVizComponent, ClaimPartyButtonsComponent],
+  exports: [ClaimCandidateVizComponent, ClaimPartyButtonsComponent, ClaimLinksComponent],
 })
 export class ClaimModule {}

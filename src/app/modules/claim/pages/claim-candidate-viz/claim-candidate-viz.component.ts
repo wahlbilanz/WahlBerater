@@ -14,7 +14,7 @@ import { PartyResult, PartyScoreResult } from '../../../../definitions/models/re
 import { Score } from '../../../../definitions/models/score.model';
 import { getCandidatePersonalInfo } from '../../../../definitions/functions/getCandidatePersonalInfo';
 import { candidateKeyValueSorter } from 'src/app/definitions/functions/candidate-sort.function';
-import { PartyDecisionThreshold } from '../../../../+state/app.models';
+import { IncludeCandidates, PartyDecisionThreshold } from '../../../../+state/app.models';
 import { getAgreement } from '../../../../definitions/functions/agreement.function';
 import { AGREEMENT } from '../../../../definitions/enums/agreement.enum';
 
@@ -34,7 +34,7 @@ export class ClaimCandidateVizComponent implements OnInit {
   @Input() partySeq: string[];
 
   @Input() partyScoreResult: PartyScoreResult;
-  @Input() showCandidates = false;
+  @Input() showCandidates = IncludeCandidates;
 
   public agreement = AGREEMENT;
   voteThreshold = PartyDecisionThreshold;
@@ -51,7 +51,7 @@ export class ClaimCandidateVizComponent implements OnInit {
       this.partySeq = Object.keys(this.politicalData.parties);
     }
     this.activePanels = [];
-    for (const c in this.partyScoreResult.partyScores) {
+    for (const c in this.partyScoreResult?.partyScores) {
       if (this.partyScoreResult.partyScores.hasOwnProperty(c)) {
         this.activePanels.push(false);
       }

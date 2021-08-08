@@ -13,6 +13,7 @@ import { CandidateDetailPageComponent } from './pages/candidate-detail-page/cand
 import { PartyDetailPageComponent } from './pages/party-detail-page/party-detail-page.component';
 import { PartyListPageComponent } from './pages/party-list-page/party-list-page.component';
 import { PartyRoutingModule } from './party-routing.module';
+import { ClaimModule } from '../claim/claim.module';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { PartyRoutingModule } from './party-routing.module';
     PipesModule,
     NzBreadCrumbModule,
     NzCollapseModule,
+    ClaimModule,
   ],
 })
 export class PartyModule {}

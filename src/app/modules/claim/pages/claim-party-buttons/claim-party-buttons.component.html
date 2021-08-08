@@ -4,7 +4,7 @@
       [label]="politicalData.parties[party.party].name"
       [link]="['/', 'parties', party.party]"
       [vote]="party.scores[politicalData.claims[claimId].category].decisions[claimId]"
-      [agreement]="agreement(party.scores[politicalData.claims[claimId].category].decisions[claimId], votes[claimId])"
+      [agreement]="agreement(party.scores[politicalData.claims[claimId].category]?.decisions[claimId] || 0, votes[claimId])"
     >
     </app-decision-button>
   </ng-container>

@@ -73,11 +73,6 @@ section {
 
 .candidate-claims nz-collapse {
   margin: 0 $wb-space-small;
-
-  .more-info-link {
-    display: block;
-    text-align: right;
-  }
 }
 
 @media screen and (max-width: $wb-breakpoint-medium) {

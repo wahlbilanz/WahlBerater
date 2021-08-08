@@ -40,7 +40,7 @@ export class AuswertungBarchartTableComponent implements OnInit {
   }*/
 
   ngOnInit(): void {
-    this.maxValueArray = [...Array(this.partyScoreResult.maxValue).keys()];
+    this.maxValueArray = [...Array(Math.max(this.partyScoreResult.maxValue, this.partyScoreResult.maxParty)).keys()];
     this.displayCandidates = this.partyScoreResult.partyScores.map((_) => 7);
     this.nCandidates = this.partyScoreResult.partyScores.map((s) => Object.keys(s.candidates).length);
   }

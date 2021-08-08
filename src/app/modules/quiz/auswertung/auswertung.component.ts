@@ -2,15 +2,16 @@ import { Component, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular
 import { select, Store } from '@ngrx/store';
 import * as AppActions from '../../../+state/app.actions';
 import { vote } from '../../../+state/app.actions';
-import { ResultUrl } from '../../../+state/app.models';
+import { IncludeCandidates, ResultUrl } from '../../../+state/app.models';
 import { AppPartialState } from '../../../+state/app.reducer';
 import * as AppSelectors from '../../../+state/app.selectors';
 import { PersonalCandidateMap } from '../../../definitions/models/candidate.model';
 import { PoliticalData } from '../../../definitions/models/political.data.model';
-import { PartyScoreResult, prepareResults } from '../../../definitions/models/results.model';
+import { PartyScoreResult } from '../../../definitions/models/results.model';
 import { Votes } from '../../../definitions/models/votes.mode';
 import { Observable, Subscription } from 'rxjs';
 import { CategoryWithClaims } from '../../../definitions/models/category.model';
+import { prepareResults } from '../../../definitions/functions/score-result.function';
 
 @Component({
   selector: 'app-auswertung',
@@ -18,6 +19,8 @@ import { CategoryWithClaims } from '../../../definitions/models/category.model';
   styleUrls: ['./auswertung.component.scss'],
 })
 export class AuswertungComponent implements OnInit, OnChanges, OnDestroy {
+  includeCandidates = IncludeCandidates;
+
   votes: Votes = undefined;
   personalData: PersonalCandidateMap = undefined;
   politicalData: PoliticalData = undefined;
@@ -79,6 +82,7 @@ export class AuswertungComponent implements OnInit, OnChanges, OnDestroy {
   recalc(): void {
     if (this.personalData && this.politicalData && this.votes) {
       this.partyScoreResult = prepareResults(this.politicalData, this.personalData, this.votes);
+      console.log(this.partyScoreResult);
     }
   }
   toggleShowCandidates() {

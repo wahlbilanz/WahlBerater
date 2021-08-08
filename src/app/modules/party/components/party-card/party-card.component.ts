@@ -24,15 +24,19 @@ export class PartyCardComponent implements OnInit, OnDestroy {
   @Input() personalData: PersonalCandidateMap;
   @Input('scores') set scores(s: PartyResult[]) {
     this.score = s?.find((p) => p.party === this.partyId);
+    this.recalcAxes();
   }
   @Input('maxParty') set setMaxParty(mp: number) {
     this.maxPartyValue = mp;
-    this.maxValueArray = [...Array(mp).keys()];
+    this.recalcAxes();
   }
+
+  axeTiksWidth: number;
+  tiksPadding: number;
   partyCandidates: string[];
   score: PartyResult;
   maxPartyValue: number;
-  maxValueArray: number[];
+  maxValueArray: number[] = [];
 
   private subscriptions: Subscription[] = [];
 
@@ -50,5 +54,18 @@ export class PartyCardComponent implements OnInit, OnDestroy {
         .pipe(select(AppSelectors.getCandidateListByPartyId, { partyId: this.partyId }))
         .subscribe((candidates) => (this.partyCandidates = candidates)),
     );
+  }
+
+  recalcAxes() {
+    if (this.maxPartyValue) {
+      this.maxValueArray = [];
+      const max = Math.floor(this.maxPartyValue / 10) * 10;
+      for (let i = 0; i < max; i += max / 10) {
+        this.maxValueArray.push(i + max / 10);
+      }
+      this.axeTiksWidth = (100 * (max / this.maxPartyValue)) / 10; // 100 * ((max - (mp % 10)) / 10) / mp;
+      this.tiksPadding = (100 * (this.maxPartyValue - max)) / this.maxPartyValue;
+      console.log(max, this.maxValueArray, this.axeTiksWidth, this.tiksPadding);
+    }
   }
 }

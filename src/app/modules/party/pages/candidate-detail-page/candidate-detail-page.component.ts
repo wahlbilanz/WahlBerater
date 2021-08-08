@@ -8,7 +8,7 @@ import * as AppSelectors from '../../../../+state/app.selectors';
 import { Vote, Votes } from '../../../../definitions/models/votes.mode';
 import { getAgreement } from '../../../../definitions/functions/agreement.function';
 import { AGREEMENT } from '../../../../definitions/enums/agreement.enum';
-import { PartyDecisionThreshold } from '../../../../+state/app.models';
+import { IncludeCandidates, PartyDecisionThreshold } from '../../../../+state/app.models';
 
 @Component({
   selector: 'app-candidate-detail-page',
@@ -41,6 +41,8 @@ export class CandidateDetailPageComponent implements OnInit, OnDestroy {
 
   voteThreshold = PartyDecisionThreshold;
 
+  includeCandidates = IncludeCandidates;
+
   constructor(private state: Store<AppPartialState>, private route: ActivatedRoute, private store: Store<AppPartialState>) {}
 
   ngOnInit(): void {
@@ -60,8 +62,4 @@ export class CandidateDetailPageComponent implements OnInit, OnDestroy {
   calcAgreement(party: number, user: Vote) {
     return getAgreement(party, user);
   }
-
-  /*public getUserVote(claimId: string) {
-    return this.state.pipe(select(AppSelectors.getUserVoteByClaimId, { claimId }));
-  }*/
 }

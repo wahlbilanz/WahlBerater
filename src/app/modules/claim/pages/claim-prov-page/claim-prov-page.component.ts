@@ -6,11 +6,12 @@ import * as AppSelectors from '../../../../+state/app.selectors';
 import { PoliticalData } from '../../../../definitions/models/political.data.model';
 import { PersonalCandidateMap } from '../../../../definitions/models/candidate.model';
 import { Votes } from '../../../../definitions/models/votes.mode';
-import { PartyResult, PartyScoreResult, prepareResults } from '../../../../definitions/models/results.model';
-import { QuizFirstPage } from '../../../../+state/app.models';
+import { PartyResult, PartyScoreResult } from '../../../../definitions/models/results.model';
+import { IncludeCandidates, QuizFirstPage } from '../../../../+state/app.models';
 import { first, take } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 import { AGREEMENT } from '../../../../definitions/enums/agreement.enum';
+import { prepareResults } from '../../../../definitions/functions/score-result.function';
 
 @Component({
   selector: 'app-thesis-prov-page',
@@ -31,6 +32,7 @@ export class ClaimProvPageComponent implements OnInit, OnChanges, OnDestroy {
   private subscriptions: Subscription[] = [];
 
   agreement = AGREEMENT;
+  includeCandidates = IncludeCandidates;
 
   constructor(private route: ActivatedRoute, private store: Store<AppPartialState>) {}
 

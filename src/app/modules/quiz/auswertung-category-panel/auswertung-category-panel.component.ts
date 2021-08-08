@@ -9,7 +9,7 @@ import { PartyScoreResult } from '../../../definitions/models/results.model';
 import { Vote, Votes } from '../../../definitions/models/votes.mode';
 import { DecisionTemplatesComponent } from '../../helpers/decision-templates/decision-templates.component';
 import * as AppSelectors from '../../../+state/app.selectors';
-import { AccessibilityModes, AccessibleUrl, AccessibleUrlFragment } from '../../../+state/app.models';
+import { AccessibilityModes, AccessibleUrl, AccessibleUrlFragment, IncludeCandidates } from '../../../+state/app.models';
 import { Subscription } from 'rxjs';
 import { AGREEMENT } from '../../../definitions/enums/agreement.enum';
 
@@ -29,6 +29,8 @@ export class AuswertungCategoryPanelComponent implements OnInit, OnDestroy {
 
   @Input() partyScoreResult: PartyScoreResult;
   @Input() showCandidates = false;
+
+  includeCandidates = IncludeCandidates;
 
   public agreement = AGREEMENT;
 

@@ -1,14 +1,31 @@
 import { CandidatePoliticalInfo } from '../models/candidate.model';
 import { Score } from '../models/score.model';
+import { PartyDecisionThreshold } from '../../+state/app.models';
 
 // export function candidateScore(candidate: CandidatePoliticalInfo, decisions: any): void {}
 
 export function claimScore(candidate: number, user: number, fav: boolean): Score {
-  if ((candidate > 0 && user > 0) || (candidate < 0 && user < 0)) {
-    if (fav) {
-      return new Score(2);
+  if (user > PartyDecisionThreshold) {
+    // user said thumbs up
+    if (candidate > PartyDecisionThreshold) {
+      return new Score(fav ? 2 : 1);
+    } else if (candidate > -PartyDecisionThreshold) {
+      return new Score(fav ? 0 : 0.5);
     }
-    return new Score(1);
+  } else if (user < -PartyDecisionThreshold) {
+    // user said thumbs down
+    if (candidate < -PartyDecisionThreshold) {
+      return new Score(fav ? 2 : 1);
+    } else if (candidate < PartyDecisionThreshold) {
+      return new Score(fav ? 0 : 0.5);
+    }
+  } else {
+    // user said no thumbs
+    if (candidate < -PartyDecisionThreshold || candidate > PartyDecisionThreshold) {
+      return new Score(fav ? 0 : 0.5);
+    } else {
+      return new Score(fav ? 2 : 1);
+    }
   }
   return new Score(0);
 }

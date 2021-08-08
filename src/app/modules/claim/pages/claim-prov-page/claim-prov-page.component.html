@@ -26,7 +26,7 @@
     ></app-decision-button>
     <a [routerLink]="'/quiz/' + claimId"><i nz-icon nzType="double-right" nzTheme="outline"></i>&nbsp;Springe zur These im Quiz</a>
 
-    <h3>Wie positionieren sich die Kandidierenden?</h3>
+    <h3>Wie positionieren sich die {{ includeCandidates ? 'Kandidierenden' : 'Listen' }}?</h3>
     <app-claim-candidate-viz
       [claimId]="claimId"
       [claim]="politicalData.claims[claimId]"
@@ -34,7 +34,7 @@
       [politicalData]="politicalData"
       [personalCandidates]="personalData"
       [partyScoreResult]="partyScoreResult"
-      [showCandidates]="true"
+      [showCandidates]="includeCandidates"
     ></app-claim-candidate-viz>
 
     <ng-container *ngIf="politicalData.claims[claimId].links && politicalData.claims[claimId].links.length > 0">

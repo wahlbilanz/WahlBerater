@@ -1,0 +1,20 @@
+<ul class="small claim-links">
+  <li class="more-info" *ngIf="showMoreInfoLink">
+    <i nz-icon nzType="double-right" nzTheme="outline"></i
+    ><a [routerLink]="'/claim/' + claimId"
+      >Mehr Informationen zu dieser These mit detailierten Antworten der {{ includeCandidates ? 'Kandidierenden' : 'Listen' }}.</a
+    >
+  </li>
+  <li class="redecide" *ngIf="showQuizLink">
+    <i nz-icon nzType="double-right" nzTheme="outline"></i
+    ><a [routerLink]="'/quiz/' + claimId" *ngIf="!this.accessibilityModes?.accessibilityMode"
+      >Zurück zum Quiz, um Entscheidung zu ändern.</a
+    >
+    <a
+      [routerLink]="'/quiz/' + AccessibleUrlPath"
+      [fragment]="sAccessibleUrlFragment + claimId"
+      *ngIf="this.accessibilityModes?.accessibilityMode"
+      >Zurück zum Quiz, um Entscheidung zu ändern.</a
+    >
+  </li>
+</ul>

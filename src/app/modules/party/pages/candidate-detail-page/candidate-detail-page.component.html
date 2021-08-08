@@ -38,72 +38,46 @@
     <div class="candidate-description" [innerHTML]="data.candidate.description | markdown: false" *ngIf="data.candidate.description"></div>
   </div>
 
-  <h2>Standpunkte von {{ data.candidate.name }}</h2>
-  <section class="candidate-claims" *ngFor="let category of data.claimPositions">
-    <h3>{{ category.category.title }}</h3>
+  <ng-container *ngIf="includeCandidates">
+    <h2>Standpunkte von {{ data.candidate.name }}</h2>
+    <section class="candidate-claims" *ngFor="let category of data.claimPositions">
+      <h3>{{ category.category.title }}</h3>
 
-    <nz-collapse class="color-band">
-      <nz-collapse-panel
-        *ngFor="let claim of category.claims"
-        [nzHeader]="claim.claim.title"
-        [nzExtra]="voteIcon"
-        [style.border-left-color]="category.category.color"
-      >
-        <p class="small" [innerHTML]="claim.claim.description | markdown" *ngIf="claim.claim.description"></p>
-        <app-decision-button
-          [vote]="votes[claim.claimId]"
-          [agreement]="votes[claim.claimId]?.fav ? agreement.USER_FAV : agreement.USER"
-          label="Deine Antwort"
-        ></app-decision-button>
+      <nz-collapse class="color-band">
+        <nz-collapse-panel
+          *ngFor="let claim of category.claims"
+          [nzHeader]="claim.claim.title"
+          [nzExtra]="voteIcon"
+          [style.border-left-color]="category.category.color"
+        >
+          <p class="small" [innerHTML]="claim.claim.description | markdown" *ngIf="claim.claim.description"></p>
+          <app-decision-button
+            [vote]="votes[claim.claimId]"
+            [agreement]="votes[claim.claimId]?.fav ? agreement.USER_FAV : agreement.USER"
+            label="Deine Antwort"
+          ></app-decision-button>
 
-        <app-decision-button
-          [vote]="claim.position.vote"
-          [agreement]="calcAgreement(claim.position.vote, votes[claim.claimId])"
-          [label]="data.candidate.name"
-        ></app-decision-button>
-        <!-- User Vote -->
-
-        <!--          <ng-container *ngIf="votes[claim.claimId] as userVote">-->
-        <!--            <ng-container *ngIf="userVote.decision > voteThreshold">-->
-        <!--              Du hast <em>dafür</em> gestimmt{{ userVote.fav ? ' und diese These als wichtig markiert' : '' }}.-->
-        <!--            </ng-container>-->
-        <!--            <ng-container *ngIf="userVote.decision < -voteThreshold">-->
-        <!--              Du hast <em>dagegen</em> gestimmt{{ userVote.fav ? ' und diese These als wichtig markiert' : '' }}.-->
-        <!--            </ng-container>-->
-        <!--            <ng-container *ngIf="userVote.decision >= -voteThreshold && userVote.decision <= voteThreshold">-->
-        <!--              Du hast hast zu dieser These keine Position bezogen.-->
-        <!--            </ng-container>-->
-        <!--            <app-decision-icon [vote]="userVote" [agreement]="userVote.fav ? agreement.USER_FAV : agreement.USER"></app-decision-icon>-->
-        <!--            <br />-->
-        <!--          </ng-container>-->
-        <!--          &lt;!&ndash; Candidate Vote &ndash;&gt;-->
-        <!--          <ng-container *ngIf="claim.position.vote > voteThreshold">-->
-        <!--            {{ data.candidate.name }} stimmt <em>{{ claim.position.vote >= 2 ? 'vehement ' : '' }}dafür</em>.-->
-        <!--          </ng-container>-->
-        <!--          <ng-container *ngIf="claim.position.vote < -voteThreshold">-->
-        <!--            {{ data.candidate.name }} stimmt <em>{{ claim.position.vote <= -2 ? 'vehement ' : '' }}dagegen</em>.-->
-        <!--          </ng-container>-->
-        <!--          <ng-container *ngIf="claim.position.vote >= -voteThreshold && claim.position.vote <= voteThreshold">-->
-        <!--            {{ data.candidate.name }} hat zu dieser These keine Position bezogen.-->
-        <!--          </ng-container>-->
-        <!--          <app-decision-icon-->
-        <!--            [vote]="claim.position.vote"-->
-        <!--            [agreement]="calcAgreement(claim.position.vote, votes[claim.claimId])"-->
-        <!--          ></app-decision-icon>-->
-        <!--        </p>-->
-
-        <p *ngIf="claim.position.reason">Begründung von {{ data.candidate.name }}:</p>
-        <blockquote [innerHTML]="claim.position.reason | markdown"></blockquote>
-
-        <a class="more-info-link" [routerLink]="['/', 'claim', claim.claimId]">Mehr Informationen zu dieser These</a>
-
-        <ng-template #voteIcon>
-          <app-decision-icon
+          <app-decision-button
             [vote]="claim.position.vote"
-            [agreement]="calcAgreement(claim.position.vote, votes[claim.claimId])"
-          ></app-decision-icon>
-        </ng-template>
-      </nz-collapse-panel>
-    </nz-collapse>
-  </section>
+            [agreement]="calcAgreement(claim?.position?.vote || 0, votes[claim.claimId])"
+            [label]="data.candidate.name"
+          ></app-decision-button>
+
+          <ng-container *ngIf="claim.position.reason">
+            <p>Begründung von {{ data.candidate.name }}:</p>
+            <blockquote [innerHTML]="claim.position.reason | markdown"></blockquote>
+          </ng-container>
+
+          <app-claim-links [claimId]="claim.claimId"></app-claim-links>
+
+          <ng-template #voteIcon>
+            <app-decision-icon
+              [vote]="claim.position?.vote || 0"
+              [agreement]="calcAgreement(claim.position?.vote || 0, votes[claim.claimId])"
+            ></app-decision-icon>
+          </ng-template>
+        </nz-collapse-panel>
+      </nz-collapse>
+    </section>
+  </ng-container>
 </ng-container>

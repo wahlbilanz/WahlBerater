@@ -42,26 +42,7 @@
             [showCandidates]="false"
           ></app-claim-party-buttons>
 
-          <ul class="small claim-bottom">
-            <li class="more-info">
-              <i nz-icon nzType="double-right" nzTheme="outline"></i
-              ><a [routerLink]="'/claim/' + claim.claimId"
-                >Mehr Informationen zu dieser These mit detailierten Antworten der Kandidierenden.</a
-              >
-            </li>
-            <li class="redecide">
-              <i nz-icon nzType="double-right" nzTheme="outline"></i
-              ><a [routerLink]="'/quiz/' + claim.claimId" *ngIf="!this.accessibilityModes?.accessibilityMode"
-                >Zurück zum Quiz, um Entscheidung zu ändern.</a
-              >
-              <a
-                [routerLink]="'/quiz/' + AccessibleUrlPath"
-                [fragment]="sAccessibleUrlFragment + claim.claimId"
-                *ngIf="this.accessibilityModes?.accessibilityMode"
-                >Zurück zum Quiz, um Entscheidung zu ändern.</a
-              >
-            </li>
-          </ul>
+          <app-claim-links [claimId]="claim.claimId"></app-claim-links>
         </div>
         <ng-template #voteIcon>
           <app-decision-icon

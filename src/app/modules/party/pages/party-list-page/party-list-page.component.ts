@@ -6,8 +6,9 @@ import * as AppSelectors from '../../../../+state/app.selectors';
 import { PoliticalData } from '../../../../definitions/models/political.data.model';
 import { PersonalCandidateMap } from '../../../../definitions/models/candidate.model';
 import { Subscription } from 'rxjs';
-import { PartyScoreResult, prepareResults } from '../../../../definitions/models/results.model';
+import { PartyScoreResult } from '../../../../definitions/models/results.model';
 import { Votes } from '../../../../definitions/models/votes.mode';
+import { prepareResults } from '../../../../definitions/functions/score-result.function';
 
 @Component({
   selector: 'app-party-list-page',

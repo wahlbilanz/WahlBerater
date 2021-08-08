@@ -3,7 +3,7 @@
   display: inline-block;
   border: 1px dashed black;
   padding: $wb-space-small;
-  margin: 0 $wb-space-small $wb-space-small 0;
+  margin: 0 $wb-space-small $wb-space-small 0 !important;
   &__text {
     margin: $wb-space-small;
     margin-right: 0;

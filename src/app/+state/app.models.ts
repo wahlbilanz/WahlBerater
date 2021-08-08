@@ -20,6 +20,8 @@ export const QuizAnimationDurationOut = 500;
 
 export const PartyDecisionThreshold = 0.5;
 
+export const IncludeCandidates = false;
+
 export interface AccessibilityModes {
   accessibilityMode: boolean;
   reducedMotionMode: boolean;
