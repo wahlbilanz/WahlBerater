@@ -251,13 +251,13 @@ export class QuizCardComponent implements OnInit, OnChanges, OnDestroy {
             this.yes();
           }
         }
-        if (Math.abs(direction[1]) > 30 && Math.abs(direction[1]) > Math.abs(direction[0] * 3)) {
+        /*if (Math.abs(direction[1]) > 30 && Math.abs(direction[1]) > Math.abs(direction[0] * 3)) {
           if (direction[1] < 0) {
             this.go(true);
           } else {
             this.go(false);
           }
-        }
+        }*/
       }
     }
   }
