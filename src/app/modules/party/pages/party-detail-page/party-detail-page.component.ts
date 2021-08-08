@@ -9,6 +9,8 @@ import { asyncScheduler, combineLatest, scheduled, Subscription } from 'rxjs';
 import { Vote, Votes } from '../../../../definitions/models/votes.mode';
 import { AGREEMENT } from '../../../../definitions/enums/agreement.enum';
 import { getAgreement } from '../../../../definitions/functions/agreement.function';
+import { CategoryWithClaims } from '../../../../definitions/models/category.model';
+import { Party } from '../../../../definitions/models/party.model';
 
 @Component({
   selector: 'app-party-detail-page',
@@ -32,7 +34,12 @@ export class PartyDetailPageComponent implements OnInit, OnDestroy {
       ]),
     ),
     // tap (([party, candidates, categoriesWithClaims, partyId]) => console.log (party, candidates, categoriesWithClaims, partyId)),
-    map(([party, candidates, categoriesWithClaims, partyId]) => ({ partyId, candidates, categoriesWithClaims, party })),
+    map(([party, candidates, categoriesWithClaims, partyId]: [Party, string[], CategoryWithClaims[], string]) => ({
+      partyId,
+      candidates,
+      categoriesWithClaims,
+      party,
+    })),
   );
   public votes: Votes;
   public agreement = AGREEMENT;

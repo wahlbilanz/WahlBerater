@@ -2,7 +2,7 @@ import { animate, keyframes, state, style, transition, trigger } from '@angular/
 import { AfterViewInit, Component, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
-import { first } from 'rxjs/operators';
+import { first, take, tap } from 'rxjs/operators';
 import { vote } from '../../../+state/app.actions';
 import {
   AccessibilityModes,
@@ -20,6 +20,7 @@ import { Category } from '../../../definitions/models/category.model';
 import { Claim } from '../../../definitions/models/claim.model';
 import { Subscription } from 'rxjs';
 import * as introJs from 'intro.js/intro.js';
+import { Votes } from '../../../definitions/models/votes.mode';
 
 @Component({
   selector: 'app-quiz-card',
@@ -161,9 +162,12 @@ export class QuizCardComponent implements OnInit, OnChanges, OnDestroy, AfterVie
   }
 
   ngAfterViewInit(): void {
-    if (this.claimId === QuizFirstPage) {
-      this.startIntro();
-    }
+    // only start intro if the user did not vote yet..
+    this.votes.pipe(take(1)).subscribe((v: Votes) => {
+      if (Object.keys(v).length < 1) {
+        this.startIntro();
+      }
+    });
   }
 
   private setupIntroJS(): void {

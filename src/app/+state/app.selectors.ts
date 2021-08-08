@@ -6,6 +6,7 @@ import { PoliticalData } from '../definitions/models/political.data.model';
 import { Votes } from '../definitions/models/votes.mode';
 import { AccessibilityModes, QuizFirstPage, QuizState, State } from './app.models';
 import { AppPartialState, STATE_FEATURE_KEY } from './app.reducer';
+import { PartyMap } from '../definitions/models/party.model';
 
 const getAppState = createFeatureSelector<AppPartialState, State>(STATE_FEATURE_KEY);
 
@@ -25,7 +26,10 @@ export const isLocalDataStorageAllowed = createSelector(getAppState, (state: Sta
 // TODO kann weg?  -- ne, das sollst du nutzen!
 export const getQuizState = createSelector(getAppState, (state: State) => QuizState.STARTED); // TODO
 
-export const getParties = createSelector(getAppState, (state: State) => (state.politicalDataLoaded ? state.politicalData.parties : null));
+export const getParties = createSelector(
+  getAppState,
+  (state: State): PartyMap => (state.politicalDataLoaded ? state.politicalData.parties : null),
+);
 export const getPartyIds = createSelector(getAppState, (state: State) => {
   if (state.politicalDataLoaded) {
     const ids = Object.getOwnPropertyNames(state.politicalData.parties);
@@ -71,7 +75,7 @@ export const getUserVoteByClaimId = createSelector(getVotes, (votes: Votes, prop
   return votes[props.claimId].fav ? votes[props.claimId].decision * 2 : votes[props.claimId].decision;
 });
 
-export const getPartyById = createSelector(getParties, (parties, props: { id: string }) => (parties ? parties[props.id] : null));
+export const getPartyById = createSelector(getParties, (parties, props: { id: string }): Party => (parties ? parties[props.id] : null));
 
 export const getCategoryByClaimId = createSelector(
   getPoliticalData,
