@@ -35,21 +35,29 @@ h6 {
   margin-top: 1em;
 }
 
-nz-breadcrumb {
-  margin: $wb-space-large $wb-space-medium !important;
-  @media screen and (max-width: $wb-breakpoint-medium) {
-    margin: $wb-space-small 0 !important;
+// overwrite nz stuff
+app-root {
+  nz-breadcrumb {
+    margin: $wb-space-large $wb-space-medium !important;
+    @media screen and (max-width: $wb-breakpoint-medium) {
+      margin: $wb-space-small 0 !important;
+    }
   }
-}
 
-.ant-collapse-header .decision-icon-text {
-  display: none;
-}
+  .ant-collapse-header .decision-icon-text {
+    display: none;
+  }
 
-app-root nz-collapse.ant-collapse nz-collapse-panel.ant-collapse-item .ant-collapse-header,
-app-root nz-collapse.ant-collapse.ant-collapse-icon-position-left nz-collapse-panel.ant-collapse-item .ant-collapse-header {
-  background-color: #fafafa;
-  color: rgba(0, 0, 0, 0.96);
+  nz-collapse.ant-collapse nz-collapse-panel.ant-collapse-item .ant-collapse-header,
+  nz-collapse.ant-collapse.ant-collapse-icon-position-left nz-collapse-panel.ant-collapse-item .ant-collapse-header {
+    background-color: #fafafa;
+    color: rgba(0, 0, 0, 0.96);
+  }
+
+  .ant-progress-success-bg,
+  .ant-progress-bg {
+    background-color: $wb-logo-wal-color;
+  }
 }
 
 .introjs-tooltipReferenceLayer {
