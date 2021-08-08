@@ -5,7 +5,7 @@
 
 <h1>Wahllisten</h1>
 
-<section class="party-list">
+<section [ngClass]="{ 'party-list': true, 'unsorted-parties': !sortedParties }" *ngIf="politicalData?.parties">
   <a
     class="party-link"
     title="Mehr Informationen und Kandidierende von {{ politicalData.parties[id].name }}"

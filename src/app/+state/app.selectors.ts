@@ -26,9 +26,13 @@ export const isLocalDataStorageAllowed = createSelector(getAppState, (state: Sta
 export const getQuizState = createSelector(getAppState, (state: State) => QuizState.STARTED); // TODO
 
 export const getParties = createSelector(getAppState, (state: State) => (state.politicalDataLoaded ? state.politicalData.parties : null));
-export const getPartyIds = createSelector(getAppState, (state: State) =>
-  state.politicalDataLoaded ? Object.getOwnPropertyNames(state.politicalData.parties) : null,
-);
+export const getPartyIds = createSelector(getAppState, (state: State) => {
+  if (state.politicalDataLoaded) {
+    const ids = Object.getOwnPropertyNames(state.politicalData.parties);
+    return ids.sort((a, b) => state.politicalData.parties[a].order - state.politicalData.parties[b].order);
+  }
+  return null;
+});
 export const getCandidatePersonalDataById = createSelector(getPersonalData, (personalData, props: { id: string }) =>
   getCandidatePersonalInfo(personalData, props.id),
 );

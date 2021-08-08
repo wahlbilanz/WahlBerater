@@ -13,12 +13,15 @@ h1 {
 .party-list {
   display: grid;
   gap: $wb-space-medium;
-  grid-template-columns: repeat(2, 1fr);
 
-  padding: 0 $wb-space-medium;
+  &.unsorted-parties {
+    grid-template-columns: repeat(2, 1fr);
 
-  @media screen and (max-width: $wb-breakpoint-medium) {
-    grid-template-columns: 1fr;
-    padding: 0;
+    padding: 0 $wb-space-medium;
+
+    @media screen and (max-width: $wb-breakpoint-medium) {
+      grid-template-columns: 1fr;
+      padding: 0;
+    }
   }
 }

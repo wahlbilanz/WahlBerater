@@ -11,4 +11,5 @@ export interface Party {
   picture?: string;
   description?: string;
   shortDescription?: string;
+  order?: number;
 }

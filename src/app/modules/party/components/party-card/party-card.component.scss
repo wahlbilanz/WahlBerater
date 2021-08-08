@@ -19,6 +19,7 @@
     'picture desc desc'
     'picture candidates candidates'
     'picture social link';
+  grid-template-columns: 30% auto auto;
 
   min-height: 150px;
   padding-right: $wb-space-small;
@@ -35,7 +36,7 @@
 
   grid-area: picture;
   justify-self: center;
-  align-self: center;
+  //align-self: center;
 }
 .party-name {
   grid-area: name;

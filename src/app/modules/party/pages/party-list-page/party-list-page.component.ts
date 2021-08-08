@@ -18,6 +18,8 @@ export class PartyListPageComponent implements OnInit, OnDestroy {
   personalData: PersonalCandidateMap;
   private subscriptions: Subscription[] = [];
 
+  sortedParties = false;
+
   constructor(private state: Store<AppPartialState>, private store: Store<AppPartialState>) {}
 
   ngOnDestroy() {
@@ -37,6 +39,10 @@ export class PartyListPageComponent implements OnInit, OnDestroy {
       this.store.pipe(select(AppSelectors.getPoliticalData)).subscribe((d) => {
         console.log('getPoliticalData', d);
         this.politicalData = d;
+        if (d) {
+          const parties = Object.values(d.parties);
+          this.sortedParties = !parties.every((v) => v.order === parties[0].order);
+        }
       }),
     );
   }
