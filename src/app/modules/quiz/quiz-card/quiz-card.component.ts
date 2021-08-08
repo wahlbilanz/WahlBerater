@@ -1,5 +1,5 @@
 import { animate, keyframes, state, style, transition, trigger } from '@angular/animations';
-import { Component, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { first } from 'rxjs/operators';
@@ -67,7 +67,7 @@ import * as introJs from 'intro.js/intro.js';
     ]),
   ],
 })
-export class QuizCardComponent implements OnInit, OnChanges, OnDestroy {
+export class QuizCardComponent implements OnInit, OnChanges, OnDestroy, AfterViewInit {
   votes = this.store.pipe(select(AppSelectors.getVotes));
   @Input() category: Category;
   @Input() claimId: string;
@@ -158,10 +158,14 @@ export class QuizCardComponent implements OnInit, OnChanges, OnDestroy {
       }),
     );
     this.setupIntroJS();
+  }
+
+  ngAfterViewInit(): void {
     if (this.claimId === QuizFirstPage) {
       this.startIntro();
     }
   }
+
   private setupIntroJS(): void {
     this.introJS.setOptions({
       nextLabel: 'Weiter',
