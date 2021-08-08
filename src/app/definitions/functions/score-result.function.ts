@@ -132,11 +132,7 @@ function calcUsingParties(politicalData: PoliticalData, personalData: PersonalCa
 
     for (const claim of Object.keys(politicalData.claims)) {
       const category = politicalData.claims[claim].category;
-      const s = claimScore(
-        politicalData.parties[party].positions[claim]?.vote || 0,
-        votes[claim]?.decision || 0,
-        votes[claim]?.fav || false,
-      );
+      const s = claimScore(politicalData.parties[party].positions[claim]?.vote, votes[claim]?.decision, votes[claim]?.fav);
 
       if (!partyResult.scores[category]) {
         partyResult.scores[category] = { category, score: new Score(), claims: {}, decisions: {} };

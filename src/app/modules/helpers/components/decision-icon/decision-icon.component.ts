@@ -47,7 +47,7 @@ const CANDIDATE_CONTEXT_TITLES = {
 export class DecisionIconComponent {
   @Input('vote')
   set voteInput(value: number | Vote) {
-    if (value == null) {
+    if (value === null || value === undefined) {
       this.vote = null;
     } else if (typeof value === 'number') {
       this.vote = value >= -2 && value <= 2 ? value : null;
@@ -83,7 +83,13 @@ export class DecisionIconComponent {
   constructor(private store: Store<AppPartialState>) {}
 
   chooseIcon() {
+    if (this.vote === null) {
+      this.icon = null;
+      return;
+    }
+
     this.icon = 0;
+
     if (this.vote > PartyDecisionThreshold) {
       this.icon = 1;
     } else if (this.vote < -PartyDecisionThreshold) {

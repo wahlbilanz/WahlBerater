@@ -40,7 +40,7 @@
             ></app-decision-button>
 
             <app-decision-button
-              [vote]="data.party.positions[claim.claimId]?.vote || 0"
+              [vote]="data.party.positions[claim.claimId]?.vote"
               [agreement]="calcAgreement(data.party.positions[claim.claimId]?.vote || 0, votes[claim.claimId])"
               [label]="data.party.name"
             ></app-decision-button>
@@ -54,7 +54,7 @@
 
             <ng-template #voteIcon>
               <app-decision-icon
-                [vote]="data.party.positions[claim.claimId]?.vote || 0"
+                [vote]="data.party.positions[claim.claimId]?.vote"
                 [agreement]="calcAgreement(data.party.positions[claim.claimId]?.vote || 0, votes[claim.claimId])"
               ></app-decision-icon>
             </ng-template>

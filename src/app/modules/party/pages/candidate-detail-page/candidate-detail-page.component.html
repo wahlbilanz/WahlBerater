@@ -72,7 +72,7 @@
 
           <ng-template #voteIcon>
             <app-decision-icon
-              [vote]="claim.position?.vote || 0"
+              [vote]="claim.position?.vote"
               [agreement]="calcAgreement(claim.position?.vote || 0, votes[claim.claimId])"
             ></app-decision-icon>
           </ng-template>

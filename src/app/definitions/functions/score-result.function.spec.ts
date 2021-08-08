@@ -35,6 +35,9 @@ describe('prepareResults', () => {
             c2: {
               vote: -1,
             },
+            c25: {
+              vote: -1,
+            },
           },
         },
       },
@@ -55,6 +58,14 @@ describe('prepareResults', () => {
           links: [],
           provenance: [],
         },
+        c2: {
+          title: '',
+          order: 3,
+          category: 'c1',
+          description: '',
+          links: [],
+          provenance: [],
+        },
       },
     };
     const personalData: PersonalCandidateMap = {};
@@ -70,9 +81,7 @@ describe('prepareResults', () => {
     expect(result.maxValue).toBe(1);
     expect(result.partyScores[0].party).toBe('p1');
     expect(result.partyScores[0].score.score).toBe(1);
-    expect(result.partyScores[1].party).toBe('p3');
-    expect(result.partyScores[1].score.score).toBe(0.5);
-    expect(result.partyScores[2].party).toBe('p2');
+    expect(result.partyScores[1].score.score).toBe(0);
     expect(result.partyScores[2].score.score).toBe(0);
 
     votes.c1.fav = true;
@@ -81,9 +90,21 @@ describe('prepareResults', () => {
     expect(result.maxValue).toBe(2);
     expect(result.partyScores[0].party).toBe('p1');
     expect(result.partyScores[0].score.score).toBe(2);
-    expect(result.partyScores[1].party).toBe('p2');
     expect(result.partyScores[1].score.score).toBe(0);
-    expect(result.partyScores[2].party).toBe('p3');
+    expect(result.partyScores[2].score.score).toBe(0);
+
+    votes.c2 = {
+      fav: true,
+      decision: -1,
+    };
+    result = prepareResults(politicalData, personalData, votes);
+    expect(result.maxParty).toBe(2);
+    expect(result.maxValue).toBe(2);
+    expect(result.partyScores[0].party).toBe('p1');
+    expect(result.partyScores[0].score.score).toBe(2);
+    expect(result.partyScores[1].party).toBe('p3');
+    expect(result.partyScores[1].score.score).toBe(2);
+    expect(result.partyScores[2].party).toBe('p2');
     expect(result.partyScores[2].score.score).toBe(0);
   });
 });

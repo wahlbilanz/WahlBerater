@@ -5,6 +5,9 @@ import { PartyDecisionThreshold } from '../../+state/app.models';
 // export function candidateScore(candidate: CandidatePoliticalInfo, decisions: any): void {}
 
 export function claimScore(candidate: number, user: number, fav: boolean): Score {
+  if (candidate === undefined || user === undefined) {
+    return new Score(0);
+  }
   if (user > PartyDecisionThreshold) {
     // user said thumbs up
     if (candidate > PartyDecisionThreshold) {
