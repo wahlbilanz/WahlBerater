@@ -6,7 +6,7 @@
     alt="Logo der Partei {{ partyData.name }}"
   />
   <h2 class="party-name">{{ partyData.name }}</h2>
-  <p class="party-description">{{ partyData.shortDescription | markdown }}</p>
+  <p class="party-description" [innerHTML]="partyData.shortDescription | markdown"></p>
   <div class="party-candidates" *ngIf="partyCandidates">
     <ng-container *ngFor="let candidateId of partyCandidates | slice: 0:7">
       <a

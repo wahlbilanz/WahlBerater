@@ -13,7 +13,7 @@ import { DecisionTemplatesComponent } from '../../../helpers/decision-templates/
 import { PartyResult, PartyScoreResult } from '../../../../definitions/models/results.model';
 import { Score } from '../../../../definitions/models/score.model';
 import { getCandidatePersonalInfo } from '../../../../definitions/functions/getCandidatePersonalInfo';
-import { candidateKeyValueSorter } from 'src/app/definitions/functions/candidate-sort.function';
+import { candidateValueSorter } from 'src/app/definitions/functions/candidate-sort.function';
 import { IncludeCandidates, PartyDecisionThreshold } from '../../../../+state/app.models';
 import { getAgreement } from '../../../../definitions/functions/agreement.function';
 import { AGREEMENT } from '../../../../definitions/enums/agreement.enum';
@@ -39,10 +39,11 @@ export class ClaimCandidateVizComponent implements OnInit {
   public agreement = AGREEMENT;
   voteThreshold = PartyDecisionThreshold;
 
-  candidateSorter = candidateKeyValueSorter;
+  // candidateSorter = candidateKeyValueSorter;
   PartyDecisionThreshold = PartyDecisionThreshold;
 
   activePanels: boolean[];
+  candidates: { [party: string]: string[] } = {};
 
   constructor() {}
 
@@ -51,9 +52,14 @@ export class ClaimCandidateVizComponent implements OnInit {
       this.partySeq = Object.keys(this.politicalData.parties);
     }
     this.activePanels = [];
-    for (const c in this.partyScoreResult?.partyScores) {
-      if (this.partyScoreResult.partyScores.hasOwnProperty(c)) {
-        this.activePanels.push(false);
+    if (this.partyScoreResult) {
+      for (const c in this.partyScoreResult?.partyScores) {
+        if (this.partyScoreResult.partyScores.hasOwnProperty(c)) {
+          this.activePanels.push(false);
+          this.candidates[this.partyScoreResult?.partyScores[c].party] = Object.values(this.partyScoreResult.partyScores[c].candidates)
+            .sort(candidateValueSorter)
+            .map((candidate) => candidate.id);
+        }
       }
     }
   }

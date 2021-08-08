@@ -3,7 +3,7 @@
     <nz-breadcrumb-item><a routerLink="/" title="Zurück zur Startseite">Start</a></nz-breadcrumb-item>
     <nz-breadcrumb-item><a routerLink="/parties" title="Zur Übersicht der Wahllisten">Wahllisten</a></nz-breadcrumb-item>
     <nz-breadcrumb-item
-      ><a [routerLink]="['/parties', data.partyId]" title="Wahlliste {{ data.party?.name }}">{{ data.party?.name }}</a></nz-breadcrumb-item
+      ><a [routerLink]="['/parties', data.partyId]" title="Wahlliste {{ data.party?.name }}">{{ data.party?.id }}</a></nz-breadcrumb-item
     >
     <nz-breadcrumb-item
       ><span title="Aktuelle Seite: {{ data.candidate.name }}">{{ data.candidate.name }}</span></nz-breadcrumb-item
@@ -58,12 +58,12 @@
           ></app-decision-button>
 
           <app-decision-button
-            [vote]="claim.position.vote"
-            [agreement]="calcAgreement(claim?.position?.vote || 0, votes[claim.claimId])"
+            [vote]="claim.position?.vote"
+            [agreement]="calcAgreement(claim?.position?.vote, votes[claim.claimId])"
             [label]="data.candidate.name"
           ></app-decision-button>
 
-          <ng-container *ngIf="claim.position.reason">
+          <ng-container *ngIf="claim.position?.reason">
             <p>Begründung von {{ data.candidate.name }}:</p>
             <blockquote [innerHTML]="claim.position.reason | markdown"></blockquote>
           </ng-container>
@@ -72,8 +72,8 @@
 
           <ng-template #voteIcon>
             <app-decision-icon
-              [vote]="claim.position?.vote"
-              [agreement]="calcAgreement(claim.position?.vote || 0, votes[claim.claimId])"
+              [vote]="claim?.position?.vote"
+              [agreement]="calcAgreement(claim.position?.vote, votes[claim.claimId])"
             ></app-decision-icon>
           </ng-template>
         </nz-collapse-panel>

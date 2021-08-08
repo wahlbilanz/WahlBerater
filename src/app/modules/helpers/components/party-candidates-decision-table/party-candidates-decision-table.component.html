@@ -1,0 +1,28 @@
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th colSpan="2">Position und Begründung</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let candidate of candidates">
+      <td>
+        <a [routerLink]="['/', 'parties', partyId, 'candidates', candidate]">
+          {{ (personalData | personalDataOf: candidate).name }}
+        </a>
+      </td>
+      <td>
+        <app-decision-icon
+          [vote]="politicalData.candidates[candidate].positions[claimId]?.vote"
+          [agreement]="calcAgreement(politicalData.candidates[candidate].positions[claimId]?.vote, votes[claimId])"
+        ></app-decision-icon>
+      </td>
+      <td>
+        <ng-container *ngIf="politicalData.candidates[candidate]?.positions[claimId]?.reason">{{
+          politicalData.candidates[candidate].positions[claimId].reason | markdown
+        }}</ng-container>
+      </td>
+    </tr>
+  </tbody>
+</table>

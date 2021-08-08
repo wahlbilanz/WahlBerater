@@ -4,7 +4,7 @@
       <nz-breadcrumb-item><a routerLink="/" title="Zurück zur Startseite">Start</a></nz-breadcrumb-item>
       <nz-breadcrumb-item><a routerLink="/parties" title="Zur Übersicht der Wahllisten">Wahllisten</a></nz-breadcrumb-item>
       <nz-breadcrumb-item
-        ><span title="Aktuelle Seite: Wahlliste {{ data.party.name }}">{{ data.party.name }}</span></nz-breadcrumb-item
+        ><span title="Aktuelle Seite: Wahlliste {{ data.party.name }}">{{ data.party.id }}</span></nz-breadcrumb-item
       >
     </nz-breadcrumb>
 
@@ -20,57 +20,78 @@
       <div [innerHTML]="data.party.description | markdown: false"></div>
     </div>
 
-    <div class="party-decisions" *ngIf="!includeCandidates">
-      <h2>Standpunkte von {{ data.party.name }}</h2>
-      <section class="party-claims" *ngFor="let category of data.categoriesWithClaims">
-        <h3>{{ category.category.title }}</h3>
-        <nz-collapse class="color-band">
-          <nz-collapse-panel
-            *ngFor="let claim of category.claims"
-            [nzHeader]="claim.title"
-            [nzExtra]="voteIcon"
-            [style.border-left-color]="category.category.color"
-          >
-            <p class="small" [innerHTML]="claim.description | markdown" *ngIf="claim.description"></p>
-            <app-decision-button
-              [vote]="votes[claim.claimId]"
-              [agreement]="votes[claim.claimId]?.fav ? agreement.USER_FAV : agreement.USER"
-              label="Deine Antwort"
-            ></app-decision-button>
+    <nz-tabset class="visualisations">
+      <nz-tab nzTitle="Abstimmungsergebnisse">
+        <div class="party-decisions">
+          <ng-container *ngIf="sortedCategroies | async as d">
+            <ng-container *ngFor="let category of d">
+              <section class="party-claims">
+                <h3>{{ category.category.title }}</h3>
 
-            <app-decision-button
-              [vote]="data.party.positions[claim.claimId]?.vote"
-              [agreement]="calcAgreement(data.party.positions[claim.claimId]?.vote || 0, votes[claim.claimId])"
-              [label]="data.party.name"
-            ></app-decision-button>
+                <nz-collapse class="color-band">
+                  <nz-collapse-panel
+                    *ngFor="let claim of category.claims; let i = index"
+                    [nzHeader]="claim.title"
+                    [nzExtra]="voteIcon"
+                    [style.border-left-color]="category.category.color"
+                    (nzActiveChange)="activate(i)"
+                  >
+                    <div *ngIf="activePanels[i]">
+                      <p class="small" [innerHTML]="claim.description | markdown" *ngIf="claim.description"></p>
+                      <app-decision-button
+                        [vote]="votes[claim.claimId]"
+                        [agreement]="votes[claim.claimId]?.fav ? agreement.USER_FAV : agreement.USER"
+                        label="Deine Antwort"
+                      ></app-decision-button>
 
-            <ng-container *ngIf="data.party.positions[claim.claimId]?.reason">
-              <p>Begründung von {{ data.party.name }}:</p>
-              <blockquote [innerHTML]="data.party.positions[claim.claimId].reason | markdown"></blockquote>
+                      <app-decision-button
+                        [vote]="data.party.positions[claim.claimId]?.vote"
+                        [agreement]="calcAgreement(data.party.positions[claim.claimId]?.vote, votes[claim.claimId])"
+                        [label]="data.party.name"
+                      ></app-decision-button>
+
+                      <ng-container *ngIf="data.party.positions[claim.claimId]?.reason">
+                        <p>Begründung von {{ data.party.name }}:</p>
+                        <blockquote [innerHTML]="data.party.positions[claim.claimId]?.reason | markdown"></blockquote>
+                      </ng-container>
+
+                      <ng-container *ngIf="includeCandidates && data.candidates as candidates">
+                        <app-party-candidates-decision-table
+                          [candidates]="candidates"
+                          [claimId]="claim.claimId"
+                          [partyId]="partyId | async"
+                          [personalData]="personalData"
+                          [politicalData]="politicalData"
+                          [votes]="votes"
+                        ></app-party-candidates-decision-table>
+                      </ng-container>
+
+                      <app-claim-links [claimId]="claim.claimId"></app-claim-links>
+                    </div>
+                    <ng-template #voteIcon>
+                      <app-decision-icon
+                        [vote]="data.party.positions[claim.claimId]?.vote"
+                        [agreement]="calcAgreement(data.party.positions[claim.claimId]?.vote, votes[claim.claimId])"
+                      ></app-decision-icon>
+                    </ng-template>
+                  </nz-collapse-panel>
+                </nz-collapse>
+              </section>
             </ng-container>
-
-            <app-claim-links [claimId]="claim.claimId"></app-claim-links>
-
-            <ng-template #voteIcon>
-              <app-decision-icon
-                [vote]="data.party.positions[claim.claimId]?.vote"
-                [agreement]="calcAgreement(data.party.positions[claim.claimId]?.vote || 0, votes[claim.claimId])"
-              ></app-decision-icon>
-            </ng-template>
-          </nz-collapse-panel>
-        </nz-collapse>
-      </section>
-    </div>
-
-    <ng-container *ngIf="data.candidates as candidates">
-      <h2 class="candidate-headline">Kandidierende</h2>
-      <div class="candidate-list">
-        <ng-container *ngFor="let candidate of candidates">
-          <a class="link" [routerLink]="['/', 'parties', partyId | async, 'candidates', candidate]">
-            <app-candidate-card [candidateId]="candidate"></app-candidate-card>
-          </a>
+          </ng-container>
+        </div>
+      </nz-tab>
+      <nz-tab nzTitle="Kandidierende">
+        <ng-container *ngIf="data.candidates as candidates">
+          <div class="candidate-list">
+            <ng-container *ngFor="let candidate of candidates">
+              <a class="link" [routerLink]="['/', 'parties', partyId | async, 'candidates', candidate]">
+                <app-candidate-card [candidateId]="candidate"></app-candidate-card>
+              </a>
+            </ng-container>
+          </div>
         </ng-container>
-      </div>
-    </ng-container>
+      </nz-tab>
+    </nz-tabset>
   </ng-container>
 </ng-container>

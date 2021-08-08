@@ -131,6 +131,7 @@ export class QuizCardComponent implements OnInit, OnChanges, OnDestroy, AfterVie
     });
     if (this.claimId === QuizFirstPage) {
       this.category = {
+        id: 'Howto',
         order: -9001,
         color: '#333',
         title: 'Howto',

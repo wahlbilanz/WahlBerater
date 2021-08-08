@@ -6,6 +6,7 @@ export interface PartyMap {
 }
 
 export interface Party {
+  id: string;
   name: string;
   color: string;
   links: LinkMap;

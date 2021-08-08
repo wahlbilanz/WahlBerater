@@ -26,7 +26,7 @@ export class PartyCardComponent implements OnInit, OnDestroy {
     this.score = s?.find((p) => p.party === this.partyId);
     this.recalcAxes();
   }
-  @Input('maxParty') set setMaxParty(mp: number) {
+  @Input() set maxParty(mp: number) {
     this.maxPartyValue = mp;
     this.recalcAxes();
   }
@@ -57,6 +57,7 @@ export class PartyCardComponent implements OnInit, OnDestroy {
   }
 
   recalcAxes() {
+    // console.log(this.maxPartyValue);
     if (this.maxPartyValue) {
       this.maxValueArray = [];
       const max = Math.floor(this.maxPartyValue / 10) * 10;
@@ -65,7 +66,7 @@ export class PartyCardComponent implements OnInit, OnDestroy {
       }
       this.axeTiksWidth = (100 * (max / this.maxPartyValue)) / 10; // 100 * ((max - (mp % 10)) / 10) / mp;
       this.tiksPadding = (100 * (this.maxPartyValue - max)) / this.maxPartyValue;
-      console.log(max, this.maxValueArray, this.axeTiksWidth, this.tiksPadding);
+      // console.log(max, this.maxValueArray, this.axeTiksWidth, this.tiksPadding);
     }
   }
 }

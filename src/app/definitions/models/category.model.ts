@@ -5,6 +5,7 @@ export interface CategoryMap {
 }
 
 export interface Category {
+  id: string;
   order: number;
   title: string;
   color: string;

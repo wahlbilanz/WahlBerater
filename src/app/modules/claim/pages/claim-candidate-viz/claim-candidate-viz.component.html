@@ -28,35 +28,43 @@
         </div>
 
         <ng-container *ngIf="showCandidates">
-          <table>
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Position</th>
-                <th>Begründung</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let data of party.candidates | keyvalue: candidateSorter">
-                <td>
-                  <a [routerLink]="'/parties/' + party.party + '/candidates/' + data.key">
-                    {{ (personalCandidates | personalDataOf: data.key).name }}
-                  </a>
-                </td>
-                <td>
-                  <app-decision-icon
-                    [vote]="politicalData.candidates[data.key].positions[claimId]?.vote"
-                    [agreement]="calcAgreement(politicalData.candidates[data.key].positions[claimId]?.vote, votes[claimId])"
-                  ></app-decision-icon>
-                </td>
-                <td>
-                  <ng-container *ngIf="politicalData.candidates[data.key]?.positions[claimId]?.reason">{{
-                    politicalData.candidates[data.key].positions[claimId].reason | markdown
-                  }}</ng-container>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+          <app-party-candidates-decision-table
+            [candidates]="candidates[party.party]"
+            [claimId]="claimId"
+            [partyId]="party.party"
+            [personalData]="personalCandidates"
+            [politicalData]="politicalData"
+            [votes]="votes"
+          ></app-party-candidates-decision-table>
+          <!--          <table>-->
+          <!--            <thead>-->
+          <!--              <tr>-->
+          <!--                <th>Name</th>-->
+          <!--                <th>Position</th>-->
+          <!--                <th>Begründung</th>-->
+          <!--              </tr>-->
+          <!--            </thead>-->
+          <!--            <tbody>-->
+          <!--              <tr *ngFor="let data of party.candidates | keyvalue: candidateSorter">-->
+          <!--                <td>-->
+          <!--                  <a [routerLink]="'/parties/' + party.party + '/candidates/' + data.key">-->
+          <!--                    {{ (personalCandidates | personalDataOf: data.key).name }}-->
+          <!--                  </a>-->
+          <!--                </td>-->
+          <!--                <td>-->
+          <!--                  <app-decision-icon-->
+          <!--                    [vote]="politicalData.candidates[data.key].positions[claimId]?.vote"-->
+          <!--                    [agreement]="calcAgreement(politicalData.candidates[data.key].positions[claimId]?.vote, votes[claimId])"-->
+          <!--                  ></app-decision-icon>-->
+          <!--                </td>-->
+          <!--                <td>-->
+          <!--                  <ng-container *ngIf="politicalData.candidates[data.key]?.positions[claimId]?.reason">{{-->
+          <!--                    politicalData.candidates[data.key].positions[claimId].reason | markdown-->
+          <!--                  }}</ng-container>-->
+          <!--                </td>-->
+          <!--              </tr>-->
+          <!--            </tbody>-->
+          <!--          </table>-->
         </ng-container>
 
         <app-claim-links [claimId]="claimId" [showMoreInfoLink]="false"></app-claim-links>

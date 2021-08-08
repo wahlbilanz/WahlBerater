@@ -36,17 +36,19 @@ export class PartyListPageComponent implements OnInit, OnChanges, OnDestroy {
   ngOnInit(): void {
     this.subscriptions.push(
       this.store.pipe(select(AppSelectors.getPersonalData)).subscribe((d) => {
-        console.log('getPersonalData', d);
+        // console.log('getPersonalData', d);
         this.personalData = d;
+        this.recalc();
       }),
     );
     this.subscriptions.push(
       this.store.pipe(select(AppSelectors.getPoliticalData)).subscribe((d) => {
-        console.log('getPoliticalData', d);
+        // console.log('getPoliticalData', d);
         this.politicalData = d;
         if (d) {
           const parties = Object.values(d.parties);
           this.sortedParties = !parties.every((v) => v.order === parties[0].order);
+          this.recalc();
         }
       }),
     );
@@ -63,9 +65,10 @@ export class PartyListPageComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   recalc(): void {
+    console.log('reaclc', this.personalData, this.politicalData, this.votes);
     if (this.personalData && this.politicalData && this.votes) {
       this.partyScoreResult = prepareResults(this.politicalData, this.personalData, this.votes);
-      console.log(this.partyScoreResult);
+      // console.log(this.partyScoreResult);
     }
   }
 }

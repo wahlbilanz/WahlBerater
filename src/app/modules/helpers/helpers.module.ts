@@ -6,10 +6,12 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { DecisionIconComponent } from './components/decision-icon/decision-icon.component';
 import { DecisionButtonComponent } from './components/decision-button/decision-button.component';
 import { RouterModule } from '@angular/router';
+import { PartyCandidatesDecisionTableComponent } from './components/party-candidates-decision-table/party-candidates-decision-table.component';
+import { PipesModule } from '../pipes/pipes.module';
 
 @NgModule({
-  declarations: [DecisionTemplatesComponent, DecisionIconComponent, DecisionButtonComponent],
-  exports: [DecisionTemplatesComponent, DecisionIconComponent, DecisionButtonComponent],
-  imports: [CommonModule, NzBadgeModule, NzIconModule, RouterModule],
+  declarations: [DecisionTemplatesComponent, DecisionIconComponent, DecisionButtonComponent, PartyCandidatesDecisionTableComponent],
+  exports: [DecisionTemplatesComponent, DecisionIconComponent, DecisionButtonComponent, PartyCandidatesDecisionTableComponent],
+  imports: [CommonModule, NzBadgeModule, NzIconModule, RouterModule, PipesModule],
 })
 export class HelpersModule {}

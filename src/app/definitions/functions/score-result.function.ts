@@ -12,7 +12,24 @@ function calcUsingCandidates(politicalData: PoliticalData, personalData: Persona
   const partyResults: Record<string, PartyResult> = {};
   let maxValue = 0;
   let maxParty = 0;
-  let partyScores;
+  let partyScores: PartyResult[];
+  const normaliser: {
+    [party: string]: {
+      categories: { [category: string]: number };
+      claims: { [claim: string]: number };
+      overall: number;
+    };
+  } = {};
+  const categorySize: {
+    [category: string]: number;
+  } = {};
+  for (const claim of Object.keys(politicalData.claims)) {
+    const category = politicalData.claims[claim].category;
+    if (!categorySize[category]) {
+      categorySize[category] = 0;
+    }
+    categorySize[category]++;
+  }
 
   // iterate all candidates
   for (const candidate of Object.keys(politicalData.candidates)) {
@@ -26,6 +43,13 @@ function calcUsingCandidates(politicalData: PoliticalData, personalData: Persona
         score: new Score(),
       };
       partyResults[politicalData.candidates[candidate].party] = partyResult;
+    }
+    if (!normaliser[politicalData.candidates[candidate].party]) {
+      normaliser[politicalData.candidates[candidate].party] = {
+        categories: {},
+        claims: {},
+        overall: 0,
+      };
     }
 
     // result of the current candidate
@@ -48,6 +72,16 @@ function calcUsingCandidates(politicalData: PoliticalData, personalData: Persona
       if (!partyResult.scores[category]) {
         partyResult.scores[category] = { category, score: new Score(), claims: {}, decisions: {} };
       }
+      if (!normaliser[politicalData.candidates[candidate].party].categories[category]) {
+        normaliser[politicalData.candidates[candidate].party].categories[category] = 0;
+      }
+      if (!normaliser[politicalData.candidates[candidate].party].claims[claim]) {
+        normaliser[politicalData.candidates[candidate].party].claims[claim] = 0;
+      }
+      if (politicalData.candidates[candidate].positions[claim]?.vote != null) {
+        normaliser[politicalData.candidates[candidate].party].claims[claim]++;
+        normaliser[politicalData.candidates[candidate].party].categories[category]++;
+      }
 
       candidateResult.scores[category].decisions[claim] = politicalData.candidates[candidate].positions[claim]?.vote || 0;
 
@@ -63,7 +97,8 @@ function calcUsingCandidates(politicalData: PoliticalData, personalData: Persona
       partyResult.scores[category].claims[claim] = { claim, score: s };
 
       candidateResult.score.add(s);
-      partyResult.score.add(s);
+      // partyResult.score.add(s);
+      normaliser[politicalData.candidates[candidate].party].overall++;
     }
     if (maxValue < candidateResult.score.score) {
       maxValue = candidateResult.score.score;
@@ -80,16 +115,20 @@ function calcUsingCandidates(politicalData: PoliticalData, personalData: Persona
 
   partyScores = Object.values(partyResults);
   partyScores.forEach((party: PartyResult) => {
-    const nCandidates = Object.keys(party.candidates).length;
-    party.score.normalise(nCandidates);
+    /*const nCandidates = Object.keys(party.candidates).length;
+    party.score.normalise(nCandidates);*/
+    party.score = new Score(0);
+    for (const cat of Object.keys(party.scores)) {
+      // console.log(party.party, party.scores[cat].score.score, normaliser[party.party].categories[cat])
+      party.scores[cat].score.normalise(normaliser[party.party].categories[cat] / categorySize[cat]);
+      // console.log(party.party, party.scores[cat].score.score)
+      party.score.add(party.scores[cat].score);
+      for (const claim of Object.keys(party.scores[cat].claims)) {
+        party.scores[cat].claims[claim].score.normalise(normaliser[party.party].claims[claim]);
+      }
+    }
     if (party.score.score > maxParty) {
       maxParty = party.score.score;
-    }
-    for (const cat of Object.keys(party.scores)) {
-      party.scores[cat].score.normalise(nCandidates);
-      for (const claim of Object.keys(party.scores[cat].claims)) {
-        party.scores[cat].claims[claim].score.normalise(nCandidates);
-      }
     }
   });
 

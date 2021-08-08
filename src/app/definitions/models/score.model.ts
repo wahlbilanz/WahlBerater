@@ -10,6 +10,8 @@ export class Score {
   }
 
   normalise(n: number) {
-    this.score /= n;
+    if (this.score !== 0) {
+      this.score /= n;
+    }
   }
 }

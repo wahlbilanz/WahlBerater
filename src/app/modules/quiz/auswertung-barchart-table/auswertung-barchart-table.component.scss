@@ -29,11 +29,10 @@ table {
       }
     }
 
-    &.candidate-row th {
-      font-weight: normal;
-      text-align: right;
+    &.candidate-spacer,
+    &.candidate-row {
+      border-left: 3px solid;
     }
-
     &.candidate-row {
       font-size: 0.8em;
       td {
@@ -44,6 +43,10 @@ table {
         span {
           font-size: 0.5em;
         }
+      }
+      th {
+        font-weight: normal;
+        text-align: right;
       }
     }
 

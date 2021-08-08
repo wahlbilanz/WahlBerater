@@ -1,6 +1,9 @@
 @import '../../../../../assets/styles/variables';
 
-.vote-icon-badge {
+.vote-icon-badge-good {
+  color: $wb-logo-wal-color; // #f5222d
+}
+.vote-icon-badge-bad {
   color: $favcolor; // #f5222d
 }
 i {

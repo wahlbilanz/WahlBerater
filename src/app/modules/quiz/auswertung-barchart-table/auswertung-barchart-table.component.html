@@ -5,14 +5,16 @@
       <tr class="party-row" style="border-color:{{ politicalData.parties[party.party].color }}">
         <th>
           <a [routerLink]="'/parties/' + party.party">
-            {{ politicalData.parties[party.party].name }}
+            {{ politicalData.parties[party.party].id }}
           </a>
         </th>
         <td>
           <ng-container *ngFor="let category of party.scores | keyvalue">
             <span
               *ngIf="category.value.score.score > 0"
-              [style.width]="(100 * category.value.score.score) / partyScoreResult.maxParty + '%'"
+              [style.width]="
+                (100 * category.value.score.score) / (showCandidates ? partyScoreResult.maxValue : partyScoreResult.maxParty) + '%'
+              "
               [style.background-color]="politicalData.categories[category.key].color"
               class="hit"
               nz-tooltip
@@ -31,8 +33,8 @@
       <!-- candidates -->
       <ng-container *ngIf="showCandidates && party.candidates">
         <ng-container *ngFor="let candidate of party.candidates | keyvalue: candidateSorter | slice: 0:displayCandidates[partyIndex] + 1">
-          <tr class="candidate-spacer"></tr>
-          <tr class="candidate-row">
+          <tr class="candidate-spacer" style="border-color:{{ politicalData.parties[party.party].color }}"></tr>
+          <tr class="candidate-row" style="border-color:{{ politicalData.parties[party.party].color }}">
             <th>
               <a [routerLink]="'/parties/' + party.party + '/candidates/' + candidate.value.id">
                 {{ candidate.value.personal.name }}

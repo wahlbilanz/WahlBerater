@@ -3,12 +3,16 @@
 import { KeyValue } from '@angular/common';
 import { CandidateResult } from '../models/results.model';
 
-export function candidateKeyValueSorter(a: KeyValue<number, CandidateResult>, b: KeyValue<number, CandidateResult>): number {
-  if (a.value.political.listOrder === b.value.political.listOrder) {
-    if (b.value.score.score === a.value.score.score) {
-      return a.value.personal.name.localeCompare(b.value.personal.name);
+export function candidateValueSorter(a: CandidateResult, b: CandidateResult): number {
+  if (a.political.listOrder === b.political.listOrder) {
+    if (b.score.score === a.score.score) {
+      return a.personal.name.localeCompare(b.personal.name);
     }
-    return b.value.score.score - a.value.score.score;
+    return b.score.score - a.score.score;
   }
-  return a.value.political.listOrder - b.value.political.listOrder;
+  return a.political.listOrder - b.political.listOrder;
+}
+
+export function candidateKeyValueSorter(a: KeyValue<number, CandidateResult>, b: KeyValue<number, CandidateResult>): number {
+  return candidateValueSorter(a.value, b.value);
 }

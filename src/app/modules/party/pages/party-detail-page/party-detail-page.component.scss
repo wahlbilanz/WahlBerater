@@ -61,8 +61,15 @@
     }
   }
 }
-
-.party-decisions {
+::ng-deep .ant-tabs-nav {
+  padding: $wb-space-medium $wb-space-large;
+  margin: $wb-space-large $wb-space-medium;
+  @media screen and (max-width: $wb-breakpoint-medium) {
+    margin: $wb-space-large 0;
+    padding: $wb-space-small $wb-space-medium;
+  }
+}
+.party-claims {
   background-color: $wb-color-page-foreground-background;
   box-shadow: $wb-shadow-normal;
   padding: $wb-space-medium $wb-space-large;
