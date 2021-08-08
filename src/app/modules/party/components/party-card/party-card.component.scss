@@ -92,9 +92,31 @@
   grid-area: bar;
   width: 100%;
   display: block;
+  margin-top: auto;
   span {
     width: 100%;
     display: inline-block;
     text-align: center;
+  }
+  .axis {
+    border-top: 1px solid #aaa;
+    text-align: right;
+    @include use-typography($wb-type-paragraph-small);
+    color: #aaa;
+    span {
+      line-height: 1;
+      span.axis-label {
+        margin-right: -$wb-space-small;
+        width: 2 * $wb-space-small;
+        display: block;
+        float: right;
+        text-align: center;
+      }
+
+      span:last-child span.axis-label {
+        margin-right: 0;
+        text-align: right;
+      }
+    }
   }
 }

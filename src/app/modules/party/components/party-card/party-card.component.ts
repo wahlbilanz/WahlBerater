@@ -20,7 +20,6 @@ export class PartyCardComponent implements OnInit, OnDestroy {
   @Input() partyId: string;
   @Input() public showSocialLinks = true;
   @Input() partyData: Party;
-  partyCandidates: string[];
   @Input() politicalData: PoliticalData;
   @Input() personalData: PersonalCandidateMap;
   @Input() set scores(s: PartyResult[]) {
@@ -28,9 +27,12 @@ export class PartyCardComponent implements OnInit, OnDestroy {
   }
   @Input() set maxParty(mp: number) {
     this.maxPartyValue = mp;
+    this.maxValueArray = [...Array(mp).keys()];
   }
+  partyCandidates: string[];
   score: PartyResult;
   maxPartyValue: number;
+  maxValueArray: number[];
 
   private subscriptions: Subscription[] = [];
 
