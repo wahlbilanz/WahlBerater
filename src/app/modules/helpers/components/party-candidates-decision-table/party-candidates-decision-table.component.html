@@ -6,23 +6,38 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let candidate of candidates">
+    <tr *ngFor="let candidate of candidates; let i = index">
       <td>
         <a [routerLink]="['/', 'parties', partyId, 'candidates', candidate]">
           {{ (personalData | personalDataOf: candidate).name }}
         </a>
       </td>
-      <td>
-        <app-decision-icon
-          [vote]="politicalData.candidates[candidate].positions[claimId]?.vote"
-          [agreement]="calcAgreement(politicalData.candidates[candidate].positions[claimId]?.vote, votes[claimId])"
-        ></app-decision-icon>
-      </td>
-      <td>
-        <ng-container *ngIf="politicalData.candidates[candidate]?.positions[claimId]?.reason">{{
-          politicalData.candidates[candidate].positions[claimId].reason | markdown
-        }}</ng-container>
-      </td>
+      <ng-container *ngIf="i == 0 && politicalData.parties[partyId].all_same">
+        <td [attr.rowspan]="candidates.length">
+          <app-decision-icon
+            [vote]="politicalData.candidates[candidate].positions[claimId]?.vote"
+            [agreement]="calcAgreement(politicalData.candidates[candidate].positions[claimId]?.vote, votes[claimId])"
+          ></app-decision-icon>
+        </td>
+        <td [attr.rowspan]="candidates.length">
+          <ng-container *ngIf="politicalData.candidates[candidate]?.positions[claimId]?.reason">{{
+            politicalData.candidates[candidate].positions[claimId].reason | markdown
+          }}</ng-container>
+        </td>
+      </ng-container>
+      <ng-container *ngIf="!politicalData.parties[partyId].all_same">
+        <td>
+          <app-decision-icon
+            [vote]="politicalData.candidates[candidate].positions[claimId]?.vote"
+            [agreement]="calcAgreement(politicalData.candidates[candidate].positions[claimId]?.vote, votes[claimId])"
+          ></app-decision-icon>
+        </td>
+        <td>
+          <ng-container *ngIf="politicalData.candidates[candidate]?.positions[claimId]?.reason">{{
+            politicalData.candidates[candidate].positions[claimId].reason | markdown
+          }}</ng-container>
+        </td>
+      </ng-container>
     </tr>
   </tbody>
 </table>

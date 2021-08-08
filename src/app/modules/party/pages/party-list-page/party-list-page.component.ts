@@ -65,7 +65,7 @@ export class PartyListPageComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   recalc(): void {
-    console.log('reaclc', this.personalData, this.politicalData, this.votes);
+    // console.log('reaclc', this.personalData, this.politicalData, this.votes);
     if (this.personalData && this.politicalData && this.votes) {
       this.partyScoreResult = prepareResults(this.politicalData, this.personalData, this.votes);
       // console.log(this.partyScoreResult);

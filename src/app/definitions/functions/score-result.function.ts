@@ -208,6 +208,7 @@ function calcUsingParties(politicalData: PoliticalData, personalData: PersonalCa
 }
 
 export function prepareResults(politicalData: PoliticalData, personalData: PersonalCandidateMap, votes: Votes): PartyScoreResult {
+  console.log('preparing results...');
   if (IncludeCandidates) {
     return calcUsingCandidates(politicalData, personalData, votes);
   } else {

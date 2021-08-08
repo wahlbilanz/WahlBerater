@@ -15,4 +15,5 @@ export interface Party {
   shortDescription?: string;
   order?: number;
   positions: PositionsMap;
+  all_same: boolean;
 }

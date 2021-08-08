@@ -10,11 +10,11 @@ import { PartyDecisionThreshold } from '../../../../+state/app.models';
 const NO_CONTEXT_TITLES = {
   '-4': 'Starke Ablehnung',
   '-3': 'Ablehnung (gegen deine Position)',
-  '-2': 'Ablehnung mit Extrapunkt',
+  '-2': 'Ablehnung, wichtig!',
   '-1': 'Ablehnung',
   0: 'Enthaltung',
   1: 'Zustimmung',
-  2: 'Zustimmung mit Extrapunkt',
+  2: 'Zustimmung, wichtig!',
   3: 'Zustimmung (gegen deine Position)',
   4: 'Starke Zustimmung',
   null: 'Unbekannte Haltung',

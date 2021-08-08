@@ -20,7 +20,7 @@ export class PartyCandidatesDecisionTableComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    console.log(this.candidates);
+    // console.log(this.candidates);
   }
 
   calcAgreement(party: number, user: Vote) {

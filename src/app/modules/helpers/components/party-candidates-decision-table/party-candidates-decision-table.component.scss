@@ -1,7 +1,11 @@
+@import '../../../../../assets/styles/variables';
 table {
   tr {
     td:first-child {
       min-width: 150px;
+    }
+    td:nth-child(2) {
+      padding: 0 $wb-space-x-small;
     }
   }
 }
