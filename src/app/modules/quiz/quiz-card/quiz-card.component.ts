@@ -181,8 +181,8 @@ export class QuizCardComponent implements OnInit, OnChanges, OnDestroy, AfterVie
         {
           title: 'Quiz Einführung',
           intro:
-            'Sie bekommen nun eine kleine Einführung in die Benutzung des Quiz.' +
-            'Sollten Sie schon wissen, wie das Quiz funktioniert, klicken Sie einfach auf das × oben rechts.',
+            'Du bekommst nun eine kleine Einführung in die Benutzung des Quiz.' +
+            'Solltest du schon wissen, wie das Quiz funktioniert, klick einfach auf das × oben rechts.',
         },
         {
           element: '#card-category',
@@ -202,39 +202,39 @@ export class QuizCardComponent implements OnInit, OnChanges, OnDestroy, AfterVie
         {
           element: '#decision-center',
           intro:
-            'Klicken Sie auf das Herz, um eine These als besonders wichtig zu markieren. Kandidierende, die die gleiche Position beziehen, bekommen dann doppelte Punktzahl.',
+            'Klicke auf das Herz, um eine These als besonders wichtig zu markieren. Kandidierende, die die gleiche Position beziehen, bekommen dann doppelte Punktzahl.',
           position: 'top',
         },
         {
           element: '#decision-left',
-          intro: 'Sind Sie gegen die These? Klicken Sie dann auf den Daumen nach unten oder wischen auf mobilen Geräten nach links.',
+          intro: 'Bist du gegen die These? Klicke dann auf den Daumen nach unten oder wische auf mobilen Geräten nach links.',
           position: 'top',
         },
         {
           element: '#decision-right',
-          intro: 'Stimmen Sie für die These? Klicken Sie dann auf den Daumen nach oben oder wischen auf mobilen Geräten nach rechts.',
+          intro: 'Stimmst du dieser These zu? Klicke dann auf den Daumen nach oben oder wische auf mobilen Geräten nach rechts.',
           position: 'top',
         },
         {
           element: '#claim-back',
           intro:
-            'Wenn es sich nicht um die erste These im Quiz handelt erscheint hier ein Feld mit dem Sie zur vorherigen These springen können.',
+            'Wenn es sich nicht um die erste These im Quiz handelt erscheint hier ein Feld mit dem du zur vorherigen These springen kannst.',
           position: 'top',
         },
         {
           element: '#claim-next',
           intro:
-            'Mit diesem Knopf können Sie zur nächsten These springen. Sie müssen nicht alle Thesen beantworten, sondern können Thesen überspringen wenn Sie keine starke Meinung zum Thema haben!',
+            'Mit diesem Knopf kannst du zur nächsten These springen. Du musst nicht alle Thesen beantworten, sondern kannst Thesen überspringen wenn du keine starke Meinung zum Thema hast!',
           position: 'top',
         },
         {
           element: '#quiz-progress',
-          intro: 'Am unteren Bildschirmrand zeigt ein Ladebalken wie viele Thesen noch vor Ihnen liegen.',
+          intro: 'Am unteren Bildschirmrand zeigt ein Ladebalken wie viele Thesen noch vor dir liegen.',
           position: 'top',
         },
         {
           element: '#forward-auswertung',
-          intro: 'Sie können jederzeit alle weiteren Thesen überspringen und mit diesem Knopf direkt zur Auswertung gelangen.',
+          intro: 'Du kannst jederzeit alle weiteren Thesen überspringen und mit diesem Knopf direkt zur Auswertung gelangen.',
           position: 'top',
         },
         {
