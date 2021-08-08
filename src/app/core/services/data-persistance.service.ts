@@ -3,12 +3,14 @@ import { Store } from '@ngrx/store';
 import { AppPartialState } from '../../+state/app.reducer';
 import { AccessibilityModeSettings } from '../../definitions/interfaces/accessibility-mode-settings.interface';
 import { Vote, Votes } from '../../definitions/models/votes.mode';
+import { QuizFirstPage } from '../../+state/app.models';
 
 const STORE_PREFIX = 'walberater_';
 export const OPTIN_STORE_KEY = `${STORE_PREFIX}user_storage_optin`;
 export const QUIZ_ANSWER_STORE_KEY = `${STORE_PREFIX}quiz_answers`;
 export const ACCESSIBILITY_MODE_STORE_KEY = `${STORE_PREFIX}accessibility_mode`;
 export const VOTES_STORE_KEY = `${STORE_PREFIX}votes`;
+export const QUIZ_LASTPAGE = `${STORE_PREFIX}lastpage`;
 
 @Injectable({
   providedIn: 'root',
@@ -42,6 +44,7 @@ export class DataPersistanceService {
       localStorage.removeItem(OPTIN_STORE_KEY);
       localStorage.removeItem(QUIZ_ANSWER_STORE_KEY);
       localStorage.removeItem(ACCESSIBILITY_MODE_STORE_KEY);
+      localStorage.removeItem(QUIZ_LASTPAGE);
     }
   }
 
@@ -88,6 +91,22 @@ export class DataPersistanceService {
     }
 
     localStorage.setItem(VOTES_STORE_KEY, JSON.stringify(votes));
+  }
+
+  public getQuizLastPage(): string {
+    if (!this.browserSupport) {
+      return QuizFirstPage;
+    }
+
+    return localStorage.getItem(QUIZ_LASTPAGE) || QuizFirstPage;
+  }
+
+  public updateQuizLastPage(lastPage: string): void {
+    if (!this.browserSupport) {
+      return;
+    }
+
+    localStorage.setItem(QUIZ_LASTPAGE, lastPage);
   }
 
   // TODO provide methods to store stuff in `QUIZ_ANSWER_STORE_KEY`

@@ -8,6 +8,7 @@ import * as AppActions from '../../../+state/app.actions';
 import { QuizFirstPage, ResultUrl } from '../../../+state/app.models';
 import { AppPartialState } from '../../../+state/app.reducer';
 import * as AppSelectors from '../../../+state/app.selectors';
+import { updateLastQuizPage } from '../../../+state/app.actions';
 
 @Component({
   selector: 'app-root',
@@ -65,6 +66,8 @@ export class AppComponent implements OnInit {
     this.store.dispatch(AppActions.loadData());
     // restore votes if possible
     this.store.dispatch(AppActions.restoreVotes());
+    // restore last quiz page if possible
+    this.store.dispatch(AppActions.restoreLastQuizPage());
     // initially calculate offset for nav container
     this.calculateNavOffset();
     // enable NgRx pipeline for global accessibility annotations

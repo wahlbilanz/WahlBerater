@@ -31,6 +31,8 @@ export const changeDataStorePreference = createAction('[app] User changed data s
 export const restoreDataStorePreference = createAction("[app] Restored user's data store preference", props<{ allow: boolean }>());
 
 export const updateLastQuizPage = createAction('[app] updating last quiz page', props<{ lastPage?: string }>());
+export const restoreLastQuizPage = createAction('[app] Restored last quiz page');
+export const restoreLastQuizPageSuccess = createAction('[app] Successfully restored last quiz page', props<{ lastPage: string }>());
 
 export const saveVotes = createAction('[app] User saved votes', props<{ votes: Votes }>());
 export const restoreVotes = createAction('[app] Restored saved votes');

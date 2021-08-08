@@ -6,7 +6,7 @@ import { PoliticalData } from '../definitions/models/political.data.model';
 import { Votes } from '../definitions/models/votes.mode';
 import { AccessibilityModes, QuizFirstPage, QuizState, State } from './app.models';
 import { AppPartialState, STATE_FEATURE_KEY } from './app.reducer';
-import { PartyMap } from '../definitions/models/party.model';
+import { Party, PartyMap } from '../definitions/models/party.model';
 
 const getAppState = createFeatureSelector<AppPartialState, State>(STATE_FEATURE_KEY);
 

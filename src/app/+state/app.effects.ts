@@ -14,6 +14,7 @@ import { State } from './app.models';
 import { AppPartialState } from './app.reducer';
 import * as AppSelectors from './app.selectors';
 import { Votes } from '../definitions/models/votes.mode';
+import { updateLastQuizPage } from './app.actions';
 
 @Injectable()
 export class AppEffects {
@@ -137,7 +138,12 @@ export class AppEffects {
     () =>
       this.actions.pipe(
         ofType(AppActions.saveVotes),
-        map(({ votes }) => this.dataPersistanceService.updateVotes(votes)),
+        withLatestFrom(this.store.pipe(select(AppSelectors.isLocalDataStorageAllowed))),
+        map(([{ votes }, localStorageAllowed]) => {
+          if (localStorageAllowed) {
+            this.dataPersistanceService.updateVotes(votes);
+          }
+        }),
       ),
     { dispatch: false },
   );
@@ -154,9 +160,31 @@ export class AppEffects {
           this.store.pipe(select(AppSelectors.getVotes), startWith({})),
           this.store.pipe(select(AppSelectors.isLocalDataStorageAllowed)),
         ),
-        map(([{}, votes, localStorageAllowed]: [any, Votes, boolean]) => this.dataPersistanceService.updateVotes(votes)),
+        map(([{}, votes, localStorageAllowed]: [any, Votes, boolean]) => {
+          if (localStorageAllowed) {
+            this.dataPersistanceService.updateVotes(votes);
+          }
+        }),
       ),
     { dispatch: false },
+  );
+
+  updateLastQuizPage = createEffect(
+    () =>
+      this.actions.pipe(
+        ofType(AppActions.updateLastQuizPage),
+        withLatestFrom(this.store.pipe(select(AppSelectors.isLocalDataStorageAllowed))),
+        map(([{ lastPage }, localStorageAllowed]) => {
+          if (localStorageAllowed) {
+            this.dataPersistanceService.updateQuizLastPage(lastPage);
+          }
+        }),
+      ),
+    { dispatch: false },
+  );
+
+  restoreLastQuizPage = createEffect(() =>
+    scheduled([AppActions.restoreLastQuizPageSuccess({ lastPage: this.dataPersistanceService.getQuizLastPage() })], asyncScheduler),
   );
 
   constructor(

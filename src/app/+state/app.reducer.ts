@@ -1,6 +1,7 @@
 import { createReducer, on } from '@ngrx/store';
 import * as AppActions from './app.actions';
 import { QuizFirstPage, State } from './app.models';
+import { updateLastQuizPage } from './app.actions';
 
 export const STATE_FEATURE_KEY = 'app';
 
@@ -107,5 +108,9 @@ export const appReducer = createReducer(
   on(AppActions.restoreVotesSuccess, (state: State, { votes }) => ({
     ...state,
     votes,
+  })),
+  on(AppActions.restoreLastQuizPageSuccess, (state: State, { lastPage }) => ({
+    ...state,
+    quizLastPage: lastPage,
   })),
 );
