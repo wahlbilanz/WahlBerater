@@ -18,6 +18,8 @@ export class QuizComponent implements OnInit, OnDestroy {
   category: Category;
   claimId: string;
 
+  progress = 0;
+
   prev: string;
   next: string;
   private subscriptions: Subscription[] = [];
@@ -43,6 +45,12 @@ export class QuizComponent implements OnInit, OnDestroy {
                 this.prev = undefined;
               }
             }
+          }),
+        );
+        this.subscriptions.push(
+          this.store.pipe(select(AppSelectors.getClaimProgress, { id: this.claimId })).subscribe((c) => {
+            console.log(c);
+            this.progress = c ? 100 * c : 0;
           }),
         );
         this.subscriptions.push(

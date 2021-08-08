@@ -1,3 +1,4 @@
 <ng-container *ngIf="claimId && data | async as d">
   <app-quiz-card [category]="category" [claim]="d.claims[claimId]" [claimId]="claimId" [next]="next" [prev]="prev"></app-quiz-card>
+  <nz-progress id="quiz-progress" [nzPercent]="progress" [nzShowInfo]="false"></nz-progress>
 </ng-container>

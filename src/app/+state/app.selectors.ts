@@ -102,6 +102,26 @@ const getSortedClaimIDsByCategory = (data: PoliticalData, category: string) =>
     .filter((c) => data.claims[c].category === category)
     .sort((a, b) => data.claims[a].order - data.claims[b].order);
 
+export const getClaimProgress = createSelector(getPoliticalData, (data, currentClaim: { id: string }): number => {
+  if (data) {
+    const categories = getSortedCategoryIDs(data);
+
+    if (!currentClaim.id || currentClaim.id === QuizFirstPage) {
+      // no claimid yet? -> no back..
+      return 0;
+    }
+
+    const currentCategoryIdx = categories.indexOf(data.claims[currentClaim.id].category);
+    const currentCategory = categories[currentCategoryIdx];
+    const claims = getSortedClaimIDsByCategory(data, currentCategory);
+
+    const currentIdx = claims.indexOf(currentClaim.id);
+    return currentIdx / claims.length;
+  }
+
+  return 0;
+});
+
 export const getPrevQuestion = createSelector(getPoliticalData, (data, currentClaim: { id: string }): string => {
   if (data) {
     const categories = getSortedCategoryIDs(data);

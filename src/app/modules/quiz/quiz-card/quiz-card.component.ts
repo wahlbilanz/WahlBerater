@@ -175,7 +175,7 @@ export class QuizCardComponent implements OnInit, OnChanges, OnDestroy, AfterVie
       // skipLabel: 'Beenden',
       steps: [
         {
-          title: 'WahlBeratungsQuiz',
+          title: 'Quiz Einführung',
           intro:
             'Sie bekommen nun eine kleine Einführung in die Benutzung des Quiz.' +
             'Sollten Sie schon wissen, wie das Quiz funktioniert, klicken Sie einfach auf das × oben rechts.',
@@ -183,7 +183,7 @@ export class QuizCardComponent implements OnInit, OnChanges, OnDestroy, AfterVie
         {
           element: '#card-category',
           intro: 'Jede These gehört zu einer Kategorie.',
-          position: 'right',
+          position: 'left',
         },
         {
           element: '#claim-background',
@@ -199,17 +199,17 @@ export class QuizCardComponent implements OnInit, OnChanges, OnDestroy, AfterVie
           element: '#decision-center',
           intro:
             'Klicken Sie auf das Herz, um eine These als besonders wichtig zu markieren. Kandidierende, die die gleiche Position beziehen, bekommen dann doppelte Punktzahl.',
-          position: 'bottom',
+          position: 'top',
         },
         {
           element: '#decision-left',
-          intro: 'Sind Sie gegen die These klicken Sie auf den Daumen nach unten oder wischen auf mobilen Geräten nach links.',
-          position: 'bottom',
+          intro: 'Sind Sie gegen die These? Klicken Sie dann auf den Daumen nach unten oder wischen auf mobilen Geräten nach links.',
+          position: 'top',
         },
         {
           element: '#decision-right',
-          intro: 'Stimmen Sie für die These klicken Sie auf den Daumen nach oben oder wischen auf mobilen Geräten nach rechts.',
-          position: 'bottom',
+          intro: 'Stimmen Sie für die These? Klicken Sie dann auf den Daumen nach oben oder wischen auf mobilen Geräten nach rechts.',
+          position: 'top',
         },
         {
           element: '#claim-back',
@@ -224,13 +224,18 @@ export class QuizCardComponent implements OnInit, OnChanges, OnDestroy, AfterVie
           position: 'top',
         },
         {
+          element: '#quiz-progress',
+          intro: 'Am unteren Bildschirmrand zeigt ein Ladebalken wie viele Thesen noch vor Ihnen liegen.',
+          position: 'top',
+        },
+        {
           element: '#forward-auswertung',
-          intro: 'Sie können jederzeit die weiteren Thesen überspringen und mit diesem Knopf direkt in die Auswertung gelangen.',
+          intro: 'Sie können jederzeit alle weiteren Thesen überspringen und mit diesem Knopf direkt zur Auswertung gelangen.',
           position: 'top',
         },
         {
           element: '#introjs-start',
-          intro: 'Diese Einführung in die Benutzung kann jederzeit über diesen Knopf nochmal gestartet werden.',
+          intro: 'Diese Einführung kann jederzeit über den Info-Knopf noch einmal gestartet werden.',
           position: 'top',
         },
       ],
