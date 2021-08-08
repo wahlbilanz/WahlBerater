@@ -9,8 +9,9 @@ import DOMPurify from 'dompurify';
 export class MarkdownPipe implements PipeTransform {
   transform(value: string, inline: boolean = true): string {
     if (value && value.length > 0) {
+      console.log(value);
       if (inline) {
-        return DOMPurify.sanitize(marked.parseInline(value));
+        return marked.parseInline(value);
       } else {
         return DOMPurify.sanitize(marked.parse(value));
       }

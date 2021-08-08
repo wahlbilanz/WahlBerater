@@ -308,8 +308,8 @@ export class QuizCardComponent implements OnInit, OnChanges, OnDestroy, AfterVie
   }
 
   private updateVote(goahead: boolean, forward: boolean, animation: string): void {
-    console.log('dispatching:');
-    console.log({ claimId: this.claimId, decision: this.decision, fav: this.fav });
+    // console.log('dispatching:');
+    // console.log({ claimId: this.claimId, decision: this.decision, fav: this.fav });
     this.store.dispatch(vote({ claimId: this.claimId, decision: this.decision, fav: this.fav }));
     if (goahead) {
       this.animateCardChange(animation);

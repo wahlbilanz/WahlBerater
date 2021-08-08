@@ -20,9 +20,9 @@
     'picture candidates candidates'
     'picture social link'
     'picture bar bar';
-  grid-template-columns: 30% auto auto;
+  grid-template-columns: 20% auto auto;
 
-  min-height: 150px;
+  min-height: 184px;
   padding-right: $wb-space-small;
 
   border-left: $wb-space-xx-small solid transparent;
@@ -32,8 +32,10 @@
 
 .party-picture {
   // height: 100%;
-  max-width: 100%;
-  max-height: 100%;
+  max-width: 160px;
+  //max-height: 100%;
+  width: 100%;
+  margin-top: $wb-space-small;
 
   grid-area: picture;
   justify-self: center;

@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "npm run build-dummy-data && ng serve",
+    "start": "ng serve",
     "build": "find ./src/assets/data -type f -not -name '.gitkeep' -delete && ng build",
     "build:prod": "find ./src/assets/data -type f -not -name '.gitkeep' -delete && ng build --prod",
     "build:staging": "npm run build-dummy-data && ng build --prod",

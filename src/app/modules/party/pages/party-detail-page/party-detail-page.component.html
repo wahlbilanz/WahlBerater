@@ -10,15 +10,14 @@
 
     <div class="party-card">
       <div class="party-info">
-        <h1 class="name">{{ data.party.name }}</h1>
         <img class="picture" src="{{ data.party.picture | pictureUrl }}" alt="Logo der Partei {{ data.party.name }}" />
-        <p class="description">{{ data.party.shortDescription | markdown }}</p>
-        <div class="social">
-          <app-social-links [links]="data.party.links" [name]="data.party.name"></app-social-links>
-        </div>
+        <h1 class="name">{{ data.party.name }}</h1>
+        <!--        <div class="social">-->
+        <!--          <app-social-links [links]="data.party.links" [name]="data.party.name"></app-social-links>-->
+        <!--        </div>-->
       </div>
-
-      <div>{{ data.party.description | markdown }}</div>
+      <h4 class="description" [innerHTML]="data.party.shortDescription | markdown: true"></h4>
+      <div [innerHTML]="data.party.description | markdown: false"></div>
     </div>
 
     <div class="party-decisions" *ngIf="!includeCandidates">

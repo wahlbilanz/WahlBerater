@@ -15,14 +15,14 @@
   }
 
   .party-info {
-    display: grid;
-    gap: $wb-space-x-small;
-    grid-template:
-      'picture name social' (
-        map-get($wb-type-h2, 'line-height') + map-get($wb-type-paragraph, 'line-height') + $wb-space-xx-small
-      ) 'picture desc desc'
-      'picture desc desc' /
-      minmax(150px, min-content) minmax(min-content, 2fr) minmax(min-content, 1fr);
+    //display: grid;
+    //gap: $wb-space-x-small;
+    //grid-template:
+    //  'picture name social' (
+    //    map-get($wb-type-h2, 'line-height') + map-get($wb-type-paragraph, 'line-height') + $wb-space-xx-small
+    //  ) 'picture desc desc'
+    //  'picture desc desc' /
+    //  minmax(150px, min-content) minmax(min-content, 2fr) minmax(min-content, 1fr);
 
     min-height: 150px;
     margin: $wb-space-medium 0;
@@ -31,13 +31,15 @@
 
     .name {
       display: block;
-      grid-area: name;
+      //grid-area: name;
       margin: 0;
       margin-bottom: $wb-space-medium;
+      hyphens: none;
     }
 
     .picture {
-      grid-area: picture;
+      float: left;
+      //grid-area: picture;
       height: 150px;
       max-height: 100%;
 
@@ -45,13 +47,15 @@
       margin-right: $wb-space-medium;
     }
 
-    .description {
-      grid-area: desc;
+    /*.description {
+      //grid-area: desc;
       margin: 0;
-    }
+      margin-top: $wb-space-medium;
+      clear: both;
+    }*/
 
     .social {
-      grid-area: social;
+      //grid-area: social;
       align-self: flex-start;
       padding-bottom: $wb-space-xx-small;
     }

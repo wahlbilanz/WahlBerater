@@ -7,6 +7,7 @@ import { Votes } from '../definitions/models/votes.mode';
 import { AccessibilityModes, QuizFirstPage, QuizState, State } from './app.models';
 import { AppPartialState, STATE_FEATURE_KEY } from './app.reducer';
 import { Party, PartyMap } from '../definitions/models/party.model';
+import { Claim } from '../definitions/models/claim.model';
 
 const getAppState = createFeatureSelector<AppPartialState, State>(STATE_FEATURE_KEY);
 
@@ -119,12 +120,17 @@ export const getClaimProgress = createSelector(getPoliticalData, (data, currentC
       return 0;
     }
 
-    const currentCategoryIdx = categories.indexOf(data.claims[currentClaim.id].category);
-    const currentCategory = categories[currentCategoryIdx];
-    const claims = getSortedClaimIDsByCategory(data, currentCategory);
+    let pre = 0;
+    for (const cid of categories) {
+      if (data.claims[currentClaim.id].category !== cid) {
+        pre += Object.values(data.claims).filter((c: Claim) => c.category === cid).length;
+      } else {
+        pre += getSortedClaimIDsByCategory(data, cid).indexOf(currentClaim.id);
+        break;
+      }
+    }
 
-    const currentIdx = claims.indexOf(currentClaim.id);
-    return currentIdx / claims.length;
+    return pre / Object.keys(data.claims).length;
   }
 
   return 0;
