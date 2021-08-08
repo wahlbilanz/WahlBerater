@@ -4,12 +4,15 @@
   display: block;
 }
 
-h1 {
-  padding: 0 $wb-space-medium;
+h1,
+.party-list,
+p {
+  margin: $wb-space-large $wb-space-medium;
   @media screen and (max-width: $wb-breakpoint-medium) {
-    padding: 0;
+    margin: $wb-space-large 0;
   }
 }
+
 .party-list {
   display: grid;
   gap: $wb-space-medium;

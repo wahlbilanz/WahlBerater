@@ -5,6 +5,8 @@
 
 <h1>Wahllisten</h1>
 
+<p *ngIf="sortedParties">Die Reihenfolge der Listen wurde von der Wahlleitung bestimmt.</p>
+
 <section [ngClass]="{ 'party-list': true, 'unsorted-parties': !sortedParties }" *ngIf="politicalData?.parties">
   <a
     class="party-link"
@@ -18,6 +20,8 @@
       [politicalData]="politicalData"
       [personalData]="personalData"
       [partyData]="politicalData.parties[id]"
+      [scores]="partyScoreResult?.partyScores"
+      [maxParty]="partyScoreResult?.maxParty"
     >
     </app-party-card>
   </a>

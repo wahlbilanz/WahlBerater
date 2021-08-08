@@ -18,7 +18,8 @@
     'picture name name'
     'picture desc desc'
     'picture candidates candidates'
-    'picture social link';
+    'picture social link'
+    'picture bar bar';
   grid-template-columns: 30% auto auto;
 
   min-height: 150px;
@@ -85,4 +86,15 @@
 .party-social,
 .party-link {
   margin-bottom: $wb-space-small;
+}
+
+.barchart {
+  grid-area: bar;
+  width: 100%;
+  display: block;
+  span {
+    width: 100%;
+    display: inline-block;
+    text-align: center;
+  }
 }

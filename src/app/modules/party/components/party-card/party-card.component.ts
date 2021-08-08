@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -8,6 +8,7 @@ import * as AppSelectors from '../../../../+state/app.selectors';
 import { Party } from '../../../../definitions/models/party.model';
 import { PoliticalData } from '../../../../definitions/models/political.data.model';
 import { PersonalCandidateMap } from '../../../../definitions/models/candidate.model';
+import { PartyResult } from '../../../../definitions/models/results.model';
 
 @Component({
   selector: 'app-party-card',
@@ -22,6 +23,15 @@ export class PartyCardComponent implements OnInit, OnDestroy {
   partyCandidates: string[];
   @Input() politicalData: PoliticalData;
   @Input() personalData: PersonalCandidateMap;
+  @Input() set scores(s: PartyResult[]) {
+    this.score = s?.find((p) => p.party === this.partyId);
+  }
+  @Input() set maxParty(mp: number) {
+    this.maxPartyValue = mp;
+  }
+  score: PartyResult;
+  maxPartyValue: number;
+
   private subscriptions: Subscription[] = [];
 
   constructor(private store: Store<AppPartialState>) {}

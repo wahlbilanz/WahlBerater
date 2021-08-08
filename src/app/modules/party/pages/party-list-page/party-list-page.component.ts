@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { AppPartialState } from '../../../../+state/app.reducer';
@@ -6,17 +6,21 @@ import * as AppSelectors from '../../../../+state/app.selectors';
 import { PoliticalData } from '../../../../definitions/models/political.data.model';
 import { PersonalCandidateMap } from '../../../../definitions/models/candidate.model';
 import { Subscription } from 'rxjs';
+import { PartyScoreResult, prepareResults } from '../../../../definitions/models/results.model';
+import { Votes } from '../../../../definitions/models/votes.mode';
 
 @Component({
   selector: 'app-party-list-page',
   templateUrl: './party-list-page.component.html',
   styleUrls: ['./party-list-page.component.scss'],
 })
-export class PartyListPageComponent implements OnInit, OnDestroy {
+export class PartyListPageComponent implements OnInit, OnChanges, OnDestroy {
   public partyIds = this.state.pipe(select(AppSelectors.getPartyIds));
   politicalData: PoliticalData;
   personalData: PersonalCandidateMap;
   private subscriptions: Subscription[] = [];
+  votes: Votes = undefined;
+  partyScoreResult: PartyScoreResult;
 
   sortedParties = false;
 
@@ -45,5 +49,22 @@ export class PartyListPageComponent implements OnInit, OnDestroy {
         }
       }),
     );
+    this.subscriptions.push(
+      this.store.pipe(select(AppSelectors.getVotes)).subscribe((votes) => {
+        this.votes = votes;
+        this.recalc();
+      }),
+    );
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    this.recalc();
+  }
+
+  recalc(): void {
+    if (this.personalData && this.politicalData && this.votes) {
+      this.partyScoreResult = prepareResults(this.politicalData, this.personalData, this.votes);
+      console.log(this.partyScoreResult);
+    }
   }
 }

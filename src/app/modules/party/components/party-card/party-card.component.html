@@ -39,4 +39,22 @@
   <a class="party-link" title="Mehr Informationen und Kandidierende von {{ partyData.name }}" [routerLink]="['/', 'parties', partyId]"
     >Mehr Informationen</a
   >
+  <div class="barchart" *ngIf="maxPartyValue && maxPartyValue > 0 && score?.scores">
+    <ng-container *ngFor="let category of score.scores | keyvalue">
+      <span
+        *ngIf="category.value.score.score > 0"
+        [style.width]="(100 * category.value.score.score) / maxPartyValue + '%'"
+        [style.background-color]="politicalData.categories[category.key].color"
+        class="hit"
+        nz-tooltip
+        nzTooltipTitle="{{ category.value.score.score | number: '1.0-2' }} Punkt{{
+          category.value.score.score == 1 ? '' : 'e'
+        }} in der Kategorie {{ politicalData.categories[category.key].title }}"
+        title="{{ category.value.score.score | number: '1.0-2' }} Punkt{{ category.value.score.score == 1 ? '' : 'e' }} in der Kategorie {{
+          politicalData.categories[category.key].title
+        }}"
+        >{{ category.value.score.score | number: '1.0-2' }}
+      </span>
+    </ng-container>
+  </div>
 </div>
