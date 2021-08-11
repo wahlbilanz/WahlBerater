@@ -10,6 +10,7 @@ import { PartyResult, PartyScoreResult, prepareResults } from '../../../../defin
 import { QuizFirstPage } from '../../../../+state/app.models';
 import { first, take } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
+import { AGREEMENT } from '../../../../definitions/enums/agreement.enum';
 
 @Component({
   selector: 'app-thesis-prov-page',
@@ -28,6 +29,8 @@ export class ClaimProvPageComponent implements OnInit, OnChanges, OnDestroy {
   prev: string;
   next: string;
   private subscriptions: Subscription[] = [];
+
+  agreement = AGREEMENT;
 
   constructor(private route: ActivatedRoute, private store: Store<AppPartialState>) {}
 

@@ -24,7 +24,11 @@
               [nzLg]="claim.description ? 12 : 24"
               [nzXl]="claim.description ? 12 : 24"
             >
-              <app-decision-button [icon]="votes[claim.claimId]" [ownDecision]="true" label="Dein Antwort"></app-decision-button>
+              <app-decision-button
+                [vote]="votes[claim.claimId]"
+                [agreement]="votes[claim.claimId]?.fav ? agreement.USER_FAV : agreement.USER"
+                label="Dein Antwort"
+              ></app-decision-button>
             </div>
           </div>
           <h4 *ngIf="this.accessibilityModes?.accessibilityMode">Positionen der Listen:</h4>
@@ -60,7 +64,10 @@
           </ul>
         </div>
         <ng-template #voteIcon>
-          <app-decision-icon [vote]="votes[claim.claimId]" voteContext="USER"></app-decision-icon>
+          <app-decision-icon
+            [vote]="votes[claim.claimId]"
+            [agreement]="votes[claim.claimId]?.fav ? agreement.USER_FAV : agreement.USER"
+          ></app-decision-icon>
         </ng-template>
       </nz-collapse-panel>
     </ng-container>

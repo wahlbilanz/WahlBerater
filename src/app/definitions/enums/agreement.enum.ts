@@ -1,0 +1,8 @@
+export enum AGREEMENT {
+  NONE,
+  USER,
+  USER_FAV,
+  AGREE,
+  AGREE_AND_FAV,
+  DISAGREE,
+}

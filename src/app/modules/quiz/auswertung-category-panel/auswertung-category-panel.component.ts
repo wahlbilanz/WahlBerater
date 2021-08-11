@@ -11,6 +11,7 @@ import { DecisionTemplatesComponent } from '../../helpers/decision-templates/dec
 import * as AppSelectors from '../../../+state/app.selectors';
 import { AccessibilityModes, AccessibleUrl, AccessibleUrlFragment } from '../../../+state/app.models';
 import { Subscription } from 'rxjs';
+import { AGREEMENT } from '../../../definitions/enums/agreement.enum';
 
 @Component({
   selector: 'app-auswertung-category-panel',
@@ -28,6 +29,9 @@ export class AuswertungCategoryPanelComponent implements OnInit, OnDestroy {
 
   @Input() partyScoreResult: PartyScoreResult;
   @Input() showCandidates = false;
+
+  public agreement = AGREEMENT;
+
   public accessibilityModes?: AccessibilityModes;
   public AccessibleUrlPath = AccessibleUrl;
   public sAccessibleUrlFragment = AccessibleUrlFragment;

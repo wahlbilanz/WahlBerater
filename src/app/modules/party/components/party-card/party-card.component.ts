@@ -22,10 +22,10 @@ export class PartyCardComponent implements OnInit, OnDestroy {
   @Input() partyData: Party;
   @Input() politicalData: PoliticalData;
   @Input() personalData: PersonalCandidateMap;
-  @Input() set scores(s: PartyResult[]) {
+  @Input('scores') set scores(s: PartyResult[]) {
     this.score = s?.find((p) => p.party === this.partyId);
   }
-  @Input() set maxParty(mp: number) {
+  @Input('maxParty') set setMaxParty(mp: number) {
     this.maxPartyValue = mp;
     this.maxValueArray = [...Array(mp).keys()];
   }

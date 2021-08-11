@@ -53,30 +53,31 @@
         <p>
           <!-- User Vote -->
           <ng-container *ngIf="votes[claim.claimId] as userVote">
-            <ng-container *ngIf="userVote.decision > 0">
-              Du hast <em>dafür</em> gestimmt{{ userVote.fav ? ' und diese These als für dich wichtig markiert' : '' }}.
+            <ng-container *ngIf="userVote.decision > voteThreshold">
+              Du hast <em>dafür</em> gestimmt{{ userVote.fav ? ' und diese These als wichtig markiert' : '' }}.
             </ng-container>
-            <ng-container *ngIf="userVote.decision < 0">
-              Du hast <em>dagegen</em> gestimmt{{ userVote.fav ? ' und diese These als für dich wichtig markiert' : '' }}.
+            <ng-container *ngIf="userVote.decision < -voteThreshold">
+              Du hast <em>dagegen</em> gestimmt{{ userVote.fav ? ' und diese These als wichtig markiert' : '' }}.
             </ng-container>
-            <ng-container *ngIf="userVote.decision == 0"> Du hast hast zu dieser These keine Position bezogen. </ng-container>
-            <app-decision-icon [vote]="userVote" voteContext="USER"></app-decision-icon>
+            <ng-container *ngIf="userVote.decision >= -voteThreshold && userVote.decision <= voteThreshold">
+              Du hast hast zu dieser These keine Position bezogen.
+            </ng-container>
+            <app-decision-icon [vote]="userVote" [agreement]="userVote.fav ? agreement.USER_FAV : agreement.USER"></app-decision-icon>
             <br />
           </ng-container>
           <!-- Candidate Vote -->
-          <ng-container *ngIf="claim.position.vote > 0">
+          <ng-container *ngIf="claim.position.vote > voteThreshold">
             {{ data.candidate.name }} stimmt <em>{{ claim.position.vote >= 2 ? 'vehement ' : '' }}dafür</em>.
           </ng-container>
-          <ng-container *ngIf="claim.position.vote < 0">
+          <ng-container *ngIf="claim.position.vote < -voteThreshold">
             {{ data.candidate.name }} stimmt <em>{{ claim.position.vote <= -2 ? 'vehement ' : '' }}dagegen</em>.
           </ng-container>
-          <ng-container *ngIf="claim.position.vote == 0">
+          <ng-container *ngIf="claim.position.vote >= -voteThreshold && claim.position.vote <= voteThreshold">
             {{ data.candidate.name }} hat zu dieser These keine Position bezogen.
           </ng-container>
           <app-decision-icon
             [vote]="claim.position.vote"
-            [disagree]="claim.position.vote !== votes[claim.claimId]?.decision"
-            voteContext="CANDIDATE"
+            [agreement]="calcAgreement(claim.position.vote, votes[claim.claimId])"
           ></app-decision-icon>
         </p>
 
@@ -87,8 +88,7 @@
         <ng-template #voteIcon>
           <app-decision-icon
             [vote]="claim.position.vote"
-            [disagree]="claim.position.vote !== votes[claim.claimId]?.decision"
-            voteContext="CANDIDATE"
+            [agreement]="calcAgreement(claim.position.vote, votes[claim.claimId])"
           ></app-decision-icon>
         </ng-template>
       </nz-collapse-panel>

@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { DecisionTemplatesComponent } from '../../../helpers/decision-templates/decision-templates.component';
-import { Claim, ClaimWithId } from '../../../../definitions/models/claim.model';
+import { ClaimWithId } from '../../../../definitions/models/claim.model';
 import { Vote, Votes } from '../../../../definitions/models/votes.mode';
 import { PoliticalData } from '../../../../definitions/models/political.data.model';
 import { PersonalCandidateMap } from '../../../../definitions/models/candidate.model';
@@ -9,6 +9,8 @@ import { candidateKeyValueSorter } from '../../../../definitions/functions/candi
 import { Position } from '../../../../definitions/models/position.model';
 import { Score } from '../../../../definitions/models/score.model';
 import { PartyDecisionThreshold } from '../../../../+state/app.models';
+import { getAgreement } from '../../../../definitions/functions/agreement.function';
+import { AGREEMENT } from '../../../../definitions/enums/agreement.enum';
 
 @Component({
   selector: 'app-claim-party-buttons',
@@ -16,7 +18,7 @@ import { PartyDecisionThreshold } from '../../../../+state/app.models';
   styleUrls: ['./claim-party-buttons.component.scss'],
 })
 export class ClaimPartyButtonsComponent implements OnInit {
-  @ViewChild('decisionTemplates', { static: true }) decisionTemplates: DecisionTemplatesComponent;
+  // @ViewChild('decisionTemplates', { static: true }) decisionTemplates: DecisionTemplatesComponent;
 
   @Input() claimId: string;
   @Input() claim: ClaimWithId;
@@ -38,7 +40,11 @@ export class ClaimPartyButtonsComponent implements OnInit {
     }
   }
 
-  getPartyAlignment(direction: number, userDecision: Vote): number {
+  agreement(party: number, user: Vote): AGREEMENT {
+    return getAgreement(party, user);
+  }
+
+  /*getPartyAlignment(direction: number, userDecision: Vote): number {
     if (direction > 1 && userDecision && userDecision.decision > 0 && userDecision.fav) {
       return 2;
     } else if (direction > PartyDecisionThreshold) {
@@ -58,9 +64,9 @@ export class ClaimPartyButtonsComponent implements OnInit {
     } else {
       return 0;
     }
-  }
+  }*/
 
-  getPartyTemplate(direction: number, userDecision: Vote): TemplateRef<any> {
+  /*getPartyTemplate(direction: number, userDecision: Vote): TemplateRef<any> {
     if (direction > 1 && userDecision && userDecision.decision > 0 && userDecision.fav) {
       return this.decisionTemplates.yesyesTempleate;
     } else if (direction > 0.5) {
@@ -113,5 +119,5 @@ export class ClaimPartyButtonsComponent implements OnInit {
 
   getStarTemplate(): TemplateRef<any> {
     return this.decisionTemplates.starTempleate;
-  }
+  }*/
 }

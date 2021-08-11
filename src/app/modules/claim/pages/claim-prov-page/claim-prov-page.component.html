@@ -18,7 +18,12 @@
       <p [innerHTML]="'**Hintergrund:** ' + politicalData.claims[claimId].description | markdown"></p>
     </ng-container>
 
-    <app-decision-button *ngIf="votes[claimId]" [icon]="votes[claimId]" [ownDecision]="true" label="Dein Antwort"></app-decision-button>
+    <app-decision-button
+      *ngIf="votes[claimId]"
+      [vote]="votes[claimId]"
+      [agreement]="votes[claimId]?.fav ? agreement.USER_FAV : agreement.USER"
+      label="Dein Antwort"
+    ></app-decision-button>
     <a [routerLink]="'/quiz/' + claimId"><i nz-icon nzType="double-right" nzTheme="outline"></i>&nbsp;Springe zur These im Quiz</a>
 
     <h3>Wie positionieren sich die Kandidierenden?</h3>

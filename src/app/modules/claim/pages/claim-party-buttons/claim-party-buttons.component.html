@@ -3,10 +3,9 @@
     <app-decision-button
       [label]="politicalData.parties[party.party].name"
       [link]="['/', 'parties', party.party]"
-      [icon]="getPartyAlignment(party.scores[politicalData.claims[claimId].category].decisions[claimId], votes[claimId])"
+      [vote]="party.scores[politicalData.claims[claimId].category].decisions[claimId]"
+      [agreement]="agreement(party.scores[politicalData.claims[claimId].category].decisions[claimId], votes[claimId])"
     >
     </app-decision-button>
   </ng-container>
 </ng-container>
-
-<app-decision-templates #decisionTemplates></app-decision-templates>

@@ -1,21 +1,29 @@
 <ng-template #skip>
   <app-decision-icon [vote]="0"></app-decision-icon>
 </ng-template>
-<ng-template #nono>
-  <app-decision-icon [vote]="-2"></app-decision-icon>
-</ng-template>
+
 <ng-template #no>
   <app-decision-icon [vote]="-1"></app-decision-icon>
 </ng-template>
+<ng-template #noAgree>
+  <app-decision-icon [vote]="-1" [agreement]="agreement.AGREE"></app-decision-icon>
+</ng-template>
+<ng-template #noAgreeAndFav>
+  <app-decision-icon [vote]="-1" [agreement]="agreement.AGREE_AND_FAV"></app-decision-icon>
+</ng-template>
+<ng-template #noDisagree>
+  <app-decision-icon [vote]="-1" [agreement]="agreement.DISAGREE"></app-decision-icon>
+</ng-template>
+
 <ng-template #yes>
   <app-decision-icon [vote]="1"></app-decision-icon>
 </ng-template>
-<ng-template #yesyes>
-  <app-decision-icon [vote]="2"></app-decision-icon>
+<ng-template #yesAgree>
+  <app-decision-icon [vote]="1" [agreement]="agreement.AGREE"></app-decision-icon>
 </ng-template>
-<ng-template #noDisagree>
-  <app-decision-icon [vote]="-1" [disagree]="true"></app-decision-icon>
+<ng-template #yesAgreeAndFav>
+  <app-decision-icon [vote]="1" [agreement]="agreement.AGREE_AND_FAV"></app-decision-icon>
 </ng-template>
 <ng-template #yesDisagree>
-  <app-decision-icon [vote]="1" [disagree]="true"></app-decision-icon>
+  <app-decision-icon [vote]="1" [agreement]="agreement.DISAGREE"></app-decision-icon>
 </ng-template>

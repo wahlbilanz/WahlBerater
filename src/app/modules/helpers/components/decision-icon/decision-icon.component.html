@@ -1,34 +1,7 @@
-<ng-container [ngSwitch]="vote">
-  <nz-badge [nzCount]="star" aria-readonly="true" role="img" [title]="titles['-2']" *ngSwitchCase="-2">
-    <i nz-icon nzType="dislike" [nzTheme]="theme" class="vote-icon decision-{{ theme }}"></i>
-  </nz-badge>
+<ng-container [ngSwitch]="icon">
   <i
     nz-icon
-    nzType="dislike"
-    [nzTheme]="theme"
-    class="vote-icon decision-{{ theme }}"
-    aria-readonly="true"
-    role="img"
-    [title]="titles['-1']"
-    *ngSwitchCase="-1"
-  ></i>
-  <i nz-icon nzType="meh" nzTheme="outline" class="vote-icon" aria-readonly="true" role="img" [title]="titles['0']" *ngSwitchCase="0"></i>
-  <i
-    nz-icon
-    nzType="like"
-    [nzTheme]="theme"
-    class="vote-icon decision-{{ theme }}"
-    aria-readonly="true"
-    role="img"
-    [title]="titles['1']"
-    *ngSwitchCase="1"
-  ></i>
-  <nz-badge [nzCount]="star" aria-readonly="true" role="img" [title]="titles['2']" *ngSwitchCase="2">
-    <i nz-icon nzType="like" [nzTheme]="theme" class="vote-icon decision-{{ theme }}"></i>
-  </nz-badge>
-  <i
-    nz-icon
-    nzType="question"
+    nzType="question-circle"
     nzTheme="outline"
     class="vote-icon"
     aria-readonly="true"
@@ -36,8 +9,59 @@
     [title]="titles[null]"
     *ngSwitchDefault
   ></i>
-  <span class="decision-icon-text" *ngIf="(accessibilityModes | async)?.accessibilityMode">{{ titles[vote] }}</span>
+  <i nz-icon nzType="meh" nzTheme="outline" class="vote-icon" aria-readonly="true" role="img" [title]="titles[vote]" *ngSwitchCase="0"></i>
+  <i
+    nz-icon
+    nzType="dislike"
+    [nzTheme]="theme"
+    class="vote-icon decision-{{ theme }}"
+    aria-readonly="true"
+    role="img"
+    [title]="titles[vote]"
+    *ngSwitchCase="-1"
+  ></i>
+  <i
+    nz-icon
+    nzType="like"
+    [nzTheme]="theme"
+    class="vote-icon decision-{{ theme }}"
+    aria-readonly="true"
+    role="img"
+    [title]="titles[vote]"
+    *ngSwitchCase="1"
+  ></i>
+  <nz-badge [nzCount]="star" aria-readonly="true" role="img" [title]="titles[vote]" *ngSwitchCase="-2">
+    <i nz-icon nzType="dislike" [nzTheme]="theme" class="vote-icon decision-{{ theme }}"></i>
+  </nz-badge>
+  <nz-badge [nzCount]="star" aria-readonly="true" role="img" [title]="titles[vote]" *ngSwitchCase="2">
+    <i nz-icon nzType="like" [nzTheme]="theme" class="vote-icon decision-{{ theme }}"></i>
+  </nz-badge>
+  <nz-badge [nzCount]="cross" aria-readonly="true" role="img" [title]="titles[vote]" *ngSwitchCase="-3">
+    <i nz-icon nzType="dislike" nzTheme="outline" class="vote-icon decision-{{ theme }}"></i>
+  </nz-badge>
+  <nz-badge [nzCount]="cross" aria-readonly="true" role="img" [title]="titles[vote]" *ngSwitchCase="3">
+    <i nz-icon nzType="like" nzTheme="outline" class="vote-icon decision-{{ theme }}"></i>
+  </nz-badge>
+  <nz-badge [nzCount]="heart" aria-readonly="true" role="img" [title]="titles[vote]" *ngSwitchCase="-4">
+    <i nz-icon nzType="dislike" [nzTheme]="theme" class="vote-icon decision-{{ theme }}"></i>
+  </nz-badge>
+  <nz-badge [nzCount]="heart" aria-readonly="true" role="img" [title]="titles[vote]" *ngSwitchCase="4">
+    <i nz-icon nzType="like" [nzTheme]="theme" class="vote-icon decision-{{ theme }}"></i>
+  </nz-badge>
+  <span class="decision-icon-text" *ngIf="(accessibilityModes | async)?.accessibilityMode">{{ titles[icon] }}</span>
 </ng-container>
-<ng-template #star>
+<ng-template #heart>
   <i nz-icon nzType="heart" nzTheme="twotone" [nzTwotoneColor]="'#ff2f00'" class="ant-scroll-number-custom-component vote-icon-badge"></i>
+</ng-template>
+<ng-template #star>
+  <i nz-icon nzType="trophy" nzTheme="twotone" [nzTwotoneColor]="'#e66101'" class="ant-scroll-number-custom-component vote-icon-badge"></i>
+</ng-template>
+<ng-template #cross>
+  <i
+    nz-icon
+    nzType="thunderbolt"
+    nzTheme="twotone"
+    [nzTwotoneColor]="'#e66101'"
+    class="ant-scroll-number-custom-component vote-icon-badge"
+  ></i>
 </ng-template>

@@ -1,9 +1,7 @@
-<div class="party-button party-button--{{ decision }} party-button--own-{{ ownDecision }}">
+<div class="party-button party-button--{{ agreement }}">
   <a class="party-button__text" *ngIf="link" [routerLink]="link">{{ label }}</a>
   <span class="party-button__text" *ngIf="!link">{{ label }}</span>
   <span class="party-button__icon">
-    <ng-container *ngTemplateOutlet="icon"></ng-container>
+    <app-decision-icon [agreement]="agreement" [vote]="vote"></app-decision-icon>
   </span>
 </div>
-
-<app-decision-templates #decisionTemplates></app-decision-templates>

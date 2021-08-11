@@ -4,13 +4,18 @@ import { Vote } from '../../../../definitions/models/votes.mode';
 import { select, Store } from '@ngrx/store';
 import * as AppSelectors from '../../../../+state/app.selectors';
 import { AppPartialState } from '../../../../+state/app.reducer';
+import { AGREEMENT } from '../../../../definitions/enums/agreement.enum';
 
 const NO_CONTEXT_TITLES = {
-  '-2': 'Starke Ablehnung',
+  '-4': 'Starke Ablehnung',
+  '-3': 'Ablehnung gegen Ihre Position',
+  '-2': 'Ablehnung mit Extrapunkt',
   '-1': 'Ablehnung',
   0: 'Enthaltung',
   1: 'Zustimmung',
-  2: 'Starke Zustimmung',
+  2: 'Zustimmung mit Extrapunkt',
+  3: 'Zustimmung gegen Ihre Position',
+  4: 'Starke Zustimmung',
   null: 'Unbekannte Haltung',
 };
 
@@ -48,17 +53,20 @@ export class DecisionIconComponent {
     } else {
       this.vote = value.fav ? value.decision * 2 : value.decision;
     }
+    this.chooseIcon();
   }
 
-  @Input('voteContext')
+  /*@Input('voteContext')
   set voteContextInput(value: VoteContext | null) {
     this.voteContext = VoteContext.NO_CONTEXT;
     this.titles = NO_CONTEXT_TITLES;
-  }
+  }*/
 
-  @Input('disagree')
-  set disagreeInput(value: boolean | null) {
-    this.theme = value ? 'outline' : 'twotone';
+  @Input('agreement')
+  set setAgreement(value: AGREEMENT) {
+    this.theme = value === AGREEMENT.NONE ? 'outline' : 'twotone';
+    this.agreementValue = value;
+    this.chooseIcon();
   }
 
   public accessibilityModes = this.store.pipe(select(AppSelectors.getAllAccessibilityModes));
@@ -67,6 +75,44 @@ export class DecisionIconComponent {
   public voteContext: VoteContext = VoteContext.NO_CONTEXT;
   public titles = NO_CONTEXT_TITLES;
   public theme = 'twotone';
+  public agreementValue: AGREEMENT = AGREEMENT.NONE;
+
+  public icon = 0;
 
   constructor(private store: Store<AppPartialState>) {}
+
+  chooseIcon() {
+    this.icon = 0;
+    switch (this.agreementValue) {
+      case AGREEMENT.AGREE:
+      case AGREEMENT.USER:
+        if (this.vote > 0) {
+          this.icon = 1;
+        } else if (this.vote < 0) {
+          this.icon = -1;
+        }
+        break;
+      case AGREEMENT.USER_FAV:
+        if (this.vote > 0) {
+          this.icon = 4;
+        } else if (this.vote < 0) {
+          this.icon = -4;
+        }
+        break;
+      case AGREEMENT.AGREE_AND_FAV:
+        if (this.vote > 0) {
+          this.icon = 2;
+        } else if (this.vote < 0) {
+          this.icon = -2;
+        }
+        break;
+      case AGREEMENT.DISAGREE:
+        if (this.vote > 0) {
+          this.icon = 3;
+        } else if (this.vote < 0) {
+          this.icon = -3;
+        }
+        break;
+    }
+  }
 }

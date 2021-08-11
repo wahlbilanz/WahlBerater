@@ -5,7 +5,10 @@ import { asyncScheduler, combineLatest, scheduled, Subscription } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { AppPartialState } from 'src/app/+state/app.reducer';
 import * as AppSelectors from '../../../../+state/app.selectors';
-import { Votes } from '../../../../definitions/models/votes.mode';
+import { Vote, Votes } from '../../../../definitions/models/votes.mode';
+import { getAgreement } from '../../../../definitions/functions/agreement.function';
+import { AGREEMENT } from '../../../../definitions/enums/agreement.enum';
+import { PartyDecisionThreshold } from '../../../../+state/app.models';
 
 @Component({
   selector: 'app-candidate-detail-page',
@@ -34,6 +37,9 @@ export class CandidateDetailPageComponent implements OnInit, OnDestroy {
 
   public votes: Votes;
   private subscriptions: Subscription[] = [];
+  public agreement = AGREEMENT;
+
+  voteThreshold = PartyDecisionThreshold;
 
   constructor(private state: Store<AppPartialState>, private route: ActivatedRoute, private store: Store<AppPartialState>) {}
 
@@ -49,6 +55,10 @@ export class CandidateDetailPageComponent implements OnInit, OnDestroy {
     for (const s of this.subscriptions) {
       s.unsubscribe();
     }
+  }
+
+  calcAgreement(party: number, user: Vote) {
+    return getAgreement(party, user);
   }
 
   /*public getUserVote(claimId: string) {

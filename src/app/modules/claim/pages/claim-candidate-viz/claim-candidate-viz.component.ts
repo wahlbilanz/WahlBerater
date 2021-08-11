@@ -15,6 +15,8 @@ import { Score } from '../../../../definitions/models/score.model';
 import { getCandidatePersonalInfo } from '../../../../definitions/functions/getCandidatePersonalInfo';
 import { candidateKeyValueSorter } from 'src/app/definitions/functions/candidate-sort.function';
 import { PartyDecisionThreshold } from '../../../../+state/app.models';
+import { getAgreement } from '../../../../definitions/functions/agreement.function';
+import { AGREEMENT } from '../../../../definitions/enums/agreement.enum';
 
 @Component({
   selector: 'app-claim-candidate-viz',
@@ -33,6 +35,9 @@ export class ClaimCandidateVizComponent implements OnInit {
 
   @Input() partyScoreResult: PartyScoreResult;
   @Input() showCandidates = false;
+
+  public agreement = AGREEMENT;
+  voteThreshold = PartyDecisionThreshold;
 
   candidateSorter = candidateKeyValueSorter;
   PartyDecisionThreshold = PartyDecisionThreshold;
@@ -53,6 +58,10 @@ export class ClaimCandidateVizComponent implements OnInit {
     }
   }
 
+  calcAgreement(party: number, user: Vote): AGREEMENT {
+    return getAgreement(party, user);
+  }
+  /*
   getPartyTemplate(direction: number, userDecision: Vote): TemplateRef<any> {
     if (direction > 1 && userDecision && userDecision.decision > 0 && userDecision.fav) {
       return this.decisionTemplates.yesyesTempleate;
@@ -106,7 +115,7 @@ export class ClaimCandidateVizComponent implements OnInit {
 
   getStarTemplate(): TemplateRef<any> {
     return this.decisionTemplates.starTempleate;
-  }
+  }*/
 
   activate(i: number): void {
     this.activePanels[i] = true;
