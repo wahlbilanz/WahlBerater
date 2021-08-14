@@ -13,8 +13,14 @@
   }
 
   &.party-button--1,
+  &.party-button--2,
   &.party-button--3,
   &.party-button--4 {
+    background: rgba($wb-logo-wal-color, 0.02);
     border: 2px solid $wb-logo-wal-color;
+  }
+  &.party-button--5 {
+    background: rgba($favcolor, 0.02);
+    border: 2px solid $favcolor;
   }
 }

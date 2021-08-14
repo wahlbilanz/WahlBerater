@@ -5,16 +5,17 @@ import { select, Store } from '@ngrx/store';
 import * as AppSelectors from '../../../../+state/app.selectors';
 import { AppPartialState } from '../../../../+state/app.reducer';
 import { AGREEMENT } from '../../../../definitions/enums/agreement.enum';
+import { PartyDecisionThreshold } from '../../../../+state/app.models';
 
 const NO_CONTEXT_TITLES = {
   '-4': 'Starke Ablehnung',
-  '-3': 'Ablehnung gegen Ihre Position',
+  '-3': 'Ablehnung (gegen deine Position)',
   '-2': 'Ablehnung mit Extrapunkt',
   '-1': 'Ablehnung',
   0: 'Enthaltung',
   1: 'Zustimmung',
   2: 'Zustimmung mit Extrapunkt',
-  3: 'Zustimmung gegen Ihre Position',
+  3: 'Zustimmung (gegen deine Position)',
   4: 'Starke Zustimmung',
   null: 'Unbekannte Haltung',
 };
@@ -83,33 +84,38 @@ export class DecisionIconComponent {
 
   chooseIcon() {
     this.icon = 0;
+    if (this.vote > PartyDecisionThreshold) {
+      this.icon = 1;
+    } else if (this.vote < -PartyDecisionThreshold) {
+      this.icon = -1;
+    }
     switch (this.agreementValue) {
       case AGREEMENT.AGREE:
       case AGREEMENT.USER:
-        if (this.vote > 0) {
+        if (this.vote > PartyDecisionThreshold) {
           this.icon = 1;
-        } else if (this.vote < 0) {
+        } else if (this.vote < -PartyDecisionThreshold) {
           this.icon = -1;
         }
         break;
       case AGREEMENT.USER_FAV:
-        if (this.vote > 0) {
+        if (this.vote > PartyDecisionThreshold) {
           this.icon = 4;
-        } else if (this.vote < 0) {
+        } else if (this.vote < -PartyDecisionThreshold) {
           this.icon = -4;
         }
         break;
       case AGREEMENT.AGREE_AND_FAV:
-        if (this.vote > 0) {
+        if (this.vote > PartyDecisionThreshold) {
           this.icon = 2;
-        } else if (this.vote < 0) {
+        } else if (this.vote < -PartyDecisionThreshold) {
           this.icon = -2;
         }
         break;
       case AGREEMENT.DISAGREE:
-        if (this.vote > 0) {
+        if (this.vote > PartyDecisionThreshold) {
           this.icon = 3;
-        } else if (this.vote < 0) {
+        } else if (this.vote < -PartyDecisionThreshold) {
           this.icon = -3;
         }
         break;
