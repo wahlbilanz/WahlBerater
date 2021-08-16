@@ -155,6 +155,8 @@ export class QuizCardComponent implements OnInit, OnChanges, OnDestroy, AfterVie
         // we cannot do this in constructor, as the routes won't be ready
         if (am.accessibilityMode) {
           this.router.navigate(['quiz', AccessibleUrl], { fragment: AccessibleUrlFragment + this.claimId });
+        } else if (this.claimId === QuizFirstPage) {
+          this.router.navigate([this.next]);
         }
       }),
     );
