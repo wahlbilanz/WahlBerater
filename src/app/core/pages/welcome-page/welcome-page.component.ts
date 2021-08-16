@@ -6,6 +6,7 @@ import { QuizState, ResultUrl, QuizFirstPage, AccessibleUrl, AccessibilityModes,
 import { AppPartialState } from '../../../+state/app.reducer';
 import * as AppSelectors from '../../../+state/app.selectors';
 import { Subscription } from 'rxjs';
+import { saveVotes, vote } from '../../../+state/app.actions';
 
 @Component({
   selector: 'app-welcome-page',
@@ -50,6 +51,7 @@ export class WelcomePageComponent implements OnDestroy {
 
   public updateLocalStorageOptIn(allow: boolean) {
     this.store.dispatch(AppActions.changeDataStorePreference({ allow }));
+    this.store.dispatch(vote({ claimId: 'savetest', decision: 1, fav: true }));
   }
 
   public updateAccessibilityMode(active: boolean) {

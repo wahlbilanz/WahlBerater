@@ -24,7 +24,10 @@
       [agreement]="votes[claimId]?.fav ? agreement.USER_FAV : agreement.USER"
       label="Dein Antwort"
     ></app-decision-button>
-    <a [routerLink]="'/quiz/' + claimId"><i nz-icon nzType="double-right" nzTheme="outline"></i>&nbsp;Springe zur These im Quiz</a>
+
+    <p>
+      <a [routerLink]="'/quiz/' + claimId"><i nz-icon nzType="double-right" nzTheme="outline"></i>&nbsp;Springe zur These im Quiz</a>
+    </p>
 
     <h3>Wie positionieren sich die {{ includeCandidates ? 'Kandidierenden' : 'Listen' }}?</h3>
     <app-claim-candidate-viz
