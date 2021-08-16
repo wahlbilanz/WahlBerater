@@ -21,13 +21,21 @@ export class AuswertungBarchartTableComponent implements OnInit {
   @Input() categories: CategoryMap;
   @Input() claims: ClaimMap;
 
-  @Input() partyScoreResult: PartyScoreResult;
+  @Input('scoreResult') set score(psr: PartyScoreResult) {
+    this.partyScoreResult = psr;
+    this.recalcAxes();
+  }
+
+  partyScoreResult: PartyScoreResult;
   @Input() showCandidates = false;
 
   candidateSorter = candidateKeyValueSorter;
   displayCandidates: number[];
   nCandidates: number[];
   maxValueArray: number[];
+
+  axeTiksWidth: number;
+  tiksPadding: number;
 
   constructor(private store: Store<AppPartialState>) {}
 
@@ -40,9 +48,22 @@ export class AuswertungBarchartTableComponent implements OnInit {
   }*/
 
   ngOnInit(): void {
-    this.maxValueArray = [...Array(Math.ceil(Math.max(this.partyScoreResult.maxValue, this.partyScoreResult.maxParty))).keys()];
+    this.recalcAxes();
+    // this.maxValueArray = [...Array(Math.ceil(Math.max(this.partyScoreResult.maxValue, this.partyScoreResult.maxParty))).keys()];
     this.displayCandidates = this.partyScoreResult.partyScores.map((_) => 7);
     this.nCandidates = this.partyScoreResult.partyScores.map((s) => Object.keys(s.candidates).length);
+  }
+
+  recalcAxes() {
+    this.maxValueArray = [];
+    const maxValue = Math.max(this.partyScoreResult.maxValue, this.partyScoreResult.maxParty);
+    const max = Math.floor(Math.ceil(maxValue) / 10) * 10;
+    for (let i = 0; i < max; i += max / 10) {
+      this.maxValueArray.push(i + max / 10);
+    }
+    this.axeTiksWidth = (100 * (max / maxValue)) / 10; // 100 * ((max - (mp % 10)) / 10) / mp;
+    this.tiksPadding = (100 * (maxValue - max)) / maxValue;
+    console.log(max, this.maxValueArray, this.axeTiksWidth, this.tiksPadding);
   }
 
   showAll(i: number): void {

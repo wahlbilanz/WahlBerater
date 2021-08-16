@@ -40,11 +40,7 @@ function calcUsingCandidates(politicalData: PoliticalData, personalData: Persona
 
     for (const claim of Object.keys(politicalData.claims)) {
       const category = politicalData.claims[claim].category;
-      const s = claimScore(
-        politicalData.candidates[candidate]?.positions[claim]?.vote || 0,
-        votes[claim]?.decision || 0,
-        votes[claim]?.fav || false,
-      );
+      const s = claimScore(politicalData.candidates[candidate]?.positions[claim]?.vote, votes[claim]?.decision, votes[claim]?.fav);
 
       if (!candidateResult.scores[category]) {
         candidateResult.scores[category] = { category, score: new Score(), claims: {}, decisions: {} };

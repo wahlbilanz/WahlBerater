@@ -71,12 +71,12 @@
             <span
               nz-tooltip
               nzTooltipTitle="Achse zeigt die Punkte der Listen/Kandidierenden."
-              title="Achse zeigt die Punkte der Listen/Kandidierenden."
-              [style.width]="100 / partyScoreResult.maxValue + '%'"
+              [style.width]="axeTiksWidth + '%'"
               *ngFor="let value of maxValueArray"
             >
-              <span class="axis-label">{{ value + 1 }}</span>
+              <span class="axis-label">{{ value }}</span>
             </span>
+            <span [style.width]="tiksPadding + '%'"> </span>
           </td>
         </tr>
       </ng-container>
