@@ -1,10 +1,10 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { map, switchMap, takeUntil, tap } from 'rxjs/operators';
 import { AppPartialState } from '../../../../+state/app.reducer';
 import * as AppSelectors from '../../../../+state/app.selectors';
-import { IncludeCandidates, PartyDecisionThreshold } from '../../../../+state/app.models';
+import { IncludeCandidates, PartyDecisionThreshold, RenderingDelay } from '../../../../+state/app.models';
 import { asyncScheduler, combineLatest, Observable, scheduled, Subject } from 'rxjs';
 import { Vote, Votes } from '../../../../definitions/models/votes.mode';
 import { AGREEMENT } from '../../../../definitions/enums/agreement.enum';
@@ -61,8 +61,9 @@ export class PartyDetailPageComponent implements OnInit, OnDestroy {
   includeCandidates = IncludeCandidates;
 
   activePanels: boolean[];
+  renderRows = 7;
 
-  constructor(private state: Store<AppPartialState>, private route: ActivatedRoute) {}
+  constructor(private state: Store<AppPartialState>, private route: ActivatedRoute, private ref: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     this.state.pipe(select(AppSelectors.getPersonalData), takeUntil(this.destroy$)).subscribe((d) => {
@@ -88,6 +89,10 @@ export class PartyDetailPageComponent implements OnInit, OnDestroy {
       this.partyScoreResult = partyScoreResult;
       this.getPartyResult();
     });
+    setTimeout(() => {
+      this.renderRows = 1000;
+      this.ref.markForCheck();
+    }, RenderingDelay);
   }
 
   getPartyResult() {

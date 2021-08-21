@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { AppPartialState } from '../../../../+state/app.reducer';
 import * as AppSelectors from '../../../../+state/app.selectors';
@@ -8,6 +8,7 @@ import { Subject } from 'rxjs';
 import { PartyScoreResult } from '../../../../definitions/models/results.model';
 import { Votes } from '../../../../definitions/models/votes.mode';
 import { takeUntil } from 'rxjs/operators';
+import { RenderingDelay } from '../../../../+state/app.models';
 
 @Component({
   selector: 'app-party-list-page',
@@ -23,8 +24,9 @@ export class PartyListPageComponent implements OnInit, OnDestroy {
   partyScoreResult: PartyScoreResult;
 
   sortedParties = false;
+  renderRows = 3;
 
-  constructor(private state: Store<AppPartialState>, private store: Store<AppPartialState>) {}
+  constructor(private state: Store<AppPartialState>, private store: Store<AppPartialState>, private ref: ChangeDetectorRef) {}
 
   ngOnDestroy() {
     this.destroy$.next();
@@ -46,5 +48,9 @@ export class PartyListPageComponent implements OnInit, OnDestroy {
       this.votes = votes;
     });
     this.store.pipe(select(AppSelectors.getPartyScoreResult), takeUntil(this.destroy$)).subscribe((r) => (this.partyScoreResult = r));
+    setTimeout(() => {
+      this.renderRows = 1000;
+      this.ref.markForCheck();
+    }, 2 * RenderingDelay);
   }
 }

@@ -1,5 +1,5 @@
 import { KeyValue } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { candidateKeyValueSorter } from 'src/app/definitions/functions/candidate-sort.function';
 import { AppPartialState } from '../../../+state/app.reducer';
@@ -8,6 +8,7 @@ import { CategoryMap } from '../../../definitions/models/category.model';
 import { ClaimMap } from '../../../definitions/models/claim.model';
 import { PoliticalData } from '../../../definitions/models/political.data.model';
 import { CandidateResult, PartyScoreResult } from '../../../definitions/models/results.model';
+import { RenderingDelay } from '../../../+state/app.models';
 
 @Component({
   selector: 'app-auswertung-barchart-table',
@@ -27,7 +28,16 @@ export class AuswertungBarchartTableComponent implements OnInit {
   }
 
   partyScoreResult: PartyScoreResult;
-  @Input() showCandidates = false;
+  @Input() set showCandidates(b: boolean) {
+    this.showCandidateBars = b;
+    if (b) {
+      this.showCandidatesNum = 0;
+      this.showMoreCandidates();
+    }
+  }
+  showCandidateBars = false;
+  showCandidatesNum = 0;
+  showCandidatesNumInterval;
 
   candidateSorter = candidateKeyValueSorter;
   displayCandidates: number[];
@@ -37,15 +47,7 @@ export class AuswertungBarchartTableComponent implements OnInit {
   axeTiksWidth: number;
   tiksPadding: number;
 
-  constructor(private store: Store<AppPartialState>) {}
-
-  /**
-   * this is just a hack to get an array with increasing numbers [0..maxValue) in frontend...
-   */
-  /*maxValueArray(): number[] {
-    const a = [...Array(this.partyScoreResult.maxValue).keys()];
-    return a;
-  }*/
+  constructor(private store: Store<AppPartialState>, private ref: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     this.recalcAxes();
@@ -68,5 +70,14 @@ export class AuswertungBarchartTableComponent implements OnInit {
 
   showAll(i: number): void {
     this.displayCandidates[i] = this.nCandidates[i] + 1;
+  }
+
+  private showMoreCandidates() {
+    this.showCandidatesNumInterval = setInterval(() => {
+      if (this.showCandidatesNum++ > this.partyScoreResult?.partyScores?.length) {
+        clearInterval(this.showCandidatesNumInterval);
+      }
+      this.ref.markForCheck();
+    }, RenderingDelay);
   }
 }

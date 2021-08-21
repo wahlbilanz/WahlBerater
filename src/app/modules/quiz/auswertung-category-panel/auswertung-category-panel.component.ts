@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnChanges, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { AppPartialState } from '../../../+state/app.reducer';
 import { PersonalCandidateMap } from '../../../definitions/models/candidate.model';
@@ -9,7 +9,7 @@ import { PartyScoreResult } from '../../../definitions/models/results.model';
 import { Vote, Votes } from '../../../definitions/models/votes.mode';
 import { DecisionTemplatesComponent } from '../../helpers/decision-templates/decision-templates.component';
 import * as AppSelectors from '../../../+state/app.selectors';
-import { AccessibilityModes, AccessibleUrl, AccessibleUrlFragment, IncludeCandidates } from '../../../+state/app.models';
+import { AccessibilityModes, AccessibleUrl, AccessibleUrlFragment, IncludeCandidates, RenderingDelay } from '../../../+state/app.models';
 import { Subject } from 'rxjs';
 import { AGREEMENT } from '../../../definitions/enums/agreement.enum';
 import { takeUntil } from 'rxjs/operators';
@@ -41,8 +41,9 @@ export class AuswertungCategoryPanelComponent implements OnInit, OnDestroy {
   private destroy$: Subject<void> = new Subject<void>();
 
   activePanels: boolean[];
+  renderRows = 2;
 
-  constructor(private store: Store<AppPartialState>) {
+  constructor(private store: Store<AppPartialState>, private ref: ChangeDetectorRef) {
     this.store
       .pipe(select(AppSelectors.getAllAccessibilityModes), takeUntil(this.destroy$))
       .subscribe((am) => (this.accessibilityModes = am));
@@ -65,6 +66,10 @@ export class AuswertungCategoryPanelComponent implements OnInit, OnDestroy {
       }
     }
     // this.activePanels = this.claims
+    setTimeout(() => {
+      this.renderRows = 1000;
+      this.ref.markForCheck();
+    }, RenderingDelay);
   }
 
   activate(i: number): void {

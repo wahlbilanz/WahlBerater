@@ -23,6 +23,8 @@ export const PartyDecisionThreshold = 0.5;
 
 export const IncludeCandidates = true;
 
+export const RenderingDelay = 70;
+
 export interface AccessibilityModes {
   accessibilityMode: boolean;
   reducedMotionMode: boolean;

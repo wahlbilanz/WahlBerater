@@ -67,8 +67,8 @@
     <h2>Detailierte Auswertung der Thesen</h2>
 
     <ng-container *ngIf="sortedCategroies | async as d">
-      <ng-container *ngFor="let category of d">
-        <div class="category" [style.border-color]="category.category.color">
+      <ng-container *ngFor="let category of d; let i = index">
+        <div class="category" [style.border-color]="category.category.color" *ngIf="i < renderRows">
           <app-auswertung-category-panel
             [votes]="votes"
             [politicalData]="politicalData"

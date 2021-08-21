@@ -13,7 +13,7 @@
             <span
               *ngIf="category.value.score.score > 0"
               [style.width]="
-                (100 * category.value.score.score) / (showCandidates ? partyScoreResult.maxValue : partyScoreResult.maxParty) + '%'
+                (100 * category.value.score.score) / (showCandidateBars ? partyScoreResult.maxValue : partyScoreResult.maxParty) + '%'
               "
               [style.background-color]="politicalData.categories[category.key].color"
               class="hit"
@@ -31,8 +31,10 @@
       </tr>
 
       <!-- candidates -->
-      <ng-container *ngIf="showCandidates && party.candidates">
-        <ng-container *ngFor="let candidate of party.candidates | keyvalue: candidateSorter | slice: 0:displayCandidates[partyIndex] + 1">
+      <ng-container *ngIf="showCandidateBars && party.candidates && partyIndex < showCandidatesNum">
+        <ng-container
+          *ngFor="let candidate of party.candidates | keyvalue: candidateSorter | slice: 0:displayCandidates[partyIndex] + 1; let i = index"
+        >
           <tr class="candidate-spacer" style="border-color:{{ politicalData.parties[party.party].color }}"></tr>
           <tr class="candidate-row" style="border-color:{{ politicalData.parties[party.party].color }}">
             <th>
@@ -88,6 +90,6 @@
 
   <p class="small">
     Die Reihenfolge der Listen entspricht der Übereinstimmung mit deinen Antworten.
-    <ng-container *ngIf="showCandidates"> Die Reihenfolge der Kandidierenden wurde von den Listen festgelegt. </ng-container>
+    <ng-container *ngIf="showCandidateBars"> Die Reihenfolge der Kandidierenden wurde von den Listen festgelegt. </ng-container>
   </p>
 </div>

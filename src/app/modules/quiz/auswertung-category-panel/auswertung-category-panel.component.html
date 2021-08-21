@@ -4,7 +4,7 @@
   <nz-collapse *ngIf="claims">
     <ng-container *ngFor="let claim of claims; let i = index">
       <nz-collapse-panel
-        *ngIf="claim.category === categoryId"
+        *ngIf="claim.category === categoryId && i < renderRows"
         class="claim"
         [nzHeader]="claim.title"
         [nzExtra]="voteIcon"

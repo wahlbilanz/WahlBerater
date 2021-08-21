@@ -1,14 +1,14 @@
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewChecked, ChangeDetectionStrategy, ChangeDetectorRef, Component, NgZone, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { asyncScheduler, combineLatest, scheduled, Subject } from 'rxjs';
-import { map, switchMap, takeUntil } from 'rxjs/operators';
+import { map, switchMap, takeUntil, tap } from 'rxjs/operators';
 import { AppPartialState } from 'src/app/+state/app.reducer';
 import * as AppSelectors from '../../../../+state/app.selectors';
 import { Vote, Votes } from '../../../../definitions/models/votes.mode';
 import { getAgreement } from '../../../../definitions/functions/agreement.function';
 import { AGREEMENT } from '../../../../definitions/enums/agreement.enum';
-import { IncludeCandidates, PartyDecisionThreshold } from '../../../../+state/app.models';
+import { IncludeCandidates, PartyDecisionThreshold, RenderingDelay } from '../../../../+state/app.models';
 
 @Component({
   selector: 'app-candidate-detail-page',
@@ -33,22 +33,43 @@ export class CandidateDetailPageComponent implements OnInit, OnDestroy {
       ]),
     ),
     map(([candidate, party, claimPositions, { partyId, candidateId }]) => ({ candidateId, candidate, claimPositions, partyId, party })),
+    tap((d) => {
+      this.activePanels = [];
+      if (d?.claimPositions) {
+        for (const cp of d.claimPositions) {
+          for (const c of cp.claims) {
+            this.activePanels.push(false);
+          }
+        }
+      }
+    }),
   );
 
   public votes: Votes;
   private destroy$: Subject<void> = new Subject<void>();
   public agreement = AGREEMENT;
+  activePanels: boolean[];
+  renderRows = 7;
 
   voteThreshold = PartyDecisionThreshold;
 
   includeCandidates = IncludeCandidates;
 
-  constructor(private state: Store<AppPartialState>, private route: ActivatedRoute, private store: Store<AppPartialState>) {}
+  constructor(
+    private state: Store<AppPartialState>,
+    private route: ActivatedRoute,
+    private store: Store<AppPartialState>,
+    private ref: ChangeDetectorRef,
+  ) {}
 
   ngOnInit(): void {
     this.store.pipe(select(AppSelectors.getVotes), takeUntil(this.destroy$)).subscribe((d: Votes) => {
       this.votes = d;
     });
+    setTimeout(() => {
+      this.renderRows = 1000;
+      this.ref.markForCheck();
+    }, RenderingDelay);
   }
 
   ngOnDestroy(): void {
@@ -58,5 +79,9 @@ export class CandidateDetailPageComponent implements OnInit, OnDestroy {
 
   calcAgreement(party: number, user: Vote) {
     return getAgreement(party, user);
+  }
+
+  activate(i: number): void {
+    this.activePanels[i] = true;
   }
 }

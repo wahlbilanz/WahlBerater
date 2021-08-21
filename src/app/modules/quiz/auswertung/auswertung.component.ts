@@ -1,8 +1,8 @@
-import { Component, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
+import { ChangeDetectorRef, Component, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import * as AppActions from '../../../+state/app.actions';
 import { vote } from '../../../+state/app.actions';
-import { IncludeCandidates, ResultUrl } from '../../../+state/app.models';
+import { IncludeCandidates, RenderingDelay, ResultUrl } from '../../../+state/app.models';
 import { AppPartialState } from '../../../+state/app.reducer';
 import * as AppSelectors from '../../../+state/app.selectors';
 import { PersonalCandidateMap } from '../../../definitions/models/candidate.model';
@@ -24,6 +24,7 @@ export class AuswertungComponent implements OnInit, OnDestroy {
   votes: Votes = undefined;
   personalData: PersonalCandidateMap = undefined;
   politicalData: PoliticalData = undefined;
+  renderRows = 7;
 
   partyScoreResult: PartyScoreResult;
   maxValue = 0;
@@ -34,7 +35,7 @@ export class AuswertungComponent implements OnInit, OnDestroy {
   public accessibilityModes = this.store.pipe(select(AppSelectors.getAllAccessibilityModes));
   private destroy$: Subject<void> = new Subject<void>();
 
-  constructor(private store: Store<AppPartialState>) {
+  constructor(private store: Store<AppPartialState>, private ref: ChangeDetectorRef) {
     this.store.dispatch(AppActions.updateLastQuizPage({ lastPage: ResultUrl }));
   }
 
@@ -54,6 +55,10 @@ export class AuswertungComponent implements OnInit, OnDestroy {
       this.votes = votes;
     });
     this.store.pipe(select(AppSelectors.getPartyScoreResult), takeUntil(this.destroy$)).subscribe((r) => (this.partyScoreResult = r));
+    setTimeout(() => {
+      this.renderRows = 1000;
+      this.ref.markForCheck();
+    }, RenderingDelay);
   }
 
   sampleVotes(): void {
