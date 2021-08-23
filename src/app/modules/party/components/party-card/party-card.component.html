@@ -1,7 +1,7 @@
 <div class="party-card shadow-hover" [style.border-left-color]="partyData.color" *ngIf="politicalData && personalData">
   <img
     class="party-picture"
-    src="{{ partyData.picture | pictureUrl }}"
+    src="{{ partyData.picture | pictureUrl: true }}"
     [routerLink]="['/', 'parties', partyId]"
     alt="Logo der Partei {{ partyData.name }}"
   />

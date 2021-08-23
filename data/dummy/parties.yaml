@@ -2,6 +2,7 @@
 parties:
   - id: party-turquoise
     name: Türkise Partei
+    kuerzel: TüPa
     color: 'rgb(0, 234, 222)'
     picture: pics/cd11.png
     links:
@@ -30,6 +31,7 @@ parties:
 
   - id: party-orange
     name: Orange Partei
+    kuerzel: Orangen
     color: 'rgb(234, 140, 0)'
     picture: pics/cd12.png
     links:

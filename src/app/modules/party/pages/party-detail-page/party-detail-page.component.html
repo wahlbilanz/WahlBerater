@@ -10,7 +10,7 @@
 
     <div class="party-card">
       <div class="party-info">
-        <img class="picture" src="{{ data.party.picture | pictureUrl }}" alt="Logo der Partei {{ data.party.name }}" />
+        <img class="picture" src="{{ data.party.picture | pictureUrl: true }}" alt="Logo der Partei {{ data.party.name }}" />
         <h1 class="name">{{ data.party.name }}</h1>
         <!--        <div class="social">-->
         <!--          <app-social-links [links]="data.party.links" [name]="data.party.name"></app-social-links>-->
