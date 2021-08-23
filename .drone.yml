@@ -16,6 +16,7 @@ steps:
     pull: false
     pull_image: false
     #cache_from: node:14
+    tags: ${DRONE_COMMIT_BRANCH}
     username:
       from_secret: docker_username
     password:
