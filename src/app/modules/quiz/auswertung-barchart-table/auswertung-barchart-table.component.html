@@ -21,12 +21,24 @@
               nzTooltipTitle="{{ category.value.score.score | number: '1.0-2' }} Punkt{{
                 category.value.score.score == 1 ? '' : 'e'
               }} in der Kategorie {{ politicalData.categories[category.key].title }}"
-              title="{{ category.value.score.score | number: '1.0-2' }} Punkt{{
-                category.value.score.score == 1 ? '' : 'e'
-              }} in der Kategorie {{ politicalData.categories[category.key].title }}"
-              >{{ category.value.score.score | number: '1.0-2' }}
+              >&nbsp;
+              <!--              {{ category.value.score.score | number: '1.0-2' }}-->
             </span>
           </ng-container>
+          <span
+            class="hit"
+            [style.width]="'50px'"
+            *ngIf="party.score.score === 0 || party.score.score < this.partyScoreResult.maxValue / 10"
+            >&nbsp;</span
+          >
+          <span
+            class="hitscore"
+            nz-tooltip
+            nzTooltipTitle="{{ politicalData.parties[party.party].id }} bekommt {{ party.score.score | number: '1.0-2' }} Punkt{{
+              party.score.score == 1 ? '' : 'e'
+            }} in allen Kategorien"
+            >{{ party.score.score | number: '1.0-2' }}</span
+          >
         </td>
       </tr>
 
