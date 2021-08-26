@@ -4,10 +4,10 @@
       <div
         class="bar-color"
         [style.background-color]="politicalData.parties[party.party].color"
-        [style.width]="(100 * party.score.score) / (showCandidateBars ? partyScoreResult.maxValue : partyScoreResult.maxParty) + '%'"
+        [style.width]="party.scorePercent.score + '%'"
       ></div>
-      <div class="bar-score">{{ party.score.score | number: '1.0-1' }} Punkt{{ party.score.score == 1 ? '' : 'e' }}</div>
-      <div class="bar-text">
+      <div class="bar-score">
+        {{ party.scorePercent.score | number: '1.1-1' }}%
         <a [routerLink]="'/parties/' + party.party">{{ politicalData.parties[party.party].kuerzel }}</a>
       </div>
     </div>
@@ -22,14 +22,10 @@
           <div
             class="bar-color"
             [style.background]="getBackground(politicalData.parties[party.party].color, candidateIndex)"
-            [style.width]="
-              (100 * candidate.value.score.score) / (showCandidateBars ? partyScoreResult.maxValue : partyScoreResult.maxParty) + '%'
-            "
+            [style.width]="candidate.value.scorePercent.score + '%'"
           ></div>
           <div class="bar-score">
-            {{ candidate.value.score.score | number: '1.0-1' }} Punkt{{ candidate.value.score.score == 1 ? '' : 'e' }}
-          </div>
-          <div class="bar-text">
+            {{ candidate.value.scorePercent.score | number: '1.1-1' }}%
             <a [routerLink]="'/parties/' + party.party + '/candidates/' + candidate.value.id">{{ candidate.value.personal.name }}</a>
           </div>
         </div>

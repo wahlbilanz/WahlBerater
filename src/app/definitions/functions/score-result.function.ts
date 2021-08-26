@@ -7,12 +7,35 @@ import { getCandidatePersonalInfo } from './getCandidatePersonalInfo';
 import { claimScore } from './score.function';
 import { CandidateResult, PartyResult, PartyScoreResult } from '../models/results.model';
 import { IncludeCandidates } from '../../+state/app.models';
+import { ClaimMap } from '../models/claim.model';
+
+/**
+ * get the divisor to scale the scores to percent
+ *
+ * basically it's the number of votes by the user plus the number of favs
+ *
+ * @param claims all the claims
+ * @param votes the decisions by the user
+ */
+function getScoreScaler(claims: ClaimMap, votes: Votes): number {
+  let scoreScaler = 0;
+  for (const claim of Object.keys(claims)) {
+    if (votes[claim]?.decision) {
+      scoreScaler++;
+      if (votes[claim]?.fav) {
+        scoreScaler++;
+      }
+    }
+  }
+  return scoreScaler;
+}
 
 function calcUsingCandidates(politicalData: PoliticalData, personalData: PersonalCandidateMap, votes: Votes): PartyScoreResult {
   const partyResults: Record<string, PartyResult> = {};
   let maxValue = 0;
   let maxParty = 0;
   let partyScores: PartyResult[];
+  const scoreScaler = getScoreScaler(politicalData.claims, votes);
   const normaliser: {
     [party: string]: {
       categories: { [category: string]: number };
@@ -41,6 +64,7 @@ function calcUsingCandidates(politicalData: PoliticalData, personalData: Persona
         candidates: {},
         scores: {},
         score: new Score(),
+        scorePercent: new Score(),
       };
       partyResults[politicalData.candidates[candidate].party] = partyResult;
     }
@@ -59,6 +83,7 @@ function calcUsingCandidates(politicalData: PoliticalData, personalData: Persona
       id: candidate,
       scores: {},
       score: new Score(),
+      scorePercent: new Score(),
     };
     partyResult.candidates[candidate] = candidateResult;
 
@@ -130,6 +155,12 @@ function calcUsingCandidates(politicalData: PoliticalData, personalData: Persona
     if (party.score.score > maxParty) {
       maxParty = party.score.score;
     }
+    if (scoreScaler > 0) {
+      party.scorePercent.score = (100 * party.score.score) / scoreScaler;
+      for (const candidate of Object.keys(party.candidates)) {
+        party.candidates[candidate].scorePercent.score = (100 * party.candidates[candidate].score.score) / scoreScaler;
+      }
+    }
   });
 
   partyScores.sort((a: PartyResult, b: PartyResult): number => {
@@ -151,6 +182,7 @@ function calcUsingParties(politicalData: PoliticalData, personalData: PersonalCa
   const partyResults: Record<string, PartyResult> = {};
   let maxParty = 0;
   let partyScores;
+  const scoreScaler = getScoreScaler(politicalData.claims, votes);
 
   // only check for parties
   for (const party of Object.keys(politicalData.parties)) {
@@ -161,6 +193,7 @@ function calcUsingParties(politicalData: PoliticalData, personalData: PersonalCa
         candidates: {},
         scores: {},
         score: new Score(),
+        scorePercent: new Score(),
       };
       partyResults[party] = partyResult;
     }
@@ -187,6 +220,10 @@ function calcUsingParties(politicalData: PoliticalData, personalData: PersonalCa
       if (maxParty < partyResult.score.score) {
         maxParty = partyResult.score.score;
       }
+    }
+
+    if (scoreScaler > 0) {
+      partyResult.scorePercent.score = partyResult.score.score / scoreScaler;
     }
   }
 

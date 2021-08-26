@@ -23,12 +23,14 @@ export interface CandidateResult {
   id: string;
   scores: Record<string, CategoryResult>;
   score: Score;
+  scorePercent: Score;
 }
 export interface PartyResult {
   party: string;
   candidates: Record<string, CandidateResult>;
   scores: Record<string, CategoryResult>;
   score: Score;
+  scorePercent: Score;
 }
 export interface PartyScoreResult {
   partyScores: PartyResult[];

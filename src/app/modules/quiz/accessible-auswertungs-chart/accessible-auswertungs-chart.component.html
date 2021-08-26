@@ -1,18 +1,20 @@
 <div id="accessible-auswertung">
   <div *ngIf="partyScoreResult?.partyScores">
     <div
-      *ngFor="let party of partyScoreResult.partyScores"
+      *ngFor="let party of partyScoreResult.partyScores; let partyIndex = index"
       class="party-score"
       style="border-color:{{ politicalData.parties[party.party].color }}"
     >
-      Die Liste
-      <a
-        class="party-link"
-        title="Mehr Informationen und Kandidierende von {{ politicalData.parties[party.party].name }}"
-        [routerLink]="['/', 'parties', party.party]"
-        >{{ politicalData.parties[party.party].name }}</a
+      <strong
+        >Die Liste
+        <a
+          class="party-link"
+          title="Mehr Informationen und Kandidierende von {{ politicalData.parties[party.party].name }}"
+          [routerLink]="['/', 'parties', party.party]"
+          >{{ politicalData.parties[party.party].name }}</a
+        >
+        hat {{ party.scorePercent.score | number: '1.1-1' }}% ({{ party.score.score | number: '1.0-2' }} Punkte) erreicht.</strong
       >
-      hat einen Punktestand von {{ party.score.score | number: '1.0-2' }} erreicht.
       <ng-container *ngIf="party.score.score > 0">
         Dabei konnte sie in den folgenden Kategorien punkten:
         <ul>
@@ -28,23 +30,31 @@
         <ng-container *ngIf="showCandidates && party.candidates">
           Die Kandidierenden der Liste haben wie folge abgeschnitten:
           <ul>
-            <ng-container *ngFor="let candidate of party.candidates | keyvalue: candidateSorter">
-              <li>
-                <a [routerLink]="['/', 'parties', party.party, 'candidates', candidate.value.id]">{{ candidate.value.personal.name }}</a>
-                erzielte {{ candidate.value.score.score }} Punkte<ng-container *ngIf="candidate.value.score.score <= 0">.</ng-container
-                ><ng-container *ngIf="candidate.value.score.score > 0"
-                  >:
-                  <ul>
-                    <ng-container *ngFor="let category of candidate.value.scores | keyvalue">
-                      <li *ngIf="category.value.score.score > 0">
-                        {{ category.value.score.score }} Punkt{{ category.value.score.score == 1 ? '' : 'e' }} in der Kategorie
-                        {{ politicalData.categories[category.key].title }}
-                      </li>
-                    </ng-container>
-                  </ul>
-                </ng-container>
-              </li>
-            </ng-container>
+            <li
+              *ngFor="
+                let candidate of party.candidates | keyvalue: candidateSorter | slice: 0:displayCandidates[partyIndex] + 1;
+                let candidateIndex = index
+              "
+            >
+              <strong
+                ><a [routerLink]="['/', 'parties', party.party, 'candidates', candidate.value.id]">{{ candidate.value.personal.name }}</a>
+                erzielte {{ candidate.value.score.score }} Punkte ({{ candidate.value.scorePercent.score | number: '1.1-1' }}%)</strong
+              ><ng-container *ngIf="candidate.value.score.score <= 0">.</ng-container
+              ><ng-container *ngIf="candidate.value.score.score > 0">
+                darunter
+                <ul>
+                  <ng-container *ngFor="let category of candidate.value.scores | keyvalue">
+                    <li *ngIf="category.value.score.score > 0">
+                      {{ category.value.score.score }} Punkt{{ category.value.score.score == 1 ? '' : 'e' }} in der Kategorie
+                      {{ politicalData.categories[category.key].title }}
+                    </li>
+                  </ng-container>
+                </ul>
+              </ng-container>
+            </li>
+            <li *ngIf="nCandidates[partyIndex] > displayCandidates[partyIndex] + 1">
+              <a (click)="showAll(partyIndex)">{{ nCandidates[partyIndex] - displayCandidates[partyIndex] }} weitere anzeigen</a>
+            </li>
           </ul>
         </ng-container>
       </ng-container>

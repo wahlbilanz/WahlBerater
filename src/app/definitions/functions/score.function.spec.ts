@@ -15,13 +15,13 @@ describe('claimScore', () => {
   });
 
   it('test score meh', () => {
-    expect(claimScore(0, 0, false).score).toBe(1);
-    expect(claimScore(0, 0, true).score).toBe(2);
+    expect(claimScore(0, 0, false).score).toBe(0);
+    expect(claimScore(0, 0, true).score).toBe(0);
 
-    expect(claimScore(1, 0, false).score).toBe(0.5);
+    expect(claimScore(1, 0, false).score).toBe(0);
     expect(claimScore(1, 0, true).score).toBe(0);
 
-    expect(claimScore(-1, 0, false).score).toBe(0.5);
+    expect(claimScore(-1, 0, false).score).toBe(0);
     expect(claimScore(-1, 0, true).score).toBe(0);
   });
 
