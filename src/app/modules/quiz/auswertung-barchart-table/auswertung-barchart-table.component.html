@@ -9,21 +9,24 @@
           </a>
         </th>
         <td>
-          <ng-container *ngFor="let category of party.scores | keyvalue">
-            <span
-              *ngIf="category.value.score.score > 0"
-              [style.width]="
-                (100 * category.value.score.score) / (showCandidateBars ? partyScoreResult.maxValue : partyScoreResult.maxParty) + '%'
-              "
-              [style.background-color]="politicalData.categories[category.key].color"
-              class="hit"
-              nz-tooltip
-              nzTooltipTitle="{{ category.value.score.score | number: '1.0-2' }} Punkt{{
-                category.value.score.score == 1 ? '' : 'e'
-              }} in der Kategorie {{ politicalData.categories[category.key].title }}"
-              >&nbsp;
-              <!--              {{ category.value.score.score | number: '1.0-2' }}-->
-            </span>
+          <ng-container *ngIf="sortedCategroies | async as d">
+            <ng-container *ngFor="let category of d; let i = index">
+              <span
+                *ngIf="party.scores[category.categoryId].score.score > 0"
+                [style.width]="
+                  (100 * party.scores[category.categoryId].score.score) /
+                    (showCandidateBars ? partyScoreResult.maxValue : partyScoreResult.maxParty) +
+                  '%'
+                "
+                [style.background-color]="politicalData.categories[category.categoryId].color"
+                class="hit"
+                nz-tooltip
+                nzTooltipTitle="{{ party.scores[category.categoryId].score.score | number: '1.0-2' }} Punkt{{
+                  party.scores[category.categoryId].score.score == 1 ? '' : 'e'
+                }} in der Kategorie {{ politicalData.categories[category.categoryId].title }}"
+                >&nbsp;
+              </span>
+            </ng-container>
           </ng-container>
           <span
             class="hit"
@@ -55,18 +58,20 @@
               </a>
             </th>
             <td>
-              <ng-container *ngFor="let category of candidate.value.scores | keyvalue">
-                <span
-                  *ngIf="category.value.score.score > 0"
-                  [style.width]="(100 * category.value.score.score) / partyScoreResult.maxValue + '%'"
-                  [style.background-color]="politicalData.categories[category.key].color"
-                  class="hit"
-                  nz-tooltip
-                  nzTooltipTitle="{{ category.value.score.score }} Übereinstimmung{{
-                    category.value.score.score == 1 ? '' : 'en'
-                  }} in der Kategorie {{ politicalData.categories[category.key].title }}"
-                  >&nbsp;
-                </span>
+              <ng-container *ngIf="sortedCategroies | async as d">
+                <ng-container *ngFor="let category of d; let i = index">
+                  <span
+                    *ngIf="candidate.value.scores[category.categoryId].score.score > 0"
+                    [style.width]="(100 * candidate.value.scores[category.categoryId].score.score) / partyScoreResult.maxValue + '%'"
+                    [style.background-color]="politicalData.categories[category.categoryId].color"
+                    class="hit"
+                    nz-tooltip
+                    nzTooltipTitle="{{ candidate.value.scores[category.categoryId].score.score }} Übereinstimmung{{
+                      candidate.value.scores[category.categoryId].score.score == 1 ? '' : 'en'
+                    }} in der Kategorie {{ politicalData.categories[category.categoryId].title }}"
+                    >&nbsp;
+                  </span>
+                </ng-container>
               </ng-container>
             </td>
           </tr>
