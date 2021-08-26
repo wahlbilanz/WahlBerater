@@ -35,7 +35,18 @@ export const getParties = createSelector(
 export const getPartyIds = createSelector(getAppState, (state: State) => {
   if (state.politicalDataLoaded) {
     const ids = Object.getOwnPropertyNames(state.politicalData.parties);
-    return ids.sort((a, b) => state.politicalData.parties[a].order - state.politicalData.parties[b].order);
+    return ids.sort((a, b) => {
+      if (state.partyScoreResult) {
+        const scoreA = state.partyScoreResult?.partyScores?.filter((p) => p.party === a)[0];
+        const scoreB = state.partyScoreResult?.partyScores?.filter((p) => p.party === b)[0];
+        if (scoreA !== scoreB) {
+          return scoreB.score.score - scoreA.score.score;
+        }
+      }
+      return state.politicalData.parties[a].order !== state.politicalData.parties[b].order
+        ? state.politicalData.parties[b].order - state.politicalData.parties[a].order
+        : 0;
+    });
   }
   return null;
 });
