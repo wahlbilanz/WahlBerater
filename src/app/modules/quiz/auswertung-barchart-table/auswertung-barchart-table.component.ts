@@ -1,14 +1,16 @@
 import { KeyValue } from '@angular/common';
 import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
 import { candidateKeyValueSorter } from 'src/app/definitions/functions/candidate-sort.function';
 import { AppPartialState } from '../../../+state/app.reducer';
 import { PersonalCandidateMap } from '../../../definitions/models/candidate.model';
-import { CategoryMap } from '../../../definitions/models/category.model';
+import { CategoryMap, CategoryWithClaims } from '../../../definitions/models/category.model';
 import { ClaimMap } from '../../../definitions/models/claim.model';
 import { PoliticalData } from '../../../definitions/models/political.data.model';
 import { CandidateResult, PartyScoreResult } from '../../../definitions/models/results.model';
 import { RenderingDelay } from '../../../+state/app.models';
+import { Observable } from 'rxjs';
+import * as AppSelectors from '../../../+state/app.selectors';
 
 @Component({
   selector: 'app-auswertung-barchart-table',
@@ -35,6 +37,9 @@ export class AuswertungBarchartTableComponent implements OnInit {
       this.showMoreCandidates();
     }
   }
+
+  sortedCategroies: Observable<CategoryWithClaims[]> = this.store.pipe(select(AppSelectors.getCategoriesWithClaims));
+
   showCandidateBars = false;
   showCandidatesNum = 0;
   showCandidatesNumInterval;
