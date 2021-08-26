@@ -1,110 +1,45 @@
-<div id="mybarchartchart">
-  <table *ngIf="partyScoreResult?.partyScores">
-    <ng-container *ngFor="let party of partyScoreResult.partyScores; let partyIndex = index">
-      <!-- Party -->
-      <tr class="party-row" style="border-color:{{ politicalData.parties[party.party].color }}">
-        <th>
-          <a [routerLink]="'/parties/' + party.party">
-            {{ politicalData.parties[party.party].id }}
-          </a>
-        </th>
-        <td>
-          <ng-container *ngIf="sortedCategroies | async as d">
-            <ng-container *ngFor="let category of d; let i = index">
-              <span
-                *ngIf="party.scores[category.categoryId].score.score > 0"
-                [style.width]="
-                  (100 * party.scores[category.categoryId].score.score) /
-                    (showCandidateBars ? partyScoreResult.maxValue : partyScoreResult.maxParty) +
-                  '%'
-                "
-                [style.background-color]="politicalData.categories[category.categoryId].color"
-                class="hit"
-                nz-tooltip
-                nzTooltipTitle="{{ party.scores[category.categoryId].score.score | number: '1.0-2' }} Punkt{{
-                  party.scores[category.categoryId].score.score == 1 ? '' : 'e'
-                }} in der Kategorie {{ politicalData.categories[category.categoryId].title }}"
-                >&nbsp;
-              </span>
-            </ng-container>
-          </ng-container>
-          <span
-            class="hit"
-            [style.width]="'50px'"
-            *ngIf="party.score.score === 0 || party.score.score < this.partyScoreResult.maxValue / 10"
-            >&nbsp;</span
-          >
-          <span
-            class="hitscore"
-            nz-tooltip
-            nzTooltipTitle="{{ politicalData.parties[party.party].id }} bekommt {{ party.score.score | number: '1.0-2' }} Punkt{{
-              party.score.score == 1 ? '' : 'e'
-            }} in allen Kategorien"
-            >{{ party.score.score | number: '1.0-2' }}</span
-          >
-        </td>
-      </tr>
-
-      <!-- candidates -->
-      <ng-container *ngIf="showCandidateBars && party.candidates && partyIndex < showCandidatesNum">
-        <ng-container
-          *ngFor="let candidate of party.candidates | keyvalue: candidateSorter | slice: 0:displayCandidates[partyIndex] + 1; let i = index"
-        >
-          <tr class="candidate-spacer" style="border-color:{{ politicalData.parties[party.party].color }}"></tr>
-          <tr class="candidate-row" style="border-color:{{ politicalData.parties[party.party].color }}">
-            <th>
-              <a [routerLink]="'/parties/' + party.party + '/candidates/' + candidate.value.id">
-                {{ candidate.value.personal.name }}
-              </a>
-            </th>
-            <td>
-              <ng-container *ngIf="sortedCategroies | async as d">
-                <ng-container *ngFor="let category of d; let i = index">
-                  <span
-                    *ngIf="candidate.value.scores[category.categoryId].score.score > 0"
-                    [style.width]="(100 * candidate.value.scores[category.categoryId].score.score) / partyScoreResult.maxValue + '%'"
-                    [style.background-color]="politicalData.categories[category.categoryId].color"
-                    class="hit"
-                    nz-tooltip
-                    nzTooltipTitle="{{ candidate.value.scores[category.categoryId].score.score }} Übereinstimmung{{
-                      candidate.value.scores[category.categoryId].score.score == 1 ? '' : 'en'
-                    }} in der Kategorie {{ politicalData.categories[category.categoryId].title }}"
-                    >&nbsp;
-                  </span>
-                </ng-container>
-              </ng-container>
-            </td>
-          </tr>
-        </ng-container>
-        <ng-container *ngIf="nCandidates[partyIndex] > displayCandidates[partyIndex]">
-          <tr class="candidate-spacer"></tr>
-          <tr class="candidate-row">
-            <th>
-              <a (click)="showAll(partyIndex)">{{ nCandidates[partyIndex] - displayCandidates[partyIndex] }} weitere anzeigen</a>
-            </th>
-            <td></td>
-          </tr>
-        </ng-container>
-        <tr class="spacer"></tr>
-        <tr id="axis">
-          <th></th>
-          <td>
-            <span
-              nz-tooltip
-              nzTooltipTitle="Achse zeigt die Punkte der Listen/Kandidierenden."
-              [style.width]="axeTiksWidth + '%'"
-              *ngFor="let value of maxValueArray"
-            >
-              <span class="axis-label">{{ value }}</span>
-            </span>
-            <span [style.width]="tiksPadding + '%'"> </span>
-          </td>
-        </tr>
+<div id="mybarchartchart" *ngIf="partyScoreResult?.partyScores">
+  <ng-container *ngFor="let party of partyScoreResult.partyScores; let partyIndex = index">
+    <div class="party-bar">
+      <div
+        class="bar-color"
+        [style.background-color]="politicalData.parties[party.party].color"
+        [style.width]="(100 * party.score.score) / (showCandidateBars ? partyScoreResult.maxValue : partyScoreResult.maxParty) + '%'"
+      ></div>
+      <div class="bar-score">{{ party.score.score | number: '1.0-1' }} Punkt{{ party.score.score == 1 ? '' : 'e' }}</div>
+      <div class="bar-text">
+        <a [routerLink]="'/parties/' + party.party">{{ politicalData.parties[party.party].kuerzel }}</a>
+      </div>
+    </div>
+    <ng-container *ngIf="showCandidateBars && party.candidates && partyIndex < showCandidatesNum">
+      <ng-container
+        *ngFor="
+          let candidate of party.candidates | keyvalue: candidateSorter | slice: 0:displayCandidates[partyIndex] + 1;
+          let candidateIndex = index
+        "
+      >
+        <div class="candidate-bar">
+          <div
+            class="bar-color"
+            [style.background]="getBackground(politicalData.parties[party.party].color, candidateIndex)"
+            [style.width]="
+              (100 * candidate.value.score.score) / (showCandidateBars ? partyScoreResult.maxValue : partyScoreResult.maxParty) + '%'
+            "
+          ></div>
+          <div class="bar-score">
+            {{ candidate.value.score.score | number: '1.0-1' }} Punkt{{ candidate.value.score.score == 1 ? '' : 'e' }}
+          </div>
+          <div class="bar-text">
+            <a [routerLink]="'/parties/' + party.party + '/candidates/' + candidate.value.id">{{ candidate.value.personal.name }}</a>
+          </div>
+        </div>
       </ng-container>
-      <tr class="spacer"></tr>
+      <div *ngIf="nCandidates[partyIndex] > displayCandidates[partyIndex] + 1">
+        <a (click)="showAll(partyIndex)">{{ nCandidates[partyIndex] - displayCandidates[partyIndex] }} weitere anzeigen</a>
+      </div>
+      <div class="candidate-bar-spacer">&nbsp;</div>
     </ng-container>
-  </table>
-
+  </ng-container>
   <p class="small">
     Die Reihenfolge der Listen entspricht der Übereinstimmung mit deinen Antworten.
     <ng-container *ngIf="showCandidateBars"> Die Reihenfolge der Kandidierenden wurde von den Listen festgelegt. </ng-container>
