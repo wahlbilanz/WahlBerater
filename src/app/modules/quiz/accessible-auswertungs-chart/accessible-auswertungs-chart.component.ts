@@ -24,8 +24,17 @@ export class AccessibleAuswertungsChartComponent implements OnInit {
   @Input() showCandidates = false;
 
   candidateSorter = candidateKeyValueSorter;
+  nCandidates: number[];
+  displayCandidates: number[];
 
   constructor(private store: Store<AppPartialState>) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.displayCandidates = this.partyScoreResult.partyScores.map((_) => 7);
+    this.nCandidates = this.partyScoreResult.partyScores.map((s) => Object.keys(s.candidates).length);
+  }
+
+  showAll(i: number): void {
+    this.displayCandidates[i] = this.nCandidates[i] + 1;
+  }
 }

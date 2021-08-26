@@ -17,8 +17,7 @@
       border-right: 1px solid black;
     }
 
-    &.bar-score,
-    &.bar-text {
+    &.bar-score {
       //position:absolute;
       //font-family: Arial, Helvetica;
       //font-size: 100px;
@@ -34,14 +33,6 @@
       //border: 1px solid white;
       //margin-top: -$wb-space-x-small;
     }
-
-    &.bar-score {
-      width: 105px;
-      text-align: right;
-    }
-    &.bar-text {
-      left: 115px;
-    }
   }
 }
 .candidate-bar {
@@ -51,8 +42,7 @@
   div {
     height: 2em;
 
-    &.bar-score,
-    &.bar-text {
+    &.bar-score {
       //margin-top: -$wb-space-xx-small;
       height: 1.4em;
     }

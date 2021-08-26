@@ -22,13 +22,13 @@ export function claimScore(candidate: number, user: number, fav: boolean): Score
     } else if (candidate < PartyDecisionThreshold) {
       return new Score(fav ? 0 : 0.5);
     }
-  } else {
+  } /*else {
     // user said no thumbs
     if (candidate < -PartyDecisionThreshold || candidate > PartyDecisionThreshold) {
       return new Score(fav ? 0 : 0.5);
     } else {
       return new Score(fav ? 2 : 1);
     }
-  }
+  }*/
   return new Score(0);
 }

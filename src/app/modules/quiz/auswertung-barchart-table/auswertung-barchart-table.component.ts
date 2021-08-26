@@ -11,6 +11,7 @@ import { CandidateResult, PartyScoreResult } from '../../../definitions/models/r
 import { RenderingDelay } from '../../../+state/app.models';
 import { Observable } from 'rxjs';
 import * as AppSelectors from '../../../+state/app.selectors';
+import { shadeColor } from '../../../definitions/functions/shade-color.function';
 
 @Component({
   selector: 'app-auswertung-barchart-table',
@@ -89,8 +90,7 @@ export class AuswertungBarchartTableComponent implements OnInit {
     if (index % 2) {
       return partyColor;
     } else {
-      const otherColor =
-        partyColor === '#000000' || partyColor === '#000' ? '#555' : AuswertungBarchartTableComponent.shadeColor(partyColor, -20);
+      const otherColor = partyColor === '#000000' || partyColor === '#000' ? '#555' : shadeColor(partyColor, -20);
       const direction = '-45deg';
       return (
         'repeating-linear-gradient(' +
@@ -106,25 +106,5 @@ export class AuswertungBarchartTableComponent implements OnInit {
         ' 10px)'
       );
     }
-  }
-
-  static shadeColor(color: string, percent: number) {
-    let R = parseInt(color.substring(1, 3), 16);
-    let G = parseInt(color.substring(3, 5), 16);
-    let B = parseInt(color.substring(5, 7), 16);
-
-    R = Math.round((R * (100 + percent)) / 100);
-    G = Math.round((G * (100 + percent)) / 100);
-    B = Math.round((B * (100 + percent)) / 100);
-
-    R = R < 255 ? R : 255;
-    G = G < 255 ? G : 255;
-    B = B < 255 ? B : 255;
-
-    const RR = R.toString(16).length === 1 ? '0' + R.toString(16) : R.toString(16);
-    const GG = G.toString(16).length === 1 ? '0' + G.toString(16) : G.toString(16);
-    const BB = B.toString(16).length === 1 ? '0' + B.toString(16) : B.toString(16);
-
-    return '#' + RR + GG + BB;
   }
 }
