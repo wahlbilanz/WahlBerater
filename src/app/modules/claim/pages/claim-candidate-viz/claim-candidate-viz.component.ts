@@ -27,14 +27,34 @@ export class ClaimCandidateVizComponent implements OnInit {
   @ViewChild('decisionTemplates', { static: true }) decisionTemplates: DecisionTemplatesComponent;
 
   @Input() claimId: string;
-  @Input() claim: Claim;
-  @Input() votes: Votes;
-  @Input() politicalData: PoliticalData;
-  @Input() personalCandidates: PersonalCandidateMap;
-  @Input() partySeq: string[];
+  @Input('claim') set currentClaim(c: Claim) {
+    this.claim = c;
+  }
+  @Input('votes') set voteData(v: Votes) {
+    this.votes = v;
+  }
+  @Input('politicalData') set politicalDataSet(pds: PoliticalData) {
+    this.politicalData = pds;
+  }
+  @Input('personalCandidates') set personalCandidatesSet(pcs: PersonalCandidateMap) {
+    this.personalCandidates = pcs;
+  }
+  @Input('partySeq') set partySequence(ps: string[]) {
+    this.partySeq = ps;
+  }
 
-  @Input() partyScoreResult: PartyScoreResult;
+  @Input('partyScoreResult') set partyScoreResults(psr: PartyScoreResult) {
+    this.partyScoreResult = psr;
+    this.init();
+  }
   @Input() showCandidates = IncludeCandidates;
+
+  partyScoreResult: PartyScoreResult;
+  partySeq: string[];
+  politicalData: PoliticalData;
+  personalCandidates: PersonalCandidateMap;
+  votes: Votes;
+  claim: Claim;
 
   public agreement = AGREEMENT;
   voteThreshold = PartyDecisionThreshold;
@@ -48,6 +68,10 @@ export class ClaimCandidateVizComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
+    this.init();
+  }
+
+  init() {
     if (!this.partySeq && this.politicalData) {
       this.partySeq = Object.keys(this.politicalData.parties);
     }

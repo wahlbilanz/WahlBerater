@@ -22,9 +22,12 @@
             [link]="'/parties/' + party.party"
           ></app-decision-button>
         </div>
-        <div class="party-reason" *ngIf="politicalData.parties[party.party]?.positions[claimId]?.reason">
+        <div
+          class="party-reason"
+          *ngIf="politicalData.parties[party.party]?.positions && politicalData.parties[party.party]?.positions[claimId]?.reason"
+        >
           <p>Begründung der Liste:</p>
-          <blockquote [innerHTML]="politicalData.parties[party.party].positions[claimId].reason | markdown"></blockquote>
+          <blockquote [innerHTML]="politicalData.parties[party.party]?.positions[claimId].reason | markdown"></blockquote>
         </div>
 
         <ng-container *ngIf="showCandidates">
