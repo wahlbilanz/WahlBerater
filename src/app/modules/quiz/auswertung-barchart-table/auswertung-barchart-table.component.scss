@@ -1,57 +1,107 @@
 @import '../../../../assets/styles/variables';
-
-.candidate-bar,
-.party-bar {
-  position: relative;
-  height: 2em;
-  margin-top: $wb-space-x-small;
-  div {
-    position: absolute;
+#mybarchartchart {
+  background-size: 10%;
+  background-image: linear-gradient(to right, #eee 1px, transparent 1px);
+  .candidate-bar,
+  .party-bar {
+    position: relative;
     height: 2em;
+    margin-top: $wb-space-x-small;
+    div {
+      position: absolute;
+      height: 2em;
 
-    &.bar-color {
-      //background: black;
-      //width:100px;
-      //z-index: 2;
-      border-bottom: 1px solid black;
-      border-right: 1px solid black;
-    }
+      &.bar-color {
+        //background: black;
+        //width:100px;
+        //z-index: 2;
+        //border-bottom: 1px solid black;
+        //border-right: 1px solid black;
+        box-shadow: 1px 1px 2px black;
+      }
 
-    &.bar-score {
-      //position:absolute;
-      //font-family: Arial, Helvetica;
-      //font-size: 100px;
-      //mix-blend-mode: difference;
-      //mix-blend-mode: difference;
-      //color: white;
-      //z-index: 3;
-      font-weight: 500;
-      background: white;
-      height: 1.5em;
-      margin-left: $wb-space-x-small;
-      padding: 0 $wb-space-x-small;
-      //border: 1px solid white;
-      //margin-top: -$wb-space-x-small;
+      &.bar-score {
+        //position:absolute;
+        //font-family: Arial, Helvetica;
+        //font-size: 100px;
+        //mix-blend-mode: difference;
+        //mix-blend-mode: difference;
+        //color: white;
+        //z-index: 3;
+        font-weight: 500;
+        //background: white;
+        height: 1.5em;
+        margin-left: $wb-space-x-small;
+        //padding: 0 $wb-space-x-small;
+        //border: 1px solid white;
+        //margin-top: -$wb-space-x-small;
+        .bar-score-text {
+          background-color: white;
+          /*a {
+          font-size: 1.3em;
+        }*/
+        }
+      }
     }
   }
-}
-.candidate-bar {
-  font-size: 0.8em;
-  height: 1.8em;
-  margin-top: 0;
-  div {
-    height: 2em;
-
-    &.bar-score {
-      //margin-top: -$wb-space-xx-small;
-      height: 1.4em;
-    }
-    &.bar-color {
-      height: 0.8em;
-      margin-top: 1em;
+  .party-bar {
+    div {
+      &.bar-score {
+        height: 1.8em;
+        margin-top: -0.5em;
+        //margin: ;
+        .bar-score-text {
+          padding: 4px $wb-space-x-small 2px $wb-space-x-small;
+          a {
+            font-size: 1.3em;
+          }
+        }
+      }
     }
   }
-  &-spacer {
-    margin-bottom: $wb-space-small;
+
+  .candidate-bar {
+    font-size: 0.8em;
+    height: 1.8em;
+    margin-top: 2px;
+    div {
+      height: 2em;
+
+      &.bar-score {
+        //margin-top: -$wb-space-xx-small;
+        height: 1.4em;
+        .bar-score-text {
+          padding: 0 4px;
+        }
+      }
+      &.bar-color {
+        height: 0.8em;
+        margin-top: 1em;
+      }
+    }
+    &-spacer {
+      margin-bottom: $wb-space-small;
+    }
+  }
+  .showMoreCandidates {
+    margin-top: 4px;
+  }
+  .axe {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8em;
+    margin-top: $wb-space-x-small;
+    .axe-labels {
+      width: 10%;
+      text-align: right;
+      .axe-tick {
+        padding: $wb-space-xx-small;
+        background: white;
+        margin-right: -$wb-space-medium;
+        &.axe-tick-invisible {
+          visibility: hidden;
+        }
+      }
+    }
   }
 }

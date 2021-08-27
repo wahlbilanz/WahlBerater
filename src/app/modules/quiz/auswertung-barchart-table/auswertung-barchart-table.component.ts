@@ -53,6 +53,8 @@ export class AuswertungBarchartTableComponent implements OnInit {
   axeTiksWidth: number;
   tiksPadding: number;
 
+  axeAnnotations: number[] = [...Array(10).keys()].map((x) => (x + 1) * 10);
+
   constructor(private store: Store<AppPartialState>, private ref: ChangeDetectorRef) {}
 
   ngOnInit(): void {
@@ -91,20 +93,22 @@ export class AuswertungBarchartTableComponent implements OnInit {
       return partyColor;
     } else {
       const otherColor = partyColor === '#000000' || partyColor === '#000' ? '#555' : shadeColor(partyColor, -20);
-      const direction = '-45deg';
-      return (
-        'repeating-linear-gradient(' +
-        direction +
-        ',' +
-        partyColor +
-        ',' +
-        partyColor +
-        ' 5px,' +
-        otherColor +
-        ' 5px,' +
-        otherColor +
-        ' 10px)'
-      );
+      console.log(partyColor, otherColor);
+      return otherColor;
+      // const direction = '-45deg';
+      // return (
+      //   'repeating-linear-gradient(' +
+      //   direction +
+      //   ',' +
+      //   partyColor +
+      //   ',' +
+      //   partyColor +
+      //   ' 5px,' +
+      //   otherColor +
+      //   ' 5px,' +
+      //   otherColor +
+      //   ' 10px)'
+      // );
     }
   }
 }
