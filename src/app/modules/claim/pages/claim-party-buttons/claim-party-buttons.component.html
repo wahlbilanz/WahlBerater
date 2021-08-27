@@ -1,7 +1,7 @@
 <ng-container *ngIf="partyScoreResult">
   <ng-container *ngFor="let party of partyScoreResult.partyScores">
     <app-decision-button
-      *ngIf="party.scores[politicalData.claims[claimId].category].decisions[claimId]"
+      *ngIf="party.scores[politicalData.claims[claimId].category].decisions[claimId] !== undefined"
       [label]="politicalData.parties[party.party].id"
       [link]="['/', 'parties', party.party]"
       [vote]="party.scores[politicalData.claims[claimId].category].decisions[claimId]"
