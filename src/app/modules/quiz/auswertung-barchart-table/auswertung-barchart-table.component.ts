@@ -24,6 +24,7 @@ export class AuswertungBarchartTableComponent implements OnInit {
   @Input() personalCandidates: PersonalCandidateMap;
   @Input() categories: CategoryMap;
   @Input() claims: ClaimMap;
+  public partyIds = this.store.pipe(select(AppSelectors.getPartyIds));
 
   @Input('scoreResult') set score(psr: PartyScoreResult) {
     this.partyScoreResult = psr;

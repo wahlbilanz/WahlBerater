@@ -40,31 +40,13 @@
     >Mehr Informationen</a
   >
   <div class="barchart" *ngIf="maxPartyValue && maxPartyValue > 0 && score?.scores">
-    <div class="bar">
-      <ng-container *ngFor="let category of score.scores | keyvalue">
-        <span
-          *ngIf="category.value.score.score > 0"
-          [style.width]="(100 * category.value.score.score) / maxPartyValue + '%'"
-          [style.background-color]="politicalData.categories[category.key].color"
-          class="hit"
-          nz-tooltip
-          nzTooltipTitle="{{ category.value.score.score | number: '1.0-2' }} Punkt{{
-            category.value.score.score == 1 ? '' : 'e'
-          }} in der Kategorie {{ politicalData.categories[category.key].title }}"
-          >{{ category.value.score.score | number: '1.0-2' }}
-        </span>
-      </ng-container>
-    </div>
-    <div class="axis">
-      <span
-        nz-tooltip
-        nzTooltipTitle="Achse zeigt die Punkte der Kandidaten."
-        [style.width]="axeTiksWidth + '%'"
-        *ngFor="let value of maxValueArray"
-      >
-        <span class="axis-label">{{ value }}</span>
-      </span>
-      <span [style.width]="tiksPadding + '%'"> </span>
+    <div
+      class="bar-color"
+      [style.background-color]="politicalData.parties[score.party].color"
+      [style.width]="score.scorePercent.score + '%'"
+    ></div>
+    <div class="bar-score">
+      <span class="bar-score-text"> {{ score.scorePercent.score | number: '1.1-1' }}% </span>
     </div>
   </div>
 </div>

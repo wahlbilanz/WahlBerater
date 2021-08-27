@@ -95,29 +95,28 @@
   width: 100%;
   display: block;
   margin-top: auto;
-  span {
-    width: 100%;
-    display: inline-block;
-    text-align: center;
-  }
-  .axis {
-    border-top: 1px solid #aaa;
-    text-align: right;
-    @include use-typography($wb-type-paragraph-small);
-    color: #aaa;
-    span {
-      line-height: 1;
-      span.axis-label {
-        margin-right: -$wb-space-small;
-        width: 2 * $wb-space-small;
-        display: block;
-        float: right;
-        text-align: center;
-      }
+  position: relative;
 
-      span:last-child span.axis-label {
-        margin-right: 0;
-        text-align: right;
+  height: 1em;
+  div {
+    position: absolute;
+    height: 0.8em;
+    margin-top: -2px;
+
+    &.bar-color {
+      box-shadow: 1px 1px 1px black;
+    }
+
+    &.bar-score {
+      font-weight: 500;
+      margin-left: $wb-space-x-small;
+      margin-top: -1.1em;
+      .bar-score-text {
+        background-color: white;
+        padding: 0 $wb-space-x-small;
+        a {
+          font-size: 1.3em;
+        }
       }
     }
   }

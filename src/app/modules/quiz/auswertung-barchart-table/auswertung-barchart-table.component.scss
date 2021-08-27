@@ -12,34 +12,15 @@
       height: 2em;
 
       &.bar-color {
-        //background: black;
-        //width:100px;
-        //z-index: 2;
-        //border-bottom: 1px solid black;
-        //border-right: 1px solid black;
         box-shadow: 1px 1px 2px black;
       }
 
       &.bar-score {
-        //position:absolute;
-        //font-family: Arial, Helvetica;
-        //font-size: 100px;
-        //mix-blend-mode: difference;
-        //mix-blend-mode: difference;
-        //color: white;
-        //z-index: 3;
         font-weight: 500;
-        //background: white;
         height: 1.5em;
         margin-left: $wb-space-x-small;
-        //padding: 0 $wb-space-x-small;
-        //border: 1px solid white;
-        //margin-top: -$wb-space-x-small;
         .bar-score-text {
           background-color: white;
-          /*a {
-          font-size: 1.3em;
-        }*/
         }
       }
     }
@@ -49,7 +30,6 @@
       &.bar-score {
         height: 1.8em;
         margin-top: -0.5em;
-        //margin: ;
         .bar-score-text {
           padding: 4px $wb-space-x-small 2px $wb-space-x-small;
           a {
@@ -68,7 +48,6 @@
       height: 2em;
 
       &.bar-score {
-        //margin-top: -$wb-space-xx-small;
         height: 1.4em;
         .bar-score-text {
           padding: 0 4px;
