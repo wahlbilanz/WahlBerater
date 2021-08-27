@@ -16,5 +16,4 @@ export interface Party {
   order?: number;
   positions: PositionsMap;
   all_same: boolean;
-  kuerzel: string;
 }

@@ -138,6 +138,7 @@ function calcUsingCandidates(politicalData: PoliticalData, personalData: Persona
     }
   }
 
+  let maxPercent = 0;
   partyScores = Object.values(partyResults);
   partyScores.forEach((party: PartyResult) => {
     /*const nCandidates = Object.keys(party.candidates).length;
@@ -157,8 +158,14 @@ function calcUsingCandidates(politicalData: PoliticalData, personalData: Persona
     }
     if (scoreScaler > 0) {
       party.scorePercent.score = (100 * party.score.score) / scoreScaler;
+      if (maxPercent < party.scorePercent.score) {
+        maxPercent = party.scorePercent.score;
+      }
       for (const candidate of Object.keys(party.candidates)) {
         party.candidates[candidate].scorePercent.score = (100 * party.candidates[candidate].score.score) / scoreScaler;
+        if (maxPercent < party.candidates[candidate].scorePercent.score) {
+          maxPercent = party.candidates[candidate].scorePercent.score;
+        }
       }
     }
   });
@@ -175,6 +182,7 @@ function calcUsingCandidates(politicalData: PoliticalData, personalData: Persona
     partyScores,
     maxValue,
     maxParty,
+    maxPercent,
   };
 }
 
@@ -183,6 +191,7 @@ function calcUsingParties(politicalData: PoliticalData, personalData: PersonalCa
   let maxParty = 0;
   let partyScores;
   const scoreScaler = getScoreScaler(politicalData.claims, votes);
+  let maxPercent = 0;
 
   // only check for parties
   for (const party of Object.keys(politicalData.parties)) {
@@ -224,6 +233,9 @@ function calcUsingParties(politicalData: PoliticalData, personalData: PersonalCa
 
     if (scoreScaler > 0) {
       partyResult.scorePercent.score = partyResult.score.score / scoreScaler;
+      if (maxPercent < partyResult.scorePercent.score) {
+        maxPercent = partyResult.scorePercent.score;
+      }
     }
   }
 
@@ -241,6 +253,7 @@ function calcUsingParties(politicalData: PoliticalData, personalData: PersonalCa
     partyScores,
     maxValue: maxParty,
     maxParty,
+    maxPercent,
   };
 }
 
