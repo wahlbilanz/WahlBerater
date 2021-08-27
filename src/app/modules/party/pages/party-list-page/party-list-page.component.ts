@@ -16,12 +16,13 @@ import { RenderingDelay } from '../../../../+state/app.models';
   styleUrls: ['./party-list-page.component.scss'],
 })
 export class PartyListPageComponent implements OnInit, OnDestroy {
-  public partyIds = this.state.pipe(select(AppSelectors.getPartyIds));
+  public partyIds: string[];
   politicalData: PoliticalData;
   personalData: PersonalCandidateMap;
   private destroy$: Subject<void> = new Subject<void>();
   votes: Votes = undefined;
   partyScoreResult: PartyScoreResult;
+  defaultSort = true;
 
   sortedParties = false;
   renderRows = 3;
@@ -52,5 +53,23 @@ export class PartyListPageComponent implements OnInit, OnDestroy {
       this.renderRows = 1000;
       this.ref.markForCheck();
     }, 2 * RenderingDelay);
+    this.state
+      .pipe(select(AppSelectors.getPartyIds))
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((ids) => {
+        this.partyIds = ids;
+        this.partiesDefaultSorted();
+      });
+  }
+
+  private partiesDefaultSorted() {
+    this.defaultSort = true;
+    if (this.partyIds && this.politicalData) {
+      for (let i = 1; i < this.partyIds.length; i++) {
+        if (this.politicalData.parties[this.partyIds[i]].order < this.politicalData.parties[this.partyIds[i - 1]].order) {
+          this.defaultSort = false;
+        }
+      }
+    }
   }
 }
