@@ -82,6 +82,12 @@ export const appReducer = createReducer(
       },
     }),
   })),
+  on(AppActions.deleteVotes, (state: State) => ({
+    ...state,
+    votes: {},
+    quizLastPage: QuizFirstPage,
+    partyScoreResult: preparePartyResults(state.politicalData, state.personalData, {}),
+  })),
   on(AppActions.updateLastQuizPage, (state: State, { lastPage }) => ({
     ...state,
     quizLastPage: lastPage ? lastPage : QuizFirstPage,

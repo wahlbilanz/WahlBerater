@@ -73,6 +73,18 @@
       <em>immer die Datenschutzerklärung lesen und verstehen!</em> Nimm dir daher kurz Zeit und schaue in
       <a routerLink="/docs/privacy">unsere Datenschutzerklärung</a>.
     </p>
+    <p class="small" *ngIf="(localStorageSupported | async) === true">
+      Du kannst deine Entscheidungen jeder Zeit löschen, um das Quiz zum Beispiel nochmal von vorn zu starten:
+    </p>
+    <button
+      nz-button
+      nzType="primary"
+      nzDanger
+      *ngIf="(localStorageSupported | async) === true && localStorageAllowed | async"
+      (click)="deleteData()"
+    >
+      Entscheidungen löschen
+    </button>
   </div>
 
   <div class="nav-block accessibility-mode-block no-animation nz-animate-disabled" [@.disabled]="true">
