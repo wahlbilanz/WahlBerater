@@ -22,6 +22,7 @@ import { CoreRoutingModule } from './core-routing.module';
 import { WelcomePageComponent } from './pages/welcome-page/welcome-page.component';
 import { NavigationContainerComponent } from './components/navigation-container/navigation-container.component';
 import { NzNoAnimationModule } from 'ng-zorro-antd/core/no-animation';
+import { NzButtonModule } from 'ng-zorro-antd/button';
 
 registerLocaleData(en);
 
@@ -53,6 +54,7 @@ registerLocaleData(en);
     NzNoAnimationModule,
     NzIconModule,
     NzMenuModule,
+    NzButtonModule,
     NzDividerModule,
     NzCheckboxModule,
   ],

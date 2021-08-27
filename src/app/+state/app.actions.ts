@@ -25,6 +25,7 @@ export const loadPersonalDataSuccess = createAction(
 export const loadPersonalDataError = createAction('[app] Load Personal Data JSON Error', props<{ error: Error }>());
 
 export const vote = createAction('[app] Vote', props<{ claimId: string; decision: number; fav: boolean }>());
+export const deleteVotes = createAction('[app] Delete Votes');
 
 export const updateLocalStorageSupport = createAction('[app] Set support flag of local storage', props<{ isSupported: boolean }>());
 export const changeDataStorePreference = createAction('[app] User changed data store preference', props<{ allow: boolean }>());

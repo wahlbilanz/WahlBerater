@@ -14,7 +14,7 @@ import { State } from './app.models';
 import { AppPartialState } from './app.reducer';
 import * as AppSelectors from './app.selectors';
 import { Votes } from '../definitions/models/votes.mode';
-import { updateLastQuizPage } from './app.actions';
+import { deleteVotes, updateLastQuizPage } from './app.actions';
 
 @Injectable()
 export class AppEffects {
@@ -132,6 +132,17 @@ export class AppEffects {
         return AppActions.restoreAccessibilityModeChoices(restored);
       }),
     ),
+  );
+
+  deleteVotes = createEffect(
+    () =>
+      this.actions.pipe(
+        ofType(AppActions.deleteVotes),
+        map((_) => {
+          this.dataPersistanceService.deleteVotes();
+        }),
+      ),
+    { dispatch: false },
   );
 
   saveVotes = createEffect(

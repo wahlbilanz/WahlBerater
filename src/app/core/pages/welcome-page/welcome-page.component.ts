@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { map, takeUntil } from 'rxjs/operators';
 import * as AppActions from '../../../+state/app.actions';
@@ -6,14 +6,15 @@ import { QuizState, ResultUrl, QuizFirstPage, AccessibleUrl, AccessibilityModes,
 import { AppPartialState } from '../../../+state/app.reducer';
 import * as AppSelectors from '../../../+state/app.selectors';
 import { Subject } from 'rxjs';
-import { saveVotes, vote } from '../../../+state/app.actions';
+import { deleteVotes, saveVotes, vote } from '../../../+state/app.actions';
+import { Vote, Votes } from '../../../definitions/models/votes.mode';
 
 @Component({
   selector: 'app-welcome-page',
   templateUrl: './welcome-page.component.html',
   styleUrls: ['./welcome-page.component.scss'],
 })
-export class WelcomePageComponent implements OnDestroy {
+export class WelcomePageComponent implements OnDestroy, OnInit {
   public QuizStateEnum = QuizState;
   public quizState = this.store.pipe(select(AppSelectors.getQuizState));
 
@@ -28,14 +29,25 @@ export class WelcomePageComponent implements OnDestroy {
   public sAccessibleUrlFragment = AccessibleUrlFragment;
   public lastQuizPage: string;
   private destroy$: Subject<void> = new Subject<void>();
+  public hasVoted = false;
 
   constructor(private store: Store<AppPartialState>) {
     this.lastQuizPage = QuizFirstPage;
+  }
+
+  ngOnInit() {
     this.store.pipe(select(AppSelectors.getLastQuizPage), takeUntil(this.destroy$)).subscribe((p) => {
       this.lastQuizPage = p;
     });
     this.store.pipe(select(AppSelectors.getAllAccessibilityModes), takeUntil(this.destroy$)).subscribe((am) => {
       this.accessibilityModes = am;
+    });
+    this.store.pipe(select(AppSelectors.getVotes), takeUntil(this.destroy$)).subscribe((votes: Votes) => {
+      if (Object.keys(votes).length > 0) {
+        this.hasVoted = true;
+      } else {
+        this.hasVoted = false;
+      }
     });
   }
 
@@ -55,5 +67,9 @@ export class WelcomePageComponent implements OnDestroy {
 
   public updateReducedMotionMode(active: boolean) {
     this.store.dispatch(AppActions.toggleReducedMotionMode({ active }));
+  }
+
+  public deleteData() {
+    this.store.dispatch(deleteVotes());
   }
 }

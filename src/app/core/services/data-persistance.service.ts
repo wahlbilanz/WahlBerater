@@ -93,6 +93,11 @@ export class DataPersistanceService {
     localStorage.setItem(VOTES_STORE_KEY, JSON.stringify(votes));
   }
 
+  public deleteVotes(): void {
+    localStorage.removeItem(VOTES_STORE_KEY);
+    localStorage.removeItem(QUIZ_LASTPAGE);
+  }
+
   public getQuizLastPage(): string {
     if (!this.browserSupport) {
       return QuizFirstPage;
