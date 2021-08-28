@@ -17,13 +17,27 @@ import { ClaimMap } from '../models/claim.model';
  * @param claims all the claims
  * @param votes the decisions by the user
  */
-function getScoreScaler(claims: ClaimMap, votes: Votes): number {
-  let scoreScaler = 0;
+function getScoreScaler(
+  claims: ClaimMap,
+  votes: Votes,
+): {
+  overall: number;
+  categories: {};
+  favs: number;
+} {
+  const scoreScaler = {
+    overall: 0,
+    categories: {},
+    favs: 0,
+  };
   for (const claim of Object.keys(claims)) {
     if (votes[claim]?.decision) {
-      scoreScaler++;
+      scoreScaler.overall++;
+      scoreScaler.categories[claims[claim].category]++;
       if (votes[claim]?.fav) {
-        scoreScaler++;
+        scoreScaler.overall++;
+        scoreScaler.favs++;
+        scoreScaler.categories[claims[claim].category]++;
       }
     }
   }
@@ -40,6 +54,7 @@ function calcUsingCandidates(politicalData: PoliticalData, personalData: Persona
     [party: string]: {
       categories: { [category: string]: number };
       claims: { [claim: string]: number };
+      decisions: { [claim: string]: number };
       overall: number;
     };
   } = {};
@@ -51,28 +66,32 @@ function calcUsingCandidates(politicalData: PoliticalData, personalData: Persona
     if (!categorySize[category]) {
       categorySize[category] = 0;
     }
-    categorySize[category]++;
+    if (votes[claim]?.decision) {
+      categorySize[category]++;
+    }
   }
 
   // iterate all candidates
   for (const candidate of Object.keys(politicalData.candidates)) {
+    const partyId = politicalData.candidates[candidate].party;
     // get the result of the party
-    let partyResult: PartyResult = partyResults[politicalData.candidates[candidate].party];
+    let partyResult: PartyResult = partyResults[partyId];
     if (!partyResult) {
       partyResult = {
-        party: politicalData.candidates[candidate].party,
+        party: partyId,
         candidates: {},
         scores: {},
         score: new Score(),
         scorePercent: new Score(),
       };
-      partyResults[politicalData.candidates[candidate].party] = partyResult;
+      partyResults[partyId] = partyResult;
     }
-    if (!normaliser[politicalData.candidates[candidate].party]) {
-      normaliser[politicalData.candidates[candidate].party] = {
+    if (!normaliser[partyId]) {
+      normaliser[partyId] = {
         categories: {},
         claims: {},
         overall: 0,
+        decisions: {},
       };
     }
 
@@ -94,36 +113,43 @@ function calcUsingCandidates(politicalData: PoliticalData, personalData: Persona
       if (!candidateResult.scores[category]) {
         candidateResult.scores[category] = { category, score: new Score(), claims: {}, decisions: {} };
       }
+      candidateResult.scores[category].claims[claim] = { claim, score: s };
       if (!partyResult.scores[category]) {
         partyResult.scores[category] = { category, score: new Score(), claims: {}, decisions: {} };
       }
-      if (!normaliser[politicalData.candidates[candidate].party].categories[category]) {
-        normaliser[politicalData.candidates[candidate].party].categories[category] = 0;
-      }
-      if (!normaliser[politicalData.candidates[candidate].party].claims[claim]) {
-        normaliser[politicalData.candidates[candidate].party].claims[claim] = 0;
-      }
-      if (politicalData.candidates[candidate].positions[claim]?.vote != null) {
-        normaliser[politicalData.candidates[candidate].party].claims[claim]++;
-        normaliser[politicalData.candidates[candidate].party].categories[category]++;
-      }
-
-      candidateResult.scores[category].decisions[claim] = politicalData.candidates[candidate].positions[claim]?.vote || 0;
-
       if (!partyResult.scores[category].decisions[claim]) {
         partyResult.scores[category].decisions[claim] = 0;
       }
-      partyResult.scores[category].decisions[claim] += politicalData.candidates[candidate].positions[claim]?.vote || 0;
+      if (!partyResult.scores[category].claims[claim]) {
+        partyResult.scores[category].claims[claim] = { claim, score: new Score() };
+      }
+      if (!normaliser[partyId].categories[category]) {
+        normaliser[partyId].categories[category] = 0;
+      }
+      if (!normaliser[partyId].claims[claim]) {
+        normaliser[partyId].claims[claim] = 0;
+      }
+      if (!normaliser[partyId].decisions[claim]) {
+        normaliser[partyId].decisions[claim] = 0;
+      }
 
+      candidateResult.scores[category].decisions[claim] = politicalData.candidates[candidate].positions[claim]?.vote || 0;
       candidateResult.scores[category].score.add(s);
-      candidateResult.scores[category].claims[claim] = { claim, score: s };
-
-      partyResult.scores[category].score.add(s);
-      partyResult.scores[category].claims[claim] = { claim, score: s };
-
       candidateResult.score.add(s);
-      // partyResult.score.add(s);
-      normaliser[politicalData.candidates[candidate].party].overall++;
+
+      partyResult.scores[category].decisions[claim] += politicalData.candidates[candidate].positions[claim]?.vote || 0;
+      partyResult.scores[category].score.add(s);
+      partyResult.scores[category].claims[claim].score.add(s);
+      partyResult.score.add(s);
+
+      if (politicalData.candidates[candidate].positions[claim]?.vote !== undefined) {
+        normaliser[partyId].decisions[claim]++;
+        if (votes[claim]?.decision) {
+          normaliser[partyId].claims[claim]++;
+          normaliser[partyId].categories[category]++;
+          normaliser[partyId].overall++;
+        }
+      }
     }
     if (maxValue < candidateResult.score.score) {
       maxValue = candidateResult.score.score;
@@ -133,55 +159,48 @@ function calcUsingCandidates(politicalData: PoliticalData, personalData: Persona
   for (const party of Object.keys(partyResults)) {
     for (const category of Object.keys(partyResults[party].scores)) {
       for (const claim of Object.keys(partyResults[party].scores[category].decisions)) {
-        partyResults[party].scores[category].decisions[claim] /= Object.keys(partyResults[party].candidates).length;
+        if (normaliser[party].decisions[claim] > 0) {
+          partyResults[party].scores[category].decisions[claim] /= normaliser[party].decisions[claim];
+        }
       }
     }
   }
 
   let maxPercent = 0;
-  partyScores = Object.values(partyResults);
-  partyScores.forEach((party: PartyResult) => {
-    /*const nCandidates = Object.keys(party.candidates).length;
-    party.score.normalise(nCandidates);*/
-    party.score = new Score(0);
-    for (const cat of Object.keys(party.scores)) {
-      // console.log(party.party, party.scores[cat].score.score, normaliser[party.party].categories[cat])
-      party.scores[cat].score.normalise(normaliser[party.party].categories[cat] / categorySize[cat]);
-      // console.log(party.party, party.scores[cat].score.score)
-      party.score.add(party.scores[cat].score);
-      for (const claim of Object.keys(party.scores[cat].claims)) {
-        party.scores[cat].claims[claim].score.normalise(normaliser[party.party].claims[claim]);
-      }
-    }
-    if (party.score.score > maxParty) {
-      maxParty = party.score.score;
-    }
-    if (scoreScaler > 0) {
-      party.scorePercent.score = (100 * party.score.score) / scoreScaler;
-      if (maxPercent < party.scorePercent.score) {
-        maxPercent = party.scorePercent.score;
-      }
-      for (const candidate of Object.keys(party.candidates)) {
-        party.candidates[candidate].scorePercent.score = (100 * party.candidates[candidate].score.score) / scoreScaler;
-        if (maxPercent < party.candidates[candidate].scorePercent.score) {
-          maxPercent = party.candidates[candidate].scorePercent.score;
-        }
-      }
-    }
-  });
 
+  for (const party of Object.keys(partyResults)) {
+    for (const category of Object.keys(partyResults[party].scores)) {
+      for (const claim of Object.keys(partyResults[party].scores[category].decisions)) {
+        partyResults[party].scores[category].claims[claim].score.normalise(normaliser[party].claims[claim]);
+      }
+      partyResults[party].scores[category].score.normalise(normaliser[party].categories[category]);
+    }
+    partyResults[party].score.normalise(normaliser[party].overall);
+    partyResults[party].scorePercent.score =
+      (partyResults[party].score.score * 100 * (scoreScaler.overall - scoreScaler.favs)) / scoreScaler.overall;
+    if (maxPercent < partyResults[party].scorePercent.score) {
+      maxPercent = partyResults[party].scorePercent.score;
+    }
+
+    for (const candidate of Object.keys(partyResults[party].candidates)) {
+      partyResults[party].candidates[candidate].scorePercent.score =
+        (100 * partyResults[party].candidates[candidate].score.score) / scoreScaler.overall;
+      if (maxPercent < partyResults[party].candidates[candidate].scorePercent.score) {
+        maxPercent = partyResults[party].candidates[candidate].scorePercent.score;
+      }
+    }
+  }
+
+  partyScores = Object.values(partyResults);
   partyScores.sort((a: PartyResult, b: PartyResult): number => {
     /*if (a.score.score === b.score.score) {
       return b.score.stars - a.score.stars;
     }*/
     return b.score.score - a.score.score;
   });
-  // console.log(partyScores);
 
   return {
     partyScores,
-    maxValue,
-    maxParty,
     maxPercent,
   };
 }
@@ -231,10 +250,10 @@ function calcUsingParties(politicalData: PoliticalData, personalData: PersonalCa
       }
     }
 
-    if (scoreScaler > 0) {
-      partyResult.scorePercent.score = partyResult.score.score / scoreScaler;
-      if (maxPercent < partyResult.scorePercent.score) {
-        maxPercent = partyResult.scorePercent.score;
+    if (scoreScaler.overall > 0) {
+      partyResult.score.score = partyResult.score.score / scoreScaler.overall;
+      if (maxPercent < partyResult.score.score) {
+        maxPercent = partyResult.score.score;
       }
     }
   }
@@ -251,8 +270,6 @@ function calcUsingParties(politicalData: PoliticalData, personalData: PersonalCa
 
   return {
     partyScores,
-    maxValue: maxParty,
-    maxParty,
     maxPercent,
   };
 }
