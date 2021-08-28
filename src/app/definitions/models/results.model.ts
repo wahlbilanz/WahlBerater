@@ -34,7 +34,5 @@ export interface PartyResult {
 }
 export interface PartyScoreResult {
   partyScores: PartyResult[];
-  maxValue: number;
-  maxParty: number;
   maxPercent: number;
 }
