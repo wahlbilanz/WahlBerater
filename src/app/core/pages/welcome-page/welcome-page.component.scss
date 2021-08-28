@@ -164,3 +164,12 @@ section.welcome-page-nav {
     }
   }
 }
+.deinwal-archiv {
+  padding: 0 16px;
+  @media screen and (max-width: $wb-breakpoint-medium) {
+    padding: 0;
+  }
+  nz-card {
+    width: 100%;
+  }
+}

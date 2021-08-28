@@ -24,6 +24,8 @@ import { NavigationContainerComponent } from './components/navigation-container/
 import { NzNoAnimationModule } from 'ng-zorro-antd/core/no-animation';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { HelpersModule } from '../modules/helpers/helpers.module';
+import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzGridModule } from 'ng-zorro-antd/grid';
 
 registerLocaleData(en);
 
@@ -59,6 +61,8 @@ registerLocaleData(en);
     NzDividerModule,
     NzCheckboxModule,
     HelpersModule,
+    NzCardModule,
+    NzGridModule,
   ],
 })
 export class CoreModule {}

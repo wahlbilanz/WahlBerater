@@ -1,5 +1,5 @@
 <div class="deinwal-greeting">
-  <h1>Willkommen zu DeinWal!</h1>
+  <h1>Willkommen bei DeinWal!</h1>
   <div class="deinwal-logo">
     <object type="image/svg+xml" data="/assets/static/wal.svg" class="deinwal-image">
       <img src="/assets/static/wal.png" alt="DeinWal.de - Du hast den Wal!" />
@@ -7,11 +7,12 @@
   </div>
   <div class="deinwal-erklaerung">
     <div class="deinwal-erklaerung-text">
+      <h3>Bundestagswahl 2021 Edition</h3>
       <p class="small">Mit deinem Wal kannst du prüfen, welche Partei wie du denkt.</p>
 
       <p class="small">
-        Du kannst die Abstimmungen der letzten Legislaturperiode nachspielen, als wärst du live dabei gewesen! In der Auswertung siehst du,
-        welche Parteien in deinem Sinne abgestimmt haben.
+        Du kannst hier die Abstimmungen der letzten Legislaturperiode von 2017 - 2021 nachspielen, als wärst du live dabei gewesen! In der
+        Auswertung siehst du, welche Parteien in deinem Sinne abgestimmt haben.
       </p>
 
       <p class="small">
@@ -132,4 +133,33 @@
     </p>
   </div>
 </section>
-<app-footer></app-footer>
+
+<div class="deinwal-archiv">
+  <h3>DeinWal Archiv</h3>
+
+  <div nz-row [nzGutter]="[16, 16]">
+    <div nz-col nzXs="24" nzSm="12" nzMd="12" nzLg="12" nzXl="12">
+      <a href="https://deinwal.de/bundestagswal2017">
+        <nz-card nzHoverable [nzCover]="BudestagsWalCover" nzTitle="BundestagsWal 2017">
+          Hier kannst du die Abstimmungen im <strong>Bundestag der 18. Legislaturperiode (2013-2017)</strong> nachspielen.
+        </nz-card>
+      </a>
+    </div>
+
+    <div nz-col nzXs="24" nzSm="12" nzMd="12" nzLg="12" nzXl="12">
+      <a href="https://deinwal.de/europawal2019">
+        <nz-card nzHoverable [nzCover]="EuropaWalCover" nzTitle="EuropaWal 2019">
+          Hier kannst du die Abstimmungen der <strong>8. Legislaturperiode (2014-2019) im Europaparlament</strong> nachspielen.
+        </nz-card>
+      </a>
+    </div>
+
+    <ng-template #BudestagsWalCover>
+      <img alt="BundestagsWal 2017" src="/assets/static/bundestagswal.svg" />
+    </ng-template>
+    <ng-template #EuropaWalCover>
+      <img alt="BundestagsWal 2017" src="/assets/static/europawal.svg" />
+    </ng-template>
+  </div>
+  <app-footer></app-footer>
+</div>
