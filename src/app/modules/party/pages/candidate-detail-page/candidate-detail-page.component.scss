@@ -71,10 +71,6 @@ section {
   }
 }
 
-.candidate-claims nz-collapse {
-  margin: 0 $wb-space-small;
-}
-
 @media screen and (max-width: $wb-breakpoint-medium) {
   .candidate-card .candidate-info {
     grid-template:
