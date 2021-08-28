@@ -24,6 +24,7 @@ import { ClaimModule } from '../claim/claim.module';
 import { AccessibleAuswertungsChartComponent } from './accessible-auswertungs-chart/accessible-auswertungs-chart.component';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzProgressModule } from 'ng-zorro-antd/progress';
+import { CoreModule } from '../../core/core.module';
 
 @NgModule({
   declarations: [

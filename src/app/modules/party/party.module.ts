@@ -15,6 +15,7 @@ import { PartyListPageComponent } from './pages/party-list-page/party-list-page.
 import { PartyRoutingModule } from './party-routing.module';
 import { ClaimModule } from '../claim/claim.module';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
+import { CoreModule } from '../../core/core.module';
 
 @NgModule({
   declarations: [
