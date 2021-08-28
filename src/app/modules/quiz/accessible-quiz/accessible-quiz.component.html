@@ -15,9 +15,13 @@
             </nz-list-item-meta-description>
           </nz-list-item-meta>
 
-          <h4>{{ claim.title }}</h4>
+          <h4 [innerHTML]="claim.title | markdown"></h4>
 
-          <ul>
+          <ul *ngIf="claim.moreinfo?.length > 0">
+            <li *ngFor="let info of claim.moreinfo" [innerHTML]="info | markdown"></li>
+          </ul>
+
+          <ul class="vote-buttons">
             <li>
               <button
                 nz-button

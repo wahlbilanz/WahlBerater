@@ -40,13 +40,10 @@
       [showCandidates]="includeCandidates"
     ></app-claim-candidate-viz>
 
-    <ng-container *ngIf="politicalData.claims[claimId].links && politicalData.claims[claimId].links.length > 0">
+    <ng-container *ngIf="politicalData.claims[claimId].moreinfo && politicalData.claims[claimId].moreinfo.length > 0">
       <h5>Weiterführende Informationen zur These</h5>
       <ul>
-        <li *ngFor="let link of politicalData.claims[claimId].links">
-          <a *ngIf="link.url" [href]="link.url" target="_blank" [title]="link.title">{{ link.title || link.url }}</a>
-          <ng-container *ngIf="!link.url">{{ link.title }}</ng-container>
-        </li>
+        <li *ngFor="let link of politicalData.claims[claimId].moreinfo" [innerHTML]="link | markdown"></li>
       </ul>
     </ng-container>
 

@@ -1,4 +1,4 @@
-import { Claim, ClaimMap, ClaimProvenanceEntry, ClaimWithId, NamedLink } from './claim.model';
+import { Claim, ClaimMap, ClaimProvenanceEntry, ClaimWithId } from './claim.model';
 
 export interface CategoryMap {
   [category: string]: Category;
