@@ -11,14 +11,14 @@ p {
 }
 section {
   background-color: $wb-color-page-foreground-background;
-  padding: $wb-space-medium $wb-space-large;
+  padding: $wb-space-xxl-large $wb-space-large;
   box-shadow: $wb-shadow-normal;
   @media screen and (max-width: $wb-breakpoint-medium) {
     padding: $wb-space-small $wb-space-medium;
   }
   img {
     width: 100%;
-    max-width: 800px;
+    max-width: 450px;
   }
 }
 table {

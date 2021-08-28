@@ -1,20 +1,27 @@
 <nz-breadcrumb>
   <nz-breadcrumb-item><a routerLink="/" title="Zurück zur Startseite">Start</a></nz-breadcrumb-item>
-  <nz-breadcrumb-item><span title="Aktuelle Seite: Über den WahlBerater">Über den Wahlberater</span></nz-breadcrumb-item>
+  <nz-breadcrumb-item><span title="Aktuelle Seite: Über den WahlBerater">Über DeinWal</span></nz-breadcrumb-item>
 </nz-breadcrumb>
 
-<h1>Über den WahlBerater</h1>
+<h1>Über den DeinWal</h1>
 
 <section class="about">
-  <img src="/assets/static/wal.png" />
+  <div nz-row [nzGutter]="[16, 16]">
+    <div nz-col nzXs="24" nzSm="12" nzMd="12" nzLg="12" nzXl="12">
+      <img src="/assets/static/wal.png" />
+    </div>
 
-  <p>Dieser DeinWal für die Bundestagswahl 2021 wurde entwickelt von</p>
+    <div nz-col nzXs="24" nzSm="12" nzMd="12" nzLg="12" nzXl="12">
+      <p>Dieser DeinWal für die Bundestagswahl 2021 wurde entwickelt von</p>
 
-  <ul>
-    <li>Sophie Flack</li>
-    <li>Tom Theile</li>
-    <li><a href="https://binfalse.de">Martin Scharm</a></li>
-  </ul>
+      <ul>
+        <li>Sophie Flack</li>
+        <li>Tom Theile</li>
+        <li><a href="https://binfalse.de">Martin Scharm</a></li>
+      </ul>
+      <p>entwickelt.</p>
+    </div>
+  </div>
 </section>
 
 <h2 id="faq">Häufig gestellte und ausgedachte Fragen</h2>
