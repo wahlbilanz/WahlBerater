@@ -6,42 +6,314 @@
 <h1>Über den WahlBerater</h1>
 
 <section class="about">
-  <img src="/assets/static/team.png" />
+  <img src="/assets/static/wal.png" />
 
-  <p>
-    Dieser WahlBerater für die Wahlen zum <a href="https://www.fernstudis.de/">Studierendenparlament</a> an der
-    <a href="https://www.fernuni-hagen.de/">FernUniversität in Hagen</a> wurde entwickelt von
-  </p>
+  <p>Dieser DeinWal für die Bundestagswahl 2021 wurde entwickelt von</p>
 
   <ul>
-    <li>Martin Peters</li>
     <li>Sophie Flack</li>
-    <li>Dr. Martin Scharm</li>
+    <li>Tom Theile</li>
+    <li><a href="https://binfalse.de">Martin Scharm</a></li>
   </ul>
-
-  <p>
-    Wir haben bis zum 25. Juli 2021 mittels
-    <a href="https://www.limesurvey.org/">LimeSurvey</a> nach Vorschlägen für Thesen gesucht. Dabei wurden <-- #TODO -->.. Thesen von ..
-    Personen eingereicht, die wir gefiltert und sukzessive in gemeinsamen Meetings zusammengeführt haben. Unsere Meetings fanden -- dank
-    Covid19 -- allesamt virtuell statt: Wir haben uns wöchentlich in einem <a href="https://jitsi.org/">Jitsi</a> Meeting getroffen.
-  </p>
-
-  <p>
-    Bei der Entwicklung des WahlBeraters haben wir uns um maximale Transparenz bemüht. So steht der Code des WahlBeraters beispielsweise
-    unter <-- #TODO -->... frei zur Verfügung und die Provinienz der finalen Thesen kann auf der
-    <a routerLink="/claim">Thesen-Seite</a> eingesehen werden! Mehr <a href="wahlberater.de">Informationen zum WahlBerater</a> gibt es auf
-    <a href="https://wahlberater.de">WahlBerater.de.</a>
-  </p>
-
-  <!-- TODO: hier sind noch einige Platzhalter zu fuellen... -->
 </section>
 
 <h2 id="faq">Häufig gestellte und ausgedachte Fragen</h2>
 
 <section class="faq-section">
   <nz-collapse>
-    <nz-collapse-panel *ngFor="let f of faq" [nzHeader]="f.question">
-      <p [innerHTML]="f.answer | markdown"></p>
+    <nz-collapse-panel nzHeader="Was ist DeinWal.de?">
+      <p>
+        Auf DeinWal.de hast du den Wal! (Oder die Wahl?) Dein Wal gibt dir die Möglichkeit, deine Einstellung zu verschiedenen Themen mit
+        den Entscheidungen der Parteien zu vergleichen. In einem Quiz kannst du einige der tatsächlich stattgefundenen Abstimmungen im
+        Bundestag nachspielen und herausfinden, welche Partei am ähnlichsten wie du abgestimmt hat. Die Fragen beruhen auf echten
+        Abstimmungen der letzten Legislaturperiode und nicht auf Absichtserklärungen der Parteien.
+      </p>
+      <p>
+        In der Auswertung kannst du dann sehen, welche Partei am häufigsten in deinem Sinne abgestimmt hat. Solltest du schon eine Partei
+        favorisieren, kannst du auch gut überprüfen, ob sich deine Präferenz bestätigt und bei welchen Themen eure Meinungen abweichen.
+      </p>
+      <p>
+        Wir haben versucht alle Thesen und Fragen so objektiv wie möglich darzustellen und aus den über <strong>200</strong> namentlichen
+        Abstimmungen der letzten vier Jahre auszuwählen. Dafür haben wir uns die Wortwahl der originalen Anträge angeschaut, aber auch die
+        auf <a href="https://www.bundestag.de/abstimmung">Bundestag.de</a>
+        verfügbaren Reden der Abgeordneten aller Parteien und die Berichterstattung in verschiedenen Medien über diese Themen und
+        Abstimmungen.
+      </p>
+      <p>
+        Dein Wal achtet dabei besonders auf deine Privatsphäre! Nachdem du die Seite einmal geladen hast, wird nichts mehr über das Internet
+        kommuniziert. Du kannst das Internet dann quasi aus machen und alles funktioniert reibungslos weiter! Das unterscheidet deinen Wal
+        von den meisten anderen Seiten, die deine Daten regelmässig an den Server zurückmelden.
+      </p>
+    </nz-collapse-panel>
+
+    <nz-collapse-panel nzHeader="Wie kommt ihr auf den bescheuerten Namen?">
+      <p>WahlWal.de war leider schon vergeben und WahlWachtel war irgendwie noch bescheuerter.</p>
+    </nz-collapse-panel>
+
+    <nz-collapse-panel nzHeader="Nanu, dieser Wal sieht ja ganz anders aus!?">
+      <p>Aha, ein treuer Nutzer! :)</p>
+      <p>
+        Genau, DeinWal ist ein bisschen erwachsener geworden. Für ein anderes Projekt hat Martin eine technische Wahlentscheidungshilfe (den
+        <a href="https://wahlberater.de">WahlBerater</a>) entwickelt, die gegenüber dem traditionellen DeinWal einige Vorteile bietet. Daher
+        haben wir uns kurzerhand entschlossen den neuen Code vom neuen Tool zu nehmen. Am DeinWal-Konzept hat sich natürlich nichts
+        geändert!
+      </p>
+    </nz-collapse-panel>
+
+    <nz-collapse-panel nzHeader="Warum macht ihr das?">
+      <p>Danke für diese sehr gute Frage ;)</p>
+      <p>
+        Man kann stundenlang über Politik diskutieren, sich dabei gegenseitig beschimpfen und man kommt doch zu keinem gemeinsamen Ergebnis.
+        Doch was kann ICH als "normaler Mensch" schon tun, um ein bisschen was zu verbessern? In die Politik gehen und meine Seele verkaufen
+        ;)? Aber an welche Partei denn? Wir wollten also etwas praktisches umsetzen!
+      </p>
+      <p>
+        Die Idee zu DeinWal ist schon ein bisschen älter und entstand beim spielen des Wahl-O-Mats: "Moment mal, alle Parteien sind für
+        dieses Thema? Warum haben einige dann noch vor einem Jahr dagegen gestimmt?".
+      </p>
+      <p>
+        Bei anderen Politik-Fragebögen werden private Daten und politische Einstellungen von Millionen von Menschen durch das Internet
+        geschickt, potentiell gespeichert und ausgewertet. Die Benutzer können nicht wissen was mit ihren Eingaben passiert. Mit einem Quiz,
+        dass ausschließlich in deinem Browser läuft, müssen deine Daten nirgendwo hingesendet werden
+      </p>
+      <p>
+        Bei unseren Recherchen für deinen Wal haben wir selber eine ganze Menge gelernt. Dieses Wissen möchten wir hier auch gerne weiter
+        geben. Wir hoffen, dass dein Wal viele Besucher zum kritischen Nachdenken anregt und ein bisschen veranschaulicht, was in den
+        letzten Jahren im Parlament passiert ist und wie sich die Parlamentarier damit auseinandersetzen mussten.
+      </p>
+    </nz-collapse-panel>
+
+    <nz-collapse-panel nzHeader="Wie berechnet ihr die Auswertung?">
+      <p>
+        Die Auswertung sollte möglichst einfach sein und ist daher an das Rechenmodell des Wahl-O-Mats angelehnt. Allerdings berücksichtigen
+        wir das Abstimmungsergebnis jedes einzelnen Abgeordneten.
+      </p>
+      <h4>Berechnung der Ähnlichkeit bei einer einzelnen Abstimmung</h4>
+      <p>
+        Die Prozentangaben geben die Ähnlichkeit deiner Entscheidung mit dem Abstimmungsergebnis einer Partei an. 100% bedeutet dabei, dass
+        die Partei geschlossen genau wie du gestimmt hat. 0% bedeutet, dass die Partei komplett anderer Meinung war. Die Berechnung der
+        Prozentzahlen dazwischen ist ein bisschen komplizierter, da die Parteien nicht zwingend geschlossen abstimmen und sich auch
+        enthalten können. Für die Berechnung der Ähnlichkeit einer Partei mit deiner Antwort zählen folgende Werte:
+      </p>
+      <table>
+        <tr>
+          <th></th>
+          <th>Partei stimmt zu</th>
+          <th>Partei enthält sich</th>
+          <th>Partei stimmt dagegen</th>
+        </tr>
+        <tr>
+          <th>Du stimmst zu</th>
+          <td>100%</td>
+          <td>50%</td>
+          <td>0%</td>
+        </tr>
+        <tr>
+          <th>Du stimmst dagegen</th>
+          <td>0%</td>
+          <td>50%</td>
+          <td>100%</td>
+        </tr>
+      </table>
+      <p>Wenn du eine Frage überspringst, zählt diese nicht in das Ergebnis hinein.</p>
+      <p>Wenn du das Herzchen bei einer Frage anklickst, zählt diese Frage doppelt in das Endergebnis hinein.</p>
+      <p>
+        Wenn die Abgeordneten einer Partei nicht alle gleich abgestimmt haben, kommt man bei einer Frage nicht auf 100 %, da der Vergleich
+        mit jedem einzelnen Abgeordneten durchgeführt wird und anschließend das Ergebnis für eine Partei gemittelt wird.
+      </p>
+      <h4>Beispiel</h4>
+      <p>
+        Angenommen du hast für eine These gestimmt. Weiter angenommen es gibt eine Partei ABC mit 100 Abgeordneten. Diese 100 Abgeordneten
+        haben sich wie folgt positioniert:
+      </p>
+      <ul>
+        <li>80x dafür gestimmt</li>
+        <li>10x enthalten</li>
+        <li>5x dagegen gestimmt</li>
+        <li>5x nicht anwesend</li>
+      </ul>
+      <p>Dann berechnet sich die Übereinstimmung aus der folgenden Summe:</p>
+      <ul>
+        <li>80 * 100% = 80 Punkte</li>
+        <li>10 * 0% = 0 Punkte</li>
+        <li>5 * 50% = 2.5 Punkte</li>
+        <li>5 * 50% = 2.5 Punkte</li>
+      </ul>
+      <p>In Summe sind es also <code>(80 + 0 + 2.5 + 2.5) / 100 Abgeordnete = 0.85 = 85%</code></p>
+      <p>
+        Eine übereinstimmende Antwort eines Abgeordneten mit deiner Antwort hat also volles Gewicht in der Berechnung. Enthält sich der
+        Abgeordnete, während du mit Ja oder Nein stimmst, zählt die Stimme mit halbem Gewicht.
+      </p>
+      <p>
+        Weil es so schön ist, hier ein weiteres Beispiel: Wenn eine Partei mit 60% Ja, 10% Nein und 30% Enthalten abgestimmt hat, ergeben
+        sich folgende Ähnlichkeiten:
+      </p>
+      <ul>
+        <li>Wenn du Ja stimmst: 60% * 1,0 + 30% * 0,5 + 10% * 0,0 = 75%</li>
+        <li>Wenn du Nein stimmst: 60% * 0,0 + 30% * 0,5 + 10% * 1,0 = 25%</li>
+      </ul>
+      <p>Diese Berechnung ist damit weitestgehend konform mit dem Rechenmodell des Wahl-O-Mat.</p>
+      <h4>Berechnung des Gesamtergebnis</h4>
+      <p>
+        Das Gesamtergebnis ensteht durch die Mittelung aller einzelnen Ergebnisse. Dabei zählen Fragen, die mit einem Herz makiert wurden,
+        doppelt. Übersprungene Fragen zählen nicht in das Ergebnis hinein.
+      </p>
+
+      <h4>Sonderfall: Bundeswehreinsätze</h4>
+      <p>
+        Die Auslandseinsätze der Bundeswehr müssen vom Bundestag abgesegnet werden und zwar bei jeder Änderung des Umfangs. Das führt zu
+        sehr vielen Abstimmungen über diese Einsätze. Anstatt einen einzelnen davon auszuwählen, haben wir uns dazu entschieden, diese
+        Abstimmungen zu einer Frage zusammenzufassen.
+      </p>
+    </nz-collapse-panel>
+
+    <nz-collapse-panel nzHeader="Was bedeuten die ganzen Icons?">
+      <p>
+        Um dir visuell schnell Rückmeldung zu geben, ob eine Partei oder ein Abgeordneter deine Position vertritt, haben wir uns folgende
+        Visualisierung überlegt:
+      </p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Deine Antwort</th>
+            <th colspan="3">Antwort der Partei / Abgeordneten</th>
+          </tr>
+          <tr>
+            <th></th>
+            <th><app-decision-icon [vote]="1" [agreement]="agreement.NONE"></app-decision-icon></th>
+            <th><app-decision-icon [vote]="0" [agreement]="agreement.NONE"></app-decision-icon></th>
+            <th><app-decision-icon [vote]="-1" [agreement]="agreement.NONE"></app-decision-icon></th>
+          </tr>
+        </thead>
+        <tr>
+          <th><app-decision-icon [vote]="1" [agreement]="agreement.USER"></app-decision-icon></th>
+          <td><app-decision-icon [vote]="1" [agreement]="agreement.AGREE"></app-decision-icon></td>
+          <td><app-decision-icon [vote]="0" [agreement]="agreement.NONE"></app-decision-icon></td>
+          <td><app-decision-icon [vote]="-1" [agreement]="agreement.DISAGREE"></app-decision-icon></td>
+        </tr>
+        <tr>
+          <th><app-decision-icon [vote]="-1" [agreement]="agreement.USER"></app-decision-icon></th>
+          <td><app-decision-icon [vote]="1" [agreement]="agreement.DISAGREE"></app-decision-icon></td>
+          <td><app-decision-icon [vote]="0" [agreement]="agreement.NONE"></app-decision-icon></td>
+          <td><app-decision-icon [vote]="-1" [agreement]="agreement.AGREE"></app-decision-icon></td>
+        </tr>
+      </table>
+      <p>Solltes du eine Frage zudem noch mit einem Herz markiert haben, sieht die Visualisierung wie folgt aus:</p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Deine Antwort</th>
+            <th colspan="3">Antwort der Partei / Abgeordneten</th>
+          </tr>
+          <tr>
+            <th></th>
+            <th><app-decision-icon [vote]="1" [agreement]="agreement.NONE"></app-decision-icon></th>
+            <th><app-decision-icon [vote]="0" [agreement]="agreement.NONE"></app-decision-icon></th>
+            <th><app-decision-icon [vote]="-1" [agreement]="agreement.NONE"></app-decision-icon></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th><app-decision-icon [vote]="{ decision: 1, fav: true }" [agreement]="agreement.USER_FAV"></app-decision-icon></th>
+            <td><app-decision-icon [vote]="1" [agreement]="agreement.AGREE_AND_FAV"></app-decision-icon></td>
+            <td><app-decision-icon [vote]="0" [agreement]="agreement.NONE"></app-decision-icon></td>
+            <td><app-decision-icon [vote]="-1" [agreement]="agreement.DISAGREE"></app-decision-icon></td>
+          </tr>
+          <tr>
+            <th><app-decision-icon [vote]="{ decision: -1, fav: true }" [agreement]="agreement.USER_FAV"></app-decision-icon></th>
+            <td><app-decision-icon [vote]="1" [agreement]="agreement.DISAGREE"></app-decision-icon></td>
+            <td><app-decision-icon [vote]="0" [agreement]="agreement.NONE"></app-decision-icon></td>
+            <td><app-decision-icon [vote]="-1" [agreement]="agreement.AGREE_AND_FAV"></app-decision-icon></td>
+          </tr>
+        </tbody>
+      </table>
+    </nz-collapse-panel>
+
+    <nz-collapse-panel nzHeader="Wie habt ihr die Abstimmungen ausgewählt und in Fragen formuliert?">
+      <p>
+        Die Auswahl der spezifischen Fragen war aufwendig. Dafür haben wir uns die namentlichen Abstimmungen auf
+        <a href="https://www.bundestag.de/abstimmung">Bundestag.de</a> angeschaut. Zu jeder Abstimmung gibt es ein PDF ("Drucksache" im
+        Beamtendeutsch), welches den Antrag, das neue Gesetz oder eine Beschlussempfehlung enthält. Über diese seitenlangen PDFs wird
+        letztendlich abgestimmt. Wir uns diese Sachen durchgelesen (OK, ja, teilweise auch nur überflogen - wer liest schon gerne
+        Gesetzestexte wenn man schon weiß, dass sich das nicht für eine Frage eignet?) und andere Quellen hinzugezogen. Andere Quellen
+        waren:
+      </p>
+      <ul>
+        <li>Die Reden der Abgeordneten oder Zusammenfassungen davon auf <a href="https://www.bundestag.de/abstimmung">Bundestag.de</a></li>
+        <li>Wikipedia (Was genau ist ein subsidiär Schutzberechtigter und was unterscheidet ihn von einem Flüchtling?)</li>
+        <li>Zeitungsartikel (Es hat uns überrascht, dass zu manchen Abstimmungen kaum Berichterstattung zu finden war!)</li>
+        <li>
+          Abgeordnetenwatch (Dort gibt es zu jeder namentlichen Abstimmung kurze und gute Informationen, aber wir haben versucht
+          Primärquellen vorzuziehen)
+        </li>
+      </ul>
+      <p>
+        Nicht jede Abstimmung eignet sich für dieses Projekt. Wenn in einem Antrag bspw. viele verschiedene Forderungen gestellt werden, ist
+        es manchmal unmöglich diesen Antrag in eine einfache Frage für DeinWal.de zu übersetzen. Wir haben auch versucht, die Thesen
+        "gerecht" zu formulieren. Wenn die Bundesregierung ein Gesetz vorschlägt, dann kann es vorkommen, dass alle anderen Parteien dagegen
+        stimmen, jedoch dann meistens aus völlig entgegengesetzten Gründen. Zum Beispiel reichte die Bundesregierung ein Gesetz zur
+        Reduktion der Stickoxidwerte ein - die AfD stimmte dagegen weil es ihnen zu weit ging, die Grünen stimmten dagegen, weil es ihnen
+        nicht weit genug ging.
+      </p>
+      <p>
+        Insgesamt sollten es natürlich auch nicht zu viele Abstimmungen sein (Es gab hunderte Abstimmungen), sondern nur interessante,
+        relevante und mit einem Abstimmungsverhalten, dass zu den Parteien passt.
+      </p>
+      <p>
+        Wenn du trotzdem der Meinung bist, dass eine bestimmte Abstimmung unbedingt bei deinem Wal auftauchen sollte, kannst du uns gern
+        davon überzeugen! Schreib uns eine Mail an <a href="{{ mto }}info@{{ domain }}.de">info@{{ domain }}.de</a> oder mach ein Ticket bei
+        <a href="https://github.com/wahlbilanz/">Github</a> auf. Wir werden dir dann erklären warum es die Frage nicht geschafft hat, oder
+        überlegen sie doch noch aufzunehmen :)
+      </p>
+    </nz-collapse-panel>
+
+    <nz-collapse-panel nzHeader="Welche Daten werden gespeichert und getrackt?">
+      <p>
+        Wir benutzen keine Tracking-Dienste wie Google-Analytics. Deine Antworten bleiben geheim und werden an niemanden (auch nicht an uns)
+        gesendet. Wenn du auf der Startseite das Häckchen bei "Speichern" aktivierst, werden deine Antworten nur in deinem Browser und
+        nirgendwo sonst gespeichert. Dann kannst du den Tab schließen und morgen trotzdem nochmal weiter machen.
+      </p>
+      <p>Wir speichern lediglich die Server-logs, um zu zählen, wie viele Leute DeinWal.de herunterladen.</p>
+    </nz-collapse-panel>
+
+    <nz-collapse-panel nzHeader="Wie habt ihr das technisch gelöst?">
+      <p>
+        Die komplette Webseite ist eine Single-Page-Javascript-Application und läuft ausschließlich im Browser. Sie wurde mit Angular
+        entwickelt. Angular ist ein Typescript-Framework mit dem sich clientseitige Web-Applikationen sowohl für den Desktop als auch für
+        mobile Geräte entwickeln lassen. Das Layout haben wir mit dem Ant-Design CSS-Framework gestaltet. Das Webprojekt kompiliert zu
+        statischem Javascript-HTML-CSS-Brei, den wir dann einfach mit einem nginx Webserver mittels Docker Container ausliefern.
+      </p>
+      <p>
+        Die Webseite ist übrigens Open Source: Auf <a href="https://github.com/wahlbilanz/">Github</a> könnt ihr die Webseite angucken,
+        forken, Verbesserungsvorschläge einreichen und mitmachen!
+      </p>
+    </nz-collapse-panel>
+
+    <nz-collapse-panel nzHeader="Wer steckt alles hinter DeinWal.de?">
+      <p>
+        Das initiale Team hinter DeinWal.de bestand aus genau 2 Personen: Martin und Tom. Für die Bundestagswahl 2021 haben wir uns
+        Verstärkung von Sophie geholt. Außerdem haben wir uns zwischendurch einen zweiten Martin geholt, der viel von der neuen Version der
+        Webseite programmiert hat.
+      </p>
+      <p>
+        Wir sind unabhängig, gehören keiner Partei an und haben (bisher) keinen Cent für das Projekt bekommen. Unsere Motivation ist einfach
+        politisches Interesse. Wir wollten mehr über den Bundestag und das System in Deutschland lernen. Das ist uns auch ganz gut gelungen.
+        Nun wollen wir das Wissen weitergeben und aufklären :)
+      </p>
+      <p>
+        Mittlerweile haben aber vielleicht schon viele andere Leute mitgewirkt. Wir versuchen alle im Impressum zu nennen. Im Projekt
+        <a href="https://github.com/wahlbilanz/">Github</a> könnt ihr auch sehen wer Code beigetragen hat.
+      </p>
+    </nz-collapse-panel>
+
+    <nz-collapse-panel nzHeader="Wer finanziert das Projekt?">
+      <p>
+        DeinWal.de wird (bisher) ausschliesslich von uns privat finanziert. Martin hat die Domain gekauft und stellt den Webserver zur
+        Verfügung. Brainstormen, Hacken, Schreiben, Formulieren, Layouten, Bewerben etc. haben wir alles über Monate in unserer Freizeit
+        gemacht ().
+      </p>
     </nz-collapse-panel>
   </nz-collapse>
 </section>

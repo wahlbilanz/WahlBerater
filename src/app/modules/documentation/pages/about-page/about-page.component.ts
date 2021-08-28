@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AGREEMENT } from '../../../../definitions/enums/agreement.enum';
 
 interface FaqEntry {
   question: string;
@@ -11,10 +12,18 @@ interface FaqEntry {
   styleUrls: ['./about-page.component.scss'],
 })
 export class AboutPageComponent implements OnInit {
+  agreement = AGREEMENT;
   faq: FaqEntry[] = [];
+  domain = 'deinwal';
+  mto = 'mailto:';
 
   constructor() {
     this.faq = [
+      {
+        question: 'Was ist DeinWal.de?',
+        answer:
+          'Wir haben locker 100+ Vorschläge diskutiert. Am Ende gab es natürlich eine demokratische Entscheidung! Und WahlBerater ist doch eigentlich ganz passend, oder? :)',
+      },
       {
         question: 'Wie kommt ihr auf den Namen?',
         answer:

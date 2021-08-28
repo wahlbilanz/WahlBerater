@@ -21,3 +21,17 @@ section {
     max-width: 800px;
   }
 }
+table {
+  margin: 24px 16px;
+  thead {
+    border-bottom: 1px solid #ccc;
+  }
+  th,
+  td {
+    padding: 12px 8px;
+    text-align: center;
+  }
+  th {
+    background: #fafafa;
+  }
+}
