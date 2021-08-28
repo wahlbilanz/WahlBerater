@@ -29,7 +29,7 @@
       <a [routerLink]="'/quiz/' + claimId"><i nz-icon nzType="double-right" nzTheme="outline"></i>&nbsp;Springe zur These im Quiz</a>
     </p>
 
-    <h3>Wie positionieren sich die {{ includeCandidates ? 'Abgeordnete' : 'Parteien' }}?</h3>
+    <h3>Wie positionieren sich die {{ includeCandidates ? 'Abgeordneten' : 'Parteien' }}?</h3>
     <app-claim-candidate-viz
       [claimId]="claimId"
       [claim]="politicalData.claims[claimId]"

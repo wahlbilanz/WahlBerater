@@ -7,9 +7,10 @@
 
 <p>
   Das Konzept von DeinWal kann nur Parteien berücksichtigen, die in der letzten Legislaturperiode im deutschen Bundestag vertreten waren.
+  <ng-container *ngIf="sortedParties && defaultSort"
+    >Die Reihenfolge der Parteien entspricht dem Ergebnis bei der letzten Bundestagswahl.</ng-container
+  >
 </p>
-
-<p *ngIf="sortedParties && defaultSort">Die Reihenfolge der Parteien entspricht dem Ergebnis bei der letzten Bundestagswahl.</p>
 
 <section [ngClass]="{ 'party-list': true, 'unsorted-parties': !sortedParties }" *ngIf="politicalData?.parties && partyIds">
   <a
