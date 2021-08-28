@@ -8,10 +8,23 @@ import { DecisionButtonComponent } from './components/decision-button/decision-b
 import { RouterModule } from '@angular/router';
 import { PartyCandidatesDecisionTableComponent } from './components/party-candidates-decision-table/party-candidates-decision-table.component';
 import { PipesModule } from '../pipes/pipes.module';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
-  declarations: [DecisionTemplatesComponent, DecisionIconComponent, DecisionButtonComponent, PartyCandidatesDecisionTableComponent],
-  exports: [DecisionTemplatesComponent, DecisionIconComponent, DecisionButtonComponent, PartyCandidatesDecisionTableComponent],
+  declarations: [
+    DecisionTemplatesComponent,
+    DecisionIconComponent,
+    DecisionButtonComponent,
+    PartyCandidatesDecisionTableComponent,
+    FooterComponent,
+  ],
+  exports: [
+    DecisionTemplatesComponent,
+    DecisionIconComponent,
+    DecisionButtonComponent,
+    PartyCandidatesDecisionTableComponent,
+    FooterComponent,
+  ],
   imports: [CommonModule, NzBadgeModule, NzIconModule, RouterModule, PipesModule],
 })
 export class HelpersModule {}

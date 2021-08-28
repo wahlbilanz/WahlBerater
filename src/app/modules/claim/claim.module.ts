@@ -19,6 +19,7 @@ import { HelpersModule } from '../helpers/helpers.module';
 import { ClaimPartyButtonsComponent } from './pages/claim-party-buttons/claim-party-buttons.component';
 import { NzTagModule } from 'ng-zorro-antd/tag';
 import { ClaimLinksComponent } from './components/claim-links/claim-links.component';
+import { CoreModule } from '../../core/core.module';
 
 @NgModule({
   declarations: [
