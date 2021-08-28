@@ -5,6 +5,12 @@
 Der WahlBerater ist eine technische Wahlentscheidungshilfe.
 Wählende sollen leicht ihre Position mit der Position von Kandidierenden vergleichen können.
 
+## Instanzen
+
+Der WahlBerater wird bisher hier eingesetzt:
+
+- tbc
+
 ## Lizenz
 
 Der Code zur Webseite ist unter der [GPLv3 Lizenz](http://www.gnu.org/licenses/) frei verwendbar:
