@@ -5,11 +5,9 @@ claims:
     category: social-stuff
     description: |
       Amerikanische Wissenschaftler haben herausgefunden, dass Sozialität viel sozialer ist.
-    links:
-      - title: Smithsonian National Museum of Natural History
-        url: https://naturalhistory.si.edu/
-      - title: Wikipediaeintrag zum Buckelwal
-        url: https://de.wikipedia.org/wiki/Buckelwal
+    moreinfo:
+      - [Smithsonian National Museum of Natural History](https://naturalhistory.si.edu/)
+      - [Wikipediaeintrag zum Buckelwal](https://de.wikipedia.org/wiki/Buckelwal)
 
   - id: social02
     order: 2
@@ -22,9 +20,8 @@ claims:
         description: Mehr gendern!
       - claim: Gendern2
         description: Noch mehr gendern!
-    links:
-      - title: Wikipedia zum Gendersternchen
-        url: https://de.wikipedia.org/wiki/Gendersternchen
+    moreinfo:
+      - [Wikipedia zum Gendersternchen](https://de.wikipedia.org/wiki/Gendersternchen)
 
   - id: energy01
     order: 1

@@ -87,6 +87,8 @@ export class QuizCardComponent implements OnInit, OnChanges, OnDestroy, AfterVie
 
   introJS = introJs();
 
+  showMoreInfos = {};
+
   containerHeight: number;
   public accessibilityModes: AccessibilityModes = {
     reducedMotionMode: true,
@@ -139,7 +141,7 @@ export class QuizCardComponent implements OnInit, OnChanges, OnDestroy, AfterVie
         description: 'Hier finden Sie Hintergrundinformationen, um die These besser einordnen zu können.',
         provenance: [],
         title: 'Eine These steht immer prominent in der Mitte der Quizkarte.',
-        links: [],
+        moreinfo: [],
       };
     }
     setTimeout(() => {
@@ -166,6 +168,10 @@ export class QuizCardComponent implements OnInit, OnChanges, OnDestroy, AfterVie
         this.startIntro();
       }
     });
+  }
+
+  moreInfos(i: string): void {
+    this.showMoreInfos[i] = true;
   }
 
   private setupIntroJS(): void {

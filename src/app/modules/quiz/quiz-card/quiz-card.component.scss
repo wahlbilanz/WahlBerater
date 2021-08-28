@@ -25,6 +25,20 @@
     font-size: 16px;
     line-height: 25px;
   }
+  .moreinfos {
+    text-align: center;
+    margin: -20px 0 50px 0;
+    ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+      hyphens: auto;
+      li {
+        margin-bottom: 10px;
+      }
+    }
+  }
+
   @media screen and (min-width: $wb-breakpoint-x-small) {
     h1 {
       font-size: 28px;

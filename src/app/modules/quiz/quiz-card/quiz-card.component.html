@@ -16,8 +16,16 @@
       </h2>
 
       <div id="claim-background" [innerHTML]="claim.description | markdown" class=""></div>
-
-      <h1 id="claim" class="" [innerHTML]="claim.title"></h1>
+      <h1 id="claim" class="" [innerHTML]="claim.title">test</h1>
+      <div class="moreinfos" *ngIf="claim.moreinfo?.length">
+        <button nz-button nzType="dashed" (click)="moreInfos(claimId)" *ngIf="!showMoreInfos[claimId]">
+          <i nz-icon nzType="info-circle"></i>
+          Mehr Informationen
+        </button>
+        <ul *ngIf="showMoreInfos[claimId]">
+          <li *ngFor="let info of claim.moreinfo" [innerHTML]="info | markdown"></li>
+        </ul>
+      </div>
 
       <div id="decision" class="">
         <div id="decision-left" class="">
