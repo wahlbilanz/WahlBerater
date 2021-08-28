@@ -4,10 +4,6 @@
 </nz-breadcrumb>
 
 <h1>Übersicht über die Thesen</h1>
-<p>
-  Die folgenden Thesen, sortiert nach Kategorien, haben es in den finalen WahlBerater geschafft. Klick eine These an um mehr Informationen
-  zu erhalten.
-</p>
 <ng-container *ngIf="sortedData | async as d">
   <div class="category" *ngFor="let category of d" [style.border-color]="category.category.color">
     <h3>{{ category.category.title }}</h3>
@@ -20,10 +16,3 @@
     </nz-list>
   </div>
 </ng-container>
-
-<p>
-  <small>
-    Du hast eine These eingereicht und sie ist nicht dabei? Uns erreichten während der Entwicklung viele weitere Thesen. Leider haben es
-    nicht alle in die finale Version des Tools geschafft.
-  </small>
-</p>

@@ -1,11 +1,15 @@
 <nz-breadcrumb>
   <nz-breadcrumb-item><a routerLink="/">Start</a></nz-breadcrumb-item>
-  <nz-breadcrumb-item><span title="Aktuelle Seite: Wahllisten">Wahllisten</span></nz-breadcrumb-item>
+  <nz-breadcrumb-item><span title="Aktuelle Seite: Parteien">Parteien</span></nz-breadcrumb-item>
 </nz-breadcrumb>
 
-<h1>Wahllisten</h1>
+<h1>Parteien</h1>
 
-<p *ngIf="sortedParties && defaultSort">Die Reihenfolge der Listen wurde von der Wahlleitung bestimmt.</p>
+<p>
+  Das Konzept von DeinWal kann nur Parteien berücksichtigen, die in der letzten Legislaturperiode im deutschen Bundestag vertreten waren.
+</p>
+
+<p *ngIf="sortedParties && defaultSort">Die Reihenfolge der Parteien entspricht dem Ergebnis bei der letzten Bundestagswahl.</p>
 
 <section [ngClass]="{ 'party-list': true, 'unsorted-parties': !sortedParties }" *ngIf="politicalData?.parties && partyIds">
   <a

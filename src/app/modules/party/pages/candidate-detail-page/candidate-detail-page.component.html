@@ -1,9 +1,11 @@
 <ng-container *ngIf="data | async as data">
   <nz-breadcrumb>
     <nz-breadcrumb-item><a routerLink="/" title="Zurück zur Startseite">Start</a></nz-breadcrumb-item>
-    <nz-breadcrumb-item><a routerLink="/parties" title="Zur Übersicht der Wahllisten">Wahllisten</a></nz-breadcrumb-item>
+    <nz-breadcrumb-item><a routerLink="/parties" title="Zur Übersicht der Parteien">Parteien</a></nz-breadcrumb-item>
     <nz-breadcrumb-item
-      ><a [routerLink]="['/parties', data.partyId]" title="Wahlliste {{ data.party?.name }}">{{ data.party?.id }}</a></nz-breadcrumb-item
+      ><a [routerLink]="['/parties', data.partyId]" title="Zur übersicht der Partei {{ data.party?.name }}">{{
+        data.party?.id
+      }}</a></nz-breadcrumb-item
     >
     <nz-breadcrumb-item
       ><span title="Aktuelle Seite: {{ data.candidate.name }}">{{ data.candidate.name }}</span></nz-breadcrumb-item

@@ -2,9 +2,9 @@
   <ng-container *ngIf="data.party && data.candidates && data.categoriesWithClaims && data.partyId">
     <nz-breadcrumb>
       <nz-breadcrumb-item><a routerLink="/" title="Zurück zur Startseite">Start</a></nz-breadcrumb-item>
-      <nz-breadcrumb-item><a routerLink="/parties" title="Zur Übersicht der Wahllisten">Wahllisten</a></nz-breadcrumb-item>
+      <nz-breadcrumb-item><a routerLink="/parties" title="Zur Übersicht der Parteien">Parteien</a></nz-breadcrumb-item>
       <nz-breadcrumb-item
-        ><span title="Aktuelle Seite: Wahlliste {{ data.party.name }}">{{ data.party.id }}</span></nz-breadcrumb-item
+        ><span title="Aktuelle Seite: Parteien {{ data.party.name }}">{{ data.party.id }}</span></nz-breadcrumb-item
       >
     </nz-breadcrumb>
 
@@ -83,7 +83,7 @@
           </ng-container>
         </div>
       </nz-tab>
-      <nz-tab nzTitle="Kandidierende">
+      <nz-tab nzTitle="Abgeordnete">
         <ng-container *ngIf="data.candidates as candidates">
           <div class="candidate-list">
             <ng-container *ngFor="let candidate of candidates; let i = index">

@@ -6,7 +6,7 @@
       style="border-color:{{ politicalData.parties[party.party].color }}"
     >
       <strong
-        >Die Liste
+        >Die Partei
         <a
           class="party-link"
           title="Mehr Informationen und Kandidierende von {{ politicalData.parties[party.party].name }}"
@@ -28,7 +28,7 @@
         </ul>
         <!-- candidates -->
         <ng-container *ngIf="showCandidates && party.candidates">
-          Die Kandidierenden der Liste haben wie folge abgeschnitten:
+          Die Abgeordneten der Partei haben wie folge abgeschnitten:
           <ul>
             <li
               *ngFor="
