@@ -115,8 +115,6 @@ section.welcome-page-nav {
 
 .deinwal-greeting {
   padding: 0 16px;
-  //grid-area: span 4/span 6;
-  //grid-column: 1/5;
   > div {
     margin-top: $wb-space-x-large;
   }
@@ -136,7 +134,6 @@ section.welcome-page-nav {
     .deinwal-erklaerung-text {
       display: block;
       padding: $wb-space-medium $wb-space-large;
-      //text-align: center;
 
       @include use-typography($wb-type-strong);
       color: $wb-color-neutral-600;
@@ -155,8 +152,6 @@ section.welcome-page-nav {
       .small {
         @include use-typography($wb-type-paragraph-small);
       }
-      //padding: 8px 16px;
-      //background: white;
     }
   }
   @media screen and (max-width: $wb-breakpoint-medium) {
@@ -168,7 +163,4 @@ section.welcome-page-nav {
       float: none;
     }
   }
-}
-.auswertungslink {
-  //grid-area: span 1/span 2;
 }
