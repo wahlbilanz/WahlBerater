@@ -10,11 +10,7 @@
 @import '../../../../assets/styles/variables';
 
 $nav-row-size: 2 * $wb-space-medium + map-get($wb-type-paragraph, 'line-height');
-h1 {
-  @media screen and (min-width: $wb-breakpoint-medium) {
-    padding: 0 $wb-space-medium;
-  }
-}
+
 section.welcome-page-nav {
   display: grid;
   gap: $wb-space-medium;
@@ -115,4 +111,64 @@ section.welcome-page-nav {
   h4 {
     margin-top: 0;
   }
+}
+
+.deinwal-greeting {
+  padding: 0 16px;
+  //grid-area: span 4/span 6;
+  //grid-column: 1/5;
+  > div {
+    margin-top: $wb-space-x-large;
+  }
+  > .deinwal-logo {
+    width: 45%;
+    float: left;
+    text-align: center;
+    object {
+      //margin-top: 5em;
+      width: 100%;
+      max-width: 400px;
+    }
+  }
+  > .deinwal-erklaerung {
+    width: 50%;
+    float: right;
+    .deinwal-erklaerung-text {
+      display: block;
+      padding: $wb-space-medium $wb-space-large;
+      //text-align: center;
+
+      @include use-typography($wb-type-strong);
+      color: $wb-color-neutral-600;
+      background-color: $wb-color-neutral-0;
+      box-shadow: $wb-shadow-normal;
+
+      transition: color 0.3s, background-color 0.3s, box-shadow 0.3s;
+
+      p,
+      .small {
+        transition: color 0.3s;
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+      .small {
+        @include use-typography($wb-type-paragraph-small);
+      }
+      //padding: 8px 16px;
+      //background: white;
+    }
+  }
+  @media screen and (max-width: $wb-breakpoint-medium) {
+    padding: 0;
+
+    > .deinwal-logo,
+    > .deinwal-erklaerung {
+      width: 100%;
+      float: none;
+    }
+  }
+}
+.auswertungslink {
+  //grid-area: span 1/span 2;
 }
