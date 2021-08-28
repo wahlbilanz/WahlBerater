@@ -39,7 +39,7 @@
   <a class="party-link" title="Mehr Informationen und Kandidierende von {{ partyData.name }}" [routerLink]="['/', 'parties', partyId]"
     >Mehr Informationen</a
   >
-  <div class="barchart" *ngIf="maxPartyValue && maxPartyValue > 0 && score?.scores">
+  <div class="barchart" *ngIf="score?.scorePercent?.score">
     <div
       class="bar-color"
       [style.background-color]="politicalData.parties[score.party].color"
