@@ -47,7 +47,7 @@ function getScoreScaler(
 function calcUsingCandidates(politicalData: PoliticalData, personalData: PersonalCandidateMap, votes: Votes): PartyScoreResult {
   const partyResults: Record<string, PartyResult> = {};
   let maxValue = 0;
-  let maxParty = 0;
+  // let maxParty = 0;
   let partyScores: PartyResult[];
   const scoreScaler = getScoreScaler(politicalData.claims, votes);
   const normaliser: {
