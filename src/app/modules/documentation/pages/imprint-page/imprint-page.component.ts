@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./imprint-page.component.scss'],
 })
 export class ImprintPageComponent implements OnInit {
-  domain = 'codeahoi';
+  domain = 'deinwal';
   mto = 'mailto:';
 
   constructor() {}
