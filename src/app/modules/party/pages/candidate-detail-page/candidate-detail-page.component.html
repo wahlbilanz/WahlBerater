@@ -47,13 +47,17 @@
         <ng-container *ngFor="let claim of category.claims; let i = index">
           <nz-collapse-panel
             *ngIf="i < renderRows"
-            [nzHeader]="claim.claim.title"
+            [nzHeader]="claim.claim.shorttitle || claim.claim.title"
             [nzExtra]="voteIcon"
             [style.border-left-color]="category.category.color"
             (nzActiveChange)="activate(i)"
           >
             <div *ngIf="activePanels[i]">
-              <p class="small" [innerHTML]="claim.claim.description | markdown" *ngIf="claim.claim.description"></p>
+              <p class="these"><strong>These:</strong>&nbsp;<span [innerHTML]="claim.claim.title | markdown"></span></p>
+
+              <p class="background" *ngIf="claim.claim.description">
+                <strong>Hintergrund:</strong>&nbsp;<span [innerHTML]="claim.claim.description | markdown"></span>
+              </p>
               <app-decision-button
                 [vote]="votes[claim.claimId]"
                 [agreement]="votes[claim.claimId]?.fav ? agreement.USER_FAV : agreement.USER"
