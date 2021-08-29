@@ -20,9 +20,12 @@
     'picture candidates candidates'
     'picture social link'
     'picture bar bar';
-  grid-template-columns: 20% auto auto;
+  grid-template-columns: 10% auto auto;
+  @media screen and (max-width: $wb-breakpoint-medium) {
+    grid-template-columns: 20% auto auto;
+  }
 
-  min-height: 184px;
+  //min-height: 184px;
   padding-right: $wb-space-small;
 
   border-left: $wb-space-xx-small solid transparent;
@@ -32,13 +35,13 @@
 
 .party-picture {
   // height: 100%;
-  max-width: 160px;
+  max-width: 90px;
   //max-height: 100%;
   width: 100%;
   margin-top: $wb-space-small;
 
   grid-area: picture;
-  justify-self: center;
+  justify-self: left;
   //align-self: center;
 }
 .party-name {

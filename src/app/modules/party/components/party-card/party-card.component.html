@@ -7,32 +7,6 @@
   />
   <h2 class="party-name">{{ partyData.name }}</h2>
   <p class="party-description" [innerHTML]="partyData.shortDescription | markdown"></p>
-  <div class="party-candidates" *ngIf="partyCandidates">
-    <ng-container *ngFor="let candidateId of partyCandidates | slice: 0:7">
-      <a
-        [routerLink]="[partyId, 'candidates', candidateId]"
-        class="candidate-picture"
-        [style.border-color]="partyData.color"
-        nz-tooltip
-        [nzTooltipTitle]="candidate.name"
-        *ngIf="personalData | personalDataOf: candidateId as candidate"
-      >
-        <img
-          src="{{ candidate.picture | pictureUrl }}"
-          title="Bild von {{ candidate.name }}"
-          [alt]="candidate.name"
-          *ngIf="candidate.picture"
-        />
-        <img
-          src="/assets/static/placeholder/unknown-person.svg"
-          title="{{ candidate.name }} hat kein Bild"
-          [alt]="candidate.name"
-          *ngIf="!candidate.picture"
-        />
-      </a>
-    </ng-container>
-    <ng-container *ngIf="partyCandidates.length > 6"> ... </ng-container>
-  </div>
   <div class="party-social" *ngIf="showSocialLinks">
     <app-social-links [links]="partyData.links" [name]="partyData.name"></app-social-links>
   </div>
