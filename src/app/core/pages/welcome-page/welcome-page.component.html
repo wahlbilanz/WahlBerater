@@ -89,9 +89,9 @@
           <ng-container *ngIf="(localStorageSupported | async) !== true">(nicht unterstützt, siehe unten)</ng-container></label
         >
         <p class="small" *ngIf="(localStorageSupported | async) !== true">
-          Dein Browser unterstützt die <em>localStorage</em> Funktion leider nicht. Diese benötigt der WahlBerater zum Speichern von
-          Einstellungen und Abstimmungsergebnissen. Falls du ein PlugIn zum Blockieren dieser Funktion einsetzt, solltest du es deaktivieren
-          falls du die Quizergebnisse auf diesem Gerät speichern möchtest. Der WahlBerater funktioniert auch ohne diese Funktion.
+          Dein Browser unterstützt die <em>localStorage</em> Funktion leider nicht. Diese benötigt DeinWal zum Speichern von Einstellungen
+          und Abstimmungsergebnissen. Falls du ein PlugIn zum Blockieren dieser Funktion einsetzt, solltest du es deaktivieren falls du die
+          Quizergebnisse auf diesem Gerät speichern möchtest. DeinWal funktioniert auch ohne diese Funktion.
         </p>
 
         <p class="small" *ngIf="(localStorageSupported | async) === true">
