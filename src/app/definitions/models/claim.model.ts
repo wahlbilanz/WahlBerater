@@ -14,6 +14,7 @@ export interface Claim {
   description: string;
   provenance: ClaimProvenanceEntry[];
   moreinfo: string[];
+  shorttitle?: string;
 }
 
 export interface ClaimWithId extends Claim {
