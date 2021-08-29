@@ -15,18 +15,7 @@
       <p>Dieser DeinWal für die Bundestagswahl 2021 wurde von folgendem Team entwickelt:</p>
 
       <ul>
-        <li>
-          <a href="https://www.linkedin.com/in/sophie-flack-36826121b">Sophie Flack</a> studiert im Master Demokratiewissenschaften an der
-          Universität in Regensburg.
-        </li>
-        <li>
-          Tom Theile arbeitet am <a href="https://www.demogr.mpg.de/">Max-Planck-Institut für demographische Forschung</a> als
-          Softwareentwickler.
-        </li>
-        <li>
-          <a href="https://binfalse.de">Martin Scharm</a> ist <a href="https://codeahoi.de/">freiberuflicher IT-Ingenieur</a> und Teil eines
-          <a href="https://naval-architect.de/">Schiffbau-Start-Ups.</a>
-        </li>
+        <li *ngFor="let contributor of contributers" [innerHTML]="contributor"></li>
       </ul>
     </div>
   </div>
