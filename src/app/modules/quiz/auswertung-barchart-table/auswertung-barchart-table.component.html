@@ -8,7 +8,7 @@
       ></div>
       <div class="bar-score">
         <span class="bar-score-text">
-          {{ party.scorePercent.score | number: '1.1-1' }}%
+          <ng-container *ngIf="party.scorePercent.score"> {{ party.scorePercent.score | number: '1.1-1' }}% </ng-container>
           <a [routerLink]="'/parties/' + party.party">{{ politicalData.parties[party.party].id }}</a>
         </span>
       </div>
@@ -28,7 +28,9 @@
           ></div>
           <div class="bar-score">
             <span class="bar-score-text">
-              {{ candidate.value.scorePercent.score | number: '1.1-1' }}%
+              <ng-container *ngIf="candidate.value.scorePercent.score">
+                {{ candidate.value.scorePercent.score | number: '1.1-1' }}%
+              </ng-container>
               <a [routerLink]="'/parties/' + party.party + '/candidates/' + candidate.value.id">{{ candidate.value.personal.name }}</a>
             </span>
           </div>
