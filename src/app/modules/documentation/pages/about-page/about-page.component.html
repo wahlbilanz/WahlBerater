@@ -12,14 +12,18 @@
     </div>
 
     <div nz-col nzXs="24" nzSm="12" nzMd="12" nzLg="12" nzXl="12">
-      <p>Dieser DeinWal für die Bundestagswahl 2021 wurde entwickelt von</p>
+      <p>Dieser DeinWal für die Bundestagswahl 2021 wurde von folgendem Team entwickelt:</p>
 
       <ul>
-        <li>Sophie Flack</li>
-        <li>Tom Theile</li>
-        <li><a href="https://binfalse.de">Martin Scharm</a></li>
+        <li>Sophie studiert im Master Demokratiewissenschaften an der Universität in Regensburg.</li>
+        <li>
+          Tom arbeitet am <a href="https://www.demogr.mpg.de/">Max-Planck-Institut für demographische Forschung</a> als Softwareentwickler.
+        </li>
+        <li>
+          <a href="https://binfalse.de">Martin</a> ist <a href="https://codeahoi.de/">freiberuflicher IT-Ingenieur</a> und Teil eines
+          <a href="https://naval-architect.de/">Schiffbau-Start-Ups.</a>
+        </li>
       </ul>
-      <p>entwickelt.</p>
     </div>
   </div>
 </section>
@@ -58,7 +62,7 @@
     </nz-collapse-panel>
 
     <nz-collapse-panel nzHeader="Nanu, dieser Wal sieht ja ganz anders aus!?">
-      <p>Aha, ein treuer Nutzer! :)</p>
+      <p>Aha, ein treuer Nutzer!</p>
       <p>
         Genau, DeinWal ist ein bisschen erwachsener geworden. Für ein anderes Projekt hat Martin eine technische Wahlentscheidungshilfe (den
         <a href="https://wahlberater.de">WahlBerater</a>) entwickelt, die gegenüber dem traditionellen DeinWal einige Vorteile bietet. Daher
@@ -68,7 +72,7 @@
     </nz-collapse-panel>
 
     <nz-collapse-panel nzHeader="Warum macht ihr das?">
-      <p>Danke für diese sehr gute Frage ;)</p>
+      <p>Danke für diese sehr gute Frage ;-)</p>
       <p>
         Man kann stundenlang über Politik diskutieren, sich dabei gegenseitig beschimpfen und man kommt doch zu keinem gemeinsamen Ergebnis.
         Doch was kann ICH als "normaler Mensch" schon tun, um ein bisschen was zu verbessern? In die Politik gehen und meine Seele verkaufen
@@ -240,20 +244,21 @@
 
     <nz-collapse-panel nzHeader="Wie habt ihr die Abstimmungen ausgewählt und in Fragen formuliert?">
       <p>
-        Die Auswahl der spezifischen Fragen war aufwendig. Dafür haben wir uns die namentlichen Abstimmungen auf
-        <a href="https://www.bundestag.de/abstimmung">Bundestag.de</a> angeschaut. Zu jeder Abstimmung gibt es ein PDF ("Drucksache" im
+        Die Auswahl der spezifischen Fragen war aufwendig. Dafür haben wir die namentlichen Abstimmungen von
+        <a href="https://www.bundestag.de/abstimmung">Bundestag.de</a> heruntergeladen und auf
+        <a href="https://wahlbilanz.de/">WahlBilanz.de</a> aufbereitet. Zu jeder Abstimmung gibt es mindestens ein PDF ("Drucksache" im
         Beamtendeutsch), welches den Antrag, das neue Gesetz oder eine Beschlussempfehlung enthält. Über diese seitenlangen PDFs wird
-        letztendlich abgestimmt. Wir uns diese Sachen durchgelesen (OK, ja, teilweise auch nur überflogen - wer liest schon gerne
-        Gesetzestexte wenn man schon weiß, dass sich das nicht für eine Frage eignet?) und andere Quellen hinzugezogen. Andere Quellen
-        waren:
+        letztendlich abgestimmt. Wir haben uns diese Sachen durchgelesen (OK, ja, teilweise auch nur überflogen - wer liest schon gerne
+        Gesetzestexte wenn man schon weiß, dass sich das Gesetz viel zu umfangreich ist und sich sowieso nicht als eine einfache Frage
+        formulieren lässt?) und andere Quellen hinzugezogen. Andere Quellen waren:
       </p>
       <ul>
         <li>Die Reden der Abgeordneten oder Zusammenfassungen davon auf <a href="https://www.bundestag.de/abstimmung">Bundestag.de</a></li>
         <li>Wikipedia (Was genau ist ein subsidiär Schutzberechtigter und was unterscheidet ihn von einem Flüchtling?)</li>
         <li>Zeitungsartikel (Es hat uns überrascht, dass zu manchen Abstimmungen kaum Berichterstattung zu finden war!)</li>
         <li>
-          Abgeordnetenwatch (Dort gibt es zu jeder namentlichen Abstimmung kurze und gute Informationen, aber wir haben versucht
-          Primärquellen vorzuziehen)
+          <a href="https://www.abgeordnetenwatch.de/">Abgeordnetenwatch.de</a> (Dort gibt es zu jeder namentlichen Abstimmung kurze und gute
+          Informationen, aber wir haben versucht Primärquellen vorzuziehen)
         </li>
       </ul>
       <p>
@@ -265,14 +270,44 @@
         nicht weit genug ging.
       </p>
       <p>
-        Insgesamt sollten es natürlich auch nicht zu viele Abstimmungen sein (Es gab hunderte Abstimmungen), sondern nur interessante,
+        Insgesamt sollten es natürlich auch nicht zu viele Abstimmungen sein (ss gab hunderte Abstimmungen), sondern nur interessante,
         relevante und mit einem Abstimmungsverhalten, dass zu den Parteien passt.
       </p>
       <p>
         Wenn du trotzdem der Meinung bist, dass eine bestimmte Abstimmung unbedingt bei deinem Wal auftauchen sollte, kannst du uns gern
         davon überzeugen! Schreib uns eine Mail an <a href="{{ mto }}info@{{ domain }}.de">info@{{ domain }}.de</a> oder mach ein Ticket bei
         <a href="https://github.com/wahlbilanz/">Github</a> auf. Wir werden dir dann erklären warum es die Frage nicht geschafft hat, oder
-        überlegen sie doch noch aufzunehmen :)
+        überlegen sie doch noch aufzunehmen :-)
+      </p>
+    </nz-collapse-panel>
+
+    <nz-collapse-panel nzHeader="Warum fehlen so viele kleinere Parteien in der Auswertung?">
+      <p>
+        Aufgrund des Konzepts konnten wir leider nur Parteien berücksichtigen, die in den 19. Bundestag gewählt wurden. Das sind CDU/CSU,
+        SPD, Die Grünen, Die Linke, AfD und FDP. Von den anderen Parteien gibt es leider keine Abstimmungsergebnisse aus dem Bundestag, mit
+        denen du dich vergleichen könntest. Du solltest dich aber trotzdem auf jeden Fall auch
+        <a href="https://www.bundeswahlleiter.de/info/presse/mitteilungen/bundestagswahl-2021/23_21_parteien-wahlteilnahme.html"
+          >über die anderen Parteien informieren.</a
+        >
+      </p>
+    </nz-collapse-panel>
+
+    <nz-collapse-panel nzHeader="Also wen soll ich denn jetzt wählen?">
+      <p>Das können wir dir leider nicht sagen... :-(</p>
+      <p>
+        Was ist denn überhaupt mit der Tierschutzpartei oder dem Bündnis Grundeinkommen? Oder den vielen anderen Parteien? Dazu haben wir
+        gar keine Daten!
+      </p>
+      <p>
+        Außerdem ist die Unterscheidung zwischen der Union (CDU/CSU) und der SPD ist relativ schwierig, da diese vorab ihr
+        Abstimmungsverhalten aufeinander abgestimmt haben und somit fast immer gleich abgestimmt haben. Trotzdem stehen diese Parteien für
+        unterschiedliche Dinge.
+      </p>
+      <p>
+        Dein Wal kann und möchte dir also gar keine Empfehlung geben. Du hast hier ausschliesslich die Möglichkeit die Entscheidungen der
+        Parteien in der letzten Legislaturperiode mit deinen Einstellungen zu vergleichen. Dein Wal sollte auf keinen Fall die einzige
+        Quelle sein, die du für deine Entscheidung zur Europawahl nutzt! Guck am besten auch mal in den offiziellen
+        <a href="https://www.wahl-o-mat.de/">Wahl-O-Mat</a> oder eine der anderen Alternativen.
       </p>
     </nz-collapse-panel>
 
@@ -293,8 +328,8 @@
         statischem Javascript-HTML-CSS-Brei, den wir dann einfach mit einem nginx Webserver mittels Docker Container ausliefern.
       </p>
       <p>
-        Die Webseite ist übrigens Open Source: Auf <a href="https://github.com/wahlbilanz/">Github</a> könnt ihr die Webseite angucken,
-        forken, Verbesserungsvorschläge einreichen und mitmachen!
+        Die Webseite ist übrigens Open Source: Auf <a href="https://github.com/wahlbilanz/WahlBerater">Github</a> könnt ihr die Webseite
+        angucken, forken, Verbesserungsvorschläge einreichen und mitmachen!
       </p>
     </nz-collapse-panel>
 
@@ -307,11 +342,11 @@
       <p>
         Wir sind unabhängig, gehören keiner Partei an und haben (bisher) keinen Cent für das Projekt bekommen. Unsere Motivation ist einfach
         politisches Interesse. Wir wollten mehr über den Bundestag und das System in Deutschland lernen. Das ist uns auch ganz gut gelungen.
-        Nun wollen wir das Wissen weitergeben und aufklären :)
+        Nun wollen wir das Wissen weitergeben und aufklären :-)
       </p>
       <p>
         Mittlerweile haben aber vielleicht schon viele andere Leute mitgewirkt. Wir versuchen alle im Impressum zu nennen. Im Projekt
-        <a href="https://github.com/wahlbilanz/">Github</a> könnt ihr auch sehen wer Code beigetragen hat.
+        <a href="https://github.com/wahlbilanz/WahlBerater">Github</a> könnt ihr auch sehen wer Code beigetragen hat.
       </p>
     </nz-collapse-panel>
 
@@ -319,8 +354,9 @@
       <p>
         DeinWal.de wird (bisher) ausschliesslich von uns privat finanziert. Martin hat die Domain gekauft und stellt den Webserver zur
         Verfügung. Brainstormen, Hacken, Schreiben, Formulieren, Layouten, Bewerben etc. haben wir alles über Monate in unserer Freizeit
-        gemacht ().
+        gemacht. Und ein DeinWal ist wirklich eine Menge Arbeit...
       </p>
+      <p>Meldet euch gern, falls ihr eine Idee für eine sinnvolle Förderung/Finanzierung habt!</p>
     </nz-collapse-panel>
   </nz-collapse>
 </section>

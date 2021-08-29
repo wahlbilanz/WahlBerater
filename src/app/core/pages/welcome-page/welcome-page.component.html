@@ -7,17 +7,17 @@
   </div>
   <div class="deinwal-erklaerung">
     <div class="deinwal-erklaerung-text">
-      <h3>Bundestagswahl 2021 Edition</h3>
+      <h3>DeinWal zur Bundestagswahl 2021</h3>
       <p class="small">Mit deinem Wal kannst du prüfen, welche Partei wie du denkt.</p>
 
       <p class="small">
-        Du kannst hier die Abstimmungen der letzten Legislaturperiode von 2017 - 2021 nachspielen, als wärst du live dabei gewesen! In der
+        Du kannst hier die Abstimmungen der letzten Legislaturperiode von 2017 - 2021 nachspielen, als wärst du selbst dabei gewesen! In der
         Auswertung siehst du, welche Parteien in deinem Sinne abgestimmt haben.
       </p>
 
       <p class="small">
         Auch wenn DeinWal dem Wahl-O-Mat sehr ähnelt, steckt doch ein ganz anderes Konzept dahinter. Hier sagen die Parteien nicht, wie sie
-        zu einem Thema abstimmen würden — hier zählt, wie sie zu einem Thema abgestimmt haben!
+        zu einem Thema abstimmen würden — hier zählt, wie sie zu einem Thema tatsächlich abgestimmt haben!
       </p>
     </div>
   </div>
@@ -74,65 +74,65 @@
     <i nz-icon nzType="unordered-list" nzTheme="outline" class="nav-icon" alt="Thesen Icon"></i>
     Thesen
   </a>
-
-  <div class="nav-block privacy-block">
-    <h3>Speichern</h3>
-    <label
-      nz-checkbox
-      [ngModel]="localStorageAllowed | async"
-      (ngModelChange)="updateLocalStorageOptIn($event)"
-      [nzDisabled]="(localStorageSupported | async) !== true"
-      >Speichere die Quizergebnisse auf meinem Gerät
-      <ng-container *ngIf="(localStorageSupported | async) !== true">(nicht unterstützt, siehe unten)</ng-container></label
-    >
-    <p class="small" *ngIf="(localStorageSupported | async) !== true">
-      Dein Browser unterstützt die <em>localStorage</em> Funktion leider nicht. Diese benötigt der WahlBerater zum Speichern von
-      Einstellungen und Abstimmungsergebnissen. Falls du ein PlugIn zum Blockieren dieser Funktion einsetzt, solltest du es deaktivieren
-      falls du die Quizergebnisse auf diesem Gerät speichern möchtest. Der WahlBerater funktioniert auch ohne diese Funktion.
-    </p>
-
-    <p class="small" *ngIf="(localStorageSupported | async) === true">
-      Bevor du deine persönlichen Einstellungen einer Webseite preisgibst solltest du unbedingt
-      <em>immer die Datenschutzerklärung lesen und verstehen!</em> Nimm dir daher kurz Zeit und schaue in
-      <a routerLink="/docs/privacy">unsere Datenschutzerklärung</a>.
-    </p>
-    <p class="small" *ngIf="(localStorageSupported | async) === true">
-      Du kannst deine Entscheidungen jeder Zeit löschen, um das Quiz zum Beispiel nochmal von vorn zu starten:
-    </p>
-    <button
-      nz-button
-      nzType="primary"
-      nzDanger
-      *ngIf="(localStorageSupported | async) === true && localStorageAllowed | async"
-      (click)="deleteData()"
-    >
-      Entscheidungen löschen
-    </button>
-  </div>
-
-  <div class="nav-block accessibility-mode-block no-animation nz-animate-disabled" [@.disabled]="true">
-    <h3>Barrierefreiheit</h3>
-    <p class="small">
-      Der WahlBerater soll alle Wählenden sinnvoll bei ihrer Wahlentscheidung unterstützen! Manchen Menschen fällt der Zugang zu
-      Informationen jedoch schwerer, wenn sie vornehmlich visuell aufbereitet sind oder mit vielen Animationen versehen wurden. Andere nervt
-      dieses animierte Internet einfach nur. Hier kannst du jedenfalls auf einen reduzierten Modus wechseln:
-    </p>
-    <label nz-checkbox nzNoAnimation [ngModel]="accessibilityModes?.reducedMotionMode" (ngModelChange)="updateReducedMotionMode($event)"
-      >Modus ohne Animationen</label
-    >
-    <br />
-    <label nz-checkbox nzNoAnimation [ngModel]="accessibilityModes?.accessibilityMode" (ngModelChange)="updateAccessibilityMode($event)"
-      >Barrierefreier Modus mit reduzierten grafischen Elementen</label
-    >
-    <p class="small">
-      Falls du Anregungen oder Fragen zu diesem Modus hast,
-      <em>dann zögere bitte nicht uns zu <a routerLink="/docs/about">kontaktieren</a>.</em><br />
-      Wenn du die Speicherung der Quizergebnisse erlaubst, wird deine Einstellung zum barrierefreien Modus ebenfalls gespeichert. Bitte lies
-      dazu
-      <a routerLink="/docs/privacy">unsere Datenschutzerklärung</a>.
-    </p>
-  </div>
 </section>
+
+<div class="deinwal-settings">
+  <div nz-row [nzGutter]="[16, 16]">
+    <div nz-col nzXs="24" nzSm="12" nzMd="12" nzLg="12" nzXl="12">
+      <nz-card nzTitle="Speichern"
+        ><label
+          nz-checkbox
+          [ngModel]="localStorageAllowed | async"
+          (ngModelChange)="updateLocalStorageOptIn($event)"
+          [nzDisabled]="(localStorageSupported | async) !== true"
+          >Speichere die Quizergebnisse auf meinem Gerät
+          <ng-container *ngIf="(localStorageSupported | async) !== true">(nicht unterstützt, siehe unten)</ng-container></label
+        >
+        <p class="small" *ngIf="(localStorageSupported | async) !== true">
+          Dein Browser unterstützt die <em>localStorage</em> Funktion leider nicht. Diese benötigt der WahlBerater zum Speichern von
+          Einstellungen und Abstimmungsergebnissen. Falls du ein PlugIn zum Blockieren dieser Funktion einsetzt, solltest du es deaktivieren
+          falls du die Quizergebnisse auf diesem Gerät speichern möchtest. Der WahlBerater funktioniert auch ohne diese Funktion.
+        </p>
+
+        <p class="small" *ngIf="(localStorageSupported | async) === true">
+          Bevor du deine persönlichen Einstellungen einer Webseite preisgibst solltest du unbedingt
+          <em>immer die <a routerLink="/docs/privacy">Datenschutzerklärung lesen und verstehen!</a></em>
+        </p>
+        <p class="small" *ngIf="(localStorageSupported | async) === true">
+          Du kannst deine Entscheidungen jeder Zeit löschen, um das Quiz zum Beispiel nochmal von vorn zu starten:
+        </p>
+        <button
+          nz-button
+          nzType="primary"
+          nzDanger
+          *ngIf="(localStorageSupported | async) === true && localStorageAllowed | async"
+          (click)="deleteData()"
+        >
+          Entscheidungen löschen
+        </button>
+      </nz-card>
+    </div>
+
+    <div nz-col nzXs="24" nzSm="12" nzMd="12" nzLg="12" nzXl="12">
+      <nz-card nzTitle="Barrierefreiheit">
+        <label nz-checkbox nzNoAnimation [ngModel]="accessibilityModes?.reducedMotionMode" (ngModelChange)="updateReducedMotionMode($event)"
+          >Modus ohne Animationen</label
+        >
+        <br />
+        <label nz-checkbox nzNoAnimation [ngModel]="accessibilityModes?.accessibilityMode" (ngModelChange)="updateAccessibilityMode($event)"
+          >Barrierefreier Modus mit reduzierten grafischen Elementen</label
+        >
+        <p class="small">
+          Falls du Anregungen oder Fragen zu diesem Modus hast,
+          <em>dann zögere bitte nicht uns zu <a routerLink="/docs/about">kontaktieren</a>.</em><br />
+          Wenn du die Speicherung der Quizergebnisse erlaubst, wird deine Einstellung zum barrierefreien Modus ebenfalls gespeichert. Bitte
+          lies dazu
+          <a routerLink="/docs/privacy">unsere Datenschutzerklärung</a>.
+        </p>
+      </nz-card>
+    </div>
+  </div>
+</div>
 
 <div class="deinwal-archiv">
   <h3>DeinWal Archiv</h3>
