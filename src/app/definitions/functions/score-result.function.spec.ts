@@ -1,49 +1,89 @@
 import { PoliticalData } from '../models/political.data.model';
 import { PersonalCandidateMap } from '../models/candidate.model';
 import { Votes } from '../models/votes.mode';
-import { prepareResults } from './score-result.function';
+import { Party } from '../models/party.model';
+import { preparePartyResults } from './score-result.function';
+
+const partyTemplate: Party = {
+  id: '',
+  name: '',
+  links: {},
+  order: 0,
+  color: '',
+  all_same: false,
+  description: '',
+  positions: {},
+};
 
 describe('prepareResults', () => {
   it('test score calculation', () => {
     const politicalData: PoliticalData = {
       parties: {
         p1: {
-          name: '',
-          color: '',
-          links: {},
+          ...partyTemplate,
+          id: 'p1',
+        },
+        p2: {
+          ...partyTemplate,
+          id: 'p2',
+        },
+      },
+      candidates: {
+        can1: {
+          party: 'p1',
+          listOrder: 1,
           positions: {
             c1: {
               vote: 1,
             },
+            c2: {
+              vote: 1,
+            },
+            c3: {
+              vote: 1,
+            },
           },
         },
-        p2: {
-          name: '',
-          color: '',
-          links: {},
+        can2: {
+          party: 'p2',
+          listOrder: 1,
+          positions: {
+            c1: {
+              vote: 1,
+            },
+            c2: {
+              vote: 0,
+            },
+            c3: {
+              vote: -1,
+            },
+          },
+        },
+        can3: {
+          party: 'p2',
+          listOrder: 1,
           positions: {
             c1: {
               vote: -1,
             },
-          },
-        },
-        p3: {
-          name: '',
-          color: '',
-          links: {},
-          positions: {
             c2: {
               vote: -1,
             },
-            c25: {
+            c3: {
               vote: -1,
             },
           },
         },
       },
-      candidates: {},
       categories: {
         c1: {
+          id: 'c1',
+          color: '',
+          title: '',
+          order: 1,
+        },
+        c2: {
+          id: 'c2',
           color: '',
           title: '',
           order: 1,
@@ -55,7 +95,6 @@ describe('prepareResults', () => {
           order: 1,
           category: 'c1',
           description: '',
-          links: [],
           provenance: [],
         },
         c2: {
@@ -63,7 +102,13 @@ describe('prepareResults', () => {
           order: 3,
           category: 'c1',
           description: '',
-          links: [],
+          provenance: [],
+        },
+        c3: {
+          title: '',
+          order: 3,
+          category: 'c3',
+          description: '',
           provenance: [],
         },
       },
@@ -76,35 +121,32 @@ describe('prepareResults', () => {
       },
     };
 
-    let result = prepareResults(politicalData, personalData, votes);
-    expect(result.maxParty).toBe(1);
-    expect(result.maxValue).toBe(1);
+    let result = preparePartyResults(politicalData, personalData, votes);
+    // expect(result.maxParty).toBe(1);
+    // expect(result.maxValue).toBe(1);
     expect(result.partyScores[0].party).toBe('p1');
-    expect(result.partyScores[0].score.score).toBe(1);
-    expect(result.partyScores[1].score.score).toBe(0);
-    expect(result.partyScores[2].score.score).toBe(0);
+    expect(result.partyScores[0].scorePercent.score).toBe(100);
+    expect(result.partyScores[1].scorePercent.score).toBe(50);
 
     votes.c1.fav = true;
-    result = prepareResults(politicalData, personalData, votes);
-    expect(result.maxParty).toBe(2);
-    expect(result.maxValue).toBe(2);
+    result = preparePartyResults(politicalData, personalData, votes);
+    console.log(JSON.stringify(result.partyScores[1], null, 4));
+    // expect(result.maxParty).toBe(2);
+    // expect(result.maxValue).toBe(2);
     expect(result.partyScores[0].party).toBe('p1');
-    expect(result.partyScores[0].score.score).toBe(2);
-    expect(result.partyScores[1].score.score).toBe(0);
-    expect(result.partyScores[2].score.score).toBe(0);
-
+    expect(result.partyScores[0].scorePercent.score).toBe(100);
+    expect(result.partyScores[1].scorePercent.score).toBe(50);
+    /*
     votes.c2 = {
       fav: true,
-      decision: -1,
+      decision: 1,
     };
-    result = prepareResults(politicalData, personalData, votes);
-    expect(result.maxParty).toBe(2);
-    expect(result.maxValue).toBe(2);
+    result = preparePartyResults(politicalData, personalData, votes);
+    // expect(result.maxParty).toBe(2);
+    // expect(result.maxValue).toBe(2);
     expect(result.partyScores[0].party).toBe('p1');
-    expect(result.partyScores[0].score.score).toBe(2);
-    expect(result.partyScores[1].party).toBe('p3');
-    expect(result.partyScores[1].score.score).toBe(2);
-    expect(result.partyScores[2].party).toBe('p2');
-    expect(result.partyScores[2].score.score).toBe(0);
+    expect(result.partyScores[0].scorePercent.score).toBe(100);
+    expect(result.partyScores[1].party).toBe('p2');
+    expect(result.partyScores[1].scorePercent.score).toBe(2);*/
   });
 });
