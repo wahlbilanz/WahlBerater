@@ -13,7 +13,7 @@ export interface Claim {
   category: string;
   description: string;
   provenance: ClaimProvenanceEntry[];
-  moreinfo: string[];
+  moreinfo?: string[];
   shorttitle?: string;
 }
 

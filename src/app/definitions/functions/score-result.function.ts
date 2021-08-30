@@ -156,6 +156,9 @@ function calcUsingCandidates(politicalData: PoliticalData, personalData: Persona
     }
   }
 
+  console.log('party');
+  console.log(JSON.stringify(partyResults['p2'], null, 4));
+
   for (const party of Object.keys(partyResults)) {
     for (const category of Object.keys(partyResults[party].scores)) {
       for (const claim of Object.keys(partyResults[party].scores[category].decisions)) {

@@ -10,7 +10,7 @@
     <nz-list>
       <ng-container *ngFor="let claim of category.claims">
         <nz-list-item>
-          <a [routerLink]="'/claim/' + claim.claimId">{{ claim.title }}</a>
+          <a [routerLink]="'/claim/' + claim.claimId" [innerHTML]="claim.title | markdown"></a>
         </nz-list-item>
       </ng-container>
     </nz-list>

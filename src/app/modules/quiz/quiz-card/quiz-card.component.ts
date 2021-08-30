@@ -204,6 +204,11 @@ export class QuizCardComponent implements OnInit, OnChanges, OnDestroy, AfterVie
           position: 'right',
         },
         {
+          element: '.moreinfos',
+          intro: 'Zu einigen Thesen gibt es weiter Informationen, die du hier anzeigen lassen kannst.',
+          position: 'right',
+        },
+        {
           element: '#decision-center',
           intro:
             'Klicke auf das Herz, um eine These als besonders wichtig zu markieren. Kandidierende, die die gleiche Position beziehen, bekommen dann doppelte Punktzahl.',
@@ -229,11 +234,6 @@ export class QuizCardComponent implements OnInit, OnChanges, OnDestroy, AfterVie
           element: '#claim-next',
           intro:
             'Mit diesem Knopf kannst du zur nächsten These springen. Du musst nicht alle Thesen beantworten, sondern kannst Thesen überspringen wenn du keine starke Meinung zum Thema hast!',
-          position: 'top',
-        },
-        {
-          element: '#quiz-progress',
-          intro: 'Am unteren Bildschirmrand zeigt ein Ladebalken wie viele Thesen noch vor dir liegen.',
           position: 'top',
         },
         {
