@@ -1,5 +1,11 @@
 @import '../../../../assets/styles/variables';
 .results {
+  h1 {
+    margin: $wb-space-large $wb-space-medium;
+    @media screen and (max-width: $wb-breakpoint-medium) {
+      margin: $wb-space-large 0;
+    }
+  }
   .controls {
     text-align: right;
     margin: 0 $wb-space-medium;

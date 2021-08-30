@@ -13,7 +13,7 @@
           [routerLink]="['/', 'parties', party.party]"
           >{{ politicalData.parties[party.party].name }}</a
         >
-        hat {{ party.scorePercent.score | number: '1.1-1' }}% ({{ party.score.score | number: '1.0-2' }} Punkte) erreicht.</strong
+        hat {{ party.scorePercent.score | number: '1.1-1' }}% erreicht.</strong
       >
       <ng-container *ngIf="party.score.score > 0">
         Dabei konnte sie in den folgenden Kategorien punkten:
@@ -38,7 +38,7 @@
             >
               <strong
                 ><a [routerLink]="['/', 'parties', party.party, 'candidates', candidate.value.id]">{{ candidate.value.personal.name }}</a>
-                erzielte {{ candidate.value.score.score }} Punkte ({{ candidate.value.scorePercent.score | number: '1.1-1' }}%)</strong
+                erzielte {{ candidate.value.scorePercent.score | number: '1.1-1' }}%</strong
               ><ng-container *ngIf="candidate.value.score.score <= 0">.</ng-container
               ><ng-container *ngIf="candidate.value.score.score > 0">
                 darunter
