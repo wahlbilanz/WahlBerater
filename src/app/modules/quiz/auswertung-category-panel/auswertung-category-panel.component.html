@@ -13,10 +13,10 @@
         <div *ngIf="activePanels[i]">
           <div nz-row class="claim-info">
             <div nz-col nzXs="24" nzSm="24" nzLg="12" nzXl="12">
-              <p class="these"><strong>These:</strong>&nbsp;<span [innerHTML]="claim.title | markdown"></span></p>
               <p class="background" *ngIf="claim.description">
                 <strong>Hintergrund:</strong>&nbsp;<span [innerHTML]="claim.description | markdown"></span>
               </p>
+              <p class="these"><strong>These:</strong>&nbsp;<span [innerHTML]="claim.title | markdown"></span></p>
             </div>
             <div nz-col class="own-decision" nzXs="24" nzSm="24" nzLg="12" nzXl="12">
               <app-decision-button
