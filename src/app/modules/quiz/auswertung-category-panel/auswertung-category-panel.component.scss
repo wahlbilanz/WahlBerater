@@ -1,6 +1,9 @@
 @import '../../../../assets/styles/variables';
-@media (min-width: $wb-breakpoint-large) {
-  .claim-info {
+.claim-info {
+  > div {
+    margin-bottom: $wb-space-x-large !important;
+  }
+  @media (min-width: $wb-breakpoint-large) {
     .own-decision {
       display: flex;
       app-decision-button {
