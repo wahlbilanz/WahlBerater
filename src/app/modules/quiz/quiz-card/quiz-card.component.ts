@@ -205,13 +205,13 @@ export class QuizCardComponent implements OnInit, OnChanges, OnDestroy, AfterVie
         },
         {
           element: '.moreinfos',
-          intro: 'Zu einigen Thesen gibt es weiter Informationen, die du hier anzeigen lassen kannst.',
+          intro: 'Zu einigen Thesen gibt es weitere Informationen, die du hier anzeigen lassen kannst.',
           position: 'right',
         },
         {
           element: '#decision-center',
           intro:
-            'Klicke auf das Herz, um eine These als besonders wichtig zu markieren. Kandidierende, die die gleiche Position beziehen, bekommen dann doppelte Punktzahl.',
+            'Klicke auf das Herz, um eine These als besonders wichtig zu markieren. Abgeordnete, die die gleiche Position beziehen, bekommen dann doppelte Punktzahl.',
           position: 'top',
         },
         {
