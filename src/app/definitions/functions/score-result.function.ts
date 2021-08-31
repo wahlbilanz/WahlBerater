@@ -179,15 +179,17 @@ function calcUsingCandidates(politicalData: PoliticalData, personalData: Persona
       partyResults[party].scores[category].score.normalise(normaliser[party].categories[category]);
     }
     partyResults[party].score.normalise(normaliser[party].overall);
-    partyResults[party].scorePercent.score =
-      (partyResults[party].score.score * 100 * (scoreScaler.overall - scoreScaler.favs)) / scoreScaler.overall;
+    partyResults[party].scorePercent.score = scoreScaler.overall
+      ? (partyResults[party].score.score * 100 * (scoreScaler.overall - scoreScaler.favs)) / scoreScaler.overall
+      : 0;
     if (maxPercent < partyResults[party].scorePercent.score) {
       maxPercent = partyResults[party].scorePercent.score;
     }
 
     for (const candidate of Object.keys(partyResults[party].candidates)) {
-      partyResults[party].candidates[candidate].scorePercent.score =
-        (100 * partyResults[party].candidates[candidate].score.score) / scoreScaler.overall;
+      partyResults[party].candidates[candidate].scorePercent.score = scoreScaler.overall
+        ? (100 * partyResults[party].candidates[candidate].score.score) / scoreScaler.overall
+        : 0;
       if (maxPercent < partyResults[party].candidates[candidate].scorePercent.score) {
         maxPercent = partyResults[party].candidates[candidate].scorePercent.score;
       }
