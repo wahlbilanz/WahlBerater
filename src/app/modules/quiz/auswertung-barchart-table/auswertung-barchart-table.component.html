@@ -16,7 +16,7 @@
     <ng-container *ngIf="showCandidateBars && party.candidates && partyIndex < showCandidatesNum">
       <ng-container
         *ngFor="
-          let candidate of party.candidates | keyvalue: candidateSorter | slice: 0:displayCandidates[partyIndex] + 1;
+          let candidate of party.candidates | keyvalue: candidateSorter | slice: 0:displayCandidates[partyIndex];
           let candidateIndex = index
         "
       >
@@ -36,7 +36,7 @@
           </div>
         </div>
       </ng-container>
-      <div *ngIf="nCandidates[partyIndex] > displayCandidates[partyIndex] + 1" class="showMoreCandidates">
+      <div *ngIf="nCandidates[partyIndex] > displayCandidates[partyIndex]" class="showMoreCandidates">
         <a (click)="showAll(partyIndex)">{{ nCandidates[partyIndex] - displayCandidates[partyIndex] }} weitere anzeigen</a>
       </div>
       <div class="axe">
