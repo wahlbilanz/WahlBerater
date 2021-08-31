@@ -85,7 +85,7 @@
       </ng-container>
     </ng-container>
 
-    <a (click)="sampleVotes()"><i nz-icon nzType="fork" nzTheme="outline"></i> Sample Votes</a>
+    <a (click)="sampleVotes()" *ngIf="dev"><i nz-icon nzType="fork" nzTheme="outline"></i> Sample Votes</a>
   </ng-container>
 </div>
 

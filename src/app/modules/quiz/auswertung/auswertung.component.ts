@@ -12,6 +12,7 @@ import { Votes } from '../../../definitions/models/votes.mode';
 import { Observable, Subject } from 'rxjs';
 import { CategoryWithClaims } from '../../../definitions/models/category.model';
 import { takeUntil } from 'rxjs/operators';
+import { isDevMode } from '@angular/core';
 
 @Component({
   selector: 'app-auswertung',
@@ -19,6 +20,8 @@ import { takeUntil } from 'rxjs/operators';
   styleUrls: ['./auswertung.component.scss'],
 })
 export class AuswertungComponent implements OnInit, OnDestroy {
+  dev = isDevMode();
+
   includeCandidates = IncludeCandidates;
 
   votes: Votes = undefined;
