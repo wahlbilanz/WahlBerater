@@ -109,6 +109,7 @@
   }
 }
 .candidate-list {
+  padding: 10px 0;
   display: grid;
   gap: $wb-space-medium;
   grid-template-columns: repeat(1, 1fr);
