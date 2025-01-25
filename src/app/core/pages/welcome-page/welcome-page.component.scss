@@ -2,6 +2,7 @@
   padding: 5px;
   margin: 10px;
 }
+
 .gutter-row {
   background-color: #f00;
 }
@@ -10,6 +11,14 @@
 @import '../../../../assets/styles/variables';
 
 $nav-row-size: 2 * $wb-space-medium + map-get($wb-type-paragraph, 'line-height');
+
+.deinwal-announcement {
+  background: repeating-radial-gradient(circle, #095aaa, #095aaa 10px, #004d99 10px, #004d99 20px);
+  padding: 20px;
+  font-size: 2em;
+  color: white;
+  text-align: center;
+}
 
 section.welcome-page-nav {
   display: grid;
@@ -43,6 +52,7 @@ section.welcome-page-nav {
 
   @mixin large-block() {
     grid-area: span 2 / span 2;
+
     .nav-icon {
       display: block;
       font-size: $nav-row-size;
@@ -70,10 +80,12 @@ section.welcome-page-nav {
     p,
     .small {
       transition: color 0.3s;
+
       &:last-child {
         margin-bottom: 0;
       }
     }
+
     .small {
       @include use-typography($wb-type-paragraph-small);
     }
@@ -84,20 +96,24 @@ section.welcome-page-nav {
     &.about-block {
       @include wide-block();
     }
+
     &.quiz-link,
     &.candidates-link,
     &.claims-link {
       @include large-block();
+
       .small {
         display: none;
       }
     }
+
     @media screen and (max-width: $wb-breakpoint-small) {
       &.claims-link {
         @include wide-block();
       }
     }
   }
+
   a.nav-block:hover {
     color: $wb-color-secondary-400;
     text-decoration: none;
@@ -106,6 +122,7 @@ section.welcome-page-nav {
       color: $wb-color-secondary-400;
     }
   }
+
   h2,
   h3,
   h4 {
@@ -115,22 +132,27 @@ section.welcome-page-nav {
 
 .deinwal-greeting {
   padding: 0 16px;
+
   > div {
     margin-top: $wb-space-x-large;
   }
+
   > .deinwal-logo {
     width: 45%;
     float: left;
     text-align: center;
+
     object {
       //margin-top: 5em;
       width: 100%;
       max-width: 400px;
     }
   }
+
   > .deinwal-erklaerung {
     width: 50%;
     float: right;
+
     .deinwal-erklaerung-text {
       display: block;
       padding: $wb-space-medium $wb-space-large;
@@ -145,15 +167,18 @@ section.welcome-page-nav {
       p,
       .small {
         transition: color 0.3s;
+
         &:last-child {
           margin-bottom: 0;
         }
       }
+
       .small {
         @include use-typography($wb-type-paragraph-small);
       }
     }
   }
+
   @media screen and (max-width: $wb-breakpoint-medium) {
     padding: 0;
 
@@ -164,12 +189,15 @@ section.welcome-page-nav {
     }
   }
 }
+
 .deinwal-settings,
 .deinwal-archiv {
   padding: 0 16px;
+
   @media screen and (max-width: $wb-breakpoint-medium) {
     padding: 0;
   }
+
   nz-card {
     width: 100%;
   }
